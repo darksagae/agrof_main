@@ -1,0 +1,47 @@
+// Script to generate correct fungicideImages object
+const fs = require('fs');
+
+const fungicideImages = {
+  'alliete_flash_wg_80': require('../assets/FUNGICIDE_SIMPLE/alliete_flash_wg_80.png'),
+  'amistar_250_sc': require('../assets/FUNGICIDE_SIMPLE/amistar_250_sc.png'),
+  'apron_star_42ws': require('../assets/FUNGICIDE_SIMPLE/apron_star_42ws.png'),
+  'ascopper_50_wp': require('../assets/FUNGICIDE_SIMPLE/ascopper_50_wp.jpg'),
+  'ascosulph_80_wdg': require('../assets/FUNGICIDE_SIMPLE/ascosulph_80_wdg.jpg'),
+  'ascozeb_80_wp': require('../assets/FUNGICIDE_SIMPLE/ascozeb_80_wp.jpg'),
+  'bellis_38_wg': require('../assets/FUNGICIDE_SIMPLE/bellis_38_wg.png'),
+  'bio_cure_b': require('../assets/FUNGICIDE_SIMPLE/bio_cure_b.jpg'),
+  'control_70_wgd': require('../assets/FUNGICIDE_SIMPLE/control_70_wgd.png'),
+  'copper_fungcure_500_wp': require('../assets/FUNGICIDE_SIMPLE/copper_fungcure_500_wp.jpg'),
+  'daconil_720_sc': require('../assets/FUNGICIDE_SIMPLE/daconil_720_sc.png'),
+  'emthane_m45_mancozeb_80_wp': require('../assets/FUNGICIDE_SIMPLE/emthane_m45_mancozeb_80_wp.jpg'),
+  'equation_pro': require('../assets/FUNGICIDE_SIMPLE/equation_pro.png'),
+  'fangocil': require('../assets/FUNGICIDE_SIMPLE/fangocil.jpg'),
+  'fighter': require('../assets/FUNGICIDE_SIMPLE/fighter.png'),
+  'folio_gold_537_sc': require('../assets/FUNGICIDE_SIMPLE/folio_gold_537_sc.png'),
+  'fungo_force_72_wp': require('../assets/FUNGICIDE_SIMPLE/fungo_force_72_wp.png'),
+  'goldazim_500_sc_alt': require('../assets/FUNGICIDE_SIMPLE/goldazim_500_sc_alt.png'),
+  'goldazim_500_sc': require('../assets/FUNGICIDE_SIMPLE/goldazim_500_sc.png'),
+  'harveseter': require('../assets/FUNGICIDE_SIMPLE/harveseter.jpg'),
+  'harvestor_xl': require('../assets/FUNGICIDE_SIMPLE/harvestor_xl.jpg'),
+  'indofil_m45': require('../assets/FUNGICIDE_SIMPLE/indofil_m45.jpg'),
+  'milraz_wp_76': require('../assets/FUNGICIDE_SIMPLE/milraz_wp_76.png'),
+  'mister_72_wp': require('../assets/FUNGICIDE_SIMPLE/mister_72_wp.jpg'),
+  'mistress_72_wp': require('../assets/FUNGICIDE_SIMPLE/mistress_72_wp.jpg'),
+  'nemasol_soil_fumigant': require('../assets/FUNGICIDE_SIMPLE/nemasol_soil_fumigant.jpg'),
+  'nordox_super_75_wg': require('../assets/FUNGICIDE_SIMPLE/nordox_super_75_wg.jpg'),
+  'orius_25_ew': require('../assets/FUNGICIDE_SIMPLE/orius_25_ew.jpg'),
+  'oshothane_80_wp': require('../assets/FUNGICIDE_SIMPLE/oshothane_80_wp.jpg'),
+  'pearl_500_sc': require('../assets/FUNGICIDE_SIMPLE/pearl_500_sc.jpg'),
+  'proplant_722sl': require('../assets/FUNGICIDE_SIMPLE/proplant_722sl.png'),
+  'ridomil_gold_mz_68wg': require('../assets/FUNGICIDE_SIMPLE/ridomil_gold_mz_68wg.png'),
+  'sulcop_tomatoes': require('../assets/FUNGICIDE_SIMPLE/sulcop_tomatoes.jpeg'),
+  'tata_master_72wp': require('../assets/FUNGICIDE_SIMPLE/tata_master_72wp.jpg'),
+  'thiovit_jet': require('../assets/FUNGICIDE_SIMPLE/thiovit_jet.jpg'),
+  'topilite_70_wp': require('../assets/FUNGICIDE_SIMPLE/topilite_70_wp.jpg'),
+  'uthane_80_wp': require('../assets/FUNGICIDE_SIMPLE/uthane_80_wp.jpg'),
+  'victory_72wp': require('../assets/FUNGICIDE_SIMPLE/victory_72wp.jpeg'),
+  'winner_72_wp': require('../assets/FUNGICIDE_SIMPLE/winner_72_wp.jpg'),
+  'z_force': require('../assets/FUNGICIDE_SIMPLE/z_force.jpg')
+};
+
+console.log('Fungicide images object created with', Object.keys(fungicideImages).length, 'images');

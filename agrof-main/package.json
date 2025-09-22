@@ -1,0 +1,31 @@
+{
+  "name": "agrof-main",
+  "version": "1.0.0",
+  "description": "AGROF AI - Agricultural Disease Detection Platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd mobile/app && npm start",
+    "start:backend": "cd src/api && python app.py",
+    "start:frontend": "cd mobile/app && npm start",
+    "install:all": "cd mobile/app && npm install",
+    "build": "cd mobile/app && npm run build",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "agriculture",
+    "ai",
+    "disease-detection",
+    "crop-analysis",
+    "machine-learning"
+  ],
+  "author": "AGROF Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/agrof-main.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

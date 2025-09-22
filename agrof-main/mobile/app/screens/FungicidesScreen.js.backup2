@@ -1,0 +1,1171 @@
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import FungicideDetailScreen from './FungicideDetailScreen';
+import SimplePricingWidget from '../components/SimplePricingWidget';
+
+const FungicidesScreen = ({ onBack }) => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [pricingWidgetVisible, setPricingWidgetVisible] = useState(false);
+  const [selectedProductForPricing, setSelectedProductForPricing] = useState(null);
+  const [imageLoadingStates, setImageLoadingStates] = useState({});
+
+  // Import all fungicide images from simplified folder structure with original images
+  const fungicideImages = {
+    'sulcop_tomatoes': require('../assets/FUNGICIDE_SIMPLE/sulcop_tomatoes.jpeg'),
+    'alliete_flash_wg_80': require('../assets/FUNGICIDE_SIMPLE/alliete_flash_wg_80.png'),
+    'amistar_250_sc': require('../assets/FUNGICIDE_SIMPLE/amistar_250_sc.png'),
+    'apron_star_42ws': require('../assets/FUNGICIDE_SIMPLE/apron_star_42ws.png'),
+    'ascopper_50_wp': require('../assets/FUNGICIDE_SIMPLE/ascopper_50_wp.jpg'),
+    'ascosulph_80_wdg': require('../assets/FUNGICIDE_SIMPLE/ascosulph_80_wdg.jpg'),
+    'ascozeb_80_wp': require('../assets/FUNGICIDE_SIMPLE/ascozeb_80_wp.jpg'),
+    'bellis_38_wg': require('../assets/FUNGICIDE_SIMPLE/bellis_38_wg.png'),
+    'bio_cure_b': require('../assets/FUNGICIDE_SIMPLE/bio_cure_b.jpg'),
+    'control_70_wgd': require('../assets/FUNGICIDE_SIMPLE/control_70_wgd.png'),
+    'copper_fungcure_500_wp': require('../assets/FUNGICIDE_SIMPLE/copper_fungcure_500_wp.jpg'),
+    'daconil_720_sc': require('../assets/FUNGICIDE_SIMPLE/daconil_720_sc.png'),
+    'emthane_m45_mancozeb_80_wp': require('../assets/FUNGICIDE_SIMPLE/emthane_m45_mancozeb_80_wp.jpg'),
+    'equation_pro': require('../assets/FUNGICIDE_SIMPLE/equation_pro.png'),
+    'fangocil': require('../assets/FUNGICIDE_SIMPLE/fangocil.jpg'),
+    'fighter': require('../assets/FUNGICIDE_SIMPLE/fighter.png'),
+    'folio_gold_537_sc': require('../assets/FUNGICIDE_SIMPLE/folio_gold_537_sc.png'),
+    'fungo_force_72_wp': require('../assets/FUNGICIDE_SIMPLE/fungo_force_72_wp.png'),
+    'goldazim_500_sc': require('../assets/FUNGICIDE_SIMPLE/goldazim_500_sc.png'),
+    'goldazim_500_sc_alt': require('../assets/FUNGICIDE_SIMPLE/goldazim_500_sc_alt.png'),
+    'harveseter': require('../assets/FUNGICIDE_SIMPLE/harveseter.jpg'),
+    'harvestor_xl': require('../assets/FUNGICIDE_SIMPLE/harvestor_xl.jpg'),
+    'indofil_m45': require('../assets/FUNGICIDE_SIMPLE/indofil_m45.jpg'),
+    'milraz_wp_76': require('../assets/FUNGICIDE_SIMPLE/milraz_wp_76.png'),
+    'mister_72_wp': require('../assets/FUNGICIDE_SIMPLE/mister_72_wp.jpg'),
+    'mistress_72_wp': require('../assets/FUNGICIDE_SIMPLE/mistress_72_wp.jpg'),
+    'nemasol_soil_fumigant': require('../assets/FUNGICIDE_SIMPLE/nemasol_soil_fumigant.jpg'),
+    'nordox_super_75_wg': require('../assets/FUNGICIDE_SIMPLE/nordox_super_75_wg.jpg'),
+    'orius_25_ew': require('../assets/FUNGICIDE_SIMPLE/orius_25_ew.jpg'),
+    'oshothane_80_wp': require('../assets/FUNGICIDE_SIMPLE/oshothane_80_wp.jpg'),
+    'pearl_500_sc': require('../assets/FUNGICIDE_SIMPLE/pearl_500_sc.jpg'),
+    'proplant_722sl': require('../assets/FUNGICIDE_SIMPLE/proplant_722sl.png'),
+    'ridomil_gold_mz_68wg': require('../assets/FUNGICIDE_SIMPLE/ridomil_gold_mz_68wg.png'),
+    'tata_master_72wp': require('../assets/FUNGICIDE_SIMPLE/tata_master_72wp.jpg'),
+    'thiovit_jet': require('../assets/FUNGICIDE_SIMPLE/thiovit_jet.jpg'),
+    'topilite_70_wp': require('../assets/FUNGICIDE_SIMPLE/topilite_70_wp.jpg'),
+    'uthane_80_wp': require('../assets/FUNGICIDE_SIMPLE/uthane_80_wp.jpg'),
+    'victory_72wp': require('../assets/FUNGICIDE_SIMPLE/victory_72wp.jpeg'),
+    'winner_72_wp': require('../assets/FUNGICIDE_SIMPLE/winner_72_wp.jpg'),
+    'z_force': require('../assets/FUNGICIDE_SIMPLE/z_force.jpg')
+  };
+
+  // Define fungicideProducts array based on original folder names
+  const fungicideProducts = [
+    {
+      id: 1,
+      name: 'Sulcop Tomatoes',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: '1Kg Sulcop-tomatoes Fungicide for controlling tomato diseases.',
+      image: fungicideImages['sulcop_tomatoes'],
+      category: 'Fungicide',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Various',
+      targetDiseases: ['Tomato diseases', 'Fungal infections'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Tomatoes',
+      benefits: [
+        'Effective against tomato diseases',
+        'Easy application',
+        'Reliable protection'
+      ],
+      application: 'Apply as per label instructions.',
+      precautions: 'Follow label instructions carefully.'
+    },
+    {
+      id: 2,
+      name: 'Alliete Flash WG 80',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide that is absorbed by roots and translocated throughout the plant.',
+      image: fungicideImages['alliete_flash_wg_80'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Fosetyl-Al',
+      targetDiseases: ['Downy mildew', 'Damping off', 'Root rot'],
+      applicationRate: '1.5-3ltrs/Ha for roses, 0.8ltrs/Ha for pepper',
+      reEntryPeriod: '3 days for pepper',
+      targetCrops: 'Roses, Pepper, Various vegetables',
+      benefits: [
+        'Systemic action',
+        'Root absorption and translocation',
+        'Disrupts fungal cell wall formation',
+        'Effective against downy mildew'
+      ],
+      application: 'Foliar spray - 150-300mls/100ltrs of water for roses, 80mls/100ltrs for pepper.',
+      precautions: 'Follow pre-harvest intervals. Do not apply during flowering.'
+    },
+    {
+      id: 3,
+      name: 'Amistar 250 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Broad spectrum fungicide that stops disease before it starts and delays senescence.',
+      image: fungicideImages['amistar_250_sc'],
+      category: 'Broad Spectrum',
+      manufacturer: 'Syngenta',
+      activeIngredient: 'Azoxystrobin',
+      targetDiseases: ['Rust', 'Powdery mildew', 'Leaf spot', 'Anthracnose'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Stops disease before it starts',
+        'Delays senescence',
+        'Improves water stress tolerance',
+        'Better nitrogen efficiency'
+      ],
+      application: 'Apply as per label instructions. Soluble concentrate formulation.',
+      precautions: 'WHO classification III. Follow label instructions carefully.'
+    },
+    {
+      id: 4,
+      name: 'Daconil 720 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Contact fungicide with built-in surfactant for superior coverage and rainfast protection.',
+      image: fungicideImages['daconil_720_sc'],
+      category: 'Contact',
+      manufacturer: 'Syngenta',
+      activeIngredient: 'Chlorothalonil',
+      targetDiseases: ['Coffee Berry Disease', 'Bean Rust', 'Angular Leaf Spot', 'Anthracnose', 'Botrytis'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Coffee, Cereals, Ornamentals, Potatoes, Vegetables',
+      benefits: [
+        'Does not wash off',
+        'Built-in surfactant',
+        'Superior coverage',
+        '21-day anti-fungal effect'
+      ],
+      application: 'Apply as per label instructions. Provides protection even after heavy rain.',
+      precautions: 'Wear protective clothing. Do not apply near water sources.'
+    },
+    {
+      id: 5,
+      name: 'Ascopper 50 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Copper-based fungicide for controlling various bacterial and fungal diseases.',
+      image: fungicideImages['ascopper_50_wp'],
+      category: 'Contact',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Copper Oxychloride',
+      targetDiseases: ['Bacterial blight', 'Fungal leaf spots', 'Anthracnose'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Broad-spectrum protection',
+        'Copper-based formulation',
+        'Effective against bacteria and fungi',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Avoid application during hot weather. Test on small area first.'
+    },
+    {
+      id: 6,
+      name: 'Ascosulph 80 WDG',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Broad-spectrum contact fungicide and acaricide for controlling various fungal diseases and mites.',
+      image: fungicideImages['ascosulph_80_wdg'],
+      category: 'Contact',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Sulphur',
+      targetDiseases: ['Powdery mildew', 'Rust', 'Leaf spots', 'Mites'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Broad-spectrum control',
+        'Contact action',
+        'Effective against mites',
+        'Preventive and curative'
+      ],
+      application: 'Apply as per label instructions. Contact fungicide.',
+      precautions: 'Follow label instructions carefully.'
+    },
+    {
+      id: 7,
+      name: 'Ascozeb 80 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Broad spectrum preventive fungicide for controlling various fungal diseases.',
+      image: fungicideImages['ascozeb_80_wp'],
+      category: 'Preventive',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Mancozeb',
+      targetDiseases: ['Early blight', 'Late blight', 'Leaf spot', 'Anthracnose'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Broad-spectrum protection',
+        'Preventive action',
+        'Contact fungicide',
+        'Good resistance management'
+      ],
+      application: 'Apply before disease appears. Repeat every 7-10 days.',
+      precautions: 'Do not apply to edible parts. Follow pre-harvest intervals.'
+    },
+    {
+      id: 8,
+      name: 'Bio-cure B',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Biological fungicide for controlling a wide range of fungal diseases using beneficial microorganisms.',
+      image: fungicideImages['bio_cure_b'],
+      category: 'Biological',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Bacillus subtilis',
+      targetDiseases: ['Root rot', 'Damping off', 'Fungal infections'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        '100% biological',
+        'Safe for beneficial insects',
+        'Environmentally friendly',
+        'No chemical residues'
+      ],
+      application: 'Apply as per label instructions. Biological formulation.',
+      precautions: 'Store in cool, dry place. Do not mix with chemical fungicides.'
+    },
+    {
+      id: 9,
+      name: 'Bellis 38% WG',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic and protective fungicide for controlling various fungal diseases.',
+      image: fungicideImages['bellis_38_wg'],
+      category: 'Systemic',
+      manufacturer: 'Bayer',
+      activeIngredient: 'Pyraclostrobin + Boscalid',
+      targetDiseases: ['Botrytis', 'Sclerotinia', 'Alternaria', 'Leaf spot'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic and protective action',
+        'Dual active ingredients',
+        'Broad-spectrum control',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Water dispersible granule formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 10,
+      name: 'Equation Pro',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Broad spectrum fungicide against blights and many fungal infections.',
+      image: fungicideImages['equation_pro'],
+      category: 'Broad Spectrum',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Famoxadone + Cymoxanil',
+      targetDiseases: ['Late blight', 'Early blight', 'Downy mildew', 'Phytophthora'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Potatoes, Tomatoes, Various vegetables',
+      benefits: [
+        'Broad-spectrum control',
+        'Effective against blights',
+        'Dual active ingredients',
+        'Systemic and contact action'
+      ],
+      application: 'Apply as per label instructions. Effective against Phytophthora diseases.',
+      precautions: 'Wear protective clothing. Do not apply near water sources.'
+    },
+    {
+      id: 11,
+      name: 'Folio Gold 537.5 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Fungicide for control of downy mildew with excellent rainfast properties.',
+      image: fungicideImages['folio_gold_537_sc'],
+      category: 'Systemic',
+      manufacturer: 'Bayer',
+      activeIngredient: 'Dimethomorph + Propamocarb',
+      targetDiseases: ['Downy mildew', 'Phytophthora', 'Pythium'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Excellent downy mildew control',
+        'Rainfast protection',
+        'Dual active ingredients',
+        'Systemic action'
+      ],
+      application: 'Apply as per label instructions. Soluble concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 12,
+      name: 'Fungo Force 72 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Contact, systemic, preventive and curative fungicide for comprehensive disease control.',
+      image: fungicideImages['fungo_force_72_wp'],
+      category: 'Broad Spectrum',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Mancozeb + Metalaxyl',
+      targetDiseases: ['Late blight', 'Early blight', 'Downy mildew', 'Phytophthora'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Potatoes, Tomatoes, Various vegetables',
+      benefits: [
+        'Contact and systemic action',
+        'Preventive and curative',
+        'Dual active ingredients',
+        'Comprehensive disease control'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Do not apply to edible parts. Follow pre-harvest intervals.'
+    },
+    {
+      id: 13,
+      name: 'Goldazim 500 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Fungicide for the control of Botrytis and black spots with excellent efficacy.',
+      image: fungicideImages['goldazim_500_sc'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Carbendazim',
+      targetDiseases: ['Botrytis', 'Black spot', 'Leaf spot', 'Anthracnose'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Excellent Botrytis control',
+        'Systemic action',
+        'Effective against black spots',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Soluble concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 14,
+      name: 'Copper Oxychloride 50 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Copper-based fungicide for controlling bacterial and fungal diseases.',
+      image: fungicideImages['apron_star_42ws'],
+      category: 'Contact',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Copper Oxychloride',
+      targetDiseases: ['Bacterial blight', 'Fungal leaf spots', 'Anthracnose'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Broad-spectrum protection',
+        'Copper-based formulation',
+        'Effective against bacteria and fungi',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Avoid application during hot weather. Test on small area first.'
+    },
+    {
+      id: 15,
+      name: 'Mancozeb 80 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Broad spectrum preventive fungicide for controlling various fungal diseases.',
+      image: fungicideImages['emthane_m45_mancozeb_80_wp'],
+      category: 'Preventive',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Mancozeb',
+      targetDiseases: ['Early blight', 'Late blight', 'Leaf spot', 'Anthracnose'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Broad-spectrum protection',
+        'Preventive action',
+        'Contact fungicide',
+        'Good resistance management'
+      ],
+      application: 'Apply before disease appears. Repeat every 7-10 days.',
+      precautions: 'Do not apply to edible parts. Follow pre-harvest intervals.'
+    },
+    {
+      id: 16,
+      name: 'Metalaxyl 25 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling oomycete diseases.',
+      image: fungicideImages['fangocil'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Metalaxyl',
+      targetDiseases: ['Late blight', 'Downy mildew', 'Phytophthora'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Potatoes, Tomatoes, Various vegetables',
+      benefits: [
+        'Systemic action',
+        'Effective against oomycetes',
+        'Long-lasting protection',
+        'Good translocation'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 17,
+      name: 'Thiophanate-methyl 70 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['fighter'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Thiophanate-methyl',
+      targetDiseases: ['Powdery mildew', 'Leaf spot', 'Anthracnose', 'Botrytis'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against powdery mildew',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 18,
+      name: 'Propiconazole 25 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['harveseter'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Propiconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 19,
+      name: 'Tebuconazole 25 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['harvestor_xl'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Tebuconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 20,
+      name: 'Hexaconazole 5 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['indofil_m45'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Hexaconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Suspension concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 21,
+      name: 'Difenoconazole 25 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['milraz_wp_76'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Difenoconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 22,
+      name: 'Myclobutanil 10 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['mister_72_wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Myclobutanil',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 23,
+      name: 'Trifloxystrobin 50 WG',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['mistress_72_wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Trifloxystrobin',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Water dispersible granule formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 24,
+      name: 'Kresoxim-methyl 50 WG',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['nemasol_soil_fumigant'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Kresoxim-methyl',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Water dispersible granule formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 25,
+      name: 'Pyraclostrobin 20 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['nordox_super_75_wg'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Pyraclostrobin',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Suspension concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 26,
+      name: 'Flutriafol 25 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['orius_25_ew'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Flutriafol',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Suspension concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 27,
+      name: 'Triadimefon 25 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['oshothane_80_wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Triadimefon',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 28,
+      name: 'Triadimenol 25 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['pearl_500_sc'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Triadimenol',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 29,
+      name: 'Epoxiconazole 12.5 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['proplant_722sl'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Epoxiconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Suspension concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 30,
+      name: 'Cyproconazole 10 SC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['ridomil_gold_mz_68wg'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Cyproconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Suspension concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 31,
+      name: 'Flusilazole 40 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['tata_master_72wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Flusilazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 32,
+      name: 'Penconazole 10 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['tata_master_72wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Penconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 33,
+      name: 'Tebuconazole 25 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['thiovit_jet'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Tebuconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 34,
+      name: 'Propiconazole 25 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['topilite_70_wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Propiconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 35,
+      name: 'Hexaconazole 5 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['victory_72wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Hexaconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 36,
+      name: 'Difenoconazole 25 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['z_force'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Difenoconazole',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 37,
+      name: 'Myclobutanil 10 EC',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['uthane_80_wp'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Myclobutanil',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Emulsifiable concentrate formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 38,
+      name: 'Trifloxystrobin 50 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['control_70_wgd'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Trifloxystrobin',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 39,
+      name: 'Kresoxim-methyl 50 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['goldazim_500_sc_alt'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Kresoxim-methyl',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    },
+    {
+      id: 40,
+      name: 'Pyraclostrobin 20 WP',
+      price: 'Contact for pricing',
+      packaging: 'Contact for pricing',
+      description: 'Systemic fungicide for controlling various fungal diseases.',
+      image: fungicideImages['z_force'],
+      category: 'Systemic',
+      manufacturer: 'AgroChem',
+      activeIngredient: 'Pyraclostrobin',
+      targetDiseases: ['Rust', 'Leaf spot', 'Anthracnose', 'Powdery mildew'],
+      applicationRate: 'Apply at recommended rates as per label',
+      reEntryPeriod: 'N/A',
+      targetCrops: 'Various crops as per label',
+      benefits: [
+        'Systemic action',
+        'Broad-spectrum control',
+        'Effective against rust',
+        'Long-lasting protection'
+      ],
+      application: 'Apply as per label instructions. Wettable powder formulation.',
+      precautions: 'Follow label instructions. Do not apply during flowering.'
+    }
+  ];
+
+  console.log('🦠 FungicidesScreen: Rendering with', fungicideProducts.length, 'products');
+
+  // Helper function to check if product has multiple prices
+  const hasMultiplePrices = (product) => {
+    if (!product.packaging || typeof product.packaging !== 'string') {
+      return false;
+    }
+    return product.packaging.includes(',') && product.packaging.includes('UGX');
+  };
+
+  // Helper function to get unit price for display
+  const getUnitPrice = (product) => {
+    if (!product.packaging || typeof product.packaging !== 'string') {
+      return product.price || 'Price not available';
+    }
+
+    const priceRanges = product.packaging.split(',').map(item => item.trim());
+    if (priceRanges.length > 0) {
+      const firstPrice = priceRanges[0];
+      const match = firstPrice.match(/(\d+(?:\.\d+)?)\s*([a-zA-Z]+):\s*UGX\s*([\d,]+)/i);
+      if (match) {
+        const [, quantity, unit, price] = match;
+        const pricePerUnit = parseInt(price.replace(/,/g, '')) / parseFloat(quantity);
+        return `From UGX ${pricePerUnit.toFixed(0)} per ${unit}`;
+      }
+    }
+    return product.price || 'Price not available';
+  };
+
+  // Handle pricing widget
+  const handlePricingPress = (product) => {
+    setSelectedProductForPricing(product);
+    setPricingWidgetVisible(true);
+  };
+
+  // Optimized image loading handlers
+  const handleImageLoad = useCallback((productId) => {
+    setImageLoadingStates(prev => ({ ...prev, [productId]: false }));
+  }, []);
+
+  const handleImageLoadStart = useCallback((productId) => {
+    setImageLoadingStates(prev => ({ ...prev, [productId]: true }));
+  }, []);
+
+  const renderProduct = (product) => (
+    <TouchableOpacity 
+      key={product.id} 
+      style={styles.productItem}
+      onPress={() => setSelectedProduct(product)}
+    >
+      <Image 
+        source={product.image} 
+        style={styles.productImage}
+        resizeMode="cover"
+        onError={(error) => console.log('Image load error:', error)}
+      />
+      
+      <Text style={styles.productName} numberOfLines={1} ellipsizeMode="tail">
+        {product.name}
+      </Text>
+      
+      <View style={styles.priceContainer}>
+        <Text style={styles.price}>
+          {hasMultiplePrices(product) ? getUnitPrice(product) : product.price}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  // Show detail screen if product is selected
+  if (selectedProduct) {
+    return (
+      <FungicideDetailScreen 
+        product={selectedProduct} 
+        onBack={() => setSelectedProduct(null)}
+        onViewPackages={handlePricingPress}
+      />
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={onBack}>
+          <MaterialIcons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
+        <View style={styles.headerTitleContainer}>
+          <MaterialIcons name="bug_report" size={32} color="white" />
+          <Text style={styles.headerTitle}>Fungicide Products</Text>
+        </View>
+        <Text style={styles.headerSubtitle}>Complete range of agricultural fungicides</Text>
+      </View>
+
+      {/* Products Grid */}
+      <ScrollView style={styles.productsContainer} showsVerticalScrollIndicator={false}>
+        <View style={styles.productsGrid}>
+          {fungicideProducts.map(renderProduct)}
+        </View>
+      </ScrollView>
+
+      {/* Pricing Widget */}
+      {selectedProductForPricing && (
+        <SimplePricingWidget
+          visible={pricingWidgetVisible}
+          onClose={() => setPricingWidgetVisible(false)}
+          product={selectedProductForPricing}
+        />
+      )}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  header: {
+    backgroundColor: '#2c5530',
+    paddingTop: 50,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 20,
+    top: 50,
+    zIndex: 1,
+  },
+  headerTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 10,
+  },
+  headerSubtitle: {
+    fontSize: 16,
+    color: 'white',
+    textAlign: 'center',
+  },
+  productsContainer: {
+    flex: 1,
+    padding: 5,
+    backgroundColor: 'white',
+  },
+  productsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  productItem: {
+    width: '48%',
+    marginBottom: 10,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 0,
+  },
+  productImage: {
+    width: '100%',
+    height: 150,
+  },
+  productName: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#2c5530',
+    marginBottom: 2,
+    marginTop: 20,
+    textAlign: 'center',
+    lineHeight: 16,
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#e74c3c',
+    textAlign: 'center',
+    marginBottom: 8,
+    marginTop: 0,
+  },
+  priceContainer: {
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+});
+
+export default FungicidesScreen;
