@@ -80,16 +80,26 @@ const FertilizerProductsScreen = ({ onBack }) => {
   // Memoized products data based on actual image names
   const fertilizerProducts = useMemo(() => [
     {
-      id: 1, 
-      name: 'Agri Gold (Alt)', 
-      imageName: 'agri_gold_alt.jpg', 
-
-      
-
-      
-      
-      ice, wheat, vegetables, and fruit trees',
-      applicationRate: 'Foliar spray: 1-2ml per liter of water. Apply every 7-10 days during active growth. For cereals: 1-2 liters per hectare. For vegetables: 500ml-1 liter per hectare.'
+      id: 1,
+      name: 'Agri Gold (Alt)',
+      imageName: 'agri_gold_alt.jpg',
+      category: 'Foliar',
+      manufacturer: 'Various Suppliers',
+      price: 'UGX 30,000 (1L) | UGX 15,000 (500ml)',
+      description: 'Agri Gold is a wonder product that prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth.',
+      targetCrops: 'Tomatoes, peppers, beans, maize, rice, and flowering vegetables',
+      applicationRate: 'Foliar spray: 2-3ml per liter of water. Apply every 10-15 days during flowering and fruiting stages. For soil application: 1-2 liters per hectare mixed with irrigation water.'
+    },
+    {
+      id: 2,
+      name: 'Agri Gold Foliar',
+      imageName: 'agri_gold_foliar.png',
+      category: 'Foliar',
+      manufacturer: 'Various Suppliers',
+      price: 'UGX 30,000 (1L) | UGX 15,000 (500ml)',
+      description: 'Premium foliar fertilizer for enhanced crop growth and yield improvement.',
+      targetCrops: 'Maize, rice, wheat, vegetables, and fruit trees',
+      applicationRate: 'Foliar spray: 2-3ml per liter of water. Apply every 10-15 days during vegetative and reproductive stages. For soil application: 1-2 liters per hectare mixed with irrigation water.'
     },
     {
       id: 3, 
@@ -719,7 +729,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       manufacturer: 'Various Suppliers',
       price: 'UGX 105,000 (50kg)', 
       description: 'Calcium ammonium nitrate fertilizer for nitrogen and calcium supply.',
-      targetCrops: 'Potatoes, sugar beets, vegetables, and crops requiring balanced nitrogen.'
+      targetCrops: 'Potatoes, sugar beets, vegetables, and crops requiring balanced nitrogen',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. For potatoes: 300-400kg per hectare. For sugar beets: 250-350kg per hectare. For vegetables: 200-300kg per hectare. Apply at planting and top-dress during growth.'
     },
     {
       id: 63, 
@@ -729,7 +740,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       manufacturer: 'Various Suppliers',
       price: 'UGX 5,500 (250g)', 
       description: 'Essential micro-nutrients for proper crop function and growth.',
-      targetCrops: 'All crops with micronutrient deficiencies, especially citrus, maize, and vegetables.'
+      targetCrops: 'All crops with micronutrient deficiencies, especially citrus, maize, and vegetables',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-15 days during vegetative growth. For cassava: 250g per hectare per application. Mix with 200-400 liters of water per hectare.'
     }
   ], []);
 
