@@ -86,7 +86,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Foliar', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 30,000 (1L) | UGX 15,000 (500ml)', 
-      description: 'Agri Gold is a wonder product that prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth. Contains essential nutrients and plant growth regulators that support optimal flowering and fruiting stages.'
+      description: 'Agri Gold is a wonder product that prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth. This foliar fertilizer contains essential nutrients and plant growth regulators that support optimal flowering and fruiting stages, ensuring maximum crop productivity and quality.'
     },
     {
       id: 2, 
@@ -190,7 +190,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Starter', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 18,000 (1kg)', 
-      description: 'Water-soluble fertilizer enriched with chelated micro-elements and bio-stimulants, ideal during plant growth periods requiring high phosphorous levels, such as for seedlings, transplants, and young plants. Composition includes N.P.K 18:20:21, trace elements, and bio-stimulants.',
+      description: 'Easygro Starter is a water-soluble fertilizer containing chelated micro-elements and bio-stimulants, designed for foliar feeding and fertigation. It is recommended during plant growth periods requiring high phosphorus levels, such as for seedlings, transplants, and young plants. It enhances plant water-use efficiency, improves nutrient use efficiency, contributes to disease and moisture stress resistance, and accelerates plant maturity through better growth. The composition includes N.P.K 18:20:21 plus trace elements and bio-stimulants.',
       targetCrops: 'Maize, rice, vegetables, and all transplanted crops'
     },
     {
@@ -425,7 +425,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 160,000 (50kg)', 
-      description: 'Specialized NPK fertilizer (11-29-23) specifically formulated for beans, soybeans, and other leguminous crops. The high phosphorus content (29% P2O5) supports root development and nitrogen fixation, while the balanced nitrogen and potassium promote healthy plant growth.'
+      description: 'NPK 11.29.23 is a field-grade fertilizer specifically formulated for beans, soybeans, and other leguminous crops. Composed of nitrogen, phosphorus, and potassium in balanced proportions, it promotes root and shoot growth, enhances fruiting and flowering, and improves overall plant health. The high phosphorus content (29% P2O5) supports root development and nitrogen fixation, while being water-soluble for immediate plant uptake during seed and seedling stages.'
     },
     {
       id: 39, 
@@ -452,7 +452,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 160,000 (50kg)', 
-      description: 'Planting fertilizer blend (11-29-23) specifically designed for crop establishment and early growth. The high phosphorus content (29% P2O5) promotes strong root development and early plant establishment, while balanced nitrogen and potassium support healthy initial growth.'
+      description: 'NPK 11.29.23 is a field-grade planting fertilizer composed of nitrogen, phosphorus, and potassium in balanced proportions, suitable for improved production of most crops. It is universal and can be used on all crops, from vegetables to fruit trees. It promotes root and shoot growth, enhances fruiting and flowering, and improves overall plant health, providing resistance to diseases. Being water-soluble, it can be taken up by plants almost immediately, supplying essential nutrients during the seed and seedling stages.'
     },
     {
       id: 42, 
@@ -470,7 +470,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Organic', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 117,150 (1L) | UGX 15,000 (100ml)', 
-      description: 'Organic eliciting fertilizer comprising both micro and macro nutrients, including amino acids, peptides, and chitosan chelate. Non-toxic and environmentally safe, providing plants with essential nutrients like N, P, K, Ca, Mg, S, Fe, Zn, Cu, B, Mn, Mo, Na, Co, and Cl. Promotes growth of roots, stems, and leaves while enhancing quality and flavor of harvestable parts.'
+      description: 'Nutriplant Organic Plus Fertilizer (NOPF) is composed of both micro and macro nutrients, including amino acids, peptides, chitosan chelate, and their chelates with trace elements, serving as natural nutrition for plants. It is non-toxic and environmentally safe, providing plants with various nutrients, including macro (N, P, K, Ca, Mg, S) and micro (Fe, Zn, Cu, B, Mn, Mo, Na, Co, Cl) elements. It promotes growth of roots, stems, and leaves, improves quality and flavor of harvestable parts, enhances resistance to drought, infertility, diseases, and pests, aids in faster seed germination, improves soil structure, and enhances soil bioactivity.'
     },
     {
       id: 44, 
@@ -479,7 +479,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Organic', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 117,150 (1L) | UGX 15,000 (100ml)', 
-      description: 'Alternative organic eliciting fertilizer containing comprehensive micro and macro nutrients, amino acids, peptides, and chitosan chelate. Environmentally safe formulation that enhances plant resistance to drought, infertility, diseases, and pests while accelerating seed germination and improving soil structure and bioactivity.'
+      description: 'Alternative Nutriplant Organic Plus Fertilizer (NOPF) composed of both micro and macro nutrients, including amino acids, peptides, chitosan chelate, and their chelates with trace elements, serving as natural nutrition for plants. It is non-toxic and environmentally safe, providing plants with various nutrients, including macro (N, P, K, Ca, Mg, S) and micro (Fe, Zn, Cu, B, Mn, Mo, Na, Co, Cl) elements. It promotes growth of roots, stems, and leaves, improves quality and flavor of harvestable parts, enhances resistance to drought, infertility, diseases, and pests, aids in faster seed germination, improves soil structure, and enhances soil bioactivity.'
     },
     {
       id: 45, 
@@ -524,7 +524,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Liquid', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 11,000 (1L)', 
-      description: 'Complete liquid water-soluble fertilizer providing comprehensive nutrition for all crops. Contains balanced NPK plus essential micronutrients in liquid form for easy application and rapid plant uptake. Ideal for foliar feeding, fertigation, and crops requiring immediate nutrient availability.'
+      description: 'Super Green is a comprehensive water-soluble fertilizer containing both major and micro-nutrients essential for healthy plant growth. It is particularly effective during nutrient deficiency periods, offering rapid absorption and response. The formulation includes NPK (19:19:19) along with trace elements like Magnesium (Mg), Boron (B), Iron (Fe), and Zinc (Zn). For optimal results, mix 50-100g in 20 liters of water and apply to foliage every 14-21 days during the early establishment and vegetative growth stages.'
     },
     {
       id: 50, 
@@ -578,7 +578,7 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Yara',
       price: 'UGX 110,000 (50kg)', 
-      description: 'Yarabela CAN (Calcium Ammonium Nitrate) fertilizer providing both nitrogen and calcium for balanced plant nutrition. Contains 27% nitrogen in ammonium and nitrate forms, plus 8% calcium. The calcium content improves soil structure and plant cell wall development while providing essential nitrogen for growth.'
+      description: 'Yarabela CAN (Calcium Ammonium Nitrate) is a nitrogenous and calcareous fertilizer known for its high efficiency in quickly supplying nitrogen. It improves soil structure by granulating the soil, making it resistant to caking. When applied to fruits, vegetables, flowers, and industrial crops, it extends flowering periods, stimulates normal growth of roots, stems, and leaves, ensures vibrant fruit colors, and increases carbohydrate content in fruits. CAN is considered a high-efficiency, environmentally friendly greening fertilizer.'
     },
     {
       id: 56, 
