@@ -83,19 +83,13 @@ const FertilizerProductsScreen = ({ onBack }) => {
       id: 1, 
       name: 'Agri Gold (Alt)', 
       imageName: 'agri_gold_alt.jpg', 
-      category: 'Foliar', 
-      manufacturer: 'Various Suppliers',
-      price: 'UGX 30,000 (1L) | UGX 15,000 (500ml)', 
-      description: 'Agri Gold is a wonder product that prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth. This foliar fertilizer contains essential nutrients and plant growth regulators that support optimal flowering and fruiting stages, ensuring maximum crop productivity and quality.'
-    },
-    {
-      id: 2, 
-      name: 'Agri Gold Foliar', 
-      imageName: 'agri_gold_foliar.png', 
-      category: 'Foliar', 
-      manufacturer: 'Various Suppliers',
-      price: 'UGX 30,000 (1L) | UGX 15,000 (500ml)', 
-      description: 'Agri Gold Foliar is a premium foliar fertilizer containing balanced NPK and essential micronutrients for enhanced crop growth and yield improvement. This wonder product prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth. Formulated for rapid plant uptake through leaves, supporting healthy vegetative growth and optimal flowering stages.'
+
+      
+
+      
+      
+      ice, wheat, vegetables, and fruit trees',
+      applicationRate: 'Foliar spray: 1-2ml per liter of water. Apply every 7-10 days during active growth. For cereals: 1-2 liters per hectare. For vegetables: 500ml-1 liter per hectare.'
     },
     {
       id: 3, 
@@ -104,7 +98,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Premium', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 35,000 (1L)', 
-      description: 'Agri Gold Premium is a premium grade fertilizer engineered for maximum crop performance and quality. This wonder product prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth. Contains advanced nutrient formulations and plant growth enhancers that promote superior yield, fruit quality, and overall plant health.'
+      description: 'Premium grade fertilizer for maximum crop performance and quality.',
+      targetCrops: 'High-value crops like tomatoes, peppers, beans, and maize',
+      applicationRate: 'Foliar spray: 2-3ml per liter of water. Apply every 10-14 days during critical growth stages. For high-value crops: 1-2 liters per hectare per application.'
     },
     {
       id: 4, 
@@ -112,8 +108,10 @@ const FertilizerProductsScreen = ({ onBack }) => {
       imageName: 'agricultural_lime.jpeg', 
       category: 'Soil Amendment', 
       manufacturer: 'Various Suppliers',
-      price: 'UGX 25,000 (50kg)', 
-      description: 'High-quality agricultural lime for soil conditioning and pH adjustment. Contains calcium carbonate that neutralizes soil acidity, improves soil structure, and provides essential calcium for plant nutrition and root development. Essential for correcting soil pH levels and providing calcium for proper plant cell wall formation and overall plant health.'
+      price: 'UGX 75,000 (50kg)', 
+      description: 'High-quality agricultural lime for soil conditioning and pH adjustment.',
+      targetCrops: 'All crops requiring pH correction, especially legumes, vegetables, and fruit trees',
+      applicationRate: 'Broadcast application: 1-3 tons per hectare depending on soil pH. For pH correction: 2-4 tons per hectare. Apply 2-3 months before planting and incorporate into soil.'
     },
     {
       id: 5, 
@@ -121,8 +119,10 @@ const FertilizerProductsScreen = ({ onBack }) => {
       imageName: 'agricultural_lime_alt.png', 
       category: 'Soil Amendment', 
       manufacturer: 'Various Suppliers',
-      price: 'UGX 25,000 (50kg)', 
-      description: 'Agricultural limestone for soil pH correction and calcium supplementation. Provides long-lasting pH adjustment while supplying essential calcium for plant cell wall development and overall plant health. Improves soil structure and enhances nutrient availability for optimal plant growth and development.'
+      price: 'UGX 75,000 (50kg)', 
+      description: 'Agricultural limestone for soil pH correction and calcium supplementation.',
+      targetCrops: 'All crops requiring pH correction, especially legumes, vegetables, and fruit trees',
+      applicationRate: 'Broadcast application: 1-3 tons per hectare depending on soil pH. For pH correction: 2-4 tons per hectare. Apply 2-3 months before planting and incorporate into soil.'
     },
     {
       id: 6, 
@@ -131,7 +131,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 170,400 (25kg)', 
-      description: 'Water-soluble calcium and nitrogen fertilizer providing essential nutrients for plant nutrition. Calcium promotes strong cell walls and fruit quality, while nitrogen supports vigorous vegetative growth and overall plant development. Ideal for preventing calcium deficiency disorders and ensuring proper fruit development and quality.'
+      description: 'Water-soluble calcium and nitrogen fertilizer for plant nutrition.',
+      targetCrops: 'Greenhouse vegetables, tomatoes, peppers, lettuce, and calcium-deficient crops',
+      applicationRate: 'Fertigation: 1-2kg per 1000 liters of water. Foliar spray: 0.5-1kg per 1000 liters. Apply every 7-14 days. For greenhouse crops: 2-4kg per hectare per application.'
     },
     {
       id: 7, 
@@ -140,8 +142,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 170,400 (25kg)', 
-      description: 'Water-soluble calcium nitrate specifically designed for fertigation and foliar application. Provides readily available calcium and nitrogen in forms that are immediately absorbed by plants for optimal nutrition. Essential for preventing blossom end rot and ensuring proper fruit development in tomatoes, peppers, and other calcium-sensitive crops.',
-      targetCrops: 'Greenhouse vegetables, tomatoes, peppers, lettuce, and hydroponic crops'
+      description: 'Water-soluble calcium nitrate for fertigation and foliar application.',
+      targetCrops: 'Greenhouse vegetables, tomatoes, peppers, lettuce, and hydroponic crops',
+      applicationRate: 'Fertigation: 1-2kg per 1000 liters of water. Foliar spray: 0.5-1kg per 1000 liters. Apply every 7-14 days. For hydroponics: 100-200ppm in nutrient solution.'
     },
     {
       id: 8, 
@@ -149,9 +152,10 @@ const FertilizerProductsScreen = ({ onBack }) => {
       imageName: 'cassava_tapiocal.jpg', 
       category: 'Specialized', 
       manufacturer: 'Various Suppliers',
-      price: 'UGX 5,000 (250g)', 
-      description: 'Microfood foliar fertilizer specifically formulated for cassava cultivation. Contains essential micronutrients including Iron, Manganese, Zinc, Copper, Molybdenum, Boron, and Magnesium in forms readily available for plant uptake. These nutrients catalyze metabolic reactions and support food manufacturing processes within the plant, leading to robust produce and optimal cassava tuber development.',
-      targetCrops: 'Cassava, sweet potatoes, and other tuber crops requiring micronutrients'
+      price: 'UGX 5,500 (250g)', 
+      description: 'Microfood foliar fertilizer specifically formulated for cassava cultivation.',
+      targetCrops: 'Cassava, sweet potatoes, and other tuber crops requiring micronutrients',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-15 days during vegetative growth. For cassava: 250g per hectare per application. Mix with 200-400 liters of water per hectare.'
     },
     {
       id: 9, 
@@ -160,8 +164,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Complete', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 13,000 (300g)', 
-      description: 'Complete crop nutrition fertilizer providing comprehensive nutrition for all growth stages. Contains balanced NPK plus essential micronutrients that support healthy plant development from establishment through flowering and fruiting. Formulated to enhance crop yield, improve fruit quality, and provide resistance to diseases and environmental stress.',
-      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals requiring balanced nutrition'
+      description: 'Complete crop nutrition fertilizer for all growth stages.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals requiring balanced nutrition',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 7-10 days during active growth. For vegetables: 300g per hectare per application. For fruits: 500g per hectare per application.'
     },
     {
       id: 10, 
@@ -170,8 +175,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Phosphorus', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 175,000 (50kg)', 
-      description: 'Diammonium phosphate (DAP) providing high phosphorus content (46% P2O5) and nitrogen (18% N) for phosphorus supply and plant growth. Essential for root development, flowering, and early plant establishment. This concentrated phosphorus source promotes strong root systems, enhances flowering and fruiting, and supports overall plant vigor and productivity.',
-      targetCrops: 'Maize, wheat, rice, legumes (beans, soybeans), and root crops (potatoes, carrots)'
+      description: 'Diammonium phosphate for phosphorus supply and plant growth.',
+      targetCrops: 'Maize, wheat, rice, legumes (beans, soybeans), and root crops (potatoes, carrots)',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. Band application: 100-200kg per hectare placed 5-8cm below seed. For maize: 300-400kg per hectare. For legumes: 200-300kg per hectare.'
     },
     {
       id: 11, 
@@ -180,8 +186,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Calcium', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 18,000 (1kg) | UGX 9,600 (500g) | UGX 6,400 (250g)', 
-      description: 'High-quality water-soluble calcium fertilizer that provides essential calcium for plant cell wall development, fruit quality improvement, and prevention of calcium deficiency disorders. Contains readily available calcium that promotes strong plant structure, enhances fruit firmness, and improves shelf life of harvested produce. Essential for preventing blossom end rot and ensuring proper fruit development.',
-      targetCrops: 'Tomatoes, peppers, lettuce, apples, and calcium-deficient crops'
+      description: 'Water-soluble calcium fertilizer for plant growth and development.',
+      targetCrops: 'Tomatoes, peppers, lettuce, apples, and calcium-deficient crops',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-14 days during fruit development. For tomatoes: 1-2kg per hectare per application. For apples: 2-3kg per hectare per application.'
     },
     {
       id: 12, 
@@ -190,8 +197,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Starter', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 18,000 (1kg)', 
-      description: 'Easygro Starter is a water-soluble fertilizer containing chelated micro-elements and bio-stimulants, designed for foliar feeding and fertigation. It is recommended during plant growth periods requiring high phosphorus levels, such as for seedlings, transplants, and young plants. It enhances plant water-use efficiency, improves nutrient use efficiency, contributes to disease and moisture stress resistance, and accelerates plant maturity through better growth. The composition includes N.P.K 18:20:21 plus trace elements and bio-stimulants.',
-      targetCrops: 'Maize, rice, vegetables, and all transplanted crops'
+      description: 'Starter fertilizer for young plants and seedlings.',
+      targetCrops: 'Maize, rice, vegetables, and all transplanted crops',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 7-10 days for first 4-6 weeks after planting. For seedlings: 1g per liter. For transplanted crops: 2g per liter.'
     },
     {
       id: 13, 
@@ -200,7 +208,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Vegetative', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 20,000 (1kg) | UGX 9,600 (500g) | UGX 6,400 (250g)', 
-      description: 'Specialized vegetative growth fertilizer formulated to support healthy plant development during the active growing phase. Contains balanced nutrients that promote strong stem development, lush foliage growth, and robust root systems essential for optimal crop establishment and yield potential. Ideal for crops requiring vigorous vegetative growth before flowering.'
+      description: 'Vegetative growth fertilizer for healthy plant development.',
+      targetCrops: 'Maize, rice, wheat, vegetables, and leafy crops',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 7-10 days during vegetative growth. For cereals: 1-2kg per hectare per application. For vegetables: 500g-1kg per hectare per application.'
     },
     {
       id: 14, 
@@ -209,7 +219,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Trace Elements', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 779,600 (25kg)', 
-      description: 'Comprehensive trace element fertilizer containing essential micronutrients including Iron, Manganese, Zinc, Copper, Molybdenum, Boron, and Magnesium in forms readily available for plant uptake. These nutrients catalyze metabolic reactions and support food manufacturing processes within the plant, leading to robust produce and optimal crop function. Essential for correcting micronutrient deficiencies and ensuring proper plant metabolism.'
+      description: 'Effective foliar spray to correct trace element deficiency.',
+      targetCrops: 'All crops with micronutrient deficiencies, especially citrus, maize, and vegetables',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-15 days until deficiency symptoms disappear. For citrus: 2-3kg per hectare per application. For maize: 1-2kg per hectare per application.'
     },
     {
       id: 15, 
@@ -218,7 +230,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Micronutrients', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 35,000 (1kg)', 
-      description: 'Specialized micronutrient fertilizer containing Boron and Molybdenum, essential elements for proper plant development. Boron is crucial for cell wall formation, pollen germination, and fruit development, while Molybdenum is vital for nitrogen fixation in legumes and enzyme activity in plants. Essential for preventing boron and molybdenum deficiencies that can severely impact crop yield and quality.'
+      description: 'Boron and molybdenum fertilizer for plant nutrition.',
+      targetCrops: 'Legumes (beans, soybeans), cruciferous vegetables, and boron-deficient crops',
+      applicationRate: 'Foliar spray: 0.5-1g per liter of water. Apply every 10-14 days during flowering and pod development. For legumes: 500g-1kg per hectare per application. For cruciferous vegetables: 1-2kg per hectare per application.'
     },
     {
       id: 16, 
@@ -227,7 +241,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Anti-transpirant', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 31,000 (1L)', 
-      description: 'Advanced anti-transpirant formulation designed to reduce water loss through plant leaves during stress periods. Forms a protective film that helps plants conserve water, maintain turgor pressure, and survive drought conditions while maintaining optimal growth and productivity. Essential for crop protection during water stress and extreme weather conditions.'
+      description: 'Anti-transpirant for plant stress relief and water conservation.',
+      targetCrops: 'All crops during drought stress, especially vegetables, fruits, and ornamentals',
+      applicationRate: 'Foliar spray: 2-3ml per liter of water. Apply every 7-10 days during stress periods. For vegetables: 1-2 liters per hectare per application. For fruits: 2-3 liters per hectare per application.'
     },
     {
       id: 17, 
@@ -236,7 +252,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Potassium', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 35,000 (1kg)', 
-      description: 'High-quality potassium fertilizer containing 20% K2O, essential for plant water regulation, disease resistance, and fruit quality improvement. Potassium plays a crucial role in enzyme activation, protein synthesis, and carbohydrate transport within plants. Essential for improving fruit quality, enhancing disease resistance, and ensuring proper plant water balance and stress tolerance.'
+      description: 'Potassium fertilizer for all crops and growth stages.',
+      targetCrops: 'Potatoes, tomatoes, bananas, citrus fruits, and potassium-deficient crops',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-14 days during fruit development. For potatoes: 2-3kg per hectare per application. For tomatoes: 1-2kg per hectare per application.'
     },
     {
       id: 18, 
@@ -245,7 +263,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Calcium', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 38,000 (1kg)', 
-      description: 'Premium calcium fertilizer specifically formulated to provide readily available calcium for plant nutrition. Essential for cell wall development, membrane stability, and enzyme activation. Particularly effective in preventing calcium deficiency disorders and improving fruit quality and shelf life. Essential for proper fruit development and preventing physiological disorders.'
+      description: 'Calcium fertilizer for plant growth and development.',
+      targetCrops: 'Tomatoes, peppers, apples, and calcium-deficient crops',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-14 days during fruit development. For tomatoes: 1-2kg per hectare per application. For apples: 2-3kg per hectare per application.'
     },
     {
       id: 19, 
@@ -254,7 +274,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Kynoch',
       price: 'UGX 160,000 (50kg)', 
-      description: 'Premium NPK fertilizer blend engineered for maximum crop yield and performance. Contains balanced proportions of Nitrogen, Phosphorus, and Potassium along with essential micronutrients. Formulated to provide sustained nutrient release and enhance crop productivity across various agricultural applications. Ideal for high-yield agriculture and precision farming.'
+      description: 'High-performance NPK fertilizer blend for maximum yield.',
+      targetCrops: 'Maize, rice, wheat, and high-yield cereal crops',
+      applicationRate: 'Broadcast application: 300-500kg per hectare. Band application: 200-300kg per hectare. For maize: 400-500kg per hectare. For rice: 300-400kg per hectare. Apply at planting and top-dress during growth.'
     },
     {
       id: 20, 
@@ -263,7 +285,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Kynoch',
       price: 'UGX 155,000 (50kg)', 
-      description: 'Specialized NPK blend (15-9-21) enriched with 5% sulfur, specifically formulated for horticultural crops. The balanced nutrient ratio supports optimal plant development, while sulfur content enhances protein synthesis and improves crop quality. Essential for vegetables, fruits, flowers, and ornamental plants requiring precise nutrition and enhanced quality.'
+      description: 'Specialized NPK blend with sulfur for horticultural crops.',
+      targetCrops: 'Vegetables, fruits, flowers, and horticultural crops',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. For vegetables: 300-400kg per hectare. For fruits: 400-500kg per hectare. For flowers: 200-300kg per hectare. Apply at planting and during growth stages.'
     },
     {
       id: 21, 
@@ -272,7 +296,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Kynoch',
       price: 'UGX 160,000 (50kg)', 
-      description: 'Fast-acting NPK fertilizer designed for rapid plant establishment and growth. Features quick-release nitrogen for immediate plant uptake, balanced phosphorus for root development, and potassium for stress resistance and rapid establishment. Ideal for crops requiring rapid establishment and early season growth stimulation for maximum yield potential.'
+      description: 'Quick-release NPK fertilizer for rapid plant growth.',
+      targetCrops: 'Maize, rice, vegetables, and crops requiring rapid establishment',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. For rapid establishment: 300-400kg per hectare. For vegetables: 200-300kg per hectare. Apply at planting and early growth stages.'
     },
     {
       id: 22, 
@@ -281,7 +307,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Kynoch',
       price: 'UGX 140,000 (50kg)', 
-      description: 'Sulfur-enriched NPK fertilizer providing balanced nutrition with essential sulfur content. Sulfur is crucial for protein synthesis, enzyme activity, and chlorophyll formation. This formulation ensures optimal plant nutrition while addressing sulfur deficiency common in many agricultural soils. Essential for cruciferous vegetables and sulfur-demanding crops.'
+      description: 'Sulfur-enriched NPK fertilizer for balanced nutrition.',
+      targetCrops: 'Cruciferous vegetables, legumes, and sulfur-deficient crops',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. For cruciferous vegetables: 300-400kg per hectare. For legumes: 200-300kg per hectare. Apply at planting and during growth stages.'
     },
     {
       id: 23, 
@@ -290,7 +318,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Kynoch',
       price: 'UGX 165,000 (50kg)', 
-      description: 'Specialized top-dressing NPK fertilizer formulated for crop maintenance and continued nutrition throughout the growing season. Provides sustained nutrient release to support ongoing plant development, flowering, and fruiting stages. Ideal for established crops requiring additional nutrition during critical growth periods for maximum yield and quality.'
+      description: 'Top-dressing NPK fertilizer for crop maintenance.',
+      targetCrops: 'Maize, rice, wheat, and established crops requiring maintenance nutrition',
+      applicationRate: 'Top-dressing application: 100-200kg per hectare. For maize: 150-200kg per hectare at 4-6 weeks after planting. For rice: 100-150kg per hectare at tillering stage. For wheat: 100-150kg per hectare at stem elongation.'
     },
     {
       id: 24, 
@@ -299,7 +329,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 158,800 (25kg)', 
-      description: 'High-purity magnesium nitrate formulation providing essential magnesium and nitrogen for plant nutrition. Magnesium is vital for chlorophyll production and photosynthesis, while nitrogen supports vegetative growth. This water-soluble formulation ensures rapid plant uptake and immediate nutrient availability. Essential for preventing magnesium deficiency and ensuring proper photosynthesis.'
+      description: 'Alternative magnesium nitrate formulation for plant nutrition.',
+      targetCrops: 'Tomatoes, peppers, potatoes, and magnesium-deficient crops',
+      applicationRate: 'Fertigation: 1-2kg per 1000 liters of water. Foliar spray: 0.5-1kg per 1000 liters. Apply every 7-14 days. For tomatoes: 2-3kg per hectare per application. For potatoes: 1-2kg per hectare per application.'
     },
     {
       id: 25, 
@@ -308,7 +340,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 158,800 (25kg)', 
-      description: 'Hexahydrate magnesium nitrate specifically formulated for vegetative growth stages. The hexahydrate form provides stable magnesium and nitrogen supply, essential for chlorophyll synthesis, protein formation, and overall plant vigor during active growth periods. Ideal for crops requiring sustained magnesium nutrition throughout the growing season.'
+      description: 'Hexahydrate magnesium nitrate for vegetative growth.',
+      targetCrops: 'Tomatoes, peppers, potatoes, and magnesium-deficient crops',
+      applicationRate: 'Fertigation: 1-2kg per 1000 liters of water. Foliar spray: 0.5-1kg per 1000 liters. Apply every 7-14 days during vegetative growth. For tomatoes: 2-3kg per hectare per application.'
     },
     {
       id: 26, 
@@ -317,7 +351,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 158,800 (25kg)', 
-      description: 'Premium water-soluble magnesium nitrate designed for fertigation and hydroponic systems. Provides readily available magnesium and nitrogen in forms that are immediately absorbed by plant roots. Ideal for precision agriculture and controlled environment growing systems. Essential for preventing magnesium deficiency in hydroponic and greenhouse production systems.'
+      description: 'Water-soluble magnesium nitrate for fertigation.',
+      targetCrops: 'Greenhouse vegetables, tomatoes, peppers, and hydroponic crops',
+      applicationRate: 'Fertigation: 1-2kg per 1000 liters of water. For hydroponics: 50-100ppm in nutrient solution. Apply every 7-14 days. For greenhouse vegetables: 2-3kg per hectare per application.'
     },
     {
       id: 27, 
@@ -326,7 +362,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 140,000 (50kg)', 
-      description: 'MEA-urea fertilizer blend providing high nitrogen content for rapid plant growth and development. Urea is the most concentrated solid nitrogen fertilizer, containing 46% nitrogen. This formulation ensures efficient nitrogen delivery for maximum crop productivity and yield enhancement. Essential for crops requiring high nitrogen levels during active growth periods.'
+      description: 'MEA-urea fertilizer blend for nitrogen supply.',
+      targetCrops: 'Maize, rice, wheat, and all nitrogen-demanding crops',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. For maize: 300-400kg per hectare. For rice: 200-300kg per hectare. For wheat: 200-300kg per hectare. Apply at planting and top-dress during growth.'
     },
     {
       id: 28, 
@@ -335,7 +373,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Planting', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 155,000 (50kg)', 
-      description: 'Specialized planting fertilizer formulated for optimal crop establishment and early growth. Contains balanced nutrients essential for seed germination, root development, and initial plant establishment. Provides the foundation nutrition needed for healthy crop development from planting through early growth stages. Essential for ensuring strong crop establishment and early vigor.'
+      description: 'Planting fertilizer for crops and seedlings.',
+      targetCrops: 'Maize, rice, vegetables, and all transplanted crops',
+      applicationRate: 'Broadcast application: 200-400kg per hectare. For planting: 300-400kg per hectare. For seedlings: 200-300kg per hectare. Apply at planting and incorporate into soil.'
     },
     {
       id: 29, 
@@ -344,7 +384,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Topdressing', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 135,000 (50kg)', 
-      description: 'Topdressing fertilizer designed for crop maintenance and continued nutrition throughout the growing season. Provides additional nutrients to established crops during critical growth periods, supporting flowering, fruiting, and yield development. Ideal for crops requiring supplemental nutrition during active growth phases for maximum yield potential.'
+      description: 'Topdressing fertilizer for crop maintenance.',
+      targetCrops: 'Maize, rice, wheat, and established crops requiring maintenance nutrition',
+      applicationRate: 'Top-dressing application: 100-200kg per hectare. For maize: 150-200kg per hectare at 4-6 weeks. For rice: 100-150kg per hectare at tillering. For wheat: 100-150kg per hectare at stem elongation.'
     },
     {
       id: 30, 
@@ -353,7 +395,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Potassium', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 150,000 (50kg)', 
-      description: 'Muriate of potash (MOP) fertilizer containing 60% K2O, providing essential potassium for plant nutrition. Potassium is vital for water regulation, disease resistance, fruit quality, and overall plant health. This high-analysis potassium source ensures optimal crop performance and yield quality. Essential for improving fruit quality and enhancing disease resistance.'
+      description: 'Muriate of potash fertilizer for potassium supply.',
+      targetCrops: 'Potatoes, tomatoes, bananas, citrus fruits, and potassium-deficient crops',
+      applicationRate: 'Broadcast application: 100-200kg per hectare. For potatoes: 150-200kg per hectare. For tomatoes: 100-150kg per hectare. For bananas: 200-300kg per hectare. Apply at planting and during fruit development.'
     },
     {
       id: 31, 
@@ -362,7 +406,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 18,000 (1kg)', 
-      description: 'Multi-nutrient NPK fertilizer providing balanced nutrition for optimal plant growth and development. Contains essential macronutrients in proportions that support healthy plant development, flowering, and fruiting. Suitable for a wide range of crops requiring comprehensive nutrition throughout all growth stages. Ideal for general-purpose crop nutrition and maintenance.'
+      description: 'Multi-nutrient NPK fertilizer for balanced nutrition.',
+      targetCrops: 'All crops requiring balanced nutrition, especially vegetables and ornamentals'
     },
     {
       id: 32, 
@@ -371,7 +416,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 314,200 (25kg)', 
-      description: 'High-analysis soluble fertilizer (12-61-0) specifically designed for fertigation and early growth stages. The high phosphorus content (61% P2O5) promotes strong root development and early plant establishment. Ideal for crops requiring immediate phosphorus availability during critical growth phases. Essential for rapid root development and early plant vigor.'
+      description: 'Soluble fertilizer for fertigation and early growth stages.',
+      targetCrops: 'Maize, rice, vegetables, and crops requiring early phosphorus'
     },
     {
       id: 33, 
@@ -380,7 +426,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 314,200 (25kg)', 
-      description: 'Alternative high-analysis soluble fertilizer (12-61-0) formulated for fertigation systems and early crop growth. Provides concentrated phosphorus for root development and plant establishment. The water-soluble formulation ensures rapid nutrient availability for optimal crop performance. Essential for precision agriculture and controlled environment growing systems.'
+      description: 'Alternative soluble fertilizer for fertigation and early growth.',
+      targetCrops: 'Maize, rice, vegetables, and crops requiring early phosphorus'
     },
     {
       id: 34, 
@@ -389,7 +436,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 315,500 (25kg)', 
-      description: 'High-purity monopotassium phosphate (0-52-34) specifically formulated for foliar application. Provides concentrated phosphorus and potassium in forms readily absorbed through plant leaves. Ideal for correcting nutrient deficiencies and supporting flowering and fruiting stages. Essential for precision foliar nutrition and rapid nutrient correction.'
+      description: 'Monopotassium phosphate for foliar spraying.',
+      targetCrops: 'Tomatoes, peppers, potatoes, and crops requiring phosphorus and potassium',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-14 days during flowering and fruiting. For tomatoes: 1-2kg per hectare per application. For potatoes: 2-3kg per hectare per application.'
     },
     {
       id: 35, 
@@ -398,7 +447,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 315,500 (25kg)', 
-      description: 'Ultra-high purity monopotassium phosphate (0-52-34) that dissolves completely in water, leaving no residue. Provides concentrated phosphorus and potassium in forms that are immediately available to plants. Ideal for precision agriculture, hydroponics, and foliar application systems. Essential for high-purity nutrient solutions and precision feeding programs.'
+      description: 'High purity monopotassium phosphate that dissolves completely.',
+      targetCrops: 'Tomatoes, peppers, potatoes, and crops requiring phosphorus and potassium',
+      applicationRate: 'Foliar spray: 1-2g per liter of water. Apply every 10-14 days during flowering and fruiting. For tomatoes: 1-2kg per hectare per application. For potatoes: 2-3kg per hectare per application.'
     },
     {
       id: 36, 
@@ -407,7 +458,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 160,000 (50kg)', 
-      description: 'High phosphorus NPK fertilizer (25-5-5) enriched with 5% sulfur for comprehensive plant nutrition. The high phosphorus content promotes strong root development and early plant establishment, while sulfur enhances protein synthesis and crop quality. Ideal for crops requiring high phosphorus during establishment phases and sulfur nutrition.'
+      description: 'High phosphorus NPK with sulfur for plant nutrition.',
+      targetCrops: 'Maize, rice, vegetables, and crops requiring high phosphorus.'
     },
     {
       id: 37, 
@@ -416,7 +468,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 120,000 (50kg)', 
-      description: 'Balanced NPK fertilizer (17-17-17) providing equal proportions of Nitrogen, Phosphorus, and Potassium for comprehensive plant nutrition. This balanced formulation supports all growth stages from establishment through flowering and fruiting. Ideal for general-purpose crop nutrition and maintenance throughout the growing season.'
+      description: 'Balanced NPK fertilizer for all crops.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals.'
     },
     {
       id: 38, 
@@ -425,7 +478,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 160,000 (50kg)', 
-      description: 'NPK 11.29.23 is a field-grade fertilizer specifically formulated for beans, soybeans, and other leguminous crops. Composed of nitrogen, phosphorus, and potassium in balanced proportions, it promotes root and shoot growth, enhances fruiting and flowering, and improves overall plant health. The high phosphorus content (29% P2O5) supports root development and nitrogen fixation, while being water-soluble for immediate plant uptake during seed and seedling stages.'
+      description: 'Fertilizer specifically formulated for beans and soybeans.',
+      targetCrops: 'Beans, soybeans, peas, and other legumes.'
     },
     {
       id: 39, 
@@ -434,7 +488,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 70,000 (50kg)', 
-      description: 'Specialized blended fertilizer (14-10-28) formulated specifically for cassava, sweet potatoes, and other tuber crops. The high potassium content (28% K2O) promotes tuber development and starch accumulation, while balanced nitrogen and phosphorus support healthy plant growth and root formation. Essential for optimal tuber development and starch content.'
+      description: 'Blended fertilizer for cassava and sweet potato cultivation.',
+      targetCrops: 'Cassava, sweet potatoes, and other tuber crops.'
     },
     {
       id: 40, 
@@ -443,7 +498,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 155,000 (50kg)', 
-      description: 'Specialized NPK fertilizer (16-2-31) specifically formulated for coffee, tea, and other perennial crops. The high potassium content (31% K2O) enhances fruit quality and disease resistance, while the balanced nitrogen supports vegetative growth and the low phosphorus content is ideal for established perennial crops. Essential for optimal coffee and tea production and quality.'
+      description: 'Specialized fertilizer for coffee cultivation.',
+      targetCrops: 'Coffee, tea, and other perennial crops.'
     },
     {
       id: 41, 
@@ -452,7 +508,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 160,000 (50kg)', 
-      description: 'NPK 11.29.23 is a field-grade planting fertilizer composed of nitrogen, phosphorus, and potassium in balanced proportions, suitable for improved production of most crops. It is universal and can be used on all crops, from vegetables to fruit trees. It promotes root and shoot growth, enhances fruiting and flowering, and improves overall plant health, providing resistance to diseases. Being water-soluble, it can be taken up by plants almost immediately, supplying essential nutrients during the seed and seedling stages.'
+      description: 'Planting fertilizer blend for crop establishment.',
+      targetCrops: 'Maize, rice, vegetables, and all transplanted crops.'
     },
     {
       id: 42, 
@@ -461,7 +518,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 78,000 (50kg)', 
-      description: 'Specialized NPK fertilizer (24-17-10) specifically formulated for sunflowers, oilseeds, and flowering crops. The high nitrogen content (24% N) supports vigorous vegetative growth, while the balanced phosphorus and potassium promote strong flowering and seed development essential for oilseed production. Ideal for maximizing oil content and seed quality.'
+      description: 'Fertilizer specifically formulated for sunflower crops.',
+      targetCrops: 'Sunflowers, oilseeds, and flowering crops.'
     },
     {
       id: 43, 
@@ -470,7 +528,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Organic', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 117,150 (1L) | UGX 15,000 (100ml)', 
-      description: 'Nutriplant Organic Plus Fertilizer (NOPF) is composed of both micro and macro nutrients, including amino acids, peptides, chitosan chelate, and their chelates with trace elements, serving as natural nutrition for plants. It is non-toxic and environmentally safe, providing plants with various nutrients, including macro (N, P, K, Ca, Mg, S) and micro (Fe, Zn, Cu, B, Mn, Mo, Na, Co, Cl) elements. It promotes growth of roots, stems, and leaves, improves quality and flavor of harvestable parts, enhances resistance to drought, infertility, diseases, and pests, aids in faster seed germination, improves soil structure, and enhances soil bioactivity.'
+      description: 'Organic eliciting fertilizer with amino acids and trace elements.',
+      targetCrops: 'All crops, especially organic vegetables, fruits, and ornamentals.'
     },
     {
       id: 44, 
@@ -479,7 +538,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Organic', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 117,150 (1L) | UGX 15,000 (100ml)', 
-      description: 'Alternative Nutriplant Organic Plus Fertilizer (NOPF) composed of both micro and macro nutrients, including amino acids, peptides, chitosan chelate, and their chelates with trace elements, serving as natural nutrition for plants. It is non-toxic and environmentally safe, providing plants with various nutrients, including macro (N, P, K, Ca, Mg, S) and micro (Fe, Zn, Cu, B, Mn, Mo, Na, Co, Cl) elements. It promotes growth of roots, stems, and leaves, improves quality and flavor of harvestable parts, enhances resistance to drought, infertility, diseases, and pests, aids in faster seed germination, improves soil structure, and enhances soil bioactivity.'
+      description: 'Alternative organic eliciting fertilizer with amino acids.',
+      targetCrops: 'All crops, especially organic vegetables, fruits, and ornamentals.'
     },
     {
       id: 45, 
@@ -488,7 +548,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Uganda Crop Care Limited',
       price: 'UGX 366,000 (25kg)', 
-      description: 'High-purity water-soluble potassium nitrate (13-0-46) designed for fertigation and foliar application. Provides readily available potassium and nitrogen in forms that are immediately absorbed by plants. Ideal for precision agriculture, hydroponic systems, and crops requiring high-quality potassium nutrition. Essential for high-value crops and precision feeding programs.'
+      description: 'Water-soluble potassium nitrate for fertigation and foliar application.',
+      targetCrops: 'Tomatoes, peppers, potatoes, and potassium-deficient crops.'
     },
     {
       id: 46, 
@@ -497,7 +558,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 350,000 (25kg)', 
-      description: 'Balanced NPK fertilizer (19-19-19) enriched with essential trace elements for complete plant nutrition. Contains all major nutrients plus micronutrients like Magnesium, Boron, Iron, and Zinc. Provides comprehensive nutrition for healthy crop establishment, growth, and optimal yield across all growth stages. Ideal for complete crop nutrition and micronutrient supplementation.'
+      description: 'Balanced NPK with trace elements for complete nutrition.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals.'
     },
     {
       id: 47, 
@@ -506,7 +568,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Hormone', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 170,000 (1L)', 
-      description: 'Specialized rooting hormone fertilizer containing plant growth regulators that stimulate root development and enhance plant propagation success. Formulated to promote rapid root formation in cuttings, transplants, and seedlings, improving establishment rates and overall plant vigor during propagation and early growth stages. Essential for successful plant propagation and rapid establishment.'
+      description: 'Rooting hormone fertilizer for plant propagation.',
+      targetCrops: 'All crops requiring root development, especially cuttings and transplants.'
     },
     {
       id: 48, 
@@ -515,7 +578,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Water Soluble', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 260,000 (25kg)', 
-      description: 'Water-soluble NPK fertilizer enriched with essential trace elements for balanced plant nutrition. Provides readily available nutrients in forms that are immediately absorbed by plants through both root and foliar uptake. Ideal for precision agriculture and controlled environment growing systems. Essential for complete crop nutrition and rapid nutrient availability.'
+      description: 'Water soluble NPK with trace elements for balanced nutrition.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals.'
     },
     {
       id: 49, 
@@ -524,7 +588,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Liquid', 
       manufacturer: 'Various Suppliers',
       price: 'UGX 11,000 (1L)', 
-      description: 'Super Green is a comprehensive water-soluble fertilizer containing both major and micro-nutrients essential for healthy plant growth. It is particularly effective during nutrient deficiency periods, offering rapid absorption and response. The formulation includes NPK (19:19:19) along with trace elements like Magnesium (Mg), Boron (B), Iron (Fe), and Zinc (Zn). For optimal results, mix 50-100g in 20 liters of water and apply to foliage every 14-21 days during the early establishment and vegetative growth stages.'
+      description: 'Liquid complete water-soluble fertilizer for all crops.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals.'
     },
     {
       id: 50, 
@@ -532,8 +597,9 @@ const FertilizerProductsScreen = ({ onBack }) => {
       imageName: 'urea_prilled.png', 
       category: 'Nitrogen', 
       manufacturer: 'Various Suppliers',
-      price: 'UGX 125,000 (50kg)', 
-      description: 'High nitrogen fertilizer containing 46% nitrogen in prilled form for rapid plant growth and development. Urea is the most concentrated solid nitrogen fertilizer, providing efficient nitrogen delivery for maximum crop productivity. Ideal for crops requiring high nitrogen levels during active growth periods. Essential for rapid vegetative growth and high-yield agriculture.'
+      price: 'UGX 140,000 (50kg)', 
+      description: 'High nitrogen fertilizer for rapid plant growth.',
+      targetCrops: 'Maize, rice, wheat, and all nitrogen-demanding crops.'
     },
     {
       id: 51, 
@@ -542,7 +608,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Yara',
       price: 'UGX 160,000 (50kg)', 
-      description: 'Yara Mila NPK fertilizer (25-5-5) enriched with 5% sulfur for balanced plant nutrition. The high nitrogen content (25% N) supports vigorous vegetative growth, while sulfur enhances protein synthesis and crop quality. Formulated for crops requiring high nitrogen during establishment and early growth phases. Essential for high-yield agriculture and precision farming.'
+      description: 'Yara Mila NPK with sulfur for balanced nutrition.',
+      targetCrops: 'Maize, rice, wheat, and crops requiring balanced nutrition.'
     },
     {
       id: 52, 
@@ -551,7 +618,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Yara',
       price: 'UGX 190,000 (50kg)', 
-      description: 'Premium Yara Mila Power Plus NPK fertilizer with advanced micronutrient technology for maximum crop yield and quality. Contains balanced NPK plus essential micronutrients in forms that are readily available to plants. Engineered for high-yield agriculture and precision farming applications. Essential for maximum crop productivity and superior quality.'
+      description: 'Premium NPK fertilizer with micronutrients for maximum yield.',
+      targetCrops: 'Maize, rice, wheat, and high-yield cereal crops.'
     },
     {
       id: 53, 
@@ -560,7 +628,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Yara',
       price: 'UGX 146,000 (50kg)', 
-      description: 'Yara Vera Amidas high nitrogen fertilizer containing 46% nitrogen in ammonium form for all crops. Provides efficient nitrogen delivery for maximum crop productivity and yield enhancement. The ammonium form ensures stable nitrogen supply and reduces nitrogen losses through volatilization. Essential for high-yield agriculture and efficient nitrogen management.'
+      description: 'High nitrogen fertilizer (46% N) for all crops.',
+      targetCrops: 'Maize, rice, wheat, and all nitrogen-demanding crops.'
     },
     {
       id: 54, 
@@ -569,7 +638,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Yara',
       price: 'UGX 146,000 (50kg)', 
-      description: 'Alternative Yara Vera Amidas high nitrogen fertilizer containing 46% nitrogen for comprehensive crop nutrition. Provides efficient nitrogen delivery in ammonium form, ensuring stable nutrient supply and optimal plant uptake for maximum crop productivity and yield enhancement. Essential for high-yield agriculture and efficient nitrogen management.'
+      description: 'Alternative high nitrogen fertilizer (46% N) for all crops.',
+      targetCrops: 'Maize, rice, wheat, and all nitrogen-demanding crops.'
     },
     {
       id: 55, 
@@ -578,7 +648,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Yara',
       price: 'UGX 110,000 (50kg)', 
-      description: 'Yarabela CAN (Calcium Ammonium Nitrate) is a nitrogenous and calcareous fertilizer known for its high efficiency in quickly supplying nitrogen. It improves soil structure by granulating the soil, making it resistant to caking. When applied to fruits, vegetables, flowers, and industrial crops, it extends flowering periods, stimulates normal growth of roots, stems, and leaves, ensures vibrant fruit colors, and increases carbohydrate content in fruits. CAN is considered a high-efficiency, environmentally friendly greening fertilizer.'
+      description: 'Yarabela Can fertilizer for nitrogen supply.',
+      targetCrops: 'Potatoes, sugar beets, vegetables, and crops requiring balanced nitrogen.'
     },
     {
       id: 56, 
@@ -587,7 +658,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Yara',
       price: 'UGX 125,000 (50kg)', 
-      description: 'Yarabela Sulfan fertilizer containing nitrogen and sulfur for comprehensive plant nutrition. The sulfur content enhances protein synthesis, enzyme activity, and chlorophyll formation. Ideal for crops requiring both nitrogen and sulfur nutrition, particularly in sulfur-deficient soils. Essential for cruciferous vegetables and sulfur-demanding crops.'
+      description: 'Yarabela Sulfan fertilizer with sulfur content.',
+      targetCrops: 'Cruciferous vegetables, legumes, and sulfur-deficient crops.'
     },
     {
       id: 57, 
@@ -596,7 +668,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Nitrogen', 
       manufacturer: 'Yara',
       price: 'UGX 100,000 (50kg)', 
-      description: 'Yaraliva Nitrabor fertilizer providing nitrogen and boron for specialized crop nutrition. Contains nitrogen for vegetative growth and boron for proper cell division, flowering, and fruit development. Essential for crops requiring boron nutrition, particularly legumes and cruciferous vegetables. Ideal for preventing boron deficiency and ensuring proper fruit development.'
+      description: 'Yaraliva Nitrabor fertilizer for nitrogen and boron supply.',
+      targetCrops: 'Legumes, cruciferous vegetables, and boron-deficient crops.'
     },
     {
       id: 58, 
@@ -605,7 +678,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Yara',
       price: 'UGX 162,000 (50kg)', 
-      description: 'Yaramila Java balanced NPK fertilizer providing comprehensive nutrition for optimal crop development. Contains balanced proportions of Nitrogen, Phosphorus, and Potassium plus essential micronutrients. Formulated for crops requiring consistent nutrition throughout the growing season for maximum yield and quality. Essential for high-yield agriculture and consistent crop nutrition.'
+      description: 'Yaramila Java fertilizer for balanced nutrition.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals.'
     },
     {
       id: 59, 
@@ -614,7 +688,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'NPK', 
       manufacturer: 'Yara',
       price: 'UGX 165,000 (50kg)', 
-      description: 'Yaramila Winner balanced NPK fertilizer engineered for maximum crop yield and quality. Contains optimized nutrient ratios for comprehensive plant nutrition throughout all growth stages. Formulated for high-yield agriculture and precision farming applications requiring consistent nutrition delivery. Essential for maximum crop productivity and superior quality.'
+      description: 'Balanced NPK fertilizer for all crops and maximum yield.',
+      targetCrops: 'All crops, especially vegetables, fruits, and ornamentals.'
     },
     {
       id: 60, 
@@ -623,7 +698,8 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Foliar', 
       manufacturer: 'Yara',
       price: 'UGX 40,000 (1L)', 
-      description: 'Alternative Yaravita concentrated phosphorus foliar fertilizer for enhanced crop growth and development. Provides readily available phosphorus for flowering, fruiting, and root development. Formulated for foliar application to correct phosphorus deficiencies and support critical growth stages. Essential for precision foliar nutrition and rapid phosphorus correction.'
+      description: 'Alternative concentrated phosphorous foliar fertilizer.',
+      targetCrops: 'All crops requiring phosphorus, especially during flowering and fruiting.'
     },
     {
       id: 61, 
@@ -632,7 +708,28 @@ const FertilizerProductsScreen = ({ onBack }) => {
       category: 'Foliar', 
       manufacturer: 'Yara',
       price: 'UGX 40,000 (1L)', 
-      description: 'Yaravita Crop Boost concentrated phosphorus foliar fertilizer designed for enhanced crop growth and development. Provides high-analysis phosphorus in forms readily absorbed through plant leaves. Essential for flowering, fruiting, and root development during critical growth stages. Ideal for precision foliar nutrition and rapid phosphorus correction.'
+      description: 'Concentrated phosphorous foliar fertilizer for enhanced crop growth.',
+      targetCrops: 'All crops requiring phosphorus, especially during flowering and fruiting.'
+    },
+    {
+      id: 62, 
+      name: 'CAN (Calcium Ammonium Nitrate)', 
+      imageName: 'yarabela_can.jpeg', 
+      category: 'Nitrogen', 
+      manufacturer: 'Various Suppliers',
+      price: 'UGX 105,000 (50kg)', 
+      description: 'Calcium ammonium nitrate fertilizer for nitrogen and calcium supply.',
+      targetCrops: 'Potatoes, sugar beets, vegetables, and crops requiring balanced nitrogen.'
+    },
+    {
+      id: 63, 
+      name: 'Micro Food - All Crops Foliar Fertilizer', 
+      imageName: 'cassava_tapiocal.jpg', 
+      category: 'Micronutrients', 
+      manufacturer: 'Various Suppliers',
+      price: 'UGX 5,500 (250g)', 
+      description: 'Essential micro-nutrients for proper crop function and growth.',
+      targetCrops: 'All crops with micronutrient deficiencies, especially citrus, maize, and vegetables.'
     }
   ], []);
 

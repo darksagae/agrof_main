@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 const NurseryBedScreen = ({ onBack }) => {
   const [imageLoadingStates, setImageLoadingStates] = useState({});
 
-  // console.log('🌱 NurseryBedScreen: Rendering with', nurseryProducts.length, 'products');
+  console.log('🌱 NurseryBedScreen: Rendering with', nurseryProducts.length, 'products');
 
   // Optimized image loading handlers
   const handleImageLoad = useCallback((productId) => {
