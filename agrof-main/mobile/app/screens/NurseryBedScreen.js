@@ -1,50 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useCart } from '../contexts/CartContext';
-import NurseryBedDetailScreen from './NurseryBedDetailScreen';
-import SimplePricingWidget from '../components/SimplePricingWidget';
-
-const { width } = Dimensions.get('window');
 
 const NurseryBedScreen = ({ onBack }) => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [pricingWidgetVisible, setPricingWidgetVisible] = useState(false);
-  const [selectedProductForPricing, setSelectedProductForPricing] = useState(null);
   const [imageLoadingStates, setImageLoadingStates] = useState({});
 
-  // Helper function to check if product has multiple prices
-  const hasMultiplePrices = (product) => {
-    if (!product.packaging || typeof product.packaging !== 'string') {
-      return false;
-    }
-    return product.packaging.includes(',') && product.packaging.includes('UGX');
-  };
-
-  // Helper function to get unit price for display
-  const getUnitPrice = (product) => {
-    if (!product.packaging || typeof product.packaging !== 'string') {
-      return product.price || 'Price not available';
-    }
-
-    const priceRanges = product.packaging.split(',').map(item => item.trim());
-    if (priceRanges.length > 0) {
-      const firstPrice = priceRanges[0];
-      const match = firstPrice.match(/(\d+(?:\.\d+)?)\s*([a-zA-Z]+):\s*UGX\s*([\d,]+)/i);
-      if (match) {
-        const [, quantity, unit, price] = match;
-        const pricePerUnit = parseInt(price.replace(/,/g, '')) / parseFloat(quantity);
-        return `From UGX ${pricePerUnit.toFixed(0)} per ${unit}`;
-      }
-    }
-    return product.price || 'Price not available';
-  };
-
-  // Handle pricing widget
-  const handlePricingPress = (product) => {
-    setSelectedProductForPricing(product);
-    setPricingWidgetVisible(true);
-  };
+  console.log('🌱 NurseryBedScreen: Rendering with', nurseryProducts.length, 'products');
 
   // Optimized image loading handlers
   const handleImageLoad = useCallback((productId) => {
@@ -57,505 +18,229 @@ const NurseryBedScreen = ({ onBack }) => {
 
   // Import all nursery bed images from simplified folder structure
   const nurseryImages = {
-    'aloe_vera_seedling': require('../assets/NURSERY_BED_SIMPLE/aloe_vera_seedling.jpg'),
-    'atwalira_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/atwalira_banana_t_c_plantlet.jpg'),
-    'bogoya_gros_michel_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/bogoya_gros_michel_banana_t_c_plantlet.jpg'),
-    'celery_seedling': require('../assets/NURSERY_BED_SIMPLE/celery_seedling.jpg'),
-    'chocolate_mint_seedling': require('../assets/NURSERY_BED_SIMPLE/chocolate_mint_seedling.jpg'),
-    'cinnamon_seedling': require('../assets/NURSERY_BED_SIMPLE/cinnamon_seedling.jpg'),
-    'coriander_seedlings': require('../assets/NURSERY_BED_SIMPLE/coriander_seedlings.jpg'),
-    'kibuzi_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/kibuzi_banana_t_c_plantlet.jpg'),
-    'kisansa_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/kisansa_banana_t_c_plantlet.jpg'),
-    'lemon_balm_seedling': require('../assets/NURSERY_BED_SIMPLE/lemon_balm_seedling.jpg'),
-    'lemon_grass_kisubi': require('../assets/NURSERY_BED_SIMPLE/lemon_grass_kisubi.jpg'),
-    'm3_banana_suckers': require('../assets/NURSERY_BED_SIMPLE/m3_banana_suckers.jpg'),
-    'mbwazirume_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/mbwazirume_banana_t_c_plantlet.jpg'),
-    'mint_seedling': require('../assets/NURSERY_BED_SIMPLE/mint_seedling.jpg'),
-    'mpologoma_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/mpologoma_banana_t_c_plantlet.jpg'),
-    'musakala': require('../assets/NURSERY_BED_SIMPLE/musakala.jpg'),
-    'nakatansese_banana_t_c_plantlet': require('../assets/NURSERY_BED_SIMPLE/nakatansese_banana_t_c_plantlet.jpg'),
-    'oregano_seedling': require('../assets/NURSERY_BED_SIMPLE/oregano_seedling.jpg'),
-    'parsley_seedling': require('../assets/NURSERY_BED_SIMPLE/parsley_seedling.jpg'),
-    'pineapple_mint_seedling': require('../assets/NURSERY_BED_SIMPLE/pineapple_mint_seedling.jpg'),
-    'rosemary_seedling': require('../assets/NURSERY_BED_SIMPLE/rosemary_seedling.jpg'),
-    'strawberry_chandler_seedlings': require('../assets/NURSERY_BED_SIMPLE/strawberry_chandler_seedlings.jpg'),
-    'sweet_basil_seedling_mujaaja': require('../assets/NURSERY_BED_SIMPLE/sweet_basil_seedling_mujaaja.jpg'),
+    'nursery_1': require('../assets/NURSERY_BED_SIMPLE/nursery_1.jpg'),
+    'nursery_2': require('../assets/NURSERY_BED_SIMPLE/nursery_2.jpg'),
+    'nursery_3': require('../assets/NURSERY_BED_SIMPLE/nursery_3.jpg'),
+    'nursery_4': require('../assets/NURSERY_BED_SIMPLE/nursery_4.jpg'),
+    'nursery_5': require('../assets/NURSERY_BED_SIMPLE/nursery_5.jpg'),
+    'nursery_6': require('../assets/NURSERY_BED_SIMPLE/nursery_6.jpg'),
+    'nursery_7': require('../assets/NURSERY_BED_SIMPLE/nursery_7.jpg'),
+    'nursery_8': require('../assets/NURSERY_BED_SIMPLE/nursery_8.jpg'),
+    'nursery_9': require('../assets/NURSERY_BED_SIMPLE/nursery_9.jpg'),
+    'nursery_10': require('../assets/NURSERY_BED_SIMPLE/nursery_10.jpg'),
+    'nursery_11': require('../assets/NURSERY_BED_SIMPLE/nursery_11.jpg'),
+    'nursery_12': require('../assets/NURSERY_BED_SIMPLE/nursery_12.jpg'),
+    'nursery_13': require('../assets/NURSERY_BED_SIMPLE/nursery_13.jpg'),
+    'nursery_14': require('../assets/NURSERY_BED_SIMPLE/nursery_14.jpg'),
+    'nursery_15': require('../assets/NURSERY_BED_SIMPLE/nursery_15.jpg'),
+    'nursery_16': require('../assets/NURSERY_BED_SIMPLE/nursery_16.jpg'),
+    'nursery_17': require('../assets/NURSERY_BED_SIMPLE/nursery_17.jpg'),
+    'nursery_18': require('../assets/NURSERY_BED_SIMPLE/nursery_18.jpg'),
+    'nursery_19': require('../assets/NURSERY_BED_SIMPLE/nursery_19.jpg'),
+    'nursery_20': require('../assets/NURSERY_BED_SIMPLE/nursery_20.jpg'),
+    'nursery_21': require('../assets/NURSERY_BED_SIMPLE/nursery_21.jpg'),
+    'nursery_22': require('../assets/NURSERY_BED_SIMPLE/nursery_22.jpg'),
+    'nursery_23': require('../assets/NURSERY_BED_SIMPLE/nursery_23.jpg')
   };
 
   const nurseryProducts = [
     {
       id: 1,
       name: 'Oregano Seedling',
-      image: nurseryImages['aloe_vera_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_1,
+      description: 'Fresh oregano seedlings ready for planting'
     },
     {
       id: 2,
       name: 'Lemon Grass (Kisubi)',
-      image: nurseryImages['atwalira_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_2,
+      description: 'Aromatic lemon grass seedlings for culinary use'
     },
     {
       id: 3,
       name: 'Strawberry Chandler Seedlings',
-      image: nurseryImages['bogoya_gros_michel_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_3,
+      description: 'Premium strawberry seedlings for sweet fruit production'
     },
     {
       id: 4,
       name: 'Musakala',
-      image: nurseryImages['celery_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_4,
+      description: 'Traditional banana variety plantlet'
     },
     {
       id: 5,
       name: 'Kibuzi - Banana T.c Plantlet',
-      image: nurseryImages['chocolate_mint_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_5,
+      description: 'Tissue culture banana plantlet for disease-free planting'
     },
     {
       id: 6,
       name: 'Coriander Seedlings',
-      image: nurseryImages['cinnamon_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_6,
+      description: 'Fresh coriander seedlings for cooking and garnishing'
     },
     {
       id: 7,
       name: 'Sweet Basil Seedling (Mujaaja)',
-      image: nurseryImages['coriander_seedlings'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_7,
+      description: 'Aromatic sweet basil seedlings for culinary herbs'
     },
     {
       id: 8,
       name: 'Parsley Seedling',
-      image: nurseryImages['kibuzi_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_8,
+      description: 'Fresh parsley seedlings for cooking and garnishing'
     },
     {
       id: 9,
       name: 'Celery Seedling',
-      image: nurseryImages['kisansa_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_9,
+      description: 'Healthy celery seedlings for vegetable gardens'
     },
     {
       id: 10,
       name: 'Atwalira - Banana T.c Plantlet',
-      image: nurseryImages['lemon_balm_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_10,
+      description: 'Tissue culture banana plantlet variety'
     },
     {
       id: 11,
       name: 'Pineapple Mint Seedling',
-      image: nurseryImages['lemon_grass_kisubi'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_11,
+      description: 'Fragrant pineapple mint seedlings for herbal gardens'
     },
     {
       id: 12,
       name: 'Lemon Balm Seedling',
-      image: nurseryImages['m3_banana_suckers'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_12,
+      description: 'Aromatic lemon balm seedlings for herbal teas'
     },
     {
       id: 13,
       name: 'M3 Banana Suckers',
-      image: nurseryImages['mbwazirume_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_13,
+      description: 'High-quality banana suckers for plantation establishment'
     },
     {
       id: 14,
       name: 'Nakatansese - Banana T.c Plantlet',
-      image: nurseryImages['mint_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_14,
+      description: 'Tissue culture banana plantlet variety'
     },
     {
       id: 15,
       name: 'Mbwazirume-banana T.c Plantlet',
-      image: nurseryImages['mpologoma_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_15,
+      description: 'Tissue culture banana plantlet variety'
     },
     {
       id: 16,
       name: 'Chocolate Mint Seedling',
-      image: nurseryImages['musakala'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_16,
+      description: 'Unique chocolate mint seedlings for specialty gardens'
     },
     {
       id: 17,
       name: 'Aloe Vera Seedling',
-      image: nurseryImages['nakatansese_banana_t_c_plantlet'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_17,
+      description: 'Medicinal aloe vera seedlings for health and beauty'
     },
     {
       id: 18,
       name: 'Mint Seedling',
-      image: nurseryImages['oregano_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_18,
+      description: 'Fresh mint seedlings for culinary and medicinal use'
     },
     {
       id: 19,
       name: 'Bogoya (Gros Michel) - Banana T.c Plantlet',
-      image: nurseryImages['parsley_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_19,
+      description: 'Tissue culture Gros Michel banana plantlet'
     },
     {
       id: 20,
       name: 'Cinnamon Seedling',
-      image: nurseryImages['pineapple_mint_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_20,
+      description: 'Aromatic cinnamon seedlings for spice gardens'
     },
     {
       id: 21,
       name: 'Kisansa - Banana T.c Plantlet',
-      image: nurseryImages['rosemary_seedling'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_21,
+      description: 'Tissue culture banana plantlet variety'
     },
     {
       id: 22,
       name: 'Mpologoma-banana T.c Plantlet',
-      image: nurseryImages['strawberry_chandler_seedlings'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_22,
+      description: 'Tissue culture banana plantlet variety'
     },
     {
       id: 23,
       name: 'Rosemary Seedling',
-      image: nurseryImages['sweet_basil_seedling_mujaaja'],
-      description: 'High-quality nursery bed product for agricultural use.',
-      price: 'Contact for pricing',
-      packaging: 'Contact for pricing',
-      category: 'Nursery Bed',
-      manufacturer: 'Contact for details',
-      activeIngredient: 'Contact for details',
-      formulation: 'Contact for details',
-      targetCrops: 'Contact for details',
-      targetWeeds: 'Contact for details',
-      applicationMethod: 'Contact for details',
-      preHarvestInterval: 'Contact for details'
+      image: nurseryImages.nursery_23,
+      description: 'Aromatic rosemary seedlings for culinary herbs'
     }
   ];
-
-  console.log('🌱 NurseryBedScreen: Rendering with', nurseryProducts.length, 'products');
 
   // Optimized product rendering with memoization
   const renderProduct = useCallback(({ item: product }) => (
     <View style={styles.productItem}>
       {imageLoadingStates[product.id] && (
-        <ActivityIndicator
-          size="small"
-          color="#4CAF50"
-          style={styles.imageLoader}
-        />
-      )}
-      <TouchableOpacity
-        style={styles.productCard}
-        onPress={() => setSelectedProduct(product)}
-        activeOpacity={0.8}
-      >
-        <Image
-          source={product.image}
-          style={styles.productImage}
-          resizeMode="cover"
-          onLoadStart={() => handleImageLoadStart(product.id)}
-          onLoad={() => handleImageLoad(product.id)}
-          onError={() => {
-            console.log('Image load error for product:', product.name);
-            handleImageLoad(product.id);
-          }}
-        />
-        <View style={styles.productInfo}>
-          <Text style={styles.productName} numberOfLines={2}>
-            {product.name}
-          </Text>
-          <Text style={styles.productDescription} numberOfLines={2}>
-            {product.description}
-          </Text>
-          <View style={styles.priceContainer}>
-            <Text style={styles.productPrice}>
-              {hasMultiplePrices(product) ? getUnitPrice(product) : product.price}
-            </Text>
-            {hasMultiplePrices(product) && (
-              <TouchableOpacity
-                style={styles.pricingButton}
-                onPress={() => handlePricingPress(product)}
-              >
-                <Text style={styles.pricingButtonText}>View Prices</Text>
-              </TouchableOpacity>
-            )}
-          </View>
+        <View style={styles.imageLoader}>
+          <ActivityIndicator size="small" color="#2c5530" />
         </View>
-      </TouchableOpacity>
+      )}
+      <Image 
+        source={product.image} 
+        style={styles.productImage} 
+        resizeMode="cover"
+        onLoadStart={() => handleImageLoadStart(product.id)}
+        onLoad={() => handleImageLoad(product.id)}
+        onError={(error) => {
+          console.log('❌ Image load error for product', product.id, ':', error);
+          handleImageLoad(product.id);
+        }}
+      />
+      <Text style={styles.productName}>{product.name}</Text>
+      <Text style={styles.productDescription}>{product.description}</Text>
     </View>
   ), [imageLoadingStates, handleImageLoad, handleImageLoadStart]);
 
-  // Memoized key extractor
-  const keyExtractor = useCallback((item) => item.id.toString(), []);
-
-  // Memoized getItemLayout for better performance
-  const getItemLayout = useCallback((data, index) => ({
-    length: 200, // Approximate item height
-    offset: 200 * index,
-    index,
-  }), []);
-
   return (
     <View style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={onBack}>
-          <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
+          <MaterialIcons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Nursery Bed Products</Text>
-        <View style={styles.headerSpacer} />
+        <View style={styles.headerTitleContainer}>
+          <MaterialIcons name="local_florist" size={32} color="white" />
+          <Text style={styles.headerTitle}>Nursery Bed Products</Text>
+        </View>
+        <Text style={styles.headerSubtitle}>Quality seedlings and plantlets for your garden</Text>
       </View>
 
+      {/* Products Grid - Optimized FlatList */}
       <FlatList
         data={nurseryProducts}
         renderItem={renderProduct}
-        keyExtractor={keyExtractor}
+        keyExtractor={(item) => item.id.toString()}
         numColumns={2}
-        contentContainerStyle={styles.productsGrid}
+        style={styles.productsContainer}
         showsVerticalScrollIndicator={false}
-        removeClippedSubviews={true}
-        maxToRenderPerBatch={10}
+        initialNumToRender={8}
+        maxToRenderPerBatch={6}
         windowSize={10}
-        initialNumToRender={10}
-        getItemLayout={getItemLayout}
+        removeClippedSubviews={true}
+        updateCellsBatchingPeriod={50}
+        getItemLayout={(data, index) => ({
+          length: 280,
+          offset: 280 * Math.floor(index / 2),
+          index,
+        })}
       />
-
-      {selectedProduct && (
-        <NurseryBedDetailScreen
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
-
-      {pricingWidgetVisible && selectedProductForPricing && (
-        <SimplePricingWidget
-          product={selectedProductForPricing}
-          onClose={() => {
-            setPricingWidgetVisible(false);
-            setSelectedProductForPricing(null);
-          }}
-        />
-      )}
     </View>
   );
 };
@@ -563,99 +248,79 @@ const NurseryBedScreen = ({ onBack }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: 'transparent',
   },
   header: {
-    flexDirection: 'row',
+    backgroundColor: '#2c5530',
+    paddingTop: 50,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   backButton: {
-    padding: 8,
-    borderRadius: 20,
-    backgroundColor: '#E8F5E8',
+    position: 'absolute',
+    left: 20,
+    top: 50,
+    zIndex: 1,
+  },
+  headerTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#2E7D32',
-    flex: 1,
+    color: 'white',
+    marginLeft: 10,
+  },
+  headerSubtitle: {
+    fontSize: 16,
+    color: 'white',
     textAlign: 'center',
   },
-  headerSpacer: {
-    width: 40,
+  productsContainer: {
+    flex: 1,
+    padding: 15,
+    backgroundColor: 'transparent',
   },
   productsGrid: {
-    padding: 16,
-    paddingBottom: 100,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   productItem: {
-    flex: 1,
-    margin: 8,
-    maxWidth: (width - 48) / 2,
-  },
-  productCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    elevation: 3,
+    width: '48%',
+    marginBottom: 20,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 10,
+    elevation: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    overflow: 'hidden',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
   productImage: {
     width: '100%',
     height: 120,
-    backgroundColor: '#F5F5F5',
-  },
-  productInfo: {
-    padding: 12,
   },
   productName: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#2E7D32',
-    marginBottom: 4,
-    lineHeight: 18,
+    color: '#2c5530',
+    marginBottom: 5,
+    marginTop: 8,
+    textAlign: 'center',
   },
   productDescription: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#666',
-    marginBottom: 8,
     lineHeight: 16,
-  },
-  priceContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  productPrice: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#2E7D32',
-    flex: 1,
-  },
-  pricingButton: {
-    backgroundColor: '#4CAF50',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
-  },
-  pricingButtonText: {
-    color: '#FFFFFF',
-    fontSize: 10,
-    fontWeight: '600',
+    textAlign: 'center',
   },
   imageLoader: {
     position: 'absolute',

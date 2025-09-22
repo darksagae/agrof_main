@@ -51,14 +51,6 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
   };
 
   const renderBenefitsList = (benefits) => {
-    if (!benefits || !Array.isArray(benefits)) {
-      return (
-        <View style={styles.benefitItem}>
-          <MaterialIcons name="info" size={16} color="#95a5a6" />
-          <Text style={styles.benefitText}>No benefits specified</Text>
-        </View>
-      );
-    }
     return benefits.map((benefit, index) => (
       <View key={index} style={styles.benefitItem}>
         <MaterialIcons name="check-circle" size={16} color="#27ae60" />
@@ -165,7 +157,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
           <Text style={styles.sectionTitle}>Active Ingredient</Text>
           <View style={styles.ingredientContainer}>
             <MaterialIcons name="science" size={20} color="#3498db" />
-            <Text style={styles.ingredientText}>{product.activeIngredient || 'Not specified'}</Text>
+            <Text style={styles.ingredientText}>{product.activeIngredient}</Text>
           </View>
         </View>
 
@@ -178,7 +170,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
               <MaterialIcons name="opacity" size={24} color="#27ae60" />
               <Text style={styles.applicationTitle}>Application Rate</Text>
             </View>
-            <Text style={styles.applicationValue}>{product.applicationRate || 'Not specified'}</Text>
+            <Text style={styles.applicationValue}>{product.applicationRate}</Text>
           </View>
 
           <View style={styles.applicationCard}>
@@ -186,7 +178,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
               <MaterialIcons name="eco" size={24} color="#2c5530" />
               <Text style={styles.applicationTitle}>Target Crops</Text>
             </View>
-            <Text style={styles.applicationValue}>{product.crops ? product.crops.join(', ') : 'Not specified'}</Text>
+            <Text style={styles.applicationValue}>{product.crops.join(', ')}</Text>
           </View>
 
           <View style={styles.applicationCard}>
@@ -194,7 +186,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
               <MaterialIcons name="info" size={24} color="#3498db" />
               <Text style={styles.applicationTitle}>Usage Instructions</Text>
             </View>
-            <Text style={styles.applicationValue}>{product.usageInstructions || 'Not specified'}</Text>
+            <Text style={styles.applicationValue}>{product.usageInstructions}</Text>
           </View>
 
           {product.formulation && (
@@ -252,7 +244,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Key Benefits</Text>
           <View style={styles.benefitsContainer}>
-            {renderBenefitsList(product.benefits || product.keyBenefits)}
+            {renderBenefitsList(product.keyBenefits)}
           </View>
         </View>
 

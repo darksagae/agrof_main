@@ -86,7 +86,7 @@ const FungicideDetailScreen = ({ product, onBack, onViewPackages }) => {
             <Text style={styles.categoryText}>{product.category}</Text>
           </View>
           <Text style={styles.price}>{product.price}</Text>
-          {product.manufacturer && <Text style={styles.manufacturer}>by {product.manufacturer}</Text>}
+          <Text style={styles.manufacturer}>by {product.manufacturer}</Text>
           
           {/* View Packages Button */}
           {hasMultiplePrices(product) && onViewPackages && (
@@ -145,41 +145,35 @@ const FungicideDetailScreen = ({ product, onBack, onViewPackages }) => {
         </View>
 
         {/* Active Ingredient */}
-        {product.activeIngredient && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Active Ingredient</Text>
-            <View style={styles.ingredientContainer}>
-              <MaterialIcons name="science" size={20} color="#3498db" />
-              <Text style={styles.ingredientText}>{product.activeIngredient}</Text>
-            </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Active Ingredient</Text>
+          <View style={styles.ingredientContainer}>
+            <MaterialIcons name="science" size={20} color="#3498db" />
+            <Text style={styles.ingredientText}>{product.activeIngredient}</Text>
           </View>
-        )}
+        </View>
 
         {/* Target Diseases */}
-        {product.targetDiseases && product.targetDiseases.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Target Diseases</Text>
-            <View style={styles.diseasesContainer}>
-              {renderDiseaseList(product.targetDiseases)}
-            </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Target Diseases</Text>
+          <View style={styles.diseasesContainer}>
+            {renderDiseaseList(product.targetDiseases)}
           </View>
-        )}
+        </View>
 
         {/* Application Information */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Application Information</Text>
           
-          {product.applicationRate && (
-            <View style={styles.applicationCard}>
-              <View style={styles.applicationHeader}>
-                <MaterialIcons name="opacity" size={24} color="#27ae60" />
-                <Text style={styles.applicationTitle}>Application Rate</Text>
-              </View>
-              <Text style={styles.applicationValue}>{product.applicationRate}</Text>
+          <View style={styles.applicationCard}>
+            <View style={styles.applicationHeader}>
+              <MaterialIcons name="opacity" size={24} color="#27ae60" />
+              <Text style={styles.applicationTitle}>Application Rate</Text>
             </View>
-          )}
+            <Text style={styles.applicationValue}>{product.applicationRate}</Text>
+          </View>
 
-          {product.reEntryPeriod && product.reEntryPeriod !== 'N/A' && (
+          {product.reEntryPeriod !== 'N/A' && (
             <View style={styles.applicationCard}>
               <View style={styles.applicationHeader}>
                 <MaterialIcons name="schedule" size={24} color="#e67e22" />
@@ -189,15 +183,13 @@ const FungicideDetailScreen = ({ product, onBack, onViewPackages }) => {
             </View>
           )}
 
-          {product.targetCrops && (
-            <View style={styles.applicationCard}>
-              <View style={styles.applicationHeader}>
-                <MaterialIcons name="eco" size={24} color="#2c5530" />
-                <Text style={styles.applicationTitle}>Target Crops</Text>
-              </View>
-              <Text style={styles.applicationValue}>{product.targetCrops}</Text>
+          <View style={styles.applicationCard}>
+            <View style={styles.applicationHeader}>
+              <MaterialIcons name="eco" size={24} color="#2c5530" />
+              <Text style={styles.applicationTitle}>Target Crops</Text>
             </View>
-          )}
+            <Text style={styles.applicationValue}>{product.targetCrops || 'Various crops as per label'}</Text>
+          </View>
 
           <View style={styles.applicationCard}>
             <View style={styles.applicationHeader}>
