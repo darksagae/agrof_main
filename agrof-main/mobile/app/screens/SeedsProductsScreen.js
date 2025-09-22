@@ -23,7 +23,7 @@ const SeedsProductsScreen = ({ onBack }) => {
   const [imageLoadingStates, setImageLoadingStates] = useState({});
   const { addToCart } = useCart();
 
-  console.log('🌱 SeedsProductsScreen: Rendering with', seedsProducts.length, 'products');
+  // console.log('🌱 SeedsProductsScreen: Rendering with', seedsProducts.length, 'products');
 
   // Helper function to check if product has multiple prices
   const hasMultiplePrices = (product) => {

@@ -13,7 +13,7 @@ const HerbicidesScreen = ({ onBack }) => {
   const [selectedProductForPricing, setSelectedProductForPricing] = useState(null);
   const [imageLoadingStates, setImageLoadingStates] = useState({});
 
-  console.log('🌿 HerbicidesScreen: Rendering with', herbicideProducts.length, 'products');
+  // console.log('🌿 HerbicidesScreen: Rendering with', herbicideProducts.length, 'products');
 
   // Helper function to check if product has multiple prices
   const hasMultiplePrices = (product) => {

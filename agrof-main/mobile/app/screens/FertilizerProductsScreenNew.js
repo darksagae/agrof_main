@@ -7,14 +7,74 @@ import LazyImage from '../components/LazyImage';
 const FertilizerProductsScreen = ({ onBack }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   
-  // Dynamic image loading based on actual image names
+  // Static image mapping for all fertilizer images
+  const fertilizerImages = {
+    'agri_gold_alt.jpg': require('../assets/FERTILIZERS_SIMPLE/agri_gold_alt.jpg'),
+    'agri_gold_foliar.png': require('../assets/FERTILIZERS_SIMPLE/agri_gold_foliar.png'),
+    'agri_gold_premium.jpg': require('../assets/FERTILIZERS_SIMPLE/agri_gold_premium.jpg'),
+    'agricultural_lime.jpeg': require('../assets/FERTILIZERS_SIMPLE/agricultural_lime.jpeg'),
+    'agricultural_lime_alt.png': require('../assets/FERTILIZERS_SIMPLE/agricultural_lime_alt.png'),
+    'calcium_nitrate_compound.jpg': require('../assets/FERTILIZERS_SIMPLE/calcium_nitrate_compound.jpg'),
+    'calcium_nitrate_ws.png': require('../assets/FERTILIZERS_SIMPLE/calcium_nitrate_ws.png'),
+    'cassava_tapiocal.jpg': require('../assets/FERTILIZERS_SIMPLE/cassava_tapiocal.jpg'),
+    'crop_champion.png': require('../assets/FERTILIZERS_SIMPLE/crop_champion.png'),
+    'dap_phosphate.jpg': require('../assets/FERTILIZERS_SIMPLE/dap_phosphate.jpg'),
+    'easygro_calcium.jpg': require('../assets/FERTILIZERS_SIMPLE/easygro_calcium.jpg'),
+    'easygro_starter.jpg': require('../assets/FERTILIZERS_SIMPLE/easygro_starter.jpg'),
+    'easygro_vegetative.jpg': require('../assets/FERTILIZERS_SIMPLE/easygro_vegetative.jpg'),
+    'elfert_trace_elements.jpg': require('../assets/FERTILIZERS_SIMPLE/elfert_trace_elements.jpg'),
+    'folcrop_boron_mo.jpg': require('../assets/FERTILIZERS_SIMPLE/folcrop_boron_mo.jpg'),
+    'green_miracle.jpeg': require('../assets/FERTILIZERS_SIMPLE/green_miracle.jpeg'),
+    'greensea_k20.jpg': require('../assets/FERTILIZERS_SIMPLE/greensea_k20.jpg'),
+    'grow_cal.png': require('../assets/FERTILIZERS_SIMPLE/grow_cal.png'),
+    'kynoch_panda_power.jpg': require('../assets/FERTILIZERS_SIMPLE/kynoch_panda_power.jpg'),
+    'kynohorti_npk_15921s.jpg': require('../assets/FERTILIZERS_SIMPLE/kynohorti_npk_15921s.jpg'),
+    'kynoplus_expresso.jpg': require('../assets/FERTILIZERS_SIMPLE/kynoplus_expresso.jpg'),
+    'kynoplus_s.jpg': require('../assets/FERTILIZERS_SIMPLE/kynoplus_s.jpg'),
+    'kynoplus_top.jpg': require('../assets/FERTILIZERS_SIMPLE/kynoplus_top.jpg'),
+    'magnesium_nitrate_alt.png': require('../assets/FERTILIZERS_SIMPLE/magnesium_nitrate_alt.png'),
+    'magnesium_nitrate_hexa.jpg': require('../assets/FERTILIZERS_SIMPLE/magnesium_nitrate_hexa.jpg'),
+    'magnesium_nitrate_ws.jpg': require('../assets/FERTILIZERS_SIMPLE/magnesium_nitrate_ws.jpg'),
+    'mea_urea.jpg': require('../assets/FERTILIZERS_SIMPLE/mea_urea.jpg'),
+    'microp_planting.png': require('../assets/FERTILIZERS_SIMPLE/microp_planting.png'),
+    'microp_topdressing.png': require('../assets/FERTILIZERS_SIMPLE/microp_topdressing.png'),
+    'mop_potash.jpg': require('../assets/FERTILIZERS_SIMPLE/mop_potash.jpg'),
+    'multi_npk.jpg': require('../assets/FERTILIZERS_SIMPLE/multi_npk.jpg'),
+    'nova_map_12610.jpg': require('../assets/FERTILIZERS_SIMPLE/nova_map_12610.jpg'),
+    'nova_map_12610_alt.png': require('../assets/FERTILIZERS_SIMPLE/nova_map_12610_alt.png'),
+    'nova_peak_05234.png': require('../assets/FERTILIZERS_SIMPLE/nova_peak_05234.png'),
+    'nova_peak_monophosphate.jpg': require('../assets/FERTILIZERS_SIMPLE/nova_peak_monophosphate.jpg'),
+    'npk_2555s.jpg': require('../assets/FERTILIZERS_SIMPLE/npk_2555s.jpg'),
+    'npk_balanced_171717.jpg': require('../assets/FERTILIZERS_SIMPLE/npk_balanced_171717.jpg'),
+    'npk_beans_112923.png': require('../assets/FERTILIZERS_SIMPLE/npk_beans_112923.png'),
+    'npk_cassava_141028.png': require('../assets/FERTILIZERS_SIMPLE/npk_cassava_141028.png'),
+    'npk_coffee_16231.jpg': require('../assets/FERTILIZERS_SIMPLE/npk_coffee_16231.jpg'),
+    'npk_planting_112923.jpg': require('../assets/FERTILIZERS_SIMPLE/npk_planting_112923.jpg'),
+    'npk_sunflower_241710.png': require('../assets/FERTILIZERS_SIMPLE/npk_sunflower_241710.png'),
+    'nutriplant_organic.jpg': require('../assets/FERTILIZERS_SIMPLE/nutriplant_organic.jpg'),
+    'nutriplant_organic_alt.jpg': require('../assets/FERTILIZERS_SIMPLE/nutriplant_organic_alt.jpg'),
+    'omni_k_potassium.jpg': require('../assets/FERTILIZERS_SIMPLE/omni_k_potassium.jpg'),
+    'polyfeed_191919_te.jpeg': require('../assets/FERTILIZERS_SIMPLE/polyfeed_191919_te.jpeg'),
+    'rootex_hormone.jpg': require('../assets/FERTILIZERS_SIMPLE/rootex_hormone.jpg'),
+    'rosasol_even.png': require('../assets/FERTILIZERS_SIMPLE/rosasol_even.png'),
+    'super_green_liquid.jpg': require('../assets/FERTILIZERS_SIMPLE/super_green_liquid.jpg'),
+    'urea_prilled.png': require('../assets/FERTILIZERS_SIMPLE/urea_prilled.png'),
+    'yara_mila_2555s.jpg': require('../assets/FERTILIZERS_SIMPLE/yara_mila_2555s.jpg'),
+    'yara_mila_power_plus.jpeg': require('../assets/FERTILIZERS_SIMPLE/yara_mila_power_plus.jpeg'),
+    'yara_vera_amidas.jpg': require('../assets/FERTILIZERS_SIMPLE/yara_vera_amidas.jpg'),
+    'yara_vera_amidas_alt.jpg': require('../assets/FERTILIZERS_SIMPLE/yara_vera_amidas_alt.jpg'),
+    'yarabela_can.jpeg': require('../assets/FERTILIZERS_SIMPLE/yarabela_can.jpeg'),
+    'yarabela_sulfan.jpeg': require('../assets/FERTILIZERS_SIMPLE/yarabela_sulfan.jpeg'),
+    'yaraliva_nitrabor.jpg': require('../assets/FERTILIZERS_SIMPLE/yaraliva_nitrabor.jpg'),
+    'yaramila_java.jpg': require('../assets/FERTILIZERS_SIMPLE/yaramila_java.jpg'),
+    'yaramila_winner.jpg': require('../assets/FERTILIZERS_SIMPLE/yaramila_winner.jpg'),
+    'yaravita_boost_alt.png': require('../assets/FERTILIZERS_SIMPLE/yaravita_boost_alt.png'),
+    'yaravita_crop_boost.png': require('../assets/FERTILIZERS_SIMPLE/yaravita_crop_boost.png')
+  };
+
+  // Get image source from static mapping
   const getImageSource = (imageName) => {
-    try {
-      return require(`../assets/FERTILIZERS_SIMPLE/${imageName}`);
-    } catch (error) {
-      console.warn(`Failed to load fertilizer image: ${imageName}`, error);
-      return require('../assets/fertilizers.png'); // Fallback
-    }
+    return fertilizerImages[imageName] || require('../assets/fertilizers.png');
   };
 
   // Memoized products data based on actual image names

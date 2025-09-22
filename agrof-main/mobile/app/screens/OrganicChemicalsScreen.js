@@ -13,7 +13,7 @@ const OrganicChemicalsScreen = ({ onBack }) => {
   const [selectedProductForPricing, setSelectedProductForPricing] = useState(null);
   const [imageLoadingStates, setImageLoadingStates] = useState({});
 
-  console.log('🧪 OrganicChemicalsScreen: Rendering with', organicProducts.length, 'products');
+  // console.log('🧪 OrganicChemicalsScreen: Rendering with', organicProducts.length, 'products');
 
   // Helper function to check if product has multiple prices
   const hasMultiplePrices = (product) => {

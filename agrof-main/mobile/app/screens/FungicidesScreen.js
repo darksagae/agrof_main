@@ -10,7 +10,7 @@ const FungicidesScreen = ({ onBack }) => {
   const [selectedProductForPricing, setSelectedProductForPricing] = useState(null);
   const [imageLoadingStates, setImageLoadingStates] = useState({});
 
-  console.log('🦠 FungicidesScreen: Rendering with', fungicideProducts.length, 'products');
+  // console.log('🦠 FungicidesScreen: Rendering with', fungicideProducts.length, 'products');
 
   // Helper function to check if product has multiple prices
   const hasMultiplePrices = (product) => {
