@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROF Inventory Diagnostic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        .status { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 AGROF Inventory System Diagnostic</h1>
+        <p>This page will test all components of the inventory system to identify issues.</p>
+
+        <div class="test-section info">
+            <h3>📋 System Information</h3>
+            <p><strong>Current Time:</strong> <span id="currentTime"></span></p>
+            <p><strong>Browser:</strong> <span id="browserInfo"></span></p>
+            <p><strong>JavaScript Enabled:</strong> <span id="jsStatus"></span></p>
+        </div>
+
+        <div class="test-section">
+            <h3>🌐 Network Connectivity Test</h3>
+            <button onclick="testConnectivity()">Test API Connectivity</button>
+            <div id="connectivityResults"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 API Endpoints Test</h3>
+            <button onclick="testAllAPIs()">Test All APIs</button>
+            <div id="apiResults"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📦 Inventory Data Test</h3>
+            <button onclick="testInventoryData()">Load Inventory Data</button>
+            <div id="inventoryResults"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔄 Real-time Updates Test</h3>
+            <button onclick="startRealTimeTest()">Start Real-time Test</button>
+            <button onclick="stopRealTimeTest()">Stop Test</button>
+            <div id="realtimeResults"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 Diagnostic Summary</h3>
+            <div id="summaryResults"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+        let realTimeInterval = null;
+        let testResults = {
+            connectivity: false,
+            analytics: false,
+            status: false,
+            alerts: false,
+            inventory: false,
+            realtime: false
+        };
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('currentTime').textContent = new Date().toLocaleString();
+            document.getElementById('browserInfo').textContent = navigator.userAgent;
+            document.getElementById('jsStatus').textContent = '✅ Enabled';
+            runDiagnostic();
+        });
+
+        function addResult(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `test-section ${type}`;
+            div.innerHTML = `<p>${message}</p>`;
+            container.appendChild(div);
+        }
+
+        function clearResults(containerId) {
+            document.getElementById(containerId).innerHTML = '';
+        }
+
+        async function testConnectivity() {
+            clearResults('connectivityResults');
+            addResult('connectivityResults', '🔄 Testing connectivity to server...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/inventory/analytics`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    testResults.connectivity = true;
+                    addResult('connectivityResults', '✅ Server connectivity successful!', 'success');
+                    addResult('connectivityResults', `Status: ${response.status}, Content-Type: ${response.headers.get('content-type')}`, 'info');
+                } else {
+                    addResult('connectivityResults', `❌ Server responded with error: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                addResult('connectivityResults', `❌ Connection failed: ${error.message}`, 'error');
+                addResult('connectivityResults', 'Possible causes: Server not running, firewall blocking, or network issues', 'warning');
+            }
+        }
+
+        async function testAllAPIs() {
+            clearResults('apiResults');
+            addResult('apiResults', '🔄 Testing all API endpoints...', 'info');
+            
+            const endpoints = [
+                { url: '/inventory/analytics', name: 'Analytics API' },
+                { url: '/inventory/status?limit=5', name: 'Status API' },
+                { url: '/inventory/alerts', name: 'Alerts API' }
+            ];
+
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(`${API_BASE}${endpoint.url}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        testResults[endpoint.name.toLowerCase().replace(' ', '')] = true;
+                        addResult('apiResults', `✅ ${endpoint.name}: Working (${data.length || Object.keys(data).length} items)`, 'success');
+                    } else {
+                        addResult('apiResults', `❌ ${endpoint.name}: Failed (${response.status})`, 'error');
+                    }
+                } catch (error) {
+                    addResult('apiResults', `❌ ${endpoint.name}: Error - ${error.message}`, 'error');
+                }
+            }
+        }
+
+        async function testInventoryData() {
+            clearResults('inventoryResults');
+            addResult('inventoryResults', '🔄 Loading inventory data...', 'info');
+            
+            try {
+                // Test analytics
+                const analyticsResponse = await fetch(`${API_BASE}/inventory/analytics`);
+                const analytics = await analyticsResponse.json();
+                
+                addResult('inventoryResults', '📊 Analytics Data:', 'info');
+                addResult('inventoryResults', `<pre>${JSON.stringify(analytics, null, 2)}</pre>`, 'info');
+                
+                // Test status
+                const statusResponse = await fetch(`${API_BASE}/inventory/status?limit=3`);
+                const status = await statusResponse.json();
+                
+                addResult('inventoryResults', '📦 Sample Inventory Items:', 'info');
+                status.slice(0, 3).forEach((item, i) => {
+                    addResult('inventoryResults', `${i+1}. ${item.name}: ${item.quantity_in_stock} ${item.unit_of_measure} (${item.quantity_in_stock > 0 ? 'IN STOCK' : 'OUT OF STOCK'})`, 'info');
+                });
+                
+                testResults.inventory = true;
+                addResult('inventoryResults', '✅ Inventory data loaded successfully!', 'success');
+                
+            } catch (error) {
+                addResult('inventoryResults', `❌ Failed to load inventory data: ${error.message}`, 'error');
+            }
+        }
+
+        function startRealTimeTest() {
+            clearResults('realtimeResults');
+            addResult('realtimeResults', '🔄 Starting real-time test (10 seconds)...', 'info');
+            
+            let count = 0;
+            realTimeInterval = setInterval(async () => {
+                count++;
+                try {
+                    const response = await fetch(`${API_BASE}/inventory/analytics`);
+                    const data = await response.json();
+                    addResult('realtimeResults', `Update ${count}: Total Products: ${data.totalProducts}, Value: UGX ${data.totalValue.toLocaleString()}`, 'info');
+                    
+                    if (count >= 3) {
+                        clearInterval(realTimeInterval);
+                        testResults.realtime = true;
+                        addResult('realtimeResults', '✅ Real-time updates working!', 'success');
+                        updateSummary();
+                    }
+                } catch (error) {
+                    addResult('realtimeResults', `❌ Real-time test failed: ${error.message}`, 'error');
+                    clearInterval(realTimeInterval);
+                }
+            }, 3000);
+        }
+
+        function stopRealTimeTest() {
+            if (realTimeInterval) {
+                clearInterval(realTimeInterval);
+                addResult('realtimeResults', '⏹️ Real-time test stopped', 'info');
+            }
+        }
+
+        function updateSummary() {
+            clearResults('summaryResults');
+            
+            const totalTests = Object.keys(testResults).length;
+            const passedTests = Object.values(testResults).filter(result => result).length;
+            
+            addResult('summaryResults', `📊 Test Results: ${passedTests}/${totalTests} tests passed`, passedTests === totalTests ? 'success' : 'warning');
+            
+            Object.entries(testResults).forEach(([test, result]) => {
+                const status = result ? '✅' : '❌';
+                const testName = test.charAt(0).toUpperCase() + test.slice(1).replace(/([A-Z])/g, ' $1');
+                addResult('summaryResults', `${status} ${testName}`, result ? 'success' : 'error');
+            });
+            
+            if (passedTests === totalTests) {
+                addResult('summaryResults', '🎉 All tests passed! Your inventory system is working correctly.', 'success');
+                addResult('summaryResults', 'If the dashboard still appears static, try: 1) Hard refresh (Ctrl+F5), 2) Clear browser cache, 3) Try different browser', 'info');
+            } else {
+                addResult('summaryResults', '⚠️ Some tests failed. Check the error messages above for details.', 'warning');
+            }
+        }
+
+        async function runDiagnostic() {
+            addResult('summaryResults', '🔄 Running automatic diagnostic...', 'info');
+            
+            await testConnectivity();
+            await testAllAPIs();
+            await testInventoryData();
+            updateSummary();
+        }
+    </script>
+</body>
+</html>

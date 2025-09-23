@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROF Inventory Management Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .alert-card {
+            border-left-color: #e74c3c;
+        }
+
+        .alert-card .stat-number {
+            color: #e74c3c;
+        }
+
+        .success-card {
+            border-left-color: #27ae60;
+        }
+
+        .success-card .stat-number {
+            color: #27ae60;
+        }
+
+        .warning-card {
+            border-left-color: #f39c12;
+        }
+
+        .warning-card .stat-number {
+            color: #f39c12;
+        }
+
+        .table-container {
+            margin: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .table-header {
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .status-in-stock {
+            background: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .status-low-stock {
+            background: #fef5e7;
+            color: #f39c12;
+        }
+
+        .status-out-of-stock {
+            background: #fadbd8;
+            color: #e74c3c;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .error {
+            background: #fadbd8;
+            color: #e74c3c;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .table-container {
+                margin: 15px;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 AGROF Inventory Dashboard</h1>
+            <p>Real-time inventory management and analytics</p>
+        </div>
+
+        <div class="dashboard-grid" id="analytics">
+            <div class="card">
+                <h3>📦 Total Products</h3>
+                <div class="stat-number" id="totalProducts">-</div>
+                <div class="stat-label">Active inventory items</div>
+            </div>
+
+            <div class="card success-card">
+                <h3>✅ In Stock</h3>
+                <div class="stat-number" id="inStock">-</div>
+                <div class="stat-label">Products with adequate stock</div>
+            </div>
+
+            <div class="card warning-card">
+                <h3>⚠️ Low Stock</h3>
+                <div class="stat-number" id="lowStock">-</div>
+                <div class="stat-label">Products below minimum level</div>
+            </div>
+
+            <div class="card alert-card">
+                <h3>❌ Out of Stock</h3>
+                <div class="stat-number" id="outOfStock">-</div>
+                <div class="stat-label">Products requiring restock</div>
+            </div>
+
+            <div class="card">
+                <h3>💰 Inventory Value</h3>
+                <div class="stat-number" id="totalValue">-</div>
+                <div class="stat-label">Total stock value (UGX)</div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Recent Activity</h3>
+                <div class="stat-number" id="recentTransactions">-</div>
+                <div class="stat-label">Transactions this week</div>
+            </div>
+        </div>
+
+        <div class="action-buttons" style="padding: 0 30px;">
+            <button class="btn btn-primary" onclick="refreshData()">🔄 Refresh Data</button>
+            <button class="btn btn-success" onclick="openStockModal()">📝 Update Stock</button>
+            <button class="btn btn-warning" onclick="generateBarcodes()">🏷️ Generate Barcodes</button>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                📋 Inventory Status Overview
+            </div>
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Current Stock</th>
+                        <th>Min Level</th>
+                        <th>Status</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                    <tr>
+                        <td colspan="7" class="loading">Loading inventory data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Stock Update Modal -->
+    <div id="stockModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeStockModal()">&times;</span>
+            <h2>📝 Update Product Stock</h2>
+            <form id="stockUpdateForm">
+                <div class="form-group">
+                    <label for="productSelect">Product:</label>
+                    <select id="productSelect" required>
+                        <option value="">Select a product...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionType">Transaction Type:</label>
+                    <select id="transactionType" required>
+                        <option value="">Select type...</option>
+                        <option value="IN">Stock In (Restock)</option>
+                        <option value="OUT">Stock Out (Sale)</option>
+                        <option value="ADJUSTMENT">Stock Adjustment</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="referenceNumber">Reference Number:</label>
+                    <input type="text" id="referenceNumber" placeholder="PO-2024-001">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" rows="3" placeholder="Additional notes..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Update Stock</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+
+        // Load dashboard data
+        async function loadDashboard() {
+            try {
+                // Load analytics
+                const analyticsResponse = await fetch(`${API_BASE}/inventory/analytics`);
+                const analytics = await analyticsResponse.json();
+                
+                document.getElementById('totalProducts').textContent = analytics.totalProducts || 0;
+                document.getElementById('inStock').textContent = (analytics.totalProducts - analytics.lowStock - analytics.outOfStock) || 0;
+                document.getElementById('lowStock').textContent = analytics.lowStock || 0;
+                document.getElementById('outOfStock').textContent = analytics.outOfStock || 0;
+                document.getElementById('totalValue').textContent = formatCurrency(analytics.totalValue || 0);
+                document.getElementById('recentTransactions').textContent = analytics.recentTransactions || 0;
+
+                // Load inventory status
+                const statusResponse = await fetch(`${API_BASE}/inventory/status`);
+                const inventory = await statusResponse.json();
+                
+                const tbody = document.getElementById('inventoryTableBody');
+                tbody.innerHTML = '';
+                
+                inventory.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.category_name || 'N/A'}</td>
+                        <td>${item.quantity_in_stock} ${item.unit_of_measure}</td>
+                        <td>${item.minimum_stock_level}</td>
+                        <td><span class="status-badge status-${item.stock_status.toLowerCase().replace('_', '-')}">${item.stock_status.replace('_', ' ')}</span></td>
+                        <td>${formatDate(item.last_restocked_date)}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="quickUpdateStock(${item.id}, '${item.name}')">Quick Update</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                // Populate product select for modal
+                const productSelect = document.getElementById('productSelect');
+                productSelect.innerHTML = '<option value="">Select a product...</option>';
+                inventory.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = `${item.name} (${item.quantity_in_stock} ${item.unit_of_measure})`;
+                    productSelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                document.getElementById('inventoryTableBody').innerHTML = 
+                    '<tr><td colspan="7" class="error">Error loading inventory data. Please try again.</td></tr>';
+            }
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-UG', {
+                style: 'currency',
+                currency: 'UGX',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString) return 'Never';
+            return new Date(dateString).toLocaleDateString();
+        }
+
+        // Refresh data
+        function refreshData() {
+            loadDashboard();
+        }
+
+        // Open stock update modal
+        function openStockModal() {
+            document.getElementById('stockModal').style.display = 'block';
+        }
+
+        // Close stock update modal
+        function closeStockModal() {
+            document.getElementById('stockModal').style.display = 'none';
+            document.getElementById('stockUpdateForm').reset();
+        }
+
+        // Quick stock update
+        function quickUpdateStock(productId, productName) {
+            document.getElementById('productSelect').value = productId;
+            openStockModal();
+        }
+
+        // Generate barcodes for all products
+        async function generateBarcodes() {
+            if (!confirm('Generate barcodes for all products without them?')) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/inventory/generate-barcodes`, {
+                    method: 'POST'
+                });
+                const result = await response.json();
+                alert(`Generated ${result.count} barcodes successfully!`);
+                refreshData();
+            } catch (error) {
+                alert('Error generating barcodes: ' + error.message);
+            }
+        }
+
+        // Handle stock update form submission
+        document.getElementById('stockUpdateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                productId: document.getElementById('productSelect').value,
+                quantity: parseInt(document.getElementById('quantity').value),
+                transactionType: document.getElementById('transactionType').value,
+                referenceNumber: document.getElementById('referenceNumber').value,
+                notes: document.getElementById('notes').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/inventory/update-stock`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('Stock updated successfully!');
+                    closeStockModal();
+                    refreshData();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                alert('Error updating stock: ' + error.message);
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('stockModal');
+            if (event.target === modal) {
+                closeStockModal();
+            }
+        }
+
+        // Load dashboard on page load
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadDashboard, 30000);
+    </script>
+</body>
+</html>
