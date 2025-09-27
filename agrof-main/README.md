@@ -15,7 +15,7 @@
 ## ✨ **Features**
 
 ### 🌿 **AI-Powered Disease Detection**
-- **Google Gemini AI Integration** for advanced crop analysis
+- **AI Integration** for advanced crop analysis (AI services removed)
 - **Real-time image processing** and disease identification
 - **Multi-crop support** (Tomatoes, Corn, Potatoes, and more)
 - **Economic impact analysis** with yield loss predictions
@@ -42,7 +42,7 @@ AGROF AI System
 │   ├── Business Insights Dashboard
 │   └── User Management
 ├── 🧠 Backend (Flask + Python)
-│   ├── Gemini AI Integration
+│   ├── AI Integration (removed)
 │   ├── Image Processing
 │   ├── Disease Classification
 │   └── API Endpoints
@@ -61,7 +61,7 @@ AGROF AI System
 
 ### **Backend**
 - **Flask** - Python web framework
-- **Google Gemini AI** - Advanced AI analysis
+- **AI Analysis** - Advanced analysis (AI services removed)
 - **OpenCV** - Image processing
 - **NumPy** - Numerical computations
 
@@ -100,7 +100,7 @@ cd AGROF/src/api
 pip install -r requirements.txt
 
 # Set environment variables
-export GEMINI_API_KEY="your_gemini_api_key"
+# GEMINI_API_KEY removed
 
 # Run the server
 python app.py
@@ -117,7 +117,7 @@ API_URL=https://loyal-wholeness-production.up.railway.app
 Create a `.env` file in the backend directory:
 
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+# GEMINI_API_KEY removed
 ```
 
 ## 🚀 **Deployment**
@@ -221,7 +221,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 **Acknowledgments**
 
-- **Google Gemini AI** for advanced AI capabilities
+- **AI Capabilities** for advanced analysis (AI services removed)
 - **Expo** for the excellent development platform
 - **Railway** for reliable backend hosting
 - **React Native** community for the amazing framework

@@ -1,8 +1,16 @@
 // AGROF Store API Service
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Backend API configuration
-const API_BASE_URL = 'http://192.168.1.14:3001/api'; // Use your computer's IP address for mobile access
+// Backend API configuration with fallback options
+const API_BASE_URLS = [
+  'http://192.168.1.14:3001/api',  // Local store backend (port 3001)
+  'http://192.168.0.105:3001/api', // Previous network IP (port 3001)
+  'http://localhost:3001/api',     // Localhost fallback (port 3001)
+  'http://127.0.0.1:3001/api',    // Alternative localhost (port 3001)
+  'http://10.0.2.2:3001/api'       // Android emulator fallback (port 3001)
+];
+
+let currentApiUrl = API_BASE_URLS[0]; // Start with primary
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
 
 // Generate a simple session ID for cart management
@@ -44,27 +52,79 @@ const setCachedData = (key, data) => {
   });
 };
 
-// Generic API request function
-const apiRequest = async (endpoint, options = {}) => {
+// Test API connectivity
+const testApiConnection = async (baseUrl) => {
   try {
-    const url = `${API_BASE_URL}${endpoint}`;
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
+    // Test store backend with health endpoint
+    const response = await fetch(`${baseUrl}/health`, {
+      method: 'GET',
+      timeout: 3000, // 3 second timeout
     });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
+    return response.ok;
   } catch (error) {
-    console.error(`API request failed for ${endpoint}:`, error);
-    throw error;
+    return false;
   }
+};
+
+// Find working API URL
+const findWorkingApiUrl = async () => {
+  for (const url of API_BASE_URLS) {
+    console.log(`🔍 Testing API URL: ${url}`);
+    const isWorking = await testApiConnection(url);
+    if (isWorking) {
+      console.log(`✅ Found working API URL: ${url}`);
+      return url;
+    }
+  }
+  throw new Error('No working API URL found');
+};
+
+// Generic API request function with automatic failover
+const apiRequest = async (endpoint, options = {}) => {
+  let lastError;
+  
+  for (let i = 0; i < API_BASE_URLS.length; i++) {
+    try {
+      const url = `${currentApiUrl}${endpoint}`;
+      console.log(`🌐 API Request: ${url}`);
+      
+      const response = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+        timeout: 5000, // 5 second timeout
+        ...options,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(`✅ API Response: ${endpoint} - ${data.length || 'N/A'} items`);
+      return data;
+    } catch (error) {
+      console.error(`❌ API request failed for ${endpoint} with ${currentApiUrl}:`, error);
+      lastError = error;
+      
+      // Try to find a working URL
+      try {
+        const workingUrl = await findWorkingApiUrl();
+        currentApiUrl = workingUrl;
+        console.log(`🔄 Switched to working API URL: ${currentApiUrl}`);
+        continue; // Retry with new URL
+      } catch (fallbackError) {
+        console.error('❌ No working API URL found, trying next URL...');
+        if (i < API_BASE_URLS.length - 1) {
+          currentApiUrl = API_BASE_URLS[i + 1];
+          continue;
+        }
+      }
+    }
+  }
+  
+  throw lastError || new Error('All API URLs failed');
 };
 
 // Categories API
@@ -262,6 +322,30 @@ export const healthCheck = async () => {
 // Clear cache
 export const clearCache = () => {
   cache.clear();
+  console.log('🗑️ API cache cleared');
+};
+
+// Reset API URL to primary
+export const resetApiUrl = () => {
+  currentApiUrl = API_BASE_URLS[0];
+  console.log(`🔄 API URL reset to: ${currentApiUrl}`);
+};
+
+// Get current API URL
+export const getCurrentApiUrl = () => {
+  return currentApiUrl;
+};
+
+// Test all API URLs and return working ones
+export const testAllApiUrls = async () => {
+  const workingUrls = [];
+  for (const url of API_BASE_URLS) {
+    const isWorking = await testApiConnection(url);
+    if (isWorking) {
+      workingUrls.push(url);
+    }
+  }
+  return workingUrls;
 };
 
 // Get cache stats
@@ -278,5 +362,8 @@ export default {
   cartApi,
   healthCheck,
   clearCache,
-  getCacheStats
+  getCacheStats,
+  resetApiUrl,
+  getCurrentApiUrl,
+  testAllApiUrls
 };

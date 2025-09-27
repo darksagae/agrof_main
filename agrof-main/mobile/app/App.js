@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, ScrollView, Dimensions, FlatList, Modal, TextInput } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+// ImagePicker removed - camera functionality disabled
 import { StatusBar } from 'expo-status-bar';
 import { Video, ResizeMode } from 'expo-av';
 import { MaterialIcons } from '@expo/vector-icons';
 import ChatBot from './components/ChatBot';
-import ChatBotTraining from './components/ChatBotTraining';
+// ChatBotTraining removed - AI functionality disabled
 import FuturisticTechShowcase from './components/ShaderPlayground';
-import FuturisticAIAnalysisScreen from './components/FuturisticAIAnalysisScreen';
+// AI components removed
 import BackgroundImage from './components/BackgroundImage';
 import StoreScreen from './screens/StoreScreen';
+import StocksStyleScreen from './screens/StocksStyleScreen';
+import ProductTradingScreen from './screens/ProductTradingScreen';
+import SmartFarmingDashboard from './screens/SmartFarmingDashboard';
+import DiseaseDetectionScreen from './screens/DiseaseDetectionScreen';
 import { CartProvider } from './contexts/CartContext';
 
 
@@ -24,12 +28,13 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState('welcome');
   const [currentScreen, setCurrentScreen] = useState('welcome');
   const [userCategory, setUserCategory] = useState('');
+  const [navigationStack, setNavigationStack] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
-  const [showTraining, setShowTraining] = useState(false);
+  // AI training removed
   const [showAgrofVideo, setShowAgrofVideo] = useState(false);
-  const [showAIAnalysis, setShowAIAnalysis] = useState(false);
+  // AI analysis removed
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [remindersEnabled, setRemindersEnabled] = useState(true);
   const [savedAnalyses, setSavedAnalyses] = useState([]);
@@ -44,24 +49,10 @@ export default function App() {
     budget: '',
     notes: ''
   });
+  const [currentAccountScreen, setCurrentAccountScreen] = useState('main'); // main, about, help
   const agrofVideoRef = useRef(null);
-  const backgroundVideoRef = useRef(null);
 
-  // Request permissions on app start
-  useEffect(() => {
-    (async () => {
-      const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-      const mediaLibraryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      
-      if (cameraPermission.status !== 'granted' || mediaLibraryPermission.status !== 'granted') {
-        Alert.alert(
-          'Permissions Required',
-          'Camera and photo library access is required to use this app.',
-          [{ text: 'OK' }]
-        );
-      }
-    })();
-  }, []);
+  // Camera permissions removed - camera functionality disabled
 
   // Test backend connection on app start
   useEffect(() => {
@@ -85,27 +76,7 @@ export default function App() {
   }, []);
 
   // Start background video when Care tab is active
-  useEffect(() => {
-    if (currentTab === 'care' && currentScreen === 'home') {
-      console.log('Care tab activated - starting background video');
-      // Start video with multiple attempts to ensure it plays
-      const startVideo = () => {
-        if (backgroundVideoRef.current) {
-          backgroundVideoRef.current.playAsync().catch(error => {
-            console.log('Video play error:', error);
-          });
-        }
-      };
-      
-      // Try immediately
-      startVideo();
-      
-      // Try after short delays
-      setTimeout(startVideo, 500);
-      setTimeout(startVideo, 1000);
-      setTimeout(startVideo, 2000);
-    }
-  }, [currentTab, currentScreen]);
+  // Background video removed - no longer needed
 
   const userCategories = [
     { id: 'farmer', title: 'Farmer', icon: 'agriculture', description: 'I grow crops and need disease detection' },
@@ -116,16 +87,7 @@ export default function App() {
     { id: 'other', title: 'Other', icon: 'person', description: 'I have other agricultural interests' }
   ];
 
-  const blogPosts = [
-    { id: 1, title: 'Coffee Leaf Rust Prevention', icon: 'coffee', description: 'Learn how to prevent coffee leaf rust' },
-    { id: 2, title: 'Maize Disease Management', icon: 'eco', description: 'Essential tips for managing maize diseases' },
-    { id: 3, title: 'Organic Pest Control', icon: 'grass', description: 'Natural methods to control pests' },
-  ];
-
-  const communityPosts = [
-    { id: 1, user: 'John Farmer', icon: 'eco', disease: 'Maize Rust', confidence: '92%', location: 'Kampala, Uganda', time: '2 hours ago' },
-    { id: 2, user: 'Sarah Agronomist', icon: 'coffee', disease: 'Coffee Leaf Spot', confidence: '88%', location: 'Jinja, Uganda', time: '4 hours ago' },
-  ];
+  // Blog and community posts data removed
 
   // Save analysis result
   const saveAnalysis = (analysisResult) => {
@@ -228,114 +190,11 @@ export default function App() {
     return recommendations;
   };
 
-  const pickImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
+  // pickImage function removed - gallery functionality disabled
 
-      if (!result.canceled) {
-        setImage(result.assets[0].uri);
-        setResult(null);
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Failed to pick image');
-    }
-  };
+  // takePhoto function removed - camera functionality disabled
 
-  const takePhoto = async () => {
-    try {
-      const result = await ImagePicker.launchCameraAsync({
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      if (!result.canceled) {
-        setImage(result.assets[0].uri);
-        setResult(null);
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Failed to take photo');
-    }
-  };
-
-  const analyzeImage = async () => {
-    if (!image) return;
-    
-    // Show AI analysis screen first
-    setShowAIAnalysis(true);
-    setLoading(true);
-    setResult(null);
-    
-    try {
-      console.log('🔍 Starting image analysis...');
-      console.log('📡 API URL:', API_URL);
-      
-      // Create form data for image upload
-      const formData = new FormData();
-      formData.append('image', {
-        uri: image,
-        type: 'image/jpeg',
-        name: 'crop_image.jpg'
-      });
-      
-      // Add stakeholder information
-      formData.append('stakeholder', 'farmers');
-      
-      console.log('📤 Sending image to backend for analysis...');
-      
-      // Send to backend API
-      const response = await fetch(`${API_URL}/api/analyze`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      
-      console.log('📥 Response status:', response.status);
-      console.log('📥 Response headers:', response.headers);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ HTTP error response:', errorText);
-        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
-      }
-      
-      const data = await response.json();
-      console.log('✅ Backend analysis complete:', data);
-      
-      if (data.status === 'success' || data.success) {
-        console.log('✅ Setting result with data:', data);
-        setResult(data);
-        
-        // Save the analysis result
-        saveAnalysis(data);
-      } else {
-        throw new Error(data.error || data.message || 'Analysis failed');
-      }
-    } catch (error) {
-      console.error('❌ Analysis error:', error);
-      console.error('❌ Error details:', {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      });
-      
-      Alert.alert(
-        'Analysis Failed',
-        `Could not analyze image: ${error.message}. Please check your internet connection and try again.`,
-        [{ text: 'OK', style: 'default' }]
-      );
-      
-      setLoading(false);
-      setShowAIAnalysis(false);
-    }
-  };
+  // analyzeImage function removed - disease detection disabled
 
   // Welcome screen with AGROF falling animation - Updated
   const renderWelcomeScreen = () => (
@@ -452,7 +311,7 @@ export default function App() {
           <Text style={styles.stepNumber}>1</Text>
           <Text style={styles.stepTitle}>Take or Select Photo</Text>
           <Text style={styles.stepDescription}>
-            Use your camera to take a photo of the crop leaf, or select an existing image from your gallery
+            Disease detection functionality has been removed from this application
           </Text>
         </View>
 
@@ -540,7 +399,7 @@ export default function App() {
               <View style={[styles.confidenceFill, { width: `${(analysis.confidence * 100) || 0}%` }]} />
             </View>
             <Text style={styles.confidenceText}>
-              AI Confidence: {(analysis.confidence * 100).toFixed(1)}%
+              Confidence: {(analysis.confidence * 100).toFixed(1)}%
             </Text>
             <Text style={styles.analysisMethod}>
               Detection Method: {analysis.analysis_method || 'Smart Detection'}
@@ -651,7 +510,7 @@ export default function App() {
           </Text>
           {result.analysis?.api_source && result.analysis.api_source !== 'offline_detection' && (
             <Text style={styles.infoText}>
-              AI Source: {result.analysis.api_source}
+              Source: {result.analysis.api_source}
             </Text>
           )}
         </View>
@@ -731,75 +590,13 @@ export default function App() {
     );
   };
 
-  // Main Care screen with background video
+  // Main Care screen
   const renderHomeScreen = () => (
     <View style={styles.screen}>
-      {/* Background Video - Auto-playing */}
-      <View style={styles.backgroundVideoWrapper}>
-        <Video
-          ref={backgroundVideoRef}
-          source={require('./assets/background.mp4')}
-          style={styles.backgroundVideo}
-          useNativeControls={false}
-          resizeMode={ResizeMode.COVER}
-          isLooping={true}
-          shouldPlay={true}
-          isMuted={true}
-          onError={(error) => {
-            console.log('Background video error:', error);
-          }}
-          onLoad={() => {
-            console.log('Background video loaded successfully');
-            // Force play the video multiple times to ensure it starts
-            const forcePlay = () => {
-              if (backgroundVideoRef.current) {
-                backgroundVideoRef.current.playAsync().catch(e => {
-                  console.log('Force play error:', e);
-                });
-              }
-            };
-            forcePlay();
-            setTimeout(forcePlay, 100);
-            setTimeout(forcePlay, 500);
-            setTimeout(forcePlay, 1000);
-          }}
-          onPlaybackStatusUpdate={(status) => {
-            if (status.isPlaying) {
-              console.log('Background video is playing');
-            } else if (status.didJustFinish) {
-              console.log('Background video finished, restarting...');
-              // Auto-restart video
-              if (backgroundVideoRef.current) {
-                backgroundVideoRef.current.playAsync().catch(e => {
-                  console.log('Restart error:', e);
-                });
-              }
-            }
-          }}
-        />
-        <View style={styles.backgroundVideoOverlay} />
-      </View>
-      
       {/* Main Content with ScrollView */}
       <ScrollView 
         style={styles.screenContent} 
         showsVerticalScrollIndicator={false}
-        onScrollBeginDrag={() => {
-          console.log('Scrolling started - ensuring video plays');
-          if (backgroundVideoRef.current) {
-            backgroundVideoRef.current.playAsync().catch(e => {
-              console.log('Scroll play error:', e);
-            });
-          }
-        }}
-        onScrollEndDrag={() => {
-          console.log('Scrolling ended - ensuring video continues');
-          if (backgroundVideoRef.current) {
-            backgroundVideoRef.current.playAsync().catch(e => {
-              console.log('Scroll end play error:', e);
-            });
-          }
-        }}
       >
         {/* Header */}
         <View style={styles.header}>
@@ -810,206 +607,63 @@ export default function App() {
                       <Text style={styles.headerSubtitle}>AI-Powered Crop Management</Text>
         </View>
 
-        {/* Identify Section */}
+        {/* Smart Farming Features */}
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="search" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Identify</Text>
+            <MaterialIcons name="smart-toy" size={24} color="#2c5530" />
+            <Text style={styles.sectionTitle}> Smart Farming</Text>
           </View>
-          <Text style={styles.sectionSubtitle}>Open camera or gallery to identify plant issues</Text>
+          <Text style={styles.sectionSubtitle}>AI-powered crop management and monitoring</Text>
           
-          <View style={styles.buttonContainer}>
+          <View style={styles.smartFarmingGrid}>
             <TouchableOpacity 
-              style={styles.identifyButton} 
-              onPress={() => {
-                console.log('Camera button pressed');
-                takePhoto();
-              }}
+              style={styles.smartFeatureButton} 
+              onPress={() => setCurrentScreen('smart-dashboard')}
             >
-              <MaterialIcons name="camera-alt" size={20} color="white" style={styles.buttonIcon} />
-              <Text style={styles.buttonText}> Camera</Text>
+              <MaterialIcons name="dashboard" size={24} color="white" />
+              <Text style={styles.smartFeatureText}>Dashboard</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.identifyButton} 
-              onPress={() => {
-                console.log('Gallery button pressed');
-                pickImage();
-              }}
+              style={styles.smartFeatureButton} 
+              onPress={() => setCurrentScreen('disease-detection')}
             >
-              <MaterialIcons name="photo-library" size={20} color="white" style={styles.buttonIcon} />
-              <Text style={styles.buttonText}> Gallery</Text>
+              <MaterialIcons name="search" size={24} color="white" />
+              <Text style={styles.smartFeatureText}>Disease Detection</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.smartFeatureButton} 
+              onPress={() => setCurrentScreen('iot-monitoring')}
+            >
+              <MaterialIcons name="sensors" size={24} color="white" />
+              <Text style={styles.smartFeatureText}>IoT Monitoring</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.smartFeatureButton} 
+              onPress={() => setCurrentScreen('market-connect')}
+            >
+              <MaterialIcons name="store" size={24} color="white" />
+              <Text style={styles.smartFeatureText}>Market Connect</Text>
             </TouchableOpacity>
           </View>
-
-          {image && (
-            <View style={styles.imageContainer}>
-              <Image source={{ uri: image }} style={styles.image} />
-              <TouchableOpacity 
-                style={styles.analyzeButton} 
-                onPress={() => {
-                  console.log('Analyze button pressed');
-                  analyzeImage();
-                }}
-                disabled={loading}
-              >
-                <MaterialIcons name="search" size={20} color="white" style={styles.buttonIcon} />
-                <Text style={styles.buttonText}>
-                  {loading ? ' Analyzing...' : ' Analyze Disease'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-
-          {/* Display enhanced analysis results */}
-          {renderAnalysisResults()}
-          
-
         </View>
 
-        {/* Diagnose Section */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="healing" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Diagnose</Text>
-          </View>
-          <Text style={styles.sectionSubtitle}>Quickly detect plant issues and discover solutions</Text>
-          
-          <View style={styles.diagnoseCard}>
-            <Text style={styles.diagnoseText}>
-              • AI-powered disease detection{'\n'}
-              • Immediate treatment recommendations{'\n'}
-              • Economic impact analysis{'\n'}
-              • Post-harvest loss reduction{'\n'}
-              • Business ROI calculations
-            </Text>
-          </View>
-        </View>
+        {/* Identify section removed */}
 
-        {/* Blog Section */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="article" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Blog</Text>
-          </View>
-          <Text style={styles.sectionSubtitle}>Latest agricultural insights and tips</Text>
-          
-          <ScrollView 
-            horizontal 
-            showsHorizontalScrollIndicator={false}
-            style={styles.blogScroll}
-          >
-            {blogPosts.map((post) => (
-              <TouchableOpacity 
-                key={post.id} 
-                style={styles.blogCard}
-                onPress={() => {
-                  Alert.alert(
-                    post.title,
-                    `${post.description}\n\nThis article provides comprehensive information about ${post.title.toLowerCase()} including prevention methods, treatment options, and best practices for agricultural management.`,
-                    [{ text: 'Got it!', style: 'default' }]
-                  );
-                }}
-              >
-                <MaterialIcons name={post.icon} size={40} color="#FF9800" style={styles.blogIcon} />
-                <Text style={styles.blogTitle}>{post.title}</Text>
-                <Text style={styles.blogDescription}>{post.description}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
+        {/* Diagnose section removed */}
+
+        {/* Blog section removed */}
         
 
 
-        {/* Next Button - Fixed implementation */}
-        <View style={styles.nextSection}>
-          <TouchableOpacity 
-            style={styles.nextButton} 
-            onPress={() => {
-              console.log('Next button pressed in Care tab');
-              Alert.alert(
-                'Choose Image Source',
-                'Select how you want to capture the image for AI analysis',
-                [
-                  {
-                    text: 'Camera',
-                    onPress: () => {
-                      console.log('Camera selected from Next button');
-                      takePhoto();
-                    }
-                  },
-                  {
-                    text: 'Gallery',
-                    onPress: () => {
-                      console.log('Gallery selected from Next button');
-                      pickImage();
-                    }
-                  },
-                  {
-                    text: 'Cancel',
-                    style: 'cancel'
-                  }
-                ]
-              );
-            }}
-          >
-            <MaterialIcons name="camera-alt" size={20} color="white" style={styles.buttonIcon} />
-            <Text style={styles.nextButtonText}> Take Photo or Choose Image →</Text>
-          </TouchableOpacity>
-        </View>
+        {/* Camera functionality removed */}
       </ScrollView>
     </View>
   );
 
-  const renderGeneralFeedScreen = () => (
-    <View style={styles.screen}>
-      <View style={styles.feedHeader}>
-        <Text style={styles.feedTitle}>🌍 General Feed</Text>
-        <Text style={styles.feedSubtitle}>Community discoveries and findings</Text>
-      </View>
-      
-      <FlatList
-        data={communityPosts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.feedCard}>
-            <View style={styles.feedCardHeader}>
-              <MaterialIcons name={item.icon} size={40} color="#4CAF50" style={styles.feedIcon} />
-              <View style={styles.feedUserInfo}>
-                <Text style={styles.feedUserName}>{item.user}</Text>
-                <Text style={styles.feedLocation}>{item.location}</Text>
-                <Text style={styles.feedTime}>{item.time}</Text>
-              </View>
-            </View>
-            
-            <View style={styles.feedDiseaseInfo}>
-              <Text style={styles.feedDiseaseTitle}>Detected Disease:</Text>
-              <Text style={styles.feedDiseaseName}>{item.disease}</Text>
-              <Text style={styles.feedConfidence}>Confidence: {item.confidence}</Text>
-            </View>
-          </View>
-        )}
-        showsVerticalScrollIndicator={false}
-        style={styles.feedList}
-      />
-      
-      <View style={styles.nextSection}>
-        <TouchableOpacity 
-          style={styles.nextButton} 
-          onPress={() => setCurrentScreen('home')}
-        >
-          <Text style={styles.nextButtonText}>← Back to Home</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={[styles.nextButton, styles.primaryButton]} 
-          onPress={() => setCurrentTab('plan')}
-        >
-          <Text style={styles.nextButtonText}>Next: Farm Planning →</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+  // renderGeneralFeedScreen function removed - blog/feed functionality completely removed
 
   // Plan tab with integrated features
   const renderPlanScreen = () => {
@@ -1228,9 +882,9 @@ export default function App() {
       <View style={styles.tabHeader}>
         <View style={styles.tabTitleContainer}>
           <MaterialIcons name="save" size={28} color="white" />
-                          <Text style={styles.tabTitle}> AI Analysis History</Text>
+                          <Text style={styles.tabTitle}> Analysis History</Text>
         </View>
-                  <Text style={styles.tabSubtitle}>Your AI-powered crop analysis history</Text>
+                  <Text style={styles.tabSubtitle}>Your crop analysis history</Text>
       </View>
     
       <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
@@ -1278,178 +932,290 @@ export default function App() {
           </View>
         </View>
 
-        {/* Saved Images */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="photo-library" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Saved Images</Text>
-          </View>
-          
-          {savedAnalyses.length === 0 ? (
-            <View style={styles.emptyState}>
-              <MaterialIcons name="photo-library" size={48} color="#ccc" />
-              <Text style={styles.emptyStateText}>No images saved yet. Start by analyzing your first crop image!</Text>
-            </View>
-          ) : (
-            savedAnalyses.slice(0, 3).map((analysis, index) => (
-              <View key={analysis.id || index} style={styles.savedItem}>
-                <MaterialIcons name="science" size={30} color="#4CAF50" style={styles.savedIcon} />
-                <View style={styles.savedContent}>
-                  <Text style={styles.savedTitle}>{analysis.crop || 'Unknown Crop'} Analysis</Text>
-                  <Text style={styles.savedDate}>Saved on {new Date(analysis.timestamp || Date.now()).toLocaleDateString()}</Text>
-                  <Text style={styles.savedDescription}>
-                    {analysis.disease && analysis.disease !== 'No disease detected' 
-                      ? `Disease: ${analysis.disease}` 
-                      : 'No disease detected'}
-                  </Text>
-                </View>
-              </View>
-            ))
-          )}
-        </View>
+        {/* Saved Images section removed */}
       </ScrollView>
     </View>
   );
 
 
 
-  // Settings tab
-  const renderSettingsScreen = () => (
+  // Account tab
+  const renderAccountScreen = () => (
     <View style={styles.screen}>
-              <View style={styles.tabHeader}>
-          <View style={styles.tabTitleContainer}>
-            <MaterialIcons name="settings" size={28} color="white" />
-                            <Text style={styles.tabTitle}> AI Settings</Text>
-          </View>
-          <Text style={styles.tabSubtitle}>Customize your AGROF AI experience</Text>
+      <View style={styles.tabHeader}>
+        <View style={styles.tabTitleContainer}>
+          <MaterialIcons name="account-circle" size={28} color="white" />
+          <Text style={styles.tabTitle}> My Account</Text>
         </View>
+        <Text style={styles.tabSubtitle}>Manage your AGROF account and profile</Text>
+      </View>
       
       <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
-        {/* Notifications Section */}
+        {/* Welcome Section */}
         <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="notifications" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Notifications</Text>
-          </View>
-          <View style={styles.settingItem}>
-            <MaterialIcons name="notifications" size={30} color="#4CAF50" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Push Notifications</Text>
-              <Text style={styles.settingValue}>Enabled</Text>
+          <View style={styles.welcomeAccountCard}>
+            <View style={styles.welcomeHeader}>
+              <MaterialIcons name="account-circle" size={50} color="#4CAF50" />
+              <View style={styles.welcomeInfo}>
+                <Text style={styles.welcomeTitle}>Welcome back!</Text>
+                <Text style={styles.welcomeEmail}>user@agrof.com</Text>
+              </View>
             </View>
-            <TouchableOpacity 
-              style={[styles.toggleButton, notificationsEnabled && styles.toggleButtonActive]}
-              onPress={() => setNotificationsEnabled(!notificationsEnabled)}
-            >
-              <Text style={styles.toggleButtonText}>
-                {notificationsEnabled ? 'ON' : 'OFF'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.settingItem}>
-            <MaterialIcons name="schedule" size={30} color="#4CAF50" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Reminder Alerts</Text>
-              <Text style={styles.settingValue}>Daily</Text>
-            </View>
-            <TouchableOpacity 
-              style={[styles.toggleButton, remindersEnabled && styles.toggleButtonActive]}
-              onPress={() => setRemindersEnabled(!remindersEnabled)}
-            >
-              <Text style={styles.toggleButtonText}>
-                {remindersEnabled ? 'ON' : 'OFF'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Data Usage Section */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="data-usage" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Data Usage</Text>
-          </View>
-          <View style={styles.dataUsageCard}>
-            <Text style={styles.dataUsageTitle}>Weekly Data Consumption</Text>
-            <View style={styles.dataUsageBar}>
-              <View style={[styles.dataUsageFill, { width: `${Math.min(100, (savedAnalyses.length * 5))}%` }]} />
-              <Text style={styles.dataUsageLabel}>
-                {Math.min(100, (savedAnalyses.length * 5))}% Used ({savedAnalyses.length * 0.1}GB / 4GB)
-              </Text>
-            </View>
-            <View style={styles.dataUsageStats}>
-              <Text style={styles.dataUsageStat}>• Image Analysis: {(savedAnalyses.length * 0.08).toFixed(1)}GB</Text>
-              <Text style={styles.dataUsageStat}>• App Updates: 0.8GB</Text>
-              <Text style={styles.dataUsageStat}>• Sync Data: {(savedAnalyses.length * 0.02).toFixed(1)}GB</Text>
+            <View style={styles.balanceCard}>
+              <Text style={styles.balanceLabel}>AGROF Balance</Text>
+              <Text style={styles.balanceAmount}>UGX 25,000</Text>
             </View>
           </View>
         </View>
 
-        {/* App Statistics Section */}
+        {/* Need Assistance */}
         <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="analytics" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> App Statistics</Text>
-          </View>
-          <View style={styles.settingItem}>
-            <MaterialIcons name="camera-alt" size={30} color="#4CAF50" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Total Scans</Text>
-              <Text style={styles.settingValue}>{savedAnalyses.length}</Text>
+          <TouchableOpacity 
+            style={styles.assistanceCard}
+            onPress={() => setCurrentAccountScreen('about')}
+          >
+            <MaterialIcons name="help" size={30} color="#4CAF50" />
+            <View style={styles.assistanceContent}>
+              <Text style={styles.assistanceTitle}>Need Assistance?</Text>
+              <Text style={styles.assistanceSubtitle}>Help & Support</Text>
             </View>
-          </View>
-
-          <View style={styles.settingItem}>
-            <MaterialIcons name="local-florist" size={30} color="#4CAF50" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Crop Types Analyzed</Text>
-              <Text style={styles.settingValue}>
-                {[...new Set(savedAnalyses.map(a => a.crop).filter(Boolean))].length}
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.settingItem}>
-            <MaterialIcons name="warning" size={30} color="#FF9800" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Diseases Detected</Text>
-              <Text style={styles.settingValue}>
-                {savedAnalyses.filter(a => a.disease && a.disease !== 'No disease detected').length}
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.settingItem}>
-            <MaterialIcons name="schedule" size={30} color="#4CAF50" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Active Crop Plans</Text>
-              <Text style={styles.settingValue}>{cropPlans.length}</Text>
-            </View>
-          </View>
+            <MaterialIcons name="arrow-forward-ios" size={20} color="#666" />
+          </TouchableOpacity>
         </View>
 
-        {/* Other Settings */}
+        {/* Account Sections */}
         <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="settings" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> General Settings</Text>
-          </View>
-          <View style={styles.settingItem}>
-            <MaterialIcons name="language" size={30} color="#4CAF50" style={styles.settingIcon} />
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Language</Text>
-              <Text style={styles.settingValue}>English</Text>
-            </View>
-          </View>
+          <Text style={styles.sectionTitle}>Account</Text>
+          
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="inbox" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Inbox</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
 
-          <View style={styles.settingItem}>
-            <Text style={styles.settingIcon}>🔒</Text>
-            <View style={styles.settingContent}>
-              <Text style={styles.settingTitle}>Privacy</Text>
-              <Text style={styles.settingValue}>Standard</Text>
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="star" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Rating & Review</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="store" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Seller</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="visibility" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Recently Viewed</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="search" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Recently Searched</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+        </View>
+
+        {/* My Settings */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>My Settings</Text>
+          
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="payment" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Payment Settings</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="manage-accounts" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Account Management</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="close" size={24} color="#FF5722" />
+            <Text style={[styles.accountItemText, { color: '#FF5722' }]}>Close Account</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="logout" size={24} color="#FF5722" />
+            <Text style={[styles.accountItemText, { color: '#FF5722' }]}>Logout</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
+  );
+
+  // About AGROF screen
+  const renderAboutAgrofScreen = () => (
+    <View style={styles.screen}>
+      <View style={styles.tabHeader}>
+        <View style={styles.tabTitleContainer}>
+          <TouchableOpacity onPress={() => setCurrentAccountScreen('main')}>
+            <MaterialIcons name="arrow-back" size={24} color="white" />
+          </TouchableOpacity>
+          <Text style={styles.tabTitle}> About AGROF</Text>
+        </View>
+        <Text style={styles.tabSubtitle}>Learn about AGROF services and support</Text>
+      </View>
+      
+      <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
+        {/* AGROF Services */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>AGROF Services</Text>
+          
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="storefront" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Sell on AGROF</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="contact-phone" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Contact Us</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Help Center */}
+        <View style={styles.section}>
+          <TouchableOpacity 
+            style={styles.assistanceCard}
+            onPress={() => setCurrentAccountScreen('help')}
+          >
+            <MaterialIcons name="help-center" size={30} color="#4CAF50" />
+            <View style={styles.assistanceContent}>
+              <Text style={styles.assistanceTitle}>Help Center</Text>
+              <Text style={styles.assistanceSubtitle}>Get help with orders, payments, and more</Text>
             </View>
-          </View>
+            <MaterialIcons name="arrow-forward-ios" size={20} color="#666" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
+  );
+
+  // Help Center screen
+  const renderHelpCenterScreen = () => (
+    <View style={styles.screen}>
+      <View style={styles.tabHeader}>
+        <View style={styles.tabTitleContainer}>
+          <TouchableOpacity onPress={() => setCurrentAccountScreen('about')}>
+            <MaterialIcons name="arrow-back" size={24} color="white" />
+          </TouchableOpacity>
+          <Text style={styles.tabTitle}> Help Center</Text>
+        </View>
+        <Text style={styles.tabSubtitle}>Get help with your AGROF experience</Text>
+      </View>
+      
+      <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
+        {/* Order Management */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Order Management</Text>
+          
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="track-changes" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Track Your Order</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="shopping-cart" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Place an Order</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="payment" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Pay for Order</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="cancel" size={24} color="#FF5722" />
+            <Text style={[styles.accountItemText, { color: '#FF5722' }]}>Cancel Order</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="assignment-return" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Create a Return</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Support Topics */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Support Topics</Text>
+          
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="help" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Frequently Asked Questions</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="payment" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Payment</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="local-shipping" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Delivery</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="inventory" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Products</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="account-circle" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Account</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="storefront" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Sell on AGROF</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="security" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Warranty</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Contact Support */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Contact Support</Text>
+          
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="chat" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Live Chat</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="phone" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Call: +256 700 123 456</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.accountItem}>
+            <MaterialIcons name="email" size={24} color="#4CAF50" />
+            <Text style={styles.accountItemText}>Email: support@agrof.com</Text>
+            <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -1531,16 +1297,16 @@ export default function App() {
         </TouchableOpacity>
         
         <TouchableOpacity 
-          style={[styles.tab, currentTab === 'saved' && styles.activeTab]} 
-          onPress={() => setCurrentTab('saved')}
+          style={[styles.tab, currentTab === 'stocks' && styles.activeTab]} 
+          onPress={() => setCurrentTab('stocks')}
         >
           <MaterialIcons 
-            name="save" 
+            name="trending-up" 
             size={24} 
-            color={currentTab === 'saved' ? '#4CAF50' : '#666'} 
+            color={currentTab === 'stocks' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'saved' && styles.activeTabLabel]}>History</Text>
+          <Text style={[styles.tabLabel, currentTab === 'stocks' && styles.activeTabLabel]}>Blocker</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -1557,16 +1323,16 @@ export default function App() {
         </TouchableOpacity>
         
         <TouchableOpacity 
-          style={[styles.tab, currentTab === 'settings' && styles.activeTab]} 
-          onPress={() => setCurrentTab('settings')}
+          style={[styles.tab, currentTab === 'account' && styles.activeTab]} 
+          onPress={() => setCurrentTab('account')}
         >
           <MaterialIcons 
-            name="settings" 
+            name="account-circle" 
             size={24} 
-            color={currentTab === 'settings' ? '#4CAF50' : '#666'} 
+            color={currentTab === 'account' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'settings' && styles.activeTabLabel]}>Settings</Text>
+          <Text style={[styles.tabLabel, currentTab === 'account' && styles.activeTabLabel]}>Account</Text>
         </TouchableOpacity>
       </View>
     );
@@ -1590,23 +1356,38 @@ export default function App() {
           <Text style={[styles.subTabText, currentScreen === 'home' && styles.activeSubTabText]}> Home</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity 
-          style={[styles.subTab, currentScreen === 'feed' && styles.activeSubTab]} 
-          onPress={() => setCurrentScreen('feed')}
-        >
-          <MaterialIcons 
-            name="public" 
-            size={16} 
-            color={currentScreen === 'feed' ? 'white' : '#666'} 
-            style={styles.subTabIcon} 
-          />
-          <Text style={[styles.subTabText, currentScreen === 'feed' && styles.activeSubTabText]}> General Feed</Text>
-        </TouchableOpacity>
+        {/* General Feed tab removed */}
       </View>
     );
   };
 
+  // Navigation functions
+  const navigate = (screen, params = {}) => {
+    setNavigationStack(prev => [...prev, { screen, params }]);
+  };
+
+  const goBack = () => {
+    setNavigationStack(prev => prev.slice(0, -1));
+  };
+
+  const getCurrentScreen = () => {
+    if (navigationStack.length > 0) {
+      const current = navigationStack[navigationStack.length - 1];
+      return { screen: current.screen, params: current.params };
+    }
+    return null;
+  };
+
   const renderTabContent = () => {
+    const currentNav = getCurrentScreen();
+    
+    if (currentNav && currentNav.screen === 'ProductTrading') {
+      return <ProductTradingScreen 
+        route={{ params: currentNav.params }} 
+        navigation={{ navigate, goBack }} 
+      />;
+    }
+
     if (currentTab === 'welcome') {
       if (currentScreen === 'welcome') return renderWelcomeScreen();
       if (currentScreen === 'category') return renderCategoryScreen();
@@ -1618,23 +1399,22 @@ export default function App() {
     if (currentTab === 'plan') return renderPlanScreen();
     if (currentTab === 'care') {
       if (currentScreen === 'home') return renderHomeScreen();
-      if (currentScreen === 'feed') return renderGeneralFeedScreen();
+      // Feed screen removed
+      if (currentScreen === 'smart-dashboard') return <SmartFarmingDashboard navigation={{ navigate }} />;
+      if (currentScreen === 'disease-detection') return <DiseaseDetectionScreen navigation={{ navigate }} />;
     }
-    if (currentTab === 'saved') return renderSavedScreen();
+    if (currentTab === 'stocks') return <StocksStyleScreen navigation={{ navigate }} />;
     if (currentTab === 'store') return <StoreScreen />;
-    if (currentTab === 'settings') return renderSettingsScreen();
+    if (currentTab === 'account') {
+      if (currentAccountScreen === 'about') return renderAboutAgrofScreen();
+      if (currentAccountScreen === 'help') return renderHelpCenterScreen();
+      return renderAccountScreen();
+    }
     
     return renderHomeScreen();
   };
 
-  if (showTraining) {
-    return (
-      <ChatBotTraining 
-        onClose={() => setShowTraining(false)}
-        onTrain={(data) => console.log('Training data:', data)}
-      />
-    );
-  }
+  // AI training functionality removed
 
   // Get background image based on current screen and tab
   const getBackgroundImage = () => {
@@ -1656,10 +1436,7 @@ export default function App() {
       if (currentTab === 'settings') return 'organic';        // Settings tab - organic chemicals
       return 'background1';
     } 
-    // Feed screen
-    else if (currentScreen === 'feed') {
-      return 'seeds';       // Feed screen - seeds background
-    }
+    // Feed screen removed
     // Analysis and results screens
     else if (currentScreen === 'analysis') {
       return 'fungicides';  // Analysis screen - fungicides background
@@ -1687,17 +1464,7 @@ export default function App() {
         
         {renderNavigationTabs()}
         
-                       {/* Futuristic AI Analysis Screen */}
-                 <FuturisticAIAnalysisScreen
-                   isVisible={showAIAnalysis}
-                   onComplete={() => {
-                     setShowAIAnalysis(false);
-                     setLoading(false); // Ensure loading is set to false when AI analysis completes
-                     // Analysis complete, results will be shown in the main UI
-                   }}
-                   analysisData={result}
-                   imageUri={image?.uri}
-                 />
+        {/* Futuristic AI Analysis Screen component was removed */}
       </BackgroundImage>
     </CartProvider>
   );
@@ -2188,30 +1955,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
 
-  // Background video styles
-  backgroundVideoWrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-    elevation: -1,
-  },
-  backgroundVideo: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-  },
-  backgroundVideoOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    zIndex: 0,
-  },
+  // Background video styles - REMOVED
   screenContent: {
     flex: 1,
     zIndex: 1,
@@ -2273,22 +2017,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     lineHeight: 20,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 15,
-  },
-  identifyButton: {
-    backgroundColor: '#4CAF50',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 25,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-  },
+  // Identify and camera button styles removed
   buttonText: {
     color: 'white',
     fontSize: 16,
@@ -2623,18 +2352,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 3,
   },
-  diagnoseCard: {
-    backgroundColor: '#F3E5F5',
-    padding: 15,
-    borderRadius: 10,
-    borderLeftWidth: 4,
-    borderLeftColor: '#9C27B0',
-  },
-  diagnoseText: {
-    fontSize: 14,
-    color: '#333',
-    lineHeight: 20,
-  },
+  // Diagnose styles removed
   blogScroll: {
     marginTop: 10,
   },
@@ -3125,5 +2843,140 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 20,
   },
+  // Account screen styles
+  welcomeAccountCard: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 15,
+    marginBottom: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  welcomeHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  welcomeInfo: {
+    marginLeft: 15,
+    flex: 1,
+  },
+  welcomeTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#2c5530',
+    marginBottom: 5,
+  },
+  welcomeEmail: {
+    fontSize: 14,
+    color: '#666',
+  },
+  balanceCard: {
+    backgroundColor: '#E8F5E8',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  balanceLabel: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 5,
+  },
+  balanceAmount: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#4CAF50',
+  },
+  assistanceCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  assistanceContent: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  assistanceTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#2c5530',
+    marginBottom: 3,
+  },
+  assistanceSubtitle: {
+    fontSize: 14,
+    color: '#666',
+  },
+  accountItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 15,
+    marginBottom: 8,
+    borderRadius: 10,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  accountItemText: {
+    flex: 1,
+    fontSize: 16,
+    color: '#333',
+    marginLeft: 15,
+  },
+  // Smart Farming Styles
+  smartFarmingGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  smartFeatureButton: {
+    backgroundColor: '#2196F3',
+    width: (width - 60) / 2,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  smartFeatureText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 8,
+    textAlign: 'center',
+  },
+  // Disabled functionality styles
+  disabledSection: {
+    backgroundColor: '#f5f5f5',
+    padding: 20,
+    borderRadius: 10,
+    margin: 15,
+    alignItems: 'center',
+  },
+  disabledText: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
 });
+
 

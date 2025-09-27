@@ -1,73 +1,47 @@
 # Easygro Starter
 
+## Supplier
+Osho Chemical Industries Ltd
+
 ## Overview
-Easygro Starter is a balanced starter fertilizer designed for young plants and seedlings. This specialized fertilizer provides essential nutrients in the right proportions to promote strong root development and early growth establishment.
-
-## Specifications
-Active Ingredient: Balanced NPK with micronutrients
-Formulation: Water-soluble granules
-Mode of Action: Starter fertilizer
-Target Application: Young plants and seedlings
-Application Areas: Vegetables, flowers, nursery plants, transplants
-Packaging: 1kg, 5kg, 25kg bags
-
-## Key Features
-Balanced NPK ratio
-Micronutrient enriched
-Water-soluble formulation
-Starter-specific formulation
-Fast-acting nutrients
-Premium quality
-Easy to apply
-
-## Usage Instructions
-Mixing: Dissolve in water for application
-Application: Foliar spray or soil drench
-Timing: Apply at planting or transplanting
-Rate: 1-2kg per hectare
-Frequency: Apply every 2-3 weeks during early growth
-Concentration: 0.5-1% for foliar spray
-
-## Application Method
-Foliar Spray: Direct application to young plants
-Soil Drench: Application to root zone
-Fertigation: Through irrigation systems
-Timing: Early morning or late evening
-
-## Benefits
-Starter Formula: Designed for young plants
-Balanced Nutrition: Optimal NPK ratio
-Fast Acting: Immediate nutrient availability
-Water Soluble: Easy application and uptake
-Micronutrient Rich: Complete nutrition package
-Premium Quality: High-grade fertilizer
+A water-soluble fertilizer with chelated micro-elements and bio-stimulants for foliar feeding and fertigation. It is recommended for use during: Plant growth periods that require relatively high phosphorous levels.
 
 ## Price Information
-Per 1kg bag: UGX 6,000
-Per 5kg bag: UGX 25,000
-Per 25kg bag: UGX 110,000
-Bulk orders: Contact for pricing
+1 Kg: UGX 18,000
+250 g: UGX 6,400
+500 g: UGX 9,600
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in dry, covered area
-Keep away from moisture
-Protect from direct sunlight
-Shelf life: 2 years from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves and dust mask
-First Aid: In case of contact, wash thoroughly with water
-Storage: Store away from food and feed
-Disposal: Safe for agricultural use
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

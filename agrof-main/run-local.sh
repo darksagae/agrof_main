@@ -17,7 +17,7 @@ echo "📦 Installing lightweight Python dependencies..."
 pip3 install -r requirements_light.txt
 
 # Set environment variable with working API key
-export GEMINI_API_KEY="AIzaSyC-iO6PkYIVcb4Z-9iixdFapdKe-HQL-58"
+# Gemini API removed
 export FLASK_DEBUG=0  # Disable debug for faster performance
 
 # Start the backend server

@@ -1,68 +1,44 @@
 # AGRI GOLD Fertilizer
 
 ## Overview
-AGRI GOLD is a premium agricultural fertilizer designed to enhance crop growth and maximize yield potential. This high-quality fertilizer provides essential nutrients for healthy plant development and improved soil fertility.
+Agri Gold is wonder product that prevents flower shedding, promotes more flower formation and bumper yield while enhancing healthy fruit formation and vegetative growth. Agri gold is recommended in all flowering crops like tomatoes, peppers, beans, cotton, coffee. Agri Gold is approved for use in organic Agriculture.
 
-## Specifications
-NPK Ratio: 20-10-10
-Application Rate: 50kg per acre
-Crop Types: Maize, Rice, Wheat, Vegetables
-Season: All seasons
-Form: Granular
-Packaging: 50kg bags
-
-## Key Features
-Promotes vigorous root development
-Improves soil fertility and structure
-Increases crop yield by 25-30%
-Easy to apply and spread
-Long-lasting nutrient release
-Suitable for all soil types
-Environmentally friendly formula
-
-## Usage Instructions
-Before Planting: Apply 50kg per acre and mix thoroughly with soil
-Side Dressing: Apply 25kg per acre 4-6 weeks after planting
-Top Dressing: Apply 25kg per acre during active growth phase
-Watering: Water immediately after application for best results
-Reapplication: Repeat every 6-8 weeks during growing season
-
-## Application Method
-Broadcast Spreading: For large fields
-Band Application: For row crops
-Foliar Spray: Dilute 1:100 for foliar feeding
-
-## Benefits
-Increased Yield: 25-30% improvement in crop production
-Better Quality: Enhanced fruit and grain quality
-Soil Health: Improves soil structure and fertility
-Cost Effective: Reduces need for multiple applications
-Easy Storage: Stable formulation with long shelf life
+## Application/Usage
+Foliar application: Mix 2-3mls of Agri Gold per 1ltrs of water (60mls/20ltrs). Drip Irrigation: Mix 5mls of Agri Gold per 1ltr of water
 
 ## Price Information
-Per 50kg bag: UGX 150,000
-Bulk orders (10+ bags): UGX 140,000 per bag
-Wholesale (50+ bags): UGX 135,000 per bag
-Delivery: Free delivery for orders above 10 bags
+1ltr: UGX 30,000
+500ml: UGX 15,000
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide coverage
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Ensure proper ventilation
-Shelf life: 24 months from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Keep away from children and pets
-Use protective equipment during application
-Avoid contact with eyes and skin
-Store separately from food items
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456

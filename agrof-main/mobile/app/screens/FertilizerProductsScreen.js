@@ -1,27 +1,54 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import FertilizerDetailScreen from './FertilizerDetailScreen';
-import { createProductData, getImageSource } from '../utils/productDataManager';
+import { createProductData, getImageSource, clearProductCache } from '../utils/productDataManager';
 import { preloadImages } from '../utils/imageCache';
+import { productsApi, clearCache } from '../services/storeApi';
 
 const FertilizerProductsScreen = ({ onBack }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  // Fertilizer images have been removed - using placeholder
-  const fertilizerImages = {};
-  // Get image source from static mapping
-  const getImageSourceLocal = (imageName) => {
-    return fertilizerImages[imageName] || require('../assets/fertilizers.png');
+  // Get image source from API data
+  const getImageSource = (product) => {
+    return product.image_url 
+      ? { uri: `http://192.168.1.14:3001${product.image_url}` }
+      : require('../assets/fertilizers.png');
   };
 
-  // Empty products array - store is currently empty
-  const fertilizerProducts = useMemo(() => createProductData([], 'fertilizers'), []);
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        // Clear all caches to ensure fresh data
+        clearCache();
+        clearProductCache();
+        const data = await productsApi.getAll({ category: 'fertilizers' });
+        setProducts(data);
+      } catch (err) {
+        console.error('Error fetching fertilizer products:', err);
+        setError('Failed to load products');
+        Alert.alert('Error', 'Failed to load fertilizer products. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Process products with API data
+  const fertilizerProducts = useMemo(() => createProductData(products, 'fertilizers'), [products]);
 
   // Preload images on component mount
   useEffect(() => {
     const imageSources = fertilizerProducts
-      .map(product => getImageSourceLocal(product.imageName))
+      .map(product => getImageSource(product))
       .filter(Boolean);
     
     if (imageSources.length > 0) {
@@ -34,10 +61,10 @@ const FertilizerProductsScreen = ({ onBack }) => {
     <TouchableOpacity 
       key={item.id}
       style={styles.productItem}
-      onPress={() => setSelectedProduct({ ...item, image: getImageSourceLocal(item.imageName) })}
+      onPress={() => setSelectedProduct({ ...item, image: getImageSource(item) })}
     >
       <Image 
-        source={getImageSourceLocal(item.imageName)}
+        source={getImageSource(item)}
         style={styles.productImage} 
         resizeMode="cover"
         fadeDuration={0}
@@ -61,6 +88,71 @@ const FertilizerProductsScreen = ({ onBack }) => {
         product={selectedProduct} 
         onBack={() => setSelectedProduct(null)}
       />
+    );
+  }
+
+  // Show loading state
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={onBack}>
+            <MaterialIcons name="arrow-back" size={24} color="white" />
+          </TouchableOpacity>
+          <View style={styles.headerTitleContainer}>
+            <MaterialIcons name="eco" size={32} color="white" />
+            <Text style={styles.headerTitle}>Fertilizer Products</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>Complete range of agricultural fertilizers</Text>
+        </View>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#2c5530" />
+          <Text style={styles.loadingText}>Loading fertilizer products...</Text>
+        </View>
+      </View>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={onBack}>
+            <MaterialIcons name="arrow-back" size={24} color="white" />
+          </TouchableOpacity>
+          <View style={styles.headerTitleContainer}>
+            <MaterialIcons name="eco" size={32} color="white" />
+            <Text style={styles.headerTitle}>Fertilizer Products</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>Complete range of agricultural fertilizers</Text>
+        </View>
+        <View style={styles.errorContainer}>
+          <MaterialIcons name="error-outline" size={48} color="#e74c3c" />
+          <Text style={styles.errorText}>{error}</Text>
+              <TouchableOpacity style={styles.retryButton} onPress={() => {
+                setError(null);
+                setLoading(true);
+                // Trigger a re-fetch with cache clearing
+                const fetchProducts = async () => {
+                  try {
+                    clearCache();
+                    clearProductCache();
+                    const data = await productsApi.getAll({ category: 'fertilizers' });
+                    setProducts(data);
+                    setLoading(false);
+                  } catch (err) {
+                    console.error('Error fetching fertilizer products:', err);
+                    setError('Failed to load products');
+                    setLoading(false);
+                  }
+                };
+                fetchProducts();
+              }}>
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 
@@ -185,6 +277,42 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     textAlign: 'center',
     marginTop: 0,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#2c5530',
+    textAlign: 'center',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  errorText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#e74c3c',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  retryButton: {
+    backgroundColor: '#2c5530',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

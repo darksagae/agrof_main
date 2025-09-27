@@ -1,51 +1,43 @@
-# Auxo EC Selective Herbicide For Weed Control In Maize
+# Auxo Ec – Selective Herbicide For Weed Control In Maize
 
 ## Overview
-Auxo EC is a selective herbicide specifically designed for weed control in maize crops. This herbicide contains auxin-type active ingredients that provide excellent control against broadleaf weeds while being safe for maize plants.
+Auxo EC is a post-emergence herbicide for control of Grasses & Broadleaf weeds in Maize varieties grown in mid and high altitudes only.
 
 ## Specifications
-Active Ingredient: Auxin-type active ingredients
-Formulation: Emulsifiable Concentrate (EC)
-Mode of Action: Selective herbicide
-Target Weeds: Broadleaf weeds
-Application Areas: Maize crops
-Packaging: 1L, 5L, 20L containers
+Active Ingredients: Tembotrione 50g/l + Bromoxynil Octanoate 262g/l
+Formulation: Emulsifiable concentrate (EC)
+Mode of Action: Post-emergence herbicide
+Target Weeds: Grasses and broadleaf weeds
+Target Crops: Maize (mid and high altitudes only)
+Packaging: 1L, 5L containers
 
 ## Key Features
-Selective weed control
-Maize-specific formulation
-Auxin-type action
-Rainfast within 6 hours
+Post-emergence weed control
+Effective against grasses and broadleaf weeds
+Selective herbicide
+Suitable for mid and high altitude maize
 Cost-effective weed control
 Easy to apply
-Safe for maize crops
 
 ## Usage Instructions
-Mixing: Mix 100-150ml per 20 liters of water
-Application: Apply as a foliar spray to actively growing weeds
-Timing: Best applied when maize is 15-30cm tall and weeds are young
-Avoid Drift: Do not apply when windy to prevent drift
-Re-entry Period: 12 hours after application
+**Application:** Apply as a post-emergence herbicide
+**Timing:** Apply when weeds are actively growing
+**Coverage:** Ensure thorough coverage of target weeds
+**Crop Stage:** Apply when maize is at appropriate growth stage
 
 ## Application Method
-Foliar Spray: Apply to weed foliage
-Boom Sprayer: For large areas
-Knapsack Sprayer: For small areas
-Timing: Early morning or late evening
+Foliar Spray: Direct application to weed foliage
 
 ## Benefits
-Selective Control: Kills broadleaf weeds, spares maize
-Maize Safe: Specially formulated for maize crops
-Cost Effective: Reduces manual weeding
-Time Saving: Quick and efficient application
-High Efficacy: Excellent broadleaf weed control
-Easy Use: Simple application method
+Effective control of grasses and broadleaf weeds
+Selective action on maize
+Suitable for mid and high altitude conditions
+Cost-effective solution
+Easy to use
 
 ## Price Information
-Per 1L container: UGX 38,000
-Per 5L container: UGX 170,000
-Per 20L container: UGX 620,000
-Bulk orders: Contact for pricing
+Per 1L: UGX 126,500
+Per 5L: UGX 605,600
 
 ## Availability & Delivery
 Stock Status: In Stock
@@ -55,16 +47,15 @@ Delivery Time: 2-3 business days
 Payment: Cash on delivery, Mobile money, Bank transfer
 
 ## Storage Instructions
-Store in original container
-Keep in cool, dry place
-Avoid direct sunlight
-Shelf life: 2 years from manufacturing date
+Store in cool, dry place
+Keep away from direct sunlight
+Ensure proper ventilation
+Shelf life: 24 months from manufacturing date
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves, eye protection, and long-sleeved clothing
-First Aid: In case of contact, rinse immediately with water
+Personal Protective Equipment: Wear appropriate protective clothing
+First Aid: In case of contact, wash thoroughly with soap and water
 Storage: Store away from food and feed
-Disposal: Dispose according to local regulations
 
 ## Contact Information
 Phone: +256 700 123 456

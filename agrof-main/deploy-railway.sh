@@ -22,5 +22,5 @@ railway up
 echo "✅ Backend deployed to Railway!"
 echo "🌐 Your backend URL will be shown above"
 echo "📝 Next: Configure custom domain 'api.agrof.farm' in Railway dashboard"
-echo "🔑 Don't forget to set GEMINI_API_KEY environment variable!"
+echo "🔑 Note: AI services have been removed from this application!"
 

@@ -1,73 +1,46 @@
 # Easygro Calcium - Water-soluble
 
+## Supplier
+Osho Chemical Industries Ltd
+
 ## Overview
-Easygro Calcium is a water-soluble calcium fertilizer designed for foliar application and fertigation systems. This premium fertilizer provides highly available calcium to prevent calcium deficiency and improve fruit quality in various crops.
-
-## Specifications
-Active Ingredient: Calcium Nitrate Ca(NO3)2
-Formulation: Water-soluble powder
-Mode of Action: Calcium fertilizer
-Target Application: Crops requiring calcium supplementation
-Application Areas: Fruits, vegetables, flowers, field crops
-Packaging: 1kg, 5kg, 25kg bags
-
-## Key Features
-Water-soluble formulation
-High calcium content
-Foliar application compatible
-Fertigation suitable
-Fast-acting calcium
-Premium quality
-Easy to apply
-
-## Usage Instructions
-Mixing: Dissolve in water for foliar or fertigation
-Application: Foliar spray or fertigation
-Timing: Apply during active growth periods
-Rate: 1-2kg per hectare for foliar application
-Frequency: Apply every 2-3 weeks
-Concentration: 0.5-1% for foliar spray
-
-## Application Method
-Foliar Spray: Direct application to leaves
-Fertigation: Through irrigation systems
-Soil Application: Broadcast or band placement
-Timing: Early morning or late evening
-
-## Benefits
-Water Soluble: Easy application and uptake
-Fast Acting: Immediate calcium availability
-Foliar Compatible: Safe for leaf application
-Fertigation Ready: Suitable for irrigation systems
-Premium Quality: High-grade fertilizer
-Fruit Quality: Improves fruit firmness and shelf life
+Easygro Calcium is a water-soluble fertilizer with calcium, magnesium and other micro-elements for foliar feeding and fertigation.
 
 ## Price Information
-Per 1kg bag: UGX 8,000
-Per 5kg bag: UGX 35,000
-Per 25kg bag: UGX 150,000
-Bulk orders: Contact for pricing
+250 g: UGX 6,400
+500 g: UGX 9,600
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in dry, covered area
-Keep away from moisture
-Protect from direct sunlight
-Shelf life: 2 years from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves and dust mask
-First Aid: In case of contact, wash thoroughly with water
-Storage: Store away from food and feed
-Disposal: Safe for agricultural use
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

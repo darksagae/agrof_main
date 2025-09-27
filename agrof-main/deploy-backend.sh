@@ -21,6 +21,6 @@ echo "🚀 Deploying to Railway..."
 railway up
 
 echo "✅ Backend deployment initiated!"
-echo "📝 Note: Set your GEMINI_API_KEY environment variable in Railway dashboard"
+echo "📝 Note: AI services have been removed from this application"
 echo "🌐 Your backend will be available at: https://your-app-name.up.railway.app"
 

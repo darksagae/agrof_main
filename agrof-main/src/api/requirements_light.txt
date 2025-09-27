@@ -16,5 +16,5 @@ python-dotenv>=0.19.0
 # Production server
 waitress>=2.1.0
 
-# AI API dependencies (lightweight)
-google-generativeai>=0.3.0
+# Additional production dependencies
+Werkzeug>=2.0.0
