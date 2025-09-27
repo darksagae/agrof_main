@@ -1239,15 +1239,6 @@ export default function App() {
         </View>
       
       <ChatBot onShowTraining={() => setShowTraining(true)} />
-      
-      <View style={styles.nextSection}>
-        <TouchableOpacity 
-          style={[styles.nextButton, styles.primaryButton]} 
-          onPress={() => setCurrentTab('plan')}
-        >
-          <Text style={styles.nextButtonText}>Next: Farm Planning →</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 

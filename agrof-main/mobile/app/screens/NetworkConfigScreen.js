@@ -4,7 +4,7 @@ import {
   TextInput, Alert, ActivityIndicator 
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { testAllApiUrls, getCurrentApiUrl, resetApiUrl } from '../services/storeApi';
+import { testAllApiUrls, getCurrentApiUrl, resetApiUrl, setApiUrl } from '../services/storeApi';
 
 const NetworkConfigScreen = ({ onBack }) => {
   const [currentUrl, setCurrentUrl] = useState('');
@@ -62,6 +62,12 @@ const NetworkConfigScreen = ({ onBack }) => {
     Alert.alert('Success', 'API URL reset to primary');
   };
 
+  const setToWorkingUrl = (url) => {
+    setApiUrl(url);
+    setCurrentUrl(getCurrentApiUrl());
+    Alert.alert('Success', `API URL set to: ${url}`);
+  };
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -108,6 +114,12 @@ const NetworkConfigScreen = ({ onBack }) => {
               <View key={index} style={styles.urlItem}>
                 <MaterialIcons name="check-circle" size={16} color="#4CAF50" />
                 <Text style={styles.workingUrlText}>{url}</Text>
+                <TouchableOpacity 
+                  style={styles.setButton}
+                  onPress={() => setToWorkingUrl(url)}
+                >
+                  <Text style={styles.setButtonText}>Use</Text>
+                </TouchableOpacity>
               </View>
             ))
           ) : (
@@ -246,6 +258,18 @@ const styles = StyleSheet.create({
     color: '#2e7d32',
     fontFamily: 'monospace',
     flex: 1,
+  },
+  setButton: {
+    backgroundColor: '#4CAF50',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 4,
+    marginLeft: 8,
+  },
+  setButtonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
   noUrlsText: {
     fontSize: 14,

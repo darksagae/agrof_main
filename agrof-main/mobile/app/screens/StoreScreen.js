@@ -226,7 +226,7 @@ const StoreScreen = () => {
                 onPress={() => setSelectedProduct(item)}
               >
                 <Image 
-                  source={item.image_url ? { uri: `http://192.168.1.14:3001${item.image_url}` } : getCategoryImage(item.category_name)} 
+                  source={item.image_url ? { uri: `http://192.168.0.100:3001${item.image_url}` } : getCategoryImage(item.category_name)} 
                   style={styles.searchResultImage} 
                 />
                 <View style={styles.searchResultContent}>
@@ -253,7 +253,7 @@ const StoreScreen = () => {
                 onPress={() => setSelectedProduct(product)}
               >
                 <Image 
-                  source={product.image_url ? { uri: `http://192.168.1.14:3001${product.image_url}` } : getCategoryImage(product.category_name)} 
+                  source={product.image_url ? { uri: `http://192.168.0.100:3001${product.image_url}` } : getCategoryImage(product.category_name)} 
                   style={styles.featuredImage} 
                 />
                 <Text style={styles.featuredName} numberOfLines={2}>{product.name}</Text>

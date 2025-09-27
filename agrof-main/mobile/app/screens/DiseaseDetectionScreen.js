@@ -30,15 +30,11 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   const pickImageFromGallery = async () => {
     try {
       setIsLoading(true);
-      console.log('📸 Requesting gallery permissions...');
-      
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('Permission Required', 'Gallery permission is needed to select images');
         return;
       }
-
-      console.log('📸 Opening gallery with alternative method...');
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: false,
@@ -47,17 +43,8 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         exif: false,
       });
 
-      console.log('📸 Gallery result:', JSON.stringify(result, null, 2));
-
       if (!result.canceled && result.assets && result.assets.length > 0) {
         const image = result.assets[0];
-        console.log('📸 Selected image details:', {
-          uri: image.uri,
-          width: image.width,
-          height: image.height,
-          type: image.type,
-          fileSize: image.fileSize
-        });
         
         // Validate image data
         if (!image.uri) {
@@ -67,14 +54,11 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         setSelectedImage(image);
         setAnalysisResult(null);
         setError(null);
-        console.log('📸 Image set successfully');
         Alert.alert('Success', 'Image selected successfully!');
       } else {
-        console.log('📸 Image selection canceled or no assets');
         Alert.alert('Info', 'No image was selected');
       }
     } catch (error) {
-      console.error('📸 Gallery error:', error);
       setError(`Gallery error: ${error.message}`);
       Alert.alert('Error', `Failed to pick image: ${error.message}`);
     } finally {
@@ -86,15 +70,11 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   const takePhotoWithCamera = async () => {
     try {
       setIsLoading(true);
-      console.log('📷 Requesting camera permissions...');
-      
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('Permission Required', 'Camera permission is needed to take photos');
         return;
       }
-
-      console.log('📷 Opening camera with alternative method...');
       const result = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: false,
@@ -103,17 +83,8 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         exif: false,
       });
 
-      console.log('📷 Camera result:', JSON.stringify(result, null, 2));
-
       if (!result.canceled && result.assets && result.assets.length > 0) {
         const image = result.assets[0];
-        console.log('📷 Captured image details:', {
-          uri: image.uri,
-          width: image.width,
-          height: image.height,
-          type: image.type,
-          fileSize: image.fileSize
-        });
         
         // Validate image data
         if (!image.uri) {
@@ -123,13 +94,9 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         setSelectedImage(image);
         setAnalysisResult(null);
         setError(null);
-        console.log('📷 Image set successfully');
         Alert.alert('Success', 'Photo taken successfully!');
-      } else {
-        console.log('📷 Photo capture canceled or no assets');
       }
     } catch (error) {
-      console.error('📷 Camera error:', error);
       setError(`Camera error: ${error.message}`);
       Alert.alert('Error', `Failed to take photo: ${error.message}`);
     } finally {
@@ -148,12 +115,8 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     setError(null);
 
     try {
-      console.log('🤖 Starting JavaScript-based image analysis...');
-      console.log('📸 Image URI:', selectedImage.uri);
-
       // Use proper image analysis service
       const result = await getProperImageAnalysis(selectedImage.uri);
-      console.log('🤖 Analysis result:', result);
 
       if (result.success) {
         setAnalysisResult({
@@ -167,7 +130,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         throw new Error(result.error || 'Analysis failed');
       }
     } catch (error) {
-      console.error('🤖 Analysis error:', error);
       setError(error.message);
       Alert.alert('Analysis Failed', `Failed to analyze image: ${error.message}`);
     } finally {
@@ -436,7 +398,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           <Card.Content>
             <Title style={styles.headerTitle}><Text>🔬 Disease Detection</Text></Title>
             <Paragraph style={styles.headerSubtitle}>
-              <Text>AI-powered plant disease detection using advanced image analysis</Text>
+              <Text>Advanced plant health analysis and crop monitoring</Text>
             </Paragraph>
           </Card.Content>
         </Card>
@@ -450,19 +412,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         {/* Analysis Results */}
         {renderAnalysisResults()}
 
-        {/* Instructions */}
-        <Card style={styles.card}>
-          <Card.Content>
-            <Title style={styles.cardTitle}><Text>📋 Instructions</Text></Title>
-            <Text style={styles.instructionText}>
-              • Take a clear photo of the affected plant part{'\n'}
-              • Ensure good lighting and focus{'\n'}
-              • Include leaves, stems, or fruits in the image{'\n'}
-              • Avoid blurry or dark images{'\n'}
-              • The AI will analyze and provide disease diagnosis
-            </Text>
-          </Card.Content>
-        </Card>
       </ScrollView>
     </SafeAreaView>
   );

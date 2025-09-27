@@ -3,11 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Backend API configuration with fallback options
 const API_BASE_URLS = [
-  'http://192.168.1.14:3001/api',  // Local store backend (port 3001)
-  'http://192.168.0.105:3001/api', // Previous network IP (port 3001)
+  'http://192.168.0.100:3001/api', // Current local IP (highest priority)
   'http://localhost:3001/api',     // Localhost fallback (port 3001)
   'http://127.0.0.1:3001/api',    // Alternative localhost (port 3001)
-  'http://10.0.2.2:3001/api'       // Android emulator fallback (port 3001)
+  'http://10.0.2.2:3001/api',      // Android emulator fallback
+  'http://192.168.1.14:3001/api',  // Previous network IP (port 3001)
+  'http://192.168.0.105:3001/api' // Previous network IP (port 3001)
 ];
 
 let currentApiUrl = API_BASE_URLS[0]; // Start with primary
@@ -55,13 +56,17 @@ const setCachedData = (key, data) => {
 // Test API connectivity
 const testApiConnection = async (baseUrl) => {
   try {
+    console.log(`🔍 Testing API connection to: ${baseUrl}/health`);
     // Test store backend with health endpoint
     const response = await fetch(`${baseUrl}/health`, {
       method: 'GET',
-      timeout: 3000, // 3 second timeout
+      timeout: 5000, // 5 second timeout
     });
-    return response.ok;
+    const isOk = response.ok;
+    console.log(`📊 API test result for ${baseUrl}: ${isOk ? 'SUCCESS' : 'FAILED'} (status: ${response.status})`);
+    return isOk;
   } catch (error) {
+    console.log(`❌ API test error for ${baseUrl}:`, error.message);
     return false;
   }
 };
@@ -331,6 +336,12 @@ export const resetApiUrl = () => {
   console.log(`🔄 API URL reset to: ${currentApiUrl}`);
 };
 
+// Force API URL to specific URL
+export const setApiUrl = (url) => {
+  currentApiUrl = url;
+  console.log(`🔧 API URL manually set to: ${currentApiUrl}`);
+};
+
 // Get current API URL
 export const getCurrentApiUrl = () => {
   return currentApiUrl;
@@ -364,6 +375,7 @@ export default {
   clearCache,
   getCacheStats,
   resetApiUrl,
+  setApiUrl,
   getCurrentApiUrl,
   testAllApiUrls
 };

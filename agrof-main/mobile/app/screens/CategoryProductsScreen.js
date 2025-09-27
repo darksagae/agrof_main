@@ -48,7 +48,7 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
     >
       <View style={styles.imageContainer}>
         <Image 
-          source={item.image_url ? { uri: `http://192.168.0.105:3001${item.image_url}` } : require('../assets/fertilizers.png')} 
+          source={item.image_url ? { uri: `http://192.168.0.100:3001${item.image_url}` } : require('../assets/fertilizers.png')} 
           style={styles.productImage}
           resizeMode="cover"
         />
