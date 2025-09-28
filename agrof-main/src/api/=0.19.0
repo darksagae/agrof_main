@@ -1,0 +1,4 @@
+Requirement already satisfied: python-dotenv in ./enhanced_ai_env/lib/python3.13/site-packages (1.1.1)
+hed python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Installing collected packages: python-dotenv
+Successfully installed python-dotenv-1.1.1

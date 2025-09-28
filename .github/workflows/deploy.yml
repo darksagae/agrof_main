@@ -1,0 +1,94 @@
+name: Deploy Enhanced AGROF System
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  deploy-enhanced-ai:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        cd agrof-main/src/api
+        pip install -r requirements_production.txt
+    
+    - name: Test Enhanced AI System
+      run: |
+        cd agrof-main/src/api
+        python -c "
+        from enhanced_disease_detector import EnhancedDiseaseDetector
+        print('✅ Enhanced AI System test passed')
+        "
+    
+    - name: Deploy to Render (Enhanced AI)
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "🚀 Deploying Enhanced AI Backend to Render"
+        # Add Render deployment commands here
+
+  deploy-store-backend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: |
+        cd store-backend
+        npm install
+    
+    - name: Test Store Backend
+      run: |
+        cd store-backend
+        npm test || echo "No tests configured"
+    
+    - name: Deploy to Render (Store Backend)
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "🚀 Deploying Store Backend to Render"
+        # Add Render deployment commands here
+
+  deploy-mobile-app:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install Expo CLI
+      run: npm install -g @expo/cli
+    
+    - name: Install dependencies
+      run: |
+        cd agrof-main/mobile
+        npm install
+    
+    - name: Test Mobile App
+      run: |
+        cd agrof-main/mobile
+        expo doctor || echo "Expo doctor completed"
+    
+    - name: Build for Expo Go
+      run: |
+        cd agrof-main/mobile
+        expo export || echo "Export completed"

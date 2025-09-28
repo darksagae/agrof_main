@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import ChatbotWrapper from '../services/chatbotWrapper.js';
 
 const ChatBot = ({ onShowTraining }) => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm AgrofBot, your AI agricultural assistant. I can help you with:\n\n🌱 Crop disease identification\n💊 Treatment recommendations\n🌾 Farming best practices\n🌿 Pest control advice\n📚 General agricultural knowledge\n🌤️ Weather-based advice\n💰 Market insights\n\nWhat would you like to know today?",
+      text: "Hello! I'm AgrofBot, your AI agricultural assistant powered by Gemini AI. I can help you with:\n\n🌱 Crop disease identification\n💊 Treatment recommendations\n🌾 Farming best practices\n🌿 Pest control advice\n📚 General agricultural knowledge\n🌤️ Weather-based advice\n💰 Market insights\n🏪 AGROF store product recommendations\n\nWhat would you like to know today?",
       isBot: true,
       timestamp: new Date(),
     }
@@ -168,8 +169,41 @@ const ChatBot = ({ onShowTraining }) => {
     setInputText('');
     setIsTyping(true);
     
-    // Simulate bot thinking
-    setTimeout(() => {
+    try {
+      console.log('🤖 Sending message to Gemini API...');
+      console.log('📋 ChatbotWrapper:', ChatbotWrapper);
+      console.log('📋 ChatbotWrapper type:', typeof ChatbotWrapper);
+      console.log('📋 ChatbotWrapper keys:', Object.keys(ChatbotWrapper || {}));
+      
+      // Use real Gemini chatbot API via wrapper
+      const response = await ChatbotWrapper.sendMessage(inputText, userContext);
+      
+      if (response.success) {
+        console.log('✅ Gemini API response received');
+        const botMessage = {
+          id: Date.now() + 1,
+          text: response.message,
+          isBot: true,
+          timestamp: new Date(),
+        };
+        
+        setMessages(prev => [...prev, botMessage]);
+      } else {
+        console.log('⚠️ Gemini API failed, using fallback');
+        // Fallback to local knowledge base
+        const botResponse = generateBotResponse(inputText);
+        const botMessage = {
+          id: Date.now() + 1,
+          text: botResponse,
+          isBot: true,
+          timestamp: new Date(),
+        };
+        
+        setMessages(prev => [...prev, botMessage]);
+      }
+    } catch (error) {
+      console.error('❌ Chatbot error:', error);
+      // Fallback to local knowledge base
       const botResponse = generateBotResponse(inputText);
       const botMessage = {
         id: Date.now() + 1,
@@ -179,8 +213,9 @@ const ChatBot = ({ onShowTraining }) => {
       };
       
       setMessages(prev => [...prev, botMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+    }
   };
 
   const formatTime = (timestamp) => {
@@ -199,7 +234,7 @@ const ChatBot = ({ onShowTraining }) => {
           onPress: () => {
             setMessages([{
               id: Date.now(),
-              text: "Hello! I'm AgrofBot, your AI agricultural assistant. I can help you with:\n\n🌱 Crop disease identification\n💊 Treatment recommendations\n🌾 Farming best practices\n🌿 Pest control advice\n📚 General agricultural knowledge\n🌤️ Weather-based advice\n💰 Market insights\n\nWhat would you like to know today?",
+              text: "Hello! I'm AgrofBot, your AI agricultural assistant powered by Gemini AI. I can help you with:\n\n🌱 Crop disease identification\n💊 Treatment recommendations\n🌾 Farming best practices\n🌿 Pest control advice\n📚 General agricultural knowledge\n🌤️ Weather-based advice\n💰 Market insights\n🏪 AGROF store product recommendations\n\nWhat would you like to know today?",
               isBot: true,
               timestamp: new Date(),
             }]);

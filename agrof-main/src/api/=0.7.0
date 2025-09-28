@@ -1,0 +1,5 @@
+Collecting loguru
+  Using cached loguru-0.7.3-py3-none-any.whl.metadata (22 kB)
+Using cached loguru-0.7.3-py3-none-any.whl (61 kBInstalling collected packages: loguru
+Successfully installed loguru-0.7.3
+3
