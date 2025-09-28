@@ -2,8 +2,8 @@ services:
   - type: web
     name: agrof-enhanced-ai-api
     env: python
-    buildCommand: pip install -r requirements_production.txt
-    startCommand: gunicorn enhanced_app:app --bind 0.0.0.0:$PORT
+    buildCommand: pip install -r requirements_lightweight.txt
+    startCommand: gunicorn lightweight_app:app --bind 0.0.0.0:$PORT
     envVars:
       - key: PORT
         value: 10000
@@ -18,9 +18,9 @@ services:
       - key: USE_GOOGLE_VISION
         value: "true"
       - key: USE_TENSORFLOW_HUB
-        value: "true"
+        value: "false"
       - key: USE_PYTORCH_VISION
-        value: "true"
+        value: "false"
       - key: STORE_PATH
         value: "../store-backend"
       - key: CACHE_SIZE
