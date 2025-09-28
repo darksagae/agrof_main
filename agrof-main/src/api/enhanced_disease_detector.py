@@ -129,7 +129,7 @@ class GoogleVisionAPI:
     """Google Vision API integration for image analysis"""
     
     def __init__(self):
-        self.api_key = os.getenv('GOOGLE_VISION_API_KEY')
+        self.api_key = os.getenv('GOOGLE_VISION_API_KEY', 'AIzaSyD3vGEfsbn5Copz13NVNc7wB8EnSHGJysY')
         self.base_url = "https://vision.googleapis.com/v1/images:annotate"
     
     def analyze_image(self, image_data: bytes) -> Dict:
