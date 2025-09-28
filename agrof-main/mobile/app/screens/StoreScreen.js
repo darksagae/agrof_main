@@ -1,11 +1,12 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert, ActivityIndicator, TextInput, FlatList } from 'react-native';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert, ActivityIndicator, TextInput, FlatList, Animated, Easing } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { categoriesApi, productsApi, healthCheck } from '../services/storeApi';
 import { useCart } from '../contexts/CartContext';
 import CategoryProductsScreen from './CategoryProductsScreen';
 import CartScreen from './CartScreen';
 import ProductDetailScreen from './ProductDetailScreen';
+import { featuredProducts } from '../data/featuredProducts';
 
 const StoreScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -13,14 +14,50 @@ const StoreScreen = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [imageLoadingStates, setImageLoadingStates] = useState({});
   const [categories, setCategories] = useState([]);
-  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [apiFeaturedProducts, setApiFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  
+  // Debug state changes
+  useEffect(() => {
+    console.log('🔍 Search results state changed:', showSearchResults);
+    console.log('🎯 Featured products should be visible:', !showSearchResults);
+  }, [showSearchResults]);
   const [backendStatus, setBackendStatus] = useState('checking');
+  
+  // Marquee animation
+  const marqueeAnimation = useRef(new Animated.Value(0)).current;
 
   const { getTotalItems } = useCart();
+
+
+  // Function to get real product images from store folder
+  const getProductImage = (product) => {
+    // For now, use category images to avoid complex path issues
+    // TODO: Implement real product images later
+    console.log('🎯 Using category image for product:', product.name, 'category:', product.category);
+    return getCategoryImage(product.category);
+  };
+
+  // Legacy function for backward compatibility
+  const getCategoryImage = (categoryName) => {
+    console.log('🖼️ Getting category image for:', categoryName);
+    const imageMap = {
+      'fertilizers': require('../assets/fertilizers.png'),
+      'fungicides': require('../assets/fungicides.png'),
+      'herbicides': require('../assets/herbicides.png'),
+      'nursery_bed': require('../assets/nurserybed.png'),
+      'organic_chemicals': require('../assets/organic_chemicals.png'),
+      'seeds': require('../assets/seeds.png'),
+      'pesticides': require('../assets/fungicides.png'),
+      'tools': require('../assets/fertilizers.png'),
+    };
+    const image = imageMap[categoryName] || require('../assets/fertilizers.png');
+    console.log('🖼️ Category image result:', image ? 'Found' : 'Not found');
+    return image;
+  };
 
   // Fallback categories if API fails
   const fallbackCategories = useMemo(() => [
@@ -32,29 +69,76 @@ const StoreScreen = () => {
     { id: 6, name: 'seeds', display_name: 'Seeds', image: require('../assets/seeds.png') },
   ], []);
 
+  // Featured products fetched from JavaScript array
+  const extendedFeaturedProducts = useMemo(() => {
+    console.log('🎯 Featured Products loaded:', featuredProducts.length, 'products');
+    console.log('🎯 First few products:', featuredProducts.slice(0, 3));
+    console.log('🎯 Sample product with imagePath:', featuredProducts[0]);
+    return featuredProducts;
+  }, []);
+
   // Load categories and featured products on mount
   useEffect(() => {
     loadStoreData();
   }, []);
 
+  // Start marquee animation - never stops
+  useEffect(() => {
+    if (extendedFeaturedProducts.length === 0) return;
+    
+    console.log('🎬 Starting marquee animation with', extendedFeaturedProducts.length, 'products');
+    
+    const startMarquee = () => {
+      marqueeAnimation.setValue(0);
+      
+      const animate = () => {
+        Animated.timing(marqueeAnimation, {
+          toValue: 1,
+          duration: 60000, // 60 seconds for slower movement
+          useNativeDriver: true,
+          easing: Easing.linear,
+        }).start(() => {
+          marqueeAnimation.setValue(0);
+          animate(); // Restart immediately
+        });
+      };
+      
+      animate();
+    };
+
+    const timer = setTimeout(startMarquee, 500);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [extendedFeaturedProducts.length]);
+
   const loadStoreData = async () => {
     try {
       setLoading(true);
+      console.log('🔄 Loading store data...');
       
       // Check backend health
+      console.log('🔍 Checking backend health...');
       const health = await healthCheck();
+      console.log('🏥 Health check result:', health);
       setBackendStatus(health.status === 'OK' ? 'connected' : 'disconnected');
       
       // Load categories
+      console.log('📂 Loading categories...');
       const categoriesData = await categoriesApi.getAll();
+      console.log('📂 Categories loaded:', categoriesData.length, 'categories');
+      console.log('📂 Categories data:', categoriesData);
       setCategories(categoriesData.length > 0 ? categoriesData : fallbackCategories);
       
       // Load featured products
+      console.log('⭐ Loading featured products...');
       const productsData = await productsApi.getAll({ limit: 6 });
-      setFeaturedProducts(productsData);
+      console.log('⭐ Featured products loaded:', productsData.length, 'products');
+      setApiFeaturedProducts(productsData);
       
     } catch (error) {
-      console.error('Failed to load store data:', error);
+      console.error('❌ Failed to load store data:', error);
       setBackendStatus('disconnected');
       setCategories(fallbackCategories);
     } finally {
@@ -96,18 +180,7 @@ const StoreScreen = () => {
     setImageLoadingStates(prev => ({ ...prev, [categoryId]: true }));
   };
 
-  // Get category image
-  const getCategoryImage = (categoryName) => {
-    const imageMap = {
-      'fertilizers': require('../assets/fertilizers.png'),
-      'fungicides': require('../assets/fungicides.png'),
-      'herbicides': require('../assets/herbicides.png'),
-      'nursery_bed': require('../assets/nurserybed.png'),
-      'organic_chemicals': require('../assets/organic_chemicals.png'),
-      'seeds': require('../assets/seeds.png'),
-    };
-    return imageMap[categoryName] || require('../assets/fertilizers.png');
-  };
+  // Duplicate getCategoryImage function removed - using the one declared earlier
 
   // Show product detail screen if a product is selected
   if (selectedProduct) {
@@ -198,7 +271,8 @@ const StoreScreen = () => {
             style={styles.searchInput}
             placeholder="Search products..."
             value={searchQuery}
-            onChangeText={handleSearch}
+            onChangeText={setSearchQuery}
+            onSubmitEditing={() => handleSearch(searchQuery)}
             placeholderTextColor="#999"
           />
           {searchQuery.length > 0 && (
@@ -226,7 +300,7 @@ const StoreScreen = () => {
                 onPress={() => setSelectedProduct(item)}
               >
                 <Image 
-                  source={item.image_url ? { uri: `http://192.168.0.100:3001${item.image_url}` } : getCategoryImage(item.category_name)} 
+                  source={item.image_url ? { uri: `http://192.168.0.100:3002${item.image_url}` } : getCategoryImage(item.category_name)} 
                   style={styles.searchResultImage} 
                 />
                 <View style={styles.searchResultContent}>
@@ -241,26 +315,68 @@ const StoreScreen = () => {
         </View>
       )}
 
-      {/* Featured Products */}
-      {!showSearchResults && featuredProducts.length > 0 && (
+      {/* Featured Products Marquee */}
+      {!showSearchResults && (
         <View style={styles.featuredContainer}>
           <Text style={styles.featuredTitle}>Featured Products</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.featuredScroll}>
-            {featuredProducts.map((product) => (
-              <TouchableOpacity 
-                key={product.id} 
-                style={styles.featuredItem}
-                onPress={() => setSelectedProduct(product)}
-              >
-                <Image 
-                  source={product.image_url ? { uri: `http://192.168.0.100:3001${product.image_url}` } : getCategoryImage(product.category_name)} 
-                  style={styles.featuredImage} 
-                />
-                <Text style={styles.featuredName} numberOfLines={2}>{product.name}</Text>
-                <Text style={styles.featuredPrice}>{product.price}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+          {console.log('🎬 Rendering marquee with', extendedFeaturedProducts.length, 'products')}
+          {extendedFeaturedProducts.length > 0 ? (
+            <View style={styles.marqueeContainer}>
+            <Animated.View 
+              style={[
+                styles.marqueeContent,
+                {
+                  transform: [{
+                    translateX: marqueeAnimation.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, -(extendedFeaturedProducts.length * 165)] // Move left by total width
+                    })
+                  }]
+                }
+              ]}
+            >
+              {/* First set of products */}
+              {extendedFeaturedProducts.map((product, index) => {
+                console.log(`🎬 Rendering product ${index + 1}:`, product.name, 'imagePath:', product.imagePath);
+                return (
+                  <TouchableOpacity 
+                    key={product.id} 
+                    style={styles.featuredItem}
+                    onPress={() => setSelectedProduct(product)}
+                  >
+                    <Image 
+                      source={getProductImage(product)} 
+                      style={styles.featuredImage} 
+                      defaultSource={require('../assets/fertilizers.png')}
+                    />
+                    <Text style={styles.featuredName} numberOfLines={2}>{product.name}</Text>
+                    <Text style={styles.featuredPrice}>{product.price}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+              {/* Duplicate set for seamless loop */}
+              {extendedFeaturedProducts.map((product) => (
+                <TouchableOpacity 
+                  key={`duplicate-${product.id}`} 
+                  style={styles.featuredItem}
+                  onPress={() => setSelectedProduct(product)}
+                >
+                  <Image 
+                    source={getProductImage(product)} 
+                    style={styles.featuredImage} 
+                    defaultSource={require('../assets/fertilizers.png')}
+                  />
+                  <Text style={styles.featuredName} numberOfLines={2}>{product.name}</Text>
+                  <Text style={styles.featuredPrice}>{product.price}</Text>
+                </TouchableOpacity>
+              ))}
+            </Animated.View>
+          </View>
+          ) : (
+            <View style={styles.marqueeContainer}>
+              <Text style={styles.noProductsText}>Loading featured products...</Text>
+            </View>
+          )}
         </View>
       )}
 
@@ -269,10 +385,13 @@ const StoreScreen = () => {
       <View style={styles.categoriesContainer}>
           <Text style={styles.categoriesTitle}>Categories</Text>
         <View style={styles.categoriesGrid}>
-          {categories.map((category) => (
-            <TouchableOpacity
-              key={category.id}
-              style={styles.categoryCard}
+          {console.log('🏪 Rendering categories:', categories.length, 'categories')}
+          {categories.map((category, index) => {
+            console.log(`🏪 Category ${index + 1}:`, category.name, 'display_name:', category.display_name);
+            return (
+              <TouchableOpacity
+                key={category.id}
+                style={styles.categoryCard}
                 onPress={() => handleCategoryPress(category)}
               >
                 <Image 
@@ -280,11 +399,12 @@ const StoreScreen = () => {
                   style={styles.categoryImage} 
                   resizeMode="cover" 
                 />
-              <Text style={styles.categoryText}>
+                <Text style={styles.categoryText}>
                   {category.display_name || category.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </View>
       )}
@@ -457,6 +577,28 @@ const styles = StyleSheet.create({
   featuredScroll: {
     paddingLeft: 15,
   },
+  marqueeContainer: {
+    height: 200,
+    overflow: 'hidden',
+    backgroundColor: '#ffffff',
+    position: 'relative',
+    marginHorizontal: 15,
+    borderRadius: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  marqueeContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
   featuredItem: {
     width: 150,
     marginRight: 15,
@@ -526,6 +668,12 @@ const styles = StyleSheet.create({
     color: '#2c5530',
     textAlign: 'center',
     lineHeight: 16,
+  },
+  noProductsText: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 80,
   },
 });
 

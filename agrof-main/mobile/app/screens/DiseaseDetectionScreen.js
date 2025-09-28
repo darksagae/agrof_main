@@ -163,17 +163,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
                 source={{ uri: selectedImage.uri }} 
                 style={styles.imagePreview}
                 onError={(error) => {
-                  console.error('Image load error:', error);
-                  setError('Failed to load image. URI: ' + selectedImage.uri);
-                }}
-                onLoad={() => {
-                  console.log('Image loaded successfully:', selectedImage.uri);
-                }}
-                onLoadStart={() => {
-                  console.log('Image loading started:', selectedImage.uri);
-                }}
-                onLoadEnd={() => {
-                  console.log('Image loading ended:', selectedImage.uri);
+                  setError('Failed to load image. Please try again.');
                 }}
               />
               <TouchableOpacity style={styles.removeButton} onPress={resetAll}>
@@ -183,10 +173,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
                 <Text style={styles.imageInfoText}>
                   {selectedImage.width}x{selectedImage.height} • {Math.round((selectedImage.fileSize || 0) / 1024)}KB
                 </Text>
-              </View>
-              <View style={styles.imageDebugInfo}>
-                <Text style={styles.debugText}>URI: {selectedImage.uri}</Text>
-                <Text style={styles.debugText}>Type: {selectedImage.type}</Text>
               </View>
             </View>
           ) : (
@@ -231,21 +217,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
 
 
 
-        {/* Debug Button */}
-        <TouchableOpacity 
-          style={styles.debugButton} 
-          onPress={() => {
-            console.log('🔧 Current state:', {
-              selectedImage,
-              isLoading,
-              isAnalyzing,
-              error
-            });
-            Alert.alert('Debug Info', `Selected Image: ${selectedImage ? 'Yes' : 'No'}\nLoading: ${isLoading}\nAnalyzing: ${isAnalyzing}\nError: ${error || 'None'}`);
-          }}
-        >
-          <Text style={styles.debugButtonText}>🔧 Debug Info</Text>
-        </TouchableOpacity>
 
         {/* Analyze Button */}
         {selectedImage && (
@@ -392,16 +363,21 @@ const DiseaseDetectionScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Header with Back Button */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
+        </TouchableOpacity>
+        <View style={styles.headerContent}>
+          <Text style={styles.headerTitle}>🔬 Disease Detection</Text>
+          <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
+        </View>
+      </View>
+      
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Header */}
-        <Card style={styles.headerCard}>
-          <Card.Content>
-            <Title style={styles.headerTitle}><Text>🔬 Disease Detection</Text></Title>
-            <Paragraph style={styles.headerSubtitle}>
-              <Text>Advanced plant health analysis and crop monitoring</Text>
-            </Paragraph>
-          </Card.Content>
-        </Card>
 
         {/* Image Selection */}
         {renderImageSelection()}
@@ -413,6 +389,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         {renderAnalysisResults()}
 
       </ScrollView>
+      
     </SafeAreaView>
   );
 };
@@ -421,6 +398,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  backButton: {
+    marginRight: 12,
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: '#f0f0f0',
+  },
+  headerContent: {
+    flex: 1,
   },
   scrollContent: {
     padding: 16,
@@ -431,13 +431,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#2E7D32',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   headerSubtitle: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#666',
   },
   card: {
@@ -502,25 +502,6 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 4,
     maxWidth: width - 100,
-  },
-  debugText: {
-    color: '#fff',
-    fontSize: 10,
-    marginBottom: 2,
-  },
-  debugButton: {
-    marginTop: 12,
-    marginBottom: 12,
-    backgroundColor: '#17a2b8',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 6,
-    alignSelf: 'center',
-  },
-  debugButtonText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
   },
   imagePlaceholder: {
     width: width - 64,

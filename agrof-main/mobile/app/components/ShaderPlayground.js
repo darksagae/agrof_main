@@ -9,9 +9,7 @@ export default function FuturisticTechShowcase() {
   // Simple animation values
   const agrofFallAnim = useRef(new Animated.Value(-200)).current; // Start closer for normal fall
   const agrofOpacityAnim = useRef(new Animated.Value(0)).current; // Start invisible
-  const leafFallAnim = useRef(new Animated.Value(-300)).current; // Start closer for normal fall
-  const leafScaleAnim = useRef(new Animated.Value(0.2)).current; // Start much smaller for dramatic effect
-  const leafRotateAnim = useRef(new Animated.Value(0)).current; // Start no rotation
+  // Leaf animation removed - only AGROF word will fall
 
   useEffect(() => {
     startAnimations();
@@ -33,32 +31,7 @@ export default function FuturisticTechShowcase() {
         useNativeDriver: false,
       })
     ]).start(() => {
-      // After AGROF lands, start leaf animation
-      setTimeout(() => {
-        // Leaves fall with zoom and rotation effect
-        Animated.parallel([
-          Animated.timing(leafFallAnim, {
-            toValue: 100,
-            duration: 3000,
-            easing: Easing.out(Easing.bounce),
-            useNativeDriver: false,
-          }),
-          Animated.timing(leafScaleAnim, {
-            toValue: 4.0, // Much bigger size increase for dramatic effect
-            duration: 3000,
-            easing: Easing.out(Easing.bounce),
-            useNativeDriver: false,
-          }),
-          Animated.timing(leafRotateAnim, {
-            toValue: 1,
-            duration: 3000,
-            easing: Easing.linear,
-            useNativeDriver: false,
-          })
-        ]).start(() => {
-          // All animations complete
-        });
-      }, 500);
+      // AGROF animation complete - no leaf animation
     });
   };
 
@@ -87,23 +60,7 @@ export default function FuturisticTechShowcase() {
           <View style={styles.agrofGlow} />
         </Animated.View>
 
-        {/* Leaves falling with zoom and rotation effect */}
-        <Animated.View style={[
-          styles.leafContainer,
-          {
-            transform: [
-              { translateY: leafFallAnim },
-              { scale: leafScaleAnim },
-              { rotate: leafRotateAnim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['0deg', '360deg']
-                })
-              }
-            ]
-          }
-        ]}>
-          <Text style={styles.leafText}>🍃</Text>
-        </Animated.View>
+        {/* Leaf animation removed - only AGROF word falls */}
 
         {/* Welcome message at the top */}
         <View style={styles.welcomeSection}>
@@ -162,16 +119,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     zIndex: 1,
   },
-  leafContainer: {
-    position: 'absolute',
-    top: height / 2 - 100,
-    left: width / 2 - 50,
-    zIndex: 5,
-  },
-  leafText: {
-    fontSize: 60,
-    textAlign: 'center',
-  },
+  // Leaf styles removed
   welcomeSection: {
     position: 'absolute',
     top: 100,

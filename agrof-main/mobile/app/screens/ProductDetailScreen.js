@@ -203,7 +203,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
           <Image
             source={
               productData.image_url 
-                ? { uri: `http://192.168.0.100:3001${productData.image_url}` }
+                ? { uri: `http://192.168.0.100:3002${productData.image_url}` }
                 : getCategoryImage(productData.category_name)
             }
             style={styles.productImage}
@@ -393,6 +393,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
           )}
         </TouchableOpacity>
       </View>
+      
     </View>
   );
 };

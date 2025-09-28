@@ -133,7 +133,7 @@ const NetworkConfigScreen = ({ onBack }) => {
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.textInput}
-              placeholder="http://192.168.0.105:3001/api"
+              placeholder="http://192.168.0.105:3002/api"
               value={customUrl}
               onChangeText={setCustomUrl}
               autoCapitalize="none"

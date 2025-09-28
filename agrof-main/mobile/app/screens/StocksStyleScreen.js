@@ -10,11 +10,38 @@ import {
   Animated,
   PanResponder,
   Vibration,
+  Image,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import MiniChart from '../components/MiniChart';
 
 const { width, height } = Dimensions.get('window');
+
+// Function to get crop image based on product name
+const getCropImage = (productName) => {
+  const imageMap = {
+    'Maize': require('../assets/crops/maize.png'),
+    'Coffee': require('../assets/crops/coffee.png'),
+    'Rice': require('../assets/crops/rice.png'),
+    'Bananas': require('../assets/crops/banana.png'),
+    'Tomatoes': require('../assets/crops/tomatoes.png'),
+    'Beans': require('../assets/crops/beans.png'),
+    'Avocados': require('../assets/crops/avocados.png'),
+    'Pineapples': require('../assets/crops/pineapple.png'),
+    'Oranges': require('../assets/crops/orangoes.png'),
+    'Mangoes': require('../assets/crops/mangoes.png'),
+    'Cotton': require('../assets/crops/cotton.png'),
+    'Groundnuts': require('../assets/crops/groundnuts.png'),
+    'Sugarcane': require('../assets/crops/sugarcane.png'),
+    'Soya Beans': require('../assets/crops/soyabeans.png'),
+    'Cabbage': require('../assets/crops/cabbage.png'),
+    'Carrots': require('../assets/crops/carrot.png'),
+    'Onions': require('../assets/crops/onions.png'),
+    'Spinach': require('../assets/crops/spinach.png'),
+    'Millet': require('../assets/crops/millet.png'),
+  };
+  
+  return imageMap[productName] || require('../assets/crops/maize.png'); // Default fallback
+};
 
 // Mock agricultural product data with price trends
 const agriculturalProducts = [
@@ -22,10 +49,10 @@ const agriculturalProducts = [
   {
     id: 1,
     name: 'Maize',
-    currentPrice: 2500,
-    previousPrice: 2300,
+    currentPrice: 1000,
+    previousPrice: 950,
     trend: 'bullish',
-    priceChange: 8.7,
+    priceChange: 5.3,
     category: 'Grains',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -39,10 +66,10 @@ const agriculturalProducts = [
   {
     id: 2,
     name: 'Millet',
-    currentPrice: 3150,
-    previousPrice: 3200,
-    trend: 'bearish',
-    priceChange: -1.6,
+    currentPrice: 7000,
+    previousPrice: 6800,
+    trend: 'bullish',
+    priceChange: 2.9,
     category: 'Grains',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -56,10 +83,10 @@ const agriculturalProducts = [
   {
     id: 3,
     name: 'Rice',
-    currentPrice: 4450,
-    previousPrice: 4200,
+    currentPrice: 3800,
+    previousPrice: 3700,
     trend: 'bullish',
-    priceChange: 5.9,
+    priceChange: 2.7,
     category: 'Grains',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -74,10 +101,10 @@ const agriculturalProducts = [
   {
     id: 4,
     name: 'Beans',
-    currentPrice: 3750,
-    previousPrice: 3800,
+    currentPrice: 2900,
+    previousPrice: 3000,
     trend: 'bearish',
-    priceChange: -1.3,
+    priceChange: -3.3,
     category: 'Legumes',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -91,10 +118,10 @@ const agriculturalProducts = [
   {
     id: 5,
     name: 'Soya Beans',
-    currentPrice: 4200,
-    previousPrice: 4000,
+    currentPrice: 5000,
+    previousPrice: 4800,
     trend: 'bullish',
-    priceChange: 5.0,
+    priceChange: 4.2,
     category: 'Legumes',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -108,10 +135,10 @@ const agriculturalProducts = [
   {
     id: 6,
     name: 'Groundnuts',
-    currentPrice: 5600,
-    previousPrice: 5450,
+    currentPrice: 4300,
+    previousPrice: 4200,
     trend: 'bullish',
-    priceChange: 2.8,
+    priceChange: 2.4,
     category: 'Legumes',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -126,10 +153,10 @@ const agriculturalProducts = [
   {
     id: 7,
     name: 'Coffee',
-    currentPrice: 8700,
-    previousPrice: 8450,
+    currentPrice: 6000,
+    previousPrice: 5800,
     trend: 'bullish',
-    priceChange: 3.0,
+    priceChange: 3.4,
     category: 'Cash Crops',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -160,9 +187,9 @@ const agriculturalProducts = [
   {
     id: 9,
     name: 'Sugarcane',
-    currentPrice: 1750,
-    previousPrice: 1800,
-    trend: 'bearish',
+    currentPrice: 500,
+    previousPrice: 480,
+    trend: 'bullish',
     category: 'Cash Crops',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -193,8 +220,8 @@ const agriculturalProducts = [
   {
     id: 11,
     name: 'Onions',
-    currentPrice: 3750,
-    previousPrice: 3800,
+    currentPrice: 300,
+    previousPrice: 320,
     trend: 'bearish',
     category: 'Vegetables',
     chartData: {
@@ -226,10 +253,10 @@ const agriculturalProducts = [
   {
     id: 13,
     name: 'Carrots',
-    currentPrice: 3300,
-    previousPrice: 3150,
+    currentPrice: 100,
+    previousPrice: 95,
     trend: 'bullish',
-    priceChange: 4.8,
+    priceChange: 5.3,
     category: 'Vegetables',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -260,9 +287,9 @@ const agriculturalProducts = [
   {
     id: 15,
     name: 'Bananas',
-    currentPrice: 2150,
-    previousPrice: 2200,
-    trend: 'bearish',
+    currentPrice: 1000,
+    previousPrice: 950,
+    trend: 'bullish',
     category: 'Fruits',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -276,9 +303,9 @@ const agriculturalProducts = [
   {
     id: 16,
     name: 'Mangoes',
-    currentPrice: 1750,
-    previousPrice: 1800,
-    trend: 'bearish',
+    currentPrice: 500,
+    previousPrice: 480,
+    trend: 'bullish',
     category: 'Fruits',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -292,10 +319,10 @@ const agriculturalProducts = [
   {
     id: 17,
     name: 'Oranges',
-    currentPrice: 2600,
-    previousPrice: 2450,
+    currentPrice: 500,
+    previousPrice: 480,
     trend: 'bullish',
-    priceChange: 6.1,
+    priceChange: 4.2,
     category: 'Fruits',
     chartData: {
       labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -562,11 +589,10 @@ const StocksStyleScreen = ({ navigation }) => {
         </View>
         
         <View style={styles.chartContainer}>
-          <MiniChart 
-            data={product.chartData.datasets[0].data}
-            isPositive={isPositive}
-            height={30}
-            width={50}
+          <Image 
+            source={getCropImage(product.name)} 
+            style={styles.cropImage}
+            resizeMode="cover"
           />
         </View>
 
@@ -713,11 +739,10 @@ const StocksStyleScreen = ({ navigation }) => {
                 {agriculturalProducts.map((product, index) => (
                   <View key={index} style={styles.widgetMarqueeItem}>
                     <Text style={styles.widgetProductName}>{product.name}</Text>
-                    <MiniChart 
-                      data={product.chartData.datasets[0].data}
-                      isPositive={product.trend === 'bullish'}
-                      height={30}
-                      width={50}
+                    <Image 
+                      source={getCropImage(product.name)} 
+                      style={styles.cropImage}
+                      resizeMode="cover"
                     />
                     <Text style={[
                       styles.widgetPrice,
@@ -731,11 +756,10 @@ const StocksStyleScreen = ({ navigation }) => {
                 {agriculturalProducts.map((product, index) => (
                   <View key={`duplicate-${index}`} style={styles.widgetMarqueeItem}>
                     <Text style={styles.widgetProductName}>{product.name}</Text>
-                    <MiniChart 
-                      data={product.chartData.datasets[0].data}
-                      isPositive={product.trend === 'bullish'}
-                      height={30}
-                      width={50}
+                    <Image 
+                      source={getCropImage(product.name)} 
+                      style={styles.cropImage}
+                      resizeMode="cover"
                     />
                     <Text style={[
                       styles.widgetPrice,
@@ -770,6 +794,7 @@ const StocksStyleScreen = ({ navigation }) => {
             </View>
           </Animated.View>
         )}
+        
       </View>
     </View>
   );
@@ -1414,6 +1439,13 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontWeight: '600',
     marginTop: 2,
+  },
+  cropImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginTop: -8,
+    marginBottom: 4,
   },
   widgetNewsSection: {
     borderTopWidth: 1,

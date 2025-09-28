@@ -12,7 +12,6 @@ import {
   Alert,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import ProfessionalChart from '../components/ProfessionalChart';
 
 const { width, height } = Dimensions.get('window');
 
@@ -88,56 +87,13 @@ const tradingData = {
 
 const ProductTradingScreen = ({ route, navigation }) => {
   const { product } = route.params;
-  const [activeTab, setActiveTab] = useState('chart');
+  const [activeTab, setActiveTab] = useState('buyers');
   const [selectedTrader, setSelectedTrader] = useState(null);
   const [chatMessage, setChatMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
 
-  const chartData = candlestickData[product.name] || [];
   const tradingInfo = tradingData[product.name] || { buyers: [], sellers: [] };
 
-  const renderCandlestickChart = () => {
-    return (
-      <View style={styles.tradingViewContainer}>
-        {/* Chart Header */}
-        <View style={styles.chartHeader}>
-          <View style={styles.chartTitleSection}>
-            <Text style={styles.chartTitle}>{product.name}</Text>
-            <Text style={styles.chartSubtitle}>UGX {chartData[chartData.length - 1]?.close?.toLocaleString()}</Text>
-          </View>
-          <View style={styles.chartControls}>
-            <TouchableOpacity style={styles.timeframeButton}>
-              <Text style={styles.timeframeText}>1D</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.timeframeButton}>
-              <Text style={styles.timeframeText}>1W</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.timeframeButton}>
-              <Text style={styles.timeframeText}>1M</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Professional Victory Chart */}
-        <ProfessionalChart 
-          data={chartData} 
-          type="line" 
-          height={250} 
-          showVolume={true} 
-        />
-
-        {/* Chart Footer */}
-        <View style={styles.chartFooter}>
-          <View style={styles.priceInfo}>
-            <Text style={styles.priceLabel}>Open: UGX {chartData[0]?.open?.toLocaleString()}</Text>
-            <Text style={styles.priceLabel}>High: UGX {Math.max(...chartData.map(d => d.high)).toLocaleString()}</Text>
-            <Text style={styles.priceLabel}>Low: UGX {Math.min(...chartData.map(d => d.low)).toLocaleString()}</Text>
-            <Text style={styles.priceLabel}>Close: UGX {chartData[chartData.length - 1]?.close?.toLocaleString()}</Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
 
   const renderTraderCard = (trader, type) => (
     <TouchableOpacity
@@ -254,13 +210,6 @@ const ProductTradingScreen = ({ route, navigation }) => {
       {/* Tabs */}
       <View style={styles.tabContainer}>
         <TouchableOpacity
-          style={[styles.tab, activeTab === 'chart' && styles.activeTab]}
-          onPress={() => setActiveTab('chart')}
-        >
-          <MaterialIcons name="show-chart" size={20} color={activeTab === 'chart' ? '#4CAF50' : '#666'} />
-          <Text style={[styles.tabText, activeTab === 'chart' && styles.activeTabText]}>Chart</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
           style={[styles.tab, activeTab === 'buyers' && styles.activeTab]}
           onPress={() => setActiveTab('buyers')}
         >
@@ -278,7 +227,6 @@ const ProductTradingScreen = ({ route, navigation }) => {
 
       {/* Content */}
       <ScrollView style={styles.content}>
-        {activeTab === 'chart' && renderCandlestickChart()}
         
         {activeTab === 'buyers' && (
           <View style={styles.tradersContainer}>

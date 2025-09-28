@@ -18,11 +18,12 @@ echo ""
 echo "📋 Deployment Options:"
 echo "1. Deploy AI Backend (Python Flask)"
 echo "2. Deploy Store Backend (Node.js)"
-echo "3. Deploy Both Backends"
-echo "4. Exit"
+echo "3. Deploy Frontend (React Native Web)"
+echo "4. Deploy All Services (Recommended)"
+echo "5. Exit"
 echo ""
 
-read -p "Choose an option (1-4): " choice
+read -p "Choose an option (1-5): " choice
 
 case $choice in
     1)
@@ -36,7 +37,12 @@ case $choice in
         render services create --name agrof-store-api --type web --env node --build-command "npm install" --start-command "npm start"
         ;;
     3)
-        echo "🚀 Deploying Both Backends to Render..."
+        echo "🚀 Deploying Frontend to Render..."
+        cd agrof-main/mobile/app
+        render services create --name agrof-frontend --type web --env node --build-command "npm install && npm run build:web" --start-command "npx serve dist -s"
+        ;;
+    4)
+        echo "🚀 Deploying All Services to Render..."
         
         echo "📦 Deploying AI Backend..."
         cd agrof-main/src/api
@@ -45,13 +51,17 @@ case $choice in
         echo "📦 Deploying Store Backend..."
         cd ../../store-backend
         render services create --name agrof-store-api --type web --env node --build-command "npm install" --start-command "npm start"
+        
+        echo "📦 Deploying Frontend..."
+        cd ../agrof-main/mobile/app
+        render services create --name agrof-frontend --type web --env node --build-command "npm install && npm run build:web" --start-command "npx serve dist -s"
         ;;
-    4)
+    5)
         echo "👋 Exiting..."
         exit 0
         ;;
     *)
-        echo "❌ Invalid option. Please choose 1-4."
+        echo "❌ Invalid option. Please choose 1-5."
         exit 1
         ;;
 esac
@@ -63,3 +73,4 @@ echo "📝 Note: You may need to configure environment variables in the Render d
 echo "🔗 Your services will be available at:"
 echo "   - AI Backend: https://agrof-ai-api.onrender.com"
 echo "   - Store Backend: https://agrof-store-api.onrender.com"
+echo "   - Frontend: https://agrof-frontend.onrender.com"

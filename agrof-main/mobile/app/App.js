@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Video, ResizeMode } from 'expo-av';
 import { MaterialIcons } from '@expo/vector-icons';
 import ChatBot from './components/ChatBot';
+import ChatBotButton from './components/ChatBotButton';
 // ChatBotTraining removed - AI functionality disabled
 import FuturisticTechShowcase from './components/ShaderPlayground';
 // AI components removed
@@ -12,9 +13,10 @@ import BackgroundImage from './components/BackgroundImage';
 import StoreScreen from './screens/StoreScreen';
 import StocksStyleScreen from './screens/StocksStyleScreen';
 import ProductTradingScreen from './screens/ProductTradingScreen';
-import SmartFarmingDashboard from './screens/SmartFarmingDashboard';
+// SmartFarmingDashboard removed - dashboard functionality disabled
 import DiseaseDetectionScreen from './screens/DiseaseDetectionScreen';
 import { CartProvider } from './contexts/CartContext';
+import { cropProducts } from './data/cropProducts';
 
 
 const { width, height } = Dimensions.get('window');
@@ -26,7 +28,7 @@ const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('welcome');
-  const [currentScreen, setCurrentScreen] = useState('welcome');
+  const [currentScreen, setCurrentScreen] = useState('disease-detection');
   const [userCategory, setUserCategory] = useState('');
   const [navigationStack, setNavigationStack] = useState([]);
   const [image, setImage] = useState(null);
@@ -50,6 +52,7 @@ export default function App() {
     notes: ''
   });
   const [currentAccountScreen, setCurrentAccountScreen] = useState('main'); // main, about, help
+  const [showChatbot, setShowChatbot] = useState(false); // For bot image chatbot
   const agrofVideoRef = useRef(null);
 
   // Camera permissions removed - camera functionality disabled
@@ -80,11 +83,7 @@ export default function App() {
 
   const userCategories = [
     { id: 'farmer', title: 'Farmer', icon: 'agriculture', description: 'I grow crops and need disease detection' },
-    { id: 'agronomist', title: 'Agronomist', icon: 'science', description: 'I provide agricultural advice' },
-    { id: 'student', title: 'Student', icon: 'school', description: 'I am learning about agriculture' },
-    { id: 'researcher', title: 'Researcher', icon: 'biotech', description: 'I conduct agricultural research' },
-    { id: 'extension', title: 'Extension Officer', icon: 'assignment', description: 'I provide extension services' },
-    { id: 'other', title: 'Other', icon: 'person', description: 'I have other agricultural interests' }
+    { id: 'researcher', title: 'Researcher', icon: 'biotech', description: 'I conduct agricultural research' }
   ];
 
   // Blog and community posts data removed
@@ -618,14 +617,6 @@ export default function App() {
           <View style={styles.smartFarmingGrid}>
             <TouchableOpacity 
               style={styles.smartFeatureButton} 
-              onPress={() => setCurrentScreen('smart-dashboard')}
-            >
-              <MaterialIcons name="dashboard" size={24} color="white" />
-              <Text style={styles.smartFeatureText}>Dashboard</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.smartFeatureButton} 
               onPress={() => setCurrentScreen('disease-detection')}
             >
               <MaterialIcons name="search" size={24} color="white" />
@@ -634,21 +625,25 @@ export default function App() {
             
             <TouchableOpacity 
               style={styles.smartFeatureButton} 
-              onPress={() => setCurrentScreen('iot-monitoring')}
-            >
-              <MaterialIcons name="sensors" size={24} color="white" />
-              <Text style={styles.smartFeatureText}>IoT Monitoring</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.smartFeatureButton} 
-              onPress={() => setCurrentScreen('market-connect')}
+              onPress={() => setCurrentTab('store')}
             >
               <MaterialIcons name="store" size={24} color="white" />
               <Text style={styles.smartFeatureText}>Market Connect</Text>
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* Bot Image - Clickable to open chatbot */}
+        <TouchableOpacity 
+          style={styles.botImageContainer}
+          onPress={() => setShowChatbot(true)}
+        >
+          <Image 
+            source={require('./assets/bot.png')} 
+            style={styles.botImage}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
 
         {/* Identify section removed */}
 
@@ -906,29 +901,17 @@ export default function App() {
           )}
         </View>
 
-        {/* Management Graph */}
+        {/* Crop Overview */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>📈 Management Overview</Text>
-          <View style={styles.graphCard}>
-            <Text style={styles.graphTitle}>Disease Detection Summary</Text>
-            {savedAnalyses.length === 0 ? (
-              <Text style={styles.emptyStateText}>No data available yet</Text>
-            ) : (
-              <>
-                <View style={styles.graphBar}>
-                  <View style={[styles.graphBarFill, { width: `${Math.min(100, (savedAnalyses.filter(a => a.crop === 'Maize').length / Math.max(savedAnalyses.length, 1)) * 100)}%` }]} />
-                  <Text style={styles.graphLabel}>Maize Diseases: {savedAnalyses.filter(a => a.crop === 'Maize' && a.disease && a.disease !== 'No disease detected').length} cases</Text>
-                </View>
-                <View style={styles.graphBar}>
-                  <View style={[styles.graphBarFill, { width: `${Math.min(100, (savedAnalyses.filter(a => a.crop === 'Coffee').length / Math.max(savedAnalyses.length, 1)) * 100)}%` }]} />
-                  <Text style={styles.graphLabel}>Coffee Diseases: {savedAnalyses.filter(a => a.crop === 'Coffee' && a.disease && a.disease !== 'No disease detected').length} cases</Text>
-                </View>
-                <View style={styles.graphBar}>
-                  <View style={[styles.graphBarFill, { width: `${Math.min(100, (savedAnalyses.filter(a => a.crop !== 'Maize' && a.crop !== 'Coffee').length / Math.max(savedAnalyses.length, 1)) * 100)}%` }]} />
-                  <Text style={styles.graphLabel}>Other Crops: {savedAnalyses.filter(a => a.crop !== 'Maize' && a.crop !== 'Coffee' && a.disease && a.disease !== 'No disease detected').length} cases</Text>
-                </View>
-              </>
-            )}
+          <Text style={styles.sectionTitle}>🌾 Crop Overview</Text>
+          <View style={styles.cropGrid}>
+            {cropProducts.map((crop) => (
+              <View key={crop.id} style={styles.cropItem}>
+                <Image source={crop.image} style={styles.cropImage} />
+                <Text style={styles.cropLabel}>{crop.name}</Text>
+                <Text style={styles.cropCount}>{savedAnalyses.filter(a => a.crop === crop.name).length} analyses</Text>
+              </View>
+            ))}
           </View>
         </View>
 
@@ -1221,24 +1204,24 @@ export default function App() {
     </View>
   );
 
-  // Consult tab
+  // Consult tab - AGROF Bot AI assistant removed
   const renderConsultScreen = () => (
     <View style={styles.screen}>
-              <View style={styles.tabHeader}>
-          <View style={styles.tabTitleContainer}>
-            <MaterialIcons name="smart-toy" size={28} color="white" />
-            <Text style={styles.tabTitle}> Expert Consultation</Text>
-          </View>
-          <Text style={styles.tabSubtitle}>Chat with AGROF AI Bot for instant agricultural advice</Text>
-          <TouchableOpacity 
-            style={styles.helpButton}
-            onPress={() => setShowTraining(true)}
-          >
-            <MaterialIcons name="smart-toy" size={24} color="white" />
-          </TouchableOpacity>
+      <View style={styles.tabHeader}>
+        <View style={styles.tabTitleContainer}>
+          <MaterialIcons name="smart-toy" size={28} color="white" />
+          <Text style={styles.tabTitle}> Expert Consultation</Text>
         </View>
+        <Text style={styles.tabSubtitle}>Agricultural consultation services</Text>
+      </View>
       
-      <ChatBot onShowTraining={() => setShowTraining(true)} />
+      {/* AGROF Bot AI assistant dashboard removed */}
+      <View style={styles.consultContent}>
+        <Text style={styles.consultMessage}>
+          Expert consultation services are currently being updated. 
+          Please check back later for AI-powered agricultural assistance.
+        </Text>
+      </View>
     </View>
   );
 
@@ -1248,22 +1231,14 @@ export default function App() {
     
     return (
       <View style={styles.navigationTabs}>
-        <TouchableOpacity 
-          style={[styles.tab, currentTab === 'consult' && styles.activeTab]} 
-          onPress={() => setCurrentTab('consult')}
-        >
-          <MaterialIcons 
-            name="smart-toy" 
-            size={24} 
-            color={currentTab === 'consult' ? '#4CAF50' : '#666'} 
-            style={styles.tabIcon} 
-          />
-          <Text style={[styles.tabLabel, currentTab === 'consult' && styles.activeTabLabel]}>Consult</Text>
-        </TouchableOpacity>
+        {/* Consult tab removed - functionality moved to bot image */}
         
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'plan' && styles.activeTab]} 
-          onPress={() => setCurrentTab('plan')}
+          onPress={() => {
+            console.log('Plan tab pressed, current tab:', currentTab);
+            setCurrentTab('plan');
+          }}
         >
           <MaterialIcons 
             name="assignment" 
@@ -1276,10 +1251,13 @@ export default function App() {
         
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'care' && styles.activeTab]} 
-          onPress={() => setCurrentTab('care')}
+          onPress={() => {
+            console.log('Care tab pressed, current tab:', currentTab);
+            setCurrentTab('care');
+          }}
         >
           <MaterialIcons 
-            name="eco" 
+            name="psychology" 
             size={24} 
             color={currentTab === 'care' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
@@ -1289,7 +1267,10 @@ export default function App() {
         
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'stocks' && styles.activeTab]} 
-          onPress={() => setCurrentTab('stocks')}
+          onPress={() => {
+            console.log('Stocks tab pressed, current tab:', currentTab);
+            setCurrentTab('stocks');
+          }}
         >
           <MaterialIcons 
             name="trending-up" 
@@ -1302,7 +1283,10 @@ export default function App() {
         
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'store' && styles.activeTab]} 
-          onPress={() => setCurrentTab('store')}
+          onPress={() => {
+            console.log('Store tab pressed, current tab:', currentTab);
+            setCurrentTab('store');
+          }}
         >
           <MaterialIcons 
             name="store" 
@@ -1315,10 +1299,13 @@ export default function App() {
         
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'account' && styles.activeTab]} 
-          onPress={() => setCurrentTab('account')}
+          onPress={() => {
+            console.log('Account tab pressed, current tab:', currentTab);
+            setCurrentTab('account');
+          }}
         >
           <MaterialIcons 
-            name="account-circle" 
+            name="person" 
             size={24} 
             color={currentTab === 'account' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
@@ -1334,18 +1321,6 @@ export default function App() {
     
     return (
       <View style={styles.subTabs}>
-        <TouchableOpacity 
-          style={[styles.subTab, currentScreen === 'home' && styles.activeSubTab]} 
-          onPress={() => setCurrentScreen('home')}
-        >
-          <MaterialIcons 
-            name="home" 
-            size={16} 
-            color={currentScreen === 'home' ? 'white' : '#666'} 
-            style={styles.subTabIcon} 
-          />
-          <Text style={[styles.subTabText, currentScreen === 'home' && styles.activeSubTabText]}> Home</Text>
-        </TouchableOpacity>
         
         {/* General Feed tab removed */}
       </View>
@@ -1370,6 +1345,7 @@ export default function App() {
   };
 
   const renderTabContent = () => {
+    console.log('Rendering tab content for currentTab:', currentTab);
     const currentNav = getCurrentScreen();
     
     if (currentNav && currentNav.screen === 'ProductTrading') {
@@ -1386,22 +1362,35 @@ export default function App() {
       if (currentScreen === 'manual') return renderManualScreen();
     }
     
-    if (currentTab === 'consult') return renderConsultScreen();
-    if (currentTab === 'plan') return renderPlanScreen();
-    if (currentTab === 'care') {
-      if (currentScreen === 'home') return renderHomeScreen();
-      // Feed screen removed
-      if (currentScreen === 'smart-dashboard') return <SmartFarmingDashboard navigation={{ navigate }} />;
-      if (currentScreen === 'disease-detection') return <DiseaseDetectionScreen navigation={{ navigate }} />;
+    // Consult tab removed - functionality moved to bot image
+    if (currentTab === 'plan') {
+      console.log('Rendering plan screen');
+      return renderPlanScreen();
     }
-    if (currentTab === 'stocks') return <StocksStyleScreen navigation={{ navigate }} />;
-    if (currentTab === 'store') return <StoreScreen />;
+    if (currentTab === 'care') {
+      console.log('Rendering care screen');
+      // Feed screen removed
+      // Dashboard and IoT monitoring removed
+      if (currentScreen === 'disease-detection') return <DiseaseDetectionScreen navigation={{ navigate, goBack: () => setCurrentTab('welcome') }} />;
+      // Default to disease detection screen
+      return <DiseaseDetectionScreen navigation={{ navigate, goBack: () => setCurrentTab('welcome') }} />;
+    }
+    if (currentTab === 'stocks') {
+      console.log('Rendering stocks screen');
+      return <StocksStyleScreen navigation={{ navigate }} />;
+    }
+    if (currentTab === 'store') {
+      console.log('Rendering store screen');
+      return <StoreScreen />;
+    }
     if (currentTab === 'account') {
+      console.log('Rendering account screen');
       if (currentAccountScreen === 'about') return renderAboutAgrofScreen();
       if (currentAccountScreen === 'help') return renderHelpCenterScreen();
       return renderAccountScreen();
     }
     
+    console.log('Rendering default home screen');
     return renderHomeScreen();
   };
 
@@ -1417,14 +1406,6 @@ export default function App() {
     } 
     // Category selection screen
     else if (currentScreen === 'category') {
-      return 'background1';
-    } 
-    // Main home screen with different backgrounds per tab
-    else if (currentScreen === 'home') {
-      if (currentTab === 'care') return 'background2';        // Care tab - agricultural background
-      if (currentTab === 'store') return 'fertilizers';       // Store tab - fertilizers background
-      if (currentTab === 'insights') return 'background3';    // Insights tab - third background
-      if (currentTab === 'settings') return 'organic';        // Settings tab - organic chemicals
       return 'background1';
     } 
     // Feed screen removed
@@ -1454,6 +1435,33 @@ export default function App() {
         {renderCareSubTabs()}
         
         {renderNavigationTabs()}
+        
+        {/* ChatBot Button - Available on all screens except welcome */}
+        {currentTab !== 'welcome' && (
+          <ChatBotButton onPress={() => setShowChatbot(true)} />
+        )}
+        
+        {/* Chatbot Modal */}
+        {showChatbot && (
+          <Modal
+            visible={showChatbot}
+            animationType="slide"
+            presentationStyle="fullScreen"
+          >
+            <View style={styles.chatbotModal}>
+              <View style={styles.chatbotHeader}>
+                <TouchableOpacity 
+                  style={styles.closeButton}
+                  onPress={() => setShowChatbot(false)}
+                >
+                  <MaterialIcons name="close" size={24} color="white" />
+                </TouchableOpacity>
+                <Text style={styles.chatbotTitle}>AGROF AI Assistant</Text>
+              </View>
+              <ChatBot onShowTraining={() => setShowChatbot(false)} />
+            </View>
+          </Modal>
+        )}
         
         {/* Futuristic AI Analysis Screen component was removed */}
       </BackgroundImage>
@@ -2569,6 +2577,44 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
   },
+  // Crop grid styles
+  cropGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  cropItem: {
+    width: '30%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  cropImage: {
+    width: 50,
+    height: 50,
+    marginBottom: 8,
+    borderRadius: 25,
+  },
+  cropLabel: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#2c5530',
+    marginBottom: 4,
+    textAlign: 'center',
+  },
+  cropCount: {
+    fontSize: 10,
+    color: '#666',
+    textAlign: 'center',
+  },
   savedItem: {
     flexDirection: 'row',
     backgroundColor: 'white',
@@ -2967,6 +3013,74 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
     lineHeight: 24,
+  },
+  // Consult content styles
+  consultContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 30,
+  },
+  consultMessage: {
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center',
+    lineHeight: 28,
+    textShadowColor: 'rgba(0, 0, 0, 0.8)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+  },
+  // Bot image styles - positioned near the tabs
+  botImageContainer: {
+    position: 'absolute',
+    bottom: 80,
+    right: 20,
+    zIndex: 1000,
+    elevation: 10,
+  },
+  botImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40, // Makes it perfectly circular
+    borderWidth: 3,
+    borderColor: '#4CAF50',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  // Chatbot modal styles
+  chatbotModal: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  chatbotHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#2c5530',
+    paddingTop: 50,
+    paddingBottom: 15,
+    paddingHorizontal: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  closeButton: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  chatbotTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    flex: 1,
+    textAlign: 'center',
+    marginRight: 40, // Compensate for close button
   },
 });
 
