@@ -6,24 +6,24 @@
 
 // Base IP addresses for all services - with fallbacks
 const BASE_IPS = [
-  '192.168.1.15',  // Current WiFi IP - UPDATED Oct 11, 2025
-  '10.0.0.1',      // VPN interface (wg0)
+  'localhost',     // Deployed Docker Compose services - HIGHEST PRIORITY
+  '127.0.0.1',     // Localhost (Docker Compose deployment)
+  '10.0.0.1',      // WireGuard VPN / Coolify server
+  '192.168.1.15',  // WiFi IP (for mobile device testing)
   '192.168.0.108', // Previous WiFi IP
   '192.168.0.113', // Older WiFi IP
-  '127.0.0.1',     // Localhost fallback
   '10.0.2.2',      // Android emulator host
-  'localhost'      // Local fallback
 ];
 
 // Get the current base IP (will be dynamically determined)
-let BASE_IP = '192.168.1.15';  // WiFi IP - your phone can reach this!
+let BASE_IP = 'localhost';  // Deployed Docker Compose services - UPDATED Oct 12, 2025
 
 // API Configuration
 export const API_CONFIG = {
   // Store Backend API
   STORE: {
-    BASE_URL: `http://${BASE_IP}:3001`,
-    API_URL: `http://${BASE_IP}:3001/api`,
+    BASE_URL: `http://${BASE_IP}:3000`,
+    API_URL: `http://${BASE_IP}:3000/api`,
     ENDPOINTS: {
       PRODUCTS: '/products',
       CATEGORIES: '/categories',
@@ -114,9 +114,9 @@ export const findWorkingApiEndpoint = async () => {
   
   for (const ip of BASE_IPS) {
     try {
-      console.log(`🌐 Testing endpoint: http://${ip}:3001/api/health`);
+      console.log(`🌐 Testing endpoint: http://${ip}:3000/api/health`);
       
-      const response = await fetch(`http://${ip}:3001/api/health`, {
+      const response = await fetch(`http://${ip}:3000/api/health`, {
         method: 'GET',
         timeout: 3000, // 3 second timeout
         headers: {
@@ -128,12 +128,12 @@ export const findWorkingApiEndpoint = async () => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 'OK') {
-          console.log(`✅ Found working API endpoint: http://${ip}:3001`);
+          console.log(`✅ Found working API endpoint: http://${ip}:3000`);
           BASE_IP = ip;
           
           // Update API_CONFIG with working IP
-          API_CONFIG.STORE.BASE_URL = `http://${ip}:3001`;
-          API_CONFIG.STORE.API_URL = `http://${ip}:3001/api`;
+          API_CONFIG.STORE.BASE_URL = `http://${ip}:3000`;
+          API_CONFIG.STORE.API_URL = `http://${ip}:3000/api`;
           API_CONFIG.AI.BASE_URL = `http://${ip}:5000`;
           API_CONFIG.AI.API_URL = `http://${ip}:5000/api`;
           
@@ -141,7 +141,7 @@ export const findWorkingApiEndpoint = async () => {
         }
       }
     } catch (error) {
-      console.log(`❌ Failed to connect to http://${ip}:3001 - ${error.message}`);
+      console.log(`❌ Failed to connect to http://${ip}:3000 - ${error.message}`);
     }
   }
   
