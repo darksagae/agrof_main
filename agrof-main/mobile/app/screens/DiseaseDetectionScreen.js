@@ -16,7 +16,7 @@ import { Card, Title, Paragraph, Button, Chip } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
-import hybridAIService from '../services/hybridAIService';
+import hybridAIService from '../services/enhancedHybridAIService';
 import ProductRecommendationCards from '../components/ProductRecommendationCards';
 import authService from '../services/authService';
 
