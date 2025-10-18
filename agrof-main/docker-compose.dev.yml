@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # AGROF Flask Backend - Development
+  backend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: agrof-backend:dev
+    container_name: agrof-backend-dev
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - PYTHONUNBUFFERED=1
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-AIzaSyBE2b1nKpQd6LseRIVXfh10O_O3Pm0fvM0}
+    volumes:
+      - ./src:/app/src  # Live code reload
+      - ./uploads:/app/uploads
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - agrof-dev-network
+    command: ["python", "src/api/app.py"]  # Use Flask dev server instead of gunicorn
+
+networks:
+  agrof-dev-network:
+    driver: bridge
+

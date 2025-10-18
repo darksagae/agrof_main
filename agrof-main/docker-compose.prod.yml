@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # AGROF Flask Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: agrof-backend:latest
+    container_name: agrof-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-AIzaSyBE2b1nKpQd6LseRIVXfh10O_O3Pm0fvM0}
+      - PORT=5000
+      - WORKERS=4
+    volumes:
+      - ./uploads:/app/uploads
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - agrof-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.agrof.service=backend"
+      - "com.agrof.version=1.0.0"
+
+networks:
+  agrof-network:
+    driver: bridge
+    name: agrof-network
+
+volumes:
+  uploads:
+    name: agrof-uploads
+  artifacts:
+    name: agrof-artifacts
+  data:
+    name: agrof-data
+  logs:
+    name: agrof-logs
+
