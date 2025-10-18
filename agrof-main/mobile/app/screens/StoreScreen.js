@@ -98,52 +98,57 @@ const StoreScreen = () => {
     }
   }, [categories]);
 
-  // Start marquee animation - never stops
+  // Start marquee animation - never stops, restarts when returning from product detail
   useEffect(() => {
     if (extendedFeaturedProducts.length === 0) return;
     
+    let animationRef = null;
+    
     const startMarquee = () => {
+      // Reset to start position
       marqueeAnimation.setValue(0);
       
       const animate = () => {
-        Animated.timing(marqueeAnimation, {
-          toValue: 1,
-          duration: 20000, // 20 seconds for faster movement
-          useNativeDriver: true,
-          easing: Easing.linear,
-        }).start(() => {
-          marqueeAnimation.setValue(0);
-          animate(); // Restart immediately
-        });
+        animationRef = Animated.loop(
+          Animated.timing(marqueeAnimation, {
+            toValue: 1,
+            duration: 60000, // 60 seconds for smooth, slower movement
+            useNativeDriver: true,
+            easing: Easing.linear,
+          }),
+          {
+            iterations: -1, // Infinite loop
+          }
+        );
+        animationRef.start();
       };
       
       animate();
     };
 
-    const timer = setTimeout(startMarquee, 500);
+    const timer = setTimeout(startMarquee, 100);
     
     return () => {
       clearTimeout(timer);
+      if (animationRef) {
+        animationRef.stop();
+      }
     };
-  }, [extendedFeaturedProducts.length]);
+  }, [extendedFeaturedProducts.length, selectedProduct, selectedCategory, showCart]);
 
   const loadStoreData = async () => {
     try {
       setLoading(true);
       console.log('🔄 Loading store data...');
       
-      // Load categories and products in parallel (streamlined for speed)
-      const [health, categoriesData, productsData] = await Promise.allSettled([
+      // Load health and categories first
+      const [health, categoriesData] = await Promise.allSettled([
         healthCheck().catch(err => {
           console.warn('⚠️ Health check error:', err);
           return { status: 'ERROR', message: err.message };
         }),
         categoriesApi.getAll(currentLanguage).catch(err => {
           console.warn('⚠️ Categories API error:', err);
-          return [];
-        }),
-        productsApi.getAll({ limit: 6, language: currentLanguage }).catch(err => {
-          console.warn('⚠️ Products API error:', err);
           return [];
         })
       ]);
@@ -158,22 +163,50 @@ const StoreScreen = () => {
       }
       
       // Handle categories result
-      if (categoriesData.status === 'fulfilled' && categoriesData.value) {
+      let loadedCategories = fallbackCategories;
+      if (categoriesData.status === 'fulfilled' && categoriesData.value && categoriesData.value.length > 0) {
         console.log('📂 Categories loaded:', categoriesData.value.length, 'categories');
-        setCategories(categoriesData.value.length > 0 ? categoriesData.value : fallbackCategories);
+        loadedCategories = categoriesData.value;
+        setCategories(loadedCategories);
       } else {
         console.warn('⚠️ Categories loading failed, using fallback');
         setCategories(fallbackCategories);
       }
       
-      // Handle products result
-      if (productsData.status === 'fulfilled' && productsData.value) {
-        console.log('⭐ Featured products loaded:', productsData.value.length, 'products');
-        console.log('⭐ Featured products data:', productsData.value);
-        setApiFeaturedProducts(productsData.value);
+      // Load 7 products from each category for featured marquee
+      console.log('⭐ Loading featured products from all categories...');
+      const categoryNames = ['fertilizers', 'fungicides', 'herbicides', 'nursery_bed', 'organic_chemicals', 'seeds'];
+      
+      try {
+        const categoryProductPromises = categoryNames.map(category =>
+          productsApi.getAll({ category, limit: 7, language: currentLanguage }).catch(err => {
+            console.warn(`⚠️ Failed to load ${category} products:`, err);
+            return [];
+          })
+        );
+        
+        const allCategoryProducts = await Promise.all(categoryProductPromises);
+        
+        // Flatten and shuffle products from all categories
+        let allProducts = [];
+        allCategoryProducts.forEach((products, index) => {
+          console.log(`  ✓ ${categoryNames[index]}: ${products.length} products`);
+          allProducts = allProducts.concat(products);
+        });
+        
+        // Shuffle array to mix categories
+        const shuffledProducts = allProducts.sort(() => Math.random() - 0.5);
+        
+        console.log(`⭐ Total featured products: ${shuffledProducts.length} (shuffled from all categories)`);
+        
+        if (shuffledProducts.length > 0) {
+          setApiFeaturedProducts(shuffledProducts);
       } else {
-        console.warn('⚠️ Products loading failed, using fallback');
-        console.warn('⚠️ Products error details:', productsData.reason);
+          console.warn('⚠️ No products loaded, using static fallback');
+          setApiFeaturedProducts([]);
+        }
+      } catch (productsError) {
+        console.error('❌ Error loading featured products:', productsError);
         setApiFeaturedProducts([]);
       }
       
@@ -389,14 +422,7 @@ const StoreScreen = () => {
               ]}
             >
               {/* First set of products */}
-              {extendedFeaturedProducts.map((product, index) => {
-                console.log('🎯 Marquee product:', { 
-                  id: product.id, 
-                  name: product.name, 
-                  price: product.price,
-                  index 
-                });
-                return (
+              {extendedFeaturedProducts.map((product, index) => (
                   <TouchableOpacity 
                     key={product.id} 
                     style={styles.featuredItem}
@@ -410,8 +436,7 @@ const StoreScreen = () => {
                     <Text style={styles.featuredName} numberOfLines={2}>{product.name}</Text>
                     <Text style={styles.featuredPrice}>{product.price}</Text>
                   </TouchableOpacity>
-                );
-              })}
+              ))}
               {/* Duplicate set for seamless loop */}
               {extendedFeaturedProducts.map((product) => (
                 <TouchableOpacity 
@@ -452,8 +477,8 @@ const StoreScreen = () => {
                 style={styles.categoryCard}
                 onPress={() => handleCategoryPress(category)}
               >
-                <OptimizedImage 
-                  product={{ category_name: category.name, id: category.id }}
+                <Image 
+                  source={getCategoryImage(category.name)}
                   style={styles.categoryImage}
                   resizeMode="cover"
                 />

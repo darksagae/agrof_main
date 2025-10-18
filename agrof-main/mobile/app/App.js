@@ -27,6 +27,12 @@ import './i18n'; // Initialize i18n
 // Firebase imports
 import authService from './services/authService';
 
+// Hybrid offline/online imports
+// TEMPORARILY DISABLED - Requires development build for expo-sqlite
+// import hybridInitialization from './services/hybridInitialization';
+// import OfflineIndicator from './components/OfflineIndicator';
+// import SyncStatusModal from './components/SyncStatusModal';
+
 // Authentication imports
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -44,6 +50,9 @@ import CreateBuyRequestScreen from './screens/CreateBuyRequestScreen';
 import BrowseBuyRequestsScreen from './screens/BrowseBuyRequestsScreen';
 import BuyRequestDetailsScreen from './screens/BuyRequestDetailsScreen';
 import ConversationScreen from './screens/ConversationScreen';
+import PlanScreen from './screens/PlanScreen';
+import FloatingNewsWidget from './components/FloatingNewsWidget';
+import agricultureNewsService from './services/agricultureNewsService';
 
 
 const { width, height } = Dimensions.get('window');
@@ -85,6 +94,15 @@ export default function App() {
   const [showPhoneVerification, setShowPhoneVerification] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   
+  // News state for floating widget
+  const [newsData, setNewsData] = useState([]);
+  const [newsLoading, setNewsLoading] = useState(false);
+  
+  // Hybrid offline/online state
+  // TEMPORARILY DISABLED - Requires development build for expo-sqlite
+  // const [hybridInitialized, setHybridInitialized] = useState(false);
+  // const [showSyncModal, setShowSyncModal] = useState(false);
+  
   // All other state declarations
   const [navigationStack, setNavigationStack] = useState([]);
   const [image, setImage] = useState(null);
@@ -122,6 +140,26 @@ export default function App() {
   const [showChatbot, setShowChatbot] = useState(false); // For bot image chatbot
   
   // Initialize Firebase on app start
+  // Initialize hybrid services
+  // TEMPORARILY DISABLED - Requires development build for expo-sqlite
+  /*
+  useEffect(() => {
+    const initializeHybrid = async () => {
+      console.log('🔄 Initializing hybrid services...');
+      try {
+        const result = await hybridInitialization.initialize();
+        setHybridInitialized(result);
+        console.log('✅ Hybrid services initialized:', result);
+      } catch (error) {
+        console.error('❌ Failed to initialize hybrid services:', error);
+        setHybridInitialized(false);
+      }
+    };
+
+    initializeHybrid();
+  }, []);
+  */
+
   useEffect(() => {
     const initializeFirebase = async () => {
       console.log('🔥 Initializing Firebase...');
@@ -214,6 +252,30 @@ export default function App() {
     };
 
     initializeFirebase();
+  }, []);
+
+  // Fetch agricultural news for floating widget
+  useEffect(() => {
+    const fetchNews = async () => {
+      setNewsLoading(true);
+      try {
+        const news = await agricultureNewsService.fetchNews();
+        console.log('📰 Fetched', news.length, 'news items for floating widget');
+        setNewsData(news);
+      } catch (error) {
+        console.error('❌ Error fetching news:', error);
+        setNewsData([]); // Set empty array on error
+      } finally {
+        setNewsLoading(false);
+      }
+    };
+
+    fetchNews();
+    
+    // Refresh news every 5 minutes
+    const newsInterval = setInterval(fetchNews, 5 * 60 * 1000);
+    
+    return () => clearInterval(newsInterval);
   }, []);
 
   // Authentication helper functions
@@ -1146,27 +1208,45 @@ export default function App() {
           </View>
                       <Text style={styles.headerSubtitle}>{t('care.subtitle')}</Text>
           
-          {/* Firebase Status Indicator */}
-          <View style={[styles.firebaseStatus, { 
-            backgroundColor: 
-              firebaseStatus === 'connected' ? '#4CAF50' : 
-              firebaseStatus === 'partial' ? '#2196F3' : 
-              firebaseStatus === 'error' ? '#f44336' : '#ff9800' 
-          }]}>
-            <MaterialIcons 
-              name={
-                firebaseStatus === 'connected' ? 'check-circle' : 
-                firebaseStatus === 'partial' ? 'sync' : 
-                firebaseStatus === 'error' ? 'error' : 'schedule'
-              } 
-              size={16} 
-              color="white" 
-            />
-        <Text style={styles.firebaseStatusText}>
-          {firebaseStatus === 'connected' ? 'AGROF: Firebase Auth + Supabase' : 
-           firebaseStatus === 'partial' ? 'AGROF: Ready' : 
-           firebaseStatus === 'error' ? 'AGROF: Offline' : 'AGROF: Starting...'}
-        </Text>
+          {/* System Status Indicators */}
+          <View style={styles.statusIndicatorsContainer}>
+            {/* Firebase Auth Indicator */}
+            <View style={[styles.statusIndicator, { 
+              backgroundColor: 
+                firebaseStatus === 'connected' ? '#4CAF50' : 
+                firebaseStatus === 'partial' ? '#2196F3' : 
+                firebaseStatus === 'error' ? '#f44336' : '#ff9800' 
+            }]}>
+              <MaterialIcons 
+                name={
+                  firebaseStatus === 'connected' ? 'check-circle' : 
+                  firebaseStatus === 'partial' ? 'sync' : 
+                  firebaseStatus === 'error' ? 'error' : 'schedule'
+                } 
+                size={14} 
+                color="white" 
+              />
+              <Text style={styles.statusText}>Auth</Text>
+            </View>
+
+            {/* Supabase Indicator */}
+            <View style={[styles.statusIndicator, { 
+              backgroundColor: firebaseStatus === 'connected' ? '#4CAF50' : '#2196F3'
+            }]}>
+              <MaterialIcons 
+                name={firebaseStatus === 'connected' ? 'cloud-done' : 'cloud-queue'} 
+                size={14} 
+                color="white" 
+              />
+              <Text style={styles.statusText}>DB</Text>
+            </View>
+
+            {/* Overall System Status */}
+            <Text style={styles.systemStatusText}>
+              {firebaseStatus === 'connected' ? 'Online' : 
+               firebaseStatus === 'partial' ? 'Ready' : 
+               firebaseStatus === 'error' ? 'Offline' : 'Starting...'}
+            </Text>
           </View>
         </View>
 
@@ -2672,36 +2752,64 @@ export default function App() {
     
     // Consult tab removed - functionality moved to bot image
     if (currentTab === 'plan') {
-      console.log('Rendering plan screen');
-      return renderPlanScreen();
+      console.log('Rendering new professional plan screen');
+      return (
+        <>
+          <PlanScreen onNavigateToStore={() => setCurrentTab('store')} />
+          <FloatingNewsWidget news={newsData} />
+        </>
+      );
     }
     if (currentTab === 'care') {
       console.log('Rendering care screen');
       // Feed screen removed
       // Dashboard and IoT monitoring removed
-      if (currentScreen === 'disease-detection') return <DiseaseDetectionScreen navigation={{ navigate: navigateToAuth, goBack: () => setCurrentTab('care') }} />;
+      if (currentScreen === 'disease-detection') {
+        return (
+          <>
+            <DiseaseDetectionScreen navigation={{ navigate: navigateToAuth, goBack: () => setCurrentTab('care') }} />
+            <FloatingNewsWidget news={newsData} />
+          </>
+        );
+      }
       // Default to disease detection screen
-      return <DiseaseDetectionScreen navigation={{ navigate: navigateToAuth, goBack: () => setCurrentTab('care') }} />;
+      return (
+        <>
+          <DiseaseDetectionScreen navigation={{ navigate: navigateToAuth, goBack: () => setCurrentTab('care') }} />
+          <FloatingNewsWidget news={newsData} />
+        </>
+      );
     }
     if (currentTab === 'stocks') {
       console.log('Rendering P2P Products screen (Blocker tab)');
-      return <P2PProductsScreen navigation={{ navigate }} />;
+      return (
+        <>
+          <P2PProductsScreen navigation={{ navigate }} />
+          <FloatingNewsWidget news={newsData} />
+        </>
+      );
     }
     if (currentTab === 'store') {
       console.log('Rendering store screen');
-      return <StoreScreen />;
+      return (
+        <>
+          <StoreScreen />
+          <FloatingNewsWidget news={newsData} />
+        </>
+      );
     }
     if (currentTab === 'account') {
       console.log('Rendering account screen');
       return (
-        <AuthGate 
-          tabName="Account"
-          onAuthSuccess={handleAuthSuccess}
-          navigation={{ navigate: navigateToAuth }}
-          showSoftGate={true}
-          softGateAttempts={2}
-        >
-          {currentAccountScreen === 'about' ? renderAboutAgrofScreen() : 
+        <>
+          <AuthGate 
+            tabName="Account"
+            onAuthSuccess={handleAuthSuccess}
+            navigation={{ navigate: navigateToAuth }}
+            showSoftGate={true}
+            softGateAttempts={2}
+          >
+            {currentAccountScreen === 'about' ? renderAboutAgrofScreen() : 
            currentAccountScreen === 'help' ? renderHelpCenterScreen() : 
            currentAccountScreen === 'BuyerRequest' ? <BuyerRequestScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: setCurrentTab }} /> :
            currentAccountScreen === 'SellerRequest' ? <SellerRequestScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} /> :
@@ -2713,7 +2821,9 @@ export default function App() {
            currentAccountScreen === 'BuyRequestDetails' ? <BuyRequestDetailsScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} route={{ params: screenParams }} /> :
            currentAccountScreen === 'Conversation' ? <ConversationScreen navigation={{ goBack: () => setCurrentAccountScreen('P2PMarketPanel'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} route={{ params: screenParams }} /> :
            renderAccountScreen()}
-        </AuthGate>
+          </AuthGate>
+          <FloatingNewsWidget news={newsData} />
+        </>
       );
     }
     
@@ -2812,6 +2922,21 @@ export default function App() {
         
         {renderNavigationTabs()}
         
+        {/* Offline Indicator */}
+        {/* TEMPORARILY DISABLED - Requires development build for expo-sqlite */}
+        {/*
+        {hybridInitialized && (
+          <OfflineIndicator 
+            onPress={() => setShowSyncModal(true)}
+          />
+        )}
+        
+        <SyncStatusModal 
+          visible={showSyncModal}
+          onClose={() => setShowSyncModal(false)}
+        />
+        */}
+        
         {/* ChatBot Button - Available on all screens */}
         <ChatBotButton onPress={() => setShowChatbot(true)} />
         
@@ -2868,20 +2993,32 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
   },
-  firebaseStatus: {
+  statusIndicatorsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
+    justifyContent: 'center',
     marginTop: 10,
-    alignSelf: 'center',
+    gap: 8,
   },
-  firebaseStatusText: {
+  statusIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 4,
+  },
+  statusText: {
     color: 'white',
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginLeft: 6,
+    fontSize: 10,
+    fontWeight: '600',
+  },
+  systemStatusText: {
+    color: 'white',
+    fontSize: 11,
+    fontWeight: '500',
+    marginLeft: 4,
+    opacity: 0.9,
   },
   welcomeOverlay: {
     position: 'absolute',

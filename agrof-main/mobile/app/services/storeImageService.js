@@ -136,7 +136,15 @@ class StoreImageService {
 
     // 2. Backend API image URL (most common case from store API)
     if (product.image_url && !product.image_url.startsWith('http') && product.image_url.trim() !== '' && product.image_url !== '/api/images/') {
-      const fullUrl = `${this.baseUrl}${product.image_url}`;
+      // Properly encode URL segments to handle spaces and special characters
+      const pathParts = product.image_url.split('/').map(part => {
+        if (part === '' || part === 'api' || part === 'images') {
+          return part;
+        }
+        return encodeURIComponent(part);
+      });
+      const encodedPath = pathParts.join('/');
+      const fullUrl = `${this.baseUrl}${encodedPath}`;
       console.log('✅ Using store API image URL:', fullUrl);
       sources.push({ uri: fullUrl });
     }
