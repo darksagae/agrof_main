@@ -5,7 +5,7 @@
 
 import { AI_BASE_URL } from '../config/apiConfig';
 
-const API_URL = AI_BASE_URL || 'http://192.168.0.105:5000';
+const API_URL = AI_BASE_URL || 'http://10.100.100.180:5000';
 
 class EnhancedImageAnalysisService {
   constructor() {
