@@ -36,6 +36,8 @@ export default {
     runtimeVersion: {
       policy: "appVersion"
     },
-    updates: {}
+    updates: {
+      url: "https://u.expo.dev/5078ace1-2ba3-4c26-8cfa-62c952a21a2c"
+    }
   }
 };

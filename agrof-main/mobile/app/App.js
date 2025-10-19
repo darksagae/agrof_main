@@ -58,7 +58,7 @@ import agricultureNewsService from './services/agricultureNewsService';
 const { width, height } = Dimensions.get('window');
 
 // Update API URL to use deployed backend
-const API_URL = 'http://10.100.100.180:5000'; // Coolify deployment on STI server
+const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed Railway backend
 // const API_URL = 'http://192.168.1.10:5000'; // Use your computer's IP address for local testing
 // const API_URL = 'http://localhost:5000'; // For web browser testing
 
