@@ -3,7 +3,8 @@ const { Client } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 // Use advanced admin commands with secret triggers
 const AdminCommandsV2 = require('./admin-commands-v2');
-const adminHandler = new AdminCommandsV2('https://agrof-store-api.onrender.com/api', []);
+// TEMP: Allow all numbers for testing (empty array means no restrictions)
+const adminHandler = new AdminCommandsV2('http://localhost:3001/api', []);
 
 // Create WhatsApp client
 const client = new Client({
@@ -22,7 +23,7 @@ const app = express();
 app.use('/', healthApp);
 
 // Start health server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`🏥 Health server running on port ${PORT}`);
 });

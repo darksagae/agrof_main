@@ -25,6 +25,13 @@ class AdminCommandsV2 {
    */
   isAdmin(phoneNumber) {
     const cleanNumber = phoneNumber.replace(/[@c.us]/g, '');
+    
+    // TEMP: Allow all numbers for testing
+    if (this.adminNumbers.length === 0) {
+      console.log('🔓 Admin check: Allowing all numbers for testing');
+      return true;
+    }
+    
     return this.adminNumbers.some(admin => cleanNumber.includes(admin));
   }
 
@@ -32,17 +39,24 @@ class AdminCommandsV2 {
    * Main entry point for admin messages
    */
   async handleAdminMessage(msg, text) {
+    console.log(`🔍 Admin check for: ${msg.from} - "${text}"`);
+    
     if (!this.isAdmin(msg.from)) {
+      console.log('❌ Not an admin');
       return false; // Not an admin
     }
 
+    console.log('✅ Admin authorized');
     const phone = msg.from;
     const textLower = text.toLowerCase().trim();
 
     // Check for trigger words
     const detectedTrigger = this.triggers.find(t => textLower === t || textLower.startsWith(t + ' '));
     
+    console.log(`🔍 Trigger detection: "${textLower}" -> ${detectedTrigger || 'none'}`);
+    
     if (detectedTrigger) {
+      console.log(`🎯 Trigger detected: ${detectedTrigger}`);
       return await this.handleTrigger(msg, detectedTrigger, text);
     }
 
