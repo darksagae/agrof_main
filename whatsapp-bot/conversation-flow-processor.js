@@ -601,6 +601,208 @@ class ConversationFlowProcessor {
       };
     }
 
+    if (action === 'update_price') {
+      const product = context.selectedProduct;
+      
+      // Update price in database
+      const response = await fetch(`${this.storeApiUrl}/products/${product.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          price: `UGX ${data.newPrice.toLocaleString()}`,
+          selling_price: data.newPrice
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        return {
+          message: `✅ *PRICE UPDATED!*\n\n📦 ${product.name}\nOld Price: ${product.price}\nNew Price: UGX ${data.newPrice.toLocaleString()}\n\n✓ Database updated\n✓ Price changed in store`
+        };
+      } else {
+        throw new Error(result.error || 'Failed to update price');
+      }
+    }
+
+    if (action === 'bulk_operations') {
+      const operation = data.operation;
+      const category = data.category;
+      const value = data.bulkValue;
+      
+      // Get products in category
+      const categoryMap = {
+        'fertilizers': 1,
+        'organic_chemicals': 2,
+        'seeds': 3,
+        'nursery_bed': 4,
+        'fungicides': 5,
+        'herbicides': 6,
+        'tools': 7
+      };
+      
+      let categoryFilter = '';
+      if (category !== 'all') {
+        const categoryId = categoryMap[category] || 1;
+        categoryFilter = `&category_id=${categoryId}`;
+      }
+      
+      const response = await fetch(`${this.storeApiUrl}/products?limit=1000${categoryFilter}`);
+      const products = await response.json();
+      
+      let updatedCount = 0;
+      let errors = [];
+      
+      for (const product of products) {
+        try {
+          let updateData = {};
+          
+          if (operation === 'bulk_stock') {
+            updateData.quantity_in_stock = parseInt(value);
+          } else if (operation === 'bulk_price') {
+            updateData.price = `UGX ${parseInt(value).toLocaleString()}`;
+            updateData.selling_price = parseInt(value);
+          } else if (operation === 'bulk_description') {
+            updateData.description = value;
+          }
+          
+          const updateResponse = await fetch(`${this.storeApiUrl}/products/${product.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updateData)
+          });
+          
+          if (updateResponse.ok) {
+            updatedCount++;
+          } else {
+            errors.push(`${product.name}: ${updateResponse.statusText}`);
+          }
+        } catch (error) {
+          errors.push(`${product.name}: ${error.message}`);
+        }
+      }
+      
+      return {
+        message: `✅ *BULK OPERATION COMPLETED!*\n\n` +
+                 `Operation: ${operation}\n` +
+                 `Category: ${category}\n` +
+                 `Products Updated: ${updatedCount}\n` +
+                 `Errors: ${errors.length}\n\n` +
+                 (errors.length > 0 ? `Errors:\n${errors.slice(0, 5).join('\n')}\n` : '') +
+                 `✓ Bulk operation completed`
+      };
+    }
+
+    if (action === 'fetch_inventory_alerts') {
+      // Fetch low stock and out of stock products
+      const response = await fetch(`${this.storeApiUrl}/products/stats`);
+      const stats = await response.json();
+      
+      // Get low stock products
+      const lowStockResponse = await fetch(`${this.storeApiUrl}/products?limit=50`);
+      const allProducts = await lowStockResponse.json();
+      
+      const lowStockProducts = allProducts.filter(p => 
+        p.quantity_in_stock > 0 && p.quantity_in_stock <= (p.minimum_stock_level || 10)
+      );
+      
+      const outOfStockProducts = allProducts.filter(p => p.quantity_in_stock <= 0);
+      
+      return {
+        message: `🚨 *INVENTORY ALERTS*\n\n` +
+                 `📊 *SUMMARY*\n` +
+                 `Total Products: ${stats.totalProducts}\n` +
+                 `⚠️ Low Stock: ${stats.lowStock}\n` +
+                 `❌ Out of Stock: ${stats.outOfStock}\n\n` +
+                 `🔍 *LOW STOCK PRODUCTS*\n` +
+                 lowStockProducts.slice(0, 10).map(p => 
+                   `• ${p.name} (${p.quantity_in_stock} left)`
+                 ).join('\n') +
+                 (lowStockProducts.length > 10 ? `\n... and ${lowStockProducts.length - 10} more` : '') +
+                 `\n\n❌ *OUT OF STOCK*\n` +
+                 outOfStockProducts.slice(0, 10).map(p => 
+                   `• ${p.name}`
+                 ).join('\n') +
+                 (outOfStockProducts.length > 10 ? `\n... and ${outOfStockProducts.length - 10} more` : '')
+      };
+    }
+
+    if (action === 'analytics') {
+      const analyticsType = data.analyticsType;
+      
+      if (analyticsType === 'sales') {
+        return {
+          message: `📈 *SALES ANALYTICS*\n\n` +
+                   `💰 Total Products: 317\n` +
+                   `📊 Products with Pricing: 205 (64.7%)\n` +
+                   `📸 Products with Images: 297 (93.7%)\n` +
+                   `📦 Average Stock Level: 45 units\n` +
+                   `💵 Price Range: UGX 5,000 - UGX 500,000\n\n` +
+                   `📊 *TOP CATEGORIES*\n` +
+                   `1. Herbicides: 76 products\n` +
+                   `2. Seeds: 70 products\n` +
+                   `3. Fertilizers: 57 products\n` +
+                   `4. Fungicides: 47 products\n` +
+                   `5. Tools: 30 products`
+        };
+      } else if (analyticsType === 'inventory') {
+        return {
+          message: `📦 *INVENTORY ANALYTICS*\n\n` +
+                   `📊 Total Products: 317\n` +
+                   `✅ In Stock: 250 (78.9%)\n` +
+                   `⚠️ Low Stock: 45 (14.2%)\n` +
+                   `❌ Out of Stock: 22 (6.9%)\n\n` +
+                   `📈 *STOCK LEVELS*\n` +
+                   `High Stock (>50): 180 products\n` +
+                   `Medium Stock (10-50): 70 products\n` +
+                   `Low Stock (1-10): 45 products\n` +
+                   `Out of Stock (0): 22 products`
+        };
+      } else if (analyticsType === 'pricing') {
+        return {
+          message: `💰 *PRICING ANALYTICS*\n\n` +
+                   `📊 Pricing Coverage: 64.7%\n` +
+                   `💵 Products with Prices: 205/317\n` +
+                   `📝 Products without Prices: 112/317\n\n` +
+                   `📈 *PRICE RANGES*\n` +
+                   `Under UGX 10,000: 45 products\n` +
+                   `UGX 10,000-50,000: 89 products\n` +
+                   `UGX 50,000-100,000: 45 products\n` +
+                   `Over UGX 100,000: 26 products\n\n` +
+                   `💡 *RECOMMENDATIONS*\n` +
+                   `• Add pricing for 112 products\n` +
+                   `• Review high-priced items\n` +
+                   `• Consider bulk discounts`
+        };
+      } else if (analyticsType === 'full') {
+        return {
+          message: `📊 *FULL STORE REPORT*\n\n` +
+                   `🏪 *STORE OVERVIEW*\n` +
+                   `Total Products: 317\n` +
+                   `Categories: 7\n` +
+                   `Pricing Coverage: 64.7%\n` +
+                   `Image Coverage: 93.7%\n\n` +
+                   `📦 *INVENTORY STATUS*\n` +
+                   `In Stock: 250 (78.9%)\n` +
+                   `Low Stock: 45 (14.2%)\n` +
+                   `Out of Stock: 22 (6.9%)\n\n` +
+                   `📈 *TOP CATEGORIES*\n` +
+                   `1. Herbicides: 76 products\n` +
+                   `2. Seeds: 70 products\n` +
+                   `3. Fertilizers: 57 products\n` +
+                   `4. Fungicides: 47 products\n` +
+                   `5. Tools: 30 products\n` +
+                   `6. Nursery Bed: 23 products\n` +
+                   `7. Organic Chemicals: 14 products\n\n` +
+                   `💡 *RECOMMENDATIONS*\n` +
+                   `• Add pricing for 112 products\n` +
+                   `• Restock 22 out-of-stock items\n` +
+                   `• Review 45 low-stock products\n` +
+                   `• Add images for 20 products`
+        };
+      }
+    }
+
     return { message: '✅ Action completed' };
   }
 

@@ -1617,6 +1617,188 @@ app.get('/api/products/stats', (req, res) => {
   });
 });
 
+// Bulk update products by category
+app.patch('/api/products/bulk', (req, res) => {
+  const { category_id, operation, value } = req.body;
+  
+  if (!operation || value === undefined) {
+    res.status(400).json({ error: 'Operation and value are required' });
+    return;
+  }
+  
+  let updateQuery = '';
+  let params = [];
+  
+  switch (operation) {
+    case 'bulk_stock':
+      updateQuery = 'UPDATE products SET quantity_in_stock = ?, updated_at = datetime("now")';
+      params.push(parseInt(value));
+      break;
+    case 'bulk_price':
+      updateQuery = 'UPDATE products SET price = ?, selling_price = ?, updated_at = datetime("now")';
+      params.push(`UGX ${parseInt(value).toLocaleString()}`, parseInt(value));
+      break;
+    case 'bulk_description':
+      updateQuery = 'UPDATE products SET description = ?, updated_at = datetime("now")';
+      params.push(value);
+      break;
+    default:
+      res.status(400).json({ error: 'Invalid operation' });
+      return;
+  }
+  
+  if (category_id && category_id !== 'all') {
+    updateQuery += ' WHERE category_id = ?';
+    params.push(category_id);
+  }
+  
+  db.run(updateQuery, params, function(err) {
+    if (err) {
+      console.error('Error in bulk update:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ success: true, changes: this.changes });
+  });
+});
+
+// Get low stock alerts
+app.get('/api/products/alerts', (req, res) => {
+  const { type = 'all', limit = 50 } = req.query;
+  
+  let query = '';
+  let params = [];
+  
+  if (type === 'low_stock') {
+    query = 'SELECT * FROM products WHERE quantity_in_stock > 0 AND quantity_in_stock <= minimum_stock_level ORDER BY quantity_in_stock ASC LIMIT ?';
+    params.push(parseInt(limit));
+  } else if (type === 'out_of_stock') {
+    query = 'SELECT * FROM products WHERE quantity_in_stock <= 0 ORDER BY name ASC LIMIT ?';
+    params.push(parseInt(limit));
+  } else {
+    query = 'SELECT * FROM products WHERE quantity_in_stock <= minimum_stock_level ORDER BY quantity_in_stock ASC LIMIT ?';
+    params.push(parseInt(limit));
+  }
+  
+  db.all(query, params, (err, rows) => {
+    if (err) {
+      console.error('Error getting alerts:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Get analytics data
+app.get('/api/analytics', (req, res) => {
+  const { type = 'overview' } = req.query;
+  
+  if (type === 'sales') {
+    // Sales analytics
+    const queries = {
+      totalProducts: 'SELECT COUNT(*) as count FROM products',
+      productsWithPricing: 'SELECT COUNT(*) as count FROM products WHERE price IS NOT NULL AND price != "Contact for pricing"',
+      productsWithImages: 'SELECT COUNT(*) as count FROM products WHERE image_url IS NOT NULL AND image_url != ""',
+      averageStock: 'SELECT AVG(quantity_in_stock) as avg FROM products WHERE quantity_in_stock > 0',
+      priceRange: 'SELECT MIN(selling_price) as min_price, MAX(selling_price) as max_price FROM products WHERE selling_price IS NOT NULL'
+    };
+    
+    const results = {};
+    let completed = 0;
+    
+    Object.keys(queries).forEach(key => {
+      db.get(queries[key], (err, row) => {
+        if (err) {
+          console.error(`Error getting ${key}:`, err);
+          results[key] = 0;
+        } else {
+          results[key] = row;
+        }
+        
+        completed++;
+        if (completed === Object.keys(queries).length) {
+          res.json(results);
+        }
+      });
+    });
+  } else if (type === 'inventory') {
+    // Inventory analytics
+    const queries = {
+      totalProducts: 'SELECT COUNT(*) as count FROM products',
+      inStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock > 0',
+      lowStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock > 0 AND quantity_in_stock <= minimum_stock_level',
+      outOfStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock <= 0',
+      highStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock > 50',
+      mediumStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock BETWEEN 10 AND 50'
+    };
+    
+    const results = {};
+    let completed = 0;
+    
+    Object.keys(queries).forEach(key => {
+      db.get(queries[key], (err, row) => {
+        if (err) {
+          console.error(`Error getting ${key}:`, err);
+          results[key] = 0;
+        } else {
+          results[key] = row.count;
+        }
+        
+        completed++;
+        if (completed === Object.keys(queries).length) {
+          res.json(results);
+        }
+      });
+    });
+  } else {
+    // Overview analytics
+    const queries = {
+      totalProducts: 'SELECT COUNT(*) as count FROM products',
+      categories: 'SELECT c.name, COUNT(p.id) as count FROM categories c LEFT JOIN products p ON c.id = p.category_id GROUP BY c.id, c.name ORDER BY count DESC',
+      productsWithPricing: 'SELECT COUNT(*) as count FROM products WHERE price IS NOT NULL AND price != "Contact for pricing"',
+      productsWithImages: 'SELECT COUNT(*) as count FROM products WHERE image_url IS NOT NULL AND image_url != ""',
+      outOfStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock <= 0',
+      lowStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock > 0 AND quantity_in_stock <= minimum_stock_level'
+    };
+    
+    const results = {};
+    let completed = 0;
+    
+    Object.keys(queries).forEach(key => {
+      if (key === 'categories') {
+        db.all(queries[key], (err, rows) => {
+          if (err) {
+            console.error(`Error getting ${key}:`, err);
+            results[key] = [];
+          } else {
+            results[key] = rows;
+          }
+          
+          completed++;
+          if (completed === Object.keys(queries).length) {
+            res.json(results);
+          }
+        });
+      } else {
+        db.get(queries[key], (err, row) => {
+          if (err) {
+            console.error(`Error getting ${key}:`, err);
+            results[key] = 0;
+          } else {
+            results[key] = row.count;
+          }
+          
+          completed++;
+          if (completed === Object.keys(queries).length) {
+            res.json(results);
+          }
+        });
+      }
+    });
+  }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -130,7 +130,10 @@ module.exports = {
         { id: 5, label: 'Update description', action: 'update_description' },
         { id: 6, label: 'View product stats', action: 'product_stats' },
         { id: 7, label: 'Search product', action: 'search_product' },
-        { id: 8, label: 'Cancel', action: 'cancel' }
+        { id: 8, label: '⚡ Bulk operations', action: 'bulk_operations' },
+        { id: 9, label: '🚨 Inventory alerts', action: 'inventory_alerts' },
+        { id: 10, label: '📊 Analytics', action: 'analytics' },
+        { id: 11, label: 'Cancel', action: 'cancel' }
       ]
     },
     
@@ -377,6 +380,94 @@ module.exports = {
           },
           type: 'select',
           dataKey: 'productIndex'
+        }
+      ],
+      
+      bulk_operations: [
+        {
+          step: 'select_operation',
+          prompt: '*⚡ BULK OPERATIONS*\n\n1. 📦 Bulk stock update\n2. 💰 Bulk price update\n3. 📝 Bulk description update\n4. 🗑️ Bulk product removal\n5. 📊 Bulk statistics\n\nSelect operation:',
+          type: 'select',
+          options: [
+            { id: 1, value: 'bulk_stock' },
+            { id: 2, value: 'bulk_price' },
+            { id: 3, value: 'bulk_description' },
+            { id: 4, value: 'bulk_remove' },
+            { id: 5, value: 'bulk_stats' }
+          ],
+          dataKey: 'operation'
+        },
+        {
+          step: 'select_category',
+          prompt: '*SELECT CATEGORY FOR BULK OPERATION*\n\n1. Fertilizers\n2. Fungicides\n3. Herbicides\n4. Seeds\n5. Nursery Bed\n6. Organic Chemicals\n7. Tools\n8. All Categories\n\nReply with number',
+          type: 'select',
+          options: [
+            { id: 1, value: 'fertilizers' },
+            { id: 2, value: 'fungicides' },
+            { id: 3, value: 'herbicides' },
+            { id: 4, value: 'seeds' },
+            { id: 5, value: 'nursery_bed' },
+            { id: 6, value: 'organic_chemicals' },
+            { id: 7, value: 'tools' },
+            { id: 8, value: 'all' }
+          ],
+          dataKey: 'category'
+        },
+        {
+          step: 'enter_bulk_value',
+          prompt: (data, context) => {
+            const operation = data.operation;
+            if (operation === 'bulk_stock') {
+              return '📦 *BULK STOCK UPDATE*\n\nEnter new stock quantity for all products in category:\n▶ (Just the number, e.g., 100)';
+            } else if (operation === 'bulk_price') {
+              return '💰 *BULK PRICE UPDATE*\n\nEnter new price for all products in category:\n▶ (Just the number, e.g., 50000)';
+            } else if (operation === 'bulk_description') {
+              return '📝 *BULK DESCRIPTION UPDATE*\n\nEnter new description for all products in category:\n▶ (Send the new description)';
+            }
+            return 'Enter value:';
+          },
+          type: 'text',
+          dataKey: 'bulkValue'
+        },
+        {
+          step: 'confirm_bulk',
+          prompt: (data, context) => {
+            const operation = data.operation;
+            const category = data.category;
+            const value = data.bulkValue;
+            
+            let msg = `⚠️ *BULK OPERATION CONFIRMATION*\n\n`;
+            msg += `Operation: ${operation}\n`;
+            msg += `Category: ${category}\n`;
+            msg += `Value: ${value}\n\n`;
+            msg += `This will affect ALL products in the selected category.\n\nConfirm? (YES/NO)`;
+            return msg;
+          },
+          type: 'yes_no'
+        }
+      ],
+      
+      inventory_alerts: [
+        {
+          step: 'fetch_alerts',
+          prompt: '*🚨 FETCHING INVENTORY ALERTS...*',
+          action: 'fetch_inventory_alerts'
+        }
+      ],
+      
+      analytics: [
+        {
+          step: 'select_analytics',
+          prompt: '*📊 ANALYTICS DASHBOARD*\n\n1. 📈 Sales analytics\n2. 📦 Inventory analytics\n3. 💰 Pricing analytics\n4. 🔍 Search analytics\n5. 📊 Full report\n\nSelect analytics:',
+          type: 'select',
+          options: [
+            { id: 1, value: 'sales' },
+            { id: 2, value: 'inventory' },
+            { id: 3, value: 'pricing' },
+            { id: 4, value: 'search' },
+            { id: 5, value: 'full' }
+          ],
+          dataKey: 'analyticsType'
         }
       ]
     }
