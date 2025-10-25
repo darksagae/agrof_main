@@ -21,6 +21,8 @@ services:
         value: "false"
       - key: USE_PYTORCH_VISION
         value: "false"
+      - key: USE_TFLITE
+        value: "true"
 
   - type: web
     name: agrof-store-api

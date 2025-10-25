@@ -18,3 +18,5 @@ waitress>=2.1.0
 
 # Additional production dependencies
 Werkzeug>=2.0.0
+# TensorFlow Lite for mobile AI
+tflite-runtime>=2.13.0
