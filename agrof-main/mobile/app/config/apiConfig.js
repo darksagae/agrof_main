@@ -4,9 +4,16 @@
  * Uses single consistent address: 192.168.0.107
  */
 
-// Base IP addresses for all services - with fallbacks
-const BASE_IPS = [
-  '192.168.1.15',   // Current WiFi IP - UPDATED Oct 25, 2025
+// Production Render URLs - Primary endpoints
+const RENDER_URLS = [
+  'https://agrof-store-api.onrender.com',    // Store Backend on Render
+  'https://agrof-ai-api.onrender.com',       // AI Backend on Render
+  'https://agrof-whatsapp-bot.onrender.com' // WhatsApp Bot on Render
+];
+
+// Fallback local IPs for development
+const LOCAL_IPS = [
+  '192.168.1.15',   // Current WiFi IP
   '10.0.4.1',       // Docker bridge network
   '10.0.1.1',       // Docker bridge network
   '10.100.100.180', // STI Backend Server (VM)
@@ -19,15 +26,18 @@ const BASE_IPS = [
   '10.0.2.2',       // Android emulator host
 ];
 
-// Get the current base IP (will be dynamically determined)
-let BASE_IP = '192.168.1.15';  // Laptop IP with STI VPN - UPDATED Oct 25, 2025
+// Combined endpoints for testing
+const BASE_IPS = [...RENDER_URLS, ...LOCAL_IPS];
+
+// Get the current base URL (will be dynamically determined)
+let BASE_IP = 'https://agrof-store-api.onrender.com';  // Production Render URL
 
 // API Configuration
 export const API_CONFIG = {
   // Store Backend API
   STORE: {
-    BASE_URL: `http://${BASE_IP}:3001`,
-    API_URL: `http://${BASE_IP}:3001/api`,
+    BASE_URL: BASE_IP.startsWith('https://') ? BASE_IP : `http://${BASE_IP}:3001`,
+    API_URL: BASE_IP.startsWith('https://') ? `${BASE_IP}/api` : `http://${BASE_IP}:3001/api`,
     ENDPOINTS: {
       PRODUCTS: '/products',
       CATEGORIES: '/categories',
@@ -38,10 +48,10 @@ export const API_CONFIG = {
     }
   },
   
-  // AI Backend API - Using current IP for Gemini AI
+  // AI Backend API - Using Render URL for Gemini AI
   AI: {
-    BASE_URL: `http://${BASE_IP}:5000`,
-    API_URL: `http://${BASE_IP}:5000/api`,
+    BASE_URL: BASE_IP.startsWith('https://') ? BASE_IP.replace('store-api', 'ai-api') : `http://${BASE_IP}:5000`,
+    API_URL: BASE_IP.startsWith('https://') ? `${BASE_IP.replace('store-api', 'ai-api')}/api` : `http://${BASE_IP}:5000/api`,
     ENDPOINTS: {
       ANALYZE_DISEASE: '/ai-analyze-disease',
       HEALTH: '/health',  // Note: AI backend uses /health not /api/health

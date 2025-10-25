@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: agrof-whatsapp-bot
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_NUMBERS
+        value: 256743232441
+      - key: STORE_BACKEND_URL
+        value: https://agrof-store-api.onrender.com
+      - key: AUTOMATION_ENGINE_URL
+        value: https://agrof-automation-engine.onrender.com
+    healthCheckPath: /health
+    plan: starter
