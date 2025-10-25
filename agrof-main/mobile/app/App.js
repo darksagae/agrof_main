@@ -99,9 +99,14 @@ export default function App() {
   // Chat state
   const [showChatScreen, setShowChatScreen] = useState(false);
   const [chatOtherUser, setChatOtherUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // TEMP: Bypass auth for testing
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null); // Store user data
+  const [currentUser, setCurrentUser] = useState({
+    uid: 'test-user',
+    email: 'test@agrof.com',
+    fullName: 'Test User',
+    emailVerified: true
+  }); // TEMP: Dummy user for testing
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editableUserData, setEditableUserData] = useState({
     username: '',
