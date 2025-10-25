@@ -30,11 +30,27 @@ def analyze_plant_disease_with_gemini(image_data):
     Analyze plant disease using Gemini AI
     """
     try:
-        # Convert image to base64
+        # Convert image to base64 and detect MIME type
         if hasattr(image_data, 'read'):
-            image_base64 = base64.b64encode(image_data.read()).decode('utf-8')
+            # Reset file pointer if it's a file object
+            if hasattr(image_data, 'seek'):
+                image_data.seek(0)
+            image_bytes = image_data.read()
+            image_base64 = base64.b64encode(image_bytes).decode('utf-8')
         else:
-            image_base64 = base64.b64encode(image_data).decode('utf-8')
+            image_bytes = image_data
+            image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+        
+        # Detect image MIME type from magic bytes
+        mime_type = "image/jpeg"  # Default
+        if image_bytes[:8] == b'\x89PNG\r\n\x1a\n':
+            mime_type = "image/png"
+        elif image_bytes[:3] == b'\xff\xd8\xff':
+            mime_type = "image/jpeg"
+        elif image_bytes[:4] == b'RIFF' and image_bytes[8:12] == b'WEBP':
+            mime_type = "image/webp"
+        
+        logger.info(f"📸 Detected image type: {mime_type}")
         
         # Prepare prompt for Gemini
         prompt = """
@@ -62,7 +78,7 @@ def analyze_plant_disease_with_gemini(image_data):
                     {"text": prompt},
                     {
                         "inline_data": {
-                            "mime_type": "image/jpeg",
+                            "mime_type": mime_type,
                             "data": image_base64
                         }
                     }

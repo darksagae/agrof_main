@@ -1,0 +1,436 @@
+[
+  {
+    "id": 36,
+    "name": "Sprouting Calabrese – Broccoli",
+    "folder": "Green Sprouting Calabrese – Broccoli With Medium Sized Dark Green Heads",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Broccoli",
+    "details": {
+      "description": "Green Sprouting Calabrese broccoli has Medium sized dark green heads. Plant continues producing side shoots for several weeks after the main flower head is cut. It is Very nutritious, very tender and has Slow bolting. Produces compact dark green central head, with many lateral or side shoots over a long season."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 1900 },
+        { "qty": 5, "price": 1799 },
+        { "qty": 10, "price": 1799 },
+        { "qty": 20, "price": 1799 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 2700 },
+        { "qty": 5, "price": 2400 },
+        { "qty": 10, "price": 2500 },
+        { "qty": 20, "price": 2400 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 3200 },
+        { "qty": 5, "price": 2899 },
+        { "qty": 10, "price": 2998 },
+        { "qty": 20, "price": 2899 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 6700 },
+        { "qty": 5, "price": 6600 },
+        { "qty": 10, "price": 6499 },
+        { "qty": 20, "price": 6399 }
+      ]}
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Copenhagen Market – Cabbage",
+    "folder": "Copenhagen Market – Cabbage, The Most Popular Early Maturing Ball-headed Variety",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "Copenhagen Market is the most popular amongst the ball-headed cabbages. The heads are uniform round, firm, medium sized and weigh about 2-3kg. The plant is short stemmed and rather small and can be spaced closer, early maturing, approximately 8-10 weeks. Sensitive to splitting and should not be left in the field for too long after maturity.",
+      "spacing": "45cm x 45cm",
+      "seedRate": "123grams/acre",
+      "maturityDaysFromTransplanting": "75-90 days",
+      "yieldPotential": "16-32mt/acre"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 2200 },
+        { "qty": 5, "price": 2101 },
+        { "qty": 10, "price": 2101 },
+        { "qty": 20, "price": 2101 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 3100 },
+        { "qty": 5, "price": 3100 },
+        { "qty": 10, "price": 2899 },
+        { "qty": 20, "price": 2899 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 4100 },
+        { "qty": 5, "price": 4002 },
+        { "qty": 10, "price": 3899 },
+        { "qty": 20, "price": 3899 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 5100 },
+        { "qty": 5, "price": 4998 },
+        { "qty": 10, "price": 4901 },
+        { "qty": 20, "price": 4901 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 19400 },
+        { "qty": 5, "price": 18100 },
+        { "qty": 10, "price": 17906 },
+        { "qty": 20, "price": 17906 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 34000 },
+        { "qty": 5, "price": 32708 },
+        { "qty": 10, "price": 32504 },
+        { "qty": 20, "price": 32402 }
+      ]}
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Mammoth Red Rock – Red Cabbage",
+    "folder": "Mammoth Red Rock – Red Cabbage Producing Large, Beautiful Deep Red-purple Heads",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "This cabbage produces large, beautiful deep red-purple heads. This easy to grow, low maintenance variety produces a uniformly round head that is 20-25cm in diameter and weighs approximately 2-3.5kgs. It has a small to medium core and grows to a height of around 28cm. It stores well, reportedly loosing neither flavour nor crispness."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 2600 },
+        { "qty": 5, "price": 2301 },
+        { "qty": 10, "price": 2400 },
+        { "qty": 20, "price": 2301 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 3100 },
+        { "qty": 5, "price": 3100 },
+        { "qty": 10, "price": 2899 },
+        { "qty": 20, "price": 2899 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 4100 },
+        { "qty": 5, "price": 4002 },
+        { "qty": 10, "price": 3899 },
+        { "qty": 20, "price": 3899 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 6700 },
+        { "qty": 5, "price": 6600 },
+        { "qty": 10, "price": 6499 },
+        { "qty": 20, "price": 6399 }
+      ]}
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Green Aroma - Coriander (Dhania)",
+    "folder": "Green Aroma- Coriander (Dhania) Variety with Vigorous and Fast growing Plants",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Coriander/Herbs",
+    "details": {
+      "description": "Green Aroma is a late bolting type with small seeds. Plants are vigorous and fast growing with large stems and thick leaves with good aroma. It is rather compact and can be transported well over long distance. Green Aroma is multi-cut with a very good heat tolerance; its performance is excellent also during hot summer and rainy season. It can easily be grown all the year."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 2800 },
+        { "qty": 5, "price": 2500 },
+        { "qty": 10, "price": 2601 },
+        { "qty": 20, "price": 2500 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 3600 },
+        { "qty": 5, "price": 3499 },
+        { "qty": 10, "price": 3398 },
+        { "qty": 20, "price": 3398 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 4100 },
+        { "qty": 5, "price": 4002 },
+        { "qty": 10, "price": 3899 },
+        { "qty": 20, "price": 3899 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 7700 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 21500 },
+        { "qty": 5, "price": 20103 },
+        { "qty": 10, "price": 19995 },
+        { "qty": 20, "price": 19909 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 36100 },
+        { "qty": 5, "price": 34692 },
+        { "qty": 10, "price": 34584 },
+        { "qty": 20, "price": 34512 }
+      ]},
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 67700 },
+        { "qty": 5, "price": 66008 },
+        { "qty": 10, "price": 65804 },
+        { "qty": 20, "price": 65534 }
+      ]}
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Georgia Sukuma Wiki",
+    "folder": "Georgia Sukuma Wiki – Vigorous And Hardy Collard Variety",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Kale/Vegetables",
+    "details": {
+      "description": "Georgia Sukuma Wiki is vigorous and hardy variety. It is tolerant to adverse weather and soil conditions. The plant has spreading habit with large, tender, crumpled/waxy bluish-green leaves on long petioles forming a loose rosette or cluster. It is fairly tolerant to black rot and downy mildew. You can keep harvesting for a long time. It is rich in carbohydrates, proteins and vitamins, has very low cholesterol level and saturated fats.",
+      "spacing": "60cm x 60cm",
+      "seedRate": "100grams/acre",
+      "maturityPeriodFromTransplanting": "60 days",
+      "yieldPotential": "70-100mt/acre"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 5, "price": 1894 },
+        { "qty": 10, "price": 1964 },
+        { "qty": 20, "price": 1927 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 2200 },
+        { "qty": 5, "price": 2200 },
+        { "qty": 10, "price": 2200 },
+        { "qty": 20, "price": 2101 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 3100 },
+        { "qty": 5, "price": 2799 },
+        { "qty": 10, "price": 2899 },
+        { "qty": 20, "price": 2799 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 4600 },
+        { "qty": 5, "price": 4499 },
+        { "qty": 10, "price": 4402 },
+        { "qty": 20, "price": 4402 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 16400 },
+        { "qty": 5, "price": 15793 },
+        { "qty": 10, "price": 15695 },
+        { "qty": 20, "price": 15695 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 34000 },
+        { "qty": 5, "price": 32708 },
+        { "qty": 10, "price": 32504 },
+        { "qty": 20, "price": 32402 }
+      ]}
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Long Purple – Eggplant",
+    "folder": "Long Purple – Eggplant Variety With A High Yield Potential",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Eggplant",
+    "details": {
+      "description": "Long purple is an early, tall growing and high yielding variety. Fruits are elongated about 20cm long and about 6cm wide with intense purple colour.",
+      "spacing": "75cm x 60cm",
+      "seedRate": "200grams/acre",
+      "maturityPeriod": "70-90 days",
+      "yieldPotential": "20-32mt/acre"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 3100 },
+        { "qty": 5, "price": 2899 },
+        { "qty": 10, "price": 2899 },
+        { "qty": 20, "price": 2899 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 6700 },
+        { "qty": 5, "price": 6553 },
+        { "qty": 10, "price": 6412 },
+        { "qty": 20, "price": 6412 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 8800 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 49600 },
+        { "qty": 5, "price": 48013 },
+        { "qty": 10, "price": 47914 },
+        { "qty": 20, "price": 47814 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 96800 },
+        { "qty": 5, "price": 94767 },
+        { "qty": 10, "price": 94477 },
+        { "qty": 20, "price": 94186 }
+      ]}
+    ]
+  },
+  {
+    "id": 42,
+    "name": "California Wonder – Sweet Pepper (Syova)",
+    "folder": "California Wonder – Sweet Pepper Variety Suitable For Home And Market Gardens",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Pepper",
+    "details": {
+      "description": "An established sweet pepper variety suitable for home and market gardens. Plants are tall, vigorous and highly productive. The fruits are pedant, thick walled, 4-lobed, uniform blocky and compact with attractive colour and continuous fruiting over a long period.",
+      "spacing": "60cm x 60cm",
+      "seedRate": "200grams/acre",
+      "maturity": "2-2.5 months",
+      "yieldPotential": "10-16mt/acre"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 10300 },
+        { "qty": 5, "price": 10197 },
+        { "qty": 10, "price": 10104 },
+        { "qty": 20, "price": 10104 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 8300 },
+        { "qty": 5, "price": 8101 },
+        { "qty": 10, "price": 8101 },
+        { "qty": 20, "price": 8101 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 10300 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 21500 },
+        { "qty": 5, "price": 20103 },
+        { "qty": 10, "price": 19995 },
+        { "qty": 20, "price": 19909 }
+      ]}
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Nakati",
+    "folder": "Nakati - Highly Nutritious Local Vegetable",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Vegetables",
+    "details": {
+      "description": "Nakati is a Bush spreading, local vegetable, Highly nutritive and very adaptable to a wide range of soils. Nakati requires less labour and is easy to grow because it does not involve a lot of technical agronomic practices. Matures in 30 days after planting, Seed rate of 500 grams per acre."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 2600 },
+        { "qty": 5, "price": 2553 },
+        { "qty": 10, "price": 2505 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 3100 },
+        { "qty": 5, "price": 2899 },
+        { "qty": 10, "price": 2899 },
+        { "qty": 20, "price": 2899 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 3800 },
+        { "qty": 5, "price": 3701 },
+        { "qty": 10, "price": 3599 },
+        { "qty": 20, "price": 3599 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 5700 },
+        { "qty": 5, "price": 5501 },
+        { "qty": 10, "price": 5501 },
+        { "qty": 20, "price": 5398 }
+      ]}
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Pusa Sawani – Okra",
+    "folder": "Pusa Sawani – Okra Variety With Wide Adaptability",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Okra",
+    "details": {
+      "description": "Pusa Sawani is an open pollinated variety with wide adaptation in many warmer regions. Medium tall plant frame with short internodes and vigour. Green slender and attractive pods with good storage ability, Good fruit setting, Maturity: Harvesting start 40-45 days from planting, Tolerant to Yellow Vein Mosaic Virus (YVMV)"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 2200 },
+        { "qty": 5, "price": 2070 },
+        { "qty": 10, "price": 2070 },
+        { "qty": 20, "price": 2070 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 3400 },
+        { "qty": 5, "price": 3101 },
+        { "qty": 10, "price": 3199 },
+        { "qty": 20, "price": 3101 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 5100 },
+        { "qty": 5, "price": 4998 },
+        { "qty": 10, "price": 4998 },
+        { "qty": 20, "price": 4901 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 10800 },
+        { "qty": 5, "price": 10800 },
+        { "qty": 10, "price": 10595 },
+        { "qty": 20, "price": 10595 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 21500 },
+        { "qty": 5, "price": 20103 },
+        { "qty": 10, "price": 19995 },
+        { "qty": 20, "price": 19909 }
+      ]}
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Swiss Chard Ford Hook Giant – Spinach",
+    "folder": "Swiss Chard Ford Hook Giant – Tall And Vigorous Spinach Variety",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Spinach/Vegetables",
+    "details": {
+      "description": "This is a tall, vigorous growing, sturdy variety which produces only leaves and is suitable for home gardens and fresh markets. The leaves are large, broad, dark glossy green and heavily crumped with midribs which are white, thick, succulent and a little broader.",
+      "spacing": "45cm x 45cm",
+      "seedRate": "3-5kgs/acre",
+      "maturityPeriod": "75-90 days",
+      "yieldPotential": "15-24mt/acre"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 2200 },
+        { "qty": 5, "price": 2083 },
+        { "qty": 10, "price": 2083 },
+        { "qty": 20, "price": 2083 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 3600 },
+        { "qty": 5, "price": 3499 },
+        { "qty": 10, "price": 3398 },
+        { "qty": 20, "price": 3398 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 5700 },
+        { "qty": 5, "price": 5501 },
+        { "qty": 10, "price": 5501 },
+        { "qty": 20, "price": 5398 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 21500 },
+        { "qty": 5, "price": 20103 },
+        { "qty": 10, "price": 19995 },
+        { "qty": 20, "price": 19909 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 42200 },
+        { "qty": 5, "price": 40892 },
+        { "qty": 10, "price": 40681 },
+        { "qty": 20, "price": 40596 }
+      ]}
+    ]
+  }
+]
+
+
+
+
+

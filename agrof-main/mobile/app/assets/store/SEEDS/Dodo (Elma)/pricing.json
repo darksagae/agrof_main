@@ -1,0 +1,48 @@
+{
+  "productName": "Dodo (Elma)",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Amaranth/Vegetables",
+  "displayPrice": "UGX 1,303",
+  "lowestPrice": 1303,
+  "lowestPackage": "10g @ 20+ units",
+  "productDetails": "Dodo is a Highly nutritious vegetable, Easy to grow, Fast maturing, has very vigorous growth, Transports well, Quick to cook.",
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {"quantity": "1+ units", "quantityValue": 1, "pricePerUnit": 1400, "priceFormatted": "UGX 1,400", "discountPercent": 0},
+        {"quantity": "5+ units", "quantityValue": 5, "pricePerUnit": 1322, "priceFormatted": "UGX 1,322", "discountPercent": 6},
+        {"quantity": "10+ units", "quantityValue": 10, "pricePerUnit": 1308, "priceFormatted": "UGX 1,308", "discountPercent": 7},
+        {"quantity": "20+ units", "quantityValue": 20, "pricePerUnit": 1303, "priceFormatted": "UGX 1,303", "discountPercent": 7}
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {"quantity": "1+ units", "quantityValue": 1, "pricePerUnit": 1500, "priceFormatted": "UGX 1,500", "discountPercent": 0},
+        {"quantity": "5+ units", "quantityValue": 5, "pricePerUnit": 1422, "priceFormatted": "UGX 1,422", "discountPercent": 5},
+        {"quantity": "10+ units", "quantityValue": 10, "pricePerUnit": 1409, "priceFormatted": "UGX 1,409", "discountPercent": 6},
+        {"quantity": "20+ units", "quantityValue": 20, "pricePerUnit": 1404, "priceFormatted": "UGX 1,404", "discountPercent": 6}
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {"quantity": "1+ units", "quantityValue": 1, "pricePerUnit": 1600, "priceFormatted": "UGX 1,600", "discountPercent": 0},
+        {"quantity": "5+ units", "quantityValue": 5, "pricePerUnit": 1530, "priceFormatted": "UGX 1,530", "discountPercent": 4},
+        {"quantity": "10+ units", "quantityValue": 10, "pricePerUnit": 1509, "priceFormatted": "UGX 1,509", "discountPercent": 6},
+        {"quantity": "20+ units", "quantityValue": 20, "pricePerUnit": 1506, "priceFormatted": "UGX 1,506", "discountPercent": 6}
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {"quantity": "1+ units", "quantityValue": 1, "pricePerUnit": 4500, "priceFormatted": "UGX 4,500", "discountPercent": 0},
+        {"quantity": "5+ units", "quantityValue": 5, "pricePerUnit": 4320, "priceFormatted": "UGX 4,320", "discountPercent": 4},
+        {"quantity": "10+ units", "quantityValue": 10, "pricePerUnit": 4302, "priceFormatted": "UGX 4,302", "discountPercent": 4},
+        {"quantity": "20+ units", "quantityValue": 20, "pricePerUnit": 4289, "priceFormatted": "UGX 4,289", "discountPercent": 5}
+      ]
+    }
+  ]
+}
+

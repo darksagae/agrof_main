@@ -1,0 +1,334 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  🚀 FINAL TRAINING CODE - COPY & PASTE INTO GOOGLE COLAB         ║
+║  Run cells 1-6 in order. Training takes 3-4 hours.              ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 1: VERIFY DATASET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🔍 Checking dataset in /content/agrof_dataset...")
+print("="*60)
+
+if os.path.exists('/content/agrof_dataset'):
+    classes = sorted(os.listdir('/content/agrof_dataset'))
+    
+    crops = {
+        'Beans': [],
+        'Coffee': [],
+        'Tomato': [],
+        'Potato': [],
+        'Pepper': []
+    }
+    
+    for class_name in classes:
+        class_path = f'/content/agrof_dataset/{class_name}'
+        if os.path.isdir(class_path):
+            count = len([f for f in os.listdir(class_path) 
+                        if f.endswith(('.jpg', '.jpeg', '.png'))])
+            
+            if 'Beans' in class_name or 'Bean' in class_name:
+                crops['Beans'].append((class_name, count))
+            elif 'Coffee' in class_name:
+                crops['Coffee'].append((class_name, count))
+            elif 'Tomato' in class_name:
+                crops['Tomato'].append((class_name, count))
+            elif 'Potato' in class_name:
+                crops['Potato'].append((class_name, count))
+            elif 'Pepper' in class_name:
+                crops['Pepper'].append((class_name, count))
+    
+    for crop, classes_list in crops.items():
+        if classes_list:
+            total = sum(c[1] for c in classes_list)
+            icon = {'Beans': '🌱', 'Coffee': '☕', 'Tomato': '🍅', 
+                   'Potato': '🥔', 'Pepper': '🌶️'}[crop]
+            print(f"\n{icon} {crop}: {len(classes_list)} classes, {total:,} images")
+            for class_name, count in classes_list:
+                disease = class_name.split('_', 1)[1] if '_' in class_name else class_name
+                print(f"   ├─ {disease}: {count} images")
+    
+    total_classes = sum(len(c) for c in crops.values())
+    total_images = sum(sum(cls[1] for cls in c) for c in crops.values())
+    
+    print(f"\n{'='*60}")
+    print(f"✅ TOTAL: {total_classes} classes, {total_images:,} images")
+    print("="*60)
+else:
+    print("❌ /content/agrof_dataset does not exist!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 2: BUILD AND COMPILE MODEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
+
+print("🚀 Building AGROF 5-Crop Disease Detection Model...")
+print("="*60)
+
+# Image parameters
+IMG_SIZE = 224
+BATCH_SIZE = 32
+
+# Data augmentation for training
+train_datagen = ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=30,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest',
+    validation_split=0.2
+)
+
+# Load training data
+train_generator = train_datagen.flow_from_directory(
+    '/content/agrof_dataset',
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode='categorical',
+    subset='training',
+    shuffle=True
+)
+
+# Load validation data
+validation_generator = train_datagen.flow_from_directory(
+    '/content/agrof_dataset',
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode='categorical',
+    subset='validation',
+    shuffle=False
+)
+
+print(f"\n✅ Training samples: {train_generator.samples}")
+print(f"✅ Validation samples: {validation_generator.samples}")
+print(f"✅ Number of classes: {train_generator.num_classes}")
+print(f"✅ Classes: {list(train_generator.class_indices.keys())}")
+
+# Build model
+base_model = MobileNetV2(
+    input_shape=(IMG_SIZE, IMG_SIZE, 3),
+    include_top=False,
+    weights='imagenet'
+)
+
+# Freeze base model
+base_model.trainable = False
+
+# Add custom layers
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dense(512, activation='relu')(x)
+x = Dropout(0.5)(x)
+x = Dense(256, activation='relu')(x)
+x = Dropout(0.3)(x)
+predictions = Dense(train_generator.num_classes, activation='softmax')(x)
+
+model = Model(inputs=base_model.input, outputs=predictions)
+
+# Compile model
+model.compile(
+    optimizer=Adam(learning_rate=0.001),
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+print("\n✅ Model compiled successfully!")
+print(f"✅ Total parameters: {model.count_params():,}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 3: TRAIN MODEL (This will take 3-4 hours)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Callbacks
+checkpoint = ModelCheckpoint(
+    'agrof_5crop_best_model.h5',
+    monitor='val_accuracy',
+    save_best_only=True,
+    mode='max',
+    verbose=1
+)
+
+early_stopping = EarlyStopping(
+    monitor='val_accuracy',
+    patience=10,
+    restore_best_weights=True,
+    verbose=1
+)
+
+reduce_lr = ReduceLROnPlateau(
+    monitor='val_loss',
+    factor=0.5,
+    patience=5,
+    min_lr=0.00001,
+    verbose=1
+)
+
+print("🚀 Starting training...")
+print("This will take 3-4 hours. You can monitor progress below.")
+print("="*60)
+
+# Train model
+history = model.fit(
+    train_generator,
+    validation_data=validation_generator,
+    epochs=50,
+    callbacks=[checkpoint, early_stopping, reduce_lr],
+    verbose=1
+)
+
+print("\n✅ Training completed!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 4: EVALUATE MODEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import matplotlib.pyplot as plt
+
+# Plot training history
+plt.figure(figsize=(12, 4))
+
+# Accuracy
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.title('Model Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid(True)
+
+# Loss
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Model Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+
+# Final evaluation
+print("\n📊 Final Model Evaluation:")
+print("="*60)
+val_loss, val_accuracy = model.evaluate(validation_generator)
+print(f"✅ Validation Accuracy: {val_accuracy*100:.2f}%")
+print(f"✅ Validation Loss: {val_loss:.4f}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 5: CONVERT TO TFLITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import json
+
+print("🔄 Converting to TensorFlow Lite...")
+
+# Convert to TFLite
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+
+tflite_model = converter.convert()
+
+# Save TFLite model
+tflite_path = 'agrof_5crop_model.tflite'
+with open(tflite_path, 'wb') as f:
+    f.write(tflite_model)
+
+print(f"✅ TFLite model saved: {tflite_path}")
+
+# Save H5 model as backup
+h5_path = 'agrof_5crop_model.h5'
+model.save(h5_path)
+print(f"✅ H5 model saved: {h5_path}")
+
+# Save class labels
+class_labels = {v: k for k, v in train_generator.class_indices.items()}
+class_labels_list = [class_labels[i] for i in range(len(class_labels))]
+
+labels_path = 'agrof_5crop_classes.json'
+with open(labels_path, 'w') as f:
+    json.dump(class_labels_list, f, indent=2)
+
+print(f"✅ Class labels saved: {labels_path}")
+
+# Get model sizes
+import os
+tflite_size = os.path.getsize(tflite_path) / (1024*1024)
+h5_size = os.path.getsize(h5_path) / (1024*1024)
+
+print(f"\n📊 Model Information:")
+print("="*60)
+print(f"Model Name: AGROF 5-Crop Disease Detection")
+print(f"Crops: Beans, Coffee, Tomato, Potato, Pepper")
+print(f"Total Classes: {len(class_labels_list)}")
+print(f"TFLite Size: {tflite_size:.1f} MB")
+print(f"H5 Size: {h5_size:.1f} MB")
+print(f"Input Size: 224x224x3")
+print(f"Output: {len(class_labels_list)} class probabilities")
+
+print("\n📋 Classes:")
+for i, label in enumerate(class_labels_list):
+    print(f"  {i}: {label}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 6: DOWNLOAD MODEL FILES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+from google.colab import files
+
+print("📥 Downloading model files...")
+print("These files will be downloaded to your computer.")
+print("="*60)
+
+# Download TFLite model
+print("\n1. Downloading TFLite model...")
+files.download('agrof_5crop_model.tflite')
+
+# Download H5 model (backup)
+print("\n2. Downloading H5 model (backup)...")
+files.download('agrof_5crop_model.h5')
+
+# Download class labels
+print("\n3. Downloading class labels...")
+files.download('agrof_5crop_classes.json')
+
+print("\n🎉 All files downloaded!")
+print("="*60)
+print("\n📦 Downloaded Files:")
+print("  1. agrof_5crop_model.tflite  - Deploy this to your mobile app")
+print("  2. agrof_5crop_model.h5      - Keep as backup")
+print("  3. agrof_5crop_classes.json  - Class labels for predictions")
+print("\n✅ Training complete! Ready for deployment!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 INSTRUCTIONS:
+
+1. Paste CELL 1 → Run (verify 20 classes, 22K images)
+2. Paste CELL 2 → Run (build model)
+3. Paste CELL 3 → Run (train - takes 3-4 hours) ⏳
+4. Paste CELL 4 → Run (evaluate)
+5. Paste CELL 5 → Run (convert to TFLite)
+6. Paste CELL 6 → Run (download files)
+
+After CELL 6, you'll have 3 files downloaded to your computer!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+

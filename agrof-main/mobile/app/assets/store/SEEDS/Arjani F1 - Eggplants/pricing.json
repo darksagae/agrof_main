@@ -1,0 +1,29 @@
+{
+  "productName": "Arjani F1 - Eggplants",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Eggplant",
+  "displayPrice": "UGX 54,000",
+  "lowestPrice": 54000,
+  "lowestPackage": "5g @ 1+ units",
+  "details": {
+    "description": "Arjani F1 eggplant seeds are a high-yielding hybrid variety known for producing uniform, glossy dark purple fruits with a smooth texture, ideal for both local and commercial markets. These plants are vigorous, with an erect habit that keeps fruits off the ground even under heavy loads, and they exhibit intermediate resistance to bacterial wilt. Arjani F1 thrives in well-drained, fertile soils, maturing for harvest in 60-70 days.",
+    "maturity": "60-70 days",
+    "diseaseResistance": "Intermediate resistance to bacterial wilt"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 54000,
+          "priceFormatted": "UGX 54,000",
+          "totalPrice": 54000,
+          "totalFormatted": "UGX 54,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

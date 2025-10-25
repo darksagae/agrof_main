@@ -13,11 +13,14 @@ const InventoryReports = require('./inventory-reports');
 // Product translation service
 const loadProductTranslations = async (language = 'en') => {
   try {
-    const translationPath = path.join(__dirname, `../agrof-main/mobile/app/locales/products_${language}.json`);
+    const translationPath = path.join(__dirname, `locales/products_${language}.json`);
+    console.log(`🌍 Loading translations from: ${translationPath}`);
     if (await fs.pathExists(translationPath)) {
       const translationData = await fs.readJson(translationPath);
+      console.log(`✅ Loaded ${Object.keys(translationData).length} translation keys for ${language}`);
       return translationData;
     }
+    console.log(`❌ Translation file not found: ${translationPath}`);
     return {};
   } catch (error) {
     console.error(`Error loading translations for ${language}:`, error);
@@ -30,6 +33,7 @@ const translateProduct = (product, translations) => {
   
   // Create a mapping from product names to translation keys
   const productNameMapping = {
+    // Seeds
     'Sugar Baby Watermelon Seeds': 'sugar_baby',
     'Julie F1 Watermelon Seeds': 'julie_f1',
     'Drumhead Cabbage Seeds': 'drumhead_cabbage',
@@ -41,10 +45,42 @@ const translateProduct = (product, translations) => {
     'Drumhead': 'drumhead_cabbage',
     'Copenhagen': 'copenhagen_cabbage',
     'Corriander Dhania': 'coriander_dhania',
+    // Fertilizers
     'Ammonium Sulphate': 'ammonium_sulphate',
     'Urea (Prilled)': 'urea',
     'Dap': 'dap',
-    'DAP': 'dap'
+    'DAP': 'dap',
+    // TOOLS
+    'Agriscope Knapsack Sprayer': 'agriscope_knapsack_sprayer',
+    'Bird Protection / Floriculture Net': 'bird_protection_floriculture_net',
+    'Bomba Kaliba – Knapsack Sprayer': 'bomba_kaliba_knapsack_sprayer',
+    'CP15 Evolution – Sprayer': 'cp15_evolution_sprayer',
+    'Climatesmart Direct with Rainmaker 2S': 'climatesmart_direct_with_rainmaker_2s',
+    'Echo 20L Pump': 'echo_20l_pump',
+    'Electric Spray Pump': 'electric_spray_pump',
+    'Farmate - Spray Pump': 'farmate_spray_pump',
+    'Garden Fork / Spading Fork': 'garden_fork_spading_fork',
+    'Grain Plastic Silos': 'grain_plastic_silos',
+    'Grape Net': 'grape_net',
+    'Hoe Handle': 'hoe_handle',
+    'Hoe – Peacock Brand': 'hoe_peacock_brand',
+    'Jectto Manual Pump 16Ltrs': 'jectto_manual_pump_16ltrs',
+    'Makula Knapsack Sprayer': 'makula_knapsack_sprayer',
+    'Nurserybed - Potting Bags': 'nurserybed_potting_bags',
+    'Panga': 'panga',
+    'Pick Axe': 'pick_axe',
+    'Protective Gear (Coat/Overall)': 'protective_gear_coat_overall',
+    'Pruning Saw': 'pruning_saw',
+    'Rubber Gloves (Protective Gear)': 'rubber_gloves_protective_gear',
+    'Safety Gumboots - Gayu (Yellow)': 'safety_gumboots_gayu_yellow',
+    'Sharpening File': 'sharpening_file',
+    'Slasher': 'slasher',
+    'Smart Sensor Grain Moisture Meter': 'smart_sensor_grain_moisture_meter',
+    'Stanes Entrap Fruit Fly Trap': 'stanes_entrap_fruit_fly_trap',
+    'Tape Measure': 'tape_measure',
+    'Tarpaulin': 'tarpaulin',
+    'Tarpaulin (Twebaze)': 'tarpaulin_twebaze',
+    'Watering Can (10L, Plastic)': 'watering_can_10l_plastic'
   };
   
   // Try to find the translation key
@@ -109,9 +145,28 @@ app.use(express.urlencoded({ extended: true }));
 const messagingRoutes = require('./messaging');
 app.use('/api', messagingRoutes);
 
+// Import admin routes
+const adminRoutes = require('./admin-routes');
+app.use('/api/admin', adminRoutes);
+
 // Serve static files from the store directory
-const storePath = path.join(__dirname, '../agrof-main/mobile/app/assets/store');
+const storePath = path.join(__dirname, 'store');
 app.use('/api/images', express.static(storePath));
+
+// Serve SEEDS images from mobile app assets (mounted at /app/store in Docker)
+const seedsImagesPath = storePath; // Already points to /app/store in Docker
+app.use('/images', express.static(seedsImagesPath));
+console.log('📸 Serving SEEDS images from:', seedsImagesPath);
+
+// Serve TOOLS images from mobile app assets
+const toolsImagesPath = path.join(__dirname, '../agrof-main/mobile/app/assets/store/tools');
+app.use('/images/tools', express.static(toolsImagesPath));
+console.log('🔧 Serving TOOLS images from:', toolsImagesPath);
+
+// Serve category images from mobile app assets
+const categoryImagesPath = path.join(__dirname, '../agrof-main/mobile/app/assets');
+app.use('/images', express.static(categoryImagesPath));
+console.log('📁 Serving category images from:', categoryImagesPath);
 
 // Database setup
 const dbPath = path.join(__dirname, 'store.db');
@@ -461,9 +516,16 @@ const populateDatabase = async () => {
               }
               
               const productFiles = await fs.readdir(itemPath);
-              const imageFile = productFiles.find(file => 
-                /\.(jpg|jpeg|png|gif)$/i.test(file)
+              // Prioritize standardized image names first, then fall back to any image
+              let imageFile = productFiles.find(file => 
+                file.toLowerCase() === 'image.png' || file.toLowerCase() === 'image.jpg' || file.toLowerCase() === 'image.jpeg'
               );
+              // If no standardized image found, use any image file
+              if (!imageFile) {
+                imageFile = productFiles.find(file => 
+                  /\.(jpg|jpeg|png|gif)$/i.test(file)
+                );
+              }
               
               // Check for individual product .md file
               const productMdFile = productFiles.find(file => file === 'product.md');
@@ -554,6 +616,44 @@ const populateDatabase = async () => {
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'AGROF Store Backend is running' });
+});
+
+// Get agricultural news
+app.get('/api/news', (req, res) => {
+  const { type, priority, location, limit = 50 } = req.query;
+  
+  let query = 'SELECT * FROM agricultural_news WHERE status = ?';
+  const params = ['active'];
+  
+  if (type) {
+    query += ' AND type = ?';
+    params.push(type);
+  }
+  
+  if (priority) {
+    // Handle comma-separated priorities (e.g., "urgent,high")
+    const priorities = priority.split(',').map(p => p.trim());
+    const placeholders = priorities.map(() => '?').join(',');
+    query += ` AND priority IN (${placeholders})`;
+    params.push(...priorities);
+  }
+  
+  if (location) {
+    query += ' AND location = ?';
+    params.push(location);
+  }
+  
+  query += ' ORDER BY priority DESC, created_at DESC LIMIT ?';
+  params.push(parseInt(limit));
+  
+  db.all(query, params, (err, rows) => {
+    if (err) {
+      console.error('Error fetching news:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows || []);
+  });
 });
 
 // Get all categories

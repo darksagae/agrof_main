@@ -1,0 +1,95 @@
+{
+  "productName": "Green Bunching – Onion, Non-bulbing Alliums That Produce Yummy Green Stems",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Onion",
+  "displayPrice": "UGX 5,398",
+  "lowestPrice": 5398,
+  "lowestPackage": "10g @ 20+ units",
+  "details": {
+    "description": "Green Bunching are perennial non-bulbing alliums that produce yummy green stems and tiny white roots, year after year. They have thick, round, hollow stems that are bright green in color, and unique and lovely greenish white flowers. The leaves have a mild onion flavor and are edible raw or cooked."
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5700,
+          "priceFormatted": "UGX 5,700",
+          "totalPrice": 5700,
+          "totalFormatted": "UGX 5,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 5501,
+          "priceFormatted": "UGX 5,501",
+          "totalPrice": 27505,
+          "totalFormatted": "UGX 27,505",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 5501,
+          "priceFormatted": "UGX 5,501",
+          "totalPrice": 55010,
+          "totalFormatted": "UGX 55,010",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 5398,
+          "priceFormatted": "UGX 5,398",
+          "totalPrice": 107960,
+          "totalFormatted": "UGX 107,960",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 16500,
+          "priceFormatted": "UGX 16,500",
+          "totalPrice": 16500,
+          "totalFormatted": "UGX 16,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 15906,
+          "priceFormatted": "UGX 15,906",
+          "totalPrice": 79530,
+          "totalFormatted": "UGX 79,530",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 15906,
+          "priceFormatted": "UGX 15,906",
+          "totalPrice": 159060,
+          "totalFormatted": "UGX 159,060",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 15906,
+          "priceFormatted": "UGX 15,906",
+          "totalPrice": 318120,
+          "totalFormatted": "UGX 318,120",
+          "discountPercent": 4
+        }
+      ]
+    }
+  ]
+}

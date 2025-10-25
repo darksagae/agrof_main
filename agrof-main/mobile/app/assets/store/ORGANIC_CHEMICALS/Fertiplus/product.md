@@ -1,75 +1,33 @@
-# Fertiplus - Organic Fertilizer
+# Fertiplus 4-3-3-65 Organic Fertilizer
 
 ## Overview
-Fertiplus is a premium organic fertilizer made from natural ingredients, providing essential nutrients for healthy plant growth. This organic product improves soil structure, enhances nutrient availability, and promotes sustainable agriculture.
+Fertiplus Organic Fertilizer 4-3-3-65 OM is a well-known 100% Organic Fertilizer pellet, ecologic/environmentally friendly and hygienic. The organic material contains mostly humic acid structures which benefit soils in facilitating its nutrient availability. Composition: Dry Matter 88% min; Moisture 12% max; Organic Matter 65%; Nitrogen (Total) 4.2%; Phosphorus 3.0%; Potassium 2.8%; Calcium 9%; Magnesium 1%; Sulphur 1.5% + Trace elements. pH:6.4, Pellet diameter: 5-6mm
 
-## Specifications
-Organic Matter: >70%
-Nitrogen Content: 2-3%
-Phosphorus Content: 1-2%
-Potassium Content: 1-2%
-pH Level: 6.5-7.5
-Moisture Content: <30%
-Form: Granular
-Packaging: 25kg, 50kg bags
+## Supplier
+**Fertiplus Organic Ltd**
 
-## Key Features
-100% organic and natural
-Rich in organic matter
-Improves soil structure
-Enhances nutrient availability
-Safe for all plants
-Environmentally friendly
-Long-lasting effect
+## Product Specifications
 
-## Usage Instructions
-Soil Amendment: Mix 2-3kg per square meter
-Potting Mix: Add 20-30% to potting soil
-Top Dressing: Apply 1-2kg per plant
-Timing: Apply at planting and during growing season
-Frequency: 2-3 applications per season
+### Application
+Considerable saving in mineral Fertilizers, and a reduction of mineral Fertilizers application in the soil
 
-## Application Method
-Soil Incorporation: Mix thoroughly into soil
-Top Dressing: Apply around plant base
-Mulching: Spread as surface mulch
-Compost Tea: Use as liquid fertilizer
+## Pricing
 
-## Benefits
-Soil Health: Improves soil structure and fertility
-Nutrient Supply: Provides slow-release nutrients
-Water Retention: Improves soil water-holding capacity
-Root Development: Promotes healthy root growth
-Microbial Activity: Increases beneficial soil microorganisms
-Organic Certification: Suitable for organic farming
+**Price**: UGX 79,875
 
-## Price Information
-Per 25kg bag: UGX 50,000
-Per 50kg bag: UGX 90,000
-Bulk orders (10+ bags): UGX 45,000 per 25kg bag
-Wholesale (50+ bags): UGX 40,000 per 25kg bag
+### Available Packages
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+**25kg**:
+- 1+ units: UGX 79,875/unit
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain proper ventilation
-Shelf life: 12 months from manufacturing date
+## Why Buy From Us?
+- ✓ 100% Organic and certified
+- ✓ Trusted supplier
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Safety Information
-Safe for all plants and animals
-No harmful chemicals
-Safe for children and pets
-Store away from food items
-Use protective equipment during application
-
-## Contact Information
-Phone: +256 700 123 456
-Email: organic@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

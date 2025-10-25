@@ -1,0 +1,22 @@
+{
+  "productName": "Atwalira - Banana T.c Plantlet",
+  "supplier": "Senai Farm Supplies",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 3,600",
+  "lowestPrice": 3600,
+  "productDetails": "These are laboratory bred, clean Tissue culture plantlets, free from pests and diseases. Banana type: Matooke (cooking) banana; Planting to harvest: 13-14 months; Susceptibility to weevils: Moderate; Susceptibility to wilt: Not susceptible; Average finger size: Medium and medium long; Av bunch size: Medium; Food texture: Medium soft.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 T.C Plantlet",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3600,
+          "priceFormatted": "UGX 3,600"
+        }
+      ]
+    }
+  ]
+}

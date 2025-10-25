@@ -1,0 +1,58 @@
+{
+  "productName": "Namuche 3",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Rice",
+  "displayPrice": "UGX 5,286",
+  "lowestPrice": 5286,
+  "lowestPackage": "1kg @ 20+ units",
+  "details": {
+    "description": "Namuche 3 is a high yielding rice variety with excellent milling ability.",
+    "daysToMaturity": "92 days",
+    "yieldPotential": "1.6-2.3 tons per acre",
+    "seedRate": "30-40kg/acre",
+    "specialAttributes": "High yielding and excellent milling ability"
+  },
+  "packages": [
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5500,
+          "priceFormatted": "UGX 5,500",
+          "totalPrice": 5500,
+          "totalFormatted": "UGX 5,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 5392,
+          "priceFormatted": "UGX 5,392",
+          "totalPrice": 26960,
+          "totalFormatted": "UGX 26,960",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 5392,
+          "priceFormatted": "UGX 5,392",
+          "totalPrice": 53920,
+          "totalFormatted": "UGX 53,920",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 5286,
+          "priceFormatted": "UGX 5,286",
+          "totalPrice": 105720,
+          "totalFormatted": "UGX 105,720",
+          "discountPercent": 4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "productName": "Water Melon Pata Negra",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Watermelon",
+  "displayPrice": "UGX 89,640",
+  "lowestPrice": 89640,
+  "lowestPackage": "1000 Seeds @ 1+ units",
+  "details": {
+    "description": "High yielding variety with production potential of 46 t/acre. Very sweet brilliant red, crisp flesh. Early maturing variety 100-120 days. Dark green round uniform fruit 7-10 kg in weight. Vigorous plant with good fruit cover. Thick rind making the variety excellent for long distance shipping. Variety resistant to Fusarium wilt. Number of seeds per gram: 23-27",
+    "yieldPotential": "46 t/acre",
+    "maturity": "100-120 days",
+    "fruitWeight": "7-10 kg",
+    "seedsPerGram": "23-27"
+  },
+  "packages": [
+    {
+      "size": "1000 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 89640,
+          "priceFormatted": "UGX 89,640",
+          "totalPrice": 89640,
+          "totalFormatted": "UGX 89,640",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "5000 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 415800,
+          "priceFormatted": "UGX 415,800",
+          "totalPrice": 415800,
+          "totalFormatted": "UGX 415,800",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "10000 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 789000,
+          "priceFormatted": "UGX 789,000",
+          "totalPrice": 789000,
+          "totalFormatted": "UGX 789,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

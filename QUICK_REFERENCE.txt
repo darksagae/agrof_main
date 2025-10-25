@@ -1,0 +1,136 @@
+╔══════════════════════════════════════════════════════════════╗
+║     🤖 WHATSAPP BOT & AUTOMATION ENGINE - QUICK REF         ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│ CURRENT STATUS                                               │
+├──────────────────────────────────────────────────────────────┤
+│ ✅ WhatsApp Bot:      RUNNING (PID: 398628)                 │
+│ ✅ Automation Engine: RUNNING (PID: 678863, Port: 3002)     │
+│ ✅ Store Backend:     RUNNING (Port: 3001)                  │
+│ ✅ AI Backend:        RUNNING (Port: 5000)                  │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ RESTART WHATSAPP BOT (load new config)                      │
+├──────────────────────────────────────────────────────────────┤
+│ pkill -f bot.js                                              │
+│ cd /home/darksagae/Desktop/agrof-auto/whatsapp-bot          │
+│ nohup node bot.js > /tmp/whatsapp-bot.log 2>&1 &            │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ TEST WHATSAPP BOT (send via WhatsApp)                       │
+├──────────────────────────────────────────────────────────────┤
+│ hi              - Greeting & menu                            │
+│ products        - List products                              │
+│ order           - Start order                                │
+│ help            - Show commands                              │
+│ status          - Order status                               │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ AUTOMATION ENGINE API                                        │
+├──────────────────────────────────────────────────────────────┤
+│ Health:         curl http://192.168.0.105:3002/api/health   │
+│ Workflows:      curl http://192.168.0.105:3002/api/workflows│
+│ Schedules:      curl http://192.168.0.105:3002/api/schedules│
+│ Executions:     curl http://192.168.0.105:3002/api/executions│
+│ Web UI:         http://192.168.0.105:3002                   │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ VIEW LOGS                                                    │
+├──────────────────────────────────────────────────────────────┤
+│ WhatsApp:       tail -f /tmp/whatsapp-bot.log               │
+│ Automation:     tail -f /tmp/automation-engine.log          │
+│ Store:          (running in foreground or check process)     │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ ADD ADMIN NUMBERS (receive WhatsApp alerts)                 │
+├──────────────────────────────────────────────────────────────┤
+│ nano /home/darksagae/Desktop/agrof-auto/whatsapp-bot/.env   │
+│                                                              │
+│ Add line:                                                    │
+│ ADMIN_NUMBERS=256701234567,256789876543                     │
+│                                                              │
+│ (Use country code, no + sign, comma-separated)              │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ AVAILABLE WORKFLOWS (Pre-loaded)                            │
+├──────────────────────────────────────────────────────────────┤
+│ 1. Low Stock Alert     - Monitor inventory                  │
+│ 2. Daily Sales Report  - Generate daily summary             │
+│ 3. Order Notification  - Alert on new orders                │
+│ 4. Restock Reminder    - Schedule restock alerts            │
+│ 5. Customer Follow-up  - Send follow-up messages            │
+│ 6. Automated Backup    - Schedule data backups              │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ INTEGRATION FLOW                                             │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  Customer ──► WhatsApp Bot ──► Store Backend                │
+│                    │                   │                     │
+│                    └──► Automation Engine                    │
+│                             │                                │
+│                             └──► Triggers workflows          │
+│                                      │                       │
+│                                      └──► Actions:           │
+│                                          • Send WhatsApp     │
+│                                          • Update inventory  │
+│                                          • Create orders     │
+│                                          • Generate reports  │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ EXAMPLE: TRIGGER WORKFLOW                                   │
+├──────────────────────────────────────────────────────────────┤
+│ curl -X POST http://192.168.0.105:3002/api/workflows/execute│
+│   -H "Content-Type: application/json" \                     │
+│   -d '{                                                      │
+│     "workflowId": "low_stock_alert",                        │
+│     "data": {                                               │
+│       "product": "Fertilizer XYZ",                          │
+│       "current_stock": 5,                                   │
+│       "minimum_stock": 20                                   │
+│     }                                                        │
+│   }'                                                         │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ EXAMPLE: SCHEDULE DAILY REPORT                              │
+├──────────────────────────────────────────────────────────────┤
+│ curl -X POST http://192.168.0.105:3002/api/schedules \      │
+│   -H "Content-Type: application/json" \                     │
+│   -d '{                                                      │
+│     "workflowId": "daily_report",                           │
+│     "cronExpression": "0 18 * * *",                         │
+│     "timezone": "Africa/Kampala",                           │
+│     "name": "Daily Inventory Report at 6 PM"               │
+│   }'                                                         │
+└──────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│ TROUBLESHOOTING                                              │
+├──────────────────────────────────────────────────────────────┤
+│ Check services:                                              │
+│   ps aux | grep -E "node.*(bot|automation)"                 │
+│                                                              │
+│ Check ports:                                                 │
+│   ss -tlnp | grep -E "(3001|3002|5000)"                     │
+│                                                              │
+│ Test connectivity:                                           │
+│   curl http://192.168.0.105:3001/api/health  # Store        │
+│   curl http://192.168.0.105:3002/api/health  # Automation   │
+│   curl http://192.168.0.105:5000/health      # AI           │
+└──────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ 📚 DOCUMENTATION: WHATSAPP_AUTOMATION_GUIDE.md              ║
+║ 📊 FULL STATUS: ALL_SERVICES_STATUS.md                      ║
+║ ✅ ALL SYSTEMS OPERATIONAL!                                 ║
+╚══════════════════════════════════════════════════════════════╝

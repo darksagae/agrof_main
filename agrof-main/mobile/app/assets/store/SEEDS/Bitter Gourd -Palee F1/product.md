@@ -1,89 +1,37 @@
-# Bitter Gourd Palee F1 Seeds
+# Bitter Gourd -Palee F1
 
 ## Overview
-Bitter Gourd Palee F1 is a high-yielding hybrid bitter gourd variety known for its excellent fruit quality, disease resistance, and adaptability to various growing conditions. This variety produces uniform, tender fruits with excellent flavor and market appeal.
+Bitter Gourd Palee F1 seeds are high-yielding, hybrid seeds that produce vigorous plants with uniform, slender, dark green fruits ideal for culinary and medicinal use. They thrive in warm Ugandan climates with well-drained, fertile soils and require planting in raised beds or ridges, spaced 60-90 cm apart, and regular watering to maintain soil moisture. With a maturity period of 50-60 days from planting, these seeds offer early harvests and are resistant to common pests and diseases.
 
-## Specifications
-Variety: Hybrid F1 Bitter Gourd
-Fruit Shape: Long, cylindrical
-Fruit Length: 20-25cm
-Days to Maturity: 70-75 days
-Plant Type: Vining, indeterminate
-Fruit Color: Light green
-Flesh Color: White, tender
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Naseco 1996 Ltd**
 
-## Key Features
-High yield potential
-Uniform fruit size
-Excellent flavor
-Disease resistance
-Tender texture
-Suitable for containers
-Market preferred variety
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 25-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 90cm x 90cm between plants
+- **Maturity**: 50-60 days from planting
+- **Spacing**: 60-90 cm apart
 
-## Usage Instructions
-- **Variety type**: High-yielding, hybrid seeds that produce vigorous plants with uniform, slender, dark green fruits
-- **Plant characteristics**: Vigorous plants with uniform, slender, dark green fruits ideal for culinary and medicinal use
-- **Growing conditions**: Thrive in warm Ugandan climates with well-drained, fertile soils
-- **Planting method**: Require planting in raised beds or ridges, spaced 60-90 cm apart
-- **Watering**: Regular watering to maintain soil moisture
-- **Maturity period**: 50-60 days from planting
-- **Disease resistance**: Resistant to common pests and diseases
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: After last frost, when soil temperature is 20°C+
+## Pricing
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: High-yielding, hybrid bitter gourd for culinary and medicinal use
-- **Spacing**: 60-90 cm apart in raised beds or ridges
-- **Soil requirements**: Well-drained, fertile soils
-- **Watering**: Regular watering to maintain soil moisture
-- **Disease resistance**: Resistant to common pests and diseases
+**Best Price**: UGX 17,000 (10g @ 1+ units)
 
-## Benefits
-- **High-yielding hybrid**: High-yielding, hybrid seeds that produce vigorous plants
-- **Uniform fruits**: Uniform, slender, dark green fruits ideal for culinary and medicinal use
-- **Warm climate adaptation**: Thrive in warm Ugandan climates
-- **Disease resistance**: Resistant to common pests and diseases
-- **Early maturity**: 50-60 days from planting
-- **Versatile use**: Ideal for both commercial and home farming
-- **Profit potential**: High return on investment
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 32,000
-Per 5000 seeds: UGX 140,000
-Per 10000 seeds: UGX 260,000
-Bulk orders: Contact for pricing
+**10g**:
+- 1+ units: UGX 17,000/unit
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**50g**:
+- 1+ units: UGX 77,000/unit
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
-
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

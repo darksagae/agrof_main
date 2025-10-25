@@ -1,0 +1,36 @@
+{
+  "productName": "Superagric Soil And Vegetable",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 37,800",
+  "lowestPrice": 37800,
+  "productDetails": "The combination of microbes in Super Agric, have a reviving action on an ecosystem and are completely safe to use. In the soil Super Agric will function by increasing the beneficial microbes which will improve soil health and function. Super Agric will also improve fertiliser effectiveness by reducing leaching and improving plant availability leading to increased performance in your farming system, and improves seeds germination. Active Ingredients: Beneficial Microorganisms and Organic Preservatives",
+  "specifications": {
+    "Directions for use": "Dilute 1L to 50L of non-chlorine water. Apply 150 - 250L per acre during growth stages. Irrigation system. Rates of 250L per acre are recommended",
+    "Key Benefits": "Converting organic matter to plant nutrients, Fixing atmospheric nitrogen, Decomposing organic residues, Recycling soil nutrients"
+  },
+  "packages": [
+    {
+      "size": "1ltr",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 37800,
+          "priceFormatted": "UGX 37,800"
+        }
+      ]
+    },
+    {
+      "size": "5ltr",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 180800,
+          "priceFormatted": "UGX 180,800"
+        }
+      ]
+    }
+  ]
+}

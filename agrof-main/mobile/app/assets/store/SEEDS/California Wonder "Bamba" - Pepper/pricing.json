@@ -1,0 +1,57 @@
+{
+  "productName": "California Wonder \"Bamba\" - Pepper",
+  "supplier": "Home Harvest (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 21,809",
+  "lowestPrice": 21809,
+  "lowestPackage": "50g @ 10+ units",
+  "details": {
+    "description": "California Wonder \"Bamba\" has an erect plant with good vigor. It has a very good production of green deep blocky fruits with smooth skin.",
+    "yieldPotential": "15-20 tons under good management",
+    "seedRate": "100g per acre",
+    "spacing": "60cm x 45cm"
+  },
+  "packages": [
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 23300,
+          "priceFormatted": "UGX 23,300",
+          "totalPrice": 23300,
+          "totalFormatted": "UGX 23,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 21995,
+          "priceFormatted": "UGX 21,995",
+          "totalPrice": 109975,
+          "totalFormatted": "UGX 109,975",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 21809,
+          "priceFormatted": "UGX 21,809",
+          "totalPrice": 218090,
+          "totalFormatted": "UGX 218,090",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 21809,
+          "priceFormatted": "UGX 21,809",
+          "totalPrice": 436180,
+          "totalFormatted": "UGX 436,180",
+          "discountPercent": 6
+        }
+      ]
+    }
+  ]
+}

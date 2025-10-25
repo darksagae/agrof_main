@@ -1,0 +1,30 @@
+{
+  "productName": "Demon F1-Hotpaper",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 480,000",
+  "lowestPrice": 480000,
+  "lowestPackage": "50g @ 1+ units",
+  "details": {
+    "description": "The plants are tall with the production of concentrated fruits which grow upwards. Demon's appeal is fruit quality, bright colour, uniform fruit (8*1cm) and firmness. Maturity: 70-75 days. Color: Red. Length: 7-9 cm. Diameter: 0.9-1.1 cm. Plant vigour: strong",
+    "maturity": "70-75 days",
+    "fruitLength": "7-9 cm",
+    "fruitDiameter": "0.9-1.1 cm"
+  },
+  "packages": [
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 480000,
+          "priceFormatted": "UGX 480,000",
+          "totalPrice": 480000,
+          "totalFormatted": "UGX 480,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

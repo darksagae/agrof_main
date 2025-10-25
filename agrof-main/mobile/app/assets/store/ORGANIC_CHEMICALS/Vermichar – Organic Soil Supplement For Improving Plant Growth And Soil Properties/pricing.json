@@ -1,0 +1,36 @@
+{
+  "productName": "Vermichar – Organic Soil Supplement",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 22,500",
+  "lowestPrice": 22500,
+  "productDetails": "Vermichar is used as a sustainable approach for improving plant Growth and soil properties. Vermichar application to the soil is a practical method to increase crop yield and enhance pesticide degradation. Active Ingredients: Activated carbon, Enzymes and beneficial micro-organisms",
+  "specifications": {
+    "Directions for use": "In general gardening, Incorporate 1-5kg/m2 into the soil to a depth of 10cm before planting. In horticulture, incorporate 10% volume into soil before planting. In tree plantations like coffee, put into furrows or holes, or broadcast, and then cover with soil timely",
+    "Key Benefits": "Enhances plant growth, Habitat for microbes, Retains moisture, Holds nutrients"
+  },
+  "packages": [
+    {
+      "size": "5kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 22500,
+          "priceFormatted": "UGX 22,500"
+        }
+      ]
+    },
+    {
+      "size": "10kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 42800,
+          "priceFormatted": "UGX 42,800"
+        }
+      ]
+    }
+  ]
+}

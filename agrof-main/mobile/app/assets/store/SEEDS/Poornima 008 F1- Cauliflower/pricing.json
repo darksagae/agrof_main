@@ -1,0 +1,29 @@
+{
+  "productName": "Poornima 008 F1- Cauliflower",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Cauliflower",
+  "displayPrice": "UGX 20,000",
+  "lowestPrice": 20000,
+  "lowestPackage": "1000 Seeds @ 1+ units",
+  "details": {
+    "description": "Plant: Large compact, & Erect, Curd: Compact, dome shape, white colour with good leaf coverage, Average curd weight: 1.5 Kg, Duration: Harvest starts in about 70 days from planting, Remarks: Late maturing hybrid.",
+    "averageCurdWeight": "1.5 Kg",
+    "harvestDuration": "70 days from planting"
+  },
+  "packages": [
+    {
+      "size": "1000 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 20000,
+          "priceFormatted": "UGX 20,000",
+          "totalPrice": 20000,
+          "totalFormatted": "UGX 20,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

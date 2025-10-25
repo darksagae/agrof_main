@@ -1,0 +1,22 @@
+{
+  "productName": "Coriander Seedlings",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Coriander is a very beautiful annual herb. Its green shade and the shape of the leaves come together perfectly. It is used as spice giving food an extra delicious taste. It has essential oils and vitamins associated with various health benefits such as immunity boosting, Regulation of blood sugars, anti-inflammatory, and anti-cancer properties. It matures very fast with the ability to bare edible mass in about 4-6 weeks.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

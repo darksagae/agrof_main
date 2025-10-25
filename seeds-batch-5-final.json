@@ -1,0 +1,187 @@
+[
+  {
+    "id": 62,
+    "name": "Kifaru F1 – Red Cabbage",
+    "folder": "Kifaru F1 – Red Cabbage",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "Maturity: 68-72 days, plant vigour: Moderate, Shape: round, colour: bright red, Head diameter: 12-14cm, Head depth: 12-14cm, Average head weight: 1.2-1.4kg, Special attributes: Attractive red colour, firm heads, wide adaptability; recommended for semi tropical climate.",
+      "maturity": "68-72 days",
+      "averageHeadWeight": "1.2-1.4kg",
+      "headDiameter": "12-14cm"
+    },
+    "packages": [
+      { "size": "1000 Seeds", "tiers": [
+        { "qty": 5, "price": 19636 },
+        { "qty": 10, "price": 19273 }
+      ]}
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Poornima 008 F1 - Cauliflower",
+    "folder": "Poornima 008 F1- Cauliflower",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Cauliflower",
+    "details": {
+      "description": "Plant: Large compact, & Erect, Curd: Compact, dome shape, white colour with good leaf coverage, Average curd weight: 1.5 Kg, Duration: Harvest starts in about 70 days from planting, Remarks: Late maturing hybrid.",
+      "averageCurdWeight": "1.5 Kg",
+      "harvestDuration": "70 days from planting"
+    },
+    "packages": [
+      { "size": "1000 Seeds", "tiers": [
+        { "qty": 1, "price": 20000 }
+      ]}
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Arjani F1 - Eggplants",
+    "folder": "Arjani F1 - Eggplants",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Eggplant",
+    "details": {
+      "description": "Arjani F1 eggplant seeds are a high-yielding hybrid variety known for producing uniform, glossy dark purple fruits with a smooth texture, ideal for both local and commercial markets. These plants are vigorous, with an erect habit that keeps fruits off the ground even under heavy loads, and they exhibit intermediate resistance to bacterial wilt. Arjani F1 thrives in well-drained, fertile soils, maturing for harvest in 60-70 days.",
+      "maturity": "60-70 days",
+      "diseaseResistance": "Intermediate resistance to bacterial wilt"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 1, "price": 54000 }
+      ]}
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Femi F1 – Hybrid Eggplant",
+    "folder": "Femi F1 – Hybrid Eggplant Variety",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Eggplant",
+    "details": {
+      "description": "Femi F1 is an improved Eggplant hybrid in terms of yield, shelf life and bacterial wilt resistance. The Fruits are very glossy day violet with a smooth skin and excellent firmness. Flesh color is white. It is widely adaptable to a range of growing conditions and ideal for areas where bacterial wilt occurs.",
+      "diseaseResistance": "Bacterial wilt resistance"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 1, "price": 51000 }
+      ]}
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Demon F1 - Hotpaper",
+    "folder": "Demon F1-Hotpaper",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Pepper",
+    "details": {
+      "description": "The plants are tall with the production of concentrated fruits which grow upwards. Demon's appeal is fruit quality, bright colour, uniform fruit (8*1cm) and firmness. Maturity: 70-75 days. Color: Red. Length: 7-9 cm. Diameter: 0.9-1.1 cm. Plant vigour: strong",
+      "maturity": "70-75 days",
+      "fruitLength": "7-9 cm",
+      "fruitDiameter": "0.9-1.1 cm"
+    },
+    "packages": [
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 480000 }
+      ]}
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Maradona F1 – Hybrid Papaya",
+    "folder": "Maradona F1 – Hybrid Papayapawpaw",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Papaya",
+    "details": {
+      "description": "Maradona F1 is a Hybrid with dwarf and strong plants and high setting ability. It bares uniform fruits (1.5-2kg) in shape and size. Fruit flesh is firm, thick and has a very sweet taste (brix: 12-14). It's dwarf growth habit makes it a superior variety since it does not grow very tall making it easy and cost effective to harvest. Intermediate resistant to PRSV and Anthrachnose. Days to maturity: 210-240. Color: Orange. Flowering habit: Dwarf.",
+      "fruitWeight": "1.5-2kg",
+      "brix": "12-14",
+      "maturity": "210-240 days",
+      "diseaseResistance": "Intermediate resistant to PRSV and Anthrachnose"
+    },
+    "packages": [
+      { "size": "10 Seeds", "tiers": [
+        { "qty": 1, "price": 7500 }
+      ]}
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Kaveri F1 – Sweet Pepper",
+    "folder": "Kaveri F1 – Sweet Pepper",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Pepper",
+    "details": {
+      "description": "Days to maturity after transplant: 70-75 days, Plant vigour: Strong, Fruit length: 8-9cm, Fruit diameter: 8-9cm, Thick fruit walls, Fruit colour: Dark green when immature and bright red when mature, Special attributes: It shows a good combination of vegetative power and earliness; high yielding",
+      "maturity": "70-75 days after transplant",
+      "fruitLength": "8-9cm",
+      "fruitDiameter": "8-9cm"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 1, "price": 47000 }
+      ]}
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Tandi F1 – Tomato",
+    "folder": "Tandi F1 – Tomato",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "Tandi F1 tomato is so outstanding in performance when it comes to earliness, yields, fruit size and quality. It is recommended for Tropical Midland growing condition, dry season. Plant habit is compact and small. Closer planting distance can be considered. Fruit set is easy and concentrated, Fruit shape is elongated blocky and large in size. Fruit firmness and shelf life is rated high. Seed rate: 100 grams per acre, Maturity: 65-75 days after transplanting. Plant Vigour: Medium strong.",
+      "seedRate": "100 grams per acre",
+      "maturity": "65-75 days after transplanting"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 1, "price": 63000 }
+      ]},
+      { "size": "100 Seeds", "tiers": [
+        { "qty": 1, "price": 6000 }
+      ]}
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Sugar King - Sweet Corn",
+    "folder": "Sugar King - Sweet Corn",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Corn",
+    "details": {
+      "description": "Sugar King matures between 71-75 days. It has yellow colour with an average length of 20-21 cm. Its resistant to diseases like corn leaf blight and also is sweet with a good shelf life",
+      "maturity": "71-75 days",
+      "averageLength": "20-21 cm",
+      "diseaseResistance": "Resistant to corn leaf blight"
+    },
+    "packages": [
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 62000 }
+      ]}
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Sc Duma 43 – Maize Seed",
+    "folder": "Sc Duma 43 – Maize Seed (Agro Supply)",
+    "supplier": "Agro Supply Uganda Limited",
+    "category": "Maize",
+    "details": {
+      "description": "This is a very Early maturing, Drought resilient variety with wide adaptability scope. Duma is the Swahili name for cheetah and just like the cheetah, Duma 43 is known for its speed. It is a very early maturing maize hybrid. SC Duma 43 is in the 400 series and is a heat and drought tolerant hybrid. It has high shelling percentage with hard dent grain texture and a good disease tolerant package. It has very white grain colour with excellent cob rot tolerance. This variety is good for inter-cropping regimes. It matures between 85-90 days. Expected yield per acre is 30-32 bags (90kg) per acre with good agronomy practices. Seed rate: 10kgs/Acre.",
+      "maturity": "85-90 days",
+      "yieldPerAcre": "30-32 bags (90kg) per acre",
+      "seedRate": "10kgs/Acre"
+    },
+    "packages": [
+      { "size": "2kg", "tiers": [
+        { "qty": 1, "price": 23000 }
+      ]}
+    ]
+  }
+]
+
+
+
+
+

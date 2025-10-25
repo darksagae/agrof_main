@@ -22,7 +22,8 @@ class CropPlanningService {
         spacing: '60cm × 45cm',
         plants_per_acre: 18000,
         expected_yield_tons: '8-12',
-        market_price_per_kg: { min: 1500, max: 2500 },
+        market_price_min: 1500,
+        market_price_max: 2500,
         seed_categories: ['seeds'],
         seed_keywords: ['tomato', 'maxim', 'tengeru', 'cal-j'],
         fertilizer_plan: [
@@ -511,10 +512,10 @@ class CropPlanningService {
   calculateROI(totalCost, cropData, acres) {
     let revenueMin, revenueMax;
 
-    if (cropData.market_price_per_kg) {
+    if (cropData.market_price_min) {
       const [minYield, maxYield] = cropData.expected_yield_tons.split('-').map(n => parseInt(n) * 1000); // to kg
-      revenueMin = minYield * acres * cropData.market_price_per_kg.min;
-      revenueMax = maxYield * acres * cropData.market_price_per_kg.max;
+      revenueMin = minYield * acres * cropData.market_price_min;
+      revenueMax = maxYield * acres * cropData.market_price_max;
     } else if (cropData.market_price_per_bag) {
       const [minYield, maxYield] = cropData.expected_yield_bags.split('-').map(n => parseInt(n));
       revenueMin = minYield * acres * cropData.market_price_per_bag.min;

@@ -1,0 +1,60 @@
+{
+  "productName": "Galia F1 – Sweet Melon With Firm Fruits, Aromatic Flavour",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Melon",
+  "displayPrice": "UGX 21,996",
+  "lowestPrice": 21996,
+  "lowestPackage": "10g @ 10+ units",
+  "details": {
+    "description": "Galia F1 is very sweet Melon with firm fruits, aromatic flavour. Tolerant to fusarium wilt race 0 and powdery mildew.",
+    "maturityDaysAfterSowing": "70 days",
+    "spacing": "150cm x 60cm",
+    "seedRate": "600grams/acre",
+    "averageFruitWeight": "0.8-1.2kgs",
+    "shape": "Globe shaped fruits with small cavity",
+    "colour": "Rind-gold yellow with medium netting, fruits-green flesh"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 23500,
+          "priceFormatted": "UGX 23,500",
+          "totalPrice": 23500,
+          "totalFormatted": "UGX 23,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 22208,
+          "priceFormatted": "UGX 22,208",
+          "totalPrice": 111040,
+          "totalFormatted": "UGX 111,040",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 21996,
+          "priceFormatted": "UGX 21,996",
+          "totalPrice": 219960,
+          "totalFormatted": "UGX 219,960",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 21996,
+          "priceFormatted": "UGX 21,996",
+          "totalPrice": 439920,
+          "totalFormatted": "UGX 439,920",
+          "discountPercent": 6
+        }
+      ]
+    }
+  ]
+}

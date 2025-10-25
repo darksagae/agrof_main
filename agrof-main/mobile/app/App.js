@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, ScrollView, Dimensions, FlatList, Modal, TextInput, Platform, ActivityIndicator, Linking } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, ScrollView, Dimensions, FlatList, Modal, TextInput, Platform, ActivityIndicator, Linking, SafeAreaView } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
 import { useFonts } from 'expo-font';
@@ -18,10 +18,13 @@ import ProductTradingScreen from './screens/ProductTradingScreen';
 // SmartFarmingDashboard removed - dashboard functionality disabled
 import DiseaseDetectionScreen from './screens/DiseaseDetectionScreen';
 import ProductRecommendationCards from './components/ProductRecommendationCards';
+import CropSelectionTestScreen from './screens/CropSelectionTestScreen';
+import OutstandingAIPlanScreen from './screens/OutstandingAIPlanScreen';
 import { CartProvider } from './contexts/CartContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { UserProvider } from './contexts/UserContext';
-import { cropProducts } from './data/cropProducts';
+import ComprehensiveCropDatabase from './services/comprehensiveCropDatabase';
+// OLD CROP SYSTEM REMOVED - Now using ComprehensiveCropDatabase
 import './i18n'; // Initialize i18n
 
 // Firebase imports
@@ -53,12 +56,26 @@ import ConversationScreen from './screens/ConversationScreen';
 import PlanScreen from './screens/PlanScreen';
 import FloatingNewsWidget from './components/FloatingNewsWidget';
 import agricultureNewsService from './services/agricultureNewsService';
+import dynamicMarketService from './services/dynamicMarketService';
+import enhancedAccuracyService from './services/enhancedAccuracyService';
+import regionalPriceService from './services/regionalPriceService';
+import seasonalPriceService from './services/seasonalPriceService';
+import weatherIntegrationService from './services/weatherIntegrationService';
+import cropTimingService from './services/cropTimingService';
+import userFeedbackService from './services/userFeedbackService';
+import recommendationRefinementService from './services/recommendationRefinementService';
+import mlModelTrainingService from './services/mlModelTrainingService';
+import featureEngineeringService from './services/featureEngineeringService';
+import predictiveAnalyticsService from './services/predictiveAnalyticsService';
+import advancedAccuracyService from './services/advancedAccuracyService';
+import comprehensiveAccuracyDashboardService from './services/comprehensiveAccuracyDashboardService';
 
 
 const { width, height } = Dimensions.get('window');
 
 // Update API URL to use deployed backend
-const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed Railway backend
+const API_URL = 'http://10.100.100.180:5000'; // STI Coolify deployment (production)
+// const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Old Railway backend
 // const API_URL = 'http://192.168.1.10:5000'; // Use your computer's IP address for local testing
 // const API_URL = 'http://localhost:5000'; // For web browser testing
 
@@ -133,6 +150,8 @@ export default function App() {
   const [showProductSuggestions, setShowProductSuggestions] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [notifications, setNotifications] = useState([]);
+  const [allCrops, setAllCrops] = useState([]);
+  const [showCropSelector, setShowCropSelector] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [themeColor, setThemeColor] = useState('#4CAF50'); // Customizable theme
   const [currentAccountScreen, setCurrentAccountScreen] = useState('main'); // main, about, help
@@ -652,6 +671,236 @@ export default function App() {
     testBackendConnection();
   }, []);
 
+  // Load all crops on component mount
+  useEffect(() => {
+    loadAllCrops();
+  }, []);
+
+  // Initialize Batch 1 services for dynamic recommendation accuracy
+  useEffect(() => {
+    const initializeBatch1Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 1 services for dynamic recommendation accuracy...');
+        
+        // Initialize dynamic market service
+        await dynamicMarketService.initialize();
+        console.log('✅ Dynamic Market Service initialized');
+        
+        // Enhanced accuracy service is already initialized as singleton
+        console.log('✅ Enhanced Accuracy Service ready');
+        
+        console.log('✅ Batch 1 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 1 services:', error);
+      }
+    };
+
+    initializeBatch1Services();
+  }, []);
+
+  // Initialize Batch 2 services for regional price variations
+  useEffect(() => {
+    const initializeBatch2Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 2 services for regional price variations...');
+        
+        // Initialize regional price service
+        await regionalPriceService.initialize();
+        console.log('✅ Regional Price Service initialized');
+        
+        // Initialize seasonal price service
+        await seasonalPriceService.initialize();
+        console.log('✅ Seasonal Price Service initialized');
+        
+        console.log('✅ Batch 2 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 2 services:', error);
+      }
+    };
+
+    initializeBatch2Services();
+  }, []);
+
+  // Initialize Batch 3 services for seasonal adjustments
+  useEffect(() => {
+    const initializeBatch3Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 3 services for seasonal adjustments...');
+        
+        // Initialize weather integration service
+        await weatherIntegrationService.initialize();
+        console.log('✅ Weather Integration Service initialized');
+        
+        // Initialize crop timing service
+        await cropTimingService.initialize();
+        console.log('✅ Crop Timing Service initialized');
+        
+        console.log('✅ Batch 3 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 3 services:', error);
+      }
+    };
+
+    initializeBatch3Services();
+  }, []);
+
+  // Initialize Batch 4 services for user feedback system
+  useEffect(() => {
+    const initializeBatch4Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 4 services for user feedback system...');
+        
+        // Initialize user feedback service
+        await userFeedbackService.initialize();
+        console.log('✅ User Feedback Service initialized');
+        
+        // Initialize recommendation refinement service
+        await recommendationRefinementService.initialize();
+        console.log('✅ Recommendation Refinement Service initialized');
+        
+        console.log('✅ Batch 4 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 4 services:', error);
+      }
+    };
+
+    initializeBatch4Services();
+  }, []);
+
+  // Initialize Batch 5 services for ML model training
+  useEffect(() => {
+    const initializeBatch5Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 5 services for ML model training...');
+        
+        // Initialize ML model training service
+        await mlModelTrainingService.initialize();
+        console.log('✅ ML Model Training Service initialized');
+        
+        // Initialize feature engineering service
+        await featureEngineeringService.initialize();
+        console.log('✅ Feature Engineering Service initialized');
+        
+        console.log('✅ Batch 5 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 5 services:', error);
+      }
+    };
+
+    initializeBatch5Services();
+  }, []);
+
+  // Initialize Batch 6 services for predictive analytics
+  useEffect(() => {
+    const initializeBatch6Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 6 services for predictive analytics...');
+        
+        // Initialize predictive analytics service
+        await predictiveAnalyticsService.initialize();
+        console.log('✅ Predictive Analytics Service initialized');
+        
+        console.log('✅ Batch 6 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 6 services:', error);
+      }
+    };
+
+    initializeBatch6Services();
+  }, []);
+
+  // Initialize Batch 7 services for advanced accuracy features
+  useEffect(() => {
+    const initializeBatch7Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 7 services for advanced accuracy features...');
+        
+        // Initialize advanced accuracy service
+        await advancedAccuracyService.initialize();
+        console.log('✅ Advanced Accuracy Service initialized');
+        
+        console.log('✅ Batch 7 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 7 services:', error);
+      }
+    };
+
+    initializeBatch7Services();
+  }, []);
+
+  // Initialize Batch 8 services for comprehensive accuracy dashboard
+  useEffect(() => {
+    const initializeBatch8Services = async () => {
+      try {
+        console.log('🔄 Initializing Batch 8 services for comprehensive accuracy dashboard...');
+        
+        // Initialize comprehensive accuracy dashboard service
+        await comprehensiveAccuracyDashboardService.initialize();
+        console.log('✅ Comprehensive Accuracy Dashboard Service initialized');
+        
+        console.log('✅ Batch 8 services initialized successfully');
+      } catch (error) {
+        console.error('❌ Failed to initialize Batch 8 services:', error);
+      }
+    };
+
+    initializeBatch8Services();
+  }, []);
+
+  const loadAllCrops = async () => {
+    try {
+      console.log('🔄 Loading all 19 crops from database...');
+      console.log('🔍 ComprehensiveCropDatabase:', ComprehensiveCropDatabase);
+      const crops = ComprehensiveCropDatabase.getAllCrops();
+      console.log('🔍 Raw crops from database:', crops);
+      
+      // Static image mapping to avoid dynamic require issues
+      const cropImageMap = {
+        'maize.png': require('./assets/crops/maize.png'),
+        'tomatoes.png': require('./assets/crops/tomatoes.png'),
+        'beans.png': require('./assets/crops/beans.png'),
+        'coffee.png': require('./assets/crops/coffee.png'),
+        'banana.png': require('./assets/crops/banana.png'),
+        'onions.png': require('./assets/crops/onions.png'),
+        'groundnuts.png': require('./assets/crops/groundnuts.png'),
+        'rice.png': require('./assets/crops/rice.png'),
+        'cotton.png': require('./assets/crops/cotton.png'),
+        'sugarcane.png': require('./assets/crops/sugarcane.png'),
+        'pineapple.png': require('./assets/crops/pineapple.png'),
+        'mangoes.png': require('./assets/crops/mangoes.png'),
+        'avocados.png': require('./assets/crops/avocados.png'),
+        'carrot.png': require('./assets/crops/carrot.png'),
+        'spinach.png': require('./assets/crops/spinach.png'),
+        'millet.png': require('./assets/crops/millet.png'),
+        'soyabeans.png': require('./assets/crops/soyabeans.png'),
+        'cabbage.png': require('./assets/crops/cabbage.png'),
+        'orangoes.png': require('./assets/crops/orangoes.png')
+      };
+      
+      // Add image paths to each crop
+      const cropsWithImages = crops.map(crop => {
+        return {
+          ...crop,
+          image: cropImageMap[crop.image] || require('./assets/crops/maize.png') // fallback to maize
+        };
+      });
+      
+      setAllCrops(cropsWithImages);
+      console.log(`✅ Loaded ${cropsWithImages.length} crops with images`);
+      console.log('Crops loaded:', cropsWithImages.map(c => c.name));
+      console.log('🔍 All crops state set:', cropsWithImages.length);
+      console.log('🔍 First crop:', cropsWithImages[0]);
+      console.log('🔍 Last crop:', cropsWithImages[cropsWithImages.length - 1]);
+      
+      // Debug: Check if crops are being set
+      console.log('🔍 All crops state set:', cropsWithImages.length);
+      console.log('🔍 First crop:', cropsWithImages[0]);
+      console.log('🔍 Last crop:', cropsWithImages[cropsWithImages.length - 1]);
+    } catch (error) {
+      console.error('❌ Failed to load crops for planning:', error);
+    }
+  };
+
   // Start background video when Care tab is active
   // Background video removed - no longer needed
 
@@ -687,17 +936,23 @@ export default function App() {
 
   // Calculate budget based on crop type and area
   const calculateBudget = (crop, area) => {
-    const baseCosts = {
-      'Maize': { seed: 150, fertilizer: 300, labor: 200, equipment: 150 },
-      'Coffee': { seed: 300, fertilizer: 400, labor: 400, equipment: 200 },
-      'Beans': { seed: 80, fertilizer: 150, labor: 120, equipment: 100 },
-      'Wheat': { seed: 120, fertilizer: 250, labor: 180, equipment: 120 }
-    };
+    // Get crop data from comprehensive database
+    const cropData = allCrops.find(c => c.name.toLowerCase() === crop.toLowerCase());
     
-    const costs = baseCosts[crop] || baseCosts['Maize'];
-    const totalCost = Object.values(costs).reduce((sum, cost) => sum + cost, 0);
+    if (cropData) {
+      // Use real crop data from comprehensive database
+      const seedCost = cropData.seed_cost_per_acre || 150;
+      const fertilizerCost = cropData.fertilizer_cost_per_acre || 300;
+      const laborCost = cropData.labor_cost_per_acre || 200;
+      const equipmentCost = cropData.equipment_cost_per_acre || 150;
+      
+      const totalCost = seedCost + fertilizerCost + laborCost + equipmentCost;
+      return convertToUGX(totalCost * parseFloat(area));
+    }
     
-    // Convert to UGX
+    // Fallback to default costs if crop not found
+    const defaultCosts = { seed: 150, fertilizer: 300, labor: 200, equipment: 150 };
+    const totalCost = Object.values(defaultCosts).reduce((sum, cost) => sum + cost, 0);
     return convertToUGX(totalCost * parseFloat(area));
   };
 
@@ -813,15 +1068,15 @@ export default function App() {
 
   // Get product suggestions from store
   const getProductSuggestions = () => {
-    if (!cropProducts || cropProducts.length === 0) {
+    if (!allCrops || allCrops.length === 0) {
       return [];
     }
 
-    let filteredProducts = cropProducts;
+    let filteredProducts = allCrops;
     
     // Filter by selected category
     if (selectedCategory !== 'all') {
-      filteredProducts = cropProducts.filter(p => 
+      filteredProducts = allCrops.filter(p => 
         p.category && p.category.toLowerCase().includes(selectedCategory.toLowerCase())
       );
     }
@@ -905,11 +1160,15 @@ export default function App() {
   // Get crop rotation recommendations
   const getCropRotationRecommendations = () => {
     if (!savedAnalyses || savedAnalyses.length === 0) {
-      return [
-        { crop: 'Maize', season: 'Spring', duration: '90 days', budget: formatUGX(convertToUGX(800)) + '/acre' },
-        { crop: 'Beans', season: 'Summer', duration: '60 days', budget: formatUGX(convertToUGX(400)) + '/acre' },
-        { crop: 'Wheat', season: 'Fall', duration: '120 days', budget: formatUGX(convertToUGX(600)) + '/acre' }
-      ];
+      // Use comprehensive database for fallback recommendations
+      const fallbackCrops = allCrops.slice(0, 3); // Get first 3 crops
+      const seasons = ['Spring', 'Summer', 'Fall'];
+      return fallbackCrops.map((crop, index) => ({
+        crop: crop.name,
+        season: seasons[index] || 'Spring',
+        duration: crop.growth_duration || '90 days',
+        budget: formatUGX(convertToUGX(crop.market_price_min * 100 || 800)) + '/acre'
+      }));
     }
 
     const cropTypes = [...new Set(savedAnalyses.map(analysis => analysis.crop))];
@@ -918,8 +1177,10 @@ export default function App() {
     cropTypes.forEach((crop, index) => {
       const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
       const season = seasons[index % seasons.length];
-      const duration = crop === 'Maize' ? '90 days' : crop === 'Coffee' ? '180 days' : '60 days';
-      const usdAmount = crop === 'Maize' ? 800 : crop === 'Coffee' ? 1200 : 400;
+      // Get crop data from comprehensive database
+      const cropData = allCrops.find(c => c.name.toLowerCase() === crop.toLowerCase());
+      const duration = cropData ? cropData.growth_duration : '90 days';
+      const usdAmount = cropData ? cropData.market_price_min * 100 : 800;
       const budget = formatUGX(convertToUGX(usdAmount)) + '/acre';
       
       recommendations.push({ crop, season, duration, budget });
@@ -1206,55 +1467,13 @@ export default function App() {
             <MaterialIcons name="eco" size={32} color="white" />
             <Text style={styles.headerTitle}> AGROF AI</Text>
           </View>
-                      <Text style={styles.headerSubtitle}>{t('care.subtitle')}</Text>
-          
-          {/* System Status Indicators */}
-          <View style={styles.statusIndicatorsContainer}>
-            {/* Firebase Auth Indicator */}
-            <View style={[styles.statusIndicator, { 
-              backgroundColor: 
-                firebaseStatus === 'connected' ? '#4CAF50' : 
-                firebaseStatus === 'partial' ? '#2196F3' : 
-                firebaseStatus === 'error' ? '#f44336' : '#ff9800' 
-            }]}>
-              <MaterialIcons 
-                name={
-                  firebaseStatus === 'connected' ? 'check-circle' : 
-                  firebaseStatus === 'partial' ? 'sync' : 
-                  firebaseStatus === 'error' ? 'error' : 'schedule'
-                } 
-                size={14} 
-                color="white" 
-              />
-              <Text style={styles.statusText}>Auth</Text>
-            </View>
-
-            {/* Supabase Indicator */}
-            <View style={[styles.statusIndicator, { 
-              backgroundColor: firebaseStatus === 'connected' ? '#4CAF50' : '#2196F3'
-            }]}>
-              <MaterialIcons 
-                name={firebaseStatus === 'connected' ? 'cloud-done' : 'cloud-queue'} 
-                size={14} 
-                color="white" 
-              />
-              <Text style={styles.statusText}>DB</Text>
-            </View>
-
-            {/* Overall System Status */}
-            <Text style={styles.systemStatusText}>
-              {firebaseStatus === 'connected' ? 'Online' : 
-               firebaseStatus === 'partial' ? 'Ready' : 
-               firebaseStatus === 'error' ? 'Offline' : 'Starting...'}
-            </Text>
-          </View>
+          <Text style={styles.headerSubtitle}>{t('care.subtitle')}</Text>
         </View>
 
         {/* Smart Farming Features */}
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
-            <MaterialIcons name="smart-toy" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> {t('care.smartFarming')}</Text>
+            <Text style={styles.sectionTitle}>{t('care.smartFarming')}</Text>
           </View>
           <Text style={styles.sectionSubtitle}>{t('care.smartFarmingSubtitle')}</Text>
           
@@ -1304,22 +1523,9 @@ export default function App() {
         <View style={styles.tabHeader}>
           <View style={styles.tabTitleContainer}>
             <MaterialIcons name="assignment" size={28} color="white" />
-                            <Text style={styles.tabTitle}> {t('plan.title')}</Text>
+            <Text style={styles.tabTitle}> {t('plan.title')}</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TouchableOpacity
-              style={styles.notificationButton}
-              onPress={() => setShowNotifications(!showNotifications)}
-            >
-              <MaterialIcons name="notifications" size={24} color="white" />
-              {notifications.length > 0 && (
-                <View style={styles.notificationBadge}>
-                  <Text style={styles.notificationBadgeText}>{notifications.length}</Text>
-                </View>
-              )}
-            </TouchableOpacity>
-          </View>
-                      <Text style={styles.tabSubtitle}>{t('plan.subtitle')}</Text>
+          <Text style={styles.tabSubtitle}>{t('plan.subtitle')}</Text>
         </View>
         
         {/* Plan Type Selector */}
@@ -1414,18 +1620,15 @@ export default function App() {
               </Text>
               
               {getCropRotationRecommendations().map((rec, index) => {
-                // Get appropriate icon based on crop type
+                // Get appropriate icon based on crop type from comprehensive database
                 const getCropIcon = (cropName) => {
-                  const crop = cropName.toLowerCase();
-                  if (crop.includes('maize') || crop.includes('corn')) {
-                    return <MaterialIcons name="eco" size={24} color="#4CAF50" />;
-                  } else if (crop.includes('bean')) {
-                    return <MaterialIcons name="circle" size={24} color="#FF9800" />;
-                  } else if (crop.includes('wheat')) {
-                    return <MaterialIcons name="grain" size={24} color="#8BC34A" />;
-                  } else {
-                    return <MaterialIcons name="agriculture" size={24} color="#4CAF50" />;
+                  const cropData = allCrops.find(c => c.name.toLowerCase() === cropName.toLowerCase());
+                  if (cropData) {
+                    // Use crop image from comprehensive database
+                    return <Image source={cropData.image} style={{ width: 24, height: 24 }} />;
                   }
+                  // Fallback to generic agriculture icon
+                  return <MaterialIcons name="agriculture" size={24} color="#4CAF50" />;
                 };
 
                 return (
@@ -1543,12 +1746,32 @@ export default function App() {
               </View>
               
               <ScrollView style={styles.modalBody}>
-                <TextInput
-                  style={styles.input}
-                  placeholder={t('form.cropType')}
-                  value={newPlan.crop}
-                  onChangeText={(text) => setNewPlan({...newPlan, crop: text})}
-                />
+                <Text style={styles.label}>Select Crop ({allCrops.length} Crops Available)</Text>
+                <Text style={styles.debugText}>Debug: {allCrops.length === 19 ? 'All 19 crops loaded' : `Only ${allCrops.length} crops loaded`}</Text>
+                <TouchableOpacity
+                  style={styles.cropSelector}
+                  onPress={() => {
+                    console.log('🔍 Opening crop selector with', allCrops.length, 'crops');
+                    console.log('🔍 Crops:', allCrops.map(c => c.name));
+                    console.log('🔍 allCrops state:', allCrops);
+                    console.log('🔍 showCropSelector will be set to true');
+                    setShowCropSelector(true);
+                  }}
+                >
+                  {newPlan.crop ? (
+                    <Image 
+                      source={allCrops.find(c => c.name === newPlan.crop)?.image || require('./assets/crops/maize.png')} 
+                      style={styles.cropSelectorImage}
+                      resizeMode="cover"
+                    />
+                  ) : (
+                    <MaterialIcons name="agriculture" size={20} color="#4CAF50" />
+                  )}
+                  <Text style={styles.cropSelectorText}>
+                    {newPlan.crop || `Select a crop from ${allCrops.length} available options`}
+                  </Text>
+                  <MaterialIcons name="arrow-drop-down" size={24} color="#666" />
+                </TouchableOpacity>
                 <TextInput
                   style={styles.input}
                   placeholder={t('form.area')}
@@ -1623,6 +1846,59 @@ export default function App() {
                   <Text style={styles.saveButtonText}>Save Plan</Text>
                 </TouchableOpacity>
               </View>
+            </View>
+          </View>
+        </Modal>
+
+        {/* Crop Selector Modal */}
+        <Modal
+          visible={showCropSelector}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setShowCropSelector(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Select Crop ({allCrops.length} Crops Available)</Text>
+                <Text style={styles.modalSubtitle}>
+                  {allCrops.length === 19 ? '✅ All 19 crops loaded' : `⚠️ Only ${allCrops.length} crops loaded`}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => setShowCropSelector(false)}
+                  style={styles.modalCloseButton}
+                >
+                  <MaterialIcons name="close" size={24} color="#666" />
+                </TouchableOpacity>
+              </View>
+              
+              <ScrollView style={styles.modalBody}>
+                <View style={styles.cropsGrid}>
+                  {allCrops.map((crop, index) => (
+                    <TouchableOpacity
+                      key={crop.name}
+                      style={[
+                        styles.cropCard,
+                        newPlan.crop === crop.name && styles.selectedCropCard
+                      ]}
+                      onPress={() => {
+                        setNewPlan({...newPlan, crop: crop.name});
+                        setShowCropSelector(false);
+                      }}
+                    >
+                      <Text style={styles.cropCardNumber}>{index + 1}</Text>
+                      <Image 
+                        source={crop.image} 
+                        style={styles.cropImage}
+                        resizeMode="cover"
+                      />
+                      <Text style={styles.cropCardName}>{crop.name}</Text>
+                      <Text style={styles.cropCardCategory}>{crop.category}</Text>
+                      <Text style={styles.cropCardROI}>ROI: {crop.roi_percentage.min}-{crop.roi_percentage.max}%</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </ScrollView>
             </View>
           </View>
         </Modal>
@@ -1888,8 +2164,8 @@ export default function App() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>🌾 Crop Overview</Text>
           <View style={styles.cropGrid}>
-            {cropProducts.map((crop) => (
-              <View key={crop.id} style={styles.cropItem}>
+            {allCrops.map((crop, index) => (
+              <View key={crop.name} style={styles.cropItem}>
                 <Image source={crop.image} style={styles.cropImage} />
                 <Text style={styles.cropLabel}>{crop.name}</Text>
                 <Text style={styles.cropCount}>{savedAnalyses.filter(a => a.crop === crop.name).length} analyses</Text>
@@ -2752,10 +3028,10 @@ export default function App() {
     
     // Consult tab removed - functionality moved to bot image
     if (currentTab === 'plan') {
-      console.log('Rendering new professional plan screen');
+      console.log('Rendering new AI plan screen with Supabase integration');
       return (
         <>
-          <PlanScreen onNavigateToStore={() => setCurrentTab('store')} />
+          <OutstandingAIPlanScreen onNavigateToStore={() => setCurrentTab('store')} />
           <FloatingNewsWidget news={newsData} />
         </>
       );
@@ -2885,20 +3161,20 @@ export default function App() {
     })();
 
   return (
-      <View style={{ flex: 1, backgroundColor: '#e8f5e9' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#e8f5e9' }}>
         <StatusBar style="dark" />
         {screen}
-      </View>
+      </SafeAreaView>
     );
   };
 
   // Wait for fonts to load
   if (!fontsLoaded) {
     return (
-      <View style={{ flex: 1, backgroundColor: '#e8f5e9', justifyContent: 'center', alignItems: 'center' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#e8f5e9', justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size="large" color="#4CAF50" />
         <Text style={{ marginTop: 20, color: '#333', fontSize: 16 }}>Loading AGROF...</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -2909,7 +3185,7 @@ export default function App() {
 
   // Main app render
   return (
-    <View style={{ flex: 1, backgroundColor: '#e8f5e9' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#e8f5e9' }}>
     <UserProvider>
     <LanguageProvider>
       <CartProvider key={languageKey}>
@@ -2982,7 +3258,7 @@ export default function App() {
       </CartProvider>
     </LanguageProvider>
     </UserProvider>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -3780,11 +4056,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   headerTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 40,
+    fontWeight: '900',
     color: 'white',
     marginBottom: 5,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
   },
@@ -6541,11 +6819,13 @@ const budgetStyles = StyleSheet.create({
     paddingBottom: 20,
   },
   headerTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 40,
+    fontWeight: '900',
     color: 'white',
     marginBottom: 5,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
   },

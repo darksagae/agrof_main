@@ -1,74 +1,39 @@
 # Vermicompost 100 - Premium Organic Fertilizer
 
 ## Overview
-Vermicompost 100 is a premium organic fertilizer produced through the natural process of vermicomposting. This nutrient-rich organic matter improves soil structure, enhances plant growth, and provides essential nutrients in a form that plants can easily absorb.
+Vermicompost 100 contain higher percentage of both macro and micronutrients than the garden compost. Apart from other nutrients, a fine worm cast is rich in NPK which are in readily available form. Vermicompost enhances plant growth, suppresses disease in plants, increases porosity and microbial activity in soil, and improves water retention and aeration. Active Ingredients: Earthworm castings, organic matter, natural enzymes and hormones
 
-## Specifications
-Organic Matter: >60%
-Nitrogen Content: 1.5-2.0%
-Phosphorus Content: 1.0-1.5%
-Potassium Content: 1.0-1.5%
-pH Level: 6.5-7.5
-Moisture Content: <40%
-Packaging: 25kg, 50kg bags
+## Supplier
+**Vermipro Limited**
 
-## Key Features
-100% organic and natural
-Rich in beneficial microorganisms
-Improves soil structure and water retention
-Enhances nutrient availability
-Safe for all plants
-Environmentally friendly
-Long-lasting soil improvement
+## Product Specifications
 
-## Usage Instructions
-Soil Amendment: Mix 2-3kg per square meter
-Potting Mix: Add 20-30% to potting soil
-Compost Tea: Steep 1kg in 10 liters of water for 24 hours
-Top Dressing: Apply 1-2kg per plant
-Timing: Apply at planting and during growing season
+### Directions for use
+Mix vermicompost100 in a ratio of 1:4 to soil. Top dress in potted plants, gardens or lawns. In general gardening, apply 1000kg/ha. In horticulture, apply 50-100g per plant. In tree plantations like coffee, apply 250-500g per plant per season
 
-## Application Method
-Soil Incorporation: Mix thoroughly into soil
-Top Dressing: Apply around plant base
-Compost Tea: Use as liquid fertilizer
-Mulching: Spread as surface mulch
+### Key Benefits
+Soil Conditioner, Nutrient Retention of Soil, Pest Resistant, Better Aeration, Water Retention, Healthier Plants, Root Penetration, 100% Organic
 
-## Benefits
-Soil Health: Improves soil structure and fertility
-Plant Growth: Enhances root development and plant vigor
-Nutrient Supply: Provides slow-release nutrients
-Water Retention: Improves soil water-holding capacity
-Microbial Activity: Increases beneficial soil microorganisms
-Organic Certification: Suitable for organic farming
+## Pricing
 
-## Price Information
-Per 25kg bag: UGX 45,000
-Per 50kg bag: UGX 80,000
-Bulk orders (10+ bags): UGX 40,000 per 25kg bag
-Wholesale (50+ bags): UGX 35,000 per 25kg bag
+**Price**: UGX 27,500
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+### Available Packages
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain proper ventilation
-Shelf life: 12 months from manufacturing date
+**5kg**:
+- 1+ units: UGX 27,500/unit
 
-## Safety Information
-Safe for all plants and animals
-No harmful chemicals
-Safe for children and pets
-Store away from food items
-Use protective equipment during application
+**10kg**:
+- 1+ units: UGX 53,000/unit
 
-## Contact Information
-Phone: +256 700 123 456
-Email: organic@agrof.com
-WhatsApp: +256 700 123 456
+## Why Buy From Us?
+- ✓ 100% Organic and certified
+- ✓ Trusted supplier
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

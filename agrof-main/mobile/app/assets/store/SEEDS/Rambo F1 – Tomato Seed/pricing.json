@@ -1,0 +1,181 @@
+{
+  "productName": "Rambo F1 – Tomato Seed",
+  "supplier": "Nsanja Agrochemicals Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 17,597",
+  "lowestPrice": 17597,
+  "lowestPackage": "1g @ 10+ units",
+  "details": {
+    "description": "Rambo F1 is a high yielding Determinate tomato variety. Maturity 75 days from transplanting. Fruit weight 150 grams. Yield potential 30 tonnes per acre. Very good shelf life and transport quality. Vigorous plant with uniformly set and firm fruits. Excellent fruit grade out up to 90% in grade one.",
+    "maturity": "75 days from transplanting",
+    "fruitWeight": "150 grams",
+    "yieldPotential": "30 tonnes per acre",
+    "diseaseResistance": "High bacterial wilt tolerant, Fusarium Wilt (Fol: 1,2), Verticillium Wilt (Vd & Va), Bacterial Spot, Nematode"
+  },
+  "packages": [
+    {
+      "size": "1g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 18800,
+          "priceFormatted": "UGX 18,800",
+          "totalPrice": 18800,
+          "totalFormatted": "UGX 18,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 17691,
+          "priceFormatted": "UGX 17,691",
+          "totalPrice": 88455,
+          "totalFormatted": "UGX 88,455",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 17597,
+          "priceFormatted": "UGX 17,597",
+          "totalPrice": 175970,
+          "totalFormatted": "UGX 175,970",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 17597,
+          "priceFormatted": "UGX 17,597",
+          "totalPrice": 351940,
+          "totalFormatted": "UGX 351,940",
+          "discountPercent": 6
+        }
+      ]
+    },
+    {
+      "size": "2.5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 39500,
+          "priceFormatted": "UGX 39,500",
+          "totalPrice": 39500,
+          "totalFormatted": "UGX 39,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 38394,
+          "priceFormatted": "UGX 38,394",
+          "totalPrice": 191970,
+          "totalFormatted": "UGX 191,970",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 38315,
+          "priceFormatted": "UGX 38,315",
+          "totalPrice": 383150,
+          "totalFormatted": "UGX 383,150",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 38197,
+          "priceFormatted": "UGX 38,197",
+          "totalPrice": 763940,
+          "totalFormatted": "UGX 763,940",
+          "discountPercent": 3
+        }
+      ]
+    },
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 143400,
+          "priceFormatted": "UGX 143,400",
+          "totalPrice": 143400,
+          "totalFormatted": "UGX 143,400",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 141106,
+          "priceFormatted": "UGX 141,106",
+          "totalPrice": 705530,
+          "totalFormatted": "UGX 705,530",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 140532,
+          "priceFormatted": "UGX 140,532",
+          "totalPrice": 1405320,
+          "totalFormatted": "UGX 1,405,320",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 140245,
+          "priceFormatted": "UGX 140,245",
+          "totalPrice": 2804900,
+          "totalFormatted": "UGX 2,804,900",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 605600,
+          "priceFormatted": "UGX 605,600",
+          "totalPrice": 605600,
+          "totalFormatted": "UGX 605,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 601966,
+          "priceFormatted": "UGX 601,966",
+          "totalPrice": 3009830,
+          "totalFormatted": "UGX 3,009,830",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 600755,
+          "priceFormatted": "UGX 600,755",
+          "totalPrice": 6007550,
+          "totalFormatted": "UGX 6,007,550",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 589854,
+          "priceFormatted": "UGX 589,854",
+          "totalPrice": 11797080,
+          "totalFormatted": "UGX 11,797,080",
+          "discountPercent": 3
+        }
+      ]
+    }
+  ]
+}

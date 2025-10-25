@@ -1,0 +1,22 @@
+{
+  "productName": "Pineapple Mint Seedling",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Pineapple Mint is an herbaceous perennial plant commonly grown as a culinary herb. Like most mints, pineapple mint is a creeping plant that spreads from shallow underground rhizomes. Clumps grow 2 to 3 feet tall, and unlimited in width. The soft, furry leaves are crinkled with cream and green variegation. It can be used as a tasty topping for fruit, ice cream, cold and hot tea, and juice drinks. Pineapple Mint offer a pleasing pineapple flavor.",
+  "specifications": "Pineapple mint does best in full sun in cool climates (but needs some shade in hotter climates). It needs consistent moisture to look its best. They do great in containers. Pollinators love the flowers",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

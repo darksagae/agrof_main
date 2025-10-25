@@ -1,0 +1,59 @@
+{
+  "id": 72,
+  "name": "Giant Drum Head – Cabbage",
+  "folder": "Giant Drum Head – Cabbage Variety That Is High Yielding And Market Fit",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Cabbage",
+  "details": {
+    "description": "Giant Drum Head is a high-yielding cabbage variety that is market fit and known for its excellent quality, uniform heads, and adaptability to various growing conditions. This variety produces large, round, drum-shaped heads. Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall.",
+    "transplantToHarvest": "85-95 days",
+    "seedRate": "120g/acre",
+    "spacing": "60*45cm",
+    "headShape": "Round, drum-shaped",
+    "averageHeadWeight": "3-5kg",
+    "averagePotentialYield": "32 Tonnes Per Acre"
+  },
+  "packages": [
+    { "size": "10g", "tiers": [
+      { "qty": 1, "price": 1700 },
+      { "qty": 5, "price": 1630 },
+      { "qty": 10, "price": 1622 },
+      { "qty": 20, "price": 1618 }
+    ]},
+    { "size": "20g", "tiers": [
+      { "qty": 1, "price": 1900 },
+      { "qty": 5, "price": 1818 },
+      { "qty": 10, "price": 1811 },
+      { "qty": 20, "price": 1807 }
+    ]},
+    { "size": "50g", "tiers": [
+      { "qty": 1, "price": 4900 },
+      { "qty": 5, "price": 4733 },
+      { "qty": 10, "price": 4714 },
+      { "qty": 20, "price": 4699 }
+    ]},
+    { "size": "250g", "tiers": [
+      { "qty": 1, "price": 29800 },
+      { "qty": 5, "price": 29442 },
+      { "qty": 10, "price": 29413 },
+      { "qty": 20, "price": 29323 }
+    ]},
+    { "size": "500g", "tiers": [
+      { "qty": 1, "price": 50600 },
+      { "qty": 5, "price": 50499 },
+      { "qty": 10, "price": 50296 },
+      { "qty": 20, "price": 43921 }
+    ]},
+    { "size": "1kg", "tiers": [
+      { "qty": 1, "price": 103300 },
+      { "qty": 5, "price": 101337 },
+      { "qty": 10, "price": 88322 },
+      { "qty": 20, "price": 90388 }
+    ]}
+  ]
+}
+
+
+
+
+

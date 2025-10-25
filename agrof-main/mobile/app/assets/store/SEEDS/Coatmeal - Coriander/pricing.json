@@ -1,0 +1,132 @@
+{
+  "productName": "Coatmeal - Coriander",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Coriander/Herbs",
+  "displayPrice": "UGX 1,200",
+  "lowestPrice": 1200,
+  "lowestPackage": "10g @ 101+ units",
+  "details": {
+    "description": "A popular herb with finely cut, small and rather pungent leaves. Tender foliage used for seasoning and flavouring curries."
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "50+ units",
+          "quantityValue": 50,
+          "pricePerUnit": 1300,
+          "priceFormatted": "UGX 1,300",
+          "totalPrice": 65000,
+          "totalFormatted": "UGX 65,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "100+ units",
+          "quantityValue": 100,
+          "pricePerUnit": 1250,
+          "priceFormatted": "UGX 1,250",
+          "totalPrice": 125000,
+          "totalFormatted": "UGX 125,000",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "101+ units",
+          "quantityValue": 101,
+          "pricePerUnit": 1200,
+          "priceFormatted": "UGX 1,200",
+          "totalPrice": 121200,
+          "totalFormatted": "UGX 121,200",
+          "discountPercent": 8
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 3780,
+          "priceFormatted": "UGX 3,780",
+          "totalPrice": 18900,
+          "totalFormatted": "UGX 18,900",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 3710,
+          "priceFormatted": "UGX 3,710",
+          "totalPrice": 37100,
+          "totalFormatted": "UGX 37,100",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "500g",
+      "tiers": [
+        {
+          "quantity": "50+ units",
+          "quantityValue": 50,
+          "pricePerUnit": 31000,
+          "priceFormatted": "UGX 31,000",
+          "totalPrice": 1550000,
+          "totalFormatted": "UGX 1,550,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "100+ units",
+          "quantityValue": 100,
+          "pricePerUnit": 30901,
+          "priceFormatted": "UGX 30,901",
+          "totalPrice": 3090100,
+          "totalFormatted": "UGX 3,090,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "101+ units",
+          "quantityValue": 101,
+          "pricePerUnit": 29503,
+          "priceFormatted": "UGX 29,503",
+          "totalPrice": 2979803,
+          "totalFormatted": "UGX 2,979,803",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "50+ units",
+          "quantityValue": 50,
+          "pricePerUnit": 66500,
+          "priceFormatted": "UGX 66,500",
+          "totalPrice": 3325000,
+          "totalFormatted": "UGX 3,325,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "100+ units",
+          "quantityValue": 100,
+          "pricePerUnit": 66453,
+          "priceFormatted": "UGX 66,453",
+          "totalPrice": 6645300,
+          "totalFormatted": "UGX 6,645,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "101+ units",
+          "quantityValue": 101,
+          "pricePerUnit": 63301,
+          "priceFormatted": "UGX 63,301",
+          "totalPrice": 6393401,
+          "totalFormatted": "UGX 6,393,401",
+          "discountPercent": 5
+        }
+      ]
+    }
+  ]
+}

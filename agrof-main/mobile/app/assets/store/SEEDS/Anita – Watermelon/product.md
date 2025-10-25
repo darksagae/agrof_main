@@ -1,88 +1,48 @@
-# Anita F1 Watermelon Seeds
+# Anita – Watermelon
 
 ## Overview
-Anita F1 is a premium hybrid watermelon variety known for its exceptional sweetness, high yield potential, and excellent disease resistance. This variety produces large, round fruits with deep red flesh and thin, dark green rind.
+An excellent oval to oblong stripped type hybrid. Glossy attractive high quality fruits with deep crimson red flesh. The fruit texture is very crispy with a sweetness of 12-13% TSS. The fruits have excellent transport quality fit for long distance transport. Field observable tolerance to Anthracnose caused by Colletotrichum orbiculare and Fusarium wilt.
 
-## Specifications
-Variety: F1 Hybrid
-Fruit Weight: 8-12 kg
-Days to Maturity: 75-85 days
-Plant Type: Vining
-Fruit Shape: Round
-Flesh Color: Deep Red
-Rind Color: Dark Green
-Seed Count: 1000 seeds per packet
+## Supplier
+**Nsanja Agrochemicals Ltd**
 
-## Key Features
-High Sugar Content: 12-14% Brix
-Excellent Flavor: Sweet and refreshing
-High Yield: 40-50 tons per hectare
-Disease Resistance: Resistant to Fusarium wilt and Anthracnose
-Long Shelf Life: 2-3 weeks post-harvest
-Uniform Fruit Size: Consistent quality
-Adaptable: Grows well in various soil types
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 25-35°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 2m x 2m between plants
-
-## Usage Instructions
-- **Variety type**: Excellent oval to oblong stripped type hybrid
-- **Fruit characteristics**: Glossy attractive high quality fruits with deep crimson red flesh
-- **Fruit texture**: The fruit texture is very crispy with a sweetness of 12-13% TSS
-- **Transport quality**: The fruits have excellent transport quality fit for long distance transport
-- **Fruit average weight**: 8-10kg under good farming practice
+- **Fruit Average Weight**: 8-10kg under good farming practice
 - **Maturity**: 80-85 days after sowing
-- **Yield potential**: 32 –40tons/acre
-- **Disease resistance**: Field observable tolerance to Anthracnose caused by Colletotrichum orbiculare and Fusarium wilt
+- **Yield Potential**: 32-40 tons/acre
 - **Spacing**: 60cm x 45cm
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Excellent oval to oblong stripped type hybrid watermelon
-- **Spacing**: 60cm x 45cm between plants
-- **Fruit quality**: Glossy attractive high quality fruits with deep crimson red flesh
-- **Transport quality**: Excellent transport quality fit for long distance transport
-- **Disease resistance**: Field observable tolerance to Anthracnose and Fusarium wilt
+## Pricing
 
-## Benefits
-- **High yield potential**: 32 –40tons/acre under good farming practice
-- **Excellent fruit quality**: Glossy attractive high quality fruits with deep crimson red flesh
-- **Sweet flavor**: The fruit texture is very crispy with a sweetness of 12-13% TSS
-- **Transport quality**: Excellent transport quality fit for long distance transport
-- **Disease resistance**: Field observable tolerance to Anthracnose and Fusarium wilt
-- **Market demand**: High demand due to excellent fruit quality and transport quality
-- **Profit potential**: Excellent return on investment
+**Best Price**: UGX 42,292 (50g @ 20+ units)
 
-## Price Information
-Per 1000 seeds: UGX 25,000
-Per 5000 seeds: UGX 110,000
-Per 10000 seeds: UGX 200,000
-Bulk orders: Contact for pricing
+### Package Options & Pricing
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**50g**:
+- 1+ units: UGX 43,600/unit
+- 5+ units: UGX 42,510/unit (3% off)
+- 10+ units: UGX 42,379/unit (3% off)
+- 20+ units: UGX 42,292/unit (3% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**250g**:
+- 1+ units: UGX 179,200/unit
+- 5+ units: UGX 176,870/unit (1% off)
+- 10+ units: UGX 176,333/unit (2% off)
+- 20+ units: UGX 176,154/unit (2% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**500g**:
+- 1+ units: UGX 340,000/unit
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

@@ -1,90 +1,43 @@
-# California Wonder Sweet Pepper Seeds
+# California Wonder
 
 ## Overview
-California Wonder is a popular sweet pepper variety known for its excellent fruit quality, high yield, and adaptability to various growing conditions. This variety produces large, blocky, sweet peppers that are perfect for fresh consumption and processing.
+Ideal for Open field production, Very uniform fruits, Blocky and medium-sized, Widely adaptable variety, Colour turns from green to red.
 
-## Specifications
-Variety: Open Pollinated Sweet Pepper
-Fruit Shape: Blocky, 4-lobed
-Fruit Weight: 150-200g
-Days to Maturity: 75-80 days
-Plant Type: Compact, determinate
-Fruit Color: Green to Red
-Flavor: Sweet, mild
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Simlaw Seeds Company (U) Ltd**
 
-## Key Features
-Large, blocky fruits
-Excellent sweet flavor
-High yield potential
-Disease resistance
-Compact plant habit
-Suitable for containers
-Versatile use
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 20-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 50cm x 50cm between plants
-
-## Usage Instructions
-- **Variety type**: Ideal for Open field production
-- **Fruit characteristics**: Very uniform fruits, Blocky and medium-sized
-- **Adaptability**: Widely adaptable variety
-- **Fruit color**: Colour turns from green to red
-- **Average yield per acre**: 6-7 tons
+- **Average Yield Per Acre**: 6-7 tonnes
 - **Maturity**: 80-90 Days
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: After last frost, when soil temperature is 15°C+
-- **Germination**: 7-10 days
-- **Transplanting**: When seedlings have 4-6 true leaves
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Open field production with uniform fruits
-- **Spacing**: Maintain proper spacing for optimal growth
-- **Field production**: Ideal for Open field production
-- **Fruit uniformity**: Very uniform fruits, Blocky and medium-sized
-- **Color development**: Colour turns from green to red
+## Pricing
 
-## Benefits
-- **Open field production**: Ideal for Open field production
-- **Uniform fruits**: Very uniform fruits, Blocky and medium-sized
-- **Wide adaptability**: Widely adaptable variety
-- **High yield**: Average yield per acre 6-7 tons
-- **Early maturity**: 80-90 Days to maturity
-- **Market demand**: Popular variety with excellent market acceptance
-- **Easy growing**: Suitable for beginners and experienced farmers
+**Best Price**: UGX 3,621 (10g @ 20+ units)
 
-## Price Information
-Per 1000 seeds: UGX 30,000
-Per 5000 seeds: UGX 130,000
-Per 10000 seeds: UGX 240,000
-Bulk orders: Contact for pricing
+### Package Options & Pricing
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**10g**:
+- 1+ units: UGX 3,800/unit
+- 5+ units: UGX 3,648/unit (4% off)
+- 10+ units: UGX 3,633/unit (4% off)
+- 20+ units: UGX 3,621/unit (5% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**50g**:
+- 1+ units: UGX 17,600/unit
+- 5+ units: UGX 17,406/unit (1% off)
+- 10+ units: UGX 17,354/unit (1% off)
+- 20+ units: UGX 17,318/unit (2% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

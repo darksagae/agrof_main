@@ -1,0 +1,27 @@
+{
+  "productName": "Yubi F1 Pakchoy- Chinese Cabbage",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Cabbage",
+  "displayPrice": "UGX 15,000",
+  "lowestPrice": 15000,
+  "lowestPackage": "1000 Seeds @ 1+ units",
+  "details": {
+    "description": "Pak choy, also known as bok choy or Chinese cabbage, is a leafy green vegetable widely used in Asian cuisine. It features crisp white stems and dark green leaves, offering a mild, sweet flavor and a tender texture. Pak choy is rich in vitamins A, C, and K, as well as calcium and iron."
+  },
+  "packages": [
+    {
+      "size": "1000 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 15000,
+          "priceFormatted": "UGX 15,000",
+          "totalPrice": 15000,
+          "totalFormatted": "UGX 15,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

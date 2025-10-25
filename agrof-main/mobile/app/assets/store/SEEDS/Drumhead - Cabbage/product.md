@@ -1,90 +1,70 @@
-# Drumhead Cabbage Seeds
+# Drumhead - Cabbage
 
 ## Overview
-Drumhead is a popular cabbage variety known for its large, round heads and excellent flavor. This variety produces uniform, high-quality heads that are perfect for fresh consumption and storage.
+Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall. Transplant to harvest days: 90, Seed Rate: 120g/acre, Spacing: 60*45cm, Head Shape: Round, Average Potential Yield: 32 Tones Per Acre
 
-## Specifications
-Variety: Open Pollinated Cabbage
-Head Shape: Round, drum-shaped
-Head Weight: 2-4kg
-Days to Maturity: 80-90 days
-Plant Type: Large, determinate
-Head Color: Light green
-Flavor: Sweet, mild
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Simlaw Seeds Company (U) Ltd**
 
-## Key Features
-Large head size
-Round, drum-shaped heads
-Excellent flavor
-High yield potential
-Disease resistance
-Good storage quality
-Suitable for large-scale farming
+## Product Specifications
 
-## Growing Requirements
-Climate: Cool season crop
-Temperature: 15-25°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 60cm x 60cm between plants
-
-## Usage Instructions
-- **Growing conditions**: Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall
-- **Transplant to harvest days**: 90 days
-- **Seed rate**: 120g/acre
+- **Transplant To Harvest**: 90 days
+- **Seed Rate**: 120g/acre
 - **Spacing**: 60*45cm
-- **Head shape**: Round
-- **Average potential yield**: 32 Tones Per Acre
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: 6-8 weeks before last frost
-- **Germination**: 7-10 days
-- **Transplanting**: When seedlings have 4-6 true leaves
+- **Head Shape**: Round
+- **Average Potential Yield**: 32 Tonnes Per Acre
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Cool season cabbage variety with large heads
-- **Spacing**: 60*45cm between plants
-- **Growing conditions**: Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall
-- **Head characteristics**: Round heads with excellent quality
-- **Yield potential**: 32 Tones Per Acre
+## Pricing
 
-## Benefits
-- **Cool season variety**: Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall
-- **High yield potential**: 32 Tones Per Acre under good management
-- **Round heads**: Round heads with excellent quality
-- **Good storage**: Long shelf life
-- **Disease resistance**: Reduces crop losses
-- **Suitable for large scale**: Ideal for commercial farming
-- **Market demand**: Popular variety with excellent market acceptance
+**Best Price**: UGX 1,618 (10g @ 20+ units)
 
-## Price Information
-Per 1000 seeds: UGX 25,000
-Per 5000 seeds: UGX 110,000
-Per 10000 seeds: UGX 200,000
-Bulk orders: Contact for pricing
+### Package Options & Pricing
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**10g**:
+- 1+ units: UGX 1,700/unit
+- 5+ units: UGX 1,630/unit (4% off)
+- 10+ units: UGX 1,622/unit (5% off)
+- 20+ units: UGX 1,618/unit (5% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**20g**:
+- 1+ units: UGX 1,900/unit
+- 5+ units: UGX 1,818/unit (4% off)
+- 10+ units: UGX 1,811/unit (5% off)
+- 20+ units: UGX 1,807/unit (5% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**50g**:
+- 1+ units: UGX 4,900/unit
+- 5+ units: UGX 4,733/unit (3% off)
+- 10+ units: UGX 4,714/unit (4% off)
+- 20+ units: UGX 4,699/unit (4% off)
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+**250g**:
+- 1+ units: UGX 29,800/unit
+- 5+ units: UGX 29,442/unit (1% off)
+- 10+ units: UGX 29,413/unit (1% off)
+- 20+ units: UGX 29,323/unit (2% off)
+
+**500g**:
+- 1+ units: UGX 50,600/unit
+- 5+ units: UGX 50,499/unit
+- 10+ units: UGX 50,296/unit (1% off)
+- 20+ units: UGX 43,921/unit (13% off)
+
+**1kg**:
+- 1+ units: UGX 103,300/unit
+- 5+ units: UGX 101,337/unit (2% off)
+- 10+ units: UGX 88,322/unit (14% off)
+- 20+ units: UGX 90,388/unit (12% off)
+
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

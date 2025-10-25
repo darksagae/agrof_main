@@ -1,0 +1,111 @@
+{
+  "productName": "Red Bugga-amaranthus",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Amaranth/Vegetables",
+  "displayPrice": "UGX 1,500",
+  "lowestPrice": 1500,
+  "lowestPackage": "Assorted @ 1+ units",
+  "details": {
+    "description": "Red Bugga-Amaranthus seeds are a high-yielding, nutrient-rich variety ideal for both commercial farming and home gardens. Known for their vibrant red leaves and fast growth, they thrive in diverse climates, offering a sustainable source of vitamins and minerals. Farmers value these seeds for their resilience to pests and adaptability."
+  },
+  "packages": [
+    {
+      "size": "Assorted",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 1500,
+          "priceFormatted": "UGX 1,500",
+          "totalPrice": 1500,
+          "totalFormatted": "UGX 1,500",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 1760,
+          "priceFormatted": "UGX 1,760",
+          "totalPrice": 1760,
+          "totalFormatted": "UGX 1,760",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 2600,
+          "priceFormatted": "UGX 2,600",
+          "totalPrice": 2600,
+          "totalFormatted": "UGX 2,600",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3100,
+          "priceFormatted": "UGX 3,100",
+          "totalPrice": 3100,
+          "totalFormatted": "UGX 3,100",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600",
+          "totalPrice": 5600,
+          "totalFormatted": "UGX 5,600",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "250g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 21780,
+          "priceFormatted": "UGX 21,780",
+          "totalPrice": 21780,
+          "totalFormatted": "UGX 21,780",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "500g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 38983,
+          "priceFormatted": "UGX 38,983",
+          "totalPrice": 38983,
+          "totalFormatted": "UGX 38,983",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

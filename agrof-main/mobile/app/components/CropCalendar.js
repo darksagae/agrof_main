@@ -9,10 +9,12 @@ import {
   TextInput,
   Alert,
   Dimensions,
-  Platform
+  Platform,
+  Image
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import ComprehensiveCropDatabase from '../services/comprehensiveCropDatabase';
 
 const { width } = Dimensions.get('window');
 
@@ -34,6 +36,64 @@ const CropCalendar = ({ savedAnalyses, onSavePlan }) => {
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [allCrops, setAllCrops] = useState([]);
+  const [showCropSelector, setShowCropSelector] = useState(false);
+
+  // Load all crops on component mount
+  useEffect(() => {
+    loadAllCrops();
+  }, []);
+
+  const loadAllCrops = async () => {
+    try {
+      console.log('🔄 Loading all 19 crops from database...');
+      const crops = ComprehensiveCropDatabase.getAllCrops();
+      
+      // Static image mapping to avoid dynamic require issues
+      const cropImageMap = {
+        'maize.png': require('../assets/crops/maize.png'),
+        'tomatoes.png': require('../assets/crops/tomatoes.png'),
+        'beans.png': require('../assets/crops/beans.png'),
+        'coffee.png': require('../assets/crops/coffee.png'),
+        'banana.png': require('../assets/crops/banana.png'),
+        'onions.png': require('../assets/crops/onions.png'),
+        'groundnuts.png': require('../assets/crops/groundnuts.png'),
+        'rice.png': require('../assets/crops/rice.png'),
+        'cotton.png': require('../assets/crops/cotton.png'),
+        'sugarcane.png': require('../assets/crops/sugarcane.png'),
+        'pineapple.png': require('../assets/crops/pineapple.png'),
+        'mangoes.png': require('../assets/crops/mangoes.png'),
+        'avocados.png': require('../assets/crops/avocados.png'),
+        'carrot.png': require('../assets/crops/carrot.png'),
+        'spinach.png': require('../assets/crops/spinach.png'),
+        'millet.png': require('../assets/crops/millet.png'),
+        'soyabeans.png': require('../assets/crops/soyabeans.png'),
+        'cabbage.png': require('../assets/crops/cabbage.png'),
+        'orangoes.png': require('../assets/crops/orangoes.png')
+      };
+      
+      // Add image paths to each crop
+      const cropsWithImages = crops.map(crop => {
+        return {
+          ...crop,
+          image: cropImageMap[crop.image] || require('../assets/crops/maize.png') // fallback to maize
+        };
+      });
+      
+      setAllCrops(cropsWithImages);
+      console.log(`✅ Loaded ${cropsWithImages.length} crops with images`);
+      console.log('Crops loaded:', cropsWithImages.map(c => c.name));
+      
+      // Debug: Show first few crops
+      console.log('First 3 crops:', cropsWithImages.slice(0, 3));
+    } catch (error) {
+      console.error('❌ Failed to load crops for calendar:', error);
+      
+      // No fallback crops - database must work
+      console.error('❌ ComprehensiveCropDatabase failed to load - no fallback available');
+      setAllCrops([]);
+    }
+  };
 
   // Convert USD to Ugandan Shillings (UGX)
   const convertToUGX = (usdAmount) => {
@@ -82,23 +142,36 @@ const CropCalendar = ({ savedAnalyses, onSavePlan }) => {
     return days;
   };
 
-  // Get crop rotation recommendations based on saved analyses (only if user has analyses)
+  // Get crop rotation recommendations based on saved analyses
   const getCropRotationRecommendations = () => {
     if (!savedAnalyses || savedAnalyses.length === 0) {
-      return []; // No mocked data - return empty array
+      return [];
     }
 
     const cropTypes = [...new Set(savedAnalyses.map(analysis => analysis.crop))];
     const recommendations = [];
     
-    cropTypes.forEach((crop, index) => {
-      const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
-      const season = seasons[index % seasons.length];
-      const duration = crop === 'Maize' ? '90 days' : crop === 'Coffee' ? '180 days' : '60 days';
-      const usdAmount = crop === 'Maize' ? 800 : crop === 'Coffee' ? 1200 : 400;
-      const budget = formatUGX(convertToUGX(usdAmount)) + '/acre';
+    cropTypes.forEach((cropName, index) => {
+      // Find the crop in our database
+      const cropData = allCrops.find(crop => crop.name.toLowerCase() === cropName.toLowerCase());
       
-      recommendations.push({ crop, season, duration, budget });
+      if (cropData) {
+        const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
+        const season = seasons[index % seasons.length];
+        const duration = cropData.duration_days || cropData.duration_months || '90 days';
+        const budget = cropData.market_price_min ? 
+          formatUGX(cropData.market_price_min * 1000) + '/acre' : 
+          'Price varies';
+        
+        recommendations.push({ 
+          crop: cropName, 
+          season, 
+          duration, 
+          budget,
+          category: cropData.category,
+          roi: cropData.roi_percentage
+        });
+      }
     });
     
     return recommendations;
@@ -132,16 +205,23 @@ const CropCalendar = ({ savedAnalyses, onSavePlan }) => {
 
   // Calculate budget based on crop type and area
   const calculateBudget = (crop, area) => {
-    const baseCosts = {
-      'Maize': { seed: 150, fertilizer: 300, labor: 200, equipment: 150 },
-      'Coffee': { seed: 300, fertilizer: 400, labor: 400, equipment: 200 },
-      'Beans': { seed: 80, fertilizer: 150, labor: 120, equipment: 100 },
-      'Wheat': { seed: 120, fertilizer: 250, labor: 180, equipment: 120 }
-    };
+    // Get crop data from comprehensive database
+    const cropData = allCrops.find(c => c.name.toLowerCase() === crop.toLowerCase());
     
-    const costs = baseCosts[crop] || baseCosts['Maize'];
-    const totalCost = Object.values(costs).reduce((sum, cost) => sum + cost, 0);
+    if (cropData) {
+      // Use real crop data from comprehensive database
+      const seedCost = cropData.seed_cost_per_acre || 150;
+      const fertilizerCost = cropData.fertilizer_cost_per_acre || 300;
+      const laborCost = cropData.labor_cost_per_acre || 200;
+      const equipmentCost = cropData.equipment_cost_per_acre || 150;
+      
+      const totalCost = seedCost + fertilizerCost + laborCost + equipmentCost;
+      return (totalCost * parseFloat(area)).toFixed(2);
+    }
     
+    // Fallback to default costs if crop not found
+    const defaultCosts = { seed: 150, fertilizer: 300, labor: 200, equipment: 150 };
+    const totalCost = Object.values(defaultCosts).reduce((sum, cost) => sum + cost, 0);
     return (totalCost * parseFloat(area)).toFixed(2);
   };
 
@@ -434,12 +514,26 @@ const CropCalendar = ({ savedAnalyses, onSavePlan }) => {
             </View>
             
             <ScrollView style={styles.modalBody}>
-              <TextInput
-                style={styles.input}
-                placeholder="Crop Type (e.g., Maize, Coffee)"
-                value={currentPlan.crop}
-                onChangeText={(text) => setCurrentPlan({...currentPlan, crop: text})}
-              />
+              {/* Crop Selection */}
+              <Text style={styles.label}>Select Crop ({allCrops.length} Crops Available)</Text>
+              <TouchableOpacity
+                style={styles.cropSelector}
+                onPress={() => setShowCropSelector(true)}
+              >
+                {currentPlan.crop ? (
+                  <Image 
+                    source={allCrops.find(c => c.name === currentPlan.crop)?.image || require('../assets/crops/maize.png')} 
+                    style={styles.cropSelectorImage}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <MaterialIcons name="agriculture" size={20} color="#4CAF50" />
+                )}
+                <Text style={styles.cropSelectorText}>
+                  {currentPlan.crop || `Select a crop from ${allCrops.length} available options`}
+                </Text>
+                <MaterialIcons name="arrow-drop-down" size={24} color="#666" />
+              </TouchableOpacity>
               <TextInput
                 style={styles.input}
                 placeholder="Area (acres)"
@@ -514,6 +608,59 @@ const CropCalendar = ({ savedAnalyses, onSavePlan }) => {
                 <Text style={styles.saveButtonText}>Save Plan</Text>
               </TouchableOpacity>
             </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Crop Selector Modal */}
+      <Modal
+        visible={showCropSelector}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowCropSelector(false)}
+      >
+        <View style={styles.cropModalOverlay}>
+          <View style={styles.cropModalContent}>
+            <View style={styles.cropModalHeader}>
+              <Text style={styles.cropModalTitle}>Select Crop ({allCrops.length} Crops Available)</Text>
+              <Text style={styles.cropModalSubtitle}>
+                {allCrops.length === 19 ? '✅ All 19 crops loaded' : `⚠️ Only ${allCrops.length} crops loaded`}
+              </Text>
+              <TouchableOpacity
+                onPress={() => setShowCropSelector(false)}
+                style={styles.cropModalCloseButton}
+              >
+                <MaterialIcons name="close" size={24} color="#666" />
+              </TouchableOpacity>
+            </View>
+            
+            <ScrollView style={styles.cropModalBody}>
+              <View style={styles.cropsGrid}>
+                {allCrops.map((crop, index) => (
+                  <TouchableOpacity
+                    key={crop.name}
+                    style={[
+                      styles.cropCard,
+                      currentPlan.crop === crop.name && styles.selectedCropCard
+                    ]}
+                    onPress={() => {
+                      setCurrentPlan({...currentPlan, crop: crop.name});
+                      setShowCropSelector(false);
+                    }}
+                  >
+                    <Text style={styles.cropCardNumber}>{index + 1}</Text>
+                    <Image 
+                      source={crop.image} 
+                      style={styles.cropImage}
+                      resizeMode="cover"
+                    />
+                    <Text style={styles.cropCardName}>{crop.name}</Text>
+                    <Text style={styles.cropCardCategory}>{crop.category}</Text>
+                    <Text style={styles.cropCardROI}>ROI: {crop.roi_percentage.min}-{crop.roi_percentage.max}%</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
           </View>
         </View>
       </Modal>
@@ -840,6 +987,121 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: 'white',
     fontWeight: '600',
+  },
+  // Crop Selector Styles
+  label: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  cropSelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    backgroundColor: '#f8f9fa',
+  },
+  cropSelectorText: {
+    fontSize: 16,
+    color: '#333',
+    marginLeft: 8,
+    flex: 1,
+  },
+  cropSelectorImage: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+  },
+  cropModalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cropModalContent: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    width: '90%',
+    maxHeight: '80%',
+    elevation: 5,
+  },
+  cropModalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  cropModalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2c5530',
+    flex: 1,
+  },
+  cropModalSubtitle: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
+    flex: 1,
+  },
+  cropModalCloseButton: {
+    padding: 8,
+  },
+  cropModalBody: {
+    padding: 16,
+  },
+  cropsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  cropCard: {
+    backgroundColor: '#f8f9fa',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 8,
+    width: '48%',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    alignItems: 'center',
+  },
+  cropImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginBottom: 8,
+  },
+  selectedCropCard: {
+    backgroundColor: '#e8f5e9',
+    borderColor: '#4CAF50',
+    borderWidth: 2,
+  },
+  cropCardNumber: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 4,
+  },
+  cropCardName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#2c5530',
+    textAlign: 'center',
+  },
+  cropCardCategory: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 2,
+    textAlign: 'center',
+  },
+  cropCardROI: {
+    fontSize: 12,
+    color: '#4CAF50',
+    marginTop: 2,
+    textAlign: 'center',
   },
 });
 

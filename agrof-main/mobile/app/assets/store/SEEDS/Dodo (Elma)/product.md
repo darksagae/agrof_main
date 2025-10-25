@@ -1,87 +1,50 @@
-# Dodo (Elma) Amaranth Seeds
+# Dodo (Elma)
 
 ## Overview
-Dodo (Elma) is a high-quality amaranth variety known for its excellent nutritional value, disease resistance, and adaptability to various growing conditions. This variety produces abundant, nutritious leaves that are rich in vitamins and minerals.
+Dodo is a Highly nutritious vegetable, Easy to grow, Fast maturing, has very vigorous growth, Transports well, Quick to cook.
 
-## Specifications
-Variety: Open Pollinated Amaranth
-Plant Type: Annual leafy vegetable
-Plant Height: 60-120cm
-Days to Maturity: 30-45 days
-Leaf Color: Green to red
-Leaf Size: Medium to large
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Simlaw Seeds Company (U) Ltd**
 
-## Key Features
-High nutritional value
-Abundant leaf production
-Disease resistance
-Easy to grow
-Suitable for containers
-Fast growing
-Rich in vitamins and minerals
+## Pricing
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 20-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 30cm x 30cm between plants
+**Best Price**: UGX 1,303 (10g @ 20+ units)
 
-## Usage Instructions
-- **Variety type**: Highly nutritious vegetable
-- **Growing characteristics**: Easy to grow, Fast maturing, has very vigorous growth
-- **Transport quality**: Transports well
-- **Cooking quality**: Quick to cook
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: After last frost, when soil temperature is 15°C+
-- **Germination**: 5-7 days
-- **Direct seeding**: Recommended for optimal results
+### Package Options & Pricing
 
-## Application Method
-- **Method**: Direct seeding recommended
-- **Target**: Highly nutritious vegetable with vigorous growth
-- **Spacing**: Maintain proper spacing for optimal growth
-- **Growing characteristics**: Easy to grow, Fast maturing, has very vigorous growth
-- **Transport quality**: Transports well
-- **Cooking quality**: Quick to cook
+**10g**:
+- 1+ units: UGX 1,400/unit
+- 5+ units: UGX 1,322/unit (6% off)
+- 10+ units: UGX 1,308/unit (7% off)
+- 20+ units: UGX 1,303/unit (7% off)
 
-## Benefits
-- **Highly nutritious**: Highly nutritious vegetable with excellent nutritional value
-- **Easy to grow**: Easy to grow, Fast maturing, has very vigorous growth
-- **Fast maturing**: Fast maturing variety with quick harvest
-- **Vigorous growth**: Has very vigorous growth characteristics
-- **Transport quality**: Transports well for market
-- **Quick cooking**: Quick to cook for consumption
-- **High demand**: Popular variety with excellent market acceptance
+**20g**:
+- 1+ units: UGX 1,500/unit
+- 5+ units: UGX 1,422/unit (5% off)
+- 10+ units: UGX 1,409/unit (6% off)
+- 20+ units: UGX 1,404/unit (6% off)
 
-## Price Information
-Per 1000 seeds: UGX 12,000
-Per 5000 seeds: UGX 50,000
-Per 10000 seeds: UGX 90,000
-Bulk orders: Contact for pricing
+**25g**:
+- 1+ units: UGX 1,600/unit
+- 5+ units: UGX 1,530/unit (4% off)
+- 10+ units: UGX 1,509/unit (6% off)
+- 20+ units: UGX 1,506/unit (6% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**50g**:
+- 1+ units: UGX 4,500/unit
+- 5+ units: UGX 4,320/unit (4% off)
+- 10+ units: UGX 4,302/unit (4% off)
+- 20+ units: UGX 4,289/unit (5% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
-
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

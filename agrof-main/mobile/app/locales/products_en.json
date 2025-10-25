@@ -24,7 +24,8 @@
     "herbicides": "Herbicides",
     "nursery_bed": "Nursery Bed",
     "organic_chemicals": "Organic Chemicals",
-    "seeds": "Seeds"
+    "seeds": "Seeds",
+    "tools": "Tools"
   },
   "sugar_baby": {
     "name": "Sugar Baby - Watermelon",
@@ -218,5 +219,125 @@
     ],
     "application_method": "Direct seeding in drills recommended.",
     "price": "Contact for current pricing"
+  },
+  "agriscope_knapsack_sprayer": {
+    "name": "Agriscope Knapsack Sprayer",
+    "description": "Highly durable, efficient sprayer ideal for outdoor work and all spraying jobs"
+  },
+  "bird_protection_floriculture_net": {
+    "name": "Bird Protection / Floriculture Net",
+    "description": "Multipurpose net used for protection against birds and other agricultural applications"
+  },
+  "bomba_kaliba_knapsack_sprayer": {
+    "name": "Bomba Kaliba – Knapsack Sprayer",
+    "description": "Highly durable efficient knapsack sprayer with excellent chemical resistance"
+  },
+  "cp15_evolution_sprayer": {
+    "name": "CP15 Evolution – Sprayer",
+    "description": "Comfortable and safe knapsack sprayer with non-corrosive polypropylene tank"
+  },
+  "climatesmart_direct_with_rainmaker_2s": {
+    "name": "Climatesmart Direct with Rainmaker 2S",
+    "description": "Optimised irrigation solution for <1 acre farm with solar pump and accessories"
+  },
+  "echo_20l_pump": {
+    "name": "Echo 20L Pump",
+    "description": "Double Wand High-Pressure Sprayer with vibration-reduction system"
+  },
+  "electric_spray_pump": {
+    "name": "Electric Spray Pump",
+    "description": "20L agriculture backpack power battery electric sprayer pump"
+  },
+  "farmate_spray_pump": {
+    "name": "Farmate - Spray Pump",
+    "description": "General purpose lever-operated knapsack sprayer with high quality PE tank"
+  },
+  "garden_fork_spading_fork": {
+    "name": "Garden Fork / Spading Fork",
+    "description": "Multipurpose tool for turning, digging, and loosening all types of soil"
+  },
+  "grain_plastic_silos": {
+    "name": "Grain Plastic Silos",
+    "description": "Gas-tight hermetic plastic silos for storing grains to kill insect pests"
+  },
+  "grape_net": {
+    "name": "Grape Net",
+    "description": "Light weighted but durable net for protecting grapes against birds and hail"
+  },
+  "hoe_handle": {
+    "name": "Hoe Handle",
+    "description": "Smoothened wooden hoe handle, strong and durable, easy to fit"
+  },
+  "hoe_peacock_brand": {
+    "name": "Hoe – Peacock Brand",
+    "description": "Versatile agricultural and horticultural hand tool for shaping soil and weeding"
+  },
+  "jectto_manual_pump_16ltrs": {
+    "name": "Jectto Manual Pump 16Ltrs",
+    "description": "Reliable and versatile spraying solution for agricultural and industrial applications"
+  },
+  "makula_knapsack_sprayer": {
+    "name": "Makula Knapsack Sprayer",
+    "description": "High pressure sprayer with ergonomic design and consistent spray pattern"
+  },
+  "nurserybed_potting_bags": {
+    "name": "Nurserybed - Potting Bags",
+    "description": "Large fabric-like bags for growing plants and vegetables in various sizes"
+  },
+  "panga": {
+    "name": "Panga",
+    "description": "Machete with deep belly for chopping and slicing woody vegetation"
+  },
+  "pick_axe": {
+    "name": "Pick Axe",
+    "description": "Heavy-duty tool for digging rocky pits, mining, and construction tasks"
+  },
+  "protective_gear_coat_overall": {
+    "name": "Protective Gear (Coat/Overall)",
+    "description": "Loose-fitting protective garment worn over clothes for protection against dirt"
+  },
+  "pruning_saw": {
+    "name": "Pruning Saw",
+    "description": "Sharp-tooth pruning saw for trimming trees and shrubs with steel blade"
+  },
+  "rubber_gloves_protective_gear": {
+    "name": "Rubber Gloves (Protective Gear)",
+    "description": "Protective gloves for comfort and protection against chemicals and damage"
+  },
+  "safety_gumboots_gayu_yellow": {
+    "name": "Safety Gumboots - Gayu (Yellow)",
+    "description": "Waterproof safety gumboots with cushioned foot-bed and soft fabric lining"
+  },
+  "sharpening_file": {
+    "name": "Sharpening File",
+    "description": "High-quality file for sharpening pangas, knives, chainsaws and deburring metals"
+  },
+  "slasher": {
+    "name": "Slasher",
+    "description": "Implement with long sharp blade used to clear scrub and thin bush"
+  },
+  "smart_sensor_grain_moisture_meter": {
+    "name": "Smart Sensor Grain Moisture Meter",
+    "description": "LCD Digital Smart Sensor with probe for measuring moisture in grains and feeds"
+  },
+  "stanes_entrap_fruit_fly_trap": {
+    "name": "Stanes Entrap Fruit Fly Trap",
+    "description": "Eco-friendly fruit fly trap for monitoring and control in fruit trees"
+  },
+  "tape_measure": {
+    "name": "Tape Measure",
+    "description": "Fiberglass long tape, metric/inch, suitable for field and construction measurements"
+  },
+  "tarpaulin": {
+    "name": "Tarpaulin",
+    "description": "Strong waterproof tarpaulin for harvesting, drying produce, and covering trucks"
+  },
+  "tarpaulin_twebaze": {
+    "name": "Tarpaulin (Twebaze)",
+    "description": "Strong waterproof tarpaulin for agricultural uses and truck covering"
+  },
+  "watering_can_10l_plastic": {
+    "name": "Watering Can (10L, Plastic)",
+    "description": "Light weight plastic watering can for agricultural use, 10L capacity"
   }
 }

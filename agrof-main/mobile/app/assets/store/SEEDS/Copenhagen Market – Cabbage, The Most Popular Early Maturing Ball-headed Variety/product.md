@@ -1,90 +1,69 @@
-# Copenhagen Market Cabbage Seeds
+# Copenhagen Market – Cabbage, The Most Popular Early Maturing Ball-headed Variety
 
 ## Overview
-Copenhagen Market is the most popular early maturing ball-headed cabbage variety, known for its excellent quality, uniform heads, and adaptability to various growing conditions. This variety produces compact, round heads with excellent flavor.
+Copenhagen Market is the most popular amongst the ball-headed cabbages. The heads are uniform round, firm, medium sized and weigh about 2-3kg. The plant is short stemmed and rather small and can be spaced closer, early maturing, approximately 8-10 weeks. Sensitive to splitting and should not be left in the field for too long after maturity.
 
-## Specifications
-Variety: Open Pollinated Cabbage
-Head Shape: Round, compact
-Head Weight: 1.5-2.5 kg
-Days to Maturity: 65-75 days
-Plant Type: Compact, determinate
-Head Color: Light green
-Flavor: Sweet, mild
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Syova Seed (U) Ltd**
 
-## Key Features
-Early maturity
-Uniform, round heads
-Excellent flavor
-High yield potential
-Disease resistance
-Compact plant habit
-Suitable for close spacing
+## Product Specifications
 
-## Growing Requirements
-Climate: Cool season crop
-Temperature: 15-25°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 45cm x 45cm between plants
+- **Spacing**: 45cm x 45cm
+- **Seed Rate**: 123grams/acre
+- **Maturity Days From Transplanting**: 75-90 days
+- **Yield Potential**: 16-32mt/acre
 
-## Usage Instructions
-- **Variety type**: The most popular amongst the ball-headed cabbages
-- **Head characteristics**: The heads are uniform round, firm, medium sized and weigh about 2-3kg
-- **Plant characteristics**: The plant is short stemmed and rather small and can be spaced closer
-- **Maturity**: Early maturing, approximately 8-10 weeks
-- **Sensitivity**: Sensitive to splitting and should not be left in the field for too long after maturity
-- **Dependability**: It is a highly dependable and productive variety
-- **Spacing**: 45cm*45cm
-- **Seed rate**: 123grams/acre
-- **Maturity days from transplanting**: 75-90 days
-- **Yield potential**: 16-32mt/acre
+## Pricing
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: The most popular amongst the ball-headed cabbages
-- **Spacing**: 45cm*45cm between plants
-- **Head characteristics**: Uniform round, firm, medium sized and weigh about 2-3kg
-- **Plant characteristics**: Short stemmed and rather small and can be spaced closer
-- **Yield potential**: 16-32mt/acre
+**Best Price**: UGX 2,101 (10g @ 5+ units)
 
-## Benefits
-- **Popular variety**: The most popular amongst the ball-headed cabbages
-- **Uniform heads**: The heads are uniform round, firm, medium sized and weigh about 2-3kg
-- **Early maturity**: Early maturing, approximately 8-10 weeks
-- **Compact growth**: The plant is short stemmed and rather small and can be spaced closer
-- **High dependability**: It is a highly dependable and productive variety
-- **Market demand**: Popular variety with excellent market acceptance
-- **Profit potential**: High return on investment
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 25,000
-Per 5000 seeds: UGX 110,000
-Per 10000 seeds: UGX 200,000
-Bulk orders: Contact for pricing
+**10g**:
+- 1+ units: UGX 2,200/unit
+- 5+ units: UGX 2,101/unit (5% off)
+- 10+ units: UGX 2,101/unit (5% off)
+- 20+ units: UGX 2,101/unit (5% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**20g**:
+- 1+ units: UGX 3,100/unit
+- 5+ units: UGX 3,100/unit
+- 10+ units: UGX 2,899/unit (6% off)
+- 20+ units: UGX 2,899/unit (6% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**25g**:
+- 1+ units: UGX 4,100/unit
+- 5+ units: UGX 4,002/unit (2% off)
+- 10+ units: UGX 3,899/unit (5% off)
+- 20+ units: UGX 3,899/unit (5% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**50g**:
+- 1+ units: UGX 5,100/unit
+- 5+ units: UGX 4,998/unit (2% off)
+- 10+ units: UGX 4,901/unit (4% off)
+- 20+ units: UGX 4,901/unit (4% off)
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+**250g**:
+- 1+ units: UGX 19,400/unit
+- 5+ units: UGX 18,100/unit (7% off)
+- 10+ units: UGX 17,906/unit (8% off)
+- 20+ units: UGX 17,906/unit (8% off)
+
+**500g**:
+- 1+ units: UGX 34,000/unit
+- 5+ units: UGX 32,708/unit (4% off)
+- 10+ units: UGX 32,504/unit (4% off)
+- 20+ units: UGX 32,402/unit (5% off)
+
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

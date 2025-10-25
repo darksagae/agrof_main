@@ -24,7 +24,8 @@
     "herbicides": "Herbicides",
     "nursery_bed": "Nursery Bed",
     "organic_chemicals": "Organic Chemicals",
-    "seeds": "Embajjajja"
+    "seeds": "Embajjajja",
+    "tools": "Ebikozesebwa"
   },
   "sugar_baby": {
     "name": "Sugar Baby - Watermelon",
@@ -308,5 +309,125 @@
     ],
     "application_method": "Okukozesa fertilizer mu ttaka ly'omugolomugolo.",
     "price": "Buulira omutindo"
+  },
+  "agriscope_knapsack_sprayer": {
+    "name": "Agriscope Knapsack Sprayer",
+    "description": "Sprayer ey'omugolomugolo ey'okukula mangu, ey'okukozesa mu kifo ky'omugolomugolo"
+  },
+  "bird_protection_floriculture_net": {
+    "name": "Bird Protection / Floriculture Net",
+    "description": "Net ey'okukozesa mu kifo ky'omugolomugolo ey'okwerinda ku ndwadde"
+  },
+  "bomba_kaliba_knapsack_sprayer": {
+    "name": "Bomba Kaliba – Knapsack Sprayer",
+    "description": "Sprayer ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "cp15_evolution_sprayer": {
+    "name": "CP15 Evolution – Sprayer",
+    "description": "Sprayer ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "climatesmart_direct_with_rainmaker_2s": {
+    "name": "Climatesmart Direct with Rainmaker 2S",
+    "description": "Eky'okukozesa mu kifo ky'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "echo_20l_pump": {
+    "name": "Echo 20L Pump",
+    "description": "Pump ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "electric_spray_pump": {
+    "name": "Electric Spray Pump",
+    "description": "Pump ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "farmate_spray_pump": {
+    "name": "Farmate - Spray Pump",
+    "description": "Sprayer ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "garden_fork_spading_fork": {
+    "name": "Garden Fork / Spading Fork",
+    "description": "Eky'okukozesa mu kifo ky'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "grain_plastic_silos": {
+    "name": "Grain Plastic Silos",
+    "description": "Silos ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "grape_net": {
+    "name": "Grape Net",
+    "description": "Net ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "hoe_handle": {
+    "name": "Hoe Handle",
+    "description": "Handle ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "hoe_peacock_brand": {
+    "name": "Hoe – Peacock Brand",
+    "description": "Hoe ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "jectto_manual_pump_16ltrs": {
+    "name": "Jectto Manual Pump 16Ltrs",
+    "description": "Pump ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "makula_knapsack_sprayer": {
+    "name": "Makula Knapsack Sprayer",
+    "description": "Sprayer ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "nurserybed_potting_bags": {
+    "name": "Nurserybed - Potting Bags",
+    "description": "Bags ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "panga": {
+    "name": "Panga",
+    "description": "Panga ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "pick_axe": {
+    "name": "Pick Axe",
+    "description": "Axe ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "protective_gear_coat_overall": {
+    "name": "Protective Gear (Coat/Overall)",
+    "description": "Gear ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "pruning_saw": {
+    "name": "Pruning Saw",
+    "description": "Saw ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "rubber_gloves_protective_gear": {
+    "name": "Rubber Gloves (Protective Gear)",
+    "description": "Gloves ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "safety_gumboots_gayu_yellow": {
+    "name": "Safety Gumboots - Gayu (Yellow)",
+    "description": "Boots ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "sharpening_file": {
+    "name": "Sharpening File",
+    "description": "File ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "slasher": {
+    "name": "Slasher",
+    "description": "Slasher ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "smart_sensor_grain_moisture_meter": {
+    "name": "Smart Sensor Grain Moisture Meter",
+    "description": "Meter ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "stanes_entrap_fruit_fly_trap": {
+    "name": "Stanes Entrap Fruit Fly Trap",
+    "description": "Trap ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "tape_measure": {
+    "name": "Tape Measure",
+    "description": "Measure ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "tarpaulin": {
+    "name": "Tarpaulin",
+    "description": "Tarpaulin ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "tarpaulin_twebaze": {
+    "name": "Tarpaulin (Twebaze)",
+    "description": "Tarpaulin ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
+  },
+  "watering_can_10l_plastic": {
+    "name": "Watering Can (10L, Plastic)",
+    "description": "Can ey'omugolomugolo ey'okukula mangu n'okukwata ku ndwadde"
   }
 }

@@ -1,0 +1,43 @@
+{
+  "productName": "Bitter Gourd -Palee F1",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Bitter Gourd",
+  "displayPrice": "UGX 17,000",
+  "lowestPrice": 17000,
+  "lowestPackage": "10g @ 1+ units",
+  "details": {
+    "description": "Bitter Gourd Palee F1 seeds are high-yielding, hybrid seeds that produce vigorous plants with uniform, slender, dark green fruits ideal for culinary and medicinal use. They thrive in warm Ugandan climates with well-drained, fertile soils and require planting in raised beds or ridges, spaced 60-90 cm apart, and regular watering to maintain soil moisture. With a maturity period of 50-60 days from planting, these seeds offer early harvests and are resistant to common pests and diseases.",
+    "maturity": "50-60 days from planting",
+    "spacing": "60-90 cm apart"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 17000,
+          "priceFormatted": "UGX 17,000",
+          "totalPrice": 17000,
+          "totalFormatted": "UGX 17,000",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 77000,
+          "priceFormatted": "UGX 77,000",
+          "totalPrice": 77000,
+          "totalFormatted": "UGX 77,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

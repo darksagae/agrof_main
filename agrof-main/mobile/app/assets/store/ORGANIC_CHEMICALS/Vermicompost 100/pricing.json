@@ -1,0 +1,36 @@
+{
+  "productName": "Vermicompost 100 - Premium Organic Fertilizer",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 27,500",
+  "lowestPrice": 27500,
+  "productDetails": "Vermicompost 100 contain higher percentage of both macro and micronutrients than the garden compost. Apart from other nutrients, a fine worm cast is rich in NPK which are in readily available form. Vermicompost enhances plant growth, suppresses disease in plants, increases porosity and microbial activity in soil, and improves water retention and aeration. Active Ingredients: Earthworm castings, organic matter, natural enzymes and hormones",
+  "specifications": {
+    "Directions for use": "Mix vermicompost100 in a ratio of 1:4 to soil. Top dress in potted plants, gardens or lawns. In general gardening, apply 1000kg/ha. In horticulture, apply 50-100g per plant. In tree plantations like coffee, apply 250-500g per plant per season",
+    "Key Benefits": "Soil Conditioner, Nutrient Retention of Soil, Pest Resistant, Better Aeration, Water Retention, Healthier Plants, Root Penetration, 100% Organic"
+  },
+  "packages": [
+    {
+      "size": "5kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 27500,
+          "priceFormatted": "UGX 27,500"
+        }
+      ]
+    },
+    {
+      "size": "10kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 53000,
+          "priceFormatted": "UGX 53,000"
+        }
+      ]
+    }
+  ]
+}

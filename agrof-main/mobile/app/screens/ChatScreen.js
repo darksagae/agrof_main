@@ -39,27 +39,52 @@ const ChatScreen = ({ route, navigation }) => {
 
     console.log('💬 Opening chat between:', currentUser.fullName, 'and', otherUser.name);
 
-    // Listen to real-time messages
-    const unsubscribe = messagingService.listenToChat(
-      currentUser.uid,
-      otherUser.uid,
-      (updatedMessages) => {
-        setMessages(updatedMessages);
+    // Get or create conversation and load initial messages
+    const loadConversationAndMessages = async () => {
+      try {
+        const conversationResult = await messagingService.getOrCreateConversation(otherUser.uid);
+        if (conversationResult.success) {
+          const conversationId = conversationResult.conversation.id;
+          
+          // Load initial messages
+          const messagesResult = await messagingService.getMessages(conversationId);
+          if (messagesResult.success) {
+            setMessages(messagesResult.messages);
+            setLoading(false);
+          }
+          
+          // Subscribe to real-time message updates
+          const unsubscribe = messagingService.subscribeToMessages(
+            conversationId,
+            (newMessage) => {
+              console.log('💬 New message received:', newMessage);
+              setMessages(prevMessages => [...prevMessages, newMessage]);
+              
+              // Auto-scroll to bottom when new message arrives
+              setTimeout(() => {
+                flatListRef.current?.scrollToEnd({ animated: true });
+              }, 100);
+            }
+          );
+          
+          return unsubscribe;
+        }
+      } catch (error) {
+        console.error('❌ Error loading conversation:', error);
         setLoading(false);
-        
-        // Auto-scroll to bottom when new message arrives
-        setTimeout(() => {
-          flatListRef.current?.scrollToEnd({ animated: true });
-        }, 100);
       }
-    );
+    };
+    
+    const unsubscribePromise = loadConversationAndMessages();
 
     // Mark messages as read
-    messagingService.markAsRead(currentUser.uid, otherUser.uid);
+    messagingService.markMessagesAsRead(conversationResult?.conversation?.id);
 
     // Cleanup listener on unmount
     return () => {
-      unsubscribe();
+      unsubscribePromise.then(unsubscribe => {
+        if (unsubscribe) unsubscribe();
+      });
     };
   }, [currentUser, otherUser]);
 
@@ -71,18 +96,31 @@ const ChatScreen = ({ route, navigation }) => {
     setSending(true);
 
     try {
-      await messagingService.sendMessage(
-        currentUser.uid,
-        otherUser.uid,
-        textToSend,
-        currentUser.fullName || currentUser.username,
-        otherUser.name
-      );
-      
-      // Scroll to bottom after sending
-      setTimeout(() => {
-        flatListRef.current?.scrollToEnd({ animated: true });
-      }, 100);
+      // Get or create conversation first
+      const conversationResult = await messagingService.getOrCreateConversation(otherUser.uid);
+      if (conversationResult.success) {
+        const conversationId = conversationResult.conversation.id;
+        
+        // Send message
+        const messageData = {
+          text: textToSend,
+          senderName: currentUser.fullName || currentUser.username,
+          receiverName: otherUser.name
+        };
+        
+        const sendResult = await messagingService.sendMessage(conversationId, otherUser.uid, messageData);
+        
+        if (sendResult.success) {
+          // Scroll to bottom after sending
+          setTimeout(() => {
+            flatListRef.current?.scrollToEnd({ animated: true });
+          }, 100);
+        } else {
+          throw new Error(sendResult.error || 'Failed to send message');
+        }
+      } else {
+        throw new Error(conversationResult.error || 'Failed to get conversation');
+      }
     } catch (error) {
       console.error('❌ Error sending message:', error);
       setMessageText(textToSend); // Restore message on error

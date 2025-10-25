@@ -1,0 +1,36 @@
+{
+  "productName": "Superagric Germination Booster",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 17,000",
+  "lowestPrice": 17000,
+  "productDetails": "Super germination booster is a natural safe technology with many applications around farm, orchard, and vineyard environments. The organic product, superagric germination booster works by getting the natural processes to function, the way nature intended. Active Ingredients: Beneficial micro-organisms",
+  "specifications": {
+    "Directions for use": "Soak seeds in a solution at rate of 1:20 litres. Spread them in a shade to dry, then plant. Seed Size and Time to soak - Small: 20-30 mins, Medium: 30-60 mins, Large: 2-3 Hrs",
+    "Key Benefits": "Improves seed viability, germination. Enhances plant growth"
+  },
+  "packages": [
+    {
+      "size": "250ml",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 17000,
+          "priceFormatted": "UGX 17,000"
+        }
+      ]
+    },
+    {
+      "size": "1ltr",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 37800,
+          "priceFormatted": "UGX 37,800"
+        }
+      ]
+    }
+  ]
+}

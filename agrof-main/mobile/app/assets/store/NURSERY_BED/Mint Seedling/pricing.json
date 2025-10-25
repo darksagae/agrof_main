@@ -1,0 +1,22 @@
+{
+  "productName": "Mint Seedling",
+  "supplier": "Mukama Mwesigwa Compound Designers",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 2,400",
+  "lowestPrice": 2400,
+  "productDetails": "Mint is a perennial herb with very fragrant, toothed leaves and tiny purple, pink, or white flowers. Mints are used as garden accents, ground covers, air fresheners, and herbal medicines. They are easy to grow due to the ability of thriving in sun and shade. Not only does mint add fruity, aromatic flavor to foods and tea, but also, it's useful for health remedies such as aiding digestion and relieving headaches. It is easy to grow. Can be used for Soothing common cold symptoms. Has anti-allergenic effects. Contain antioxidant and anti-inflammatory agents.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 2400,
+          "priceFormatted": "UGX 2,400"
+        }
+      ]
+    }
+  ]
+}

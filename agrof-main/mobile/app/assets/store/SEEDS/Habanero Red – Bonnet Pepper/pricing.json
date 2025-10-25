@@ -1,0 +1,101 @@
+{
+  "productName": "Habanero Red – Bonnet Pepper",
+  "supplier": "Home Harvest (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 15,695",
+  "lowestPrice": 15695,
+  "lowestPackage": "10g @ 10+ units",
+  "details": {
+    "description": "Habanero Red is a high yielding pepper variety with great demand both locally and internationally. It can be grown for export to various countries globally.",
+    "fruitColor": "Red hot pepper fruits",
+    "yieldPerPlant": "4-5kg per season",
+    "maturity": "70 days from transplanting",
+    "harvestingPeriod": "4-6 months",
+    "seedRate": "120g per acre",
+    "spacing": "60cm x 75cm"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 16400,
+          "priceFormatted": "UGX 16,400",
+          "totalPrice": 16400,
+          "totalFormatted": "UGX 16,400",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 15793,
+          "priceFormatted": "UGX 15,793",
+          "totalPrice": 78965,
+          "totalFormatted": "UGX 78,965",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 15695,
+          "priceFormatted": "UGX 15,695",
+          "totalPrice": 156950,
+          "totalFormatted": "UGX 156,950",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 15695,
+          "priceFormatted": "UGX 15,695",
+          "totalPrice": 313900,
+          "totalFormatted": "UGX 313,900",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 59600,
+          "priceFormatted": "UGX 59,600",
+          "totalPrice": 59600,
+          "totalFormatted": "UGX 59,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 58289,
+          "priceFormatted": "UGX 58,289",
+          "totalPrice": 291445,
+          "totalFormatted": "UGX 291,445",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 57991,
+          "priceFormatted": "UGX 57,991",
+          "totalPrice": 579910,
+          "totalFormatted": "UGX 579,910",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 57812,
+          "priceFormatted": "UGX 57,812",
+          "totalPrice": 1156240,
+          "totalFormatted": "UGX 1,156,240",
+          "discountPercent": 3
+        }
+      ]
+    }
+  ]
+}

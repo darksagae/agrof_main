@@ -1,0 +1,118 @@
+{
+  "productName": "Sugar Baby – Most Popular And Grown Watermelon Variety Due To Its Early Maturity",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Watermelon",
+  "displayPrice": "UGX 2,100",
+  "lowestPrice": 2100,
+  "lowestPackage": "10g @ 1+ units",
+  "details": {
+    "description": "Sugar Baby is the most popular and widely grown watermelon variety due to its early maturity, small to medium size, and high yield potential. Produces sweet, crisp red flesh fruits.",
+    "potentialFruitWeight": "5-8kgs",
+    "yieldPotential": "48-50 tons per acre",
+    "durationToMaturity": "80 days",
+    "spacing": "100x100cm",
+    "seedRate": "500 grams per acre",
+    "approximateSeedCount": "20 seeds per gram",
+    "specialAttributes": "Dark green, round watermelon, Very uniform growth, Very adoptable and grows on wide range of soils"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 2100,
+          "priceFormatted": "UGX 2,100",
+          "totalPrice": 2100,
+          "totalFormatted": "UGX 2,100",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3200,
+          "priceFormatted": "UGX 3,200",
+          "totalPrice": 3200,
+          "totalFormatted": "UGX 3,200",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3800,
+          "priceFormatted": "UGX 3,800",
+          "totalPrice": 3800,
+          "totalFormatted": "UGX 3,800",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 8700,
+          "priceFormatted": "UGX 8,700",
+          "totalPrice": 8700,
+          "totalFormatted": "UGX 8,700",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "250g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 34900,
+          "priceFormatted": "UGX 34,900",
+          "totalPrice": 34900,
+          "totalFormatted": "UGX 34,900",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "500g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 67200,
+          "priceFormatted": "UGX 67,200",
+          "totalPrice": 67200,
+          "totalFormatted": "UGX 67,200",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 128900,
+          "priceFormatted": "UGX 128,900",
+          "totalPrice": 128900,
+          "totalFormatted": "UGX 128,900",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

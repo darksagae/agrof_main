@@ -1,0 +1,29 @@
+{
+  "productName": "Katana F1 -Pumpkin",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Pumpkin",
+  "displayPrice": "UGX 14,000",
+  "lowestPrice": 14000,
+  "lowestPackage": "10g @ 1+ units",
+  "details": {
+    "description": "Katana F1 shows very strong plant vigor and good fruit setting ability. Intermediate resistance to squash leaf curl virus (SLCV). Flat round uniform fruits shape. Dark green color skin with thick dark yellow orange flesh. Excellent eating quality as comparable with Arjuna F1. Average fruit weight is 3.0 - 4.5 kg",
+    "averageFruitWeight": "3.0-4.5 kg",
+    "diseaseResistance": "Intermediate resistance to squash leaf curl virus (SLCV)"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 14000,
+          "priceFormatted": "UGX 14,000",
+          "totalPrice": 14000,
+          "totalFormatted": "UGX 14,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

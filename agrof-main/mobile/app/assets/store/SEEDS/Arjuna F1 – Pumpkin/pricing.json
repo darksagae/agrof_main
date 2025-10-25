@@ -1,0 +1,31 @@
+{
+  "productName": "Arjuna F1 – Pumpkin",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Pumpkin",
+  "displayPrice": "UGX 14,000",
+  "lowestPrice": 14000,
+  "lowestPackage": "10g @ 1+ units",
+  "details": {
+    "description": "Seed rate: 1.2kgs/acre, Number of plants per acre: 1,600, Spacing: 100cm x 250cm, Number of days in nursery bed: (0)-direct sowing, Maturity days after transplanting: 80-85 days. Suitable for harvesting either immature green or fully mature red brown depending on market demands, good shelf life. Flesh is yellow in colour, firm, sticky and has excellent taste.",
+    "seedRate": "1.2kgs/acre",
+    "plantsPerAcre": "1,600",
+    "spacing": "100cm x 250cm",
+    "maturity": "80-85 days"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 14000,
+          "priceFormatted": "UGX 14,000",
+          "totalPrice": 14000,
+          "totalFormatted": "UGX 14,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

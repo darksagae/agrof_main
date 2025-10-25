@@ -1,0 +1,22 @@
+{
+  "productName": "Celery Seedling",
+  "supplier": "Mukama Mwesigwa Compound Designers",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 3,500",
+  "lowestPrice": 3500,
+  "productDetails": "This is a crisp, stringless green celery with tightly folded hearts, and broad, thick, well-rounded stalks. It is a vigorous grower. Celery is a negative-calorie food. Celery is rich in fibre content that makes it a detoxification agent for the gut. Celery contains vitamin A that is essential for stronger immunity, better eyes and healthier skin.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3500,
+          "priceFormatted": "UGX 3,500"
+        }
+      ]
+    }
+  ]
+}

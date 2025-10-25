@@ -1,0 +1,353 @@
+[
+  {
+    "id": 46,
+    "name": "Anita – Watermelon",
+    "folder": "Anita – Watermelon",
+    "supplier": "Nsanja Agrochemicals Ltd",
+    "category": "Watermelon",
+    "details": {
+      "description": "An excellent oval to oblong stripped type hybrid. Glossy attractive high quality fruits with deep crimson red flesh. The fruit texture is very crispy with a sweetness of 12-13% TSS. The fruits have excellent transport quality fit for long distance transport. Field observable tolerance to Anthracnose caused by Colletotrichum orbiculare and Fusarium wilt.",
+      "fruitAverageWeight": "8-10kg under good farming practice",
+      "maturity": "80-85 days after sowing",
+      "yieldPotential": "32-40 tons/acre",
+      "spacing": "60cm x 45cm"
+    },
+    "packages": [
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 43600 },
+        { "qty": 5, "price": 42510 },
+        { "qty": 10, "price": 42379 },
+        { "qty": 20, "price": 42292 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 179200 },
+        { "qty": 5, "price": 176870 },
+        { "qty": 10, "price": 176333 },
+        { "qty": 20, "price": 176154 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 340000 }
+      ]}
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Tomato Assila",
+    "folder": "Tomato Assila",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "This is a determinate variety that produces red coloured fruits with an oval shape and is known to be sweet. Assila F1 is an early maturing variety taking 75days to mature after transplanting. It is tolerant to Tomato Yellow Leaf Curl Virus and nematodes. This variety can yield up to 23tonnes per acre. It can be stored well and transported without much damage.",
+      "maturity": "75 days after transplanting",
+      "yieldPotential": "23 tonnes per acre",
+      "tolerance": "Tomato Yellow Leaf Curl Virus and nematodes"
+    },
+    "packages": [
+      { "size": "2500 Seeds", "tiers": [
+        { "qty": 1, "price": 170640 }
+      ]}
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Water Melon Pata Negra",
+    "folder": "Water Melon Pata Negra",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Watermelon",
+    "details": {
+      "description": "High yielding variety with production potential of 46 t/acre. Very sweet brilliant red, crisp flesh. Early maturing variety 100-120 days. Dark green round uniform fruit 7-10 kg in weight. Vigorous plant with good fruit cover. Thick rind making the variety excellent for long distance shipping. Variety resistant to Fusarium wilt. Number of seeds per gram: 23-27",
+      "yieldPotential": "46 t/acre",
+      "maturity": "100-120 days",
+      "fruitWeight": "7-10 kg",
+      "seedsPerGram": "23-27"
+    },
+    "packages": [
+      { "size": "1000 Seeds", "tiers": [
+        { "qty": 1, "price": 89640 }
+      ]},
+      { "size": "5000 Seeds", "tiers": [
+        { "qty": 1, "price": 415800 }
+      ]},
+      { "size": "10000 Seeds", "tiers": [
+        { "qty": 1, "price": 789000 }
+      ]}
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Red Bugga-amaranthus",
+    "folder": "Red Bugga-amaranthus",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Amaranth/Vegetables",
+    "details": {
+      "description": "Red Bugga-Amaranthus seeds are a high-yielding, nutrient-rich variety ideal for both commercial farming and home gardens. Known for their vibrant red leaves and fast growth, they thrive in diverse climates, offering a sustainable source of vitamins and minerals. Farmers value these seeds for their resilience to pests and adaptability."
+    },
+    "packages": [
+      { "size": "Assorted", "tiers": [
+        { "qty": 1, "price": 1500 }
+      ]},
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 1760 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 2600 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 3100 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 5600 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 21780 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 38983 }
+      ]}
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Red Beauty",
+    "folder": "Red Beauty",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "Red Beauty is a high-quality tomato variety known for excellent fruit quality and productivity."
+    },
+    "packages": [
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 7500 }
+      ]}
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Bitter Gourd - Palee F1",
+    "folder": "Bitter Gourd -Palee F1",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Bitter Gourd",
+    "details": {
+      "description": "Bitter Gourd Palee F1 seeds are high-yielding, hybrid seeds that produce vigorous plants with uniform, slender, dark green fruits ideal for culinary and medicinal use. They thrive in warm Ugandan climates with well-drained, fertile soils and require planting in raised beds or ridges, spaced 60-90 cm apart, and regular watering to maintain soil moisture. With a maturity period of 50-60 days from planting, these seeds offer early harvests and are resistant to common pests and diseases.",
+      "maturity": "50-60 days from planting",
+      "spacing": "60-90 cm apart"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 17000 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 77000 }
+      ]}
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Black Beauty - Eggplants",
+    "folder": "Black Beauty - Eggplants",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Eggplant",
+    "details": {
+      "description": "Black Beauty is a classic eggplant variety valued for its large, glossy, deep purple fruits and tender, flavorful flesh. The plants are sturdy and productive, thriving in warm climates and maturing in 70-80 days.",
+      "maturity": "70-80 days"
+    },
+    "packages": [
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 7000 }
+      ]},
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 108000 }
+      ]}
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Merdan F1 - African Eggplants",
+    "folder": "Merdan F1- African Eggplants",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Eggplant",
+    "details": {
+      "description": "Merdan F1 is a fast-growing, vigorous hybrid eggplant variety known for its semi-erect plant habit and medium to late maturity. It produces uniform, very shiny black, firm, oval-shaped fruits ideal for long-distance transport. The fruits typically measure 12-14 cm in length, 9-10 cm in diameter, and weigh between 250-300 grams. Merdan F1 is suitable for both indoor and outdoor cultivation and exhibits high resistance to Tobacco Mosaic Virus.",
+      "fruitLength": "12-14 cm",
+      "fruitDiameter": "9-10 cm",
+      "fruitWeight": "250-300 grams",
+      "diseaseResistance": "High resistance to Tobacco Mosaic Virus"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 1, "price": 42000 }
+      ]}
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Efia - Hot Paper",
+    "folder": "Efia - Hot paper",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Pepper",
+    "details": {
+      "description": "Efia Hot Paper is a high-quality hot pepper variety designed for various culinary applications. Known for its excellent heat level and durability."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 27000 }
+      ]}
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Katana F1 - Pumpkin",
+    "folder": "Katana F1 -Pumpkin",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Pumpkin",
+    "details": {
+      "description": "Katana F1 shows very strong plant vigor and good fruit setting ability. Intermediate resistance to squash leaf curl virus (SLCV). Flat round uniform fruits shape. Dark green color skin with thick dark yellow orange flesh. Excellent eating quality as comparable with Arjuna F1. Average fruit weight is 3.0 - 4.5 kg",
+      "averageFruitWeight": "3.0-4.5 kg",
+      "diseaseResistance": "Intermediate resistance to squash leaf curl virus (SLCV)"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 14000 }
+      ]}
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Yubi F1 Pakchoy - Chinese Cabbage",
+    "folder": "Yubi F1 Pakchoy- Chinese Cabbage",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "Pak choy, also known as bok choy or Chinese cabbage, is a leafy green vegetable widely used in Asian cuisine. It features crisp white stems and dark green leaves, offering a mild, sweet flavor and a tender texture. Pak choy is rich in vitamins A, C, and K, as well as calcium and iron."
+    },
+    "packages": [
+      { "size": "1000 Seeds", "tiers": [
+        { "qty": 1, "price": 15000 }
+      ]}
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Tengeru 97 - Tomato",
+    "folder": "Tengeru 97 - Determinate Round Tomato With A High Yield Potential",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "Tengeru 97 is a high yielding variety. It is round to oblate in shape weighing 100-125grams with good shelf life of about 2 weeks. It is resistant to root knot, nematodes, Tomato Mosaic Virus and fusarium wilt. It matures in 100days and yields about 60-80mt/ha.",
+      "spacing": "60cm x 45cm",
+      "seedRate": "80 grams/acre",
+      "maturity": "95-100 days",
+      "yieldPotential": "20-30mt/acre",
+      "fruitWeight": "100-125 grams"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 5200 },
+        { "qty": 5, "price": 5086 },
+        { "qty": 10, "price": 4976 },
+        { "qty": 20, "price": 4976 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 7200 },
+        { "qty": 5, "price": 7099 },
+        { "qty": 10, "price": 7099 },
+        { "qty": 20, "price": 6998 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 9300 },
+        { "qty": 5, "price": 9198 },
+        { "qty": 10, "price": 9095 },
+        { "qty": 20, "price": 9095 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 16500 },
+        { "qty": 5, "price": 15906 },
+        { "qty": 10, "price": 15906 },
+        { "qty": 20, "price": 15906 }
+      ]}
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Roma Vfn – Tomato",
+    "folder": "Roma Vfn – High Yielding Determinate Oval Shape Tomato",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "Roma is a high yielding determinate oval shape tomato for use in a variety of dishes. Popular processing variety. Good dry matter content. Fruits weigh about 70g. High yielding tomato. Determinate variety (has definite flowering and fruiting). Fruits mature at the same time and thus can be harvested at once. Fruits ripen uniformly for mechanical harvesting. It's resistant to Verticillium and Fusarium wilts, and nematodes.",
+      "maturity": "90-100 days",
+      "yieldPotential": "15,000-20,000 kg/acre",
+      "spacing": "35 cm x 100 cm",
+      "seedRate": "400 grams per acre direct seeding/80grams transplant",
+      "fruitWeight": "70g"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 4900 },
+        { "qty": 5, "price": 4802 },
+        { "qty": 10, "price": 4709 },
+        { "qty": 20, "price": 4709 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 7200 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 9600 },
+        { "qty": 5, "price": 9504 },
+        { "qty": 10, "price": 9408 },
+        { "qty": 20, "price": 9408 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 18300 },
+        { "qty": 5, "price": 16964 },
+        { "qty": 10, "price": 16873 },
+        { "qty": 20, "price": 16781 }
+      ]}
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Kilele F1 hybrid",
+    "folder": "Kilele F1hybrid",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "KILELE F1 - SPACING: 60x60cm, Seed rate: 35 grams per acre, APPROXIMATE SEED COUNT (per grams): 300 seeds, Yield 70-78 tons per acre, DURATION TO MATURITY: 80 days from transplanting, SPECIAL ATTRIBUTES: Over 21 days shelf life, Disease tolerance: bacterial wilt.",
+      "spacing": "60x60cm",
+      "seedRate": "35 grams per acre",
+      "seedCount": "300 seeds per gram",
+      "yield": "70-78 tons per acre",
+      "maturity": "80 days from transplanting"
+    },
+    "packages": [
+      { "size": "1000 Seeds", "tiers": [
+        { "qty": 1, "price": 68000 }
+      ]}
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Indica F1 - Cabbage",
+    "folder": "Indica F1-cabbage",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "Seed rate: 80gms/acre, Spacing: 60cm x 60cm, Number of days in nursery bed: 25-30days, Maturity days after transplanting: 70-75days, Number of plants per acre: 10,700. Main features: Average head weight 1.6-2kg, does not bust.",
+      "seedRate": "80gms/acre",
+      "spacing": "60cm x 60cm",
+      "nurseryDays": "25-30 days",
+      "maturity": "70-75 days after transplanting",
+      "averageHeadWeight": "1.6-2kg"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 24000 }
+      ]}
+    ]
+  }
+]
+
+
+
+
+

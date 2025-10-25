@@ -1,0 +1,24 @@
+{
+  "productName": "Fertiplus 4-3-3-65 Organic Fertilizer",
+  "supplier": "Fertiplus Organic Ltd",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 79,875",
+  "lowestPrice": 79875,
+  "productDetails": "Fertiplus Organic Fertilizer 4-3-3-65 OM is a well-known 100% Organic Fertilizer pellet, ecologic/environmentally friendly and hygienic. The organic material contains mostly humic acid structures which benefit soils in facilitating its nutrient availability. Composition: Dry Matter 88% min; Moisture 12% max; Organic Matter 65%; Nitrogen (Total) 4.2%; Phosphorus 3.0%; Potassium 2.8%; Calcium 9%; Magnesium 1%; Sulphur 1.5% + Trace elements. pH:6.4, Pellet diameter: 5-6mm",
+  "specifications": {
+    "Application": "Considerable saving in mineral Fertilizers, and a reduction of mineral Fertilizers application in the soil"
+  },
+  "packages": [
+    {
+      "size": "25kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 79875,
+          "priceFormatted": "UGX 79,875"
+        }
+      ]
+    }
+  ]
+}

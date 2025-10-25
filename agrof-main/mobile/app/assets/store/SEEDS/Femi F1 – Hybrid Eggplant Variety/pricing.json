@@ -1,0 +1,28 @@
+{
+  "productName": "Femi F1 – Hybrid Eggplant Variety",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Eggplant",
+  "displayPrice": "UGX 51,000",
+  "lowestPrice": 51000,
+  "lowestPackage": "5g @ 1+ units",
+  "details": {
+    "description": "Femi F1 is an improved Eggplant hybrid in terms of yield, shelf life and bacterial wilt resistance. The Fruits are very glossy day violet with a smooth skin and excellent firmness. Flesh color is white. It is widely adaptable to a range of growing conditions and ideal for areas where bacterial wilt occurs.",
+    "diseaseResistance": "Bacterial wilt resistance"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 51000,
+          "priceFormatted": "UGX 51,000",
+          "totalPrice": 51000,
+          "totalFormatted": "UGX 51,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

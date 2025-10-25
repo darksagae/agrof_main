@@ -1,0 +1,487 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  🔄 COMPLETE GOOGLE COLAB RESTART GUIDE                          ║
+║  Run these cells in order after disconnection                    ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 1: CHECK GPU AVAILABILITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import tensorflow as tf
+
+print("🔍 Checking GPU availability...")
+print("="*60)
+
+# Check if GPU is available
+gpu_available = tf.config.list_physical_devices('GPU')
+
+if gpu_available:
+    print("✅ GPU is available!")
+    print(f"📊 GPU devices: {gpu_available}")
+    
+    # Get GPU details
+    gpu_name = tf.test.gpu_device_name()
+    print(f"🎮 GPU Name: {gpu_name}")
+    
+    # Check CUDA version
+    print(f"🔧 TensorFlow version: {tf.__version__}")
+    print(f"🔧 Built with CUDA: {tf.test.is_built_with_cuda()}")
+else:
+    print("❌ No GPU found!")
+    print("⚠️  Go to: Runtime → Change runtime type → GPU")
+
+print("="*60)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 2: SETUP KAGGLE API
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+from google.colab import files
+import os
+
+print("📤 Upload your kaggle.json file")
+print("(Download from: https://www.kaggle.com/settings → API → Create New Token)")
+print("="*60)
+
+uploaded = files.upload()
+
+!mkdir -p ~/.kaggle
+!cp kaggle.json ~/.kaggle/
+!chmod 600 ~/.kaggle/kaggle.json
+
+print("\n✅ Kaggle API configured!")
+print("Testing connection...")
+!kaggle datasets list --max-size 100MB | head -5
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 3: DOWNLOAD COFFEE DATASET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("☕ Downloading Coffee dataset...")
+print("="*60)
+
+# Create directories
+!mkdir -p /content/datasets/coffee
+!mkdir -p /content/agrof_dataset
+
+# Download Coffee dataset
+!kaggle datasets download -d alvarole/coffee-leaves-disease
+!unzip -q coffee-leaves-disease.zip -d /content/datasets/coffee/
+!rm coffee-leaves-disease.zip
+
+print("✅ Coffee dataset downloaded!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 4: DOWNLOAD PLANTVILLAGE (TOMATO, POTATO, PEPPER)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+print("🍅 Downloading PlantVillage dataset (Tomato, Potato, Pepper)...")
+print("="*60)
+
+# Download PlantVillage
+!kaggle datasets download -d emmarex/plantdisease
+!unzip -q plantdisease.zip -d /content/datasets/plantvillage/
+!rm plantdisease.zip
+
+print("✅ PlantVillage downloaded!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 5: DOWNLOAD BEANS (MAKERERE iBEAN FROM HUGGING FACE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading Makerere iBean from Hugging Face...")
+print("="*60)
+
+# Install huggingface_hub
+!pip install -q huggingface_hub
+
+from huggingface_hub import snapshot_download
+
+# Download the iBean dataset
+try:
+    dataset_path = snapshot_download(
+        repo_id="ai-lab-makerere/beans",
+        repo_type="dataset",
+        local_dir="/content/datasets/ibean_hf",
+        local_dir_use_symlinks=False
+    )
+    print(f"✅ Dataset downloaded to: {dataset_path}")
+except Exception as e:
+    print(f"⚠️  Hugging Face download failed: {e}")
+    print("\n🔄 Trying git clone...")
+    !git lfs install
+    !git clone https://huggingface.co/datasets/ai-lab-makerere/beans /content/datasets/ibean_hf
+
+print("✅ iBean downloaded!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 6: EXTRACT BEANS ZIP FILES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+import zipfile
+
+print("📦 Extracting iBean zip files...")
+print("="*60)
+
+zip_files = [
+    '/content/datasets/ibean_hf/data/train.zip',
+    '/content/datasets/ibean_hf/data/validation.zip',
+    '/content/datasets/ibean_hf/data/test.zip'
+]
+
+for zip_file in zip_files:
+    if os.path.exists(zip_file):
+        extract_dir = zip_file.replace('.zip', '')
+        print(f"\n📦 Extracting {os.path.basename(zip_file)}...")
+        with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+            zip_ref.extractall(extract_dir)
+        print(f"   ✅ Extracted to {extract_dir}")
+
+print("\n✅ Beans extraction complete!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 7: ORGANIZE ALL DATASETS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+import shutil
+
+print("📁 Organizing all datasets into /content/agrof_dataset...")
+print("="*60)
+
+os.makedirs('/content/agrof_dataset', exist_ok=True)
+
+def copy_classes(source_base, crop_prefix):
+    """Copy all disease classes from source to agrof_dataset"""
+    copied = 0
+    
+    if not os.path.exists(source_base):
+        print(f"⚠️  {source_base} not found, skipping...")
+        return copied
+    
+    for root, dirs, files in os.walk(source_base):
+        for dir_name in dirs:
+            source_path = os.path.join(root, dir_name)
+            
+            try:
+                image_files = [f for f in os.listdir(source_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png', '.JPG', '.PNG'))]
+                
+                if len(image_files) > 50:
+                    clean_name = dir_name.replace('___', '_').replace('__', '_').replace(' ', '_')
+                    
+                    if not clean_name.startswith(crop_prefix):
+                        clean_name = f'{crop_prefix}_{clean_name}'
+                    
+                    dest_path = f'/content/agrof_dataset/{clean_name}'
+                    
+                    if not os.path.exists(dest_path):
+                        print(f"📦 {clean_name}: {len(image_files)} images")
+                        shutil.copytree(source_path, dest_path)
+                        copied += 1
+            except:
+                pass
+    
+    return copied
+
+# Copy Beans
+print("\n🌱 ORGANIZING BEANS...")
+beans_copied = copy_classes('/content/datasets/ibean_hf/data', 'Beans')
+print(f"✅ Copied {beans_copied} Beans classes")
+
+# Copy Coffee
+print("\n☕ ORGANIZING COFFEE...")
+coffee_copied = copy_classes('/content/datasets/coffee', 'Coffee')
+print(f"✅ Copied {coffee_copied} Coffee classes")
+
+# Copy Tomato, Potato, Pepper
+print("\n🍅 ORGANIZING TOMATO, POTATO, PEPPER...")
+target_crops = ['Tomato', 'Potato', 'Pepper']
+pv_copied = 0
+
+for root, dirs, files in os.walk('/content/datasets/plantvillage'):
+    for dir_name in dirs:
+        if any(crop in dir_name for crop in target_crops):
+            source_path = os.path.join(root, dir_name)
+            
+            try:
+                image_files = [f for f in os.listdir(source_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+                
+                if len(image_files) > 0:
+                    clean_name = dir_name.replace('___', '_').replace('__', '_')
+                    dest_path = f'/content/agrof_dataset/{clean_name}'
+                    
+                    if not os.path.exists(dest_path):
+                        crop_icon = '🍅' if 'Tomato' in dir_name else '🥔' if 'Potato' in dir_name else '🌶️'
+                        print(f"{crop_icon} {clean_name}: {len(image_files)} images")
+                        shutil.copytree(source_path, dest_path)
+                        pv_copied += 1
+            except:
+                pass
+
+print(f"✅ Copied {pv_copied} Tomato/Potato/Pepper classes")
+print("\n" + "="*60)
+print(f"✅ Organization complete!")
+print(f"📊 Total classes: {beans_copied + coffee_copied + pv_copied}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 8: VERIFY FINAL DATASET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🔍 Final dataset verification...")
+print("="*60)
+
+crops = {
+    'Beans': [],
+    'Coffee': [],
+    'Tomato': [],
+    'Potato': [],
+    'Pepper': []
+}
+
+for class_name in sorted(os.listdir('/content/agrof_dataset')):
+    class_path = f'/content/agrof_dataset/{class_name}'
+    if os.path.isdir(class_path):
+        count = len([f for f in os.listdir(class_path) 
+                    if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+        
+        if 'Bean' in class_name:
+            crops['Beans'].append((class_name, count))
+        elif 'Coffee' in class_name:
+            crops['Coffee'].append((class_name, count))
+        elif 'Tomato' in class_name:
+            crops['Tomato'].append((class_name, count))
+        elif 'Potato' in class_name:
+            crops['Potato'].append((class_name, count))
+        elif 'Pepper' in class_name:
+            crops['Pepper'].append((class_name, count))
+
+for crop, classes_list in crops.items():
+    if classes_list:
+        total = sum(c[1] for c in classes_list)
+        icon = {'Beans': '🌱', 'Coffee': '☕', 'Tomato': '🍅', 
+               'Potato': '🥔', 'Pepper': '🌶️'}[crop]
+        print(f"\n{icon} {crop}: {len(classes_list)} classes, {total:,} images")
+
+total_classes = sum(len(c) for c in crops.values())
+total_images = sum(sum(cls[1] for cls in c) for c in crops.values())
+
+print(f"\n{'='*60}")
+print(f"✅ READY FOR TRAINING!")
+print(f"📊 Total: {total_classes} classes, {total_images:,} images")
+print("="*60)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 9: BUILD MODEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications import MobileNetV2
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
+
+print("🚀 Building AGROF 5-Crop Disease Detection Model...")
+print("="*60)
+
+IMG_SIZE = 224
+BATCH_SIZE = 32
+
+train_datagen = ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=30,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest',
+    validation_split=0.2
+)
+
+train_generator = train_datagen.flow_from_directory(
+    '/content/agrof_dataset',
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode='categorical',
+    subset='training',
+    shuffle=True
+)
+
+validation_generator = train_datagen.flow_from_directory(
+    '/content/agrof_dataset',
+    target_size=(IMG_SIZE, IMG_SIZE),
+    batch_size=BATCH_SIZE,
+    class_mode='categorical',
+    subset='validation',
+    shuffle=False
+)
+
+print(f"\n✅ Training samples: {train_generator.samples}")
+print(f"✅ Validation samples: {validation_generator.samples}")
+print(f"✅ Classes: {train_generator.num_classes}")
+
+base_model = MobileNetV2(
+    input_shape=(IMG_SIZE, IMG_SIZE, 3),
+    include_top=False,
+    weights='imagenet'
+)
+
+base_model.trainable = False
+
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dense(512, activation='relu')(x)
+x = Dropout(0.5)(x)
+x = Dense(256, activation='relu')(x)
+x = Dropout(0.3)(x)
+predictions = Dense(train_generator.num_classes, activation='softmax')(x)
+
+model = Model(inputs=base_model.input, outputs=predictions)
+
+model.compile(
+    optimizer=Adam(learning_rate=0.001),
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+print("\n✅ Model compiled!")
+print(f"✅ Parameters: {model.count_params():,}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 10: TRAIN MODEL (3-4 HOURS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+checkpoint = ModelCheckpoint(
+    'agrof_5crop_best_model.h5',
+    monitor='val_accuracy',
+    save_best_only=True,
+    mode='max',
+    verbose=1
+)
+
+early_stopping = EarlyStopping(
+    monitor='val_accuracy',
+    patience=10,
+    restore_best_weights=True,
+    verbose=1
+)
+
+reduce_lr = ReduceLROnPlateau(
+    monitor='val_loss',
+    factor=0.5,
+    patience=5,
+    min_lr=0.00001,
+    verbose=1
+)
+
+print("🚀 Starting training (3-4 hours)...")
+print("="*60)
+
+history = model.fit(
+    train_generator,
+    validation_data=validation_generator,
+    epochs=50,
+    callbacks=[checkpoint, early_stopping, reduce_lr],
+    verbose=1
+)
+
+print("\n✅ Training completed!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 11: EVALUATE MODEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 4))
+
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Training')
+plt.plot(history.history['val_accuracy'], label='Validation')
+plt.title('Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid(True)
+
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Training')
+plt.plot(history.history['val_loss'], label='Validation')
+plt.title('Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+
+val_loss, val_accuracy = model.evaluate(validation_generator)
+print(f"\n✅ Final Accuracy: {val_accuracy*100:.2f}%")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 12: CONVERT TO TFLITE & DOWNLOAD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import json
+from google.colab import files
+
+print("🔄 Converting to TFLite...")
+
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_model = converter.convert()
+
+with open('agrof_5crop_model.tflite', 'wb') as f:
+    f.write(tflite_model)
+
+model.save('agrof_5crop_model.h5')
+
+class_labels = {v: k for k, v in train_generator.class_indices.items()}
+class_labels_list = [class_labels[i] for i in range(len(class_labels))]
+
+with open('agrof_5crop_classes.json', 'w') as f:
+    json.dump(class_labels_list, f, indent=2)
+
+print("✅ Models created!")
+print("\n📥 Downloading...")
+
+files.download('agrof_5crop_model.tflite')
+files.download('agrof_5crop_model.h5')
+files.download('agrof_5crop_classes.json')
+
+print("\n🎉 COMPLETE! Training finished!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 QUICK START SEQUENCE:
+
+1. CELL 1  → Check GPU
+2. CELL 2  → Setup Kaggle
+3. CELL 3  → Download Coffee
+4. CELL 4  → Download PlantVillage  
+5. CELL 5  → Download Beans
+6. CELL 6  → Extract Beans
+7. CELL 7  → Organize datasets
+8. CELL 8  → Verify (should show 20 classes)
+9. CELL 9  → Build model
+10. CELL 10 → Train (3-4 hours) ⏳
+11. CELL 11 → Evaluate
+12. CELL 12 → Convert & Download
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+

@@ -1,0 +1,22 @@
+{
+  "productName": "Lemon Balm Seedling",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Lemon balm is an herb from the mint family. The leaves, which have a mild lemon aroma, are used to make herbal medicine and flavor foods. Lemon balm is a bushy herbaceous perennial that grows to about 0.6 meters (2 feet) tall. Lemon balm can be grown easily at home in almost any location. Lemon balm leaves are used fresh or dried to season and flavor foods such as salads, soups, sauces and as a flavoring in candies, liqueurs, wine, and fruit drinks.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

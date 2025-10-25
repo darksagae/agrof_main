@@ -1,253 +1,140 @@
 /**
- * Proper Image Analysis Service - JavaScript-based AI image processing
- * Handles real image analysis using Gemini AI with proper image conversion
+ * Proper Image Analysis Service - Backend API Integration
+ * Sends images to AGROF backend which uses Gemini AI for analysis
  */
 
 import { Platform } from 'react-native';
+import { AI_API_URL } from '../config/apiConfig';
 
-const GEMINI_API_KEY = "AIzaSyDUMB5H8bzSIbaECO2CmVk3hfoNj7zfU60";
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-
-/**
- * Convert image to base64 using React Native's built-in capabilities
- * @param {string} imageUri - Image URI
- * @returns {Promise<string>} Base64 encoded image
- */
-const convertImageToBase64 = async (imageUri) => {
-  try {
-    console.log('🔄 Converting real image to base64...');
-    console.log('📸 Image URI:', imageUri);
-    
-    // For React Native, we'll use fetch to get the image
-    const response = await fetch(imageUri);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch image: ${response.status}`);
-    }
-    
-    // Convert to blob first
-    const blob = await response.blob();
-    console.log('📊 Blob size:', blob.size, 'bytes');
-    
-    // Convert blob to base64 using FileReader
-    const base64 = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        // Extract base64 string (remove data:image/jpeg;base64, prefix)
-        const base64String = reader.result.split(',')[1];
-        resolve(base64String);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-    
-    console.log('✅ Image converted to base64');
-    console.log('📊 Base64 length:', base64.length);
-    
-    return base64;
-  } catch (error) {
-    console.error('❌ Error converting image to base64:', error);
-    throw new Error(`Image conversion failed: ${error.message}`);
-  }
-};
+// Backend API endpoint (uses backend's Gemini integration)
+const BACKEND_ANALYZE_URL = `${AI_API_URL}/analyze`;
 
 /**
- * Analyze image using Gemini AI with proper image data
+ * Analyze image using Backend API (which uses Gemini AI)
  * @param {string} imageUri - Image URI
  * @returns {Promise<Object>} Analysis result
  */
 export const analyzeImageWithProperMethod = async (imageUri) => {
   try {
-    console.log('🤖 Starting proper image analysis with Gemini AI...');
+    console.log('🤖 Starting image analysis via Backend API...');
     console.log('📸 Image URI:', imageUri);
+    console.log('🌐 Backend URL:', BACKEND_ANALYZE_URL);
     
-    // Convert image to base64
-    const imageBase64 = await convertImageToBase64(imageUri);
+    // Create form data for multipart upload
+    const formData = new FormData();
     
-    // Validate base64 data
-    if (!imageBase64 || imageBase64.length < 100) {
-      throw new Error('Invalid image data - base64 too short');
-    }
+    // Get file name from URI
+    const fileName = imageUri.split('/').pop() || 'plant-image.jpg';
     
-    // Prepare the prompt for plant disease analysis and crop identification
-    const prompt = `
-    Analyze this plant image for disease detection AND crop identification. This is an actual photograph of a plant.
+    // Append image file
+    formData.append('image', {
+      uri: imageUri,
+      name: fileName,
+      type: 'image/jpeg'
+    });
     
-    Provide a detailed analysis including:
+    // Append stakeholder type
+    formData.append('stakeholder', 'farmers');
     
-    1. CROP IDENTIFICATION:
-       - Identify the specific crop/plant type (e.g., tomato, corn, rice, wheat, etc.)
-       - Plant family (e.g., Solanaceae, Poaceae, Fabaceae, etc.)
-       - Growth stage (seedling, vegetative, flowering, fruiting, etc.)
+    console.log('📡 Sending image to backend API...');
     
-    2. DISEASE ANALYSIS:
-       - Health status (healthy/diseased)
-       - Disease type if any (be specific about the disease)
-       - Severity level (low/medium/high)
-       - Symptoms observed (list all visible symptoms)
-       - Affected plant parts (leaves, stems, roots, etc.)
-    
-    3. TREATMENT & PREVENTION:
-       - Treatment recommendations (practical steps)
-       - Prevention strategies
-       - Confidence score (0.0 to 1.0)
-    
-    Format your response as JSON with these exact fields:
-    {
-      "crop_type": "specific crop name (e.g., tomato, corn, rice)",
-      "plant_family": "botanical family name",
-      "growth_stage": "seedling/vegetative/flowering/fruiting/mature",
-      "health_status": "healthy" or "diseased",
-      "disease_type": "specific disease name" or "none",
-      "severity_level": "low", "medium", or "high",
-      "symptoms": ["list", "of", "symptoms"],
-      "affected_parts": ["list", "of", "affected", "parts"],
-      "recommendations": ["list", "of", "treatment", "recommendations"],
-      "prevention": ["list", "of", "prevention", "strategies"],
-      "confidence": 0.0 to 1.0
-    }
-    
-    Be thorough and accurate in your analysis. Look for:
-    - Plant characteristics (leaf shape, stem structure, flowers, fruits)
-    - Crop-specific features (grain heads, fruit clusters, root vegetables)
-    - Disease symptoms (leaf spots, discoloration, wilting)
-    - Fungal infections, bacterial infections
-    - Nutrient deficiencies, pest damage
-    - Environmental stress signs
-    
-    If you cannot clearly identify the crop or disease, set confidence to a lower value 
-    and provide general recommendations for plant health.
-    `;
-    
-    // Prepare the request payload
-    const payload = {
-      contents: [{
-        parts: [
-          { text: prompt },
-          {
-            inline_data: {
-              mime_type: "image/jpeg",
-              data: imageBase64
-            }
-          }
-        ]
-      }]
-    };
-    
-    console.log('📡 Sending image to Gemini API...');
-    console.log('📊 Payload size:', JSON.stringify(payload).length, 'characters');
-    console.log('📊 Base64 length:', imageBase64.length);
-    
-    // Send request to Gemini API
-    const response = await fetch(GEMINI_API_URL, {
+    // Send request to backend API
+    const response = await fetch(BACKEND_ANALYZE_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
-      body: JSON.stringify(payload)
+      body: formData,
+      timeout: 30000 // 30 second timeout
     });
     
     console.log('📊 Response status:', response.status);
     
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('❌ API Error:', errorText);
-      throw new Error(`Gemini API error: ${response.status} - ${errorText}`);
+      console.error('❌ Backend API Error:', errorText);
+      throw new Error(`Backend API error: ${response.status} - ${errorText}`);
     }
     
     const result = await response.json();
-    console.log('✅ Gemini API response received');
+    console.log('✅ Backend API response received');
+    console.log('📊 Response:', result);
     
-    // Parse the analysis result
-    if (result.candidates && result.candidates.length > 0) {
-      const analysisText = result.candidates[0].content.parts[0].text;
-      console.log('🔍 Raw analysis text length:', analysisText.length);
+    // Parse the backend response
+    if (result.status === 'success' && result.analysis) {
+      console.log('✅ Analysis complete from backend');
       
-      // Try to extract JSON from the response
-      try {
-        // Look for JSON in the response
-        const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          const analysisJson = JSON.parse(jsonMatch[0]);
-          console.log('✅ Parsed analysis JSON:', analysisJson);
-          
-          return {
-            success: true,
-            analysis: analysisJson,
-            rawResponse: analysisText,
-            timestamp: new Date().toISOString(),
-            imageProcessed: true
-          };
-        } else {
-          // Fallback: create structured response from text
-          console.log('⚠️ No JSON found, creating structured response from text');
-          return {
-            success: true,
-            analysis: {
-              crop_type: "unknown",
-              plant_family: "unknown",
-              growth_stage: "unknown",
-              health_status: "unknown",
-              disease_type: "analysis_incomplete",
-              severity_level: "unknown",
-              symptoms: ["Unable to parse AI response"],
-              affected_parts: ["unknown"],
-              recommendations: ["Consult agricultural expert"],
-              prevention: ["Regular monitoring recommended"],
-              confidence: 0.0
-            },
-            rawResponse: analysisText,
-            timestamp: new Date().toISOString(),
-            imageProcessed: true
-          };
-        }
-      } catch (parseError) {
-        console.error('❌ Error parsing Gemini response:', parseError);
-        throw new Error(`Failed to parse AI response: ${parseError.message}`);
-      }
+      return {
+        success: true,
+        analysis: {
+          crop_type: result.analysis.crop_type || 'Unknown',
+          plant_family: result.analysis.plant_family || 'Unknown',
+          growth_stage: result.analysis.growth_stage || 'unknown',
+          health_status: result.analysis.health_status || 'unknown',
+          disease_type: result.analysis.disease_type || 'Unknown',
+          severity_level: result.analysis.severity_level || 'unknown',
+          symptoms: result.analysis.symptoms || [],
+          affected_parts: result.analysis.affected_parts || [],
+          recommendations: result.analysis.recommendations || [],
+          prevention: result.analysis.prevention || [],
+          confidence: result.analysis.confidence || 0.0
+        },
+        rawResponse: JSON.stringify(result),
+        timestamp: new Date().toISOString(),
+        imageProcessed: true,
+        source: 'Backend API (Gemini AI)'
+      };
     } else {
-      throw new Error('No analysis results from Gemini API');
+      throw new Error(result.message || 'No analysis results from backend');
     }
     
   } catch (error) {
-    console.error('❌ Proper image analysis failed:', error);
-    throw new Error(`Proper image analysis failed: ${error.message}`);
+    console.error('❌ Backend image analysis failed:', error);
+    throw new Error(`Backend analysis failed: ${error.message}`);
   }
 };
 
 /**
- * Get proper image analysis with fallback
+ * Get image analysis from backend with fallback
  * @param {string} imageUri - Image URI
  * @returns {Promise<Object>} Analysis result with fallback
  */
 export const getProperImageAnalysis = async (imageUri) => {
   try {
-    console.log('🔍 Starting proper image analysis...');
+    console.log('🔍 Starting backend image analysis...');
     console.log('📸 Processing image:', imageUri);
     
     const result = await analyzeImageWithProperMethod(imageUri);
     return result;
   } catch (error) {
-    console.error('❌ Proper image analysis failed, using fallback');
+    console.error('❌ Backend image analysis failed:', error.message);
+    console.warn('⚠️ Check backend connection at:', BACKEND_ANALYZE_URL);
     
     // Return a fallback response
     return {
       success: false,
       analysis: {
-        crop_type: "unknown",
-        plant_family: "unknown",
+        crop_type: "Unknown",
+        plant_family: "Unknown",
         growth_stage: "unknown",
         health_status: "unknown",
-        disease_type: "analysis_failed",
+        disease_type: "Backend Connection Failed",
         severity_level: "unknown",
-        symptoms: ["Analysis unavailable - please try again"],
+        symptoms: ["Cannot connect to backend server", "Please check your network connection"],
         affected_parts: ["unknown"],
-        recommendations: ["Please try again or consult an expert"],
+        recommendations: [
+          "Ensure backend server is running",
+          "Check network connection",
+          "Try again in a moment",
+          "Consult agricultural expert if issue persists"
+        ],
         prevention: ["Regular monitoring recommended"],
         confidence: 0.0
       },
       error: error.message,
       timestamp: new Date().toISOString(),
-      imageProcessed: false
+      imageProcessed: false,
+      source: 'Error - Backend Unavailable'
     };
   }
 };

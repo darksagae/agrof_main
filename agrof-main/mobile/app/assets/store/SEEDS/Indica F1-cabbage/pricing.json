@@ -1,0 +1,32 @@
+{
+  "productName": "Indica F1-cabbage",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Cabbage",
+  "displayPrice": "UGX 24,000",
+  "lowestPrice": 24000,
+  "lowestPackage": "10g @ 1+ units",
+  "details": {
+    "description": "Seed rate: 80gms/acre, Spacing: 60cm x 60cm, Number of days in nursery bed: 25-30days, Maturity days after transplanting: 70-75days, Number of plants per acre: 10,700. Main features: Average head weight 1.6-2kg, does not bust.",
+    "seedRate": "80gms/acre",
+    "spacing": "60cm x 60cm",
+    "nurseryDays": "25-30 days",
+    "maturity": "70-75 days after transplanting",
+    "averageHeadWeight": "1.6-2kg"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 24000,
+          "priceFormatted": "UGX 24,000",
+          "totalPrice": 24000,
+          "totalFormatted": "UGX 24,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

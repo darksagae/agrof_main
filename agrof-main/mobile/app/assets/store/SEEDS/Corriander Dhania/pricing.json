@@ -1,0 +1,177 @@
+{
+  "productName": "Corriander Dhania",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Coriander/Herbs",
+  "displayPrice": "UGX 1,490",
+  "lowestPrice": 1490,
+  "lowestPackage": "10g @ 20+ units",
+  "details": {
+    "description": "Coriander seeds are planted in drills of 30cm apart at a sowing depth of 2.5cm – 3.5cm. You should expect germination to take place 10 days after sowing. Dhania matures for harvesting within 4-6 weeks after planting."
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 1600,
+          "priceFormatted": "UGX 1,600",
+          "totalPrice": 1600,
+          "totalFormatted": "UGX 1,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 1510,
+          "priceFormatted": "UGX 1,510",
+          "totalPrice": 7550,
+          "totalFormatted": "UGX 7,550",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 1494,
+          "priceFormatted": "UGX 1,494",
+          "totalPrice": 14940,
+          "totalFormatted": "UGX 14,940",
+          "discountPercent": 7
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 1490,
+          "priceFormatted": "UGX 1,490",
+          "totalPrice": 29800,
+          "totalFormatted": "UGX 29,800",
+          "discountPercent": 7
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5000,
+          "priceFormatted": "UGX 5,000",
+          "totalPrice": 5000,
+          "totalFormatted": "UGX 5,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4800,
+          "priceFormatted": "UGX 4,800",
+          "totalPrice": 24000,
+          "totalFormatted": "UGX 24,000",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 4780,
+          "priceFormatted": "UGX 4,780",
+          "totalPrice": 47800,
+          "totalFormatted": "UGX 47,800",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 4765,
+          "priceFormatted": "UGX 4,765",
+          "totalPrice": 95300,
+          "totalFormatted": "UGX 95,300",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "500g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 32700,
+          "priceFormatted": "UGX 32,700",
+          "totalPrice": 32700,
+          "totalFormatted": "UGX 32,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 32340,
+          "priceFormatted": "UGX 32,340",
+          "totalPrice": 161700,
+          "totalFormatted": "UGX 161,700",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 32308,
+          "priceFormatted": "UGX 32,308",
+          "totalPrice": 323080,
+          "totalFormatted": "UGX 323,080",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 32210,
+          "priceFormatted": "UGX 32,210",
+          "totalPrice": 644200,
+          "totalFormatted": "UGX 644,200",
+          "discountPercent": 1
+        }
+      ]
+    },
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 66000,
+          "priceFormatted": "UGX 66,000",
+          "totalPrice": 66000,
+          "totalFormatted": "UGX 66,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 65406,
+          "priceFormatted": "UGX 65,406",
+          "totalPrice": 327030,
+          "totalFormatted": "UGX 327,030",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 65208,
+          "priceFormatted": "UGX 65,208",
+          "totalPrice": 652080,
+          "totalFormatted": "UGX 652,080",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 57024,
+          "priceFormatted": "UGX 57,024",
+          "totalPrice": 1140480,
+          "totalFormatted": "UGX 1,140,480",
+          "discountPercent": 14
+        }
+      ]
+    }
+  ]
+}

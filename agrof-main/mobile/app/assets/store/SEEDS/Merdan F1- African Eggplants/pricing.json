@@ -1,0 +1,31 @@
+{
+  "productName": "Merdan F1- African Eggplants",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Eggplant",
+  "displayPrice": "UGX 42,000",
+  "lowestPrice": 42000,
+  "lowestPackage": "5g @ 1+ units",
+  "details": {
+    "description": "Merdan F1 is a fast-growing, vigorous hybrid eggplant variety known for its semi-erect plant habit and medium to late maturity. It produces uniform, very shiny black, firm, oval-shaped fruits ideal for long-distance transport. The fruits typically measure 12-14 cm in length, 9-10 cm in diameter, and weigh between 250-300 grams. Merdan F1 is suitable for both indoor and outdoor cultivation and exhibits high resistance to Tobacco Mosaic Virus.",
+    "fruitLength": "12-14 cm",
+    "fruitDiameter": "9-10 cm",
+    "fruitWeight": "250-300 grams",
+    "diseaseResistance": "High resistance to Tobacco Mosaic Virus"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 42000,
+          "priceFormatted": "UGX 42,000",
+          "totalPrice": 42000,
+          "totalFormatted": "UGX 42,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

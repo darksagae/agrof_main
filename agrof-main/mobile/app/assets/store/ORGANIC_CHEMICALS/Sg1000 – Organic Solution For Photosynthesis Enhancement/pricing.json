@@ -1,0 +1,36 @@
+{
+  "productName": "Sg1000 – Organic Solution For Photosynthesis Enhancement",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 53,000",
+  "lowestPrice": 53000,
+  "productDetails": "SG1000 enhances the process of photosynthesis. It is a formula that has been developed to enhance photosynthesis and biological functions by allowing plants to capture and utilize radiant energy more efficiently. It speeds up uptake and distribution of macro and micro nutrients required for plant growth and increased yields whilst reducing input costs. Active Ingredients: Biostimulants are made up of a variety of biological substances, micro-organisms, and compounds",
+  "specifications": {
+    "Directions for use": "For Crops and Vegetables apply 1L of SG1000 in 200L to water (100ml in 20L). Spray on the soil in the morning. Spray 200L per acre",
+    "Key Benefits": "Decomposes toxic matters like the organic materials, hydrogen Sulfide, Nitrous acid and Ammonia, Removes soil toxicity"
+  },
+  "packages": [
+    {
+      "size": "1ltr",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 53000,
+          "priceFormatted": "UGX 53,000"
+        }
+      ]
+    },
+    {
+      "size": "3ltr",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 180800,
+          "priceFormatted": "UGX 180,800"
+        }
+      ]
+    }
+  ]
+}

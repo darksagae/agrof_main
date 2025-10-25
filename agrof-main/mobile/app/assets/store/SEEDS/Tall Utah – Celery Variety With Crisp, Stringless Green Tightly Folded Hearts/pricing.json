@@ -1,0 +1,181 @@
+{
+  "productName": "Tall Utah – Celery Variety With Crisp, Stringless Green Tightly Folded Hearts",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Celery",
+  "displayPrice": "UGX 3,000",
+  "lowestPrice": 3000,
+  "lowestPackage": "10g @ 5+ units",
+  "details": {
+    "description": "Tall Utah is a crisp, stringless green celery with tightly folded hearts, and broad, thick, well-rounded stalks. It is a vigorous grower without getting flimsy. This is a popular green celery for late use.",
+    "germination": "7-10 days",
+    "heightAtMaturity": "45-60cm",
+    "spacingAfterThinning": "20cm",
+    "daysToMaturity": "70-125 days"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3300,
+          "priceFormatted": "UGX 3,300",
+          "totalPrice": 3300,
+          "totalFormatted": "UGX 3,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 3000,
+          "priceFormatted": "UGX 3,000",
+          "totalPrice": 15000,
+          "totalFormatted": "UGX 15,000",
+          "discountPercent": 9
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 3099,
+          "priceFormatted": "UGX 3,099",
+          "totalPrice": 30990,
+          "totalFormatted": "UGX 30,990",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 3000,
+          "priceFormatted": "UGX 3,000",
+          "totalPrice": 60000,
+          "totalFormatted": "UGX 60,000",
+          "discountPercent": 9
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 4100,
+          "priceFormatted": "UGX 4,100",
+          "totalPrice": 4100,
+          "totalFormatted": "UGX 4,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4002,
+          "priceFormatted": "UGX 4,002",
+          "totalPrice": 20010,
+          "totalFormatted": "UGX 20,010",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 3899,
+          "priceFormatted": "UGX 3,899",
+          "totalPrice": 38990,
+          "totalFormatted": "UGX 38,990",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 3899,
+          "priceFormatted": "UGX 3,899",
+          "totalPrice": 77980,
+          "totalFormatted": "UGX 77,980",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5000,
+          "priceFormatted": "UGX 5,000",
+          "totalPrice": 5000,
+          "totalFormatted": "UGX 5,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4900,
+          "priceFormatted": "UGX 4,900",
+          "totalPrice": 24500,
+          "totalFormatted": "UGX 24,500",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 4800,
+          "priceFormatted": "UGX 4,800",
+          "totalPrice": 48000,
+          "totalFormatted": "UGX 48,000",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 4800,
+          "priceFormatted": "UGX 4,800",
+          "totalPrice": 96000,
+          "totalFormatted": "UGX 96,000",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10100,
+          "priceFormatted": "UGX 10,100",
+          "totalPrice": 10100,
+          "totalFormatted": "UGX 10,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 9999,
+          "priceFormatted": "UGX 9,999",
+          "totalPrice": 49995,
+          "totalFormatted": "UGX 49,995",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 9898,
+          "priceFormatted": "UGX 9,898",
+          "totalPrice": 98980,
+          "totalFormatted": "UGX 98,980",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 9898,
+          "priceFormatted": "UGX 9,898",
+          "totalPrice": 197960,
+          "totalFormatted": "UGX 197,960",
+          "discountPercent": 2
+        }
+      ]
+    }
+  ]
+}

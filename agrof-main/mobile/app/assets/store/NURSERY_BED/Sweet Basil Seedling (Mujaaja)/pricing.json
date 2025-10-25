@@ -1,0 +1,22 @@
+{
+  "productName": "Sweet Basil Seedling (Mujaaja)",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Sweet Basil is one of the most iconic culinary herbs. It adds flavor to meals, and its nutrients may provide health benefits. Sweet basil has been used for thousands of years as a culinary and medicinal herb. It acts principally on the digestive and nervous systems, easing flatulence, stomach cramps, colic and indigestion. Basil prefers a sunny location, and a soil that is well supplied with organic matter and is fertile.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

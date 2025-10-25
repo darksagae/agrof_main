@@ -1,65 +1,163 @@
 services:
-  # Python AI API Service
-  agrof-api:
-    build: ./agrof-main/src/api
-    container_name: agrof-api
+  # Flask API (Optimized for 2GB RAM)
+  api:
+    build:
+      context: ./agrof-main
     ports:
       - "5000:5000"
     environment:
-      - PORT=5000
+      - MODEL_CKPT=artifacts/best.pt
       - FLASK_ENV=production
+      - FLASK_DEBUG=false
+      - PORT=5000
+      - HOST=0.0.0.0
+      - LOG_PREDICTIONS=false
+      - PYTHONUNBUFFERED=1
+      - WORKERS=1
+      - SUPABASE_URL=${SUPABASE_URL:-https://xtklayjpdpfykjbttaac.supabase.co}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
       - GEMINI_API_KEY=${GEMINI_API_KEY:-AIzaSyBE2b1nKpQd6LseRIVXfh10O_O3Pm0fvM0}
     volumes:
-      - ./uploads:/app/uploads
-    networks:
-      - agrof-network
+      - ./agrof-main/artifacts:/app/artifacts
+      - ./agrof-main/uploads:/app/uploads
+      - ./agrof-main/data:/app/data
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 400M
+          cpus: '0.5'
+        reservations:
+          memory: 200M
+          cpus: '0.25'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-
-  # Store Backend Service
-  agrof-store:
-    build: ./store-backend
-    container_name: agrof-store
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-    volumes:
-      - ./store-backend/store.db:/app/store.db
-      - ./store-backend/uploads:/app/uploads
+      start_period: 40s
     networks:
       - agrof-network
+
+  # Store Backend (Optimized for 2GB RAM)
+  store-backend:
+    build:
+      context: ./store-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - AUTOMATION_ENGINE_URL=http://automation-engine:3002
+      - NODE_OPTIONS=--max-old-space-size=200
+      - SUPABASE_URL=${SUPABASE_URL:-https://xtklayjpdpfykjbttaac.supabase.co}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+    volumes:
+      - ./store-backend:/app
+      - ./agrof-main/mobile/app/assets/store:/app/store
+      - store_db:/app/data
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+          cpus: '0.3'
+        reservations:
+          memory: 100M
+          cpus: '0.1'
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-
-  # PostgreSQL Database
-  postgres:
-    image: postgres:15-alpine
-    container_name: agrof-postgres
-    environment:
-      - POSTGRES_DB=agrof_db
-      - POSTGRES_USER=agrof_user
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-agrof2024}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     networks:
       - agrof-network
-    restart: unless-stopped
+    depends_on:
+      - automation-engine
+
+  # Automation Engine (Optimized for 2GB RAM)
+  automation-engine:
+    build:
+      context: ./automation-engine
     ports:
-      - "5432:5432"
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - NODE_ENV=production
+      - DB_PATH=/app/data/automation.db
+      - STORE_BACKEND_URL=http://store-backend:3001
+      - API_BACKEND_URL=http://api:5000
+      - NODE_OPTIONS=--max-old-space-size=150
+      - SUPABASE_URL=${SUPABASE_URL:-https://xtklayjpdpfykjbttaac.supabase.co}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+    volumes:
+      - automation_db:/app/data
+      - ./automation-engine:/app
+      - /app/node_modules
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+          cpus: '0.2'
+        reservations:
+          memory: 80M
+          cpus: '0.1'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - agrof-network
+
+  # Redis for caching (Optimized for 2GB RAM)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+          cpus: '0.1'
+        reservations:
+          memory: 50M
+          cpus: '0.05'
+    command: redis-server --maxmemory 80mb --maxmemory-policy allkeys-lru
+    networks:
+      - agrof-network
+    profiles:
+      - cache
+
+  # Optional: ngrok for mobile testing (existing)
+  ngrok:
+    image: ngrok/ngrok:latest
+    ports:
+      - "4040:4040"
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN:-}
+    command: http api:5000
+    depends_on:
+      - api
+    networks:
+      - agrof-network
+    profiles:
+      - mobile-testing
+
+volumes:
+  redis_data:
+  store_db:
+  automation_db:
 
 networks:
   agrof-network:
+    name: agrof-network
     driver: bridge
-
-volumes:
-  postgres_data:

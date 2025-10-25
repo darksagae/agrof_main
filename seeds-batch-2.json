@@ -1,0 +1,368 @@
+[
+  {
+    "id": 26,
+    "name": "Great Lakes Mesa 659 – Lettuce",
+    "folder": "Great Lakes Mesa 659 – Lettuce Variety With Tip-burn Resistance & Medium-large, Solid Heads",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Lettuce",
+    "details": {
+      "description": "Great Lakes 659 lettuce is tip-burn resistant, produces medium-large, solid heads, and does best in warmer weather. It is bolt resistant (very slow to go to seed). Maturity: 80 to 90 day. Each gram contains approximately 500 to 600 seeds."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 5100 },
+        { "qty": 5, "price": 4998 },
+        { "qty": 10, "price": 4901 },
+        { "qty": 20, "price": 4901 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 9800 },
+        { "qty": 5, "price": 9702 },
+        { "qty": 10, "price": 9604 },
+        { "qty": 20, "price": 9604 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 10800 },
+        { "qty": 5, "price": 10800 },
+        { "qty": 10, "price": 10595 },
+        { "qty": 20, "price": 10595 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 21500 }
+      ]}
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Sukari F1 – Watermelon",
+    "folder": "Sukari F1 – Watermelon",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Watermelon",
+    "details": {
+      "description": "A vigorous growing plant with excellent fruit set and wide adaptability. Maturity days from sowing: 72-85 days. Rind is light green with dark green stripes. Fruit shape: oblong. Average fruit weight: 7-8kgs, some may grow up to 12kgs. Flesh is deep crimson with good granular texture and high sweetness brix. Has good thickness, suitable for long distance transportation.",
+      "maturityDaysFromSowing": "72-85 days",
+      "seedRate": "600grams/acre",
+      "spacing": "150cm x 60cm",
+      "averageFruitWeight": "7-8kgs"
+    },
+    "packages": [
+      { "size": "1g", "tiers": [
+        { "qty": 1, "price": 2600 },
+        { "qty": 5, "price": 2600 },
+        { "qty": 10, "price": 2400 },
+        { "qty": 20, "price": 2301 }
+      ]},
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 10700 },
+        { "qty": 5, "price": 10593 },
+        { "qty": 10, "price": 10486 },
+        { "qty": 20, "price": 10486 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 20500 },
+        { "qty": 5, "price": 19106 },
+        { "qty": 10, "price": 19004 },
+        { "qty": 20, "price": 18901 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 35700 },
+        { "qty": 5, "price": 34308 },
+        { "qty": 10, "price": 34201 },
+        { "qty": 20, "price": 34129 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 162600 },
+        { "qty": 5, "price": 159511 },
+        { "qty": 10, "price": 158698 },
+        { "qty": 20, "price": 158372 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 316300 },
+        { "qty": 5, "price": 313770 },
+        { "qty": 10, "price": 313453 },
+        { "qty": 20, "price": 312504 }
+      ]},
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 610500 },
+        { "qty": 5, "price": 606227 },
+        { "qty": 10, "price": 603785 },
+        { "qty": 20, "price": 592185 }
+      ]}
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Arjuna F1 – Pumpkin",
+    "folder": "Arjuna F1 – Pumpkin",
+    "supplier": "Naseco 1996 Ltd",
+    "category": "Pumpkin",
+    "details": {
+      "description": "Seed rate: 1.2kgs/acre, Number of plants per acre: 1,600, Spacing: 100cm x 250cm, Number of days in nursery bed: (0)-direct sowing, Maturity days after transplanting: 80-85 days. Suitable for harvesting either immature green or fully mature red brown depending on market demands, good shelf life. Flesh is yellow in colour, firm, sticky and has excellent taste.",
+      "seedRate": "1.2kgs/acre",
+      "plantsPerAcre": "1,600",
+      "spacing": "100cm x 250cm",
+      "maturity": "80-85 days"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 14000 }
+      ]}
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Nouvelle F1 - Tomatoes",
+    "folder": "Nouvelle F1 - Tomatoes",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "Spacing: 60x60cm, Maturity: 80-85 days from transplanting, Yield potential: 35 tons per acre. Very good shelf life and transport quality.",
+      "spacing": "60x60cm",
+      "maturity": "80-85 days from transplanting",
+      "yieldPotential": "35 tons per acre"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 1, "price": 49700 },
+        { "qty": 5, "price": 49601 },
+        { "qty": 10, "price": 49402 },
+        { "qty": 20, "price": 43140 }
+      ]},
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 97600 },
+        { "qty": 5, "price": 95648 },
+        { "qty": 10, "price": 83253 },
+        { "qty": 20, "price": 85400 }
+      ]}
+    ]
+  },
+  {
+    "id": 30,
+    "name": "E107 (Simsim)",
+    "folder": "E107 (Simsim)",
+    "supplier": "Ag-ploutos Company Limited",
+    "category": "Sesame",
+    "details": {
+      "description": "E107 sesame variety is a mechanizable high yielding, non shattering and drought resistant sesame variety that matures in 3 months. Preferably planting in line or can be broadcasted after clear guidelines from an agronomist. Row to row spacing of 15cm and continuous drilling. Planting: mixing ratio 2.5 kgs of seed to 8kgs of sand and ash for 1 acre. For maximum yields, Use of fertilizers is encouraged. Yields up to 5 bags/acre.",
+      "maturity": "3 months",
+      "yield": "Up to 5 bags/acre",
+      "plantingRatio": "2.5 kgs of seed to 8kgs of sand and ash for 1 acre"
+    },
+    "packages": [
+      { "size": "2.5kg", "tiers": [
+        { "qty": 1, "price": 139600 },
+        { "qty": 5, "price": 136668 },
+        { "qty": 10, "price": 135970 },
+        { "qty": 20, "price": 135831 }
+      ]}
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Tengeru",
+    "folder": "Tengeru",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Tomato",
+    "details": {
+      "description": "Transplant to maturity: 90 days, Seed Rate: 120g per acre, Plant Spacing: 60*60cm, Fruit weight: 130g, Fruit shape: Round",
+      "transplantToMaturity": "90 days",
+      "seedRate": "120g per acre",
+      "plantSpacing": "60*60cm",
+      "fruitWeight": "130g",
+      "fruitShape": "Round"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 4300 },
+        { "qty": 5, "price": 4201 },
+        { "qty": 10, "price": 4098 },
+        { "qty": 20, "price": 4098 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 16500 },
+        { "qty": 5, "price": 16500 },
+        { "qty": 10, "price": 16385 },
+        { "qty": 20, "price": 16385 }
+      ]}
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Drumhead - Cabbage",
+    "folder": "Drumhead - Cabbage",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall. Transplant to harvest days: 90, Seed Rate: 120g/acre, Spacing: 60*45cm, Head Shape: Round, Average Potential Yield: 32 Tones Per Acre",
+      "transplantToHarvest": "90 days",
+      "seedRate": "120g/acre",
+      "spacing": "60*45cm",
+      "headShape": "Round",
+      "averagePotentialYield": "32 Tonnes Per Acre"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 1700 },
+        { "qty": 5, "price": 1630 },
+        { "qty": 10, "price": 1622 },
+        { "qty": 20, "price": 1618 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 1900 },
+        { "qty": 5, "price": 1818 },
+        { "qty": 10, "price": 1811 },
+        { "qty": 20, "price": 1807 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 4900 },
+        { "qty": 5, "price": 4733 },
+        { "qty": 10, "price": 4714 },
+        { "qty": 20, "price": 4699 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 29800 },
+        { "qty": 5, "price": 29442 },
+        { "qty": 10, "price": 29413 },
+        { "qty": 20, "price": 29323 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 50600 },
+        { "qty": 5, "price": 50499 },
+        { "qty": 10, "price": 50296 },
+        { "qty": 20, "price": 43921 }
+      ]},
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 103300 },
+        { "qty": 5, "price": 101337 },
+        { "qty": 10, "price": 88322 },
+        { "qty": 20, "price": 90388 }
+      ]}
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Cayenne Long Slim – Hot Pepper",
+    "folder": "Cayenne Long Slim – Hot Pepper, With Early Maturity And High Yield Potential",
+    "supplier": "Syova Seed (U) Ltd",
+    "category": "Pepper",
+    "details": {
+      "description": "Cayenne Long Slim hot pepper is ideally suited for home gardens and marker gardens. Plants are very early maturing in approximately 75 days after transplanting. It bears cylindrical fruits. Fruit colour: medium green turning to medium red. The Cayenne Long Slim has wrinkled pods with an unusual shape, often twisted. A mature plant can grow up to 40 pods. The length of the pods is about 12 cm long and 1.5 cm thick. They are easy to dry and good in salsas or sauces and perfect to use for making a wreath or rista.",
+      "maturity": "75 days after transplanting",
+      "podLength": "12 cm",
+      "podThickness": "1.5 cm",
+      "podsPerPlant": "Up to 40 pods"
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 4100 },
+        { "qty": 5, "price": 4002 },
+        { "qty": 10, "price": 3899 },
+        { "qty": 20, "price": 3899 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 6700 },
+        { "qty": 5, "price": 6600 },
+        { "qty": 10, "price": 6600 },
+        { "qty": 20, "price": 6499 }
+      ]},
+      { "size": "25g", "tiers": [
+        { "qty": 1, "price": 8000 },
+        { "qty": 5, "price": 7896 },
+        { "qty": 10, "price": 7800 },
+        { "qty": 20, "price": 7800 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 14200 },
+        { "qty": 5, "price": 14200 },
+        { "qty": 10, "price": 14101 },
+        { "qty": 20, "price": 14101 }
+      ]}
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Copenhagen",
+    "folder": "Copenhagen",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Cabbage",
+    "details": {
+      "description": "Transplant to harvest days: 65 days, Seed rate: 120g per acre, Spacing 60*45cm. Planted in well drained soil. Light soil with low organic matter preferable. Average Yield per acre: 34 tons",
+      "transplantToHarvest": "65 days",
+      "seedRate": "120g per acre",
+      "spacing": "60*45cm",
+      "averageYield": "34 tons per acre"
+    },
+    "packages": [
+      { "size": "5g", "tiers": [
+        { "qty": 12, "price": 12000 },
+        { "qty": 20, "price": 11782 },
+        { "qty": 120, "price": 11564 }
+      ]},
+      { "size": "20g", "tiers": [
+        { "qty": 1, "price": 3000 },
+        { "qty": 5, "price": 2877 },
+        { "qty": 10, "price": 2865 },
+        { "qty": 20, "price": 2862 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 7000 },
+        { "qty": 5, "price": 6762 },
+        { "qty": 10, "price": 6734 },
+        { "qty": 20, "price": 6713 }
+      ]},
+      { "size": "250g", "tiers": [
+        { "qty": 1, "price": 31000 },
+        { "qty": 5, "price": 30659 },
+        { "qty": 10, "price": 30597 },
+        { "qty": 20, "price": 30504 }
+      ]},
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 99000 },
+        { "qty": 5, "price": 97020 },
+        { "qty": 10, "price": 84546 },
+        { "qty": 20, "price": 86625 }
+      ]}
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Corriander Dhania",
+    "folder": "Corriander Dhania",
+    "supplier": "Simlaw Seeds Company (U) Ltd",
+    "category": "Coriander/Herbs",
+    "details": {
+      "description": "Coriander seeds are planted in drills of 30cm apart at a sowing depth of 2.5cm – 3.5cm. You should expect germination to take place 10 days after sowing. Dhania matures for harvesting within 4-6 weeks after planting."
+    },
+    "packages": [
+      { "size": "10g", "tiers": [
+        { "qty": 1, "price": 1600 },
+        { "qty": 5, "price": 1510 },
+        { "qty": 10, "price": 1494 },
+        { "qty": 20, "price": 1490 }
+      ]},
+      { "size": "50g", "tiers": [
+        { "qty": 1, "price": 5000 },
+        { "qty": 5, "price": 4800 },
+        { "qty": 10, "price": 4780 },
+        { "qty": 20, "price": 4765 }
+      ]},
+      { "size": "500g", "tiers": [
+        { "qty": 1, "price": 32700 },
+        { "qty": 5, "price": 32340 },
+        { "qty": 10, "price": 32308 },
+        { "qty": 20, "price": 32210 }
+      ]},
+      { "size": "1kg", "tiers": [
+        { "qty": 1, "price": 66000 },
+        { "qty": 5, "price": 65406 },
+        { "qty": 10, "price": 65208 },
+        { "qty": 20, "price": 57024 }
+      ]}
+    ]
+  }
+]
+
+
+
+
+

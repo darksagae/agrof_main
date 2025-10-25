@@ -1,0 +1,213 @@
+{
+  "productName": "Copenhagen",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Cabbage",
+  "displayPrice": "UGX 2,862",
+  "lowestPrice": 2862,
+  "lowestPackage": "20g @ 20+ units",
+  "details": {
+    "description": "Transplant to harvest days: 65 days, Seed rate: 120g per acre, Spacing 60*45cm. Planted in well drained soil. Light soil with low organic matter preferable. Average Yield per acre: 34 tons",
+    "transplantToHarvest": "65 days",
+    "seedRate": "120g per acre",
+    "spacing": "60*45cm",
+    "averageYield": "34 tons per acre"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "12+ units",
+          "quantityValue": 12,
+          "pricePerUnit": 12000,
+          "priceFormatted": "UGX 12,000",
+          "totalPrice": 144000,
+          "totalFormatted": "UGX 144,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 11782,
+          "priceFormatted": "UGX 11,782",
+          "totalPrice": 235640,
+          "totalFormatted": "UGX 235,640",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "120+ units",
+          "quantityValue": 120,
+          "pricePerUnit": 11564,
+          "priceFormatted": "UGX 11,564",
+          "totalPrice": 1387680,
+          "totalFormatted": "UGX 1,387,680",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3000,
+          "priceFormatted": "UGX 3,000",
+          "totalPrice": 3000,
+          "totalFormatted": "UGX 3,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 2877,
+          "priceFormatted": "UGX 2,877",
+          "totalPrice": 14385,
+          "totalFormatted": "UGX 14,385",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 2865,
+          "priceFormatted": "UGX 2,865",
+          "totalPrice": 28650,
+          "totalFormatted": "UGX 28,650",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 2862,
+          "priceFormatted": "UGX 2,862",
+          "totalPrice": 57240,
+          "totalFormatted": "UGX 57,240",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 7000,
+          "priceFormatted": "UGX 7,000",
+          "totalPrice": 7000,
+          "totalFormatted": "UGX 7,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 6762,
+          "priceFormatted": "UGX 6,762",
+          "totalPrice": 33810,
+          "totalFormatted": "UGX 33,810",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 6734,
+          "priceFormatted": "UGX 6,734",
+          "totalPrice": 67340,
+          "totalFormatted": "UGX 67,340",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 6713,
+          "priceFormatted": "UGX 6,713",
+          "totalPrice": 134260,
+          "totalFormatted": "UGX 134,260",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "250g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 31000,
+          "priceFormatted": "UGX 31,000",
+          "totalPrice": 31000,
+          "totalFormatted": "UGX 31,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 30659,
+          "priceFormatted": "UGX 30,659",
+          "totalPrice": 153295,
+          "totalFormatted": "UGX 153,295",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 30597,
+          "priceFormatted": "UGX 30,597",
+          "totalPrice": 305970,
+          "totalFormatted": "UGX 305,970",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 30504,
+          "priceFormatted": "UGX 30,504",
+          "totalPrice": 610080,
+          "totalFormatted": "UGX 610,080",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 99000,
+          "priceFormatted": "UGX 99,000",
+          "totalPrice": 99000,
+          "totalFormatted": "UGX 99,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 97020,
+          "priceFormatted": "UGX 97,020",
+          "totalPrice": 485100,
+          "totalFormatted": "UGX 485,100",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 84546,
+          "priceFormatted": "UGX 84,546",
+          "totalPrice": 845460,
+          "totalFormatted": "UGX 845,460",
+          "discountPercent": 15
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 86625,
+          "priceFormatted": "UGX 86,625",
+          "totalPrice": 1732500,
+          "totalFormatted": "UGX 1,732,500",
+          "discountPercent": 13
+        }
+      ]
+    }
+  ]
+}

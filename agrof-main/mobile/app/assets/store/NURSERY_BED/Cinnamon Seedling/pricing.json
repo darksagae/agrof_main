@@ -1,0 +1,22 @@
+{
+  "productName": "Cinnamon Seedling",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 10,700",
+  "lowestPrice": 10700,
+  "productDetails": "Cinnamon plant foliage is generally a glossy green to yellow-green, and they produce small flowers. Both the bark and leaves are aromatic. Its inner bark can also be used to make the spice. Cinnamon is used to flavor a variety of foods, from confections to curries to beverages, and is popular in bakery products. Essential oil can be distilled from the bark fragments for use in food, liqueur, perfume, and drugs.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10700,
+          "priceFormatted": "UGX 10,700"
+        }
+      ]
+    }
+  ]
+}

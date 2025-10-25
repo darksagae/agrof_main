@@ -1,0 +1,30 @@
+{
+  "productName": "Sugar King - Sweet Corn",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Corn",
+  "displayPrice": "UGX 62,000",
+  "lowestPrice": 62000,
+  "lowestPackage": "250g @ 1+ units",
+  "details": {
+    "description": "Sugar King matures between 71-75 days. It has yellow colour with an average length of 20-21 cm. Its resistant to diseases like corn leaf blight and also is sweet with a good shelf life",
+    "maturity": "71-75 days",
+    "averageLength": "20-21 cm",
+    "diseaseResistance": "Resistant to corn leaf blight"
+  },
+  "packages": [
+    {
+      "size": "250g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 62000,
+          "priceFormatted": "UGX 62,000",
+          "totalPrice": 62000,
+          "totalFormatted": "UGX 62,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

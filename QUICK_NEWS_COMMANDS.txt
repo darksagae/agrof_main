@@ -1,0 +1,56 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 WHATSAPP NEWS COMMANDS - QUICK REFERENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📰 ADD NEWS:
+──────────────────────────────────────────────────────
+#addnews fraud urgent
+Title Here
+Message here...
+
+Types:  fraud | price | disease | weather | research | general
+Priority: urgent | high | medium | low
+
+📋 LIST ALL NEWS:
+──────────────────────────────────────────────────────
+#listnews
+
+🗑️ DELETE NEWS:
+──────────────────────────────────────────────────────
+#deletenews 123
+
+✅ MARK AS RESOLVED:
+──────────────────────────────────────────────────────
+#resolvenews 123
+
+❓ HELP:
+──────────────────────────────────────────────────────
+admin help
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fraud Alert:
+  #addnews fraud urgent
+  Fake DAP Fertilizer in Kampala
+  Ministry warns against counterfeit...
+
+Price Update:
+  #addnews price high
+  Urea Price Reduced
+  Now UGX 35,000 (was 41,000)
+
+Disease Alert:
+  #addnews disease urgent
+  Fall Armyworm in Eastern Uganda
+  Spray Lambda-cyhalothrin immediately
+
+Weather:
+  #addnews weather high
+  Good Planting Window
+  Rain expected, plant maize now
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Send commands to your WhatsApp Bot number!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

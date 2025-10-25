@@ -1,0 +1,208 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                  🚀 AGROF COOLIFY DEPLOYMENT                          ║
+║                     READY TO DEPLOY NOW!                              ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+✅ PRE-FLIGHT CHECK COMPLETE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ VPN Connected:        10.100.101.13 (AGROF interface)
+✓ Docker Image:         agrof-backend:latest (844MB)
+✓ GitHub Repo:          darksagae/agrof_main
+✓ Branch:               feature/mobile-api-config
+✓ Dockerfile:           /Dockerfile (in repository root)
+✓ Latest Commit:        dffddea - "Add production Docker setup"
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                  COOLIFY DEPLOYMENT STEPS                             ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+STEP 1: OPEN COOLIFY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Try these URLs in your browser:
+  • http://10.100.100.1:8000
+  • http://10.100.101.1:8000
+  • Your custom Coolify domain
+
+Login with your credentials.
+
+
+STEP 2: CREATE NEW APPLICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Click: "+ New" or "Add Resource"
+2. Select: "Application"
+3. Choose: "Public Repository" or "GitHub"
+
+
+STEP 3: CONNECT REPOSITORY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Git Provider:    GitHub
+Repository:      darksagae/agrof_main
+Branch:          feature/mobile-api-config
+
+Click "Continue"
+
+
+STEP 4: BUILD CONFIGURATION ⚠️ CRITICAL!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name:                agrof-backend
+Build Pack:          Dockerfile
+Dockerfile:          Dockerfile          ← Just the filename!
+Base Directory:      .                   ← Just a dot OR leave EMPTY
+Port Exposes:        5000
+Port Mappings:       5000:5000
+
+⚠️ IMPORTANT: 
+   • Base Directory = "." or EMPTY (NOT "/")
+   • Dockerfile Location = "Dockerfile" (NOT "/Dockerfile")
+
+
+STEP 5: ENVIRONMENT VARIABLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Click "+ Add Variable" for each:
+
+FLASK_ENV = production
+GEMINI_API_KEY = AIzaSyBE2b1nKpQd6LseRIVXfh10O_O3Pm0fvM0
+PORT = 5000
+PYTHONUNBUFFERED = 1
+WORKERS = 4
+
+Click "Save" after adding all variables.
+
+
+STEP 6: HEALTH CHECK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Enable:     ✅ Yes
+Path:       /health
+Method:     GET
+Interval:   30s
+Timeout:    10s
+Retries:    3
+
+
+STEP 7: DEPLOY!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Review all settings
+2. Click "Deploy" button
+3. Watch logs in real-time
+4. Wait ~3-5 minutes for first build
+
+
+STEP 8: VERIFY DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Status should show:     "Running" (green)
+Health check:           "Healthy"
+
+Test in terminal:
+  curl https://your-app-url/health
+
+Expected: {"status":"OK","service":"agrof-backend"}
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                  EXPECTED BUILD OUTPUT                                ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+You should see in Coolify build logs:
+
+[+] Building Docker image...
+[+] Installing system dependencies: gcc, g++, curl, libjpeg...
+[+] Installing Python packages: flask, gunicorn, requests...
+[+] Copying application code...
+[+] Creating non-root user: agrof
+[+] Setting up health checks...
+[+] Image built successfully!
+[+] Starting container...
+[+] Gunicorn starting with 4 workers...
+[+] Listening at: http://0.0.0.0:5000
+✅ Deployment successful!
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                  TROUBLESHOOTING                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+IF "Dockerfile not found" ERROR:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Verify on GitHub:
+   https://github.com/darksagae/agrof_main/blob/feature/mobile-api-config/Dockerfile
+
+2. In Coolify Configuration:
+   - Base Directory: "." (just a dot) or LEAVE EMPTY
+   - Dockerfile Location: "Dockerfile" (no slashes)
+
+3. Try creating NEW application (fresh start)
+
+4. Check Coolify logs for exact error message
+
+
+IF BUILD TIMEOUT:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Increase timeout in Coolify settings to 600s
+2. Check STI server has enough resources
+3. Verify internet connection from STI server
+
+
+IF HEALTH CHECK FAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Wait 60 seconds (app needs time to start)
+2. Check logs for Python errors
+3. Temporarily disable health check
+4. Verify port 5000 is correct
+5. Check if gunicorn is starting
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                  NEXT STEPS AFTER DEPLOYMENT                          ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+1. ✅ TEST API:
+   curl https://your-app-url/health
+
+2. 📱 UPDATE MOBILE APP:
+   Edit: mobile/app/config/api.js
+   Set backend URL to your Coolify deployment URL
+
+3. 🧪 TEST DISEASE DETECTION:
+   curl -X POST https://your-app-url/api/detect \
+     -F "image=@plant-disease.jpg"
+
+4. 📊 MONITOR:
+   - Check Coolify dashboard for metrics
+   - Monitor logs for errors
+   - Verify health checks passing
+
+5. 🎉 CELEBRATE:
+   Your AGROF backend is live on STI server! 🎊
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                  IMPORTANT NOTES                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📌 VPN must remain connected for deployment to work
+📌 First build takes ~3-5 minutes (downloading dependencies)
+📌 Subsequent builds are faster (Docker layer caching)
+📌 Application runs as non-root user (agrof) for security
+📌 Logs available in Coolify dashboard in real-time
+📌 Auto-deploy can be enabled for automatic updates on git push
+
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 DEPLOYMENT COMMAND CENTER 🎯
+
+Current Status:        READY TO DEPLOY ✅
+VPN Status:           CONNECTED (10.100.101.13) ✅
+Docker Image:         BUILT (844MB) ✅
+GitHub:               PUSHED ✅
+Coolify Access:       AWAITING YOUR ACTION 🎯
+
+═══════════════════════════════════════════════════════════════════════
+
+👉 NOW GO TO COOLIFY AND CLICK "DEPLOY"! 👈
+
+═══════════════════════════════════════════════════════════════════════
+
+

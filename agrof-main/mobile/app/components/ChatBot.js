@@ -88,9 +88,19 @@ const ChatBot = ({ onShowTraining }) => {
   };
 
   const cleanResponse = (text) => {
-    // Remove all emoji icons, symbols, and formatting
+    // Remove ALL emoji icons, symbols, and formatting
     return text
-      .replace(/[🌱💊🌾🌿📚🌤️💰🏪🔍🛡️⚠️📅💩🌦️📤🤖🗑️]/g, '')
+      // Remove all emojis using comprehensive unicode ranges
+      .replace(/[\u{1F300}-\u{1F9FF}]/gu, '') // Emoticons & symbols
+      .replace(/[\u{2600}-\u{26FF}]/gu, '') // Miscellaneous symbols
+      .replace(/[\u{2700}-\u{27BF}]/gu, '') // Dingbats
+      .replace(/[\u{1F000}-\u{1F02F}]/gu, '') // Mahjong tiles
+      .replace(/[\u{1F0A0}-\u{1F0FF}]/gu, '') // Playing cards
+      .replace(/[\u{1F100}-\u{1F64F}]/gu, '') // Enclosed characters
+      .replace(/[\u{1F680}-\u{1F6FF}]/gu, '') // Transport & map symbols
+      .replace(/[\u{1F900}-\u{1F9FF}]/gu, '') // Supplemental symbols
+      .replace(/[\u{FE00}-\u{FE0F}]/gu, '') // Variation selectors
+      .replace(/[\u{200D}\u{200C}]/gu, '') // Zero-width joiners
       .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold formatting
       .replace(/\*(.*?)\*/g, '$1') // Remove italic formatting
       .replace(/\*+/g, '') // Remove any remaining stars

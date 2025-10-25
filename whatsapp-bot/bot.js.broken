@@ -1,0 +1,834 @@
+/**
+ * AGROF WhatsApp Bot
+ * Automatically handle customer orders, inquiries, and notifications via WhatsApp
+ */
+
+const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal');
+const fetch = require('node-fetch');
+require('dotenv').config();
+
+// Import admin command handler (V2 - Conversational Portal)
+const AdminCommandsV2 = require('./admin-commands-v2');
+
+// Configuration
+const STORE_API = process.env.STORE_API || 'http://store-backend:3001/api';
+const AUTOMATION_API = process.env.AUTOMATION_API || 'http://automation-engine:3002';
+const ADMIN_NUMBERS = (process.env.ADMIN_NUMBERS || '').split(',').filter(n => n);
+
+// Initialize admin handler
+const adminHandler = new AdminCommandsV2(STORE_API, ADMIN_NUMBERS);
+
+console.log('🔐 Admin Portal ready with secret triggers:');
+console.log('   👁️ godeye - News Control');
+console.log('   🌀 void - Store Management');
+console.log('   ✨ destiny - Market Control');
+console.log('   🔮 oracle - Analytics');
+console.log('   🛡️ guardian - Customer Management');
+console.log('   🔥 phoenix - System Operations');
+console.log('   ⚡ nexus - Automation Control');
+
+// Initialize WhatsApp Client
+const client = new Client({
+    authStrategy: new LocalAuth({
+        dataPath: './whatsapp-session'
+    }),
+    puppeteer: {
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    }
+});
+
+// Store for conversation state
+const conversations = new Map();
+
+// ==================== WHATSAPP EVENTS ====================
+
+client.on('qr', (qr) => {
+    console.log('\n📱 SCAN THIS QR CODE WITH YOUR WHATSAPP BUSINESS APP:\n');
+    qrcode.generate(qr, { small: true });
+    console.log('\n✅ Open WhatsApp Business on your phone');
+    console.log('✅ Go to Settings > Linked Devices');
+    console.log('✅ Tap "Link a Device"');
+    console.log('✅ Scan the QR code above\n');
+});
+
+client.on('authenticated', () => {
+    console.log('✅ WhatsApp authenticated successfully!');
+});
+
+client.on('ready', () => {
+    console.log('🎉 AGROF WhatsApp Bot is ready!');
+    console.log('📱 You can now receive and send messages');
+    console.log('💬 Bot is listening for customer messages...\n');
+    
+    // Notify admins that bot is online
+    notifyAdmins('🤖 AGROF WhatsApp Bot is now ONLINE and ready to serve customers!');
+});
+
+client.on('message', async (msg) => {
+    try {
+        await handleMessage(msg);
+    } catch (error) {
+        console.error('❌ Error handling message:', error);
+        await msg.reply('⚠️ Sorry, I encountered an error. Please try again or contact support.');
+    }
+});
+
+client.on('disconnected', (reason) => {
+    console.log('❌ WhatsApp disconnected:', reason);
+    console.log('🔄 Attempting to reconnect...');
+});
+
+// ==================== MESSAGE HANDLER ====================
+
+async function handleMessage(msg) {
+    const sender = msg.from;
+    const text = msg.body.trim();
+    const senderName = await getContactName(msg);
+    
+    console.log(`\n📩 Message from ${senderName} (${sender}):`);
+    console.log(`💬 "${text}"\n`);
+    
+    // Ignore group messages
+    if (msg.from.includes('@g.us')) {
+        return;
+    }
+    
+    // Ignore own messages
+    if (msg.fromMe) {
+        return;
+    }
+    
+    // Check for admin commands (secret triggers + legacy)
+    const adminHandled = await adminHandler.handleAdminMessage(msg, text);
+    if (adminHandled) return;
+    
+    // Check for confirmation of admin actions
+    if (text.toLowerCase().startsWith('confirm delete')) {
+        if (adminHandler.isAdmin(msg.from)) {
+            const productId = text.match(/\d+/);
+            if (productId) {
+                await adminHandler.processDeleteProduct(msg, productId[0]);
+                conversations.delete(msg.from);
+                return;
+            }
+        }
+    }
+    
+    // Check if admin is in product addition flow
+    const adminState = conversations.get(msg.from);
+    if (adminState && adminState.type === 'admin_add_product' && adminHandler.isAdmin(msg.from)) {
+        await adminHandler.processAddProduct(msg, text);
+        conversations.delete(msg.from);
+        return;
+    }
+    
+    // Command routing
+    const command = text.toLowerCase();
+    
+    // Greeting
+    if (command.match(/^(hi|hello|hey|good morning|good afternoon|good evening|jambo|habari)/i)) {
+        await handleGreeting(msg, senderName);
+    }
+    // Menu
+    else if (command.match(/^(menu|help|options|commands)/i)) {
+        await sendMenu(msg);
+    }
+    // Check stock
+    else if (command.match(/^(stock|inventory|available|products)/i)) {
+        await handleStockInquiry(msg);
+    }
+    // Order
+    else if (command.match(/^(order|buy|purchase|i want|i need)/i)) {
+        await handleOrderRequest(msg, text);
+    }
+    // Check prices
+    else if (command.match(/^(price|cost|how much)/i)) {
+        await handlePriceInquiry(msg, text);
+    }
+    // Track order
+    else if (command.match(/^(track|status|my order)/i)) {
+        await handleOrderTracking(msg);
+    }
+    // Contact/Support
+    else if (command.match(/^(contact|support|help me|call)/i)) {
+        await handleSupport(msg);
+    }
+    // Yes/No responses (for confirmations)
+    else if (command.match(/^(yes|confirm|ok|proceed)/i)) {
+        await handleConfirmation(msg, true);
+    }
+    else if (command.match(/^(no|cancel|stop)/i)) {
+        await handleConfirmation(msg, false);
+    }
+    // Default - AI-like response
+    else {
+        await handleGeneralInquiry(msg, text);
+    }
+}
+
+// ==================== COMMAND HANDLERS ====================
+
+async function handleGreeting(msg, senderName) {
+    const greeting = `Good day, ${senderName}! 👋
+
+Welcome to *AGROF Agricultural Services* - Your trusted partner in modern farming solutions.
+
+We offer a comprehensive range of premium agricultural inputs including:
+
+▪️ Fertilizers & Soil Nutrients
+▪️ Quality Seeds & Seedlings
+▪️ Crop Protection Solutions
+▪️ Organic Farming Products
+
+*How may we assist you today?*
+
+Reply with:
+• *PRODUCTS* - Browse our catalog
+• *ORDER* - Place an order
+• *SUPPORT* - Speak with our team
+
+_AGROF - Growing Together_ 🌾`;
+    
+    await msg.reply(greeting);
+}
+
+async function sendMenu(msg) {
+    const menu = `*AGROF AGRICULTURAL SERVICES*
+_Your Partner in Modern Farming_
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+*PRODUCT CATEGORIES*
+
+▪️ FERTILIZERS - Premium soil nutrients
+▪️ SEEDS - Certified quality seeds
+▪️ FUNGICIDES - Crop disease control
+▪️ HERBICIDES - Weed management
+▪️ NURSERY - Seedlings & plantlets
+▪️ ORGANIC - Natural solutions
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+*QUICK ACTIONS*
+
+• Reply *PRODUCTS* - View our catalog
+• Reply *ORDER* - Place an order
+• Reply *CONTACT* - Reach our team
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+📞 +256 705 223 777
+🌐 www.agrof.farm
+
+_Professional Agricultural Solutions_`;
+
+    await msg.reply(menu);
+}
+
+async function handleStockInquiry(msg) {
+    await msg.reply('Please wait while we prepare our current product catalog...');
+    
+    try {
+        const response = await fetch(`${STORE_API}/api/products?limit=500`);
+        const allProducts = await response.json();
+        
+        // Filter in-stock products
+        const inStock = allProducts.filter(p => p.quantity_in_stock > 0);
+        
+        if (inStock.length === 0) {
+            await msg.reply('We apologize, but our inventory is currently being restocked. Please contact us at +256 705 223 777 for immediate assistance.');
+            return;
+        }
+        
+        // Group by category
+        const categories = {};
+        inStock.forEach(p => {
+            const cat = p.category_display_name || p.category_name || 'Other';
+            if (!categories[cat]) categories[cat] = [];
+            categories[cat].push(p);
+        });
+        
+        let stockMessage = `*AGROF PRODUCT CATALOG*\n_Premium Agricultural Solutions_\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        
+        for (const [category, items] of Object.entries(categories)) {
+            stockMessage += `*${category.toUpperCase()}*\n`;
+            stockMessage += `${items.length} products available\n\n`;
+            items.slice(0, 8).forEach(item => {
+                stockMessage += `▪️ ${item.name}\n`;
+            });
+            if (items.length > 8) {
+                stockMessage += `   _...and ${items.length - 8} more_\n`;
+            }
+            stockMessage += '\n';
+        }
+        
+        stockMessage += `━━━━━━━━━━━━━━━━━━━━━━\n\n*Total: ${inStock.length} products in stock*\n\n`;
+        stockMessage += `To view detailed information and place an order:\n• Reply: *ORDER [product name]*\n\n`;
+        stockMessage += `📞 Questions? Call +256 705 223 777\n🌐 Visit www.agrof.farm`;
+        
+        await msg.reply(stockMessage);
+        
+    } catch (error) {
+        console.error('Error fetching stock:', error);
+        await msg.reply('We apologize for the inconvenience. Please contact our team at +256 705 223 777 or support@agrof.farm for assistance.');
+    }
+}
+
+async function handleOrderRequest(msg, text) {
+    await msg.reply('Thank you for your interest. Let me assist you with your order...');
+    
+    // Try to parse order from message
+    const orderMatch = text.match(/(\d+)\s*(kg|bags?|units?|pcs?|pieces?)?\s*(.+)/i);
+    
+    if (orderMatch) {
+        const quantity = orderMatch[1];
+        const unit = orderMatch[2] || 'units';
+        const productName = orderMatch[3].trim();
+        
+        await msg.reply(`Searching for: *${productName}*\n\nPlease wait...`);
+        
+        try {
+            // Search for product
+            const response = await fetch(`${STORE_API}/api/search?q=${encodeURIComponent(productName)}`);
+            const products = await response.json();
+            
+            if (products.length === 0) {
+                await msg.reply(`We apologize, but "${productName}" is not currently available in our catalog.\n\nFor product inquiries:\n📞 +256 705 223 777\n📧 support@agrof.farm\n\nReply *PRODUCTS* to browse our full catalog.`);
+                return;
+            }
+            
+            const product = products[0];
+            
+            // Send product image if available
+            if (product.image_url) {
+                try {
+                    // Properly encode the URL path
+                    const pathParts = product.image_url.split('/').map(part => {
+                        if (part === '' || part === 'api' || part === 'images') {
+                            return part;
+                        }
+                        return encodeURIComponent(part);
+                    });
+                    const encodedPath = pathParts.join('/');
+                    const imageUrl = `${STORE_API.replace('/api', '')}${encodedPath}`;
+                    
+                    console.log('📸 Fetching product image:', imageUrl);
+                    
+                    const media = await MessageMedia.fromUrl(imageUrl);
+                    
+                    const imageCaption = `*${product.name}*\n\n${product.description ? product.description.substring(0, 150) + '...' : 'Premium agricultural product'}\n\n━━━━━━━━━━━━━━━━━━━━━━`;
+                    
+                    await client.sendMessage(msg.from, media, { caption: imageCaption });
+                    console.log('✅ Product image sent successfully');
+                } catch (imgError) {
+                    console.log('❌ Could not send image:', imgError.message);
+                }
+            }
+            
+            // Check availability
+            if (product.quantity_in_stock < quantity) {
+                const altMessage = `*STOCK AVAILABILITY*\n\n` +
+                    `Product: ${product.name}\n` +
+                    `Requested: ${quantity} ${product.unit_of_measure}\n` +
+                    `Available: ${product.quantity_in_stock} ${product.unit_of_measure}\n\n` +
+                    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                    `Would you like to proceed with ${product.quantity_in_stock} ${product.unit_of_measure}?\n\n` +
+                    `Reply *YES* to confirm or *NO* to cancel`;
+                
+                await msg.reply(altMessage);
+                
+                // Save conversation state
+                conversations.set(msg.from, {
+                    type: 'order_alternative',
+                    product: product,
+                    quantity: product.quantity_in_stock,
+                    customerName: await getContactName(msg)
+                });
+                return;
+            }
+            
+            // Calculate total (parse price)
+            const priceMatch = product.price.match(/[\d,]+/);
+            const unitPrice = priceMatch ? parseInt(priceMatch[0].replace(/,/g, '')) : 0;
+            const total = unitPrice * quantity;
+            
+            const confirmMessage = `*ORDER SUMMARY*\n\n` +
+                `Product: ${product.name}\n` +
+                `Quantity: ${quantity} ${product.unit_of_measure}\n` +
+                `Unit Price: UGX ${unitPrice.toLocaleString()}\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━\n` +
+                `*Total Amount: UGX ${total.toLocaleString()}*\n\n` +
+                `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                `Reply *YES* to confirm your order\n` +
+                `Reply *NO* to cancel`;
+            
+            await msg.reply(confirmMessage);
+            
+            // Save conversation state
+            conversations.set(msg.from, {
+                type: 'order_confirm',
+                product: product,
+                quantity: parseInt(quantity),
+                total: total,
+                unitPrice: unitPrice,
+                customerName: await getContactName(msg)
+            });
+            
+        } catch (error) {
+            console.error('Error processing order:', error);
+            await msg.reply('We apologize for the technical difficulty. Please contact us directly:\n\n📞 +256 705 223 777\n📧 support@agrof.farm');
+        }
+        
+    } else {
+        // Guide user
+        await msg.reply(`*HOW TO ORDER*\n\n` +
+            `Please specify the product and quantity:\n\n` +
+            `*Example:*\n` +
+            `• Order 50kg DAP fertilizer\n` +
+            `• I want 10 bags of NPK\n` +
+            `• 5kg Urea\n\n` +
+            `Or reply *PRODUCTS* to browse our catalog first.\n\n` +
+            `_AGROF - Professional Agricultural Solutions_`);
+    }
+}
+
+async function handleConfirmation(msg, confirmed) {
+    const state = conversations.get(msg.from);
+    
+    if (!state) {
+        await msg.reply('Please start a new order by typing *ORDER* or browse our *PRODUCTS*.');
+        return;
+    }
+    
+    if (state.type === 'order_confirm' || state.type === 'order_alternative') {
+        if (confirmed) {
+            await msg.reply('Processing your order...');
+            
+            try {
+                const orderNumber = 'AGROF' + Date.now().toString().slice(-8);
+                const customerPhone = msg.from.replace('@c.us', '');
+                
+                // Send product image with order details
+                if (state.product.image_url) {
+                    try {
+                        // Properly encode the URL path
+                        const pathParts = state.product.image_url.split('/').map(part => {
+                            if (part === '' || part === 'api' || part === 'images') {
+                                return part;
+                            }
+                            return encodeURIComponent(part);
+                        });
+                        const encodedPath = pathParts.join('/');
+                        const imageUrl = `${STORE_API.replace('/api', '')}${encodedPath}`;
+                        
+                        console.log('📸 Sending order confirmation image:', imageUrl);
+                        
+                        const media = await MessageMedia.fromUrl(imageUrl);
+                        
+                        const orderCaption = `*ORDER CONFIRMED*\n\n` +
+                            `Order #${orderNumber}\n` +
+                            `${state.product.name}\n` +
+                            `Quantity: ${state.quantity} ${state.product.unit_of_measure}\n` +
+                            `Amount: UGX ${state.total.toLocaleString()}\n\n` +
+                            `━━━━━━━━━━━━━━━━━━━━━━`;
+                        
+                        await client.sendMessage(msg.from, media, { caption: orderCaption });
+                        console.log('✅ Order confirmation image sent successfully');
+                    } catch (imgError) {
+                        console.log('❌ Could not send order image:', imgError.message);
+                        console.log('   Image URL was:', state.product.image_url);
+                    }
+                }
+                
+                // Send payment instructions
+                const paymentMessage = `*PAYMENT INSTRUCTIONS*\n\n` +
+                    `Order: #${orderNumber}\n` +
+                    `Amount: UGX ${state.total.toLocaleString()}\n\n` +
+                    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                    `*Payment Options:*\n\n` +
+                    `▪️ *Mobile Money (MTN/Airtel)*\n` +
+                    `   Send to: 0705 223 777\n` +
+                    `   Name: AGROF Services\n\n` +
+                    `▪️ *Bank Transfer*\n` +
+                    `   Bank: Stanbic Bank\n` +
+                    `   Account: [Available on request]\n\n` +
+                    `▪️ *Cash on Delivery*\n` +
+                    `   Pay when you receive\n\n` +
+                    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                    `After payment, send screenshot to:\n` +
+                    `📞 WhatsApp: +256 705 223 777\n\n` +
+                    `*Delivery:* Within 24-48 hours\n` +
+                    `*Pickup:* Available at our store\n\n` +
+                    `Thank you for choosing AGROF! 🌾`;
+                
+                await msg.reply(paymentMessage);
+                
+                // Create order via automation
+                await fetch(`${AUTOMATION_API}/api/events/whatsapp_order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId: orderNumber,
+                        customer: customerPhone,
+                        customerName: state.customerName,
+                        product: state.product,
+                        quantity: state.quantity,
+                        unitPrice: state.unitPrice,
+                        total: state.total,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                // Notify admins with complete details
+                const adminNotification = `*NEW ORDER RECEIVED*\n\n` +
+                    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                    `*Order Details:*\n` +
+                    `Order #: ${orderNumber}\n` +
+                    `Time: ${new Date().toLocaleString('en-UG')}\n\n` +
+                    `*Customer Information:*\n` +
+                    `Name: ${state.customerName}\n` +
+                    `Phone: +${customerPhone}\n` +
+                    `WhatsApp: ${msg.from}\n\n` +
+                    `*Product Details:*\n` +
+                    `Product: ${state.product.name}\n` +
+                    `Category: ${state.product.category_display_name || state.product.category_name}\n` +
+                    `Quantity: ${state.quantity} ${state.product.unit_of_measure}\n` +
+                    `Unit Price: UGX ${state.unitPrice.toLocaleString()}\n\n` +
+                    `*Payment:*\n` +
+                    `Total Amount: UGX ${state.total.toLocaleString()}\n` +
+                    `Status: Pending\n` +
+                    `Method: To be confirmed\n\n` +
+                    `*Inventory Impact:*\n` +
+                    `Current Stock: ${state.product.quantity_in_stock} ${state.product.unit_of_measure}\n` +
+                    `After Order: ${state.product.quantity_in_stock - state.quantity} ${state.product.unit_of_measure}\n\n` +
+                    `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                    `⚡ *Action Required:*\n` +
+                    `1. Prepare order for fulfillment\n` +
+                    `2. Contact customer for payment confirmation\n` +
+                    `3. Arrange delivery/pickup\n\n` +
+                    `📞 Customer: +${customerPhone}`;
+                
+                notifyAdmins(adminNotification);
+                
+            } catch (error) {
+                console.error('Error creating order:', error);
+                await msg.reply('We apologize for the inconvenience. Our team has been notified and will contact you shortly at this number.\n\n📞 Or call us: +256 705 223 777');
+            }
+            
+        } else {
+            await msg.reply('*Order Cancelled*\n\nNo problem! Feel free to:\n\n▪️ Browse our *PRODUCTS*\n▪️ Contact us for assistance: +256 705 223 777\n\nThank you for considering AGROF.');
+        }
+        
+        // Clear conversation state
+        conversations.delete(msg.from);
+    }
+}
+
+async function handlePriceInquiry(msg, text) {
+    await msg.reply('Retrieving current pricing information...');
+    
+    try {
+        const response = await fetch(`${STORE_API}/api/products?limit=30`);
+        const products = await response.json();
+        
+        let priceMessage = `*AGROF PRICE LIST*\n_Current Market Prices_\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        
+        // Group by category
+        const byCategory = {};
+        products.forEach(p => {
+            const cat = p.category_display_name || p.category_name || 'Other';
+            if (!byCategory[cat]) byCategory[cat] = [];
+            byCategory[cat].push(p);
+        });
+        
+        for (const [category, items] of Object.entries(byCategory)) {
+            priceMessage += `*${category.toUpperCase()}*\n\n`;
+            items.slice(0, 5).forEach(p => {
+                priceMessage += `▪️ ${p.name}\n   ${p.price}\n\n`;
+            });
+        }
+        
+        priceMessage += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        priceMessage += `*To place an order:*\nReply: *ORDER [product name] [quantity]*\n\n`;
+        priceMessage += `📞 Bulk orders: +256 705 223 777\n🌐 Full catalog: www.agrof.farm`;
+        
+        await msg.reply(priceMessage);
+        
+    } catch (error) {
+        console.error('Error fetching prices:', error);
+        await msg.reply('We apologize for the inconvenience. For pricing information, please contact:\n\n📞 +256 705 223 777\n📧 support@agrof.farm');
+    }
+}
+
+async function handleOrderTracking(msg) {
+    await msg.reply('📦 To track your order, please provide your order number.\n\nExample: #ORD123456');
+}
+
+async function handleSupport(msg) {
+    const supportMessage = `📞 *CONTACT INFORMATION*
+
+🏢 AGROF Agricultural Services
+
+📱 Phone: +256 705 223 777
+📧 Email: support@agrof.farm
+🌐 Website: www.agrof.farm
+
+⏰ *Working Hours:*
+Monday - Friday: 8:00 AM - 6:00 PM
+Saturday: 9:00 AM - 4:00 PM
+Sunday: Closed
+
+📍 *Location:*
+Kampala, Uganda
+
+💬 You can also continue chatting here, and our team will respond shortly!`;
+
+    await msg.reply(supportMessage);
+}
+
+async function handleGeneralInquiry(msg, text) {
+    // Smart response based on keywords
+    if (text.match(/fertilizer|dap|urea|npk|nutrient/i)) {
+        await msg.reply('*FERTILIZERS & SOIL NUTRIENTS*\n\nWe stock a comprehensive range of premium fertilizers including:\n\n▪️ NPK Compounds\n▪️ Urea & DAP\n▪️ Organic Fertilizers\n▪️ Foliar Nutrients\n\nReply *PRODUCTS* to view our complete fertilizer catalog.\n\n_AGROF - Quality Agricultural Inputs_');
+    } else if (text.match(/seed|seedling|nursery/i)) {
+        await msg.reply('*SEEDS & SEEDLINGS*\n\nDiscover our selection of certified quality seeds:\n\n▪️ Vegetable Seeds\n▪️ Maize & Grain Seeds\n▪️ Nursery Seedlings\n▪️ Hybrid Varieties\n\nReply *PRODUCTS* to explore our seed collection.\n\n📞 Expert advice: +256 705 223 777');
+    } else if (text.match(/deliver|delivery|transport|shipping/i)) {
+        await msg.reply('*DELIVERY SERVICES*\n\nAGROF offers reliable delivery across Uganda.\n\n▪️ Delivery timeframe: 24-48 hours\n▪️ Coverage: Nationwide\n▪️ Pickup: Available at our store\n\nFor delivery quotes and scheduling:\n📞 +256 705 223 777\n\n_Fast & Reliable Agricultural Logistics_');
+    } else if (text.match(/payment|pay|price|cost|how much/i)) {
+        await msg.reply('*PAYMENT OPTIONS*\n\nWe accept the following payment methods:\n\n▪️ Mobile Money (MTN/Airtel)\n▪️ Bank Transfer\n▪️ Cash on Delivery\n▪️ Cash at Store\n\nReply *PRICE* to view product pricing.\n\nFor payment assistance:\n📞 +256 705 223 777');
+    } else if (text.match(/fungicide|disease|blight|pest/i)) {
+        await msg.reply('*CROP PROTECTION SOLUTIONS*\n\nProtect your crops with our range of:\n\n▪️ Fungicides\n▪️ Herbicides\n▪️ Pest Control Products\n\nReply *PRODUCTS* to view our crop protection catalog.\n\n_Professional Agricultural Solutions_');
+    } else {
+        await msg.reply('*AGROF AGRICULTURAL SERVICES*\n\nHow may we assist you today?\n\n▪️ *PRODUCTS* - Browse catalog\n▪️ *ORDER* - Place an order\n▪️ *CONTACT* - Speak with our team\n\nFor immediate assistance:\n📞 +256 705 223 777\n🌐 www.agrof.farm');
+    }
+}
+
+// ==================== HELPER FUNCTIONS ====================
+
+async function getContactName(msg) {
+    try {
+        const contact = await msg.getContact();
+        return contact.pushname || contact.name || contact.number || 'Customer';
+    } catch {
+        return 'Customer';
+    }
+}
+
+async function notifyAdmins(message) {
+    if (ADMIN_NUMBERS.length === 0) return;
+    
+    for (const adminNumber of ADMIN_NUMBERS) {
+        try {
+            const chatId = adminNumber.includes('@c.us') ? adminNumber : `${adminNumber}@c.us`;
+            await client.sendMessage(chatId, message);
+        } catch (error) {
+            console.error(`Failed to notify admin ${adminNumber}:`, error.message);
+        }
+    }
+}
+
+// ==================== OUTBOUND MESSAGE API ====================
+
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+// API to send messages from automation system
+app.post('/send', async (req, res) => {
+    try {
+        const { to, message } = req.body;
+        
+        if (!to || !message) {
+            return res.status(400).json({ error: 'Missing to or message' });
+        }
+        
+        const chatId = to.includes('@c.us') ? to : `${to}@c.us`;
+        await client.sendMessage(chatId, message);
+        
+        res.json({ success: true, message: 'Message sent' });
+    } catch (error) {
+        console.error('Error sending message:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Health check
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'OK',
+        ready: client.info ? true : false,
+        info: client.info
+    });
+});
+
+const API_PORT = process.env.API_PORT || 3003;
+app.listen(API_PORT, () => {
+    console.log(`\n📡 WhatsApp Bot API listening on port ${API_PORT}`);
+    console.log(`   POST http://localhost:${API_PORT}/send - Send messages`);
+    console.log(`   GET  http://localhost:${API_PORT}/health - Health check\n`);
+});
+
+// ==================== START BOT ====================
+
+console.log('🚀 Starting AGROF WhatsApp Bot...\n');
+client.initialize();
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+    console.log('\n🛑 Shutting down WhatsApp bot...');
+    await client.destroy();
+    process.exit(0);
+});
+
+async function handlePriceInquiry(msg, text) {
+    await msg.reply('Retrieving current pricing information...');
+    
+    try {
+        const response = await fetch(`${STORE_API}/api/products?limit=30`);
+        const products = await response.json();
+        
+        let priceMessage = `*AGROF PRICE LIST*\n_Current Market Prices_\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        
+        // Group by category
+        const byCategory = {};
+        products.forEach(p => {
+            const cat = p.category_display_name || p.category_name || 'Other';
+            if (!byCategory[cat]) byCategory[cat] = [];
+            byCategory[cat].push(p);
+        });
+        
+        for (const [category, items] of Object.entries(byCategory)) {
+            priceMessage += `*${category.toUpperCase()}*\n\n`;
+            items.slice(0, 5).forEach(p => {
+                priceMessage += `▪️ ${p.name}\n   ${p.price}\n\n`;
+            });
+        }
+        
+        priceMessage += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+        priceMessage += `*To place an order:*\nReply: *ORDER [product name] [quantity]*\n\n`;
+        priceMessage += `📞 Bulk orders: +256 705 223 777\n🌐 Full catalog: www.agrof.farm`;
+        
+        await msg.reply(priceMessage);
+        
+    } catch (error) {
+        console.error('Error fetching prices:', error);
+        await msg.reply('We apologize for the inconvenience. For pricing information, please contact:\n\n📞 +256 705 223 777\n📧 support@agrof.farm');
+    }
+}
+
+async function handleOrderTracking(msg) {
+    await msg.reply('📦 To track your order, please provide your order number.\n\nExample: #ORD123456');
+}
+
+async function handleSupport(msg) {
+    const supportMessage = `📞 *CONTACT INFORMATION*
+
+🏢 AGROF Agricultural Services
+
+📱 Phone: +256 705 223 777
+📧 Email: support@agrof.farm
+🌐 Website: www.agrof.farm
+
+⏰ *Working Hours:*
+Monday - Friday: 8:00 AM - 6:00 PM
+Saturday: 9:00 AM - 4:00 PM
+Sunday: Closed
+
+📍 *Location:*
+Kampala, Uganda
+
+💬 You can also continue chatting here, and our team will respond shortly!`;
+
+    await msg.reply(supportMessage);
+}
+
+async function handleGeneralInquiry(msg, text) {
+    // Smart response based on keywords
+    if (text.match(/fertilizer|dap|urea|npk|nutrient/i)) {
+        await msg.reply('*FERTILIZERS & SOIL NUTRIENTS*\n\nWe stock a comprehensive range of premium fertilizers including:\n\n▪️ NPK Compounds\n▪️ Urea & DAP\n▪️ Organic Fertilizers\n▪️ Foliar Nutrients\n\nReply *PRODUCTS* to view our complete fertilizer catalog.\n\n_AGROF - Quality Agricultural Inputs_');
+    } else if (text.match(/seed|seedling|nursery/i)) {
+        await msg.reply('*SEEDS & SEEDLINGS*\n\nDiscover our selection of certified quality seeds:\n\n▪️ Vegetable Seeds\n▪️ Maize & Grain Seeds\n▪️ Nursery Seedlings\n▪️ Hybrid Varieties\n\nReply *PRODUCTS* to explore our seed collection.\n\n📞 Expert advice: +256 705 223 777');
+    } else if (text.match(/deliver|delivery|transport|shipping/i)) {
+        await msg.reply('*DELIVERY SERVICES*\n\nAGROF offers reliable delivery across Uganda.\n\n▪️ Delivery timeframe: 24-48 hours\n▪️ Coverage: Nationwide\n▪️ Pickup: Available at our store\n\nFor delivery quotes and scheduling:\n📞 +256 705 223 777\n\n_Fast & Reliable Agricultural Logistics_');
+    } else if (text.match(/payment|pay|price|cost|how much/i)) {
+        await msg.reply('*PAYMENT OPTIONS*\n\nWe accept the following payment methods:\n\n▪️ Mobile Money (MTN/Airtel)\n▪️ Bank Transfer\n▪️ Cash on Delivery\n▪️ Cash at Store\n\nReply *PRICE* to view product pricing.\n\nFor payment assistance:\n📞 +256 705 223 777');
+    } else if (text.match(/fungicide|disease|blight|pest/i)) {
+        await msg.reply('*CROP PROTECTION SOLUTIONS*\n\nProtect your crops with our range of:\n\n▪️ Fungicides\n▪️ Herbicides\n▪️ Pest Control Products\n\nReply *PRODUCTS* to view our crop protection catalog.\n\n_Professional Agricultural Solutions_');
+    } else {
+        await msg.reply('*AGROF AGRICULTURAL SERVICES*\n\nHow may we assist you today?\n\n▪️ *PRODUCTS* - Browse catalog\n▪️ *ORDER* - Place an order\n▪️ *CONTACT* - Speak with our team\n\nFor immediate assistance:\n📞 +256 705 223 777\n🌐 www.agrof.farm');
+    }
+}
+
+// ==================== HELPER FUNCTIONS ====================
+
+async function getContactName(msg) {
+    try {
+        const contact = await msg.getContact();
+        return contact.pushname || contact.name || contact.number || 'Customer';
+    } catch {
+        return 'Customer';
+    }
+}
+
+async function notifyAdmins(message) {
+    if (ADMIN_NUMBERS.length === 0) return;
+    
+    for (const adminNumber of ADMIN_NUMBERS) {
+        try {
+            const chatId = adminNumber.includes('@c.us') ? adminNumber : `${adminNumber}@c.us`;
+            await client.sendMessage(chatId, message);
+        } catch (error) {
+            console.error(`Failed to notify admin ${adminNumber}:`, error.message);
+        }
+    }
+}
+
+// ==================== OUTBOUND MESSAGE API ====================
+
+
+// API to send messages from automation system
+app.post('/send', async (req, res) => {
+    try {
+        const { to, message } = req.body;
+        
+        if (!to || !message) {
+            return res.status(400).json({ error: 'Missing to or message' });
+        }
+        
+        const chatId = to.includes('@c.us') ? to : `${to}@c.us`;
+        await client.sendMessage(chatId, message);
+        
+        res.json({ success: true, message: 'Message sent' });
+    } catch (error) {
+        console.error('Error sending message:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Health check
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'OK',
+        ready: client.info ? true : false,
+        info: client.info
+    });
+});
+
+});
+
+// ==================== START BOT ====================
+
+console.log('🚀 Starting AGROF WhatsApp Bot...\n');
+client.initialize();
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+    console.log('\n🛑 Shutting down WhatsApp bot...');
+    await client.destroy();
+    process.exit(0);
+});
+
+
+

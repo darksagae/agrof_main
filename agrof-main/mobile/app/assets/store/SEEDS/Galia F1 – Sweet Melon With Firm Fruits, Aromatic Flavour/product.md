@@ -1,91 +1,41 @@
-# Galia F1 Sweet Melon Seeds
+# Galia F1 – Sweet Melon With Firm Fruits, Aromatic Flavour
 
 ## Overview
-Galia F1 is a high-yielding hybrid sweet melon variety known for its firm fruits and aromatic flavor. This variety produces uniform, high-quality melons that are perfect for fresh consumption and have excellent storage quality.
+Galia F1 is very sweet Melon with firm fruits, aromatic flavour. Tolerant to fusarium wilt race 0 and powdery mildew.
 
-## Specifications
-Variety: Hybrid F1 Sweet Melon
-Fruit Shape: Round to oval
-Fruit Weight: 1-2kg
-Days to Maturity: 85-90 days
-Plant Type: Vining, indeterminate
-Fruit Color: Yellow-green
-Flesh Color: Green, aromatic
-Flavor: Sweet, aromatic
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Syova Seed (U) Ltd**
 
-## Key Features
-Firm fruit texture
-Aromatic flavor
-High yield potential
-Disease resistance
-Good storage quality
-Suitable for processing
-Market preferred variety
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 25-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 120cm x 120cm between plants
+- **Maturity Days After Sowing**: 70 days
+- **Spacing**: 150cm x 60cm
+- **Seed Rate**: 600grams/acre
+- **Average Fruit Weight**: 0.8-1.2kgs
+- **Shape**: Globe shaped fruits with small cavity
+- **Colour**: Rind-gold yellow with medium netting, fruits-green flesh
 
-## Usage Instructions
-- **Variety type**: Very sweet Melon with firm fruits, aromatic flavour
-- **Disease resistance**: Tolerant to fusarium wilt race 0 and powdery mildew
-- **Maturity days after sowing**: 70 days
-- **Spacing**: 150cm*60cm
-- **Seed rate**: 600grams/acre
-- **Average fruit weight**: 0.8-1.2kgs
-- **Fruit shape**: Globe shaped fruits with small cavity
-- **Fruit color**: Rind-gold yellow with medium netting, fruits- green fresh
-- **Planting depth**: 2-3 cm deep
-- **Planting time**: After last frost, when soil temperature is 20°C+
+## Pricing
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Sweet melon with firm fruits and aromatic flavour
-- **Spacing**: 150cm*60cm between plants
-- **Disease resistance**: Tolerant to fusarium wilt race 0 and powdery mildew
-- **Fruit characteristics**: Globe shaped fruits with small cavity
-- **Storage quality**: Excellent storage and transport quality
+**Best Price**: UGX 21,996 (10g @ 10+ units)
 
-## Benefits
-- **Sweet melon**: Very sweet Melon with firm fruits, aromatic flavour
-- **Disease resistance**: Tolerant to fusarium wilt race 0 and powdery mildew
-- **Early maturity**: 70 days after sowing
-- **High yield**: Excellent production per plant
-- **Firm texture**: Globe shaped fruits with small cavity
-- **Good storage**: Excellent storage and transport quality
-- **Market demand**: High demand due to sweet flavor and firm texture
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 40,000
-Per 5000 seeds: UGX 180,000
-Per 10000 seeds: UGX 340,000
-Bulk orders: Contact for pricing
+**10g**:
+- 1+ units: UGX 23,500/unit
+- 5+ units: UGX 22,208/unit (5% off)
+- 10+ units: UGX 21,996/unit (6% off)
+- 20+ units: UGX 21,996/unit (6% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
-
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
-
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

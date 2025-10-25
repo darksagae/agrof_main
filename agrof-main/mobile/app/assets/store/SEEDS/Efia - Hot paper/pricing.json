@@ -1,0 +1,27 @@
+{
+  "productName": "Efia - Hot paper",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 27,000",
+  "lowestPrice": 27000,
+  "lowestPackage": "10g @ 1+ units",
+  "details": {
+    "description": "Efia Hot Paper is a high-quality hot pepper variety designed for various culinary applications. Known for its excellent heat level and durability."
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 27000,
+          "priceFormatted": "UGX 27,000",
+          "totalPrice": 27000,
+          "totalFormatted": "UGX 27,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

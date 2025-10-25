@@ -1,0 +1,22 @@
+{
+  "productName": "Oscars Primo Organic Fertilizer",
+  "supplier": "Trax Holdings Ltd",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 90,700",
+  "lowestPrice": 90700,
+  "productDetails": "OSCARS PRIMO, is very effective and increase efficiency of all nutrients during spraying. It causes the leaves to release high life energy and the process rise up chlorophyll quantity and accelerates photosynthesis. The plant fixes all the nutrients itself by increasing resistance against diseases. Its effective in flowering, sprouting of new shoots, and fruiting.",
+  "specifications": {},
+  "packages": [
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 90700,
+          "priceFormatted": "UGX 90,700"
+        }
+      ]
+    }
+  ]
+}

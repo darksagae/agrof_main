@@ -1,0 +1,30 @@
+{
+  "productName": "Grace - Barley Seed",
+  "supplier": "Sebei Farmers Sacco",
+  "category": "Barley",
+  "displayPrice": "UGX 2,500",
+  "lowestPrice": 2500,
+  "lowestPackage": "1kg @ 1+ units",
+  "details": {
+    "description": "Grace barley is a good yielding variety",
+    "maturity": "100 days",
+    "yieldPotential": "1500 kg/Acre",
+    "seedRate": "50kgs/Acre"
+  },
+  "packages": [
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 2500,
+          "priceFormatted": "UGX 2,500",
+          "totalPrice": 2500,
+          "totalFormatted": "UGX 2,500",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

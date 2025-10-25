@@ -1,86 +1,45 @@
-# Coatmeal Coriander Seeds
+# Coatmeal - Coriander
 
 ## Overview
-Coatmeal Coriander is a high-quality coriander variety known for its excellent flavor, aroma, and adaptability to various growing conditions. This variety produces abundant foliage and seeds, making it ideal for both culinary and medicinal purposes.
+A popular herb with finely cut, small and rather pungent leaves. Tender foliage used for seasoning and flavouring curries.
 
-## Specifications
-Variety: Open Pollinated Coriander
-Plant Type: Annual herb
-Plant Height: 30-60cm
-Days to Maturity: 45-60 days
-Leaf Color: Bright green
-Seed Color: Light brown
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Simlaw Seeds Company (U) Ltd**
 
-## Key Features
-Excellent flavor and aroma
-Abundant foliage production
-High seed yield
-Disease resistance
-Easy to grow
-Suitable for containers
-Versatile use
+## Pricing
 
-## Growing Requirements
-Climate: Cool season crop
-Temperature: 15-25°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 20cm x 20cm between plants
+**Best Price**: UGX 1,200 (10g @ 101+ units)
 
-## Usage Instructions
-- **Variety type**: A popular herb with finely cut, small and rather pungent leaves
-- **Foliage use**: Tender foliage used for seasoning and flavouring curries
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: Early spring or fall
-- **Germination**: 7-10 days
-- **Direct seeding**: Recommended for optimal results
-- **Special attributes**: Popular herb with excellent flavor and aroma
+### Package Options & Pricing
 
-## Application Method
-- **Method**: Direct seeding recommended
-- **Target**: Popular herb with finely cut, small and rather pungent leaves
-- **Spacing**: Maintain proper spacing for optimal growth
-- **Broadcast seeding**: For large areas
-- **Container growing**: Suitable for pots
-- **Culinary use**: Tender foliage used for seasoning and flavouring curries
+**10g**:
+- 50+ units: UGX 1,300/unit
+- 100+ units: UGX 1,250/unit (4% off)
+- 101+ units: UGX 1,200/unit (8% off)
 
-## Benefits
-- **Popular herb**: A popular herb with finely cut, small and rather pungent leaves
-- **Culinary use**: Tender foliage used for seasoning and flavouring curries
-- **Excellent flavor**: Superior taste and aroma
-- **Easy growing**: Suitable for beginners and experienced gardeners
-- **Container friendly**: Can be grown in pots
-- **Versatile use**: Culinary and medicinal purposes
-- **High demand**: Popular variety with excellent market acceptance
+**50g**:
+- 5+ units: UGX 3,780/unit
+- 10+ units: UGX 3,710/unit (2% off)
 
-## Price Information
-Per 1000 seeds: UGX 15,000
-Per 5000 seeds: UGX 60,000
-Per 10000 seeds: UGX 110,000
-Bulk orders: Contact for pricing
+**500g**:
+- 50+ units: UGX 31,000/unit
+- 100+ units: UGX 30,901/unit
+- 101+ units: UGX 29,503/unit (5% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**1kg**:
+- 50+ units: UGX 66,500/unit
+- 100+ units: UGX 66,453/unit
+- 101+ units: UGX 63,301/unit (5% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
-
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

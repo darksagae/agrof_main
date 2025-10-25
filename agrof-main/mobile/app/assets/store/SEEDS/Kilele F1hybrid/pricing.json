@@ -1,0 +1,32 @@
+{
+  "productName": "Kilele F1hybrid",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 68,000",
+  "lowestPrice": 68000,
+  "lowestPackage": "1000 Seeds @ 1+ units",
+  "details": {
+    "description": "KILELE F1 - SPACING: 60x60cm, Seed rate: 35 grams per acre, APPROXIMATE SEED COUNT (per grams): 300 seeds, Yield 70-78 tons per acre, DURATION TO MATURITY: 80 days from transplanting, SPECIAL ATTRIBUTES: Over 21 days shelf life, Disease tolerance: bacterial wilt.",
+    "spacing": "60x60cm",
+    "seedRate": "35 grams per acre",
+    "seedCount": "300 seeds per gram",
+    "yield": "70-78 tons per acre",
+    "maturity": "80 days from transplanting"
+  },
+  "packages": [
+    {
+      "size": "1000 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 68000,
+          "priceFormatted": "UGX 68,000",
+          "totalPrice": 68000,
+          "totalFormatted": "UGX 68,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

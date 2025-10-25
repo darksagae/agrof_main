@@ -1,0 +1,36 @@
+{
+  "productName": "Calphos – Organic Solution For Improved Fruit Development",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 16,000",
+  "lowestPrice": 16000,
+  "productDetails": "Calphos is a nutrient solution for plants just entering the flowering cycle. In natural farming, apply Calphos before the flower initiation to reduce flower abortion and support the eventual fruit. Calcium is used to strengthen the plant in preparation for heavy flowers/fruits. Main Ingredients: Natural source of calcium and phosphorous",
+  "specifications": {
+    "Directions for use": "Apply 200ml of Calphos diluted in 20L of water for fruits and vegetables before flowering. Apply 100L for 1 Acre",
+    "Key Benefits": "Reduces flower abortion, Improves fruit development, Improves fruit ripening and quality"
+  },
+  "packages": [
+    {
+      "size": "250ml",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 16000,
+          "priceFormatted": "UGX 16,000"
+        }
+      ]
+    },
+    {
+      "size": "1ltr",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 53000,
+          "priceFormatted": "UGX 53,000"
+        }
+      ]
+    }
+  ]
+}

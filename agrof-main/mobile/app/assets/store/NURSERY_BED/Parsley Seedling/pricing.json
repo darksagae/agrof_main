@@ -1,0 +1,22 @@
+{
+  "productName": "Parsley Seedling",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Parsley is a versatile herb that can be used in many ways, such in sauces, juices, or as a garnish. Parsley contains several important nutrients, such as vitamins A, K, and C. It's also a good source of the mineral calcium, iron, magnesium, and potassium. This herb can easily be added to many tasty dishes. Parsley stays fresh for up to two weeks.",
+  "specifications": "Parsley enjoys well-draining soil that is rich in organic matter. Pick a spot that gets full sun (6 to 8 hours of sunlight). Keep parsley plants sufficiently watered, especially through the heat of summer. Harvesting: When the leaf stems have three segments, parsley is ready to be harvested",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

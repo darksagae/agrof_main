@@ -1,0 +1,113 @@
+{
+  "productName": "Anita – Watermelon",
+  "supplier": "Nsanja Agrochemicals Ltd",
+  "category": "Watermelon",
+  "displayPrice": "UGX 42,292",
+  "lowestPrice": 42292,
+  "lowestPackage": "50g @ 20+ units",
+  "details": {
+    "description": "An excellent oval to oblong stripped type hybrid. Glossy attractive high quality fruits with deep crimson red flesh. The fruit texture is very crispy with a sweetness of 12-13% TSS. The fruits have excellent transport quality fit for long distance transport. Field observable tolerance to Anthracnose caused by Colletotrichum orbiculare and Fusarium wilt.",
+    "fruitAverageWeight": "8-10kg under good farming practice",
+    "maturity": "80-85 days after sowing",
+    "yieldPotential": "32-40 tons/acre",
+    "spacing": "60cm x 45cm"
+  },
+  "packages": [
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 43600,
+          "priceFormatted": "UGX 43,600",
+          "totalPrice": 43600,
+          "totalFormatted": "UGX 43,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 42510,
+          "priceFormatted": "UGX 42,510",
+          "totalPrice": 212550,
+          "totalFormatted": "UGX 212,550",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 42379,
+          "priceFormatted": "UGX 42,379",
+          "totalPrice": 423790,
+          "totalFormatted": "UGX 423,790",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 42292,
+          "priceFormatted": "UGX 42,292",
+          "totalPrice": 845840,
+          "totalFormatted": "UGX 845,840",
+          "discountPercent": 3
+        }
+      ]
+    },
+    {
+      "size": "250g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 179200,
+          "priceFormatted": "UGX 179,200",
+          "totalPrice": 179200,
+          "totalFormatted": "UGX 179,200",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 176870,
+          "priceFormatted": "UGX 176,870",
+          "totalPrice": 884350,
+          "totalFormatted": "UGX 884,350",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 176333,
+          "priceFormatted": "UGX 176,333",
+          "totalPrice": 1763330,
+          "totalFormatted": "UGX 1,763,330",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 176154,
+          "priceFormatted": "UGX 176,154",
+          "totalPrice": 3523080,
+          "totalFormatted": "UGX 3,523,080",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "500g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 340000,
+          "priceFormatted": "UGX 340,000",
+          "totalPrice": 340000,
+          "totalFormatted": "UGX 340,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

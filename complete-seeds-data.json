@@ -1,0 +1,4915 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Sugar Baby",
+      "folder": "Sugar Baby – Most Popular And Grown Watermelon Variety Due To Its Early Maturity",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Watermelon",
+      "details": {
+        "description": "Sugar Baby is the most popular and widely grown watermelon variety due to its early maturity, small to medium size, and high yield potential. Produces sweet, crisp red flesh fruits.",
+        "potentialFruitWeight": "5-8kgs",
+        "yieldPotential": "48-50 tons per acre",
+        "durationToMaturity": "80 days",
+        "spacing": "100x100cm",
+        "seedRate": "500 grams per acre",
+        "approximateSeedCount": "20 seeds per gram",
+        "specialAttributes": "Dark green, round watermelon, Very uniform growth, Very adoptable and grows on wide range of soils"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2100
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3200
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3800
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 8700
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 34900
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 67200
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 128900
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Dodo (Elma)",
+      "folder": "Dodo (Elma)",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Amaranth/Vegetables",
+      "details": {
+        "description": "Green slender and attractive pods with good storage ability, Good fruit setting, Maturity: Harvesting start 40-45 days from planting, Tolerant to Yellow Vein Mosaic Virus (YVMV)",
+        "nutritionalValue": "Highly nutritious vegetable",
+        "growingCharacteristics": "Easy to grow, Fast maturing, Very vigorous growth",
+        "transportQuality": "Transports well",
+        "cookingQuality": "Quick to cook"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1400
+            },
+            {
+              "qty": 5,
+              "price": 1322
+            },
+            {
+              "qty": 10,
+              "price": 1308
+            },
+            {
+              "qty": 20,
+              "price": 1303
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            },
+            {
+              "qty": 5,
+              "price": 2452
+            },
+            {
+              "qty": 10,
+              "price": 2436
+            },
+            {
+              "qty": 20,
+              "price": 2428
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4300
+            },
+            {
+              "qty": 5,
+              "price": 4154
+            },
+            {
+              "qty": 10,
+              "price": 4137
+            },
+            {
+              "qty": 20,
+              "price": 4124
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 16500
+            },
+            {
+              "qty": 5,
+              "price": 16302
+            },
+            {
+              "qty": 10,
+              "price": 16253
+            },
+            {
+              "qty": 20,
+              "price": 16220
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23300
+            },
+            {
+              "qty": 5,
+              "price": 23230
+            },
+            {
+              "qty": 10,
+              "price": 23160
+            },
+            {
+              "qty": 20,
+              "price": 23067
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 46300
+            },
+            {
+              "qty": 5,
+              "price": 46207
+            },
+            {
+              "qty": 10,
+              "price": 46022
+            },
+            {
+              "qty": 20,
+              "price": 40142
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Julie F1",
+      "folder": "Julie F1",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Watermelon",
+      "details": {
+        "description": "A very popular hybrid with oblong shaped fruit. Very sweet red flesh. Tolerant to fusarium wilt and anthracnose.",
+        "potentialFruitWeight": "10-12kgs",
+        "yieldPotential": "35-40 tons per acre",
+        "durationToMaturity": "85 days",
+        "seedRate": "500 grams per acre",
+        "approximateSeedCount": "20 seeds per gram"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3800
+            },
+            {
+              "qty": 5,
+              "price": 3648
+            },
+            {
+              "qty": 10,
+              "price": 3633
+            },
+            {
+              "qty": 20,
+              "price": 3621
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7200
+            },
+            {
+              "qty": 5,
+              "price": 7049
+            },
+            {
+              "qty": 10,
+              "price": 7020
+            },
+            {
+              "qty": 20,
+              "price": 6998
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 17600
+            },
+            {
+              "qty": 5,
+              "price": 17406
+            },
+            {
+              "qty": 10,
+              "price": 17354
+            },
+            {
+              "qty": 20,
+              "price": 17318
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 33800
+            },
+            {
+              "qty": 5,
+              "price": 33462
+            },
+            {
+              "qty": 10,
+              "price": 33394
+            },
+            {
+              "qty": 20,
+              "price": 33293
+            }
+          ]
+        },
+        {
+          "size": "100g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 64900
+            },
+            {
+              "qty": 5,
+              "price": 64316
+            },
+            {
+              "qty": 10,
+              "price": 64121
+            },
+            {
+              "qty": 20,
+              "price": 56074
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 163700
+            },
+            {
+              "qty": 5,
+              "price": 140618
+            },
+            {
+              "qty": 10,
+              "price": 142583
+            },
+            {
+              "qty": 20,
+              "price": 142419
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 324600
+            },
+            {
+              "qty": 5,
+              "price": 285323
+            },
+            {
+              "qty": 10,
+              "price": 285323
+            },
+            {
+              "qty": 20,
+              "price": 285323
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Frey - Pepper Hybrid F1",
+      "folder": "Frey - Pepper Hybrid F1",
+      "supplier": "Home Harvest (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Frey is a versatile hybrid sweet pepper that can be grown outdoors or indoors. Fruits measure 12x10cm and go from green to red. The fruits have thick walls. Strong plant with short internodes and good leaf cover.",
+        "fruitSize": "12x10cm",
+        "fruitColor": "Green -> Red",
+        "walls": "Thick",
+        "shape": "Blocky",
+        "diseaseResistance": "Potato Virus Y (PVY:0,1), Tobamovirus (TM:0-3)",
+        "vigour": "Strong",
+        "leafCover": "Good",
+        "cultivation": "Open Field, Tunnel",
+        "uniformity": "High",
+        "maturity": "Early"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 38800
+            },
+            {
+              "qty": 5,
+              "price": 37403
+            },
+            {
+              "qty": 10,
+              "price": 37287
+            },
+            {
+              "qty": 20,
+              "price": 37209
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Habanero Yellow – Bonnet Pepper",
+      "folder": "Habanero Yellow – Bonnet Pepper",
+      "supplier": "Home Harvest (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Habanero Yellow Pepper is a very vigorous and high yielding pepper type with reliable performance in a wide range of different growing conditions.",
+        "fruitColor": "Yellow hot pepper fruits",
+        "yieldPerPlant": "About 5kg per season",
+        "maturity": "70 days from transplanting",
+        "harvestingPeriod": "4-6 months",
+        "seedRate": "120g per acre",
+        "spacing": "60cm x 75cm"
+      },
+      "packages": [
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 54200
+            },
+            {
+              "qty": 5,
+              "price": 53224
+            },
+            {
+              "qty": 10,
+              "price": 52899
+            },
+            {
+              "qty": 20,
+              "price": 52682
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Grace - Barley Seed",
+      "folder": "Grace - Barley Seed",
+      "supplier": "Sebei Farmers Sacco",
+      "category": "Barley",
+      "details": {
+        "description": "Grace barley is a good yielding variety",
+        "maturity": "100 days",
+        "yieldPotential": "1500 kg/Acre",
+        "seedRate": "50kgs/Acre"
+      },
+      "packages": [
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "California Wonder \"Bamba\" - Pepper",
+      "folder": "California Wonder \"Bamba\" - Pepper",
+      "supplier": "Home Harvest (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "California Wonder \"Bamba\" has an erect plant with good vigor. It has a very good production of green deep blocky fruits with smooth skin.",
+        "yieldPotential": "15-20 tons under good management",
+        "seedRate": "100g per acre",
+        "spacing": "60cm x 45cm"
+      },
+      "packages": [
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23300
+            },
+            {
+              "qty": 5,
+              "price": 21995
+            },
+            {
+              "qty": 10,
+              "price": 21809
+            },
+            {
+              "qty": 20,
+              "price": 21809
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Habanero Red – Bonnet Pepper",
+      "folder": "Habanero Red – Bonnet Pepper",
+      "supplier": "Home Harvest (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Habanero Red is a high yielding pepper variety with great demand both locally and internationally. It can be grown for export to various countries globally.",
+        "fruitColor": "Red hot pepper fruits",
+        "yieldPerPlant": "4-5kg per season",
+        "maturity": "70 days from transplanting",
+        "harvestingPeriod": "4-6 months",
+        "seedRate": "120g per acre",
+        "spacing": "60cm x 75cm"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 16400
+            },
+            {
+              "qty": 5,
+              "price": 15793
+            },
+            {
+              "qty": 10,
+              "price": 15695
+            },
+            {
+              "qty": 20,
+              "price": 15695
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 59600
+            },
+            {
+              "qty": 5,
+              "price": 58289
+            },
+            {
+              "qty": 10,
+              "price": 57991
+            },
+            {
+              "qty": 20,
+              "price": 57812
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Ashley – Open Pollinated Cucumber",
+      "folder": "Ashley – Open Pollinated Cucumber Varirty With Prolific Productivity",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Cucumber",
+      "details": {
+        "description": "Ashley is an open pollinated cucumber that has been grown for years in most vegetable gardens, and excellent for slicing. Early variety with prolific producer of medium size 30cm fruits that are darker than other cultivars. Resistant to downy mildew.",
+        "fruitSize": "30cm",
+        "color": "Darker than other cultivars",
+        "resistance": "Resistant to downy mildew",
+        "containerGrowing": "Also grows well in containers"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3600
+            },
+            {
+              "qty": 5,
+              "price": 3499
+            },
+            {
+              "qty": 10,
+              "price": 3398
+            },
+            {
+              "qty": 20,
+              "price": 3398
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6700
+            },
+            {
+              "qty": 5,
+              "price": 6600
+            },
+            {
+              "qty": 10,
+              "price": 6499
+            },
+            {
+              "qty": 20,
+              "price": 6399
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 9800
+            },
+            {
+              "qty": 5,
+              "price": 9702
+            },
+            {
+              "qty": 10,
+              "price": 9604
+            },
+            {
+              "qty": 20,
+              "price": 9604
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Mak Soy 3N (Brac Seed)",
+      "folder": "Mak Soy 3N (Brac Seed)",
+      "supplier": "Brac Seed",
+      "category": "Soya",
+      "details": {
+        "description": "Mak Soy 3N is a high-yielding soya bean variety suitable for both small and large-scale farming.",
+        "spacing": "60cm x 5cm (machine); 50cm x 25cm (hand hoe)",
+        "seedRate": "50-60 Kg per hectare, 20-25 kg per acre",
+        "maturityPeriod": "100 days",
+        "yield": "2.0-3.5 metric tonnes per hectare; 0.8-1.4 metric tonnes per acre"
+      },
+      "packages": [
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6700
+            },
+            {
+              "qty": 5,
+              "price": 6600
+            },
+            {
+              "qty": 10,
+              "price": 6600
+            },
+            {
+              "qty": 20,
+              "price": 6499
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Cal-j Tomato",
+      "folder": "Cal-j Tomato Compact And Determinate Variety Suitable For Processing And Fresh Market",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "A compact and determinate variety suitable for processing. The plant is vigorous and highly productive. The fruits are medium sized, square with apple-green back, very firm, smooth, intense red in colour with excellent flavour. Resistant to verticillium and fusarium wilts.",
+        "spacing": "60cm x 45cm",
+        "seedRate": "80grams/acre",
+        "maturityPeriod": "100-120 days",
+        "yieldPotential": "20-45mt/acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4600
+            },
+            {
+              "qty": 5,
+              "price": 4499
+            },
+            {
+              "qty": 10,
+              "price": 4402
+            },
+            {
+              "qty": 20,
+              "price": 4402
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7200
+            },
+            {
+              "qty": 5,
+              "price": 7099
+            },
+            {
+              "qty": 10,
+              "price": 7099
+            },
+            {
+              "qty": 20,
+              "price": 6998
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 9300
+            },
+            {
+              "qty": 5,
+              "price": 9198
+            },
+            {
+              "qty": 10,
+              "price": 9095
+            },
+            {
+              "qty": 20,
+              "price": 9095
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 19400
+            },
+            {
+              "qty": 5,
+              "price": 18100
+            },
+            {
+              "qty": 10,
+              "price": 17906
+            },
+            {
+              "qty": 20,
+              "price": 17906
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Green Bunching – Onion",
+      "folder": "Green Bunching – Onion, Non-bulbing Alliums That Produce Yummy Green Stems",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Onion",
+      "details": {
+        "description": "Green Bunching are perennial non-bulbing alliums that produce yummy green stems and tiny white roots, year after year. They have thick, round, hollow stems that are bright green in color, and unique and lovely greenish white flowers. The leaves have a mild onion flavor and are edible raw or cooked."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5700
+            },
+            {
+              "qty": 5,
+              "price": 5501
+            },
+            {
+              "qty": 10,
+              "price": 5501
+            },
+            {
+              "qty": 20,
+              "price": 5398
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 16500
+            },
+            {
+              "qty": 5,
+              "price": 15906
+            },
+            {
+              "qty": 10,
+              "price": 15906
+            },
+            {
+              "qty": 20,
+              "price": 15906
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Terere – Amaranthus",
+      "folder": "Terere – Amaranthus, Indigenous, Highly Nutritious Green Leafy Vegetable",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Amaranth/Vegetables",
+      "details": {
+        "description": "Terere – Amaranthus is an indigenous, highly nutritious green leafy vegetable, Highly grown for its succulent edible leaves which are extremely rich in vitamin A & C. Also has considerably high contents of minerals, such as, Iron, Calcium and Phosphorous. It is early maturing producing average size leaves good enough for harvest in a few weeks."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2000
+            },
+            {
+              "qty": 5,
+              "price": 1894
+            },
+            {
+              "qty": 10,
+              "price": 1894
+            },
+            {
+              "qty": 20,
+              "price": 1894
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            },
+            {
+              "qty": 5,
+              "price": 2600
+            },
+            {
+              "qty": 10,
+              "price": 2400
+            },
+            {
+              "qty": 20,
+              "price": 2301
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3400
+            },
+            {
+              "qty": 5,
+              "price": 3101
+            },
+            {
+              "qty": 10,
+              "price": 3199
+            },
+            {
+              "qty": 20,
+              "price": 3101
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4400
+            },
+            {
+              "qty": 5,
+              "price": 4299
+            },
+            {
+              "qty": 10,
+              "price": 4202
+            },
+            {
+              "qty": 20,
+              "price": 4202
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 12700
+            },
+            {
+              "qty": 5,
+              "price": 12700
+            },
+            {
+              "qty": 10,
+              "price": 12598
+            },
+            {
+              "qty": 20,
+              "price": 12497
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23300
+            },
+            {
+              "qty": 5,
+              "price": 21995
+            },
+            {
+              "qty": 10,
+              "price": 21809
+            },
+            {
+              "qty": 20,
+              "price": 21809
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Galia F1 – Sweet Melon",
+      "folder": "Galia F1 – Sweet Melon With Firm Fruits, Aromatic Flavour",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Melon",
+      "details": {
+        "description": "Galia F1 is very sweet Melon with firm fruits, aromatic flavour. Tolerant to fusarium wilt race 0 and powdery mildew.",
+        "maturityDaysAfterSowing": "70 days",
+        "spacing": "150cm x 60cm",
+        "seedRate": "600grams/acre",
+        "averageFruitWeight": "0.8-1.2kgs",
+        "shape": "Globe shaped fruits with small cavity",
+        "colour": "Rind-gold yellow with medium netting, fruits-green flesh"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23500
+            },
+            {
+              "qty": 5,
+              "price": 22208
+            },
+            {
+              "qty": 10,
+              "price": 21996
+            },
+            {
+              "qty": 20,
+              "price": 21996
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Green Gold F1 – Pepper",
+      "folder": "Green Gold F1 – Pepper, High Yielding Variety With Excellent Fruit Set",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Green Gold F1 is a High yielding variety with excellent fruit set, ideal for both open and protected cultivation, suitable for long distance transportation. Very good keeping qualities. High tolerance to tomato spotted wilt virus, potato virus Y, bacterial spot and tobamo virus.",
+        "spacing": "60cm x 60cm",
+        "seedRate": "200grams/acre",
+        "maturityPeriod": "90-140 days",
+        "yieldPotential": "10-16mt/acre",
+        "colour": "Dark green walled fruits",
+        "shape": "Large and blocky"
+      },
+      "packages": [
+        {
+          "size": "1g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            },
+            {
+              "qty": 5,
+              "price": 2899
+            },
+            {
+              "qty": 10,
+              "price": 2899
+            },
+            {
+              "qty": 20,
+              "price": 2899
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 117200
+            },
+            {
+              "qty": 5,
+              "price": 116145
+            },
+            {
+              "qty": 10,
+              "price": 115442
+            },
+            {
+              "qty": 20,
+              "price": 115208
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Green Coronet F1 – Cabbage",
+      "folder": "Green Coronet F1 – Cabbage, Medium-large, Semi-upright Hybrid",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Green Coronet F1 is a Medium-large, semi-upright hybrid cabbage variety that grows well in medium hot to cold areas. Has excellent field holding capacity and will last long in the field before bursting.",
+        "maturityDaysFromTransplanting": "75-80 days",
+        "seedRate": "100grams/acre",
+        "spacing": "60cm x 60cm or 60cm x 45cm",
+        "averageHeadWeight": "4kg",
+        "colour": "Deep green"
+      },
+      "packages": [
+        {
+          "size": "1g",
+          "tiers": [
+            {
+              "qty": 10,
+              "price": 2800
+            }
+          ]
+        },
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10800
+            },
+            {
+              "qty": 5,
+              "price": 10800
+            },
+            {
+              "qty": 10,
+              "price": 10595
+            },
+            {
+              "qty": 20,
+              "price": 10595
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23500
+            },
+            {
+              "qty": 5,
+              "price": 22208
+            },
+            {
+              "qty": 10,
+              "price": 21996
+            },
+            {
+              "qty": 20,
+              "price": 21996
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 54700
+            },
+            {
+              "qty": 5,
+              "price": 53715
+            },
+            {
+              "qty": 10,
+              "price": 53387
+            },
+            {
+              "qty": 20,
+              "price": 53223
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 10,
+              "price": 91600
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Tall Utah – Celery",
+      "folder": "Tall Utah – Celery Variety With Crisp, Stringless Green Tightly Folded Hearts",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Celery",
+      "details": {
+        "description": "Tall Utah is a crisp, stringless green celery with tightly folded hearts, and broad, thick, well-rounded stalks. It is a vigorous grower without getting flimsy. This is a popular green celery for late use.",
+        "germination": "7-10 days",
+        "heightAtMaturity": "45-60cm",
+        "spacingAfterThinning": "20cm",
+        "daysToMaturity": "70-125 days"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3300
+            },
+            {
+              "qty": 5,
+              "price": 3000
+            },
+            {
+              "qty": 10,
+              "price": 3099
+            },
+            {
+              "qty": 20,
+              "price": 3000
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4100
+            },
+            {
+              "qty": 5,
+              "price": 4002
+            },
+            {
+              "qty": 10,
+              "price": 3899
+            },
+            {
+              "qty": 20,
+              "price": 3899
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5000
+            },
+            {
+              "qty": 5,
+              "price": 4900
+            },
+            {
+              "qty": 10,
+              "price": 4800
+            },
+            {
+              "qty": 20,
+              "price": 4800
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10100
+            },
+            {
+              "qty": 5,
+              "price": 9999
+            },
+            {
+              "qty": 10,
+              "price": 9898
+            },
+            {
+              "qty": 20,
+              "price": 9898
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "California Wonder",
+      "folder": "California Wonder",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Ideal for Open field production, Very uniform fruits, Blocky and medium-sized, Widely adaptable variety, Colour turns from green to red.",
+        "averageYieldPerAcre": "6-7 tonnes",
+        "maturity": "80-90 Days"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3800
+            },
+            {
+              "qty": 5,
+              "price": 3648
+            },
+            {
+              "qty": 10,
+              "price": 3633
+            },
+            {
+              "qty": 20,
+              "price": 3621
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 17600
+            },
+            {
+              "qty": 5,
+              "price": 17406
+            },
+            {
+              "qty": 10,
+              "price": 17354
+            },
+            {
+              "qty": 20,
+              "price": 17318
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Maxim F1 – Tomato",
+      "folder": "Maxim F1 – Tomato",
+      "supplier": "Nsanja Agrochemicals Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Indeterminate hybrid, tall with vigorous plant habit. Broad, dark green leaves with excellent foliage cover. Ideal for greenhouse or Open field production under support system. Square oblong firm fruits turning deep uniform red colour at ripening stage. Tolerant to Bacterial wilt, Fusarium & Verticillium wilt Stemphylium.",
+        "spacing": "60 x 45 cm",
+        "fruitHarvesting": "Start 65-70 after transplanting",
+        "harvestingCycle": "5-9 months under good agronomic practice",
+        "averageFruitsPerTruss": "7-9 fruits",
+        "shelfLife": "Average 21 days harvested at mature green stage",
+        "yieldPotential": "Average 70-80 Tons/acre"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 38100
+            },
+            {
+              "qty": 5,
+              "price": 36995
+            },
+            {
+              "qty": 10,
+              "price": 36919
+            },
+            {
+              "qty": 20,
+              "price": 35014
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 69900
+            },
+            {
+              "qty": 5,
+              "price": 68572
+            },
+            {
+              "qty": 10,
+              "price": 68432
+            },
+            {
+              "qty": 20,
+              "price": 68222
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 239400
+            },
+            {
+              "qty": 5,
+              "price": 239400
+            },
+            {
+              "qty": 10,
+              "price": 239161
+            },
+            {
+              "qty": 20,
+              "price": 230063
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Coatmeal - Coriander",
+      "folder": "Coatmeal - Coriander",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Coriander/Herbs",
+      "details": {
+        "description": "A popular herb with finely cut, small and rather pungent leaves. Tender foliage used for seasoning and flavouring curries."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 50,
+              "price": 1300
+            },
+            {
+              "qty": 100,
+              "price": 1250
+            },
+            {
+              "qty": 101,
+              "price": 1200
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 5,
+              "price": 3780
+            },
+            {
+              "qty": 10,
+              "price": 3710
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 50,
+              "price": 31000
+            },
+            {
+              "qty": 100,
+              "price": 30901
+            },
+            {
+              "qty": 101,
+              "price": 29503
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 50,
+              "price": 66500
+            },
+            {
+              "qty": 100,
+              "price": 66453
+            },
+            {
+              "qty": 101,
+              "price": 63301
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Rambo F1 – Tomato Seed",
+      "folder": "Rambo F1 – Tomato Seed",
+      "supplier": "Nsanja Agrochemicals Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Rambo F1 is a high yielding Determinate tomato variety. Maturity 75 days from transplanting. Fruit weight 150 grams. Yield potential 30 tonnes per acre. Very good shelf life and transport quality. Vigorous plant with uniformly set and firm fruits. Excellent fruit grade out up to 90% in grade one.",
+        "maturity": "75 days from transplanting",
+        "fruitWeight": "150 grams",
+        "yieldPotential": "30 tonnes per acre",
+        "diseaseResistance": "High bacterial wilt tolerant, Fusarium Wilt (Fol: 1,2), Verticillium Wilt (Vd & Va), Bacterial Spot, Nematode"
+      },
+      "packages": [
+        {
+          "size": "1g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 18800
+            },
+            {
+              "qty": 5,
+              "price": 17691
+            },
+            {
+              "qty": 10,
+              "price": 17597
+            },
+            {
+              "qty": 20,
+              "price": 17597
+            }
+          ]
+        },
+        {
+          "size": "2.5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 39500
+            },
+            {
+              "qty": 5,
+              "price": 38394
+            },
+            {
+              "qty": 10,
+              "price": 38315
+            },
+            {
+              "qty": 20,
+              "price": 38197
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 143400
+            },
+            {
+              "qty": 5,
+              "price": 141106
+            },
+            {
+              "qty": 10,
+              "price": 140532
+            },
+            {
+              "qty": 20,
+              "price": 140245
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 605600
+            },
+            {
+              "qty": 5,
+              "price": 601966
+            },
+            {
+              "qty": 10,
+              "price": 600755
+            },
+            {
+              "qty": 20,
+              "price": 589854
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Zawadi F1 – Cabbage",
+      "folder": "Zawadi F1 – Cabbage, High Yielding Variety That Withstands Long Distance Transportation",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Zawadi F1 is a High yielding cabbage variety with Excellent uniformity, withstands long distance transportation, Excellent cold tolerance, good field holding capacity, High tolerance to black rot and Fusarium yellows.",
+        "maturityDaysFromTransplanting": "90-100 days",
+        "seedRate": "100grams/acre",
+        "spacing": "60cm x 60cm or 60cm x 45cm",
+        "averageHeadWeight": "5-6kg",
+        "colour": "Bluish green",
+        "shape": "Slightly flat topped, firm and compact heads"
+      },
+      "packages": [
+        {
+          "size": "1g",
+          "tiers": [
+            {
+              "qty": 10,
+              "price": 2700
+            }
+          ]
+        },
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10800
+            },
+            {
+              "qty": 5,
+              "price": 10800
+            },
+            {
+              "qty": 10,
+              "price": 10595
+            },
+            {
+              "qty": 20,
+              "price": 10595
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23500
+            },
+            {
+              "qty": 5,
+              "price": 22208
+            },
+            {
+              "qty": 10,
+              "price": 21996
+            },
+            {
+              "qty": 20,
+              "price": 21996
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 54700
+            },
+            {
+              "qty": 5,
+              "price": 53715
+            },
+            {
+              "qty": 10,
+              "price": 53387
+            },
+            {
+              "qty": 20,
+              "price": 53223
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 91600
+            },
+            {
+              "qty": 5,
+              "price": 89676
+            },
+            {
+              "qty": 10,
+              "price": 89310
+            },
+            {
+              "qty": 20,
+              "price": 89035
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Fanaka F1 - Cabbage",
+      "folder": "Fanaka F1- Cabbage, Hybrid With Excellent Heat Tolerance And High Adaptability",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Fanaka F1 cabbage has Excellent heat tolerance and high adaptability, Good field holding capacity and intermediate resistance to fusarium yellows, High yielding, Good for both fresh markets and processing.",
+        "maturityDaysFromTransplanting": "75-80 days",
+        "seedRate": "100grams/acre",
+        "averageHeadWeight": "4-5kgs",
+        "spacing": "60cm x 60cm or 60cm x 45cm",
+        "shape": "Firm round heads",
+        "colour": "Blue green"
+      },
+      "packages": [
+        {
+          "size": "1g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            },
+            {
+              "qty": 5,
+              "price": 2301
+            },
+            {
+              "qty": 10,
+              "price": 2400
+            },
+            {
+              "qty": 20,
+              "price": 2301
+            }
+          ]
+        },
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 9700
+            },
+            {
+              "qty": 5,
+              "price": 9603
+            },
+            {
+              "qty": 10,
+              "price": 9496
+            },
+            {
+              "qty": 20,
+              "price": 9496
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 22000
+            },
+            {
+              "qty": 10,
+              "price": 21600
+            },
+            {
+              "qty": 20,
+              "price": 21200
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 46900
+            },
+            {
+              "qty": 5,
+              "price": 45493
+            },
+            {
+              "qty": 10,
+              "price": 45399
+            },
+            {
+              "qty": 20,
+              "price": 45305
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 10,
+              "price": 91800
+            },
+            {
+              "qty": 20,
+              "price": 90100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Namuche 3",
+      "folder": "Namuche 3",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Rice",
+      "details": {
+        "description": "Namuche 3 is a high yielding rice variety with excellent milling ability.",
+        "daysToMaturity": "92 days",
+        "yieldPotential": "1.6-2.3 tons per acre",
+        "seedRate": "30-40kg/acre",
+        "specialAttributes": "High yielding and excellent milling ability"
+      },
+      "packages": [
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5500
+            },
+            {
+              "qty": 5,
+              "price": 5392
+            },
+            {
+              "qty": 10,
+              "price": 5392
+            },
+            {
+              "qty": 20,
+              "price": 5286
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Great Lakes Mesa 659 – Lettuce",
+      "folder": "Great Lakes Mesa 659 – Lettuce Variety With Tip-burn Resistance & Medium-large, Solid Heads",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Lettuce",
+      "details": {
+        "description": "Great Lakes 659 lettuce is tip-burn resistant, produces medium-large, solid heads, and does best in warmer weather. It is bolt resistant (very slow to go to seed). Maturity: 80 to 90 day. Each gram contains approximately 500 to 600 seeds."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5100
+            },
+            {
+              "qty": 5,
+              "price": 4998
+            },
+            {
+              "qty": 10,
+              "price": 4901
+            },
+            {
+              "qty": 20,
+              "price": 4901
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 9800
+            },
+            {
+              "qty": 5,
+              "price": 9702
+            },
+            {
+              "qty": 10,
+              "price": 9604
+            },
+            {
+              "qty": 20,
+              "price": 9604
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10800
+            },
+            {
+              "qty": 5,
+              "price": 10800
+            },
+            {
+              "qty": 10,
+              "price": 10595
+            },
+            {
+              "qty": 20,
+              "price": 10595
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 21500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Sukari F1 – Watermelon",
+      "folder": "Sukari F1 – Watermelon",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Watermelon",
+      "details": {
+        "description": "A vigorous growing plant with excellent fruit set and wide adaptability. Maturity days from sowing: 72-85 days. Rind is light green with dark green stripes. Fruit shape: oblong. Average fruit weight: 7-8kgs, some may grow up to 12kgs. Flesh is deep crimson with good granular texture and high sweetness brix. Has good thickness, suitable for long distance transportation.",
+        "maturityDaysFromSowing": "72-85 days",
+        "seedRate": "600grams/acre",
+        "spacing": "150cm x 60cm",
+        "averageFruitWeight": "7-8kgs"
+      },
+      "packages": [
+        {
+          "size": "1g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            },
+            {
+              "qty": 5,
+              "price": 2600
+            },
+            {
+              "qty": 10,
+              "price": 2400
+            },
+            {
+              "qty": 20,
+              "price": 2301
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10700
+            },
+            {
+              "qty": 5,
+              "price": 10593
+            },
+            {
+              "qty": 10,
+              "price": 10486
+            },
+            {
+              "qty": 20,
+              "price": 10486
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 20500
+            },
+            {
+              "qty": 5,
+              "price": 19106
+            },
+            {
+              "qty": 10,
+              "price": 19004
+            },
+            {
+              "qty": 20,
+              "price": 18901
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 35700
+            },
+            {
+              "qty": 5,
+              "price": 34308
+            },
+            {
+              "qty": 10,
+              "price": 34201
+            },
+            {
+              "qty": 20,
+              "price": 34129
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 162600
+            },
+            {
+              "qty": 5,
+              "price": 159511
+            },
+            {
+              "qty": 10,
+              "price": 158698
+            },
+            {
+              "qty": 20,
+              "price": 158372
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 316300
+            },
+            {
+              "qty": 5,
+              "price": 313770
+            },
+            {
+              "qty": 10,
+              "price": 313453
+            },
+            {
+              "qty": 20,
+              "price": 312504
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 610500
+            },
+            {
+              "qty": 5,
+              "price": 606227
+            },
+            {
+              "qty": 10,
+              "price": 603785
+            },
+            {
+              "qty": 20,
+              "price": 592185
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Arjuna F1 – Pumpkin",
+      "folder": "Arjuna F1 – Pumpkin",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Pumpkin",
+      "details": {
+        "description": "Seed rate: 1.2kgs/acre, Number of plants per acre: 1,600, Spacing: 100cm x 250cm, Number of days in nursery bed: (0)-direct sowing, Maturity days after transplanting: 80-85 days. Suitable for harvesting either immature green or fully mature red brown depending on market demands, good shelf life. Flesh is yellow in colour, firm, sticky and has excellent taste.",
+        "seedRate": "1.2kgs/acre",
+        "plantsPerAcre": "1,600",
+        "spacing": "100cm x 250cm",
+        "maturity": "80-85 days"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 14000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Nouvelle F1 - Tomatoes",
+      "folder": "Nouvelle F1 - Tomatoes",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Spacing: 60x60cm, Maturity: 80-85 days from transplanting, Yield potential: 35 tons per acre. Very good shelf life and transport quality.",
+        "spacing": "60x60cm",
+        "maturity": "80-85 days from transplanting",
+        "yieldPotential": "35 tons per acre"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 49700
+            },
+            {
+              "qty": 5,
+              "price": 49601
+            },
+            {
+              "qty": 10,
+              "price": 49402
+            },
+            {
+              "qty": 20,
+              "price": 43140
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 97600
+            },
+            {
+              "qty": 5,
+              "price": 95648
+            },
+            {
+              "qty": 10,
+              "price": 83253
+            },
+            {
+              "qty": 20,
+              "price": 85400
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "E107 (Simsim)",
+      "folder": "E107 (Simsim)",
+      "supplier": "Ag-ploutos Company Limited",
+      "category": "Sesame",
+      "details": {
+        "description": "E107 sesame variety is a mechanizable high yielding, non shattering and drought resistant sesame variety that matures in 3 months. Preferably planting in line or can be broadcasted after clear guidelines from an agronomist. Row to row spacing of 15cm and continuous drilling. Planting: mixing ratio 2.5 kgs of seed to 8kgs of sand and ash for 1 acre. For maximum yields, Use of fertilizers is encouraged. Yields up to 5 bags/acre.",
+        "maturity": "3 months",
+        "yield": "Up to 5 bags/acre",
+        "plantingRatio": "2.5 kgs of seed to 8kgs of sand and ash for 1 acre"
+      },
+      "packages": [
+        {
+          "size": "2.5kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 139600
+            },
+            {
+              "qty": 5,
+              "price": 136668
+            },
+            {
+              "qty": 10,
+              "price": 135970
+            },
+            {
+              "qty": 20,
+              "price": 135831
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Tengeru",
+      "folder": "Tengeru",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Transplant to maturity: 90 days, Seed Rate: 120g per acre, Plant Spacing: 60*60cm, Fruit weight: 130g, Fruit shape: Round",
+        "transplantToMaturity": "90 days",
+        "seedRate": "120g per acre",
+        "plantSpacing": "60*60cm",
+        "fruitWeight": "130g",
+        "fruitShape": "Round"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4300
+            },
+            {
+              "qty": 5,
+              "price": 4201
+            },
+            {
+              "qty": 10,
+              "price": 4098
+            },
+            {
+              "qty": 20,
+              "price": 4098
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 16500
+            },
+            {
+              "qty": 5,
+              "price": 16500
+            },
+            {
+              "qty": 10,
+              "price": 16385
+            },
+            {
+              "qty": 20,
+              "price": 16385
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Drumhead - Cabbage",
+      "folder": "Drumhead - Cabbage",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall. Transplant to harvest days: 90, Seed Rate: 120g/acre, Spacing: 60*45cm, Head Shape: Round, Average Potential Yield: 32 Tones Per Acre",
+        "transplantToHarvest": "90 days",
+        "seedRate": "120g/acre",
+        "spacing": "60*45cm",
+        "headShape": "Round",
+        "averagePotentialYield": "32 Tonnes Per Acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1700
+            },
+            {
+              "qty": 5,
+              "price": 1630
+            },
+            {
+              "qty": 10,
+              "price": 1622
+            },
+            {
+              "qty": 20,
+              "price": 1618
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1900
+            },
+            {
+              "qty": 5,
+              "price": 1818
+            },
+            {
+              "qty": 10,
+              "price": 1811
+            },
+            {
+              "qty": 20,
+              "price": 1807
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4900
+            },
+            {
+              "qty": 5,
+              "price": 4733
+            },
+            {
+              "qty": 10,
+              "price": 4714
+            },
+            {
+              "qty": 20,
+              "price": 4699
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 29800
+            },
+            {
+              "qty": 5,
+              "price": 29442
+            },
+            {
+              "qty": 10,
+              "price": 29413
+            },
+            {
+              "qty": 20,
+              "price": 29323
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 50600
+            },
+            {
+              "qty": 5,
+              "price": 50499
+            },
+            {
+              "qty": 10,
+              "price": 50296
+            },
+            {
+              "qty": 20,
+              "price": 43921
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 103300
+            },
+            {
+              "qty": 5,
+              "price": 101337
+            },
+            {
+              "qty": 10,
+              "price": 88322
+            },
+            {
+              "qty": 20,
+              "price": 90388
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Cayenne Long Slim – Hot Pepper",
+      "folder": "Cayenne Long Slim – Hot Pepper, With Early Maturity And High Yield Potential",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Cayenne Long Slim hot pepper is ideally suited for home gardens and marker gardens. Plants are very early maturing in approximately 75 days after transplanting. It bears cylindrical fruits. Fruit colour: medium green turning to medium red. The Cayenne Long Slim has wrinkled pods with an unusual shape, often twisted. A mature plant can grow up to 40 pods. The length of the pods is about 12 cm long and 1.5 cm thick. They are easy to dry and good in salsas or sauces and perfect to use for making a wreath or rista.",
+        "maturity": "75 days after transplanting",
+        "podLength": "12 cm",
+        "podThickness": "1.5 cm",
+        "podsPerPlant": "Up to 40 pods"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4100
+            },
+            {
+              "qty": 5,
+              "price": 4002
+            },
+            {
+              "qty": 10,
+              "price": 3899
+            },
+            {
+              "qty": 20,
+              "price": 3899
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6700
+            },
+            {
+              "qty": 5,
+              "price": 6600
+            },
+            {
+              "qty": 10,
+              "price": 6600
+            },
+            {
+              "qty": 20,
+              "price": 6499
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 8000
+            },
+            {
+              "qty": 5,
+              "price": 7896
+            },
+            {
+              "qty": 10,
+              "price": 7800
+            },
+            {
+              "qty": 20,
+              "price": 7800
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 14200
+            },
+            {
+              "qty": 5,
+              "price": 14200
+            },
+            {
+              "qty": 10,
+              "price": 14101
+            },
+            {
+              "qty": 20,
+              "price": 14101
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Copenhagen",
+      "folder": "Copenhagen",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Transplant to harvest days: 65 days, Seed rate: 120g per acre, Spacing 60*45cm. Planted in well drained soil. Light soil with low organic matter preferable. Average Yield per acre: 34 tons",
+        "transplantToHarvest": "65 days",
+        "seedRate": "120g per acre",
+        "spacing": "60*45cm",
+        "averageYield": "34 tons per acre"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 12,
+              "price": 12000
+            },
+            {
+              "qty": 20,
+              "price": 11782
+            },
+            {
+              "qty": 120,
+              "price": 11564
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3000
+            },
+            {
+              "qty": 5,
+              "price": 2877
+            },
+            {
+              "qty": 10,
+              "price": 2865
+            },
+            {
+              "qty": 20,
+              "price": 2862
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7000
+            },
+            {
+              "qty": 5,
+              "price": 6762
+            },
+            {
+              "qty": 10,
+              "price": 6734
+            },
+            {
+              "qty": 20,
+              "price": 6713
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 31000
+            },
+            {
+              "qty": 5,
+              "price": 30659
+            },
+            {
+              "qty": 10,
+              "price": 30597
+            },
+            {
+              "qty": 20,
+              "price": 30504
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 99000
+            },
+            {
+              "qty": 5,
+              "price": 97020
+            },
+            {
+              "qty": 10,
+              "price": 84546
+            },
+            {
+              "qty": 20,
+              "price": 86625
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Corriander Dhania",
+      "folder": "Corriander Dhania",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Coriander/Herbs",
+      "details": {
+        "description": "Coriander seeds are planted in drills of 30cm apart at a sowing depth of 2.5cm – 3.5cm. You should expect germination to take place 10 days after sowing. Dhania matures for harvesting within 4-6 weeks after planting."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1600
+            },
+            {
+              "qty": 5,
+              "price": 1510
+            },
+            {
+              "qty": 10,
+              "price": 1494
+            },
+            {
+              "qty": 20,
+              "price": 1490
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5000
+            },
+            {
+              "qty": 5,
+              "price": 4800
+            },
+            {
+              "qty": 10,
+              "price": 4780
+            },
+            {
+              "qty": 20,
+              "price": 4765
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 32700
+            },
+            {
+              "qty": 5,
+              "price": 32340
+            },
+            {
+              "qty": 10,
+              "price": 32308
+            },
+            {
+              "qty": 20,
+              "price": 32210
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 66000
+            },
+            {
+              "qty": 5,
+              "price": 65406
+            },
+            {
+              "qty": 10,
+              "price": 65208
+            },
+            {
+              "qty": 20,
+              "price": 57024
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Sprouting Calabrese – Broccoli",
+      "folder": "Green Sprouting Calabrese – Broccoli With Medium Sized Dark Green Heads",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Broccoli",
+      "details": {
+        "description": "Green Sprouting Calabrese broccoli has Medium sized dark green heads. Plant continues producing side shoots for several weeks after the main flower head is cut. It is Very nutritious, very tender and has Slow bolting. Produces compact dark green central head, with many lateral or side shoots over a long season."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1900
+            },
+            {
+              "qty": 5,
+              "price": 1799
+            },
+            {
+              "qty": 10,
+              "price": 1799
+            },
+            {
+              "qty": 20,
+              "price": 1799
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2700
+            },
+            {
+              "qty": 5,
+              "price": 2400
+            },
+            {
+              "qty": 10,
+              "price": 2500
+            },
+            {
+              "qty": 20,
+              "price": 2400
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3200
+            },
+            {
+              "qty": 5,
+              "price": 2899
+            },
+            {
+              "qty": 10,
+              "price": 2998
+            },
+            {
+              "qty": 20,
+              "price": 2899
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6700
+            },
+            {
+              "qty": 5,
+              "price": 6600
+            },
+            {
+              "qty": 10,
+              "price": 6499
+            },
+            {
+              "qty": 20,
+              "price": 6399
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Copenhagen Market – Cabbage",
+      "folder": "Copenhagen Market – Cabbage, The Most Popular Early Maturing Ball-headed Variety",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Copenhagen Market is the most popular amongst the ball-headed cabbages. The heads are uniform round, firm, medium sized and weigh about 2-3kg. The plant is short stemmed and rather small and can be spaced closer, early maturing, approximately 8-10 weeks. Sensitive to splitting and should not be left in the field for too long after maturity.",
+        "spacing": "45cm x 45cm",
+        "seedRate": "123grams/acre",
+        "maturityDaysFromTransplanting": "75-90 days",
+        "yieldPotential": "16-32mt/acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2200
+            },
+            {
+              "qty": 5,
+              "price": 2101
+            },
+            {
+              "qty": 10,
+              "price": 2101
+            },
+            {
+              "qty": 20,
+              "price": 2101
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            },
+            {
+              "qty": 5,
+              "price": 3100
+            },
+            {
+              "qty": 10,
+              "price": 2899
+            },
+            {
+              "qty": 20,
+              "price": 2899
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4100
+            },
+            {
+              "qty": 5,
+              "price": 4002
+            },
+            {
+              "qty": 10,
+              "price": 3899
+            },
+            {
+              "qty": 20,
+              "price": 3899
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5100
+            },
+            {
+              "qty": 5,
+              "price": 4998
+            },
+            {
+              "qty": 10,
+              "price": 4901
+            },
+            {
+              "qty": 20,
+              "price": 4901
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 19400
+            },
+            {
+              "qty": 5,
+              "price": 18100
+            },
+            {
+              "qty": 10,
+              "price": 17906
+            },
+            {
+              "qty": 20,
+              "price": 17906
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 34000
+            },
+            {
+              "qty": 5,
+              "price": 32708
+            },
+            {
+              "qty": 10,
+              "price": 32504
+            },
+            {
+              "qty": 20,
+              "price": 32402
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Mammoth Red Rock – Red Cabbage",
+      "folder": "Mammoth Red Rock – Red Cabbage Producing Large, Beautiful Deep Red-purple Heads",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "This cabbage produces large, beautiful deep red-purple heads. This easy to grow, low maintenance variety produces a uniformly round head that is 20-25cm in diameter and weighs approximately 2-3.5kgs. It has a small to medium core and grows to a height of around 28cm. It stores well, reportedly loosing neither flavour nor crispness."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            },
+            {
+              "qty": 5,
+              "price": 2301
+            },
+            {
+              "qty": 10,
+              "price": 2400
+            },
+            {
+              "qty": 20,
+              "price": 2301
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            },
+            {
+              "qty": 5,
+              "price": 3100
+            },
+            {
+              "qty": 10,
+              "price": 2899
+            },
+            {
+              "qty": 20,
+              "price": 2899
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4100
+            },
+            {
+              "qty": 5,
+              "price": 4002
+            },
+            {
+              "qty": 10,
+              "price": 3899
+            },
+            {
+              "qty": 20,
+              "price": 3899
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6700
+            },
+            {
+              "qty": 5,
+              "price": 6600
+            },
+            {
+              "qty": 10,
+              "price": 6499
+            },
+            {
+              "qty": 20,
+              "price": 6399
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Green Aroma - Coriander (Dhania)",
+      "folder": "Green Aroma- Coriander (Dhania) Variety with Vigorous and Fast growing Plants",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Coriander/Herbs",
+      "details": {
+        "description": "Green Aroma is a late bolting type with small seeds. Plants are vigorous and fast growing with large stems and thick leaves with good aroma. It is rather compact and can be transported well over long distance. Green Aroma is multi-cut with a very good heat tolerance; its performance is excellent also during hot summer and rainy season. It can easily be grown all the year."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2800
+            },
+            {
+              "qty": 5,
+              "price": 2500
+            },
+            {
+              "qty": 10,
+              "price": 2601
+            },
+            {
+              "qty": 20,
+              "price": 2500
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3600
+            },
+            {
+              "qty": 5,
+              "price": 3499
+            },
+            {
+              "qty": 10,
+              "price": 3398
+            },
+            {
+              "qty": 20,
+              "price": 3398
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4100
+            },
+            {
+              "qty": 5,
+              "price": 4002
+            },
+            {
+              "qty": 10,
+              "price": 3899
+            },
+            {
+              "qty": 20,
+              "price": 3899
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7700
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 21500
+            },
+            {
+              "qty": 5,
+              "price": 20103
+            },
+            {
+              "qty": 10,
+              "price": 19995
+            },
+            {
+              "qty": 20,
+              "price": 19909
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 36100
+            },
+            {
+              "qty": 5,
+              "price": 34692
+            },
+            {
+              "qty": 10,
+              "price": 34584
+            },
+            {
+              "qty": 20,
+              "price": 34512
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 67700
+            },
+            {
+              "qty": 5,
+              "price": 66008
+            },
+            {
+              "qty": 10,
+              "price": 65804
+            },
+            {
+              "qty": 20,
+              "price": 65534
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Georgia Sukuma Wiki",
+      "folder": "Georgia Sukuma Wiki – Vigorous And Hardy Collard Variety",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Kale/Vegetables",
+      "details": {
+        "description": "Georgia Sukuma Wiki is vigorous and hardy variety. It is tolerant to adverse weather and soil conditions. The plant has spreading habit with large, tender, crumpled/waxy bluish-green leaves on long petioles forming a loose rosette or cluster. It is fairly tolerant to black rot and downy mildew. You can keep harvesting for a long time. It is rich in carbohydrates, proteins and vitamins, has very low cholesterol level and saturated fats.",
+        "spacing": "60cm x 60cm",
+        "seedRate": "100grams/acre",
+        "maturityPeriodFromTransplanting": "60 days",
+        "yieldPotential": "70-100mt/acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 5,
+              "price": 1894
+            },
+            {
+              "qty": 10,
+              "price": 1964
+            },
+            {
+              "qty": 20,
+              "price": 1927
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2200
+            },
+            {
+              "qty": 5,
+              "price": 2200
+            },
+            {
+              "qty": 10,
+              "price": 2200
+            },
+            {
+              "qty": 20,
+              "price": 2101
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            },
+            {
+              "qty": 5,
+              "price": 2799
+            },
+            {
+              "qty": 10,
+              "price": 2899
+            },
+            {
+              "qty": 20,
+              "price": 2799
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4600
+            },
+            {
+              "qty": 5,
+              "price": 4499
+            },
+            {
+              "qty": 10,
+              "price": 4402
+            },
+            {
+              "qty": 20,
+              "price": 4402
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 16400
+            },
+            {
+              "qty": 5,
+              "price": 15793
+            },
+            {
+              "qty": 10,
+              "price": 15695
+            },
+            {
+              "qty": 20,
+              "price": 15695
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 34000
+            },
+            {
+              "qty": 5,
+              "price": 32708
+            },
+            {
+              "qty": 10,
+              "price": 32504
+            },
+            {
+              "qty": 20,
+              "price": 32402
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Long Purple – Eggplant",
+      "folder": "Long Purple – Eggplant Variety With A High Yield Potential",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Eggplant",
+      "details": {
+        "description": "Long purple is an early, tall growing and high yielding variety. Fruits are elongated about 20cm long and about 6cm wide with intense purple colour.",
+        "spacing": "75cm x 60cm",
+        "seedRate": "200grams/acre",
+        "maturityPeriod": "70-90 days",
+        "yieldPotential": "20-32mt/acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            },
+            {
+              "qty": 5,
+              "price": 2899
+            },
+            {
+              "qty": 10,
+              "price": 2899
+            },
+            {
+              "qty": 20,
+              "price": 2899
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6700
+            },
+            {
+              "qty": 5,
+              "price": 6553
+            },
+            {
+              "qty": 10,
+              "price": 6412
+            },
+            {
+              "qty": 20,
+              "price": 6412
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 8800
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 49600
+            },
+            {
+              "qty": 5,
+              "price": 48013
+            },
+            {
+              "qty": 10,
+              "price": 47914
+            },
+            {
+              "qty": 20,
+              "price": 47814
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 96800
+            },
+            {
+              "qty": 5,
+              "price": 94767
+            },
+            {
+              "qty": 10,
+              "price": 94477
+            },
+            {
+              "qty": 20,
+              "price": 94186
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "California Wonder – Sweet Pepper (Syova)",
+      "folder": "California Wonder – Sweet Pepper Variety Suitable For Home And Market Gardens",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "An established sweet pepper variety suitable for home and market gardens. Plants are tall, vigorous and highly productive. The fruits are pedant, thick walled, 4-lobed, uniform blocky and compact with attractive colour and continuous fruiting over a long period.",
+        "spacing": "60cm x 60cm",
+        "seedRate": "200grams/acre",
+        "maturity": "2-2.5 months",
+        "yieldPotential": "10-16mt/acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10300
+            },
+            {
+              "qty": 5,
+              "price": 10197
+            },
+            {
+              "qty": 10,
+              "price": 10104
+            },
+            {
+              "qty": 20,
+              "price": 10104
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 8300
+            },
+            {
+              "qty": 5,
+              "price": 8101
+            },
+            {
+              "qty": 10,
+              "price": 8101
+            },
+            {
+              "qty": 20,
+              "price": 8101
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10300
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 21500
+            },
+            {
+              "qty": 5,
+              "price": 20103
+            },
+            {
+              "qty": 10,
+              "price": 19995
+            },
+            {
+              "qty": 20,
+              "price": 19909
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Nakati",
+      "folder": "Nakati - Highly Nutritious Local Vegetable",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Vegetables",
+      "details": {
+        "description": "Nakati is a Bush spreading, local vegetable, Highly nutritive and very adaptable to a wide range of soils. Nakati requires less labour and is easy to grow because it does not involve a lot of technical agronomic practices. Matures in 30 days after planting, Seed rate of 500 grams per acre."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            },
+            {
+              "qty": 5,
+              "price": 2553
+            },
+            {
+              "qty": 10,
+              "price": 2505
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            },
+            {
+              "qty": 5,
+              "price": 2899
+            },
+            {
+              "qty": 10,
+              "price": 2899
+            },
+            {
+              "qty": 20,
+              "price": 2899
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3800
+            },
+            {
+              "qty": 5,
+              "price": 3701
+            },
+            {
+              "qty": 10,
+              "price": 3599
+            },
+            {
+              "qty": 20,
+              "price": 3599
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5700
+            },
+            {
+              "qty": 5,
+              "price": 5501
+            },
+            {
+              "qty": 10,
+              "price": 5501
+            },
+            {
+              "qty": 20,
+              "price": 5398
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Pusa Sawani – Okra",
+      "folder": "Pusa Sawani – Okra Variety With Wide Adaptability",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Okra",
+      "details": {
+        "description": "Pusa Sawani is an open pollinated variety with wide adaptation in many warmer regions. Medium tall plant frame with short internodes and vigour. Green slender and attractive pods with good storage ability, Good fruit setting, Maturity: Harvesting start 40-45 days from planting, Tolerant to Yellow Vein Mosaic Virus (YVMV)"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2200
+            },
+            {
+              "qty": 5,
+              "price": 2070
+            },
+            {
+              "qty": 10,
+              "price": 2070
+            },
+            {
+              "qty": 20,
+              "price": 2070
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3400
+            },
+            {
+              "qty": 5,
+              "price": 3101
+            },
+            {
+              "qty": 10,
+              "price": 3199
+            },
+            {
+              "qty": 20,
+              "price": 3101
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5100
+            },
+            {
+              "qty": 5,
+              "price": 4998
+            },
+            {
+              "qty": 10,
+              "price": 4998
+            },
+            {
+              "qty": 20,
+              "price": 4901
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 10800
+            },
+            {
+              "qty": 5,
+              "price": 10800
+            },
+            {
+              "qty": 10,
+              "price": 10595
+            },
+            {
+              "qty": 20,
+              "price": 10595
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 21500
+            },
+            {
+              "qty": 5,
+              "price": 20103
+            },
+            {
+              "qty": 10,
+              "price": 19995
+            },
+            {
+              "qty": 20,
+              "price": 19909
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Swiss Chard Ford Hook Giant – Spinach",
+      "folder": "Swiss Chard Ford Hook Giant – Tall And Vigorous Spinach Variety",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Spinach/Vegetables",
+      "details": {
+        "description": "This is a tall, vigorous growing, sturdy variety which produces only leaves and is suitable for home gardens and fresh markets. The leaves are large, broad, dark glossy green and heavily crumped with midribs which are white, thick, succulent and a little broader.",
+        "spacing": "45cm x 45cm",
+        "seedRate": "3-5kgs/acre",
+        "maturityPeriod": "75-90 days",
+        "yieldPotential": "15-24mt/acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2200
+            },
+            {
+              "qty": 5,
+              "price": 2083
+            },
+            {
+              "qty": 10,
+              "price": 2083
+            },
+            {
+              "qty": 20,
+              "price": 2083
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3600
+            },
+            {
+              "qty": 5,
+              "price": 3499
+            },
+            {
+              "qty": 10,
+              "price": 3398
+            },
+            {
+              "qty": 20,
+              "price": 3398
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5700
+            },
+            {
+              "qty": 5,
+              "price": 5501
+            },
+            {
+              "qty": 10,
+              "price": 5501
+            },
+            {
+              "qty": 20,
+              "price": 5398
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 21500
+            },
+            {
+              "qty": 5,
+              "price": 20103
+            },
+            {
+              "qty": 10,
+              "price": 19995
+            },
+            {
+              "qty": 20,
+              "price": 19909
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 42200
+            },
+            {
+              "qty": 5,
+              "price": 40892
+            },
+            {
+              "qty": 10,
+              "price": 40681
+            },
+            {
+              "qty": 20,
+              "price": 40596
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Anita – Watermelon",
+      "folder": "Anita – Watermelon",
+      "supplier": "Nsanja Agrochemicals Ltd",
+      "category": "Watermelon",
+      "details": {
+        "description": "An excellent oval to oblong stripped type hybrid. Glossy attractive high quality fruits with deep crimson red flesh. The fruit texture is very crispy with a sweetness of 12-13% TSS. The fruits have excellent transport quality fit for long distance transport. Field observable tolerance to Anthracnose caused by Colletotrichum orbiculare and Fusarium wilt.",
+        "fruitAverageWeight": "8-10kg under good farming practice",
+        "maturity": "80-85 days after sowing",
+        "yieldPotential": "32-40 tons/acre",
+        "spacing": "60cm x 45cm"
+      },
+      "packages": [
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 43600
+            },
+            {
+              "qty": 5,
+              "price": 42510
+            },
+            {
+              "qty": 10,
+              "price": 42379
+            },
+            {
+              "qty": 20,
+              "price": 42292
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 179200
+            },
+            {
+              "qty": 5,
+              "price": 176870
+            },
+            {
+              "qty": 10,
+              "price": 176333
+            },
+            {
+              "qty": 20,
+              "price": 176154
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 340000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Tomato Assila",
+      "folder": "Tomato Assila",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "This is a determinate variety that produces red coloured fruits with an oval shape and is known to be sweet. Assila F1 is an early maturing variety taking 75days to mature after transplanting. It is tolerant to Tomato Yellow Leaf Curl Virus and nematodes. This variety can yield up to 23tonnes per acre. It can be stored well and transported without much damage.",
+        "maturity": "75 days after transplanting",
+        "yieldPotential": "23 tonnes per acre",
+        "tolerance": "Tomato Yellow Leaf Curl Virus and nematodes"
+      },
+      "packages": [
+        {
+          "size": "2500 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 170640
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Water Melon Pata Negra",
+      "folder": "Water Melon Pata Negra",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Watermelon",
+      "details": {
+        "description": "High yielding variety with production potential of 46 t/acre. Very sweet brilliant red, crisp flesh. Early maturing variety 100-120 days. Dark green round uniform fruit 7-10 kg in weight. Vigorous plant with good fruit cover. Thick rind making the variety excellent for long distance shipping. Variety resistant to Fusarium wilt. Number of seeds per gram: 23-27",
+        "yieldPotential": "46 t/acre",
+        "maturity": "100-120 days",
+        "fruitWeight": "7-10 kg",
+        "seedsPerGram": "23-27"
+      },
+      "packages": [
+        {
+          "size": "1000 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 89640
+            }
+          ]
+        },
+        {
+          "size": "5000 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 415800
+            }
+          ]
+        },
+        {
+          "size": "10000 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 789000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Red Bugga-amaranthus",
+      "folder": "Red Bugga-amaranthus",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Amaranth/Vegetables",
+      "details": {
+        "description": "Red Bugga-Amaranthus seeds are a high-yielding, nutrient-rich variety ideal for both commercial farming and home gardens. Known for their vibrant red leaves and fast growth, they thrive in diverse climates, offering a sustainable source of vitamins and minerals. Farmers value these seeds for their resilience to pests and adaptability."
+      },
+      "packages": [
+        {
+          "size": "Assorted",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1500
+            }
+          ]
+        },
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1760
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 2600
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 3100
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5600
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 21780
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 38983
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Red Beauty",
+      "folder": "Red Beauty",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Red Beauty is a high-quality tomato variety known for excellent fruit quality and productivity."
+      },
+      "packages": [
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "name": "Bitter Gourd - Palee F1",
+      "folder": "Bitter Gourd -Palee F1",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Bitter Gourd",
+      "details": {
+        "description": "Bitter Gourd Palee F1 seeds are high-yielding, hybrid seeds that produce vigorous plants with uniform, slender, dark green fruits ideal for culinary and medicinal use. They thrive in warm Ugandan climates with well-drained, fertile soils and require planting in raised beds or ridges, spaced 60-90 cm apart, and regular watering to maintain soil moisture. With a maturity period of 50-60 days from planting, these seeds offer early harvests and are resistant to common pests and diseases.",
+        "maturity": "50-60 days from planting",
+        "spacing": "60-90 cm apart"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 17000
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 77000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "name": "Black Beauty - Eggplants",
+      "folder": "Black Beauty - Eggplants",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Eggplant",
+      "details": {
+        "description": "Black Beauty is a classic eggplant variety valued for its large, glossy, deep purple fruits and tender, flavorful flesh. The plants are sturdy and productive, thriving in warm climates and maturing in 70-80 days.",
+        "maturity": "70-80 days"
+      },
+      "packages": [
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7000
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 108000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Merdan F1 - African Eggplants",
+      "folder": "Merdan F1- African Eggplants",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Eggplant",
+      "details": {
+        "description": "Merdan F1 is a fast-growing, vigorous hybrid eggplant variety known for its semi-erect plant habit and medium to late maturity. It produces uniform, very shiny black, firm, oval-shaped fruits ideal for long-distance transport. The fruits typically measure 12-14 cm in length, 9-10 cm in diameter, and weigh between 250-300 grams. Merdan F1 is suitable for both indoor and outdoor cultivation and exhibits high resistance to Tobacco Mosaic Virus.",
+        "fruitLength": "12-14 cm",
+        "fruitDiameter": "9-10 cm",
+        "fruitWeight": "250-300 grams",
+        "diseaseResistance": "High resistance to Tobacco Mosaic Virus"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 42000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Efia - Hot Paper",
+      "folder": "Efia - Hot paper",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Efia Hot Paper is a high-quality hot pepper variety designed for various culinary applications. Known for its excellent heat level and durability."
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 27000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "name": "Katana F1 - Pumpkin",
+      "folder": "Katana F1 -Pumpkin",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Pumpkin",
+      "details": {
+        "description": "Katana F1 shows very strong plant vigor and good fruit setting ability. Intermediate resistance to squash leaf curl virus (SLCV). Flat round uniform fruits shape. Dark green color skin with thick dark yellow orange flesh. Excellent eating quality as comparable with Arjuna F1. Average fruit weight is 3.0 - 4.5 kg",
+        "averageFruitWeight": "3.0-4.5 kg",
+        "diseaseResistance": "Intermediate resistance to squash leaf curl virus (SLCV)"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 14000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Yubi F1 Pakchoy - Chinese Cabbage",
+      "folder": "Yubi F1 Pakchoy- Chinese Cabbage",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Pak choy, also known as bok choy or Chinese cabbage, is a leafy green vegetable widely used in Asian cuisine. It features crisp white stems and dark green leaves, offering a mild, sweet flavor and a tender texture. Pak choy is rich in vitamins A, C, and K, as well as calcium and iron."
+      },
+      "packages": [
+        {
+          "size": "1000 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 15000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "name": "Tengeru 97 - Tomato",
+      "folder": "Tengeru 97 - Determinate Round Tomato With A High Yield Potential",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Tengeru 97 is a high yielding variety. It is round to oblate in shape weighing 100-125grams with good shelf life of about 2 weeks. It is resistant to root knot, nematodes, Tomato Mosaic Virus and fusarium wilt. It matures in 100days and yields about 60-80mt/ha.",
+        "spacing": "60cm x 45cm",
+        "seedRate": "80 grams/acre",
+        "maturity": "95-100 days",
+        "yieldPotential": "20-30mt/acre",
+        "fruitWeight": "100-125 grams"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 5200
+            },
+            {
+              "qty": 5,
+              "price": 5086
+            },
+            {
+              "qty": 10,
+              "price": 4976
+            },
+            {
+              "qty": 20,
+              "price": 4976
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7200
+            },
+            {
+              "qty": 5,
+              "price": 7099
+            },
+            {
+              "qty": 10,
+              "price": 7099
+            },
+            {
+              "qty": 20,
+              "price": 6998
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 9300
+            },
+            {
+              "qty": 5,
+              "price": 9198
+            },
+            {
+              "qty": 10,
+              "price": 9095
+            },
+            {
+              "qty": 20,
+              "price": 9095
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 16500
+            },
+            {
+              "qty": 5,
+              "price": 15906
+            },
+            {
+              "qty": 10,
+              "price": 15906
+            },
+            {
+              "qty": 20,
+              "price": 15906
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "name": "Roma Vfn – Tomato",
+      "folder": "Roma Vfn – High Yielding Determinate Oval Shape Tomato",
+      "supplier": "Syova Seed (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Roma is a high yielding determinate oval shape tomato for use in a variety of dishes. Popular processing variety. Good dry matter content. Fruits weigh about 70g. High yielding tomato. Determinate variety (has definite flowering and fruiting). Fruits mature at the same time and thus can be harvested at once. Fruits ripen uniformly for mechanical harvesting. It's resistant to Verticillium and Fusarium wilts, and nematodes.",
+        "maturity": "90-100 days",
+        "yieldPotential": "15,000-20,000 kg/acre",
+        "spacing": "35 cm x 100 cm",
+        "seedRate": "400 grams per acre direct seeding/80grams transplant",
+        "fruitWeight": "70g"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4900
+            },
+            {
+              "qty": 5,
+              "price": 4802
+            },
+            {
+              "qty": 10,
+              "price": 4709
+            },
+            {
+              "qty": 20,
+              "price": 4709
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7200
+            }
+          ]
+        },
+        {
+          "size": "25g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 9600
+            },
+            {
+              "qty": 5,
+              "price": 9504
+            },
+            {
+              "qty": 10,
+              "price": 9408
+            },
+            {
+              "qty": 20,
+              "price": 9408
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 18300
+            },
+            {
+              "qty": 5,
+              "price": 16964
+            },
+            {
+              "qty": 10,
+              "price": 16873
+            },
+            {
+              "qty": 20,
+              "price": 16781
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "name": "Kilele F1 hybrid",
+      "folder": "Kilele F1hybrid",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "KILELE F1 - SPACING: 60x60cm, Seed rate: 35 grams per acre, APPROXIMATE SEED COUNT (per grams): 300 seeds, Yield 70-78 tons per acre, DURATION TO MATURITY: 80 days from transplanting, SPECIAL ATTRIBUTES: Over 21 days shelf life, Disease tolerance: bacterial wilt.",
+        "spacing": "60x60cm",
+        "seedRate": "35 grams per acre",
+        "seedCount": "300 seeds per gram",
+        "yield": "70-78 tons per acre",
+        "maturity": "80 days from transplanting"
+      },
+      "packages": [
+        {
+          "size": "1000 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 68000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "name": "Indica F1 - Cabbage",
+      "folder": "Indica F1-cabbage",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Seed rate: 80gms/acre, Spacing: 60cm x 60cm, Number of days in nursery bed: 25-30days, Maturity days after transplanting: 70-75days, Number of plants per acre: 10,700. Main features: Average head weight 1.6-2kg, does not bust.",
+        "seedRate": "80gms/acre",
+        "spacing": "60cm x 60cm",
+        "nurseryDays": "25-30 days",
+        "maturity": "70-75 days after transplanting",
+        "averageHeadWeight": "1.6-2kg"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 24000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Kifaru F1 – Red Cabbage",
+      "folder": "Kifaru F1 – Red Cabbage",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Maturity: 68-72 days, plant vigour: Moderate, Shape: round, colour: bright red, Head diameter: 12-14cm, Head depth: 12-14cm, Average head weight: 1.2-1.4kg, Special attributes: Attractive red colour, firm heads, wide adaptability; recommended for semi tropical climate.",
+        "maturity": "68-72 days",
+        "averageHeadWeight": "1.2-1.4kg",
+        "headDiameter": "12-14cm"
+      },
+      "packages": [
+        {
+          "size": "1000 Seeds",
+          "tiers": [
+            {
+              "qty": 5,
+              "price": 19636
+            },
+            {
+              "qty": 10,
+              "price": 19273
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "name": "Poornima 008 F1 - Cauliflower",
+      "folder": "Poornima 008 F1- Cauliflower",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Cauliflower",
+      "details": {
+        "description": "Plant: Large compact, & Erect, Curd: Compact, dome shape, white colour with good leaf coverage, Average curd weight: 1.5 Kg, Duration: Harvest starts in about 70 days from planting, Remarks: Late maturing hybrid.",
+        "averageCurdWeight": "1.5 Kg",
+        "harvestDuration": "70 days from planting"
+      },
+      "packages": [
+        {
+          "size": "1000 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 20000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "name": "Arjani F1 - Eggplants",
+      "folder": "Arjani F1 - Eggplants",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Eggplant",
+      "details": {
+        "description": "Arjani F1 eggplant seeds are a high-yielding hybrid variety known for producing uniform, glossy dark purple fruits with a smooth texture, ideal for both local and commercial markets. These plants are vigorous, with an erect habit that keeps fruits off the ground even under heavy loads, and they exhibit intermediate resistance to bacterial wilt. Arjani F1 thrives in well-drained, fertile soils, maturing for harvest in 60-70 days.",
+        "maturity": "60-70 days",
+        "diseaseResistance": "Intermediate resistance to bacterial wilt"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 54000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "name": "Femi F1 – Hybrid Eggplant",
+      "folder": "Femi F1 – Hybrid Eggplant Variety",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Eggplant",
+      "details": {
+        "description": "Femi F1 is an improved Eggplant hybrid in terms of yield, shelf life and bacterial wilt resistance. The Fruits are very glossy day violet with a smooth skin and excellent firmness. Flesh color is white. It is widely adaptable to a range of growing conditions and ideal for areas where bacterial wilt occurs.",
+        "diseaseResistance": "Bacterial wilt resistance"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 51000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "name": "Demon F1 - Hotpaper",
+      "folder": "Demon F1-Hotpaper",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "The plants are tall with the production of concentrated fruits which grow upwards. Demon's appeal is fruit quality, bright colour, uniform fruit (8*1cm) and firmness. Maturity: 70-75 days. Color: Red. Length: 7-9 cm. Diameter: 0.9-1.1 cm. Plant vigour: strong",
+        "maturity": "70-75 days",
+        "fruitLength": "7-9 cm",
+        "fruitDiameter": "0.9-1.1 cm"
+      },
+      "packages": [
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 480000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "name": "Maradona F1 – Hybrid Papaya",
+      "folder": "Maradona F1 – Hybrid Papayapawpaw",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Papaya",
+      "details": {
+        "description": "Maradona F1 is a Hybrid with dwarf and strong plants and high setting ability. It bares uniform fruits (1.5-2kg) in shape and size. Fruit flesh is firm, thick and has a very sweet taste (brix: 12-14). It's dwarf growth habit makes it a superior variety since it does not grow very tall making it easy and cost effective to harvest. Intermediate resistant to PRSV and Anthrachnose. Days to maturity: 210-240. Color: Orange. Flowering habit: Dwarf.",
+        "fruitWeight": "1.5-2kg",
+        "brix": "12-14",
+        "maturity": "210-240 days",
+        "diseaseResistance": "Intermediate resistant to PRSV and Anthrachnose"
+      },
+      "packages": [
+        {
+          "size": "10 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 7500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "name": "Kaveri F1 – Sweet Pepper",
+      "folder": "Kaveri F1 – Sweet Pepper",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Pepper",
+      "details": {
+        "description": "Days to maturity after transplant: 70-75 days, Plant vigour: Strong, Fruit length: 8-9cm, Fruit diameter: 8-9cm, Thick fruit walls, Fruit colour: Dark green when immature and bright red when mature, Special attributes: It shows a good combination of vegetative power and earliness; high yielding",
+        "maturity": "70-75 days after transplant",
+        "fruitLength": "8-9cm",
+        "fruitDiameter": "8-9cm"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 47000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "name": "Tandi F1 – Tomato",
+      "folder": "Tandi F1 – Tomato",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Tomato",
+      "details": {
+        "description": "Tandi F1 tomato is so outstanding in performance when it comes to earliness, yields, fruit size and quality. It is recommended for Tropical Midland growing condition, dry season. Plant habit is compact and small. Closer planting distance can be considered. Fruit set is easy and concentrated, Fruit shape is elongated blocky and large in size. Fruit firmness and shelf life is rated high. Seed rate: 100 grams per acre, Maturity: 65-75 days after transplanting. Plant Vigour: Medium strong.",
+        "seedRate": "100 grams per acre",
+        "maturity": "65-75 days after transplanting"
+      },
+      "packages": [
+        {
+          "size": "5g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 63000
+            }
+          ]
+        },
+        {
+          "size": "100 Seeds",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 6000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "name": "Sugar King - Sweet Corn",
+      "folder": "Sugar King - Sweet Corn",
+      "supplier": "Naseco 1996 Ltd",
+      "category": "Corn",
+      "details": {
+        "description": "Sugar King matures between 71-75 days. It has yellow colour with an average length of 20-21 cm. Its resistant to diseases like corn leaf blight and also is sweet with a good shelf life",
+        "maturity": "71-75 days",
+        "averageLength": "20-21 cm",
+        "diseaseResistance": "Resistant to corn leaf blight"
+      },
+      "packages": [
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 62000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "name": "Sc Duma 43 – Maize Seed",
+      "folder": "Sc Duma 43 – Maize Seed (Agro Supply)",
+      "supplier": "Agro Supply Uganda Limited",
+      "category": "Maize",
+      "details": {
+        "description": "This is a very Early maturing, Drought resilient variety with wide adaptability scope. Duma is the Swahili name for cheetah and just like the cheetah, Duma 43 is known for its speed. It is a very early maturing maize hybrid. SC Duma 43 is in the 400 series and is a heat and drought tolerant hybrid. It has high shelling percentage with hard dent grain texture and a good disease tolerant package. It has very white grain colour with excellent cob rot tolerance. This variety is good for inter-cropping regimes. It matures between 85-90 days. Expected yield per acre is 30-32 bags (90kg) per acre with good agronomy practices. Seed rate: 10kgs/Acre.",
+        "maturity": "85-90 days",
+        "yieldPerAcre": "30-32 bags (90kg) per acre",
+        "seedRate": "10kgs/Acre"
+      },
+      "packages": [
+        {
+          "size": "2kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 23000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "name": "Giant Drum Head – Cabbage",
+      "folder": "Giant Drum Head – Cabbage Variety That Is High Yielding And Market Fit",
+      "supplier": "Simlaw Seeds Company (U) Ltd",
+      "category": "Cabbage",
+      "details": {
+        "description": "Giant Drum Head is a high-yielding cabbage variety that is market fit and known for its excellent quality, uniform heads, and adaptability to various growing conditions. This variety produces large, round, drum-shaped heads. Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall.",
+        "transplantToHarvest": "85-95 days",
+        "seedRate": "120g/acre",
+        "spacing": "60*45cm",
+        "headShape": "Round, drum-shaped",
+        "averageHeadWeight": "3-5kg",
+        "averagePotentialYield": "32 Tonnes Per Acre"
+      },
+      "packages": [
+        {
+          "size": "10g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1700
+            },
+            {
+              "qty": 5,
+              "price": 1630
+            },
+            {
+              "qty": 10,
+              "price": 1622
+            },
+            {
+              "qty": 20,
+              "price": 1618
+            }
+          ]
+        },
+        {
+          "size": "20g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 1900
+            },
+            {
+              "qty": 5,
+              "price": 1818
+            },
+            {
+              "qty": 10,
+              "price": 1811
+            },
+            {
+              "qty": 20,
+              "price": 1807
+            }
+          ]
+        },
+        {
+          "size": "50g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 4900
+            },
+            {
+              "qty": 5,
+              "price": 4733
+            },
+            {
+              "qty": 10,
+              "price": 4714
+            },
+            {
+              "qty": 20,
+              "price": 4699
+            }
+          ]
+        },
+        {
+          "size": "250g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 29800
+            },
+            {
+              "qty": 5,
+              "price": 29442
+            },
+            {
+              "qty": 10,
+              "price": 29413
+            },
+            {
+              "qty": 20,
+              "price": 29323
+            }
+          ]
+        },
+        {
+          "size": "500g",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 50600
+            },
+            {
+              "qty": 5,
+              "price": 50499
+            },
+            {
+              "qty": 10,
+              "price": 50296
+            },
+            {
+              "qty": 20,
+              "price": 43921
+            }
+          ]
+        },
+        {
+          "size": "1kg",
+          "tiers": [
+            {
+              "qty": 1,
+              "price": 103300
+            },
+            {
+              "qty": 5,
+              "price": 101337
+            },
+            {
+              "qty": 10,
+              "price": 88322
+            },
+            {
+              "qty": 20,
+              "price": 90388
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "productName": "Aloe Vera Seedling",
+  "supplier": "Mukama Mwesigwa Compound Designers",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Aloe vera is a succulent plant species that is stemless or very short-stemmed with thick, greenish, fleshy leaves. The useful parts of aloe are the gel and latex. Aloe Vera is associated with a number of health benefits such as skin treatment for conditions such as Psoriasis, Seborrhea, Dandruff, Minor burns, Skin abrasions, and more. It is easy to grow, tolerant to most pests and diseases, does well in hot climate.",
+  "specifications": "",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

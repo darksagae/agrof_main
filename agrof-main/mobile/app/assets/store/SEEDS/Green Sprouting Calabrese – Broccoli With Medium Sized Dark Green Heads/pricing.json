@@ -1,0 +1,177 @@
+{
+  "productName": "Green Sprouting Calabrese – Broccoli With Medium Sized Dark Green Heads",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Broccoli",
+  "displayPrice": "UGX 1,799",
+  "lowestPrice": 1799,
+  "lowestPackage": "10g @ 5+ units",
+  "details": {
+    "description": "Green Sprouting Calabrese broccoli has Medium sized dark green heads. Plant continues producing side shoots for several weeks after the main flower head is cut. It is Very nutritious, very tender and has Slow bolting. Produces compact dark green central head, with many lateral or side shoots over a long season."
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 1900,
+          "priceFormatted": "UGX 1,900",
+          "totalPrice": 1900,
+          "totalFormatted": "UGX 1,900",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 1799,
+          "priceFormatted": "UGX 1,799",
+          "totalPrice": 8995,
+          "totalFormatted": "UGX 8,995",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 1799,
+          "priceFormatted": "UGX 1,799",
+          "totalPrice": 17990,
+          "totalFormatted": "UGX 17,990",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 1799,
+          "priceFormatted": "UGX 1,799",
+          "totalPrice": 35980,
+          "totalFormatted": "UGX 35,980",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 2700,
+          "priceFormatted": "UGX 2,700",
+          "totalPrice": 2700,
+          "totalFormatted": "UGX 2,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 2400,
+          "priceFormatted": "UGX 2,400",
+          "totalPrice": 12000,
+          "totalFormatted": "UGX 12,000",
+          "discountPercent": 11
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 2500,
+          "priceFormatted": "UGX 2,500",
+          "totalPrice": 25000,
+          "totalFormatted": "UGX 25,000",
+          "discountPercent": 7
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 2400,
+          "priceFormatted": "UGX 2,400",
+          "totalPrice": 48000,
+          "totalFormatted": "UGX 48,000",
+          "discountPercent": 11
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3200,
+          "priceFormatted": "UGX 3,200",
+          "totalPrice": 3200,
+          "totalFormatted": "UGX 3,200",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 2899,
+          "priceFormatted": "UGX 2,899",
+          "totalPrice": 14495,
+          "totalFormatted": "UGX 14,495",
+          "discountPercent": 9
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 2998,
+          "priceFormatted": "UGX 2,998",
+          "totalPrice": 29980,
+          "totalFormatted": "UGX 29,980",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 2899,
+          "priceFormatted": "UGX 2,899",
+          "totalPrice": 57980,
+          "totalFormatted": "UGX 57,980",
+          "discountPercent": 9
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 6700,
+          "priceFormatted": "UGX 6,700",
+          "totalPrice": 6700,
+          "totalFormatted": "UGX 6,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 6600,
+          "priceFormatted": "UGX 6,600",
+          "totalPrice": 33000,
+          "totalFormatted": "UGX 33,000",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 6499,
+          "priceFormatted": "UGX 6,499",
+          "totalPrice": 64990,
+          "totalFormatted": "UGX 64,990",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 6399,
+          "priceFormatted": "UGX 6,399",
+          "totalPrice": 127980,
+          "totalFormatted": "UGX 127,980",
+          "discountPercent": 4
+        }
+      ]
+    }
+  ]
+}

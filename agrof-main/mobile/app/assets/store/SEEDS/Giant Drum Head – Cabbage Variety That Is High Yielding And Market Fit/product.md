@@ -1,81 +1,71 @@
-# Giant Drum Head Cabbage Seeds
+# Giant Drum Head – Cabbage Variety That Is High Yielding And Market Fit
 
 ## Overview
-Giant Drum Head is a high-yielding cabbage variety that is market fit and known for its excellent quality, uniform heads, and adaptability to various growing conditions. This variety produces large, round heads with excellent flavor and market appeal.
+Giant Drum Head is a high-yielding cabbage variety that is market fit and known for its excellent quality, uniform heads, and adaptability to various growing conditions. This variety produces large, round, drum-shaped heads. Prefers Cool conditions, suitable for areas with well distributed, moderate to Heavy rainfall.
 
-## Specifications
-Variety: Open Pollinated Cabbage
-Head Shape: Round, drum-shaped
-Head Weight: 3-5kg
-Days to Maturity: 85-95 days
-Plant Type: Large, determinate
-Head Color: Light green
-Flavor: Sweet, mild
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Simlaw Seeds Company (U) Ltd**
 
-## Key Features
-High yielding
-Market fit variety
-Large head size
-Excellent flavor
-Disease resistance
-Good storage quality
-Suitable for large-scale farming
+## Product Specifications
 
-## Growing Requirements
-Climate: Cool season crop
-Temperature: 15-25°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 60cm x 60cm between plants
+- **Transplant To Harvest**: 85-95 days
+- **Seed Rate**: 120g/acre
+- **Spacing**: 60*45cm
+- **Head Shape**: Round, drum-shaped
+- **Average Head Weight**: 3-5kg
+- **Average Potential Yield**: 32 Tonnes Per Acre
 
-## Usage Instructions
-Seed Preparation: No special treatment required
-Planting Depth: 1-2 cm deep
-Planting Time: 6-8 weeks before last frost
-Germination: 7-10 days
-Transplanting: When seedlings have 4-6 true leaves
+## Pricing
 
-## Application Method
-Direct Seeding: Plant directly in prepared soil
-Transplanting: Start seeds in trays, transplant when ready
-Spacing: Maintain 60cm x 60cm spacing between plants
+**Best Price**: UGX 1,618 (10g @ 20+ units)
 
-## Benefits
-High Yielding: Excellent production per plant
-Market Fit: Preferred by buyers
-Large Heads: Market-preferred size
-Excellent Quality: Uniform, round heads
-Good Storage: Long shelf life
-Suitable for Large Scale: Ideal for commercial farming
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 28,000
-Per 5000 seeds: UGX 120,000
-Per 10000 seeds: UGX 220,000
-Bulk orders: Contact for pricing
+**10g**:
+- 1+ units: UGX 1,700/unit
+- 5+ units: UGX 1,630/unit (4% off)
+- 10+ units: UGX 1,622/unit (5% off)
+- 20+ units: UGX 1,618/unit (5% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**20g**:
+- 1+ units: UGX 1,900/unit
+- 5+ units: UGX 1,818/unit (4% off)
+- 10+ units: UGX 1,811/unit (5% off)
+- 20+ units: UGX 1,807/unit (5% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**50g**:
+- 1+ units: UGX 4,900/unit
+- 5+ units: UGX 4,733/unit (3% off)
+- 10+ units: UGX 4,714/unit (4% off)
+- 20+ units: UGX 4,699/unit (4% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**250g**:
+- 1+ units: UGX 29,800/unit
+- 5+ units: UGX 29,442/unit (1% off)
+- 10+ units: UGX 29,413/unit (1% off)
+- 20+ units: UGX 29,323/unit (2% off)
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+**500g**:
+- 1+ units: UGX 50,600/unit
+- 5+ units: UGX 50,499/unit
+- 10+ units: UGX 50,296/unit (1% off)
+- 20+ units: UGX 43,921/unit (13% off)
+
+**1kg**:
+- 1+ units: UGX 103,300/unit
+- 5+ units: UGX 101,337/unit (2% off)
+- 10+ units: UGX 88,322/unit (14% off)
+- 20+ units: UGX 90,388/unit (12% off)
+
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

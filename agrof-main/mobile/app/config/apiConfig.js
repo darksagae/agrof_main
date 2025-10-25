@@ -6,18 +6,19 @@
 
 // Base IP addresses for all services - with fallbacks
 const BASE_IPS = [
-  '192.168.1.15',  // Current WiFi IP - UPDATED Oct 18, 2025
-  '192.168.0.105', // Previous WiFi IP
-  'localhost',     // Deployed Docker Compose services
-  '127.0.0.1',     // Localhost (Docker Compose deployment)
-  '10.0.0.1',      // WireGuard VPN / Coolify server
-  '192.168.0.108', // Older WiFi IP
-  '192.168.0.113', // Older WiFi IP
-  '10.0.2.2',      // Android emulator host
+  '10.100.100.180', // STI Backend Server (VM)
+  '192.168.1.15',   // Current WiFi IP - UPDATED Oct 18, 2025
+  '192.168.0.105',  // Previous WiFi IP
+  'localhost',      // Deployed Docker Compose services
+  '127.0.0.1',      // Localhost (Docker Compose deployment)
+  '10.0.0.1',       // WireGuard VPN / Coolify server
+  '192.168.0.108',  // Older WiFi IP
+  '192.168.0.113',  // Older WiFi IP
+  '10.0.2.2',       // Android emulator host
 ];
 
 // Get the current base IP (will be dynamically determined)
-let BASE_IP = '192.168.1.15';  // Current WiFi IP - UPDATED Oct 18, 2025
+let BASE_IP = '192.168.1.15';  // Laptop IP with STI VPN - UPDATED Oct 19, 2025
 
 // API Configuration
 export const API_CONFIG = {
@@ -35,10 +36,10 @@ export const API_CONFIG = {
     }
   },
   
-  // AI Backend API
+  // AI Backend API - Using localhost for Gemini AI
   AI: {
-    BASE_URL: `http://${BASE_IP}:5000`,
-    API_URL: `http://${BASE_IP}:5000/api`,
+    BASE_URL: 'http://localhost:5000',
+    API_URL: 'http://localhost:5000/api',
     ENDPOINTS: {
       ANALYZE_DISEASE: '/ai-analyze-disease',
       HEALTH: '/health'

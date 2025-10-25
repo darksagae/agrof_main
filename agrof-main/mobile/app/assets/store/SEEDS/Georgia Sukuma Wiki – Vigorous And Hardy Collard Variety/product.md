@@ -1,89 +1,68 @@
-# Georgia Sukuma Wiki Collard Seeds
+# Georgia Sukuma Wiki – Vigorous And Hardy Collard Variety
 
 ## Overview
-Georgia Sukuma Wiki is a vigorous and hardy collard variety known for its excellent nutritional value, disease resistance, and adaptability to various growing conditions. This variety produces abundant, nutritious leaves that are rich in vitamins and minerals.
+Georgia Sukuma Wiki is vigorous and hardy variety. It is tolerant to adverse weather and soil conditions. The plant has spreading habit with large, tender, crumpled/waxy bluish-green leaves on long petioles forming a loose rosette or cluster. It is fairly tolerant to black rot and downy mildew. You can keep harvesting for a long time. It is rich in carbohydrates, proteins and vitamins, has very low cholesterol level and saturated fats.
 
-## Specifications
-Variety: Open Pollinated Collard
-Plant Type: Annual leafy vegetable
-Plant Height: 60-90cm
-Days to Maturity: 45-60 days
-Leaf Color: Dark green
-Leaf Size: Large, broad
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Syova Seed (U) Ltd**
 
-## Key Features
-Vigorous growth
-Hardy variety
-High nutritional value
-Abundant leaf production
-Disease resistance
-Easy to grow
-Suitable for containers
+## Product Specifications
 
-## Growing Requirements
-Climate: Cool season crop
-Temperature: 15-25°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 45cm x 45cm between plants
+- **Spacing**: 60cm x 60cm
+- **Seed Rate**: 100grams/acre
+- **Maturity Period From Transplanting**: 60 days
+- **Yield Potential**: 70-100mt/acre
 
-## Usage Instructions
-- **Variety type**: Vigorous and hardy variety
-- **Growing characteristics**: Tolerant to adverse weather and soil conditions
-- **Plant characteristics**: The plant has spreading habit with large, tender, crumpled/waxy bluish-green leaves on long petioles forming a loose rosette or cluster
-- **Disease resistance**: Fairly tolerant to black rot and downy mildew
-- **Harvesting**: You can keep harvesting for a long time
-- **Nutritional value**: Rich in carbohydrates, proteins and vitamins, has very low cholesterol level and saturated fats
-- **Spacing**: 60cm*60cm
-- **Seed rate**: 100grams/acre
-- **Maturity period from transplanting**: 60 days
-- **Yield potential**: 70-100mt/acre
+## Pricing
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Vigorous and hardy collard variety
-- **Spacing**: 60cm*60cm between plants
-- **Growing characteristics**: Tolerant to adverse weather and soil conditions
-- **Plant characteristics**: Spreading habit with large, tender, crumpled/waxy bluish-green leaves
-- **Yield potential**: 70-100mt/acre
+**Best Price**: UGX 1,894 (10g @ 5+ units)
 
-## Benefits
-- **Vigorous variety**: Vigorous and hardy variety
-- **Weather tolerance**: Tolerant to adverse weather and soil conditions
-- **Large leaves**: Large, tender, crumpled/waxy bluish-green leaves on long petioles
-- **Disease resistance**: Fairly tolerant to black rot and downy mildew
-- **Long harvesting**: You can keep harvesting for a long time
-- **High nutrition**: Rich in carbohydrates, proteins and vitamins, has very low cholesterol level and saturated fats
-- **High yield**: 70-100mt/acre under good management
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 18,000
-Per 5000 seeds: UGX 75,000
-Per 10000 seeds: UGX 140,000
-Bulk orders: Contact for pricing
+**10g**:
+- 5+ units: UGX 1,894/unit
+- 10+ units: UGX 1,964/unit
+- 20+ units: UGX 1,927/unit
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**20g**:
+- 1+ units: UGX 2,200/unit
+- 5+ units: UGX 2,200/unit
+- 10+ units: UGX 2,200/unit
+- 20+ units: UGX 2,101/unit (5% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**25g**:
+- 1+ units: UGX 3,100/unit
+- 5+ units: UGX 2,799/unit (10% off)
+- 10+ units: UGX 2,899/unit (6% off)
+- 20+ units: UGX 2,799/unit (10% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**50g**:
+- 1+ units: UGX 4,600/unit
+- 5+ units: UGX 4,499/unit (2% off)
+- 10+ units: UGX 4,402/unit (4% off)
+- 20+ units: UGX 4,402/unit (4% off)
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+**250g**:
+- 1+ units: UGX 16,400/unit
+- 5+ units: UGX 15,793/unit (4% off)
+- 10+ units: UGX 15,695/unit (4% off)
+- 20+ units: UGX 15,695/unit (4% off)
+
+**500g**:
+- 1+ units: UGX 34,000/unit
+- 5+ units: UGX 32,708/unit (4% off)
+- 10+ units: UGX 32,504/unit (4% off)
+- 20+ units: UGX 32,402/unit (5% off)
+
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

@@ -1,0 +1,30 @@
+{
+  "productName": "Kaveri F1 – Sweet Pepper",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 47,000",
+  "lowestPrice": 47000,
+  "lowestPackage": "5g @ 1+ units",
+  "details": {
+    "description": "Days to maturity after transplant: 70-75 days, Plant vigour: Strong, Fruit length: 8-9cm, Fruit diameter: 8-9cm, Thick fruit walls, Fruit colour: Dark green when immature and bright red when mature, Special attributes: It shows a good combination of vegetative power and earliness; high yielding",
+    "maturity": "70-75 days after transplant",
+    "fruitLength": "8-9cm",
+    "fruitDiameter": "8-9cm"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 47000,
+          "priceFormatted": "UGX 47,000",
+          "totalPrice": 47000,
+          "totalFormatted": "UGX 47,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

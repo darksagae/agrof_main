@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 
 // Get API URL from environment or use default
-const BASE_URL = Constants.expoConfig?.extra?.API_URL || 'http://10.100.100.180:5000';
+const BASE_URL = Constants.expoConfig?.extra?.API_URL || 'http://192.168.1.15:5000';
 
 /**
  * Send image to API for disease detection

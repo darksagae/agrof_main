@@ -1,0 +1,57 @@
+{
+  "productName": "E107 (Simsim)",
+  "supplier": "Ag-ploutos Company Limited",
+  "category": "Sesame",
+  "displayPrice": "UGX 135,831",
+  "lowestPrice": 135831,
+  "lowestPackage": "2.5kg @ 20+ units",
+  "details": {
+    "description": "E107 sesame variety is a mechanizable high yielding, non shattering and drought resistant sesame variety that matures in 3 months. Preferably planting in line or can be broadcasted after clear guidelines from an agronomist. Row to row spacing of 15cm and continuous drilling. Planting: mixing ratio 2.5 kgs of seed to 8kgs of sand and ash for 1 acre. For maximum yields, Use of fertilizers is encouraged. Yields up to 5 bags/acre.",
+    "maturity": "3 months",
+    "yield": "Up to 5 bags/acre",
+    "plantingRatio": "2.5 kgs of seed to 8kgs of sand and ash for 1 acre"
+  },
+  "packages": [
+    {
+      "size": "2.5kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 139600,
+          "priceFormatted": "UGX 139,600",
+          "totalPrice": 139600,
+          "totalFormatted": "UGX 139,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 136668,
+          "priceFormatted": "UGX 136,668",
+          "totalPrice": 683340,
+          "totalFormatted": "UGX 683,340",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 135970,
+          "priceFormatted": "UGX 135,970",
+          "totalPrice": 1359700,
+          "totalFormatted": "UGX 1,359,700",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 135831,
+          "priceFormatted": "UGX 135,831",
+          "totalPrice": 2716620,
+          "totalFormatted": "UGX 2,716,620",
+          "discountPercent": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,90 +1,57 @@
-# Cayenne Long Slim Hot Pepper Seeds
+# Cayenne Long Slim – Hot Pepper, With Early Maturity And High Yield Potential
 
 ## Overview
-Cayenne Long Slim is a hot pepper variety known for its early maturity and high yield potential. This variety produces long, slim, fiery hot peppers that are perfect for cooking, drying, and making hot sauces.
+Cayenne Long Slim hot pepper is ideally suited for home gardens and marker gardens. Plants are very early maturing in approximately 75 days after transplanting. It bears cylindrical fruits. Fruit colour: medium green turning to medium red. The Cayenne Long Slim has wrinkled pods with an unusual shape, often twisted. A mature plant can grow up to 40 pods. The length of the pods is about 12 cm long and 1.5 cm thick. They are easy to dry and good in salsas or sauces and perfect to use for making a wreath or rista.
 
-## Specifications
-Variety: Open Pollinated Hot Pepper
-Fruit Shape: Long, slim, tapering
-Fruit Length: 15-20cm
-Days to Maturity: 70-75 days
-Plant Type: Compact, determinate
-Fruit Color: Green to red
-Flesh Color: White, hot
-Heat Level: Very hot
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Syova Seed (U) Ltd**
 
-## Key Features
-Early maturity
-High yield potential
-Very hot flavor
-Long, slim fruits
-Disease resistance
-Suitable for drying
-Easy to grow
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 25-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 60cm x 60cm between plants
+- **Maturity**: 75 days after transplanting
+- **Pod Length**: 12 cm
+- **Pod Thickness**: 1.5 cm
+- **Pods Per Plant**: Up to 40 pods
 
-## Usage Instructions
-- **Variety type**: Hot pepper ideally suited for home gardens and marker gardens
-- **Maturity**: Plants are very early maturing is approximately 75 days after transplanting
-- **Fruit characteristics**: It bears cylindrical fruits, Fruit colour: medium green turning to medium red
-- **Fruit shape**: The Cayenne Long Slim has wrinkled pods with an unusual shape, often twisted
-- **Plant productivity**: A mature plant can grow up to 40 pods
-- **Fruit dimensions**: The length of the pods is about 12 cm long and 1.5 cm thick
-- **Uses**: They are easy to dry and good in salsas or sauces and perfect to use for making a wreath or rista
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: After last frost, when soil temperature is 20°C+
+## Pricing
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Hot pepper for home gardens and marker gardens
-- **Spacing**: Maintain proper spacing for optimal growth
-- **Growing characteristics**: Plants are very early maturing is approximately 75 days after transplanting
-- **Fruit quality**: Cylindrical fruits with medium green turning to medium red color
-- **Plant productivity**: A mature plant can grow up to 40 pods
+**Best Price**: UGX 3,899 (10g @ 10+ units)
 
-## Benefits
-- **Early maturity**: Plants are very early maturing is approximately 75 days after transplanting
-- **High productivity**: A mature plant can grow up to 40 pods
-- **Cylindrical fruits**: It bears cylindrical fruits with medium green turning to medium red color
-- **Versatile use**: Easy to dry and good in salsas or sauces and perfect to use for making a wreath or rista
-- **Unique shape**: The Cayenne Long Slim has wrinkled pods with an unusual shape, often twisted
-- **Good dimensions**: The length of the pods is about 12 cm long and 1.5 cm thick
-- **Market demand**: High demand for hot peppers
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 25,000
-Per 5000 seeds: UGX 110,000
-Per 10000 seeds: UGX 200,000
-Bulk orders: Contact for pricing
+**10g**:
+- 1+ units: UGX 4,100/unit
+- 5+ units: UGX 4,002/unit (2% off)
+- 10+ units: UGX 3,899/unit (5% off)
+- 20+ units: UGX 3,899/unit (5% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**20g**:
+- 1+ units: UGX 6,700/unit
+- 5+ units: UGX 6,600/unit (1% off)
+- 10+ units: UGX 6,600/unit (1% off)
+- 20+ units: UGX 6,499/unit (3% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**25g**:
+- 1+ units: UGX 8,000/unit
+- 5+ units: UGX 7,896/unit (1% off)
+- 10+ units: UGX 7,800/unit (3% off)
+- 20+ units: UGX 7,800/unit (3% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**50g**:
+- 1+ units: UGX 14,200/unit
+- 5+ units: UGX 14,200/unit
+- 10+ units: UGX 14,101/unit (1% off)
+- 20+ units: UGX 14,101/unit (1% off)
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

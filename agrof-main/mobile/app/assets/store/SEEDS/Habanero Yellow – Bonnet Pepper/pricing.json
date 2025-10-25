@@ -1,0 +1,60 @@
+{
+  "productName": "Habanero Yellow – Bonnet Pepper",
+  "supplier": "Home Harvest (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 52,682",
+  "lowestPrice": 52682,
+  "lowestPackage": "50g @ 20+ units",
+  "details": {
+    "description": "Habanero Yellow Pepper is a very vigorous and high yielding pepper type with reliable performance in a wide range of different growing conditions.",
+    "fruitColor": "Yellow hot pepper fruits",
+    "yieldPerPlant": "About 5kg per season",
+    "maturity": "70 days from transplanting",
+    "harvestingPeriod": "4-6 months",
+    "seedRate": "120g per acre",
+    "spacing": "60cm x 75cm"
+  },
+  "packages": [
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 54200,
+          "priceFormatted": "UGX 54,200",
+          "totalPrice": 54200,
+          "totalFormatted": "UGX 54,200",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 53224,
+          "priceFormatted": "UGX 53,224",
+          "totalPrice": 266120,
+          "totalFormatted": "UGX 266,120",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 52899,
+          "priceFormatted": "UGX 52,899",
+          "totalPrice": 528990,
+          "totalFormatted": "UGX 528,990",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 52682,
+          "priceFormatted": "UGX 52,682",
+          "totalPrice": 1053640,
+          "totalFormatted": "UGX 1,053,640",
+          "discountPercent": 3
+        }
+      ]
+    }
+  ]
+}

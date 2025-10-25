@@ -1,0 +1,30 @@
+{
+  "productName": "Tomato Assila",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 170,640",
+  "lowestPrice": 170640,
+  "lowestPackage": "2500 Seeds @ 1+ units",
+  "details": {
+    "description": "This is a determinate variety that produces red coloured fruits with an oval shape and is known to be sweet. Assila F1 is an early maturing variety taking 75days to mature after transplanting. It is tolerant to Tomato Yellow Leaf Curl Virus and nematodes. This variety can yield up to 23tonnes per acre. It can be stored well and transported without much damage.",
+    "maturity": "75 days after transplanting",
+    "yieldPotential": "23 tonnes per acre",
+    "tolerance": "Tomato Yellow Leaf Curl Virus and nematodes"
+  },
+  "packages": [
+    {
+      "size": "2500 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 170640,
+          "priceFormatted": "UGX 170,640",
+          "totalPrice": 170640,
+          "totalFormatted": "UGX 170,640",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

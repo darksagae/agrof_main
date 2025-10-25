@@ -1,0 +1,197 @@
+{
+  "productName": "Zawadi F1 – Cabbage, High Yielding Variety That Withstands Long Distance Transportation",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Cabbage",
+  "displayPrice": "UGX 2,700",
+  "lowestPrice": 2700,
+  "lowestPackage": "1g @ 10+ units",
+  "details": {
+    "description": "Zawadi F1 is a High yielding cabbage variety with Excellent uniformity, withstands long distance transportation, Excellent cold tolerance, good field holding capacity, High tolerance to black rot and Fusarium yellows.",
+    "maturityDaysFromTransplanting": "90-100 days",
+    "seedRate": "100grams/acre",
+    "spacing": "60cm x 60cm or 60cm x 45cm",
+    "averageHeadWeight": "5-6kg",
+    "colour": "Bluish green",
+    "shape": "Slightly flat topped, firm and compact heads"
+  },
+  "packages": [
+    {
+      "size": "1g",
+      "tiers": [
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 2700,
+          "priceFormatted": "UGX 2,700",
+          "totalPrice": 27000,
+          "totalFormatted": "UGX 27,000",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10800,
+          "priceFormatted": "UGX 10,800",
+          "totalPrice": 10800,
+          "totalFormatted": "UGX 10,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 10800,
+          "priceFormatted": "UGX 10,800",
+          "totalPrice": 54000,
+          "totalFormatted": "UGX 54,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 10595,
+          "priceFormatted": "UGX 10,595",
+          "totalPrice": 105950,
+          "totalFormatted": "UGX 105,950",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 10595,
+          "priceFormatted": "UGX 10,595",
+          "totalPrice": 211900,
+          "totalFormatted": "UGX 211,900",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 23500,
+          "priceFormatted": "UGX 23,500",
+          "totalPrice": 23500,
+          "totalFormatted": "UGX 23,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 22208,
+          "priceFormatted": "UGX 22,208",
+          "totalPrice": 111040,
+          "totalFormatted": "UGX 111,040",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 21996,
+          "priceFormatted": "UGX 21,996",
+          "totalPrice": 219960,
+          "totalFormatted": "UGX 219,960",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 21996,
+          "priceFormatted": "UGX 21,996",
+          "totalPrice": 439920,
+          "totalFormatted": "UGX 439,920",
+          "discountPercent": 6
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 54700,
+          "priceFormatted": "UGX 54,700",
+          "totalPrice": 54700,
+          "totalFormatted": "UGX 54,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 53715,
+          "priceFormatted": "UGX 53,715",
+          "totalPrice": 268575,
+          "totalFormatted": "UGX 268,575",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 53387,
+          "priceFormatted": "UGX 53,387",
+          "totalPrice": 533870,
+          "totalFormatted": "UGX 533,870",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 53223,
+          "priceFormatted": "UGX 53,223",
+          "totalPrice": 1064460,
+          "totalFormatted": "UGX 1,064,460",
+          "discountPercent": 3
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 91600,
+          "priceFormatted": "UGX 91,600",
+          "totalPrice": 91600,
+          "totalFormatted": "UGX 91,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 89676,
+          "priceFormatted": "UGX 89,676",
+          "totalPrice": 448380,
+          "totalFormatted": "UGX 448,380",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 89310,
+          "priceFormatted": "UGX 89,310",
+          "totalPrice": 893100,
+          "totalFormatted": "UGX 893,100",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 89035,
+          "priceFormatted": "UGX 89,035",
+          "totalPrice": 1780700,
+          "totalFormatted": "UGX 1,780,700",
+          "discountPercent": 3
+        }
+      ]
+    }
+  ]
+}

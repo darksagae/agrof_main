@@ -1,0 +1,22 @@
+{
+  "productName": "Strawberry Chandler Seedlings",
+  "supplier": "William Omwech",
+  "category": "Nursery Bed",
+  "displayPrice": "UGX 5,600",
+  "lowestPrice": 5600,
+  "productDetails": "Strawberries are low-growing herbaceous plants with a fibrous root system. The flowers, generally white, rarely reddish, are borne in small clusters. Packed with vitamins, fiber, and particularly high levels of antioxidants known as polyphenols. Just one serving -- about eight strawberries -- provides more vitamin C than an orange.",
+  "specifications": "Strawberry plants require 6-10 hours a day of direct sunlight. Strawberries are tolerant of different soil types, although they prefer loamy soil that drains well. Soil pH should be between 5.5 and 7.",
+  "packages": [
+    {
+      "size": "1 Piece",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5600,
+          "priceFormatted": "UGX 5,600"
+        }
+      ]
+    }
+  ]
+}

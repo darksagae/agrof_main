@@ -1,0 +1,218 @@
+{
+  "productName": "Pusa Sawani – Okra Variety With Wide Adaptability",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Okra",
+  "displayPrice": "UGX 2,070",
+  "lowestPrice": 2070,
+  "lowestPackage": "10g @ 5+ units",
+  "details": {
+    "description": "Pusa Sawani is an open pollinated variety with wide adaptation in many warmer regions. Medium tall plant frame with short internodes and vigour. Green slender and attractive pods with good storage ability, Good fruit setting, Maturity: Harvesting start 40-45 days from planting, Tolerant to Yellow Vein Mosaic Virus (YVMV)"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 2200,
+          "priceFormatted": "UGX 2,200",
+          "totalPrice": 2200,
+          "totalFormatted": "UGX 2,200",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 2070,
+          "priceFormatted": "UGX 2,070",
+          "totalPrice": 10350,
+          "totalFormatted": "UGX 10,350",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 2070,
+          "priceFormatted": "UGX 2,070",
+          "totalPrice": 20700,
+          "totalFormatted": "UGX 20,700",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 2070,
+          "priceFormatted": "UGX 2,070",
+          "totalPrice": 41400,
+          "totalFormatted": "UGX 41,400",
+          "discountPercent": 6
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3400,
+          "priceFormatted": "UGX 3,400",
+          "totalPrice": 3400,
+          "totalFormatted": "UGX 3,400",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 3101,
+          "priceFormatted": "UGX 3,101",
+          "totalPrice": 15505,
+          "totalFormatted": "UGX 15,505",
+          "discountPercent": 9
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 3199,
+          "priceFormatted": "UGX 3,199",
+          "totalPrice": 31990,
+          "totalFormatted": "UGX 31,990",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 3101,
+          "priceFormatted": "UGX 3,101",
+          "totalPrice": 62020,
+          "totalFormatted": "UGX 62,020",
+          "discountPercent": 9
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5100,
+          "priceFormatted": "UGX 5,100",
+          "totalPrice": 5100,
+          "totalFormatted": "UGX 5,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4998,
+          "priceFormatted": "UGX 4,998",
+          "totalPrice": 24990,
+          "totalFormatted": "UGX 24,990",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 4998,
+          "priceFormatted": "UGX 4,998",
+          "totalPrice": 49980,
+          "totalFormatted": "UGX 49,980",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 4901,
+          "priceFormatted": "UGX 4,901",
+          "totalPrice": 98020,
+          "totalFormatted": "UGX 98,020",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "250g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10800,
+          "priceFormatted": "UGX 10,800",
+          "totalPrice": 10800,
+          "totalFormatted": "UGX 10,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 10800,
+          "priceFormatted": "UGX 10,800",
+          "totalPrice": 54000,
+          "totalFormatted": "UGX 54,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 10595,
+          "priceFormatted": "UGX 10,595",
+          "totalPrice": 105950,
+          "totalFormatted": "UGX 105,950",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 10595,
+          "priceFormatted": "UGX 10,595",
+          "totalPrice": 211900,
+          "totalFormatted": "UGX 211,900",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "500g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 21500,
+          "priceFormatted": "UGX 21,500",
+          "totalPrice": 21500,
+          "totalFormatted": "UGX 21,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 20103,
+          "priceFormatted": "UGX 20,103",
+          "totalPrice": 100515,
+          "totalFormatted": "UGX 100,515",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 19995,
+          "priceFormatted": "UGX 19,995",
+          "totalPrice": 199950,
+          "totalFormatted": "UGX 199,950",
+          "discountPercent": 7
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 19909,
+          "priceFormatted": "UGX 19,909",
+          "totalPrice": 398180,
+          "totalFormatted": "UGX 398,180",
+          "discountPercent": 7
+        }
+      ]
+    }
+  ]
+}

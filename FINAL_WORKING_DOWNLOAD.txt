@@ -1,0 +1,237 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  📥 FINAL WORKING DATASET DOWNLOAD - Copy These Cells            ║
+╚══════════════════════════════════════════════════════════════════╝
+
+PlantVillage doesn't have Beans, and marquis03/ibean is now private.
+Let's use alternative public datasets!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 1: Download Beans (Alternative Source)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading Beans dataset (alternative source)...")
+
+# Option A: Try this public bean dataset
+try:
+    !kaggle datasets download -d nirmalsankalana/bean-disease-dataset
+    !unzip -q bean-disease-dataset.zip -d /content/datasets/beans/
+    !rm bean-disease-dataset.zip
+    print("✅ Beans dataset downloaded!")
+except:
+    print("⚠️  Trying alternative...")
+    # Option B: Another public source
+    try:
+        !kaggle datasets download -d alinedobrovsky/plant-disease-classification-merged-dataset
+        !unzip -q plant-disease-classification-merged-dataset.zip -d /content/datasets/beans_alt/
+        !rm plant-disease-classification-merged-dataset.zip
+        print("✅ Alternative beans dataset downloaded!")
+    except:
+        print("❌ Both failed, will try GitHub...")
+
+# Check what we got
+print("\n📁 Beans data structure:")
+for root, dirs, files in os.walk('/content/datasets/beans'):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        try:
+            image_count = len([f for f in os.listdir(dir_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+            if image_count > 0:
+                print(f"  📦 {dir_name}: {image_count} images")
+        except:
+            pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 2: If CELL 1 Failed, Try GitHub iBean
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading iBean from GitHub (original Makerere University source)...")
+
+# Clone from GitHub
+!git clone https://github.com/AI-Lab-Makerere/ibean.git /content/datasets/beans_github
+
+print("✅ GitHub iBean cloned!")
+
+# Find and count images
+print("\n📁 GitHub iBean structure:")
+for root, dirs, files in os.walk('/content/datasets/beans_github'):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        try:
+            image_count = len([f for f in os.listdir(dir_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+            if image_count > 0:
+                print(f"  📦 {dir_name}: {image_count} images")
+        except:
+            pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 3: Organize All Datasets
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+import shutil
+
+print("📁 Organizing all datasets into /content/agrof_dataset...")
+print("="*60)
+
+# Create main directory
+os.makedirs('/content/agrof_dataset', exist_ok=True)
+
+# Function to copy classes
+def copy_classes(source_base, crop_prefix):
+    """Copy all disease classes from source to agrof_dataset"""
+    copied = 0
+    
+    if not os.path.exists(source_base):
+        print(f"⚠️  {source_base} not found, skipping...")
+        return copied
+    
+    for root, dirs, files in os.walk(source_base):
+        for dir_name in dirs:
+            source_path = os.path.join(root, dir_name)
+            
+            # Count images
+            try:
+                image_files = [f for f in os.listdir(source_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png', '.JPG', '.PNG'))]
+                
+                if len(image_files) > 50:  # Only copy if has sufficient images
+                    # Clean name
+                    clean_name = dir_name.replace('___', '_').replace('__', '_').replace(' ', '_')
+                    
+                    # Add prefix if not present
+                    if not clean_name.startswith(crop_prefix):
+                        clean_name = f'{crop_prefix}_{clean_name}'
+                    
+                    dest_path = f'/content/agrof_dataset/{clean_name}'
+                    
+                    # Copy if doesn't exist
+                    if not os.path.exists(dest_path):
+                        print(f"📦 {clean_name}: {len(image_files)} images")
+                        shutil.copytree(source_path, dest_path)
+                        copied += 1
+            except Exception as e:
+                pass
+    
+    return copied
+
+# 1. Copy Beans (from wherever it downloaded)
+print("\n🌱 ORGANIZING BEANS...")
+beans_copied = 0
+beans_copied += copy_classes('/content/datasets/beans', 'Beans')
+beans_copied += copy_classes('/content/datasets/beans_alt', 'Beans')
+beans_copied += copy_classes('/content/datasets/beans_github', 'Beans')
+print(f"✅ Copied {beans_copied} Beans classes")
+
+# 2. Copy Coffee
+print("\n☕ ORGANIZING COFFEE...")
+coffee_copied = copy_classes('/content/datasets/coffee', 'Coffee')
+print(f"✅ Copied {coffee_copied} Coffee classes")
+
+# 3. Copy Tomato, Potato, Pepper from PlantVillage
+print("\n🍅 ORGANIZING TOMATO, POTATO, PEPPER...")
+target_crops = ['Tomato', 'Potato', 'Pepper']
+pv_copied = 0
+
+for root, dirs, files in os.walk('/content/datasets/plantvillage'):
+    for dir_name in dirs:
+        if any(crop in dir_name for crop in target_crops):
+            source_path = os.path.join(root, dir_name)
+            
+            try:
+                image_files = [f for f in os.listdir(source_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+                
+                if len(image_files) > 0:
+                    clean_name = dir_name.replace('___', '_').replace('__', '_')
+                    dest_path = f'/content/agrof_dataset/{clean_name}'
+                    
+                    if not os.path.exists(dest_path):
+                        crop_icon = '🍅' if 'Tomato' in dir_name else '🥔' if 'Potato' in dir_name else '🌶️'
+                        print(f"{crop_icon} {clean_name}: {len(image_files)} images")
+                        shutil.copytree(source_path, dest_path)
+                        pv_copied += 1
+            except:
+                pass
+
+print(f"✅ Copied {pv_copied} Tomato/Potato/Pepper classes")
+
+print("\n" + "="*60)
+print(f"✅ Organization complete!")
+print(f"📊 Total classes copied: {beans_copied + coffee_copied + pv_copied}")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 4: Verify Final Dataset
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🔍 Final dataset verification...")
+print("="*60)
+
+crops = {
+    'Beans': [],
+    'Coffee': [],
+    'Tomato': [],
+    'Potato': [],
+    'Pepper': []
+}
+
+# Count all classes
+for class_name in sorted(os.listdir('/content/agrof_dataset')):
+    class_path = f'/content/agrof_dataset/{class_name}'
+    if os.path.isdir(class_path):
+        count = len([f for f in os.listdir(class_path) 
+                    if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+        
+        # Categorize
+        if 'Bean' in class_name:
+            crops['Beans'].append((class_name, count))
+        elif 'Coffee' in class_name:
+            crops['Coffee'].append((class_name, count))
+        elif 'Tomato' in class_name:
+            crops['Tomato'].append((class_name, count))
+        elif 'Potato' in class_name:
+            crops['Potato'].append((class_name, count))
+        elif 'Pepper' in class_name:
+            crops['Pepper'].append((class_name, count))
+
+# Display
+for crop, classes_list in crops.items():
+    if classes_list:
+        total = sum(c[1] for c in classes_list)
+        icon = {'Beans': '🌱', 'Coffee': '☕', 'Tomato': '🍅', 
+               'Potato': '🥔', 'Pepper': '🌶️'}[crop]
+        print(f"\n{icon} {crop}: {len(classes_list)} classes, {total:,} images")
+        for class_name, count in classes_list:
+            disease = class_name.split('_', 1)[1] if '_' in class_name else class_name
+            print(f"   ├─ {disease}: {count:,} images")
+
+# Summary
+total_classes = sum(len(c) for c in crops.values())
+total_images = sum(sum(cls[1] for cls in c) for c in crops.values())
+
+print(f"\n{'='*60}")
+print(f"✅ READY FOR TRAINING!")
+print(f"📊 Total: {total_classes} classes, {total_images:,} images")
+print("="*60)
+
+if total_classes >= 10:
+    print("\n🎉 Dataset is ready! Proceed with training!")
+    print("📋 Next: Run training cells from COMPLETE_TRAINING_CODE_FOR_COLAB.txt")
+else:
+    print(f"\n⚠️  Only {total_classes} classes found")
+
+╔══════════════════════════════════════════════════════════════════╗
+║  🎯 WORKFLOW:                                                     ║
+║  1. Run CELL 1 (try Kaggle beans dataset)                        ║
+║  2. If CELL 1 failed, run CELL 2 (GitHub iBean)                  ║
+║  3. Run CELL 3 (organize all data)                               ║
+║  4. Run CELL 4 (verify - should show 10-20 classes)              ║
+║  5. Then run COMPLETE_TRAINING_CODE_FOR_COLAB.txt                ║
+╚══════════════════════════════════════════════════════════════════╝

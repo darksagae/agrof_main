@@ -1,0 +1,181 @@
+{
+  "productName": "Cayenne Long Slim – Hot Pepper, With Early Maturity And High Yield Potential",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 3,899",
+  "lowestPrice": 3899,
+  "lowestPackage": "10g @ 10+ units",
+  "details": {
+    "description": "Cayenne Long Slim hot pepper is ideally suited for home gardens and marker gardens. Plants are very early maturing in approximately 75 days after transplanting. It bears cylindrical fruits. Fruit colour: medium green turning to medium red. The Cayenne Long Slim has wrinkled pods with an unusual shape, often twisted. A mature plant can grow up to 40 pods. The length of the pods is about 12 cm long and 1.5 cm thick. They are easy to dry and good in salsas or sauces and perfect to use for making a wreath or rista.",
+    "maturity": "75 days after transplanting",
+    "podLength": "12 cm",
+    "podThickness": "1.5 cm",
+    "podsPerPlant": "Up to 40 pods"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 4100,
+          "priceFormatted": "UGX 4,100",
+          "totalPrice": 4100,
+          "totalFormatted": "UGX 4,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4002,
+          "priceFormatted": "UGX 4,002",
+          "totalPrice": 20010,
+          "totalFormatted": "UGX 20,010",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 3899,
+          "priceFormatted": "UGX 3,899",
+          "totalPrice": 38990,
+          "totalFormatted": "UGX 38,990",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 3899,
+          "priceFormatted": "UGX 3,899",
+          "totalPrice": 77980,
+          "totalFormatted": "UGX 77,980",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 6700,
+          "priceFormatted": "UGX 6,700",
+          "totalPrice": 6700,
+          "totalFormatted": "UGX 6,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 6600,
+          "priceFormatted": "UGX 6,600",
+          "totalPrice": 33000,
+          "totalFormatted": "UGX 33,000",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 6600,
+          "priceFormatted": "UGX 6,600",
+          "totalPrice": 66000,
+          "totalFormatted": "UGX 66,000",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 6499,
+          "priceFormatted": "UGX 6,499",
+          "totalPrice": 129980,
+          "totalFormatted": "UGX 129,980",
+          "discountPercent": 3
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 8000,
+          "priceFormatted": "UGX 8,000",
+          "totalPrice": 8000,
+          "totalFormatted": "UGX 8,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 7896,
+          "priceFormatted": "UGX 7,896",
+          "totalPrice": 39480,
+          "totalFormatted": "UGX 39,480",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 7800,
+          "priceFormatted": "UGX 7,800",
+          "totalPrice": 78000,
+          "totalFormatted": "UGX 78,000",
+          "discountPercent": 3
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 7800,
+          "priceFormatted": "UGX 7,800",
+          "totalPrice": 156000,
+          "totalFormatted": "UGX 156,000",
+          "discountPercent": 3
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 14200,
+          "priceFormatted": "UGX 14,200",
+          "totalPrice": 14200,
+          "totalFormatted": "UGX 14,200",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 14200,
+          "priceFormatted": "UGX 14,200",
+          "totalPrice": 71000,
+          "totalFormatted": "UGX 71,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 14101,
+          "priceFormatted": "UGX 14,101",
+          "totalPrice": 141010,
+          "totalFormatted": "UGX 141,010",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 14101,
+          "priceFormatted": "UGX 14,101",
+          "totalPrice": 282020,
+          "totalFormatted": "UGX 282,020",
+          "discountPercent": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,89 +1,51 @@
-# Ashley Open Pollinated Cucumber Seeds
+# Ashley – Open Pollinated Cucumber Varirty With Prolific Productivity
 
 ## Overview
-Ashley is an open pollinated cucumber variety known for its prolific productivity and excellent fruit quality. This variety produces abundant yields of crisp, flavorful cucumbers suitable for fresh consumption and pickling.
+Ashley is an open pollinated cucumber that has been grown for years in most vegetable gardens, and excellent for slicing. Early variety with prolific producer of medium size 30cm fruits that are darker than other cultivars. Resistant to downy mildew.
 
-## Specifications
-Variety: Open Pollinated Cucumber
-Fruit Shape: Straight, cylindrical
-Fruit Length: 15-20cm
-Days to Maturity: 55-60 days
-Plant Type: Vining, indeterminate
-Fruit Color: Dark green
-Flesh Color: White, crisp
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Syova Seed (U) Ltd**
 
-## Key Features
-Prolific productivity
-Open pollinated variety
-Excellent fruit quality
-Crisp texture
-Suitable for pickling
-Disease resistance
-Easy to grow
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 20-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 90cm x 90cm between plants
+- **Fruit Size**: 30cm
+- **Color**: Darker than other cultivars
+- **Resistance**: Resistant to downy mildew
+- **Container Growing**: Also grows well in containers
 
-## Usage Instructions
-- **Variety type**: Open pollinated cucumber that has been grown for years in most vegetable gardens
-- **Fruit characteristics**: Excellent for slicing, early variety with prolific producer of medium size 30cm fruits
-- **Fruit color**: Darker than other cultivars
-- **Disease resistance**: Resistant to downy mildew and other problems normally caused by humid conditions
-- **Growing conditions**: Also grows well in containers
-- **Planting depth**: 1-2 cm deep
-- **Planting time**: After last frost, when soil temperature is 15°C+
-- **Germination**: 7-10 days
-- **Transplanting**: When seedlings have 2-3 true leaves
+## Pricing
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: Open pollinated cucumber for prolific productivity
-- **Spacing**: Maintain proper spacing for optimal growth
-- **Container growing**: Also grows well in containers
-- **Disease resistance**: Resistant to downy mildew and other problems normally caused by humid conditions
-- **Versatile use**: Excellent for slicing and fresh consumption
+**Best Price**: UGX 3,398 (10g @ 10+ units)
 
-## Benefits
-- **Prolific productivity**: Prolific producer of medium size 30cm fruits
-- **Open pollinated**: Can save seeds for next season
-- **Disease resistance**: Resistant to downy mildew and other problems normally caused by humid conditions
-- **Container friendly**: Also grows well in containers
-- **Early variety**: Early variety with excellent productivity
-- **Versatile use**: Excellent for slicing and fresh consumption
-- **Easy growing**: Suitable for beginners and experienced gardeners
+### Package Options & Pricing
 
-## Price Information
-Per 1000 seeds: UGX 20,000
-Per 5000 seeds: UGX 85,000
-Per 10000 seeds: UGX 150,000
-Bulk orders: Contact for pricing
+**10g**:
+- 1+ units: UGX 3,600/unit
+- 5+ units: UGX 3,499/unit (3% off)
+- 10+ units: UGX 3,398/unit (6% off)
+- 20+ units: UGX 3,398/unit (6% off)
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**25g**:
+- 1+ units: UGX 6,700/unit
+- 5+ units: UGX 6,600/unit (1% off)
+- 10+ units: UGX 6,499/unit (3% off)
+- 20+ units: UGX 6,399/unit (4% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**50g**:
+- 1+ units: UGX 9,800/unit
+- 5+ units: UGX 9,702/unit (1% off)
+- 10+ units: UGX 9,604/unit (2% off)
+- 20+ units: UGX 9,604/unit (2% off)
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

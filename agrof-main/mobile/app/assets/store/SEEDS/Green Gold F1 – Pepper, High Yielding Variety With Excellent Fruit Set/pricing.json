@@ -1,0 +1,101 @@
+{
+  "productName": "Green Gold F1 – Pepper, High Yielding Variety With Excellent Fruit Set",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 2,899",
+  "lowestPrice": 2899,
+  "lowestPackage": "1g @ 5+ units",
+  "details": {
+    "description": "Green Gold F1 is a High yielding variety with excellent fruit set, ideal for both open and protected cultivation, suitable for long distance transportation. Very good keeping qualities. High tolerance to tomato spotted wilt virus, potato virus Y, bacterial spot and tobamo virus.",
+    "spacing": "60cm x 60cm",
+    "seedRate": "200grams/acre",
+    "maturityPeriod": "90-140 days",
+    "yieldPotential": "10-16mt/acre",
+    "colour": "Dark green walled fruits",
+    "shape": "Large and blocky"
+  },
+  "packages": [
+    {
+      "size": "1g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3100,
+          "priceFormatted": "UGX 3,100",
+          "totalPrice": 3100,
+          "totalFormatted": "UGX 3,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 2899,
+          "priceFormatted": "UGX 2,899",
+          "totalPrice": 14495,
+          "totalFormatted": "UGX 14,495",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 2899,
+          "priceFormatted": "UGX 2,899",
+          "totalPrice": 28990,
+          "totalFormatted": "UGX 28,990",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 2899,
+          "priceFormatted": "UGX 2,899",
+          "totalPrice": 57980,
+          "totalFormatted": "UGX 57,980",
+          "discountPercent": 6
+        }
+      ]
+    },
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 117200,
+          "priceFormatted": "UGX 117,200",
+          "totalPrice": 117200,
+          "totalFormatted": "UGX 117,200",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 116145,
+          "priceFormatted": "UGX 116,145",
+          "totalPrice": 580725,
+          "totalFormatted": "UGX 580,725",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 115442,
+          "priceFormatted": "UGX 115,442",
+          "totalPrice": 1154420,
+          "totalFormatted": "UGX 1,154,420",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 115208,
+          "priceFormatted": "UGX 115,208",
+          "totalPrice": 2304160,
+          "totalFormatted": "UGX 2,304,160",
+          "discountPercent": 2
+        }
+      ]
+    }
+  ]
+}

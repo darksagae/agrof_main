@@ -1,0 +1,64 @@
+{
+  "productName": "Frey - Pepper Hybrid F1",
+  "supplier": "Home Harvest (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 37,209",
+  "lowestPrice": 37209,
+  "lowestPackage": "5g @ 20+ units",
+  "details": {
+    "description": "Frey is a versatile hybrid sweet pepper that can be grown outdoors or indoors. Fruits measure 12x10cm and go from green to red. The fruits have thick walls. Strong plant with short internodes and good leaf cover.",
+    "fruitSize": "12x10cm",
+    "fruitColor": "Green -> Red",
+    "walls": "Thick",
+    "shape": "Blocky",
+    "diseaseResistance": "Potato Virus Y (PVY:0,1), Tobamovirus (TM:0-3)",
+    "vigour": "Strong",
+    "leafCover": "Good",
+    "cultivation": "Open Field, Tunnel",
+    "uniformity": "High",
+    "maturity": "Early"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 38800,
+          "priceFormatted": "UGX 38,800",
+          "totalPrice": 38800,
+          "totalFormatted": "UGX 38,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 37403,
+          "priceFormatted": "UGX 37,403",
+          "totalPrice": 187015,
+          "totalFormatted": "UGX 187,015",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 37287,
+          "priceFormatted": "UGX 37,287",
+          "totalPrice": 372870,
+          "totalFormatted": "UGX 372,870",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 37209,
+          "priceFormatted": "UGX 37,209",
+          "totalPrice": 744180,
+          "totalFormatted": "UGX 744,180",
+          "discountPercent": 4
+        }
+      ]
+    }
+  ]
+}

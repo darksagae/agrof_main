@@ -5,7 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Modal,
-  Dimensions
+  Dimensions,
+  SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import authService from '../services/authService';
@@ -73,7 +75,8 @@ const AuthGate = ({
   console.log('🔒 AuthGate: User not authenticated - showing login prompt');
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       {/* Blurred Background - just blur, no text */}
       <View style={styles.blurredContent} />
 
@@ -111,7 +114,7 @@ const AuthGate = ({
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

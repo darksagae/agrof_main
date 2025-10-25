@@ -1,0 +1,106 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  🌱 ALTERNATIVE BEANS DATASET - Run This Cell                    ║
+╚══════════════════════════════════════════════════════════════════╝
+
+The marquis03/ibean dataset is now private. Here are alternatives:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 OPTION 1: Download from PlantVillage (HAS BEANS!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Good news! The PlantVillage dataset you already downloaded 
+contains Bean diseases! Let's check:
+
+import os
+
+print("🔍 Checking PlantVillage for Beans...")
+print("="*60)
+
+plantvillage_base = '/content/datasets/plantvillage'
+
+# Search for Bean/Beans in PlantVillage
+bean_classes = []
+for root, dirs, files in os.walk(plantvillage_base):
+    for dir_name in dirs:
+        if 'Bean' in dir_name or 'bean' in dir_name:
+            source_path = os.path.join(root, dir_name)
+            try:
+                image_count = len([f for f in os.listdir(source_path) 
+                                  if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+                if image_count > 0:
+                    bean_classes.append((dir_name, image_count))
+                    print(f"🌱 Found: {dir_name} ({image_count} images)")
+            except:
+                pass
+
+if bean_classes:
+    total_bean_images = sum(c[1] for c in bean_classes)
+    print(f"\n✅ Found {len(bean_classes)} Bean classes with {total_bean_images:,} images!")
+else:
+    print("❌ No Bean classes found in PlantVillage")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 OPTION 2: Download Alternative Beans Dataset
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading alternative Beans dataset...")
+
+# Try this one - it's public and has bean diseases
+!kaggle datasets download -d nirmalsankalana/bean-disease-dataset
+!unzip -q bean-disease-dataset.zip -d /content/datasets/beans/
+!rm bean-disease-dataset.zip
+
+print("✅ Alternative Beans dataset downloaded!")
+
+# Check what we got
+print("\n📁 Checking downloaded Beans data...")
+for root, dirs, files in os.walk('/content/datasets/beans'):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        try:
+            image_count = len([f for f in os.listdir(dir_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+            if image_count > 0:
+                print(f"  📦 {dir_name}: {image_count} images")
+        except:
+            pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 OPTION 3: Use GitHub iBean Dataset (Original Source)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading iBean from GitHub (original source)...")
+
+# Clone the iBean dataset from GitHub
+!git clone https://github.com/AI-Lab-Makerere/ibean.git /content/datasets/beans_github
+
+print("✅ GitHub iBean downloaded!")
+
+# Check what we got
+print("\n📁 Checking GitHub iBean data...")
+for root, dirs, files in os.walk('/content/datasets/beans_github'):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        try:
+            image_count = len([f for f in os.listdir(dir_path) 
+                              if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+            if image_count > 0:
+                print(f"  📦 {dir_name}: {image_count} images")
+        except:
+            pass
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 INSTRUCTIONS:
+
+1. First try OPTION 1 (check if PlantVillage has Beans)
+2. If yes, skip to organizing step
+3. If no, try OPTION 2
+4. If OPTION 2 fails, try OPTION 3
+
+Let me know which one works!
+

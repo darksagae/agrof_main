@@ -1,0 +1,155 @@
+{
+  "productName": "Roma Vfn – High Yielding Determinate Oval Shape Tomato",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 4,709",
+  "lowestPrice": 4709,
+  "lowestPackage": "10g @ 10+ units",
+  "details": {
+    "description": "Roma is a high yielding determinate oval shape tomato for use in a variety of dishes. Popular processing variety. Good dry matter content. Fruits weigh about 70g. High yielding tomato. Determinate variety (has definite flowering and fruiting). Fruits mature at the same time and thus can be harvested at once. Fruits ripen uniformly for mechanical harvesting. It's resistant to Verticillium and Fusarium wilts, and nematodes.",
+    "maturity": "90-100 days",
+    "yieldPotential": "15,000-20,000 kg/acre",
+    "spacing": "35 cm x 100 cm",
+    "seedRate": "400 grams per acre direct seeding/80grams transplant",
+    "fruitWeight": "70g"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 4900,
+          "priceFormatted": "UGX 4,900",
+          "totalPrice": 4900,
+          "totalFormatted": "UGX 4,900",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4802,
+          "priceFormatted": "UGX 4,802",
+          "totalPrice": 24010,
+          "totalFormatted": "UGX 24,010",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 4709,
+          "priceFormatted": "UGX 4,709",
+          "totalPrice": 47090,
+          "totalFormatted": "UGX 47,090",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 4709,
+          "priceFormatted": "UGX 4,709",
+          "totalPrice": 94180,
+          "totalFormatted": "UGX 94,180",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 7200,
+          "priceFormatted": "UGX 7,200",
+          "totalPrice": 7200,
+          "totalFormatted": "UGX 7,200",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 9600,
+          "priceFormatted": "UGX 9,600",
+          "totalPrice": 9600,
+          "totalFormatted": "UGX 9,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 9504,
+          "priceFormatted": "UGX 9,504",
+          "totalPrice": 47520,
+          "totalFormatted": "UGX 47,520",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 9408,
+          "priceFormatted": "UGX 9,408",
+          "totalPrice": 94080,
+          "totalFormatted": "UGX 94,080",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 9408,
+          "priceFormatted": "UGX 9,408",
+          "totalPrice": 188160,
+          "totalFormatted": "UGX 188,160",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 18300,
+          "priceFormatted": "UGX 18,300",
+          "totalPrice": 18300,
+          "totalFormatted": "UGX 18,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 16964,
+          "priceFormatted": "UGX 16,964",
+          "totalPrice": 84820,
+          "totalFormatted": "UGX 84,820",
+          "discountPercent": 7
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 16873,
+          "priceFormatted": "UGX 16,873",
+          "totalPrice": 168730,
+          "totalFormatted": "UGX 168,730",
+          "discountPercent": 8
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 16781,
+          "priceFormatted": "UGX 16,781",
+          "totalPrice": 335620,
+          "totalFormatted": "UGX 335,620",
+          "discountPercent": 8
+        }
+      ]
+    }
+  ]
+}

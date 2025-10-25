@@ -1,0 +1,91 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  🌱 MAKERERE iBEAN FROM GITHUB - Copy This Cell                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+The Kaggle version is private, but we can get it from the original
+Makerere University GitHub repository!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL: Download Makerere iBean from GitHub
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading Makerere iBean from GitHub...")
+print("Source: AI Lab Makerere University")
+print("="*60)
+
+# Clone the official iBean repository
+!git clone https://github.com/AI-Lab-Makerere/ibean.git /content/datasets/ibean_github
+
+print("\n✅ iBean repository cloned!")
+
+# Explore the structure
+print("\n📁 Exploring iBean structure...")
+for root, dirs, files in os.walk('/content/datasets/ibean_github'):
+    level = root.replace('/content/datasets/ibean_github', '').count(os.sep)
+    indent = ' ' * 2 * level
+    print(f'{indent}📂 {os.path.basename(root)}/')
+    
+    # Show directories
+    subindent = ' ' * 2 * (level + 1)
+    for dir_name in dirs[:5]:  # Show first 5 dirs
+        print(f'{subindent}📁 {dir_name}')
+    
+    if len(dirs) > 5:
+        print(f'{subindent}... and {len(dirs)-5} more directories')
+    
+    # Count image files in current directory
+    image_files = [f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+    if image_files:
+        print(f'{subindent}📊 {len(image_files)} images')
+    
+    # Don't go too deep
+    if level > 3:
+        break
+
+# Find and count disease classes
+print("\n📊 Counting Bean disease classes...")
+bean_classes = {}
+
+for root, dirs, files in os.walk('/content/datasets/ibean_github'):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        try:
+            image_files = [f for f in os.listdir(dir_path) 
+                          if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+            if len(image_files) > 0:
+                bean_classes[dir_name] = len(image_files)
+        except:
+            pass
+
+if bean_classes:
+    print(f"\n✅ Found {len(bean_classes)} Bean disease classes:")
+    for class_name, count in sorted(bean_classes.items()):
+        print(f"   🌱 {class_name}: {count} images")
+    
+    total_images = sum(bean_classes.values())
+    print(f"\n📊 Total Bean images: {total_images:,}")
+else:
+    print("\n⚠️  No image folders found yet. Let's check the README...")
+    
+    # Try to read README for instructions
+    readme_paths = [
+        '/content/datasets/ibean_github/README.md',
+        '/content/datasets/ibean_github/readme.md',
+    ]
+    
+    for readme_path in readme_paths:
+        if os.path.exists(readme_path):
+            print(f"\n📄 Found README at: {readme_path}")
+            print("First 50 lines:")
+            with open(readme_path, 'r') as f:
+                lines = f.readlines()[:50]
+                for line in lines:
+                    print(line.rstrip())
+            break
+
+print("\n" + "="*60)
+print("✅ iBean download complete!")
+print("📋 Next: Check the structure above and adjust the organize code if needed")
+

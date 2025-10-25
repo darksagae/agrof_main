@@ -1,0 +1,39 @@
+{
+  "productName": "Kifaru F1 – Red Cabbage",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Cabbage",
+  "displayPrice": "UGX 19,273",
+  "lowestPrice": 19273,
+  "lowestPackage": "1000 Seeds @ 10+ units",
+  "details": {
+    "description": "Maturity: 68-72 days, plant vigour: Moderate, Shape: round, colour: bright red, Head diameter: 12-14cm, Head depth: 12-14cm, Average head weight: 1.2-1.4kg, Special attributes: Attractive red colour, firm heads, wide adaptability; recommended for semi tropical climate.",
+    "maturity": "68-72 days",
+    "averageHeadWeight": "1.2-1.4kg",
+    "headDiameter": "12-14cm"
+  },
+  "packages": [
+    {
+      "size": "1000 Seeds",
+      "tiers": [
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 19636,
+          "priceFormatted": "UGX 19,636",
+          "totalPrice": 98180,
+          "totalFormatted": "UGX 98,180",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 19273,
+          "priceFormatted": "UGX 19,273",
+          "totalPrice": 192730,
+          "totalFormatted": "UGX 192,730",
+          "discountPercent": 2
+        }
+      ]
+    }
+  ]
+}

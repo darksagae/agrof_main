@@ -1,0 +1,150 @@
+{
+  "productName": "Great Lakes Mesa 659 – Lettuce Variety With Tip-burn Resistance & Medium-large, Solid Heads",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Lettuce",
+  "displayPrice": "UGX 4,901",
+  "lowestPrice": 4901,
+  "lowestPackage": "10g @ 10+ units",
+  "details": {
+    "description": "Great Lakes 659 lettuce is tip-burn resistant, produces medium-large, solid heads, and does best in warmer weather. It is bolt resistant (very slow to go to seed). Maturity: 80 to 90 day. Each gram contains approximately 500 to 600 seeds."
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 5100,
+          "priceFormatted": "UGX 5,100",
+          "totalPrice": 5100,
+          "totalFormatted": "UGX 5,100",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4998,
+          "priceFormatted": "UGX 4,998",
+          "totalPrice": 24990,
+          "totalFormatted": "UGX 24,990",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 4901,
+          "priceFormatted": "UGX 4,901",
+          "totalPrice": 49010,
+          "totalFormatted": "UGX 49,010",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 4901,
+          "priceFormatted": "UGX 4,901",
+          "totalPrice": 98020,
+          "totalFormatted": "UGX 98,020",
+          "discountPercent": 4
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 9800,
+          "priceFormatted": "UGX 9,800",
+          "totalPrice": 9800,
+          "totalFormatted": "UGX 9,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 9702,
+          "priceFormatted": "UGX 9,702",
+          "totalPrice": 48510,
+          "totalFormatted": "UGX 48,510",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 9604,
+          "priceFormatted": "UGX 9,604",
+          "totalPrice": 96040,
+          "totalFormatted": "UGX 96,040",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 9604,
+          "priceFormatted": "UGX 9,604",
+          "totalPrice": 192080,
+          "totalFormatted": "UGX 192,080",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10800,
+          "priceFormatted": "UGX 10,800",
+          "totalPrice": 10800,
+          "totalFormatted": "UGX 10,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 10800,
+          "priceFormatted": "UGX 10,800",
+          "totalPrice": 54000,
+          "totalFormatted": "UGX 54,000",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 10595,
+          "priceFormatted": "UGX 10,595",
+          "totalPrice": 105950,
+          "totalFormatted": "UGX 105,950",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 10595,
+          "priceFormatted": "UGX 10,595",
+          "totalPrice": 211900,
+          "totalFormatted": "UGX 211,900",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 21500,
+          "priceFormatted": "UGX 21,500",
+          "totalPrice": 21500,
+          "totalFormatted": "UGX 21,500",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

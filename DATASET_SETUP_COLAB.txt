@@ -1,0 +1,242 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  📥 DATASET SETUP - PASTE THESE 4 CELLS IN COLAB FIRST           ║
+║  (Before running any training code)                              ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 1: Setup Kaggle API
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+from google.colab import files
+import os
+
+print("📤 Upload your kaggle.json file")
+print("(Download it from: https://www.kaggle.com/settings → API → Create New Token)")
+
+uploaded = files.upload()
+
+!mkdir -p ~/.kaggle
+!cp kaggle.json ~/.kaggle/
+!chmod 600 ~/.kaggle/kaggle.json
+
+print("✅ Kaggle API configured!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 2: Download All Datasets (Takes 5-10 minutes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+import shutil
+
+print("🌱 Downloading datasets for all 5 crops...")
+print("="*60)
+
+# Create main dataset directory
+os.makedirs('/content/agrof_dataset', exist_ok=True)
+os.makedirs('/content/datasets', exist_ok=True)
+
+# 1. Download Beans dataset
+print("\n🌱 DOWNLOADING BEANS...")
+!kaggle datasets download -d marquis03/beans-leaf-dataset-from-ai-lab-makerere
+!unzip -q beans-leaf-dataset-from-ai-lab-makerere.zip -d /content/datasets/beans/
+!rm beans-leaf-dataset-from-ai-lab-makerere.zip
+
+# 2. Download Coffee dataset
+print("\n☕ DOWNLOADING COFFEE...")
+!kaggle datasets download -d marquis03/coffee-leaf-dataset-from-ai-lab-makerere
+!unzip -q coffee-leaf-dataset-from-ai-lab-makerere.zip -d /content/datasets/coffee/
+!rm coffee-leaf-dataset-from-ai-lab-makerere.zip
+
+# 3. Download PlantVillage (contains Tomato, Potato, Pepper)
+print("\n🍅 DOWNLOADING TOMATO, POTATO, PEPPER...")
+!kaggle datasets download -d emmarex/plantdisease
+!unzip -q plantdisease.zip -d /content/datasets/plantvillage/
+!rm plantdisease.zip
+
+print("\n✅ All datasets downloaded!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 3: Organize Datasets into /content/agrof_dataset
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+import shutil
+
+print("📁 Organizing datasets into /content/agrof_dataset...")
+print("="*60)
+
+# Function to copy disease classes
+def copy_disease_class(source_dir, crop_prefix):
+    """Copy disease classes to agrof_dataset with proper naming"""
+    copied = []
+    
+    if not os.path.exists(source_dir):
+        return copied
+    
+    for root, dirs, files in os.walk(source_dir):
+        for dir_name in dirs:
+            source_path = os.path.join(root, dir_name)
+            
+            # Check if directory contains images
+            image_files = [f for f in os.listdir(source_path) 
+                          if f.endswith(('.jpg', '.jpeg', '.png', '.JPG', '.PNG'))]
+            
+            if len(image_files) > 0:
+                # Clean and format name
+                clean_name = dir_name.replace('___', '_').replace('__', '_')
+                
+                # Add crop prefix if not already there
+                if not clean_name.startswith(crop_prefix):
+                    clean_name = f'{crop_prefix}_{clean_name}'
+                
+                dest_path = f'/content/agrof_dataset/{clean_name}'
+                
+                # Copy if not exists
+                if not os.path.exists(dest_path):
+                    print(f"\n📦 Copying: {clean_name}")
+                    print(f"   Source: {source_path}")
+                    print(f"   Images: {len(image_files)}")
+                    
+                    shutil.copytree(source_path, dest_path)
+                    copied.append(clean_name)
+    
+    return copied
+
+# Copy Beans
+print("\n🌱 ORGANIZING BEANS...")
+beans_copied = copy_disease_class('/content/datasets/beans', 'Beans')
+
+# Copy Coffee
+print("\n☕ ORGANIZING COFFEE...")
+coffee_copied = copy_disease_class('/content/datasets/coffee', 'Coffee')
+
+# Copy Tomato, Potato, Pepper from PlantVillage
+print("\n🍅 ORGANIZING TOMATO, POTATO, PEPPER...")
+
+plantvillage_base = '/content/datasets/plantvillage'
+
+# Find the actual PlantVillage directory
+pv_dirs = []
+for root, dirs, files in os.walk(plantvillage_base):
+    if 'PlantVillage' in dirs:
+        pv_dirs.append(os.path.join(root, 'PlantVillage'))
+
+if pv_dirs:
+    pv_path = pv_dirs[0]
+    print(f"Found PlantVillage at: {pv_path}")
+    
+    # Copy Tomato classes
+    for item in os.listdir(pv_path):
+        item_path = os.path.join(pv_path, item)
+        if os.path.isdir(item_path):
+            if 'Tomato' in item:
+                clean_name = item.replace('___', '_').replace('__', '_')
+                dest = f'/content/agrof_dataset/{clean_name}'
+                if not os.path.exists(dest):
+                    image_count = len([f for f in os.listdir(item_path) 
+                                      if f.endswith(('.jpg', '.jpeg', '.png'))])
+                    if image_count > 0:
+                        print(f"\n🍅 Copying: {clean_name} ({image_count} images)")
+                        shutil.copytree(item_path, dest)
+            
+            elif 'Potato' in item:
+                clean_name = item.replace('___', '_').replace('__', '_')
+                dest = f'/content/agrof_dataset/{clean_name}'
+                if not os.path.exists(dest):
+                    image_count = len([f for f in os.listdir(item_path) 
+                                      if f.endswith(('.jpg', '.jpeg', '.png'))])
+                    if image_count > 0:
+                        print(f"\n🥔 Copying: {clean_name} ({image_count} images)")
+                        shutil.copytree(item_path, dest)
+            
+            elif 'Pepper' in item:
+                clean_name = item.replace('___', '_').replace('__', '_')
+                dest = f'/content/agrof_dataset/{clean_name}'
+                if not os.path.exists(dest):
+                    image_count = len([f for f in os.listdir(item_path) 
+                                      if f.endswith(('.jpg', '.jpeg', '.png'))])
+                    if image_count > 0:
+                        print(f"\n🌶️ Copying: {clean_name} ({image_count} images)")
+                        shutil.copytree(item_path, dest)
+
+print("\n" + "="*60)
+print("✅ Dataset organization complete!")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL 4: Verify Final Dataset (Should show ~20 classes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🔍 Verifying final dataset structure...")
+print("="*60)
+
+crops = {
+    'Beans': [],
+    'Coffee': [],
+    'Tomato': [],
+    'Potato': [],
+    'Pepper': []
+}
+
+for class_name in sorted(os.listdir('/content/agrof_dataset')):
+    class_path = f'/content/agrof_dataset/{class_name}'
+    if os.path.isdir(class_path):
+        count = len([f for f in os.listdir(class_path) 
+                    if f.endswith(('.jpg', '.jpeg', '.png'))])
+        
+        if 'Beans' in class_name or 'Bean' in class_name:
+            crops['Beans'].append((class_name, count))
+        elif 'Coffee' in class_name:
+            crops['Coffee'].append((class_name, count))
+        elif 'Tomato' in class_name:
+            crops['Tomato'].append((class_name, count))
+        elif 'Potato' in class_name:
+            crops['Potato'].append((class_name, count))
+        elif 'Pepper' in class_name:
+            crops['Pepper'].append((class_name, count))
+
+for crop, classes_list in crops.items():
+    if classes_list:
+        total = sum(c[1] for c in classes_list)
+        icon = {'Beans': '🌱', 'Coffee': '☕', 'Tomato': '🍅', 
+               'Potato': '🥔', 'Pepper': '🌶️'}[crop]
+        print(f"\n{icon} {crop}: {len(classes_list)} classes, {total:,} images")
+        for class_name, count in classes_list:
+            disease = class_name.split('_', 1)[1] if '_' in class_name else class_name
+            print(f"   ├─ {disease}: {count} images")
+
+total_classes = sum(len(c) for c in crops.values())
+total_images = sum(sum(cls[1] for cls in c) for c in crops.values())
+
+print(f"\n{'='*60}")
+print(f"✅ READY FOR TRAINING!")
+print(f"📊 Total: {total_classes} classes, {total_images:,} images")
+print("="*60)
+
+if total_classes >= 15:
+    print("\n🎉 Dataset is complete! You can now proceed with training!")
+    print("\n📋 NEXT STEP: Run the training cells from COMPLETE_TRAINING_CODE_FOR_COLAB.txt")
+else:
+    print(f"\n⚠️  Warning: Only {total_classes} classes found (expected 15-20)")
+
+╔══════════════════════════════════════════════════════════════════╗
+║  ✅ AFTER CELL 4 COMPLETES SUCCESSFULLY:                         ║
+║                                                                   ║
+║  Open COMPLETE_TRAINING_CODE_FOR_COLAB.txt and run those cells   ║
+║  to build, train, and convert the model!                         ║
+╚══════════════════════════════════════════════════════════════════╝
+
+🎯 EXPECTED OUTPUT FROM CELL 4:
+
+🌱 Beans: 3 classes, ~1,300 images
+☕ Coffee: 2 classes, ~1,100 images
+🍅 Tomato: 10 classes, ~15,000 images
+🥔 Potato: 3 classes, ~2,200 images
+🌶️ Pepper: 2 classes, ~2,500 images
+
+✅ READY FOR TRAINING!
+📊 Total: 20 classes, ~22,000 images
+
+
+

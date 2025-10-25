@@ -1,0 +1,100 @@
+{
+  "productName": "Tengeru",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 4,098",
+  "lowestPrice": 4098,
+  "lowestPackage": "10g @ 10+ units",
+  "details": {
+    "description": "Transplant to maturity: 90 days, Seed Rate: 120g per acre, Plant Spacing: 60*60cm, Fruit weight: 130g, Fruit shape: Round",
+    "transplantToMaturity": "90 days",
+    "seedRate": "120g per acre",
+    "plantSpacing": "60*60cm",
+    "fruitWeight": "130g",
+    "fruitShape": "Round"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 4300,
+          "priceFormatted": "UGX 4,300",
+          "totalPrice": 4300,
+          "totalFormatted": "UGX 4,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 4201,
+          "priceFormatted": "UGX 4,201",
+          "totalPrice": 21005,
+          "totalFormatted": "UGX 21,005",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 4098,
+          "priceFormatted": "UGX 4,098",
+          "totalPrice": 40980,
+          "totalFormatted": "UGX 40,980",
+          "discountPercent": 5
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 4098,
+          "priceFormatted": "UGX 4,098",
+          "totalPrice": 81960,
+          "totalFormatted": "UGX 81,960",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 16500,
+          "priceFormatted": "UGX 16,500",
+          "totalPrice": 16500,
+          "totalFormatted": "UGX 16,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 16500,
+          "priceFormatted": "UGX 16,500",
+          "totalPrice": 82500,
+          "totalFormatted": "UGX 82,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 16385,
+          "priceFormatted": "UGX 16,385",
+          "totalPrice": 163850,
+          "totalFormatted": "UGX 163,850",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 16385,
+          "priceFormatted": "UGX 16,385",
+          "totalPrice": 327700,
+          "totalFormatted": "UGX 327,700",
+          "discountPercent": 1
+        }
+      ]
+    }
+  ]
+}

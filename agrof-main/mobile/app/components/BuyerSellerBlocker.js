@@ -18,7 +18,7 @@
  */
 
 import React from 'react';
-import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, ActivityIndicator, SafeAreaView, StatusBar } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useUser } from '../contexts/UserContext';
 
@@ -38,24 +38,27 @@ const BuyerSellerBlocker = ({ type = 'buyer' }) => {
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
         <ActivityIndicator size="large" color="#4CAF50" />
         <Text style={styles.loadingText}>Loading {type} profile...</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
   if (!isAuthenticated || !user) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
         <MaterialIcons name="person-off" size={60} color="#ccc" />
         <Text style={styles.noDataText}>Please sign in to continue</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
       <View style={styles.profileCard}>
         {/* Profile Photo - From Supabase or Base64 */}
         <View style={styles.photoContainer}>
@@ -147,7 +150,7 @@ const BuyerSellerBlocker = ({ type = 'buyer' }) => {
           </Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -276,7 +279,7 @@ export default BuyerSellerBlocker;
  */
 
 import React from 'react';
-import { View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, ActivityIndicator, SafeAreaView, StatusBar } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useUser } from '../contexts/UserContext';
 
@@ -296,24 +299,27 @@ const BuyerSellerBlocker = ({ type = 'buyer' }) => {
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
         <ActivityIndicator size="large" color="#4CAF50" />
         <Text style={styles.loadingText}>Loading {type} profile...</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
   if (!isAuthenticated || !user) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
         <MaterialIcons name="person-off" size={60} color="#ccc" />
         <Text style={styles.noDataText}>Please sign in to continue</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
       <View style={styles.profileCard}>
         {/* Profile Photo - From Supabase or Base64 */}
         <View style={styles.photoContainer}>
@@ -405,7 +411,7 @@ const BuyerSellerBlocker = ({ type = 'buyer' }) => {
           </Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

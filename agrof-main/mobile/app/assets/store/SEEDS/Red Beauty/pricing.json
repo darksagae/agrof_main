@@ -1,0 +1,27 @@
+{
+  "productName": "Red Beauty",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 7,500",
+  "lowestPrice": 7500,
+  "lowestPackage": "1kg @ 1+ units",
+  "details": {
+    "description": "Red Beauty is a high-quality tomato variety known for excellent fruit quality and productivity."
+  },
+  "packages": [
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 7500,
+          "priceFormatted": "UGX 7,500",
+          "totalPrice": 7500,
+          "totalFormatted": "UGX 7,500",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

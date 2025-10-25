@@ -1,0 +1,42 @@
+{
+  "productName": "Black Beauty - Eggplants",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Eggplant",
+  "displayPrice": "UGX 7,000",
+  "lowestPrice": 7000,
+  "lowestPackage": "50g @ 1+ units",
+  "details": {
+    "description": "Black Beauty is a classic eggplant variety valued for its large, glossy, deep purple fruits and tender, flavorful flesh. The plants are sturdy and productive, thriving in warm climates and maturing in 70-80 days.",
+    "maturity": "70-80 days"
+  },
+  "packages": [
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 7000,
+          "priceFormatted": "UGX 7,000",
+          "totalPrice": 7000,
+          "totalFormatted": "UGX 7,000",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 108000,
+          "priceFormatted": "UGX 108,000",
+          "totalPrice": 108000,
+          "totalFormatted": "UGX 108,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

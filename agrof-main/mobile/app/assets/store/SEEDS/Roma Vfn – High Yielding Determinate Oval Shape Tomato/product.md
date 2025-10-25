@@ -1,90 +1,55 @@
-# Roma VFN Tomato Seeds
+# Roma Vfn – High Yielding Determinate Oval Shape Tomato
 
 ## Overview
-Roma VFN is a high-yielding determinate tomato variety known for its oval-shaped fruits, excellent flavor, and disease resistance. This variety is perfect for processing, canning, and fresh consumption, producing abundant yields of meaty tomatoes.
+Roma is a high yielding determinate oval shape tomato for use in a variety of dishes. Popular processing variety. Good dry matter content. Fruits weigh about 70g. High yielding tomato. Determinate variety (has definite flowering and fruiting). Fruits mature at the same time and thus can be harvested at once. Fruits ripen uniformly for mechanical harvesting. It's resistant to Verticillium and Fusarium wilts, and nematodes.
 
-## Specifications
-Variety: Determinate Tomato
-Fruit Shape: Oval, plum-shaped
-Fruit Weight: 60-80g
-Days to Maturity: 75-80 days
-Plant Type: Determinate, compact
-Fruit Color: Red
-Flesh Color: Deep red
-Disease Resistance: VFN (Verticillium, Fusarium, Nematodes)
-Seed Count: 1000 seeds per packet
-Germination Rate: >95%
+## Supplier
+**Syova Seed (U) Ltd**
 
-## Key Features
-High yield potential
-Oval, meaty fruits
-Excellent for processing
-Disease resistance (VFN)
-Compact plant habit
-Uniform fruit size
-Long harvest period
+## Product Specifications
 
-## Growing Requirements
-Climate: Warm season crop
-Temperature: 20-30°C optimal
-Soil: Well-drained, fertile soil
-pH Range: 6.0-7.0
-Water: Regular irrigation needed
-Spacing: 60cm x 60cm between plants
-
-## Usage Instructions
-- **Variety type**: High yielding determinate oval shape tomato for use in a variety of dishes
-- **Key attributes**: Roma VFN is a Popular processing variety, Good dry matter content, Fruits weigh about 70g
-- **High yielding**: High yielding tomato, Determinate variety (has definite flowering and fruiting)
-- **Fruit characteristics**: Fruits mature at the same time and thus can be harvested at once, Fruits ripen uniformly for mechanical harvesting
-- **Disease resistance**: It's resistant to Verticillium and Fusarium wilts, and nematodes
-- **Maturity**: 90 – 100 days
-- **Yield potential**: 15,000 – 20,000 kg/acre
+- **Maturity**: 90-100 days
+- **Yield Potential**: 15,000-20,000 kg/acre
 - **Spacing**: 35 cm x 100 cm
-- **Seed rate**: 400 grams per acre direct seeding/80grams transplant
+- **Seed Rate**: 400 grams per acre direct seeding/80grams transplant
+- **Fruit Weight**: 70g
 
-## Application Method
-- **Method**: Direct seeding or transplanting
-- **Target**: High yielding determinate oval shape tomato for processing
-- **Spacing**: 35 cm x 100 cm between plants
-- **Processing suitability**: Popular processing variety with good dry matter content
-- **Mechanical harvesting**: Fruits ripen uniformly for mechanical harvesting
-- **Disease resistance**: Resistant to Verticillium and Fusarium wilts, and nematodes
+## Pricing
 
-## Benefits
-- **High yield potential**: 15,000 – 20,000 kg/acre under good management
-- **Processing quality**: Popular processing variety with good dry matter content
-- **Disease resistance**: Resistant to Verticillium and Fusarium wilts, and nematodes
-- **Uniform ripening**: Fruits ripen uniformly for mechanical harvesting
-- **Determinate variety**: Has definite flowering and fruiting
-- **Mechanical harvesting**: Suitable for mechanical harvesting
-- **Market demand**: Popular processing variety with excellent market acceptance
+**Best Price**: UGX 4,709 (10g @ 10+ units)
 
-## Price Information
-Per 1000 seeds: UGX 32,000
-Per 5000 seeds: UGX 140,000
-Per 10000 seeds: UGX 260,000
-Bulk orders: Contact for pricing
+### Package Options & Pricing
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1000 seeds
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+**10g**:
+- 1+ units: UGX 4,900/unit
+- 5+ units: UGX 4,802/unit (2% off)
+- 10+ units: UGX 4,709/unit (4% off)
+- 20+ units: UGX 4,709/unit (4% off)
 
-## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Maintain low humidity
-Shelf life: 3 years from packaging date
+**20g**:
+- 1+ units: UGX 7,200/unit
 
-## Safety Information
-Keep away from children and pets
-Store separately from food items
-Use appropriate protective equipment when handling
+**25g**:
+- 1+ units: UGX 9,600/unit
+- 5+ units: UGX 9,504/unit (1% off)
+- 10+ units: UGX 9,408/unit (2% off)
+- 20+ units: UGX 9,408/unit (2% off)
 
-## Contact Information
-Phone: +256 700 123 456
-Email: seeds@agrof.com
-WhatsApp: +256 700 123 456
+**50g**:
+- 1+ units: UGX 18,300/unit
+- 5+ units: UGX 16,964/unit (7% off)
+- 10+ units: UGX 16,873/unit (8% off)
+- 20+ units: UGX 16,781/unit (8% off)
+
+## Why Buy From Us?
+- ✓ Genuine seeds from authorized suppliers
+- ✓ Quantity discounts available
+- ✓ Fresh stock with high germination
+- ✓ Fast delivery nationwide
+- ✓ Quality guaranteed
+
+## Ordering & Delivery
+- **Stock**: ✅ Available
+- **Delivery**: 1-3 days nationwide
+- **Payment**: Mobile money, Cash on delivery
+- **Support**: +256 700 123 456

@@ -1,0 +1,24 @@
+{
+  "productName": "Seek Bamboo Biochar Fertilizer",
+  "supplier": "Bukoola Chemical Industries (U) Ltd",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 90,000",
+  "lowestPrice": 90000,
+  "productDetails": "Product that gives excellent plant growth, rebuilds soil and offers higher production yields. It is made from Bamboo products, food grade organic matter, beneficial micro-organisms and amino acids of vegetable origin.",
+  "specifications": {
+    "Method of use": "Put into furrows or holes or broadcast and then cover with soil timely. Vegetables: 80-100kgs per acre, Fruits: 0.5-1kg per tree, Horticulture: 5-10kgs mixed with 100 kg substrate, Field crops: 100-120kgs per acre"
+  },
+  "packages": [
+    {
+      "size": "25kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 90000,
+          "priceFormatted": "UGX 90,000"
+        }
+      ]
+    }
+  ]
+}

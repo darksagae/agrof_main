@@ -1,0 +1,97 @@
+{
+  "productName": "California Wonder",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 3,621",
+  "lowestPrice": 3621,
+  "lowestPackage": "10g @ 20+ units",
+  "details": {
+    "description": "Ideal for Open field production, Very uniform fruits, Blocky and medium-sized, Widely adaptable variety, Colour turns from green to red.",
+    "averageYieldPerAcre": "6-7 tonnes",
+    "maturity": "80-90 Days"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 3800,
+          "priceFormatted": "UGX 3,800",
+          "totalPrice": 3800,
+          "totalFormatted": "UGX 3,800",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 3648,
+          "priceFormatted": "UGX 3,648",
+          "totalPrice": 18240,
+          "totalFormatted": "UGX 18,240",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 3633,
+          "priceFormatted": "UGX 3,633",
+          "totalPrice": 36330,
+          "totalFormatted": "UGX 36,330",
+          "discountPercent": 4
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 3621,
+          "priceFormatted": "UGX 3,621",
+          "totalPrice": 72420,
+          "totalFormatted": "UGX 72,420",
+          "discountPercent": 5
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 17600,
+          "priceFormatted": "UGX 17,600",
+          "totalPrice": 17600,
+          "totalFormatted": "UGX 17,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 17406,
+          "priceFormatted": "UGX 17,406",
+          "totalPrice": 87030,
+          "totalFormatted": "UGX 87,030",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 17354,
+          "priceFormatted": "UGX 17,354",
+          "totalPrice": 173540,
+          "totalFormatted": "UGX 173,540",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 17318,
+          "priceFormatted": "UGX 17,318",
+          "totalPrice": 346360,
+          "totalFormatted": "UGX 346,360",
+          "discountPercent": 2
+        }
+      ]
+    }
+  ]
+}

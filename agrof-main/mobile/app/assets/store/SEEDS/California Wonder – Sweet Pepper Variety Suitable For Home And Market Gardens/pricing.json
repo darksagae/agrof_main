@@ -1,0 +1,154 @@
+{
+  "productName": "California Wonder – Sweet Pepper Variety Suitable For Home And Market Gardens",
+  "supplier": "Syova Seed (U) Ltd",
+  "category": "Pepper",
+  "displayPrice": "UGX 8,101",
+  "lowestPrice": 8101,
+  "lowestPackage": "20g @ 5+ units",
+  "details": {
+    "description": "An established sweet pepper variety suitable for home and market gardens. Plants are tall, vigorous and highly productive. The fruits are pedant, thick walled, 4-lobed, uniform blocky and compact with attractive colour and continuous fruiting over a long period.",
+    "spacing": "60cm x 60cm",
+    "seedRate": "200grams/acre",
+    "maturity": "2-2.5 months",
+    "yieldPotential": "10-16mt/acre"
+  },
+  "packages": [
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10300,
+          "priceFormatted": "UGX 10,300",
+          "totalPrice": 10300,
+          "totalFormatted": "UGX 10,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 10197,
+          "priceFormatted": "UGX 10,197",
+          "totalPrice": 50985,
+          "totalFormatted": "UGX 50,985",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 10104,
+          "priceFormatted": "UGX 10,104",
+          "totalPrice": 101040,
+          "totalFormatted": "UGX 101,040",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 10104,
+          "priceFormatted": "UGX 10,104",
+          "totalPrice": 202080,
+          "totalFormatted": "UGX 202,080",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "20g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 8300,
+          "priceFormatted": "UGX 8,300",
+          "totalPrice": 8300,
+          "totalFormatted": "UGX 8,300",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 8101,
+          "priceFormatted": "UGX 8,101",
+          "totalPrice": 40505,
+          "totalFormatted": "UGX 40,505",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 8101,
+          "priceFormatted": "UGX 8,101",
+          "totalPrice": 81010,
+          "totalFormatted": "UGX 81,010",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 8101,
+          "priceFormatted": "UGX 8,101",
+          "totalPrice": 162020,
+          "totalFormatted": "UGX 162,020",
+          "discountPercent": 2
+        }
+      ]
+    },
+    {
+      "size": "25g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 10300,
+          "priceFormatted": "UGX 10,300",
+          "totalPrice": 10300,
+          "totalFormatted": "UGX 10,300",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "50g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 21500,
+          "priceFormatted": "UGX 21,500",
+          "totalPrice": 21500,
+          "totalFormatted": "UGX 21,500",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 20103,
+          "priceFormatted": "UGX 20,103",
+          "totalPrice": 100515,
+          "totalFormatted": "UGX 100,515",
+          "discountPercent": 6
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 19995,
+          "priceFormatted": "UGX 19,995",
+          "totalPrice": 199950,
+          "totalFormatted": "UGX 199,950",
+          "discountPercent": 7
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 19909,
+          "priceFormatted": "UGX 19,909",
+          "totalPrice": 398180,
+          "totalFormatted": "UGX 398,180",
+          "discountPercent": 7
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "productName": "Oscars Oligo Organic EC Fertilizer",
+  "supplier": "Trax Holdings Ltd",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 64,800",
+  "lowestPrice": 64800,
+  "productDetails": "Prevents occurrence of defects in fruits and vegetables such as colour, shape, taste, by balancing nutrient uptake by the plants.",
+  "specifications": {},
+  "packages": [
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 64800,
+          "priceFormatted": "UGX 64,800"
+        }
+      ]
+    }
+  ]
+}

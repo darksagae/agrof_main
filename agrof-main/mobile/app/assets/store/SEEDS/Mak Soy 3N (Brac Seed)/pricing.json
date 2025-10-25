@@ -1,0 +1,58 @@
+{
+  "productName": "Mak Soy 3N (Brac Seed)",
+  "supplier": "Brac Seed",
+  "category": "Soya",
+  "displayPrice": "UGX 6,499",
+  "lowestPrice": 6499,
+  "lowestPackage": "1kg @ 20+ units",
+  "details": {
+    "description": "Mak Soy 3N is a high-yielding soya bean variety suitable for both small and large-scale farming.",
+    "spacing": "60cm x 5cm (machine); 50cm x 25cm (hand hoe)",
+    "seedRate": "50-60 Kg per hectare, 20-25 kg per acre",
+    "maturityPeriod": "100 days",
+    "yield": "2.0-3.5 metric tonnes per hectare; 0.8-1.4 metric tonnes per acre"
+  },
+  "packages": [
+    {
+      "size": "1kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 6700,
+          "priceFormatted": "UGX 6,700",
+          "totalPrice": 6700,
+          "totalFormatted": "UGX 6,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 6600,
+          "priceFormatted": "UGX 6,600",
+          "totalPrice": 33000,
+          "totalFormatted": "UGX 33,000",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 6600,
+          "priceFormatted": "UGX 6,600",
+          "totalPrice": 66000,
+          "totalFormatted": "UGX 66,000",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 6499,
+          "priceFormatted": "UGX 6,499",
+          "totalPrice": 129980,
+          "totalFormatted": "UGX 129,980",
+          "discountPercent": 3
+        }
+      ]
+    }
+  ]
+}

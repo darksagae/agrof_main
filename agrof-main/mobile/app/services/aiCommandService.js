@@ -6,6 +6,8 @@
 
 import { productsApi, categoriesApi } from './storeApi';
 import { AI_BASE_URL, STORE_BASE_URL, AI_TIMEOUT } from '../config/apiConfig';
+import enhancedAccuracyService from './enhancedAccuracyService';
+import enhancedProductService from './enhancedProductService';
 
 class AICommandService {
   constructor() {
@@ -63,27 +65,46 @@ class AICommandService {
         fetchedProducts = await this.fetchFallbackProducts();
       }
 
-      // Enhance products with AI intelligence
-      const enhancedProducts = this.enhanceProductsWithAI(
-        fetchedProducts, 
-        aiCommand
+      // Calculate confidence score
+      const confidenceData = enhancedAccuracyService.calculateConfidenceScore(
+        aiCommand,
+        symptoms,
+        aiCommand.crop_type
       );
+
+      // Get enhanced recommendations with accuracy scoring
+      const enhancedResult = await enhancedProductService.getEnhancedRecommendations(
+        aiCommand,
+        {}, // marketData will be fetched internally
+        confidenceData
+      );
+
+      if (!enhancedResult.success) {
+        throw new Error(enhancedResult.error);
+      }
 
       // Store command in history
       this.commandHistory.push({
         command: aiCommand,
-        products: enhancedProducts,
+        products: enhancedResult.products,
+        confidence_data: confidenceData,
         timestamp: new Date().toISOString()
       });
 
-      console.log(`✅ AI Command processed: ${enhancedProducts.length} products fetched`);
+      console.log(`✅ AI Command processed: ${enhancedResult.products.length} products with accuracy scoring`);
       
       return {
         success: true,
-        products: enhancedProducts,
+        products: enhancedResult.products,
         command: aiCommand,
-        confidence: confidence,
-        strategy: search_strategy
+        confidence: confidenceData,
+        strategy: search_strategy,
+        accuracy_stats: {
+          total_products: enhancedResult.total_products,
+          high_accuracy_count: enhancedResult.high_accuracy_count,
+          medium_accuracy_count: enhancedResult.medium_accuracy_count,
+          low_accuracy_count: enhancedResult.low_accuracy_count
+        }
       };
 
     } catch (error) {

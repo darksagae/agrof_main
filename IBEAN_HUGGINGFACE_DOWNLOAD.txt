@@ -1,0 +1,105 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  🌱 MAKERERE iBEAN FROM HUGGING FACE - Use This Cell            ║
+╚══════════════════════════════════════════════════════════════════╝
+
+The GitHub README says iBean is available on Hugging Face!
+Source: https://github.com/AI-Lab-Makerere/ibean
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 CELL: Download Makerere iBean from Hugging Face
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import os
+
+print("🌱 Downloading Makerere iBean from Hugging Face...")
+print("Dataset: 3 classes (Healthy, Angular Leaf Spot, Bean Rust)")
+print("="*60)
+
+# Install huggingface_hub if not already installed
+!pip install -q huggingface_hub
+
+from huggingface_hub import snapshot_download
+
+# Download the iBean dataset
+try:
+    dataset_path = snapshot_download(
+        repo_id="ai-lab-makerere/beans",
+        repo_type="dataset",
+        local_dir="/content/datasets/ibean_hf",
+        local_dir_use_symlinks=False
+    )
+    print(f"✅ Dataset downloaded to: {dataset_path}")
+except Exception as e:
+    print(f"⚠️  Hugging Face download failed: {e}")
+    print("\n🔄 Trying alternative method...")
+    
+    # Alternative: Use git lfs to clone
+    !git lfs install
+    !git clone https://huggingface.co/datasets/ai-lab-makerere/beans /content/datasets/ibean_hf
+
+# Explore the downloaded structure
+print("\n📁 Exploring iBean structure...")
+for root, dirs, files in os.walk('/content/datasets/ibean_hf'):
+    level = root.replace('/content/datasets/ibean_hf', '').count(os.sep)
+    
+    if level <= 2:  # Only show 2 levels deep
+        indent = ' ' * 2 * level
+        folder_name = os.path.basename(root)
+        print(f'{indent}📂 {folder_name}/')
+        
+        # Show subdirectories
+        subindent = ' ' * 2 * (level + 1)
+        for dir_name in sorted(dirs)[:10]:
+            dir_path = os.path.join(root, dir_name)
+            try:
+                file_count = len([f for f in os.listdir(dir_path) 
+                                 if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+                if file_count > 0:
+                    print(f'{subindent}📁 {dir_name}/ ({file_count} images)')
+                else:
+                    print(f'{subindent}📁 {dir_name}/')
+            except:
+                print(f'{subindent}📁 {dir_name}/')
+
+# Count Bean classes and images
+print("\n📊 Counting Bean disease classes...")
+bean_classes = {}
+
+for root, dirs, files in os.walk('/content/datasets/ibean_hf'):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        try:
+            image_files = [f for f in os.listdir(dir_path) 
+                          if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+            if len(image_files) > 0:
+                bean_classes[dir_name] = len(image_files)
+        except:
+            pass
+
+if bean_classes:
+    print(f"\n✅ Found {len(bean_classes)} Bean classes:")
+    for class_name, count in sorted(bean_classes.items()):
+        print(f"   🌱 {class_name}: {count} images")
+    
+    total_images = sum(bean_classes.values())
+    print(f"\n📊 Total iBean images: {total_images:,}")
+    print("="*60)
+else:
+    print("\n⚠️  No standard image folders found.")
+    print("Let's check all files in the dataset...")
+    
+    all_images = []
+    for root, dirs, files in os.walk('/content/datasets/ibean_hf'):
+        for file in files:
+            if file.lower().endswith(('.jpg', '.jpeg', '.png')):
+                all_images.append(os.path.join(root, file))
+    
+    print(f"📊 Found {len(all_images)} total images")
+    
+    if all_images:
+        print("\n📁 Sample image paths:")
+        for img_path in all_images[:5]:
+            print(f"   {img_path}")
+
+print("\n✅ iBean download complete!")
+

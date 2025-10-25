@@ -1,0 +1,35 @@
+{
+  "productName": "Fungicide – Organic Product",
+  "supplier": "Vermipro Limited",
+  "category": "Organic Chemicals",
+  "displayPrice": "UGX 12,500",
+  "lowestPrice": 12500,
+  "productDetails": "A fungicide for the control of powdery mildew and other diseases on terrestrial and indoor ornamental plants, greenhouse and garden crops, and turf. Active Ingredients: Potassium Bicarbonate 35.00% + Other Ingredients 65.00%",
+  "specifications": {
+    "Directions for use": "Start application at first sign of disease. For best protection, repeat at one to two week intervals. Mature Plantation: Mix 3.5kg of fungicide into 300L of water (25 tablespoons in 20L). Apply 100L per acre. Vegetables/Nurseries: Mix 1kg of fungicide into 200L of water (5 tablespoons in 20L). Apply 100L per acre"
+  },
+  "packages": [
+    {
+      "size": "700g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 12500,
+          "priceFormatted": "UGX 12,500"
+        }
+      ]
+    },
+    {
+      "size": "3.5kg",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 55800,
+          "priceFormatted": "UGX 55,800"
+        }
+      ]
+    }
+  ]
+}

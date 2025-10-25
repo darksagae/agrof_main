@@ -1,0 +1,43 @@
+{
+  "productName": "Tandi F1 – Tomato",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 6,000",
+  "lowestPrice": 6000,
+  "lowestPackage": "100 Seeds @ 1+ units",
+  "details": {
+    "description": "Tandi F1 tomato is so outstanding in performance when it comes to earliness, yields, fruit size and quality. It is recommended for Tropical Midland growing condition, dry season. Plant habit is compact and small. Closer planting distance can be considered. Fruit set is easy and concentrated, Fruit shape is elongated blocky and large in size. Fruit firmness and shelf life is rated high. Seed rate: 100 grams per acre, Maturity: 65-75 days after transplanting. Plant Vigour: Medium strong.",
+    "seedRate": "100 grams per acre",
+    "maturity": "65-75 days after transplanting"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 63000,
+          "priceFormatted": "UGX 63,000",
+          "totalPrice": 63000,
+          "totalFormatted": "UGX 63,000",
+          "discountPercent": 0
+        }
+      ]
+    },
+    {
+      "size": "100 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 6000,
+          "priceFormatted": "UGX 6,000",
+          "totalPrice": 6000,
+          "totalFormatted": "UGX 6,000",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

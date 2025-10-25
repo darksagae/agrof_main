@@ -58,7 +58,7 @@ const ProductTradingScreen = ({ route, navigation }) => {
         .from('buyers')
         .select(`
           id,
-          location,
+          shipping_address,
           users!inner (
             id,
             full_name,
@@ -101,7 +101,7 @@ const ProductTradingScreen = ({ route, navigation }) => {
       const buyers = (buyersData || []).map((buyer) => ({
         id: buyer.users.id,
         name: buyer.users.full_name || buyer.users.email,
-        location: buyer.location || 'Uganda',
+        location: buyer.shipping_address?.location || buyer.shipping_address?.district || 'Uganda',
         price: 0, // Will be set based on actual orders
         quantity: 0, // Will be set based on actual orders
         rating: 0, // Buyers don't have ratings yet

@@ -1,0 +1,98 @@
+{
+  "productName": "Nouvelle F1 - Tomatoes",
+  "supplier": "Simlaw Seeds Company (U) Ltd",
+  "category": "Tomato",
+  "displayPrice": "UGX 43,140",
+  "lowestPrice": 43140,
+  "lowestPackage": "5g @ 20+ units",
+  "details": {
+    "description": "Spacing: 60x60cm, Maturity: 80-85 days from transplanting, Yield potential: 35 tons per acre. Very good shelf life and transport quality.",
+    "spacing": "60x60cm",
+    "maturity": "80-85 days from transplanting",
+    "yieldPotential": "35 tons per acre"
+  },
+  "packages": [
+    {
+      "size": "5g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 49700,
+          "priceFormatted": "UGX 49,700",
+          "totalPrice": 49700,
+          "totalFormatted": "UGX 49,700",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 49601,
+          "priceFormatted": "UGX 49,601",
+          "totalPrice": 248005,
+          "totalFormatted": "UGX 248,005",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 49402,
+          "priceFormatted": "UGX 49,402",
+          "totalPrice": 494020,
+          "totalFormatted": "UGX 494,020",
+          "discountPercent": 1
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 43140,
+          "priceFormatted": "UGX 43,140",
+          "totalPrice": 862800,
+          "totalFormatted": "UGX 862,800",
+          "discountPercent": 13
+        }
+      ]
+    },
+    {
+      "size": "10g",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 97600,
+          "priceFormatted": "UGX 97,600",
+          "totalPrice": 97600,
+          "totalFormatted": "UGX 97,600",
+          "discountPercent": 0
+        },
+        {
+          "quantity": "5+ units",
+          "quantityValue": 5,
+          "pricePerUnit": 95648,
+          "priceFormatted": "UGX 95,648",
+          "totalPrice": 478240,
+          "totalFormatted": "UGX 478,240",
+          "discountPercent": 2
+        },
+        {
+          "quantity": "10+ units",
+          "quantityValue": 10,
+          "pricePerUnit": 83253,
+          "priceFormatted": "UGX 83,253",
+          "totalPrice": 832530,
+          "totalFormatted": "UGX 832,530",
+          "discountPercent": 15
+        },
+        {
+          "quantity": "20+ units",
+          "quantityValue": 20,
+          "pricePerUnit": 85400,
+          "priceFormatted": "UGX 85,400",
+          "totalPrice": 1708000,
+          "totalFormatted": "UGX 1,708,000",
+          "discountPercent": 13
+        }
+      ]
+    }
+  ]
+}

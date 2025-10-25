@@ -1,0 +1,82 @@
+============================================================
+IMPORTING ALL SEED PRODUCTS TO DATABASE
+============================================================
+
+✅ SEEDS category ID: 25
+
+📁 Found 73 seed product folders
+
+[1/73] ❌ Error importing Anita – Watermelon: SQLITE_ERROR: table products has no column named discount_percentage
+[2/73] ❌ Error importing Arjani F1 - Eggplants: SQLITE_ERROR: table products has no column named discount_percentage
+[3/73] ❌ Error importing Arjuna F1 – Pumpkin: SQLITE_ERROR: table products has no column named discount_percentage
+[4/73] ❌ Error importing Ashley – Open Pollinated Cucumber Varirty With Prolific Productivity: SQLITE_ERROR: table products has no column named discount_percentage
+[6/73] ❌ Error importing Black Beauty - Eggplants: SQLITE_ERROR: table products has no column named discount_percentage
+[5/73] ❌ Error importing Bitter Gourd -Palee F1: SQLITE_ERROR: table products has no column named discount_percentage
+[7/73] ❌ Error importing Cal-j Tomato Compact And Determinate Variety Suitable For Processing And Fresh Market: SQLITE_ERROR: table products has no column named discount_percentage
+[8/73] ❌ Error importing California Wonder: SQLITE_ERROR: table products has no column named discount_percentage
+[9/73] ❌ Error importing California Wonder "Bamba" - Pepper: SQLITE_ERROR: table products has no column named discount_percentage
+[10/73] ❌ Error importing California Wonder – Sweet Pepper Variety Suitable For Home And Market Gardens: SQLITE_ERROR: table products has no column named discount_percentage
+[11/73] ❌ Error importing California Wonder “Bamba” - Pepper: SQLITE_ERROR: table products has no column named discount_percentage
+[12/73] ❌ Error importing Cayenne Long Slim – Hot Pepper, With Early Maturity And High Yield Potential: SQLITE_ERROR: table products has no column named discount_percentage
+[13/73] ❌ Error importing Coatmeal - Coriander: SQLITE_ERROR: table products has no column named discount_percentage
+[14/73] ❌ Error importing Copenhagen: SQLITE_ERROR: table products has no column named discount_percentage
+[15/73] ❌ Error importing Copenhagen Market – Cabbage, The Most Popular Early Maturing Ball-headed Variety: SQLITE_ERROR: table products has no column named discount_percentage
+[16/73] ❌ Error importing Corriander Dhania: SQLITE_ERROR: table products has no column named discount_percentage
+[17/73] ❌ Error importing Demon F1-Hotpaper: SQLITE_ERROR: table products has no column named discount_percentage
+[18/73] ❌ Error importing Dodo (Elma): SQLITE_ERROR: table products has no column named discount_percentage
+[19/73] ❌ Error importing Drumhead - Cabbage: SQLITE_ERROR: table products has no column named discount_percentage
+[20/73] ❌ Error importing E107 (Simsim): SQLITE_ERROR: table products has no column named discount_percentage
+[21/73] ❌ Error importing Efia - Hot paper: SQLITE_ERROR: table products has no column named discount_percentage
+[22/73] ❌ Error importing Fanaka F1- Cabbage, Hybrid With Excellent Heat Tolerance And High Adaptability: SQLITE_ERROR: table products has no column named discount_percentage
+[23/73] ❌ Error importing Femi F1 – Hybrid Eggplant Variety: SQLITE_ERROR: table products has no column named discount_percentage
+[24/73] ❌ Error importing Frey - Pepper Hybrid F1: SQLITE_ERROR: table products has no column named discount_percentage
+[25/73] ❌ Error importing Galia F1 – Sweet Melon With Firm Fruits, Aromatic Flavour: SQLITE_ERROR: table products has no column named discount_percentage
+[26/73] ❌ Error importing Georgia Sukuma Wiki – Vigorous And Hardy Collard Variety: SQLITE_ERROR: table products has no column named discount_percentage
+[27/73] ❌ Error importing Giant Drum Head – Cabbage Variety That Is High Yielding And Market Fit: SQLITE_ERROR: table products has no column named discount_percentage
+[28/73] ❌ Error importing Grace - Barley Seed: SQLITE_ERROR: table products has no column named discount_percentage
+[29/73] ❌ Error importing Great Lakes Mesa 659 – Lettuce Variety With Tip-burn Resistance & Medium-large, Solid Heads: SQLITE_ERROR: table products has no column named discount_percentage
+[30/73] ❌ Error importing Green Aroma- Coriander (Dhania) Variety with Vigorous and Fast growing Plants: SQLITE_ERROR: table products has no column named discount_percentage
+[31/73] ❌ Error importing Green Bunching – Onion, Non-bulbing Alliums That Produce Yummy Green Stems: SQLITE_ERROR: table products has no column named discount_percentage
+[32/73] ❌ Error importing Green Coronet F1 – Cabbage, Medium-large, Semi-upright Hybrid: SQLITE_ERROR: table products has no column named discount_percentage
+[33/73] ❌ Error importing Green Gold F1 – Pepper, High Yielding Variety With Excellent Fruit Set: SQLITE_ERROR: table products has no column named discount_percentage
+[34/73] ❌ Error importing Green Sprouting Calabrese – Broccoli With Medium Sized Dark Green Heads: SQLITE_ERROR: table products has no column named discount_percentage
+[35/73] ❌ Error importing Habanero Red – Bonnet Pepper: SQLITE_ERROR: table products has no column named discount_percentage
+[36/73] ❌ Error importing Habanero Yellow – Bonnet Pepper: SQLITE_ERROR: table products has no column named discount_percentage
+[37/73] ❌ Error importing Indica F1-cabbage: SQLITE_ERROR: table products has no column named discount_percentage
+[38/73] ❌ Error importing Julie F1: SQLITE_ERROR: table products has no column named discount_percentage
+[39/73] ❌ Error importing Katana F1 -Pumpkin: SQLITE_ERROR: table products has no column named discount_percentage
+[40/73] ❌ Error importing Kaveri F1 – Sweet Pepper: SQLITE_ERROR: table products has no column named discount_percentage
+[41/73] ❌ Error importing Kifaru F1 – Red Cabbage: SQLITE_ERROR: table products has no column named discount_percentage
+[42/73] ❌ Error importing Kilele F1hybrid: SQLITE_ERROR: table products has no column named discount_percentage
+[43/73] ❌ Error importing Long Purple – Eggplant Variety With A High Yield Potential: SQLITE_ERROR: table products has no column named discount_percentage
+[44/73] ❌ Error importing Mak Soy 3N (Brac Seed): SQLITE_ERROR: table products has no column named discount_percentage
+[45/73] ❌ Error importing Mammoth Red Rock – Red Cabbage Producing Large, Beautiful Deep Red-purple Heads: SQLITE_ERROR: table products has no column named discount_percentage
+[46/73] ❌ Error importing Maradona F1 – Hybrid Papayapawpaw: SQLITE_ERROR: table products has no column named discount_percentage
+[47/73] ❌ Error importing Maxim F1 – Tomato: SQLITE_ERROR: table products has no column named discount_percentage
+[48/73] ❌ Error importing Merdan F1- African Eggplants: SQLITE_ERROR: table products has no column named discount_percentage
+[49/73] ❌ Error importing Nakati - Highly Nutritious Local Vegetable: SQLITE_ERROR: table products has no column named discount_percentage
+[50/73] ❌ Error importing Namuche 3: SQLITE_ERROR: table products has no column named discount_percentage
+[51/73] ❌ Error importing Nouvelle F1 - Tomatoes: SQLITE_ERROR: table products has no column named discount_percentage
+[52/73] ❌ Error importing Poornima 008 F1- Cauliflower: SQLITE_ERROR: table products has no column named discount_percentage
+[53/73] ❌ Error importing Pusa Sawani: SQLITE_ERROR: table products has no column named discount_percentage
+[54/73] ❌ Error importing Pusa Sawani – Okra Variety With Wide Adaptability: SQLITE_ERROR: table products has no column named discount_percentage
+[55/73] ❌ Error importing Rambo F1 – Tomato Seed: SQLITE_ERROR: table products has no column named discount_percentage
+[56/73] ❌ Error importing Red Beauty: SQLITE_ERROR: table products has no column named discount_percentage
+[57/73] ❌ Error importing Red Bugga-amaranthus: SQLITE_ERROR: table products has no column named discount_percentage
+[58/73] ❌ Error importing Roma Vfn – High Yielding Determinate Oval Shape Tomato: SQLITE_ERROR: table products has no column named discount_percentage
+[59/73] ❌ Error importing Sc Duma 43 – Maize Seed (Agro Supply): SQLITE_ERROR: table products has no column named discount_percentage
+[60/73] ❌ Error importing Sugar Baby: SQLITE_ERROR: table products has no column named discount_percentage
+[61/73] ❌ Error importing Sugar Baby – Most Popular And Grown Watermelon Variety Due To Its Early Maturity: SQLITE_ERROR: table products has no column named discount_percentage
+[62/73] ❌ Error importing Sugar King - Sweet Corn: SQLITE_ERROR: table products has no column named discount_percentage
+[63/73] ❌ Error importing Sukari F1 – Watermelon: SQLITE_ERROR: table products has no column named discount_percentage
+[64/73] ❌ Error importing Swiss Chard Ford Hook Giant – Tall And Vigorous Spinach Variety: SQLITE_ERROR: table products has no column named discount_percentage
+[65/73] ❌ Error importing Tall Utah – Celery Variety With Crisp, Stringless Green Tightly Folded Hearts: SQLITE_ERROR: table products has no column named discount_percentage
+[66/73] ❌ Error importing Tandi F1 – Tomato: SQLITE_ERROR: table products has no column named discount_percentage
+[67/73] ❌ Error importing Tengeru: SQLITE_ERROR: table products has no column named discount_percentage
+[68/73] ❌ Error importing Tengeru 97 - Determinate Round Tomato With A High Yield Potential: SQLITE_ERROR: table products has no column named discount_percentage
+[69/73] ❌ Error importing Terere – Amaranthus, Indigenous, Highly Nutritious Green Leafy Vegetable: SQLITE_ERROR: table products has no column named discount_percentage
+[70/73] ❌ Error importing Tomato Assila: SQLITE_ERROR: table products has no column named discount_percentage
+[71/73] ❌ Error importing Water Melon Pata Negra: SQLITE_ERROR: table products has no column named discount_percentage
+[72/73] ❌ Error importing Yubi F1 Pakchoy- Chinese Cabbage: SQLITE_ERROR: table products has no column named discount_percentage
+[73/73] ❌ Error importing Zawadi F1 – Cabbage, High Yielding Variety That Withstands Long Distance Transportation: SQLITE_ERROR: table products has no column named discount_percentage
+🗑️  Cleared old seed products

@@ -1,0 +1,293 @@
+
+========================================
+UPDATING ALL SEED PRODUCTS
+========================================
+
+Total products to update: 69
+
+[1/69]
+✅ Updated: Sugar Baby – Most Popular And Grown Watermelon Variety Due To Its Early Maturity
+   📝 Created pricing.json
+
+[2/69]
+✅ Updated: Dodo (Elma)
+   📝 Created pricing.json
+
+[3/69]
+✅ Updated: Julie F1
+   📝 Created pricing.json
+
+[4/69]
+✅ Updated: Frey - Pepper Hybrid F1
+   📝 Created pricing.json
+
+[5/69]
+✅ Updated: Habanero Yellow – Bonnet Pepper
+   📝 Created pricing.json
+
+[6/69]
+✅ Updated: Grace - Barley Seed
+   📝 Created pricing.json
+
+[7/69]
+✅ Updated: California Wonder "Bamba" - Pepper
+   📝 Created pricing.json
+
+[8/69]
+✅ Updated: Habanero Red – Bonnet Pepper
+   📝 Created pricing.json
+
+[9/69]
+✅ Updated: Ashley – Open Pollinated Cucumber Varirty With Prolific Productivity
+   📝 Created pricing.json
+
+[10/69]
+✅ Updated: Mak Soy 3N (Brac Seed)
+   📝 Created pricing.json
+
+[11/69]
+✅ Updated: Cal-j Tomato Compact And Determinate Variety Suitable For Processing And Fresh Market
+   📝 Created pricing.json
+
+[12/69]
+✅ Updated: Green Bunching – Onion, Non-bulbing Alliums That Produce Yummy Green Stems
+   📝 Created pricing.json
+
+[13/69]
+✅ Updated: Terere – Amaranthus, Indigenous, Highly Nutritious Green Leafy Vegetable
+   📝 Created pricing.json
+
+[14/69]
+✅ Updated: Galia F1 – Sweet Melon With Firm Fruits, Aromatic Flavour
+   📝 Created pricing.json
+
+[15/69]
+✅ Updated: Green Gold F1 – Pepper, High Yielding Variety With Excellent Fruit Set
+   📝 Created pricing.json
+
+[16/69]
+✅ Updated: Green Coronet F1 – Cabbage, Medium-large, Semi-upright Hybrid
+   📝 Created pricing.json
+
+[17/69]
+✅ Updated: Tall Utah – Celery Variety With Crisp, Stringless Green Tightly Folded Hearts
+   📝 Created pricing.json
+
+[18/69]
+✅ Updated: California Wonder
+   📝 Created pricing.json
+
+[19/69]
+✅ Updated: Maxim F1 – Tomato
+   📝 Created pricing.json
+
+[20/69]
+✅ Updated: Coatmeal - Coriander
+   📝 Created pricing.json
+
+[21/69]
+✅ Updated: Rambo F1 – Tomato Seed
+   📝 Created pricing.json
+
+[22/69]
+✅ Updated: Zawadi F1 – Cabbage, High Yielding Variety That Withstands Long Distance Transportation
+   📝 Created pricing.json
+
+[23/69]
+✅ Updated: Fanaka F1- Cabbage, Hybrid With Excellent Heat Tolerance And High Adaptability
+   📝 Created pricing.json
+
+[24/69]
+✅ Updated: Namuche 3
+   📝 Created pricing.json
+
+[25/69]
+✅ Updated: Great Lakes Mesa 659 – Lettuce Variety With Tip-burn Resistance & Medium-large, Solid Heads
+   📝 Created pricing.json
+
+[26/69]
+✅ Updated: Sukari F1 – Watermelon
+   📝 Created pricing.json
+
+[27/69]
+✅ Updated: Arjuna F1 – Pumpkin
+   📝 Created pricing.json
+
+[28/69]
+✅ Updated: Nouvelle F1 - Tomatoes
+   📝 Created pricing.json
+
+[29/69]
+✅ Updated: E107 (Simsim)
+   📝 Created pricing.json
+
+[30/69]
+✅ Updated: Tengeru
+   📝 Created pricing.json
+
+[31/69]
+✅ Updated: Drumhead - Cabbage
+   📝 Created pricing.json
+
+[32/69]
+✅ Updated: Cayenne Long Slim – Hot Pepper, With Early Maturity And High Yield Potential
+   📝 Created pricing.json
+
+[33/69]
+✅ Updated: Copenhagen
+   📝 Created pricing.json
+
+[34/69]
+✅ Updated: Corriander Dhania
+   📝 Created pricing.json
+
+[35/69]
+✅ Updated: Green Sprouting Calabrese – Broccoli With Medium Sized Dark Green Heads
+   📝 Created pricing.json
+
+[36/69]
+✅ Updated: Copenhagen Market – Cabbage, The Most Popular Early Maturing Ball-headed Variety
+   📝 Created pricing.json
+
+[37/69]
+✅ Updated: Mammoth Red Rock – Red Cabbage Producing Large, Beautiful Deep Red-purple Heads
+   📝 Created pricing.json
+
+[38/69]
+✅ Updated: Green Aroma- Coriander (Dhania) Variety with Vigorous and Fast growing Plants
+   📝 Created pricing.json
+
+[39/69]
+✅ Updated: Georgia Sukuma Wiki – Vigorous And Hardy Collard Variety
+   📝 Created pricing.json
+
+[40/69]
+✅ Updated: Long Purple – Eggplant Variety With A High Yield Potential
+   📝 Created pricing.json
+
+[41/69]
+✅ Updated: California Wonder – Sweet Pepper Variety Suitable For Home And Market Gardens
+   📝 Created pricing.json
+
+[42/69]
+✅ Updated: Nakati - Highly Nutritious Local Vegetable
+   📝 Created pricing.json
+
+[43/69]
+✅ Updated: Pusa Sawani – Okra Variety With Wide Adaptability
+   📝 Created pricing.json
+
+[44/69]
+✅ Updated: Swiss Chard Ford Hook Giant – Tall And Vigorous Spinach Variety
+   📝 Created pricing.json
+
+[45/69]
+✅ Updated: Anita – Watermelon
+   📝 Created pricing.json
+
+[46/69]
+✅ Updated: Tomato Assila
+   📝 Created pricing.json
+
+[47/69]
+✅ Updated: Water Melon Pata Negra
+   📝 Created pricing.json
+
+[48/69]
+✅ Updated: Red Bugga-amaranthus
+   📝 Created pricing.json
+
+[49/69]
+✅ Updated: Red Beauty
+   📝 Created pricing.json
+
+[50/69]
+✅ Updated: Bitter Gourd -Palee F1
+   📝 Created pricing.json
+
+[51/69]
+✅ Updated: Black Beauty - Eggplants
+   📝 Created pricing.json
+
+[52/69]
+✅ Updated: Merdan F1- African Eggplants
+   📝 Created pricing.json
+
+[53/69]
+✅ Updated: Efia - Hot paper
+   📝 Created pricing.json
+
+[54/69]
+✅ Updated: Katana F1 -Pumpkin
+   📝 Created pricing.json
+
+[55/69]
+✅ Updated: Yubi F1 Pakchoy- Chinese Cabbage
+   📝 Created pricing.json
+
+[56/69]
+✅ Updated: Tengeru 97 - Determinate Round Tomato With A High Yield Potential
+   📝 Created pricing.json
+
+[57/69]
+✅ Updated: Roma Vfn – High Yielding Determinate Oval Shape Tomato
+   📝 Created pricing.json
+
+[58/69]
+✅ Updated: Kilele F1hybrid
+   📝 Created pricing.json
+
+[59/69]
+✅ Updated: Indica F1-cabbage
+   📝 Created pricing.json
+
+[60/69]
+✅ Updated: Kifaru F1 – Red Cabbage
+   📝 Created pricing.json
+
+[61/69]
+⚠️  Directory not found: Poornima 008 F1- Cauliflower
+   Creating directory...
+✅ Updated: Poornima 008 F1- Cauliflower
+   📝 Created pricing.json
+
+[62/69]
+✅ Updated: Arjani F1 - Eggplants
+   📝 Created pricing.json
+
+[63/69]
+✅ Updated: Femi F1 – Hybrid Eggplant Variety
+   📝 Created pricing.json
+
+[64/69]
+✅ Updated: Demon F1-Hotpaper
+   📝 Created pricing.json
+
+[65/69]
+✅ Updated: Maradona F1 – Hybrid Papayapawpaw
+   📝 Created pricing.json
+
+[66/69]
+✅ Updated: Kaveri F1 – Sweet Pepper
+   📝 Created pricing.json
+
+[67/69]
+✅ Updated: Tandi F1 – Tomato
+   📝 Created pricing.json
+
+[68/69]
+✅ Updated: Sugar King - Sweet Corn
+   📝 Created pricing.json
+
+[69/69]
+✅ Updated: Sc Duma 43 – Maize Seed (Agro Supply)
+   📝 Created pricing.json
+
+========================================
+UPDATE COMPLETE
+========================================
+
+✅ Successfully updated: 69 products
+❌ Failed: 0 products
+📊 Total: 69 products
+

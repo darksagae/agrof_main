@@ -1,0 +1,31 @@
+{
+  "productName": "Maradona F1 – Hybrid Papayapawpaw",
+  "supplier": "Naseco 1996 Ltd",
+  "category": "Papaya",
+  "displayPrice": "UGX 7,500",
+  "lowestPrice": 7500,
+  "lowestPackage": "10 Seeds @ 1+ units",
+  "details": {
+    "description": "Maradona F1 is a Hybrid with dwarf and strong plants and high setting ability. It bares uniform fruits (1.5-2kg) in shape and size. Fruit flesh is firm, thick and has a very sweet taste (brix: 12-14). It's dwarf growth habit makes it a superior variety since it does not grow very tall making it easy and cost effective to harvest. Intermediate resistant to PRSV and Anthrachnose. Days to maturity: 210-240. Color: Orange. Flowering habit: Dwarf.",
+    "fruitWeight": "1.5-2kg",
+    "brix": "12-14",
+    "maturity": "210-240 days",
+    "diseaseResistance": "Intermediate resistant to PRSV and Anthrachnose"
+  },
+  "packages": [
+    {
+      "size": "10 Seeds",
+      "tiers": [
+        {
+          "quantity": "1+ units",
+          "quantityValue": 1,
+          "pricePerUnit": 7500,
+          "priceFormatted": "UGX 7,500",
+          "totalPrice": 7500,
+          "totalFormatted": "UGX 7,500",
+          "discountPercent": 0
+        }
+      ]
+    }
+  ]
+}

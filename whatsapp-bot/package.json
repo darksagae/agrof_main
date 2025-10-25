@@ -1,0 +1,32 @@
+{
+  "name": "agrof-whatsapp-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp Bot for AGROF - Receive orders, send alerts, auto-reply",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "automation",
+    "agriculture",
+    "agrof"
+  ],
+  "author": "AGROF Team",
+  "license": "MIT",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode-terminal": "^0.12.0",
+    "node-fetch": "^2.7.0",
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
+
+

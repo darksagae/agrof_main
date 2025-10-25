@@ -607,6 +607,18 @@ const PlanScreen = ({ onNavigateToStore }) => {
           <Text style={styles.headerTitle}>AI Farm Planner</Text>
         </View>
         <Text style={styles.headerSubtitle}>Smart farming with real Uganda data</Text>
+        
+        {/* Test Button */}
+        <TouchableOpacity
+          style={styles.testButton}
+          onPress={() => {
+            // Navigate to test screen
+            console.log('🔍 Opening crop selection test...');
+          }}
+        >
+          <MaterialIcons name="bug-report" size={20} color="white" />
+          <Text style={styles.testButtonText}>Test Crop Selection</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Tab Navigation */}
@@ -713,6 +725,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'rgba(255,255,255,0.9)',
     marginTop: 5,
+  },
+  testButton: {
+    backgroundColor: '#FF9800',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginTop: 10,
+    alignSelf: 'center',
+  },
+  testButtonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginLeft: 5,
   },
   tabBar: {
     flexDirection: 'row',
