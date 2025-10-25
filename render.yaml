@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: agrof-enhanced-ai-api
+    env: python
+    buildCommand: cd agrof-main/src/api && pip install -r requirements.txt
+    startCommand: cd agrof-main/src/api && gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: FLASK_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        value: AIzaSyDUMB5H8bzSIbaECO2CmVk3hfoNj7zfU60
+      - key: GOOGLE_VISION_API_KEY
+        value: AIzaSyD3vGEfsbn5Copz13NVNc7wB8EnSHGJysY
+      - key: USE_GEMINI
+        value: "true"
+      - key: USE_GOOGLE_VISION
+        value: "true"
+      - key: USE_TENSORFLOW_HUB
+        value: "false"
+      - key: USE_PYTORCH_VISION
+        value: "false"
+
+  - type: web
+    name: agrof-store-api
+    env: node
+    buildCommand: cd store-backend && npm install
+    startCommand: cd store-backend && npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
