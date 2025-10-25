@@ -8,7 +8,9 @@ const fetch = require('node-fetch');
 class WhatsAppNotificationService {
   constructor() {
     this.adminNumber = '0743232441@c.us'; // Admin WhatsApp number
-    this.botApiUrl = 'https://agrof-whatsapp-bot.onrender.com'; // WhatsApp bot API
+    // RENDER URL DISABLED FOR LOCAL TESTING
+    // this.botApiUrl = 'https://agrof-whatsapp-bot.onrender.com'; // WhatsApp bot API
+    this.botApiUrl = 'http://localhost:10000'; // Local WhatsApp bot API
   }
 
   /**

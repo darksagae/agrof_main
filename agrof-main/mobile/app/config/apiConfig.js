@@ -4,11 +4,21 @@
  * Uses single consistent address: 192.168.0.107
  */
 
-// Production Render URLs - Primary endpoints
+// LOCAL TESTING MODE - DISABLE RENDER FOR TESTING
+const LOCAL_TESTING = true; // Set to false to use Render URLs
+
+// Production Render URLs - Primary endpoints (DISABLED FOR TESTING)
 const RENDER_URLS = [
-  'https://agrof-store-api.onrender.com',    // Store Backend on Render
-  'https://agrof-ai-api.onrender.com',       // AI Backend on Render
-  'https://agrof-whatsapp-bot.onrender.com' // WhatsApp Bot on Render
+  // 'https://agrof-store-api.onrender.com',    // Store Backend on Render
+  // 'https://agrof-ai-api.onrender.com',       // AI Backend on Render
+  // 'https://agrof-whatsapp-bot.onrender.com' // WhatsApp Bot on Render
+];
+
+// Localhost URLs for testing
+const LOCALHOST_URLS = [
+  'http://localhost:3001',    // Store Backend local
+  'http://localhost:5000',   // AI Backend local  
+  'http://localhost:10000'   // WhatsApp Bot local
 ];
 
 // Fallback local IPs for development
@@ -27,10 +37,10 @@ const LOCAL_IPS = [
 ];
 
 // Combined endpoints for testing
-const BASE_IPS = [...RENDER_URLS, ...LOCAL_IPS];
+const BASE_IPS = LOCAL_TESTING ? [...LOCALHOST_URLS, ...LOCAL_IPS] : [...RENDER_URLS, ...LOCAL_IPS];
 
 // Get the current base URL (will be dynamically determined)
-let BASE_IP = 'https://agrof-store-api.onrender.com';  // Production Render URL
+let BASE_IP = LOCAL_TESTING ? 'http://localhost:3001' : 'https://agrof-store-api.onrender.com';
 
 // API Configuration
 export const API_CONFIG = {
