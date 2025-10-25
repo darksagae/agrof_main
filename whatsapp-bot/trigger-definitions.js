@@ -485,6 +485,101 @@ module.exports = {
         }
       ]
     }
+  },
+
+  // ⚡ NEXUS - Workflow Management
+  nexus: {
+    name: 'Workflow Control',
+    description: 'Manage automation workflows and processes',
+    
+    mainMenu: {
+      title: '*NEXUS - WORKFLOW CONTROL*',
+      subtitle: 'Manage automation workflows and processes',
+      options: [
+        { id: 1, label: 'View all workflows', action: 'list_workflows' },
+        { id: 2, label: 'Create new workflow', action: 'create_workflow' },
+        { id: 3, label: 'Edit workflow', action: 'edit_workflow' },
+        { id: 4, label: 'Start workflow', action: 'start_workflow' },
+        { id: 5, label: 'Stop workflow', action: 'stop_workflow' },
+        { id: 6, label: 'Workflow analytics', action: 'workflow_analytics' },
+        { id: 7, label: 'Cancel', action: 'cancel' }
+      ]
+    },
+    
+    flows: {
+      list_workflows: [
+        {
+          step: 'fetch_workflows',
+          prompt: '*FETCHING WORKFLOWS...*',
+          action: 'fetch_workflows'
+        }
+      ],
+      
+      create_workflow: [
+        {
+          step: 'enter_name',
+          prompt: '*ENTER WORKFLOW NAME*',
+          placeholder: 'e.g., Daily Stock Check',
+          dataKey: 'name'
+        },
+        {
+          step: 'select_trigger',
+          prompt: '*SELECT TRIGGER TYPE*',
+          options: [
+            { id: 1, value: 'schedule', label: 'Scheduled (Time-based)' },
+            { id: 2, value: 'webhook', label: 'Webhook (API call)' },
+            { id: 3, value: 'event', label: 'Event (Database change)' },
+            { id: 4, value: 'manual', label: 'Manual (Admin trigger)' }
+          ],
+          dataKey: 'trigger'
+        },
+        {
+          step: 'enter_description',
+          prompt: '*ENTER WORKFLOW DESCRIPTION*',
+          placeholder: 'Describe what this workflow does',
+          dataKey: 'description'
+        },
+        {
+          step: 'confirm_creation',
+          prompt: '*CONFIRM WORKFLOW CREATION*',
+          action: 'create_workflow'
+        }
+      ],
+      
+      start_workflow: [
+        {
+          step: 'select_workflow',
+          prompt: '*SELECT WORKFLOW TO START*',
+          action: 'list_workflows_for_start'
+        },
+        {
+          step: 'confirm_start',
+          prompt: '*CONFIRM WORKFLOW START*',
+          action: 'start_workflow'
+        }
+      ],
+      
+      stop_workflow: [
+        {
+          step: 'select_workflow',
+          prompt: '*SELECT WORKFLOW TO STOP*',
+          action: 'list_active_workflows'
+        },
+        {
+          step: 'confirm_stop',
+          prompt: '*CONFIRM WORKFLOW STOP*',
+          action: 'stop_workflow'
+        }
+      ],
+      
+      workflow_analytics: [
+        {
+          step: 'fetch_analytics',
+          prompt: '*FETCHING WORKFLOW ANALYTICS...*',
+          action: 'fetch_workflow_analytics'
+        }
+      ]
+    }
   }
 };
 
