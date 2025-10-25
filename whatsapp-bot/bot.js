@@ -1,7 +1,9 @@
 // AGROF WhatsApp Bot for Render Deployment
 const { Client } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
-const adminHandler = require('./admin-commands');
+// Use advanced admin commands with secret triggers
+const AdminCommandsV2 = require('./admin-commands-v2');
+const adminHandler = new AdminCommandsV2('https://agrof-store-api.onrender.com/api', []);
 
 // Create WhatsApp client
 const client = new Client({
@@ -43,8 +45,8 @@ client.on('message', async (msg) => {
     
     console.log(`📩 Message from ${sender}: ${text}`);
     
-    // Handle admin commands
-    const adminHandled = await adminHandler.handleAdminCommand(msg, text);
+    // Handle admin commands (secret triggers + legacy)
+    const adminHandled = await adminHandler.handleAdminMessage(msg, text);
     if (adminHandled) return;
     
     // Handle other messages
