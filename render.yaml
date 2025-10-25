@@ -1,29 +1,5 @@
 services:
-  - type: web
-    name: agrof-enhanced-ai-api
-    env: python
-    buildCommand: cd agrof-main/src/api && pip install -r requirements.txt
-    startCommand: cd agrof-main/src/api && gunicorn app:app --bind 0.0.0.0:$PORT
-    envVars:
-      - key: PORT
-        value: 10000
-      - key: FLASK_ENV
-        value: production
-      - key: GEMINI_API_KEY
-        value: AIzaSyDUMB5H8bzSIbaECO2CmVk3hfoNj7zfU60
-      - key: GOOGLE_VISION_API_KEY
-        value: AIzaSyD3vGEfsbn5Copz13NVNc7wB8EnSHGJysY
-      - key: USE_GEMINI
-        value: "true"
-      - key: USE_GOOGLE_VISION
-        value: "true"
-      - key: USE_TENSORFLOW_HUB
-        value: "false"
-      - key: USE_PYTORCH_VISION
-        value: "false"
-      - key: USE_TFLITE
-        value: "true"
-
+  # Store Backend Service
   - type: web
     name: agrof-store-api
     env: node
@@ -34,3 +10,87 @@ services:
         value: 10000
       - key: NODE_ENV
         value: production
+      - key: SUPABASE_URL
+        value: https://xtklayjpdpfykjbttaac.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzQ0NzEsImV4cCI6MjA1MDU1MDQ3MX0.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDk3NDQ3MSwiZXhwIjoyMDUwNTUwNDcxfQ.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+    healthCheckPath: /api/health
+    plan: starter
+
+  # AI Backend Service
+  - type: web
+    name: agrof-ai-api
+    env: python
+    buildCommand: cd agrof-main/src/api && pip install -r requirements.txt
+    startCommand: cd agrof-main/src/api && gunicorn --bind 0.0.0.0:$PORT --workers 4 --timeout 120 app:app
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_DEBUG
+        value: false
+      - key: GEMINI_API_KEY
+        value: AIzaSyBE2b1nKpQd6LseRIVXfh10O_O3Pm0fvM0
+      - key: SUPABASE_URL
+        value: https://xtklayjpdpfykjbttaac.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzQ0NzEsImV4cCI6MjA1MDU1MDQ3MX0.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDk3NDQ3MSwiZXhwIjoyMDUwNTUwNDcxfQ.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+    healthCheckPath: /health
+    plan: starter
+
+  # WhatsApp Bot Service
+  - type: web
+    name: agrof-whatsapp-bot
+    env: node
+    buildCommand: cd whatsapp-bot && npm install
+    startCommand: cd whatsapp-bot && npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_NUMBERS
+        value: 256743232441
+      - key: STORE_BACKEND_URL
+        value: https://agrof-store-api.onrender.com
+      - key: AI_BACKEND_URL
+        value: https://agrof-ai-api.onrender.com
+      - key: SUPABASE_URL
+        value: https://xtklayjpdpfykjbttaac.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzQ0NzEsImV4cCI6MjA1MDU1MDQ3MX0.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDk3NDQ3MSwiZXhwIjoyMDUwNTUwNDcxfQ.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+    healthCheckPath: /health
+    plan: starter
+
+  # Automation Engine Service
+  - type: web
+    name: agrof-automation-engine
+    env: node
+    buildCommand: cd automation-engine && npm install
+    startCommand: cd automation-engine && npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: STORE_BACKEND_URL
+        value: https://agrof-store-api.onrender.com
+      - key: AI_BACKEND_URL
+        value: https://agrof-ai-api.onrender.com
+      - key: WHATSAPP_BOT_URL
+        value: https://agrof-whatsapp-bot.onrender.com
+      - key: SUPABASE_URL
+        value: https://xtklayjpdpfykjbttaac.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5NzQ0NzEsImV4cCI6MjA1MDU1MDQ3MX0.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0a2xheWpwZHBmeWtqYnR0YWFjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNDk3NDQ3MSwiZXhwIjoyMDUwNTUwNDcxfQ.8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q
+    healthCheckPath: /api/health
+    plan: starter
