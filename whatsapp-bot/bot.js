@@ -10,18 +10,8 @@ const adminHandler = new AdminCommandsV2('https://agrof-store-api.onrender.com/a
 const client = new Client({
     puppeteer: {
         headless: true,
-        args: [
-            '--no-sandbox', 
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
-            '--no-first-run',
-            '--no-zygote',
-            '--disable-gpu',
-            '--disable-web-security',
-            '--disable-features=VizDisplayCompositor'
-        ]
-    }
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  }
 });
 
 // Health check server
@@ -216,7 +206,7 @@ async function handleStockInquiry(msg) {
     await msg.reply('Please wait while we prepare our current product catalog...');
     
     try {
-        const response = await fetch(`${this.storeApiUrl}/products?limit=20`);
+        const response = await fetch('https://agrof-store-api.onrender.com/api/products?limit=20');
         const allProducts = await response.json();
         
         if (allProducts.length === 0) {
@@ -273,7 +263,7 @@ async function handleOrderRequest(msg, text) {
         
         try {
             // Search for product
-            const response = await fetch(`${this.storeApiUrl}/search?q=${encodeURIComponent(productName)}`);
+            const response = await fetch(`https://agrof-store-api.onrender.com/api/search?q=${encodeURIComponent(productName)}`);
             const products = await response.json();
             
             if (products.length === 0) {
@@ -309,7 +299,7 @@ async function handlePriceInquiry(msg, text) {
     await msg.reply('Let me check our current prices for you...');
     
     try {
-        const response = await fetch(`${this.storeApiUrl}/products?limit=10`);
+        const response = await fetch('https://agrof-store-api.onrender.com/api/products?limit=10');
         const products = await response.json();
         
         if (products.length === 0) {

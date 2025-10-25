@@ -133,7 +133,11 @@ module.exports = {
         { id: 8, label: '⚡ Bulk operations', action: 'bulk_operations' },
         { id: 9, label: '🚨 Inventory alerts', action: 'inventory_alerts' },
         { id: 10, label: '📊 Analytics', action: 'analytics' },
-        { id: 11, label: 'Cancel', action: 'cancel' }
+        { id: 11, label: '📤 Import/Export', action: 'import_export' },
+        { id: 12, label: '💾 Backup/Restore', action: 'backup_restore' },
+        { id: 13, label: '📋 Audit Logs', action: 'audit_logs' },
+        { id: 14, label: '🔔 Notifications', action: 'notifications' },
+        { id: 15, label: 'Cancel', action: 'cancel' }
       ]
     },
     
@@ -468,6 +472,168 @@ module.exports = {
             { id: 5, value: 'full' }
           ],
           dataKey: 'analyticsType'
+        }
+      ],
+      
+      import_export: [
+        {
+          step: 'select_operation',
+          prompt: '*📤 IMPORT/EXPORT*\n\n1. 📥 Import products from CSV\n2. 📤 Export products to CSV\n3. 📋 Export inventory report\n4. 📊 Export analytics report\n5. 🔄 Sync with external system\n\nSelect operation:',
+          type: 'select',
+          options: [
+            { id: 1, value: 'import_csv' },
+            { id: 2, value: 'export_csv' },
+            { id: 3, value: 'export_inventory' },
+            { id: 4, value: 'export_analytics' },
+            { id: 5, value: 'sync_external' }
+          ],
+          dataKey: 'operation'
+        },
+        {
+          step: 'select_category',
+          prompt: '*SELECT CATEGORY FOR EXPORT*\n\n1. Fertilizers\n2. Fungicides\n3. Herbicides\n4. Seeds\n5. Nursery Bed\n6. Organic Chemicals\n7. Tools\n8. All Categories\n\nReply with number',
+          type: 'select',
+          options: [
+            { id: 1, value: 'fertilizers' },
+            { id: 2, value: 'fungicides' },
+            { id: 3, value: 'herbicides' },
+            { id: 4, value: 'seeds' },
+            { id: 5, value: 'nursery_bed' },
+            { id: 6, value: 'organic_chemicals' },
+            { id: 7, value: 'tools' },
+            { id: 8, value: 'all' }
+          ],
+          dataKey: 'category'
+        },
+        {
+          step: 'confirm_export',
+          prompt: (data, context) => {
+            const operation = data.operation;
+            const category = data.category;
+            
+            let msg = `📤 *EXPORT CONFIRMATION*\n\n`;
+            msg += `Operation: ${operation}\n`;
+            msg += `Category: ${category}\n\n`;
+            msg += `This will generate a downloadable file with the selected data.\n\nConfirm? (YES/NO)`;
+            return msg;
+          },
+          type: 'yes_no'
+        }
+      ],
+      
+      backup_restore: [
+        {
+          step: 'select_operation',
+          prompt: '*💾 BACKUP/RESTORE*\n\n1. 💾 Create backup\n2. 📥 Restore from backup\n3. 📋 List backups\n4. 🗑️ Delete backup\n5. 🔄 Auto backup settings\n\nSelect operation:',
+          type: 'select',
+          options: [
+            { id: 1, value: 'create_backup' },
+            { id: 2, value: 'restore_backup' },
+            { id: 3, value: 'list_backups' },
+            { id: 4, value: 'delete_backup' },
+            { id: 5, value: 'auto_backup' }
+          ],
+          dataKey: 'operation'
+        },
+        {
+          step: 'backup_name',
+          prompt: (data, context) => {
+            if (data.operation === 'create_backup') {
+              return '💾 *CREATE BACKUP*\n\nEnter backup name:\n▶ (e.g., "backup_2024_01_15")';
+            } else if (data.operation === 'restore_backup') {
+              return '📥 *RESTORE BACKUP*\n\nEnter backup name to restore:\n▶ (e.g., "backup_2024_01_15")';
+            }
+            return 'Enter name:';
+          },
+          type: 'text',
+          dataKey: 'backupName'
+        },
+        {
+          step: 'confirm_backup',
+          prompt: (data, context) => {
+            const operation = data.operation;
+            const backupName = data.backupName;
+            
+            let msg = `💾 *BACKUP OPERATION CONFIRMATION*\n\n`;
+            msg += `Operation: ${operation}\n`;
+            msg += `Backup Name: ${backupName}\n\n`;
+            if (operation === 'create_backup') {
+              msg += `This will create a complete backup of the database.\n\nConfirm? (YES/NO)`;
+            } else if (operation === 'restore_backup') {
+              msg += `⚠️ This will replace the current database with the backup.\n\nConfirm? (YES/NO)`;
+            }
+            return msg;
+          },
+          type: 'yes_no'
+        }
+      ],
+      
+      audit_logs: [
+        {
+          step: 'select_log_type',
+          prompt: '*📋 AUDIT LOGS*\n\n1. 📊 View all logs\n2. 🔍 Search logs\n3. 📅 Filter by date\n4. 👤 Filter by user\n5. 🔧 Filter by operation\n\nSelect log type:',
+          type: 'select',
+          options: [
+            { id: 1, value: 'view_all' },
+            { id: 2, value: 'search_logs' },
+            { id: 3, value: 'filter_date' },
+            { id: 4, value: 'filter_user' },
+            { id: 5, value: 'filter_operation' }
+          ],
+          dataKey: 'logType'
+        },
+        {
+          step: 'enter_search_term',
+          prompt: (data, context) => {
+            const logType = data.logType;
+            if (logType === 'search_logs') {
+              return '🔍 *SEARCH LOGS*\n\nEnter search term:\n▶ (e.g., "product", "price", "stock")';
+            } else if (logType === 'filter_date') {
+              return '📅 *FILTER BY DATE*\n\nEnter date (YYYY-MM-DD):\n▶ (e.g., "2024-01-15")';
+            } else if (logType === 'filter_user') {
+              return '👤 *FILTER BY USER*\n\nEnter user ID or phone number:\n▶ (e.g., "0743232441")';
+            } else if (logType === 'filter_operation') {
+              return '🔧 *FILTER BY OPERATION*\n\nEnter operation type:\n▶ (e.g., "add_product", "update_price")';
+            }
+            return 'Enter search term:';
+          },
+          type: 'text',
+          dataKey: 'searchTerm'
+        }
+      ],
+      
+      notifications: [
+        {
+          step: 'select_notification_type',
+          prompt: '*🔔 NOTIFICATIONS*\n\n1. 📊 View notification settings\n2. 🔔 Enable/disable alerts\n3. 📱 Test notification\n4. 📋 View notification history\n5. ⚙️ Configure auto-notifications\n\nSelect notification type:',
+          type: 'select',
+          options: [
+            { id: 1, value: 'view_settings' },
+            { id: 2, value: 'toggle_alerts' },
+            { id: 3, value: 'test_notification' },
+            { id: 4, value: 'view_history' },
+            { id: 5, value: 'configure_auto' }
+          ],
+          dataKey: 'notificationType'
+        },
+        {
+          step: 'configure_auto_notifications',
+          prompt: (data, context) => {
+            const notificationType = data.notificationType;
+            if (notificationType === 'configure_auto') {
+              return '⚙️ *CONFIGURE AUTO-NOTIFICATIONS*\n\n1. 📦 Low stock alerts\n2. ❌ Out of stock alerts\n3. 📊 Daily inventory reports\n4. 🔔 Price change alerts\n5. 📈 Weekly analytics\n\nSelect notification to configure:';
+            }
+            return 'Select option:';
+          },
+          type: 'select',
+          options: [
+            { id: 1, value: 'low_stock_alerts' },
+            { id: 2, value: 'out_of_stock_alerts' },
+            { id: 3, value: 'daily_reports' },
+            { id: 4, value: 'price_alerts' },
+            { id: 5, value: 'weekly_analytics' }
+          ],
+          dataKey: 'alertType'
         }
       ]
     }
