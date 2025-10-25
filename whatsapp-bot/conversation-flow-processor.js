@@ -471,7 +471,8 @@ class ConversationFlowProcessor {
         'seeds': 3,
         'nursery_bed': 4,
         'fungicides': 5,
-        'herbicides': 6
+        'herbicides': 6,
+        'tools': 7
       };
       
       const category_id = categoryMap[data.category] || 1;
@@ -502,6 +503,102 @@ class ConversationFlowProcessor {
       } else {
         throw new Error(result.error || 'Failed to add product');
       }
+    }
+
+    if (action === 'remove_product') {
+      const product = context.selectedProduct;
+      
+      // Delete product from database
+      const response = await fetch(`${this.storeApiUrl}/products/${product.id}`, {
+        method: 'DELETE'
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        return {
+          message: `✅ *PRODUCT REMOVED!*\n\n📦 ${product.name}\nID: #${product.id}\n\n✓ Removed from database\n✓ No longer visible in store`
+        };
+      } else {
+        throw new Error(result.error || 'Failed to remove product');
+      }
+    }
+
+    if (action === 'update_stock') {
+      const product = context.selectedProduct;
+      
+      // Update stock in database
+      const response = await fetch(`${this.storeApiUrl}/products/${product.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          quantity_in_stock: data.newStock
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        return {
+          message: `✅ *STOCK UPDATED!*\n\n📦 ${product.name}\nOld Stock: ${product.quantity_in_stock || 0}\nNew Stock: ${data.newStock}\n\n✓ Database updated\n✓ Stock levels changed`
+        };
+      } else {
+        throw new Error(result.error || 'Failed to update stock');
+      }
+    }
+
+    if (action === 'update_description') {
+      const product = context.selectedProduct;
+      
+      // Update description in database
+      const response = await fetch(`${this.storeApiUrl}/products/${product.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          description: data.newDescription
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        return {
+          message: `✅ *DESCRIPTION UPDATED!*\n\n📦 ${product.name}\nNew Description: "${data.newDescription}"\n\n✓ Database updated\n✓ Description changed`
+        };
+      } else {
+        throw new Error(result.error || 'Failed to update description');
+      }
+    }
+
+    if (action === 'product_stats') {
+      // Fetch product statistics
+      const response = await fetch(`${this.storeApiUrl}/products/stats`);
+      const stats = await response.json();
+
+      return {
+        message: `📊 *STORE STATISTICS*\n\n` +
+                 `📦 Total Products: ${stats.totalProducts}\n` +
+                 `💰 Products with Pricing: ${stats.productsWithPricing}\n` +
+                 `📸 Products with Images: ${stats.productsWithImages}\n` +
+                 `❌ Out of Stock: ${stats.outOfStock}\n` +
+                 `⚠️ Low Stock: ${stats.lowStock}\n\n` +
+                 `📈 Pricing Coverage: ${((stats.productsWithPricing / stats.totalProducts) * 100).toFixed(1)}%\n` +
+                 `📸 Image Coverage: ${((stats.productsWithImages / stats.totalProducts) * 100).toFixed(1)}%`
+      };
+    }
+
+    if (action === 'search_product') {
+      // Search products
+      const response = await fetch(`${this.storeApiUrl}/products/search?q=${encodeURIComponent(data.searchQuery)}`);
+      const products = await response.json();
+
+      return {
+        message: `🔍 *SEARCH RESULTS*\n\nQuery: "${data.searchQuery}"\nFound: ${products.length} products\n\n` +
+                 products.slice(0, 10).map((p, i) => 
+                   `${i + 1}️⃣ ${p.name}\n   ID: ${p.id} | Price: ${p.price}\n   Stock: ${p.quantity_in_stock || 0}`
+                 ).join('\n\n') +
+                 (products.length > 10 ? `\n\n... and ${products.length - 10} more products` : '')
+      };
     }
 
     return { message: '✅ Action completed' };

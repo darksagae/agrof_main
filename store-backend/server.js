@@ -1428,6 +1428,195 @@ app.get('/api/inventory/export/:type', async (req, res) => {
   }
 });
 
+// ========================================
+// PRODUCT MANAGEMENT API ENDPOINTS
+// ========================================
+
+// Create new product
+app.post('/api/products', (req, res) => {
+  const { name, category_id, price, selling_price, quantity_in_stock, description, image_url } = req.body;
+  
+  // Validate required fields
+  if (!name || !category_id) {
+    res.status(400).json({ error: 'Name and category_id are required' });
+    return;
+  }
+  
+  const sql = `INSERT INTO products (name, category_id, price, selling_price, quantity_in_stock, description, image_url, created_at, updated_at) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`;
+  
+  db.run(sql, [name, category_id, price || 'Contact for pricing', selling_price, quantity_in_stock || 0, description, image_url], function(err) {
+    if (err) {
+      console.error('Error creating product:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ success: true, id: this.lastID });
+  });
+});
+
+// Update product
+app.patch('/api/products/:id', (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+  
+  // Validate product exists
+  db.get('SELECT id FROM products WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    
+    if (!row) {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+    
+    // Build dynamic update query
+    let sql = 'UPDATE products SET ';
+    let params = [];
+    let setParts = [];
+    
+    if (updates.name) {
+      setParts.push('name = ?');
+      params.push(updates.name);
+    }
+    if (updates.price) {
+      setParts.push('price = ?');
+      params.push(updates.price);
+    }
+    if (updates.selling_price !== undefined) {
+      setParts.push('selling_price = ?');
+      params.push(updates.selling_price);
+    }
+    if (updates.quantity_in_stock !== undefined) {
+      setParts.push('quantity_in_stock = ?');
+      params.push(updates.quantity_in_stock);
+    }
+    if (updates.description) {
+      setParts.push('description = ?');
+      params.push(updates.description);
+    }
+    if (updates.image_url) {
+      setParts.push('image_url = ?');
+      params.push(updates.image_url);
+    }
+    if (updates.availability) {
+      setParts.push('availability = ?');
+      params.push(updates.availability);
+    }
+    
+    if (setParts.length === 0) {
+      res.status(400).json({ error: 'No valid fields to update' });
+      return;
+    }
+    
+    sql += setParts.join(', ') + ', updated_at = datetime("now") WHERE id = ?';
+    params.push(id);
+    
+    db.run(sql, params, function(err) {
+      if (err) {
+        console.error('Error updating product:', err);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ success: true, changes: this.changes });
+    });
+  });
+});
+
+// Delete product
+app.delete('/api/products/:id', (req, res) => {
+  const { id } = req.params;
+  
+  // Validate product exists
+  db.get('SELECT id FROM products WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    
+    if (!row) {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+    
+    db.run('DELETE FROM products WHERE id = ?', [id], function(err) {
+      if (err) {
+        console.error('Error deleting product:', err);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ success: true, changes: this.changes });
+    });
+  });
+});
+
+// Search products with enhanced functionality
+app.get('/api/products/search', (req, res) => {
+  const { q, category, limit = 20 } = req.query;
+  
+  if (!q) {
+    res.status(400).json({ error: 'Search query is required' });
+    return;
+  }
+  
+  let query = `
+    SELECT p.*, c.name as category_name, c.display_name as category_display_name 
+    FROM products p 
+    JOIN categories c ON p.category_id = c.id 
+    WHERE (p.name LIKE ? OR p.description LIKE ? OR p.specifications LIKE ?)
+  `;
+  const params = [`%${q}%`, `%${q}%`, `%${q}%`];
+  
+  if (category) {
+    query += ' AND c.name = ?';
+    params.push(category);
+  }
+  
+  query += ' ORDER BY p.name LIMIT ?';
+  params.push(parseInt(limit));
+  
+  db.all(query, params, (err, rows) => {
+    if (err) {
+      console.error('Error searching products:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Get product statistics
+app.get('/api/products/stats', (req, res) => {
+  const queries = {
+    totalProducts: 'SELECT COUNT(*) as count FROM products',
+    productsWithPricing: 'SELECT COUNT(*) as count FROM products WHERE price IS NOT NULL AND price != "Contact for pricing"',
+    productsWithImages: 'SELECT COUNT(*) as count FROM products WHERE image_url IS NOT NULL AND image_url != ""',
+    outOfStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock <= 0',
+    lowStock: 'SELECT COUNT(*) as count FROM products WHERE quantity_in_stock > 0 AND quantity_in_stock <= minimum_stock_level'
+  };
+  
+  const results = {};
+  let completed = 0;
+  
+  Object.keys(queries).forEach(key => {
+    db.get(queries[key], (err, row) => {
+      if (err) {
+        console.error(`Error getting ${key}:`, err);
+        results[key] = 0;
+      } else {
+        results[key] = row.count;
+      }
+      
+      completed++;
+      if (completed === Object.keys(queries).length) {
+        res.json(results);
+      }
+    });
+  });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

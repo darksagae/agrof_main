@@ -189,7 +189,7 @@ module.exports = {
       add_product: [
         {
           step: 'select_category',
-          prompt: '*SELECT CATEGORY*\n\n1. Fertilizers\n2. Fungicides\n3. Herbicides\n4. Seeds\n5. Nursery Bed\n6. Organic Chemicals\n\nReply with number',
+          prompt: '*SELECT CATEGORY*\n\n1. Fertilizers\n2. Fungicides\n3. Herbicides\n4. Seeds\n5. Nursery Bed\n6. Organic Chemicals\n7. Tools\n\nReply with number',
           type: 'select',
           options: [
             { id: 1, value: 'fertilizers' },
@@ -197,7 +197,8 @@ module.exports = {
             { id: 3, value: 'herbicides' },
             { id: 4, value: 'seeds' },
             { id: 5, value: 'nursery_bed' },
-            { id: 6, value: 'organic_chemicals' }
+            { id: 6, value: 'organic_chemicals' },
+            { id: 7, value: 'tools' }
           ],
           dataKey: 'category'
         },
@@ -237,6 +238,145 @@ module.exports = {
           step: 'confirm',
           prompt: (data) => `*CONFIRM NEW PRODUCT*\n\nCategory: ${data.category}\nName: ${data.name}\nPrice: UGX ${data.price.toLocaleString()}\nStock: ${data.stock}\nDescription: ${data.description || 'None'}\nImage: ${data.image ? 'Provided' : 'Using default'}\n\nConfirm? (YES/NO)`,
           type: 'yes_no'
+        }
+      ],
+      
+      remove_product: [
+        {
+          step: 'search_product',
+          prompt: '*FIND PRODUCT TO REMOVE*\n\nSearch by:\n- Product name (e.g., "Urea")\n- Product ID (e.g., "ID:12345")\n- Type BROWSE to see categories',
+          type: 'text',
+          dataKey: 'searchQuery'
+        },
+        {
+          step: 'select_product',
+          prompt: (data, context) => {
+            let msg = '🗑️ *SELECT PRODUCT TO REMOVE*\n\nFound products:\n\n';
+            context.products.forEach((p, i) => {
+              msg += `${i + 1}️⃣ ${p.name}\n   ID: ${p.id} | Price: ${p.price}\n\n`;
+            });
+            msg += 'Reply with number or CANCEL';
+            return msg;
+          },
+          type: 'select',
+          dataKey: 'productIndex'
+        },
+        {
+          step: 'confirm_delete',
+          prompt: (data, context) => {
+            const product = context.products[data.productIndex - 1];
+            return `⚠️ *CONFIRM DELETION*\n\nProduct: "${product.name}"\nID: ${product.id}\nPrice: ${product.price}\n\nThis will permanently remove the product from the store.\n\nReply YES to delete or NO to cancel`;
+          },
+          type: 'yes_no'
+        }
+      ],
+      
+      update_stock: [
+        {
+          step: 'search_product',
+          prompt: '*FIND PRODUCT*\n\nSearch by:\n- Product name (e.g., "Urea")\n- Product ID (e.g., "ID:12345")\n- Type BROWSE to see categories',
+          type: 'text',
+          dataKey: 'searchQuery'
+        },
+        {
+          step: 'select_product',
+          prompt: (data, context) => {
+            let msg = '📦 *SELECT PRODUCT*\n\nFound products:\n\n';
+            context.products.forEach((p, i) => {
+              msg += `${i + 1}️⃣ ${p.name}\n   ID: ${p.id} | Stock: ${p.quantity_in_stock || 0}\n\n`;
+            });
+            msg += 'Reply with number';
+            return msg;
+          },
+          type: 'select',
+          dataKey: 'productIndex'
+        },
+        {
+          step: 'enter_new_stock',
+          prompt: (data, context) => {
+            const product = context.selectedProduct;
+            return `📦 *UPDATE STOCK*\n\nProduct: ${product.name}\nCurrent Stock: ${product.quantity_in_stock || 0}\n\nEnter new stock quantity:\n▶ (Just the number, e.g., 100)`;
+          },
+          type: 'number',
+          dataKey: 'newStock',
+          validation: (stock) => stock >= 0
+        },
+        {
+          step: 'confirm',
+          prompt: (data, context) => {
+            const product = context.selectedProduct;
+            return `📦 *STOCK UPDATE CONFIRMATION*\n\nProduct: ${product.name}\nOld Stock: ${product.quantity_in_stock || 0}\nNew Stock: ${data.newStock}\n\nConfirm this stock update? (YES/NO)`;
+          },
+          type: 'yes_no'
+        }
+      ],
+      
+      update_description: [
+        {
+          step: 'search_product',
+          prompt: '*FIND PRODUCT*\n\nSearch by:\n- Product name (e.g., "Urea")\n- Product ID (e.g., "ID:12345")\n- Type BROWSE to see categories',
+          type: 'text',
+          dataKey: 'searchQuery'
+        },
+        {
+          step: 'select_product',
+          prompt: (data, context) => {
+            let msg = '📝 *SELECT PRODUCT*\n\nFound products:\n\n';
+            context.products.forEach((p, i) => {
+              msg += `${i + 1}️⃣ ${p.name}\n   ID: ${p.id} | Current: ${p.description || 'No description'}\n\n`;
+            });
+            msg += 'Reply with number';
+            return msg;
+          },
+          type: 'select',
+          dataKey: 'productIndex'
+        },
+        {
+          step: 'enter_new_description',
+          prompt: (data, context) => {
+            const product = context.selectedProduct;
+            return `📝 *UPDATE DESCRIPTION*\n\nProduct: ${product.name}\nCurrent Description: ${product.description || 'No description'}\n\nEnter new description:\n▶ (Send the new description)`;
+          },
+          type: 'text',
+          dataKey: 'newDescription'
+        },
+        {
+          step: 'confirm',
+          prompt: (data, context) => {
+            const product = context.selectedProduct;
+            return `📝 *DESCRIPTION UPDATE CONFIRMATION*\n\nProduct: ${product.name}\nNew Description: "${data.newDescription}"\n\nConfirm this description update? (YES/NO)`;
+          },
+          type: 'yes_no'
+        }
+      ],
+      
+      product_stats: [
+        {
+          step: 'fetch_stats',
+          prompt: '*FETCHING PRODUCT STATISTICS...*',
+          action: 'fetch_product_statistics'
+        }
+      ],
+      
+      search_product: [
+        {
+          step: 'enter_search_query',
+          prompt: '*SEARCH PRODUCTS*\n\nEnter search term:\n- Product name (e.g., "Urea")\n- Category (e.g., "fertilizers")\n- Type BROWSE to see all categories',
+          type: 'text',
+          dataKey: 'searchQuery'
+        },
+        {
+          step: 'display_results',
+          prompt: (data, context) => {
+            let msg = `🔍 *SEARCH RESULTS*\n\nQuery: "${data.searchQuery}"\nFound: ${context.products.length} products\n\n`;
+            context.products.forEach((p, i) => {
+              msg += `${i + 1}️⃣ ${p.name}\n   ID: ${p.id} | Price: ${p.price}\n   Stock: ${p.quantity_in_stock || 0}\n\n`;
+            });
+            msg += 'Reply with number to view details or NEW to search again';
+            return msg;
+          },
+          type: 'select',
+          dataKey: 'productIndex'
         }
       ]
     }

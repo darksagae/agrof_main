@@ -4,14 +4,24 @@ const qrcode = require('qrcode-terminal');
 // Use advanced admin commands with secret triggers
 const AdminCommandsV2 = require('./admin-commands-v2');
 // TEMP: Allow all numbers for testing (empty array means no restrictions)
-const adminHandler = new AdminCommandsV2('http://localhost:3001/api', []);
+const adminHandler = new AdminCommandsV2('https://agrof-store-api.onrender.com/api', []);
 
 // Create WhatsApp client
 const client = new Client({
     puppeteer: {
         headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  }
+        args: [
+            '--no-sandbox', 
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--disable-gpu',
+            '--disable-web-security',
+            '--disable-features=VizDisplayCompositor'
+        ]
+    }
 });
 
 // Health check server
@@ -206,7 +216,7 @@ async function handleStockInquiry(msg) {
     await msg.reply('Please wait while we prepare our current product catalog...');
     
     try {
-        const response = await fetch('https://agrof-store-api.onrender.com/api/products?limit=20');
+        const response = await fetch(`${this.storeApiUrl}/products?limit=20`);
         const allProducts = await response.json();
         
         if (allProducts.length === 0) {
@@ -263,7 +273,7 @@ async function handleOrderRequest(msg, text) {
         
         try {
             // Search for product
-            const response = await fetch(`https://agrof-store-api.onrender.com/api/search?q=${encodeURIComponent(productName)}`);
+            const response = await fetch(`${this.storeApiUrl}/search?q=${encodeURIComponent(productName)}`);
             const products = await response.json();
             
             if (products.length === 0) {
@@ -299,7 +309,7 @@ async function handlePriceInquiry(msg, text) {
     await msg.reply('Let me check our current prices for you...');
     
     try {
-        const response = await fetch('https://agrof-store-api.onrender.com/api/products?limit=10');
+        const response = await fetch(`${this.storeApiUrl}/products?limit=10`);
         const products = await response.json();
         
         if (products.length === 0) {
