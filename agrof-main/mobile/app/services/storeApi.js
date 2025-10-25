@@ -1,5 +1,5 @@
 // AGROF Store API Service  
-// Fetches products from SQLite backend at http://192.168.1.15:3001/api
+// Fetches products from SQLite backend using dynamic API configuration
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   STORE_API_URL, 
@@ -11,7 +11,7 @@ import {
 } from '../config/apiConfig';
 
 // Backend API configuration - Dynamic endpoint discovery
-let API_BASE_URL = 'http://192.168.1.15:3001/api'; // Store backend API - WiFi IP for phone access
+let API_BASE_URL = STORE_API_URL; // Use configured store API URL
 let currentApiUrl = API_BASE_URL;
 let endpointTested = false;
 
@@ -195,7 +195,7 @@ export const productsApi = {
   search: async (query, language = 'en') => {
     try {
       console.log('🔍 Searching products:', query);
-      const url = `${API_BASE_URL}/search?query=${encodeURIComponent(query)}&language=${language}`;
+      const url = `${API_BASE_URL}/search?q=${encodeURIComponent(query)}&limit=20`;
       
       const response = await fetch(url, {
         method: 'GET',

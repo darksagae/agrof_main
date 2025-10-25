@@ -52,23 +52,45 @@ def analyze_plant_disease_with_gemini(image_data):
         
         logger.info(f"📸 Detected image type: {mime_type}")
         
-        # Prepare prompt for Gemini
+        # Enhanced prompt for Gemini AI with agricultural expertise
         prompt = """
-        Analyze this plant image for disease detection. Provide a detailed analysis including:
-        1. Health status (healthy/diseased)
-        2. Disease type if any
-        3. Severity level (low/medium/high)
-        4. Symptoms observed
-        5. Treatment recommendations
-        6. Prevention strategies
+        You are an expert agricultural AI specializing in plant disease detection and crop health analysis. 
+        Analyze this plant image with professional agricultural knowledge and provide a comprehensive analysis including:
         
-        Format your response as JSON with these fields:
-        - health_status: "healthy" or "diseased"
-        - disease_type: specific disease name or "none"
-        - severity_level: "low", "medium", or "high"
-        - symptoms: list of observed symptoms
-        - recommendations: list of treatment recommendations
-        - confidence: confidence score (0.0 to 1.0)
+        1. **Crop Identification**: Identify the specific crop type and plant family
+        2. **Health Assessment**: Determine if the plant is healthy or diseased
+        3. **Disease Diagnosis**: If diseased, identify the specific disease with scientific accuracy
+        4. **Severity Analysis**: Assess disease severity (low/medium/high/critical)
+        5. **Symptom Documentation**: List all visible symptoms and affected plant parts
+        6. **Treatment Protocol**: Provide specific, actionable treatment recommendations
+        7. **Prevention Strategy**: Suggest preventive measures for future protection
+        8. **Economic Impact**: Assess potential yield loss and economic implications
+        9. **Confidence Level**: Rate your analysis confidence (0.0 to 1.0)
+        
+        Focus on common agricultural diseases in tropical/subtropical regions including:
+        - Fungal diseases (rust, blight, mildew, anthracnose)
+        - Bacterial diseases (bacterial spot, wilt, canker)
+        - Viral diseases (mosaic, yellowing, stunting)
+        - Nutrient deficiencies
+        - Pest damage
+        
+        Format your response as JSON with these exact fields:
+        {
+          "crop_type": "specific crop name",
+          "plant_family": "botanical family",
+          "growth_stage": "seedling/vegetative/flowering/fruiting",
+          "health_status": "healthy" or "diseased",
+          "disease_type": "specific disease name" or "none",
+          "severity_level": "low", "medium", "high", or "critical",
+          "symptoms": ["list", "of", "specific", "symptoms"],
+          "affected_parts": ["leaves", "stems", "roots", "fruits"],
+          "recommendations": ["specific", "treatment", "steps"],
+          "prevention": ["preventive", "measures"],
+          "economic_impact": "description of potential losses",
+          "confidence": 0.0 to 1.0
+        }
+        
+        Be thorough, accurate, and provide actionable agricultural advice.
         """
         
         # Prepare Gemini API request

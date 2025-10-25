@@ -36,16 +36,22 @@ export const analyzeImageWithProperMethod = async (imageUri) => {
     // Append stakeholder type
     formData.append('stakeholder', 'farmers');
     
-    console.log('📡 Sending image to backend API...');
+    console.log('📡 Sending image to backend API with Gemini AI...');
+    console.log('🌐 Backend URL:', BACKEND_ANALYZE_URL);
     
-    // Send request to backend API
+    // Send request to backend API with enhanced timeout for Gemini AI
     const response = await fetch(BACKEND_ANALYZE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',
+        'X-Requested-With': 'XMLHttpRequest',
+        'User-Agent': 'AGROF-Mobile-App/1.0'
       },
       body: formData,
-      timeout: 30000 // 30 second timeout
+      timeout: 45000 // 45 second timeout for Gemini AI processing
+    }).catch(error => {
+      console.error('❌ Network request failed:', error);
+      throw new Error(`Network request failed: ${error.message}. Please check your internet connection and try again.`);
     });
     
     console.log('📊 Response status:', response.status);

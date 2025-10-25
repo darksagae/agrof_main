@@ -17,7 +17,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
 import hybridAIService from '../services/enhancedHybridAIService';
+import aiCareService from '../services/aiCareService';
 import ProductRecommendationCards from '../components/ProductRecommendationCards';
+import AICareDashboard from '../components/AICareDashboard';
 import authService from '../services/authService';
 
 const { width, height } = Dimensions.get('window');
@@ -33,9 +35,9 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showAuthPrompt, setShowAuthPrompt] = useState(false);
 
-  // Initialize Hybrid AI Service and check auth on component mount
+  // Initialize AI Care Service and check auth on component mount
   useEffect(() => {
-    initializeAI();
+    initializeAICare();
     checkAuthentication();
   }, []);
 
@@ -56,17 +58,23 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     }
   };
 
-  const initializeAI = async () => {
+  const initializeAICare = async () => {
     try {
-      console.log('🚀 Initializing Hybrid AI Service...');
-      await hybridAIService.initialize();
-      const status = hybridAIService.getStatus();
-      setAiStatus(status);
-      setNetworkStatus(status.isOnline ? 'online' : 'offline');
-      console.log('✅ Hybrid AI initialized:', status);
+      console.log('🚀 Initializing AI Care Service...');
+      const result = await aiCareService.initialize();
+      
+      if (result.success) {
+        const status = aiCareService.getStatus();
+        setAiStatus(status);
+        setNetworkStatus('online'); // AI Care Service handles network detection internally
+        console.log('✅ AI Care Service initialized:', status);
+      } else {
+        console.error('❌ AI Care Service initialization failed:', result.error);
+        Alert.alert('AI Care Service', 'AI service started with limited features');
+      }
     } catch (error) {
-      console.error('❌ AI initialization failed:', error);
-      Alert.alert('AI Initialization', 'AI service started with limited features');
+      console.error('❌ AI Care Service initialization failed:', error);
+      Alert.alert('AI Care Service', 'AI service started with limited features');
     }
   };
 
@@ -148,7 +156,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     }
   };
 
-  // Analyze image with Hybrid AI (Gemini online / TensorFlow Lite offline)
+  // Analyze image with AI Care Service (Comprehensive analysis with Gemini AI)
   const analyzeImage = async () => {
     if (!selectedImage) {
       Alert.alert('No Image', 'Please select an image first');
@@ -165,47 +173,55 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     setError(null);
 
     try {
-      console.log('🔍 Starting hybrid AI analysis...');
+      console.log('🔍 Starting AI Care comprehensive analysis...');
       
-      // Use hybrid AI service (automatically switches between Gemini and TensorFlow)
-      const result = await hybridAIService.analyzeDisease(selectedImage.uri);
+      // Use AI Care Service for comprehensive analysis
+      const result = await aiCareService.analyzePlantHealth(selectedImage.uri, {
+        cropType: 'Unknown', // Will be detected by AI
+        location: 'Uganda', // Default location
+        timestamp: new Date().toISOString()
+      });
 
-      console.log('✅ Analysis complete:', result);
+      console.log('✅ AI Care analysis complete:', result);
 
-      // Update network status
-      const status = hybridAIService.getStatus();
-      setNetworkStatus(status.isOnline ? 'online' : 'offline');
-
-      // Format result for display
-      // Check if result already has 'analysis' nested (from Gemini) or if data is at top level
-      const analysisData = result.analysis || result;
-      
-      const formattedResult = {
+      if (result.success) {
+        // Format result for display
+        const analysisData = result.analysis;
+        
+        const formattedResult = {
           status: 'success',
-        message: getAnalysisMessage(result),
-        analysis: analysisData, // Use the extracted analysis data
-        timestamp: result.timestamp || new Date().toISOString(),
-        source: result.source || 'Gemini AI',
-        analysisMethod: result.analysisMethod || 'gemini'
-      };
+          message: '✨ Comprehensive AI Care analysis completed',
+          analysis: analysisData,
+          timestamp: result.timestamp,
+          source: 'AI Care Service (Gemini AI)',
+          analysisMethod: 'ai_care_comprehensive',
+          treatmentProducts: result.treatmentProducts || [],
+          careRecommendations: result.careRecommendations || [],
+          economicImpact: result.economicImpact || null
+        };
 
-      setAnalysisResult(formattedResult);
-      
-      console.log('📊 Formatted result set to state:', JSON.stringify(formattedResult, null, 2));
-      console.log('🎯 Analysis result disease:', formattedResult.analysis?.disease_type);
-      console.log('🎯 Analysis result crop:', formattedResult.analysis?.crop_type);
-      
-      Alert.alert(
-        'Analysis Complete',
-        `Disease detected using ${result.source === 'Gemini AI' ? 'Gemini AI (Online)' : 'TensorFlow Lite (Offline)'}\n\nCrop: ${result.crop_type || 'Unknown'}\nDisease: ${result.disease_type || 'Unknown'}\nConfidence: ${(result.confidence * 100).toFixed(1)}%`,
-        [{ text: 'View Results' }]
-      );
+        setAnalysisResult(formattedResult);
+        
+        console.log('📊 AI Care result set to state:', JSON.stringify(formattedResult, null, 2));
+        console.log('🎯 Analysis result disease:', formattedResult.analysis?.disease_type);
+        console.log('🎯 Analysis result crop:', formattedResult.analysis?.crop_type);
+        console.log('💊 Treatment products:', formattedResult.treatmentProducts?.length || 0);
+        console.log('💡 Care recommendations:', formattedResult.careRecommendations?.length || 0);
+        
+        Alert.alert(
+          'AI Care Analysis Complete',
+          `Comprehensive analysis completed!\n\nCrop: ${analysisData.crop_type || 'Unknown'}\nDisease: ${analysisData.disease_type || 'None detected'}\nConfidence: ${((analysisData.confidence || 0) * 100).toFixed(1)}%\n\nTreatment products: ${result.treatmentProducts?.length || 0}\nCare recommendations: ${result.careRecommendations?.length || 0}`,
+          [{ text: 'View Results' }]
+        );
+      } else {
+        throw new Error(result.error || 'AI Care analysis failed');
+      }
     } catch (error) {
-      console.error('❌ Analysis failed:', error);
+      console.error('❌ AI Care analysis failed:', error);
       setError(error.message);
       Alert.alert(
-        'Analysis Failed',
-        `Failed to analyze image: ${error.message}\n\nPlease ensure:\n• Image is clear and well-lit\n• Plant is visible in the image\n• You have network connection (for Gemini) or model downloaded (for offline mode)`
+        'AI Care Analysis Failed',
+        `Failed to analyze image: ${error.message}\n\nPlease ensure:\n• Image is clear and well-lit\n• Plant is visible in the image\n• You have network connection for Gemini AI\n• Try again in a moment`
       );
     } finally {
       setIsAnalyzing(false);
@@ -483,16 +499,30 @@ const DiseaseDetectionScreen = ({ navigation }) => {
             {/* Error Display */}
             {renderError()}
 
-            {/* Analysis Results */}
-            {renderAnalysisResults()}
-
-            {/* Product Recommendations */}
+            {/* AI Care Dashboard */}
             {analysisResult && (
+              <AICareDashboard
+                analysisResult={analysisResult}
+                treatmentProducts={analysisResult.treatmentProducts || []}
+                careRecommendations={analysisResult.careRecommendations || []}
+                economicImpact={analysisResult.economicImpact}
+                onProductPress={(product) => {
+                  console.log('Product selected:', product);
+                  // Navigate to product detail or handle product selection
+                }}
+                onRecommendationPress={(recommendation) => {
+                  console.log('Recommendation selected:', recommendation);
+                  // Handle recommendation action
+                }}
+              />
+            )}
+
+            {/* Legacy Product Recommendations (fallback) */}
+            {analysisResult && (!analysisResult.treatmentProducts || analysisResult.treatmentProducts.length === 0) && (
               <ProductRecommendationCards
                 diseaseType={analysisResult.analysis?.disease_type}
                 symptoms={analysisResult.analysis?.symptoms}
                 onProductPress={(product) => {
-                  // Navigate to product detail or handle product selection
                   console.log('Product selected:', product);
                 }}
               />

@@ -90,18 +90,16 @@ class EnhancedProductService {
         }
       }
       
-      // Fetch from API
-      const response = await fetch(`${this.apiUrl}/api/products/search`, {
-        method: 'POST',
+      // Fetch from API - Use correct search endpoint with GET request
+      const searchTerm = aiCommand.disease_type || aiCommand.products?.[0] || 'fertilizer';
+      const searchUrl = `${this.apiUrl}/api/search?q=${encodeURIComponent(searchTerm)}&limit=10`;
+      
+      const response = await fetch(searchUrl, {
+        method: 'GET',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          search_term: aiCommand.disease_type || '',
-          categories: aiCommand.categories || [],
-          products: aiCommand.products || [],
-          symptoms: aiCommand.symptoms || []
-        })
+        }
       });
       
       if (!response.ok) {

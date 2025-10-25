@@ -31,7 +31,9 @@ const NetworkDiagnostics = ({ onClose }) => {
       try {
         console.log(`🧪 Testing ${endpoint.name}: ${endpoint.url}`);
         
-        const response = await fetch(`${endpoint.url}/api/health`, {
+        // Use correct health endpoint (AI backend uses /health, Store uses /api/health)
+        const healthEndpoint = endpoint.url.includes(':5000') ? '/health' : '/api/health';
+        const response = await fetch(`${endpoint.url}${healthEndpoint}`, {
           method: 'GET',
           timeout: 3000,
           headers: {
