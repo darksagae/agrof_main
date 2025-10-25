@@ -5,8 +5,8 @@ const adminHandler = require('./admin-commands');
 
 // Create WhatsApp client
 const client = new Client({
-  puppeteer: {
-    headless: true,
+    puppeteer: {
+        headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   }
 });
@@ -28,7 +28,7 @@ app.listen(PORT, () => {
 // WhatsApp client events
 client.on('qr', (qr) => {
   console.log('📱 QR Code generated - scan with WhatsApp Business');
-  qrcode.generate(qr, { small: true });
+    qrcode.generate(qr, { small: true });
 });
 
 client.on('ready', () => {
@@ -37,7 +37,7 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
-  try {
+    try {
     const text = msg.body.trim();
     const sender = msg.from;
     
@@ -51,8 +51,8 @@ client.on('message', async (msg) => {
     if (text.toLowerCase().includes('help')) {
       await msg.reply('🤖 AGROF WhatsApp Bot\n\nAdmin Commands:\n• #listsellers - List pending requests\n• #approve <id> - Approve request\n• #reject <id> [reason] - Reject request\n• #view <id> - View details\n• #sellerstats - View statistics\n• admin help - Show all commands');
     }
-    
-  } catch (error) {
+        
+    } catch (error) {
     console.error('❌ Error handling message:', error);
   }
 });
@@ -64,7 +64,7 @@ client.initialize();
 process.on('SIGINT', () => {
   console.log('🔄 Shutting down WhatsApp bot...');
   client.destroy();
-  process.exit(0);
+    process.exit(0);
 });
 
 module.exports = client;
