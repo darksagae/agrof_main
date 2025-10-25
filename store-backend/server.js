@@ -150,7 +150,7 @@ const adminRoutes = require('./admin-routes');
 app.use('/api/admin', adminRoutes);
 
 // Serve static files from the store directory
-const storePath = path.join(__dirname, 'store');
+const storePath = path.join(__dirname, '../agrof-main/mobile/app/assets/store');
 app.use('/api/images', express.static(storePath));
 
 // Serve SEEDS images from mobile app assets (mounted at /app/store in Docker)
