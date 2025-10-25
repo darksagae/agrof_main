@@ -107,6 +107,17 @@ class RoleRequestService {
       }
 
       console.log('✅ Seller request submitted:', request.id);
+
+      // Send WhatsApp notification to admin
+      try {
+        const whatsappService = require('./whatsappNotificationService');
+        await whatsappService.sendRegistrationNotification('seller', userData, requestData);
+        console.log('📱 WhatsApp notification sent to admin');
+      } catch (error) {
+        console.error('❌ Failed to send WhatsApp notification:', error);
+        // Don't fail the registration if WhatsApp fails
+      }
+
       return { success: true, request };
     } catch (error) {
       console.error('❌ Error in submitSellerRequest:', error);

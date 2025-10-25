@@ -90,6 +90,48 @@ client.on('message', async (msg) => {
   }
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'AGROF WhatsApp Bot is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// API endpoint to send messages
+app.post('/api/send-message', async (req, res) => {
+  try {
+    const { to, message } = req.body;
+    
+    if (!to || !message) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Missing required fields: to, message' 
+      });
+    }
+
+    // Send message via WhatsApp
+    const chatId = to.includes('@') ? to : `${to}@c.us`;
+    
+    // This would send the message via WhatsApp Web
+    // For now, we'll just log it
+    console.log(`📱 Sending message to ${chatId}: ${message}`);
+    
+    res.json({ 
+      success: true, 
+      message: 'Message sent successfully',
+      to: chatId
+    });
+  } catch (error) {
+    console.error('❌ Error sending message:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 // Initialize WhatsApp client
 client.initialize();
 

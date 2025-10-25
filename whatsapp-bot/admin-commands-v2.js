@@ -15,7 +15,7 @@ class AdminCommandsV2 {
     this.flowProcessor = new ConversationFlowProcessor(storeApiUrl);
     
     // Secret trigger words
-    this.triggers = ['godeye', 'void', 'destiny', 'oracle', 'guardian', 'phoenix', 'nexus'];
+    this.triggers = ['godeye', 'void', 'destiny', 'oracle', 'guardian', 'phoenix', 'nexus', 'cloud'];
     
     console.log('🔧 Admin Portal initialized with triggers:', this.triggers);
   }

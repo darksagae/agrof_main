@@ -104,6 +104,16 @@ const BuyerRequestScreen = ({ navigation }) => {
 
       console.log('✅ User type updated to:', newUserType);
 
+      // Send WhatsApp notification to admin
+      try {
+        const whatsappService = require('../services/whatsappNotificationService');
+        await whatsappService.sendRegistrationNotification('buyer', user, formData);
+        console.log('📱 WhatsApp notification sent to admin');
+      } catch (error) {
+        console.error('❌ Failed to send WhatsApp notification:', error);
+        // Don't fail the registration if WhatsApp fails
+      }
+
       Alert.alert(
         '🎉 Registration Complete!',
         'You are now registered as a buyer!\n\n✅ Access to P2P Market unlocked!\n\nYou can now:\n• View seller listings\n• Negotiate prices\n• Contact sellers directly\n• Trade agricultural products',

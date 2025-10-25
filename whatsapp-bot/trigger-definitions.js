@@ -379,6 +379,112 @@ module.exports = {
         { id: 6, label: '🚫 Cancel', action: 'cancel' }
       ]
     }
+  },
+
+  // CLOUD - User Activation Management
+  cloud: {
+    name: 'User Activation',
+    description: 'Activate pending buyer/seller registrations',
+    
+    mainMenu: {
+      title: '*CLOUD - USER ACTIVATION*',
+      subtitle: 'Manage pending user registrations',
+      options: [
+        { id: 1, label: 'View pending buyers', action: 'list_pending_buyers' },
+        { id: 2, label: 'View pending sellers', action: 'list_pending_sellers' },
+        { id: 3, label: 'View all pending', action: 'list_all_pending' },
+        { id: 4, label: 'Activate user', action: 'activate_user' },
+        { id: 5, label: 'Reject user', action: 'reject_user' },
+        { id: 6, label: 'User statistics', action: 'user_stats' },
+        { id: 7, label: 'Cancel', action: 'cancel' }
+      ]
+    },
+    
+    flows: {
+      list_pending_buyers: [
+        {
+          step: 'fetch_buyers',
+          prompt: '*FETCHING PENDING BUYERS...*',
+          action: 'fetch_pending_buyers'
+        }
+      ],
+      
+      list_pending_sellers: [
+        {
+          step: 'fetch_sellers', 
+          prompt: '*FETCHING PENDING SELLERS...*',
+          action: 'fetch_pending_sellers'
+        }
+      ],
+      
+      list_all_pending: [
+        {
+          step: 'fetch_all',
+          prompt: '*FETCHING ALL PENDING REGISTRATIONS...*',
+          action: 'fetch_all_pending'
+        }
+      ],
+      
+      activate_user: [
+        {
+          step: 'select_user_type',
+          prompt: '*SELECT USER TYPE*',
+          options: [
+            { id: 1, value: 'buyer', label: 'Buyer Registration' },
+            { id: 2, value: 'seller', label: 'Seller Registration' }
+          ],
+          dataKey: 'userType'
+        },
+        {
+          step: 'enter_user_id',
+          prompt: '*ENTER USER ID TO ACTIVATE*',
+          placeholder: 'User ID (from pending list)',
+          dataKey: 'userId'
+        },
+        {
+          step: 'confirm_activation',
+          prompt: '*CONFIRM USER ACTIVATION*',
+          action: 'activate_user'
+        }
+      ],
+      
+      reject_user: [
+        {
+          step: 'select_user_type',
+          prompt: '*SELECT USER TYPE*',
+          options: [
+            { id: 1, value: 'buyer', label: 'Buyer Registration' },
+            { id: 2, value: 'seller', label: 'Seller Registration' }
+          ],
+          dataKey: 'userType'
+        },
+        {
+          step: 'enter_user_id',
+          prompt: '*ENTER USER ID TO REJECT*',
+          placeholder: 'User ID (from pending list)',
+          dataKey: 'userId'
+        },
+        {
+          step: 'enter_reason',
+          prompt: '*ENTER REJECTION REASON*',
+          placeholder: 'Reason for rejection (optional)',
+          dataKey: 'reason'
+        },
+        {
+          step: 'confirm_rejection',
+          prompt: '*CONFIRM USER REJECTION*',
+          action: 'reject_user'
+        }
+      ],
+      
+      user_stats: [
+        {
+          step: 'fetch_stats',
+          prompt: '*FETCHING USER STATISTICS...*',
+          action: 'fetch_user_statistics'
+        }
+      ]
+    }
   }
 };
 

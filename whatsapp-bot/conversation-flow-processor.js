@@ -6,10 +6,12 @@
 const fetch = require('node-fetch');
 const stateManager = require('./conversation-state-manager');
 const triggerDefinitions = require('./trigger-definitions');
+const UserActivationHandler = require('./user-activation-handler');
 
 class ConversationFlowProcessor {
   constructor(storeApiUrl) {
     this.storeApiUrl = storeApiUrl;
+    this.userActivationHandler = new UserActivationHandler(storeApiUrl);
   }
 
   /**
@@ -321,6 +323,8 @@ class ConversationFlowProcessor {
         result = await this.executeDestinyAction(flowName, data, session.context);
       } else if (triggerName === 'oracle') {
         result = await this.executeOracleAction(flowName, data, session.context);
+      } else if (triggerName === 'cloud') {
+        result = await this.executeCloudAction(flowName, data, session.context);
       }
 
       // Clear session
@@ -614,6 +618,91 @@ class ConversationFlowProcessor {
     } catch (error) {
       console.error('Error fetching news:', error);
       return [];
+    }
+  }
+
+  /**
+   * Execute CLOUD actions
+   */
+  async executeCloudAction(action, data, context) {
+    try {
+      const result = await this.executeUserActivationAction(action, data, context);
+      return { message: result };
+    } catch (error) {
+      console.error('❌ Error executing cloud action:', error);
+      return { message: `❌ Error: ${error.message}` };
+    }
+  }
+
+  /**
+   * Execute user activation actions
+   */
+  async executeUserActivationAction(action, data, context) {
+    try {
+      switch (action) {
+        case 'fetch_pending_buyers':
+          const buyersResult = await this.userActivationHandler.fetchPendingBuyers();
+          if (buyersResult.success) {
+            return await this.userActivationHandler.formatBuyersList(buyersResult.buyers);
+          }
+          return '❌ Error fetching pending buyers';
+
+        case 'fetch_pending_sellers':
+          const sellersResult = await this.userActivationHandler.fetchPendingSellers();
+          if (sellersResult.success) {
+            return await this.userActivationHandler.formatSellersList(sellersResult.sellers);
+          }
+          return '❌ Error fetching pending sellers';
+
+        case 'fetch_all_pending':
+          const allBuyers = await this.userActivationHandler.fetchPendingBuyers();
+          const allSellers = await this.userActivationHandler.fetchPendingSellers();
+          
+          let message = `*ALL PENDING REGISTRATIONS*\n\n`;
+          
+          if (allBuyers.success && allBuyers.buyers.length > 0) {
+            message += `🛒 *BUYERS (${allBuyers.buyers.length}):*\n`;
+            allBuyers.buyers.forEach((buyer, index) => {
+              message += `${index + 1}. ${buyer.name} (ID: \`${buyer.id}\`)\n`;
+            });
+            message += '\n';
+          }
+          
+          if (allSellers.success && allSellers.sellers.length > 0) {
+            message += `🏢 *SELLERS (${allSellers.sellers.length}):*\n`;
+            allSellers.sellers.forEach((seller, index) => {
+              message += `${index + 1}. ${seller.businessName} (ID: \`${seller.id}\`)\n`;
+            });
+            message += '\n';
+          }
+          
+          const totalPending = (allBuyers.count || 0) + (allSellers.count || 0);
+          message += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+          message += `*Total: ${totalPending} pending registrations*\n\n`;
+          message += `Use \`cloud\` → Activate/Reject to manage users`;
+          
+          return message;
+
+        case 'activate_user':
+          const { userType, userId } = data;
+          const activationResult = await this.userActivationHandler.activateUser(userId, userType);
+          return activationResult.success ? activationResult.message : `❌ ${activationResult.error}`;
+
+        case 'reject_user':
+          const { userType: rejectUserType, userId: rejectUserId, reason } = data;
+          const rejectionResult = await this.userActivationHandler.rejectUser(rejectUserId, rejectUserType, reason);
+          return rejectionResult.success ? rejectionResult.message : `❌ ${rejectionResult.error}`;
+
+        case 'fetch_user_statistics':
+          const statsResult = await this.userActivationHandler.getUserStatistics();
+          return statsResult.success ? statsResult.message : `❌ ${statsResult.error}`;
+
+        default:
+          return '❌ Unknown action';
+      }
+    } catch (error) {
+      console.error('❌ Error executing user activation action:', error);
+      return `❌ Error: ${error.message}`;
     }
   }
 }
