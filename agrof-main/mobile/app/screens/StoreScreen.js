@@ -10,7 +10,7 @@ import OptimizedImage from '../components/OptimizedImage';
 import CategoryProductsScreen from './CategoryProductsScreen';
 import CartScreen from './CartScreen';
 import ProductDetailScreen from './ProductDetailScreen';
-import { featuredProducts } from '../data/featuredProducts';
+import { featuredProducts } from '../data/featuredProducts.js';
 
 const StoreScreen = () => {
   const { t } = useSafeTranslation();
