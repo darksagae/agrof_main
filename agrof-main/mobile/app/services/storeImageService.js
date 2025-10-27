@@ -135,14 +135,20 @@ class StoreImageService {
       category_name: product.category_name
     });
 
-    // 1. Direct HTTP URL if available
+    // 1. Base64 data URL (WhatsApp images)
+    if (product.image_url && product.image_url.startsWith('data:')) {
+      console.log('✅ Using base64 data URL (WhatsApp image)');
+      sources.push({ uri: product.image_url });
+    }
+
+    // 2. Direct HTTP URL if available
     if (product.image_url && product.image_url.startsWith('http')) {
       console.log('✅ Using direct HTTP URL:', product.image_url);
       sources.push({ uri: product.image_url });
     }
 
-    // 2. Backend API image URL (most common case from store API)
-    if (product.image_url && !product.image_url.startsWith('http') && product.image_url.trim() !== '' && product.image_url !== '/api/images/') {
+    // 3. Backend API image URL (most common case from store API)
+    if (product.image_url && !product.image_url.startsWith('http') && !product.image_url.startsWith('data:') && product.image_url.trim() !== '' && product.image_url !== '/api/images/') {
       // Use image_url as-is if already encoded (contains %)
       const fullUrl = product.image_url.includes('%') 
         ? `${this.baseUrl}${product.image_url}` 
