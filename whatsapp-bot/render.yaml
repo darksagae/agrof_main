@@ -11,6 +11,8 @@ services:
         value: production
       - key: ADMIN_NUMBERS
         value: 256743232441
+      - key: STORE_API
+        value: https://agrof-store-api.onrender.com/api
       - key: STORE_BACKEND_URL
         value: https://agrof-store-api.onrender.com
       - key: AUTOMATION_ENGINE_URL
