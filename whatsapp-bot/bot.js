@@ -16,12 +16,13 @@ const AdminCommandsV2 = require('./admin-commands-v2');
 // Initialize admin handler with configured API URL
 const adminHandler = new AdminCommandsV2(getStoreApiUrl(), config.admin.allowedNumbers);
 
-// Connection state tracking
+// Connection state tracking - PERSISTENT CONNECTION
 let isConnected = false;
 let reconnectAttempts = 0;
-const maxReconnectAttempts = config.whatsapp.maxReconnectAttempts;
-const reconnectDelay = config.whatsapp.reconnectDelay;
+const maxReconnectAttempts = Infinity; // NEVER STOP TRYING
+const reconnectDelay = 10000; // 10 seconds between attempts
 let lastDisconnectionTime = null;
+let reconnectInterval = null; // For continuous reconnection attempts
 
 // Create session directory if it doesn't exist
 const sessionDir = config.whatsapp.sessionDir;
@@ -30,20 +31,27 @@ if (!fs.existsSync(sessionDir)) {
     console.log('📁 Created WhatsApp session directory');
 }
 
-// Create WhatsApp client with enhanced configuration
+// Create WhatsApp client with PERSISTENT CONNECTION configuration
 const client = new Client({
     puppeteer: config.whatsapp.puppeteer,
-    // Session persistence
+    // Session persistence - CRITICAL for staying connected
     session: sessionDir,
-    // Restart on auth failure
-    restartOnAuthFail: true,
-    // QR code timeout
-    qrTimeoutMs: config.whatsapp.qrTimeoutMs,
-    // Additional options for stability
+    // NEVER restart on auth failure - keep trying to reconnect
+    restartOnAuthFail: false,
+    // NO QR code timeout - keep trying forever
+    qrTimeoutMs: 0,
+    // Additional options for PERSISTENT connection
     webVersionCache: {
         type: 'remote',
         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
-  }
+    },
+    // Keep alive settings
+    authTimeoutMs: 0, // No auth timeout
+    takeoverOnConflict: false, // Don't conflict with other sessions
+    takeoverTimeoutMs: 0, // No takeover timeout
+    // Connection persistence
+    connectTimeoutMs: 0, // No connection timeout
+    defaultQueryTimeoutMs: 0, // No query timeout
 });
 
 // Health check server
@@ -51,22 +59,114 @@ const healthApp = require('./health');
 const express = require('express');
 const app = express();
 
-// Use health check
+// QR code endpoints (must be before health app)
+app.get('/qr', (req, res) => {
+  if (!currentQR) {
+    return res.status(404).json({ error: 'No QR code available' });
+  }
+  res.json({
+    qr: currentQR,
+    instructions: [
+      '1. Open WhatsApp Business on your phone',
+      '2. Go to Settings > Linked Devices',
+      '3. Tap "Link a Device"',
+      '4. Scan the QR code',
+      '5. Wait for "Bot is ready!" message'
+    ]
+  });
+});
+
+app.get('/qr-display', (req, res) => {
+  if (!currentQR) {
+    return res.send(`
+      <html>
+        <head><title>AGROF WhatsApp Bot - QR Code</title></head>
+        <body style="font-family: Arial; text-align: center; padding: 20px;">
+          <h1>📱 AGROF WhatsApp Bot</h1>
+          <p>No QR code available. Bot may already be connected.</p>
+          <p><a href="/health">Check Bot Status</a></p>
+        </body>
+      </html>
+    `);
+  }
+  res.send(`
+    <html>
+      <head>
+        <title>AGROF WhatsApp Bot - QR Code</title>
+        <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+        <style>
+          body { font-family: Arial; text-align: center; padding: 20px; background: #f5f5f5; }
+          .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 500px; margin: 0 auto; }
+          #qrcode { margin: 20px 0; }
+          .instructions { text-align: left; margin: 20px 0; }
+          .instructions li { margin: 10px 0; }
+          .status { color: #666; margin-top: 20px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>📱 AGROF WhatsApp Bot</h1>
+          <h2>Scan QR Code to Connect</h2>
+          <div id="qrcode"></div>
+          <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+              <li>Open WhatsApp Business on your phone</li>
+              <li>Go to Settings > Linked Devices</li>
+              <li>Tap "Link a Device"</li>
+              <li>Scan the QR code above</li>
+              <li>Wait for "Bot is ready!" message</li>
+            </ol>
+          </div>
+          <div class="status">
+            <p><a href="/health">Check Bot Status</a> | <a href="/qr">Get QR Data (JSON)</a></p>
+          </div>
+        </div>
+        <script>
+          QRCode.toCanvas(document.getElementById('qrcode'), '${currentQR}', {
+            width: 300,
+            margin: 2,
+            color: {
+              dark: '#000000',
+              light: '#FFFFFF'
+            }
+          }, function (error) {
+            if (error) console.error(error);
+          });
+        </script>
+      </body>
+    </html>
+  `);
+});
+
+// Use health check for all other routes
 app.use('/', healthApp);
 
 // Start health server
 const PORT = getBotPort();
 app.listen(PORT, () => {
   console.log(`🏥 Health server running on port ${PORT}`);
+  console.log(`📱 Visit: http://localhost:${PORT}/qr-display for better QR code display`);
 });
 
 // WhatsApp client events with enhanced error handling
 
-// QR Code event - when new QR code is needed
+let currentQR = null;
+
+// Store QR code when generated
 client.on('qr', (qr) => {
+  currentQR = qr;
   console.log('📱 QR CODE GENERATED - Please scan with WhatsApp Business');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    qrcode.generate(qr, { small: true });
+    qrcode.generate(qr, { 
+      small: false,
+      width: 2,
+      margin: 1,
+      color: {
+        dark: '█',
+        light: ' '
+      }
+    });
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📱 Instructions:');
   console.log('1. Open WhatsApp Business on your phone');
@@ -102,28 +202,41 @@ client.on('ready', () => {
   notifyAdmin('WhatsApp bot is back online and ready!');
 });
 
-// Disconnected event - when bot loses connection
+// Disconnected event - PERSISTENT RECONNECTION (NEVER GIVES UP)
 client.on('disconnected', async (reason) => {
   console.log('❌ WhatsApp disconnected:', reason);
+  console.log('🔄 Bot will ALWAYS try to reconnect - never giving up!');
   isConnected = false;
   lastDisconnectionTime = new Date();
   
   // Notify admin about disconnection
-  await notifyAdmin(`WhatsApp bot disconnected: ${reason}`);
+  await notifyAdmin(`WhatsApp bot disconnected: ${reason}. Bot will keep trying to reconnect.`);
   
-  // Attempt reconnection
-  if (reconnectAttempts < maxReconnectAttempts) {
-    reconnectAttempts++;
-    console.log(`🔄 Attempting reconnection ${reconnectAttempts}/${maxReconnectAttempts}...`);
-    
-    setTimeout(() => {
-      console.log('🔄 Reconnecting to WhatsApp...');
-      client.initialize();
-    }, reconnectDelay);
-  } else {
-    console.log('❌ Max reconnection attempts reached. Manual intervention required.');
-    await notifyAdmin('WhatsApp bot failed to reconnect. Manual restart required.');
+  // INFINITE RECONNECTION - NEVER STOP TRYING
+  console.log('🔄 Starting INFINITE reconnection attempts...');
+  
+  // Clear any existing interval
+  if (reconnectInterval) {
+    clearInterval(reconnectInterval);
   }
+  
+  // Immediate reconnection attempt
+  setTimeout(() => {
+    console.log('🚀 Immediate reconnection attempt...');
+    client.initialize();
+  }, 5000);
+  
+  // Set up continuous reconnection attempts
+  reconnectInterval = setInterval(() => {
+    if (!isConnected) {
+      reconnectAttempts++;
+      console.log(`🔄 Continuous reconnection attempt #${reconnectAttempts} (INFINITE - never giving up)`);
+      client.initialize();
+    } else {
+      clearInterval(reconnectInterval);
+      console.log('✅ Connected! Stopping reconnection attempts');
+    }
+  }, reconnectDelay);
 });
 
 // Authentication failure event
@@ -149,18 +262,36 @@ client.on('auth_failure', (msg) => {
   }, 5000);
 });
 
-// Error event
+// Error event - PERSISTENT RECONNECTION
 client.on('error', (error) => {
   console.error('❌ WhatsApp client error:', error);
   isConnected = false;
   
-  // Attempt reconnection on error
-  if (reconnectAttempts < maxReconnectAttempts) {
-    console.log('🔄 Attempting reconnection after error...');
-    setTimeout(() => {
-      client.initialize();
-    }, 10000);
+  // INFINITE RECONNECTION on error - NEVER GIVE UP
+  console.log('🔄 Error occurred - attempting INFINITE reconnection...');
+  
+  // Clear any existing interval
+  if (reconnectInterval) {
+    clearInterval(reconnectInterval);
   }
+  
+  // Immediate reconnection attempt
+  setTimeout(() => {
+    console.log('🚀 Reconnecting after error...');
+    client.initialize();
+  }, 10000);
+  
+  // Set up continuous reconnection attempts
+  reconnectInterval = setInterval(() => {
+    if (!isConnected) {
+      reconnectAttempts++;
+      console.log(`🔄 Error recovery attempt #${reconnectAttempts} (INFINITE - never giving up)`);
+      client.initialize();
+    } else {
+      clearInterval(reconnectInterval);
+      console.log('✅ Connected after error! Stopping reconnection attempts');
+    }
+  }, reconnectDelay);
 });
 
 // Loading screen event
@@ -497,8 +628,22 @@ setInterval(() => {
   }
 }, 60000); // Check every minute
 
+
 // Initialize WhatsApp client
-console.log('🚀 Initializing WhatsApp client...');
+console.log('🚀 Initializing WhatsApp client with PERSISTENT CONNECTION...');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('🔧 PERSISTENT CONNECTION CONFIGURATION:');
+console.log('✅ Infinite reconnection attempts (NEVER GIVES UP)');
+console.log('✅ No QR code timeout (keeps trying forever)');
+console.log('✅ Session persistence (remembers connection)');
+console.log('✅ Continuous monitoring (always waiting)');
+console.log('✅ Primary admin: 0705223777 (always allowed)');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('📱 Bot will ALWAYS wait for messages from your phone');
+console.log('🔄 Bot will NEVER disconnect unless you manually disconnect');
+console.log('⏰ Bot will keep trying to reconnect FOREVER');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
 client.initialize();
 
 // Graceful shutdown
