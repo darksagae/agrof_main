@@ -8,7 +8,7 @@ import { STORE_BASE_URL } from '../config/apiConfig';
 
 class StoreImageService {
   constructor() {
-    this.baseUrl = STORE_BASE_URL;
+    this.baseUrl = STORE_BASE_URL || 'https://agrof-store-api.onrender.com';
     this.imageCache = new Map();
     this.loadingStates = new Map();
     this.fallbackImages = {
@@ -91,15 +91,21 @@ class StoreImageService {
    * @param {Array} products - Array of products
    */
   async preloadImages(products) {
+    if (!products || !Array.isArray(products)) {
+      console.warn('Invalid products array for preloading');
+      return;
+    }
+
     const preloadPromises = products.slice(0, 10).map(async (product) => {
       try {
+        if (!product) return;
         const source = this.getOptimizedImageSource(product);
-        if (source.uri) {
+        if (source && source.uri) {
           // Preload the image
           await Image.prefetch(source.uri);
         }
       } catch (error) {
-        console.warn('Failed to preload image for product:', product.name);
+        console.warn('Failed to preload image for product:', product?.name || 'unknown');
       }
     });
 

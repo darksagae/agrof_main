@@ -1,0 +1,30 @@
+{
+  "name": "render-mcp-tool",
+  "version": "1.0.0",
+  "description": "MCP tool for Render API integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server-render": "latest"
+  },
+  "env": {
+    "RENDER_API_KEY": "rnd_T81Z0ZFWJavxtF3Vd2KXRF0I8FXh"
+  },
+  "mcpConfig": {
+    "server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-render"
+      ],
+      "env": {
+        "RENDER_API_KEY": "rnd_T81Z0ZFWJavxtF3Vd2KXRF0I8FXh"
+      }
+    }
+  }
+}
+
+
+

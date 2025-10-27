@@ -1,573 +1,445 @@
 /**
- * Feature Engineering Service - Batch 5
- * Feature engineering for ML model training and prediction
+ * Feature Engineering Service
+ * Handles feature extraction, transformation, and selection for ML models
  */
-
-import userFeedbackService from './userFeedbackService';
-import enhancedAccuracyService from './enhancedAccuracyService';
-import regionalPriceService from './regionalPriceService';
-import seasonalPriceService from './seasonalPriceService';
-import weatherIntegrationService from './weatherIntegrationService';
 
 class FeatureEngineeringService {
   constructor() {
-    this.featureSets = new Map();
-    this.featureMappings = new Map();
-    this.featureScalers = new Map();
+    this.featureTransformers = new Map();
+    this.featureSelectors = new Map();
+    this.featureImportance = new Map();
     this.initialized = false;
   }
 
   /**
-   * Initialize the feature engineering service
+   * Initialize the Feature Engineering Service
    */
   async initialize() {
     try {
-      console.log('🔄 Initializing Feature Engineering Service...');
+      console.log('🔧 Initializing Feature Engineering Service...');
       
-      // Initialize feature sets
-      this.initializeFeatureSets();
+      // Setup feature transformers
+      this.setupFeatureTransformers();
       
-      // Initialize feature mappings
-      this.initializeFeatureMappings();
-      
-      // Initialize feature scalers
-      this.initializeFeatureScalers();
+      // Setup feature selectors
+      this.setupFeatureSelectors();
       
       this.initialized = true;
-      console.log('✅ Feature Engineering Service initialized');
+      console.log('✅ Feature Engineering Service initialized successfully');
+      
+      return true;
     } catch (error) {
       console.error('❌ Failed to initialize Feature Engineering Service:', error);
+      return false;
     }
   }
 
   /**
-   * Initialize feature sets
+   * Setup feature transformers
    */
-  initializeFeatureSets() {
-    // Crop features
-    this.featureSets.set('crop_features', {
-      categorical: ['crop_id', 'category', 'planting_season', 'harvest_season'],
-      numerical: ['growth_duration_days', 'yield_per_acre', 'market_price', 'roi_percentage'],
-      boolean: ['drought_tolerant', 'flood_tolerant', 'pest_resistant']
+  setupFeatureTransformers() {
+    this.featureTransformers.set('numerical_scaling', {
+      method: 'standard_scaler',
+      description: 'Standardize numerical features'
     });
 
-    // Regional features
-    this.featureSets.set('regional_features', {
-      categorical: ['region', 'soil_type', 'climate_zone'],
-      numerical: ['temperature_avg', 'humidity_avg', 'rainfall_avg', 'altitude'],
-      boolean: ['irrigation_available', 'market_access', 'transport_available']
+    this.featureTransformers.set('categorical_encoding', {
+      method: 'one_hot_encoding',
+      description: 'Encode categorical variables'
     });
 
-    // Weather features
-    this.featureSets.set('weather_features', {
-      categorical: ['season', 'weather_condition'],
-      numerical: ['temperature', 'humidity', 'rainfall', 'wind_speed', 'uv_index'],
-      boolean: ['drought_alert', 'flood_alert', 'extreme_weather']
+    this.featureTransformers.set('temporal_features', {
+      method: 'time_series_extraction',
+      description: 'Extract temporal features from dates'
     });
 
-    // Market features
-    this.featureSets.set('market_features', {
-      categorical: ['market_type', 'demand_level'],
-      numerical: ['price_volatility', 'market_demand', 'supply_level', 'transport_cost'],
-      boolean: ['export_available', 'local_market', 'processing_available']
-    });
-
-    // User features
-    this.featureSets.set('user_features', {
-      categorical: ['user_type', 'experience_level'],
-      numerical: ['price_sensitivity', 'quality_preference', 'availability_preference', 'delivery_preference'],
-      boolean: ['organic_preference', 'local_preference', 'bulk_preference']
+    this.featureTransformers.set('weather_features', {
+      method: 'weather_aggregation',
+      description: 'Aggregate weather data by time periods'
     });
   }
 
   /**
-   * Initialize feature mappings
+   * Setup feature selectors
    */
-  initializeFeatureMappings() {
-    // Crop ID mapping
-    this.featureMappings.set('crop_id', {
-      'maize': 0,
-      'tomatoes': 1,
-      'beans': 2,
-      'coffee': 3,
-      'banana': 4,
-      'onions': 5,
-      'groundnuts': 6,
-      'rice': 7,
-      'cotton': 8,
-      'sugarcane': 9,
-      'pineapple': 10,
-      'mangoes': 11,
-      'avocados': 12,
-      'carrots': 13,
-      'spinach': 14,
-      'millet': 15,
-      'soybeans': 16,
-      'cabbage': 17,
-      'oranges': 18
+  setupFeatureSelectors() {
+    this.featureSelectors.set('correlation_filter', {
+      method: 'correlation_analysis',
+      threshold: 0.8,
+      description: 'Remove highly correlated features'
     });
 
-    // Region mapping
-    this.featureMappings.set('region', {
-      'Northern': 0,
-      'Eastern': 1,
-      'Central': 2,
-      'Western': 3
+    this.featureSelectors.set('variance_filter', {
+      method: 'variance_threshold',
+      threshold: 0.01,
+      description: 'Remove low variance features'
     });
 
-    // Season mapping
-    this.featureMappings.set('season', {
-      'First Rains': 0,
-      'First Dry': 1,
-      'Second Rains': 2,
-      'Second Dry': 3
-    });
-
-    // Weather condition mapping
-    this.featureMappings.set('weather_condition', {
-      'sunny': 0,
-      'partly_cloudy': 1,
-      'cloudy': 2,
-      'rainy': 3
-    });
-
-    // Market type mapping
-    this.featureMappings.set('market_type', {
-      'local': 0,
-      'regional': 1,
-      'national': 2,
-      'export': 3
-    });
-
-    // Demand level mapping
-    this.featureMappings.set('demand_level', {
-      'low': 0,
-      'moderate': 1,
-      'high': 2,
-      'very_high': 3
+    this.featureSelectors.set('recursive_elimination', {
+      method: 'recursive_feature_elimination',
+      n_features: 10,
+      description: 'Select top N features using RFE'
     });
   }
 
   /**
-   * Initialize feature scalers
-   */
-  initializeFeatureScalers() {
-    // Temperature scaler
-    this.featureScalers.set('temperature', {
-      min: 15,
-      max: 35,
-      mean: 25,
-      std: 5
-    });
-
-    // Humidity scaler
-    this.featureScalers.set('humidity', {
-      min: 40,
-      max: 90,
-      mean: 65,
-      std: 15
-    });
-
-    // Rainfall scaler
-    this.featureScalers.set('rainfall', {
-      min: 0,
-      max: 2000,
-      mean: 1000,
-      std: 500
-    });
-
-    // Price scaler
-    this.featureScalers.set('price', {
-      min: 500,
-      max: 10000,
-      mean: 3000,
-      std: 2000
-    });
-
-    // ROI scaler
-    this.featureScalers.set('roi', {
-      min: 0,
-      max: 500,
-      mean: 200,
-      std: 100
-    });
-  }
-
-  /**
-   * Extract features for a recommendation
-   * @param {Object} recommendationData - Recommendation data
+   * Extract features from raw data
+   * @param {Object} rawData - Raw input data
+   * @param {string} featureType - Type of features to extract
    * @returns {Object} Extracted features
    */
-  extractFeatures(recommendationData) {
+  async extractFeatures(rawData, featureType = 'all') {
     try {
+      if (!this.initialized) {
+        await this.initialize();
+      }
+
+      console.log(`🔍 Extracting ${featureType} features...`);
+
       const features = {};
 
-      // Extract crop features
-      features.crop_id = this.encodeCategoricalFeature('crop_id', recommendationData.crop_id);
-      features.category = this.encodeCategoricalFeature('category', recommendationData.category);
-      features.planting_season = this.encodeCategoricalFeature('season', recommendationData.planting_season);
-      features.harvest_season = this.encodeCategoricalFeature('season', recommendationData.harvest_season);
-      features.growth_duration_days = this.parseGrowthDuration(recommendationData.growth_duration);
-      features.yield_per_acre = recommendationData.yield_per_acre || 0;
-      features.market_price = recommendationData.market_price || 0;
-      features.roi_percentage = recommendationData.roi_percentage || 0;
+      // Extract basic features
+      if (featureType === 'all' || featureType === 'basic') {
+        features.basic = this.extractBasicFeatures(rawData);
+      }
 
-      // Extract regional features
-      features.region = this.encodeCategoricalFeature('region', recommendationData.region);
-      features.soil_type = this.encodeSoilType(recommendationData.soil_type);
-      features.climate_zone = this.encodeClimateZone(recommendationData.region);
-      features.temperature_avg = this.getRegionalTemperature(recommendationData.region);
-      features.humidity_avg = this.getRegionalHumidity(recommendationData.region);
-      features.rainfall_avg = this.getRegionalRainfall(recommendationData.region);
-      features.altitude = this.getRegionalAltitude(recommendationData.region);
+      // Extract temporal features
+      if (featureType === 'all' || featureType === 'temporal') {
+        features.temporal = this.extractTemporalFeatures(rawData);
+      }
 
       // Extract weather features
-      features.season = this.encodeCategoricalFeature('season', recommendationData.season);
-      features.weather_condition = this.encodeCategoricalFeature('weather_condition', recommendationData.weather_condition);
-      features.temperature = recommendationData.temperature || 25;
-      features.humidity = recommendationData.humidity || 65;
-      features.rainfall = recommendationData.rainfall || 1000;
-      features.wind_speed = recommendationData.wind_speed || 5;
-      features.uv_index = recommendationData.uv_index || 6;
-
-      // Extract market features
-      features.market_type = this.encodeCategoricalFeature('market_type', recommendationData.market_type);
-      features.demand_level = this.encodeCategoricalFeature('demand_level', recommendationData.demand_level);
-      features.price_volatility = recommendationData.price_volatility || 0.1;
-      features.market_demand = recommendationData.market_demand || 0.5;
-      features.supply_level = recommendationData.supply_level || 0.5;
-      features.transport_cost = recommendationData.transport_cost || 0;
-
-      // Extract user features
-      const userPreferences = userFeedbackService.getUserPreferences(recommendationData.user_id);
-      features.price_sensitivity = userPreferences.preferences.price_sensitivity;
-      features.quality_preference = userPreferences.preferences.quality_preference;
-      features.availability_preference = userPreferences.preferences.availability_preference;
-      features.delivery_preference = userPreferences.preferences.delivery_preference;
-
-      // Extract derived features
-      features.weather_score = this.calculateWeatherScore(features);
-      features.market_score = this.calculateMarketScore(features);
-      features.user_preference_score = this.calculateUserPreferenceScore(features);
-      features.seasonal_score = this.calculateSeasonalScore(features);
-      features.regional_score = this.calculateRegionalScore(features);
-
-      return features;
-
-    } catch (error) {
-      console.error('❌ Failed to extract features:', error);
-      return {};
-    }
-  }
-
-  /**
-   * Encode categorical feature
-   */
-  encodeCategoricalFeature(featureName, value) {
-    const mapping = this.featureMappings.get(featureName);
-    return mapping ? (mapping[value] !== undefined ? mapping[value] : 0) : 0;
-  }
-
-  /**
-   * Encode soil type
-   */
-  encodeSoilType(soilType) {
-    const soilTypes = {
-      'well-drained loamy': 0,
-      'sandy loam': 1,
-      'clay loam': 2,
-      'sandy': 3,
-      'clay': 4,
-      'loamy': 5
-    };
-    return soilTypes[soilType] || 0;
-  }
-
-  /**
-   * Encode climate zone
-   */
-  encodeClimateZone(region) {
-    const climateZones = {
-      'Northern': 0, // Semi-arid
-      'Eastern': 1, // Humid
-      'Central': 2, // Temperate
-      'Western': 3  // Tropical
-    };
-    return climateZones[region] || 0;
-  }
-
-  /**
-   * Parse growth duration to days
-   */
-  parseGrowthDuration(duration) {
-    if (typeof duration === 'number') return duration;
-    if (typeof duration === 'string') {
-      const match = duration.match(/(\d+)-(\d+)/);
-      if (match) {
-        return (parseInt(match[1]) + parseInt(match[2])) / 2;
+      if (featureType === 'all' || featureType === 'weather') {
+        features.weather = this.extractWeatherFeatures(rawData);
       }
+
+      // Extract soil features
+      if (featureType === 'all' || featureType === 'soil') {
+        features.soil = this.extractSoilFeatures(rawData);
+      }
+
+      console.log(`✅ Feature extraction completed. Generated ${Object.keys(features).length} feature groups`);
+      return features;
+    } catch (error) {
+      console.error('❌ Error extracting features:', error);
+      throw error;
     }
-    return 90; // Default 90 days
   }
 
   /**
-   * Get regional temperature
+   * Extract basic features
+   * @param {Object} data - Input data
+   * @returns {Object} Basic features
    */
-  getRegionalTemperature(region) {
-    const temperatures = {
-      'Northern': 28,
-      'Eastern': 26,
-      'Central': 25,
-      'Western': 27
+  extractBasicFeatures(data) {
+    return {
+      crop_type: data.crop_type || 'unknown',
+      season: data.season || 'unknown',
+      region: data.region || 'unknown',
+      soil_type: data.soil_type || 'unknown',
+      planting_date: data.planting_date || null,
+      expected_harvest: data.expected_harvest || null
     };
-    return temperatures[region] || 25;
   }
 
   /**
-   * Get regional humidity
+   * Extract temporal features
+   * @param {Object} data - Input data
+   * @returns {Object} Temporal features
    */
-  getRegionalHumidity(region) {
-    const humidities = {
-      'Northern': 65,
-      'Eastern': 70,
-      'Central': 75,
-      'Western': 80
+  extractTemporalFeatures(data) {
+    const now = new Date();
+    const plantingDate = data.planting_date ? new Date(data.planting_date) : null;
+    
+    return {
+      current_month: now.getMonth() + 1,
+      current_season: this.getSeason(now.getMonth()),
+      days_since_planting: plantingDate ? Math.floor((now - plantingDate) / (1000 * 60 * 60 * 24)) : null,
+      planting_month: plantingDate ? plantingDate.getMonth() + 1 : null,
+      planting_season: plantingDate ? this.getSeason(plantingDate.getMonth()) : null
     };
-    return humidities[region] || 65;
   }
 
   /**
-   * Get regional rainfall
+   * Extract weather features
+   * @param {Object} data - Input data
+   * @returns {Object} Weather features
    */
-  getRegionalRainfall(region) {
-    const rainfalls = {
-      'Northern': 800,
-      'Eastern': 900,
-      'Central': 1000,
-      'Western': 1200
+  extractWeatherFeatures(data) {
+    const weather = data.weather || {};
+    
+    return {
+      temperature_avg: weather.temperature_avg || 0,
+      temperature_min: weather.temperature_min || 0,
+      temperature_max: weather.temperature_max || 0,
+      humidity: weather.humidity || 0,
+      rainfall: weather.rainfall || 0,
+      wind_speed: weather.wind_speed || 0,
+      weather_condition: weather.condition || 'unknown'
     };
-    return rainfalls[region] || 1000;
   }
 
   /**
-   * Get regional altitude
+   * Extract soil features
+   * @param {Object} data - Input data
+   * @returns {Object} Soil features
    */
-  getRegionalAltitude(region) {
-    const altitudes = {
-      'Northern': 1000,
-      'Eastern': 1200,
-      'Central': 1400,
-      'Western': 1100
+  extractSoilFeatures(data) {
+    const soil = data.soil || {};
+    
+    return {
+      ph_level: soil.ph || 7.0,
+      nitrogen_content: soil.nitrogen || 0,
+      phosphorus_content: soil.phosphorus || 0,
+      potassium_content: soil.potassium || 0,
+      organic_matter: soil.organic_matter || 0,
+      moisture_content: soil.moisture || 0,
+      soil_type: soil.type || 'unknown'
     };
-    return altitudes[region] || 1200;
   }
 
   /**
-   * Calculate weather score
+   * Transform features using specified transformer
+   * @param {Object} features - Input features
+   * @param {string} transformerName - Name of the transformer
+   * @returns {Object} Transformed features
    */
-  calculateWeatherScore(features) {
-    let score = 0.5; // Base score
+  async transformFeatures(features, transformerName) {
+    try {
+      const transformer = this.featureTransformers.get(transformerName);
+      if (!transformer) {
+        throw new Error(`Transformer ${transformerName} not found`);
+      }
 
-    // Temperature score
-    const tempScore = this.calculateTemperatureScore(features.temperature);
-    score += tempScore * 0.3;
+      console.log(`🔄 Transforming features using ${transformerName}...`);
 
-    // Humidity score
-    const humidityScore = this.calculateHumidityScore(features.humidity);
-    score += humidityScore * 0.2;
+      let transformedFeatures = { ...features };
 
-    // Rainfall score
-    const rainfallScore = this.calculateRainfallScore(features.rainfall);
-    score += rainfallScore * 0.3;
+      switch (transformerName) {
+        case 'numerical_scaling':
+          transformedFeatures = this.applyNumericalScaling(transformedFeatures);
+          break;
+        case 'categorical_encoding':
+          transformedFeatures = this.applyCategoricalEncoding(transformedFeatures);
+          break;
+        case 'temporal_features':
+          transformedFeatures = this.extractTemporalFeatures(transformedFeatures);
+          break;
+        case 'weather_features':
+          transformedFeatures = this.aggregateWeatherFeatures(transformedFeatures);
+          break;
+        default:
+          console.warn(`Unknown transformer: ${transformerName}`);
+      }
 
-    // Weather condition score
-    const conditionScore = this.calculateWeatherConditionScore(features.weather_condition);
-    score += conditionScore * 0.2;
-
-    return Math.min(1, Math.max(0, score));
+      console.log(`✅ Feature transformation completed using ${transformerName}`);
+      return transformedFeatures;
+    } catch (error) {
+      console.error(`❌ Error transforming features:`, error);
+      throw error;
+    }
   }
 
   /**
-   * Calculate temperature score
+   * Apply numerical scaling
+   * @param {Object} features - Input features
+   * @returns {Object} Scaled features
    */
-  calculateTemperatureScore(temperature) {
-    const optimalTemp = 25;
-    const deviation = Math.abs(temperature - optimalTemp);
-    return Math.max(0, 1 - deviation / 10);
-  }
+  applyNumericalScaling(features) {
+    const numericalFeatures = ['temperature_avg', 'humidity', 'rainfall', 'ph_level'];
+    const scaledFeatures = { ...features };
 
-  /**
-   * Calculate humidity score
-   */
-  calculateHumidityScore(humidity) {
-    const optimalHumidity = 65;
-    const deviation = Math.abs(humidity - optimalHumidity);
-    return Math.max(0, 1 - deviation / 25);
-  }
-
-  /**
-   * Calculate rainfall score
-   */
-  calculateRainfallScore(rainfall) {
-    const optimalRainfall = 1000;
-    const deviation = Math.abs(rainfall - optimalRainfall);
-    return Math.max(0, 1 - deviation / 500);
-  }
-
-  /**
-   * Calculate weather condition score
-   */
-  calculateWeatherConditionScore(weatherCondition) {
-    const conditionScores = {
-      0: 1.0, // sunny
-      1: 0.8, // partly_cloudy
-      2: 0.6, // cloudy
-      3: 0.4  // rainy
-    };
-    return conditionScores[weatherCondition] || 0.5;
-  }
-
-  /**
-   * Calculate market score
-   */
-  calculateMarketScore(features) {
-    let score = 0.5; // Base score
-
-    // Market demand score
-    const demandScore = features.market_demand;
-    score += demandScore * 0.3;
-
-    // Price volatility score (inverse)
-    const volatilityScore = 1 - features.price_volatility;
-    score += volatilityScore * 0.2;
-
-    // Supply level score
-    const supplyScore = features.supply_level;
-    score += supplyScore * 0.2;
-
-    // Market type score
-    const marketTypeScore = this.calculateMarketTypeScore(features.market_type);
-    score += marketTypeScore * 0.3;
-
-    return Math.min(1, Math.max(0, score));
-  }
-
-  /**
-   * Calculate market type score
-   */
-  calculateMarketTypeScore(marketType) {
-    const marketTypeScores = {
-      0: 0.6, // local
-      1: 0.7, // regional
-      2: 0.8, // national
-      3: 0.9  // export
-    };
-    return marketTypeScores[marketType] || 0.5;
-  }
-
-  /**
-   * Calculate user preference score
-   */
-  calculateUserPreferenceScore(features) {
-    let score = 0.5; // Base score
-
-    // Price sensitivity score (inverse)
-    const priceScore = 1 - features.price_sensitivity;
-    score += priceScore * 0.25;
-
-    // Quality preference score
-    const qualityScore = features.quality_preference;
-    score += qualityScore * 0.25;
-
-    // Availability preference score
-    const availabilityScore = features.availability_preference;
-    score += availabilityScore * 0.25;
-
-    // Delivery preference score
-    const deliveryScore = features.delivery_preference;
-    score += deliveryScore * 0.25;
-
-    return Math.min(1, Math.max(0, score));
-  }
-
-  /**
-   * Calculate seasonal score
-   */
-  calculateSeasonalScore(features) {
-    const seasonScores = {
-      0: 0.9, // First Rains
-      1: 0.7, // First Dry
-      2: 0.95, // Second Rains
-      3: 0.6  // Second Dry
-    };
-    return seasonScores[features.season] || 0.5;
-  }
-
-  /**
-   * Calculate regional score
-   */
-  calculateRegionalScore(features) {
-    const regionScores = {
-      0: 0.8, // Northern
-      1: 0.9, // Eastern
-      2: 0.95, // Central
-      3: 0.85 // Western
-    };
-    return regionScores[features.region] || 0.5;
-  }
-
-  /**
-   * Normalize features
-   * @param {Object} features - Raw features
-   * @returns {Object} Normalized features
-   */
-  normalizeFeatures(features) {
-    const normalizedFeatures = { ...features };
-
-    // Normalize numerical features
-    Object.keys(normalizedFeatures).forEach(key => {
-      if (typeof normalizedFeatures[key] === 'number') {
-        const scaler = this.featureScalers.get(key);
-        if (scaler) {
-          normalizedFeatures[key] = (normalizedFeatures[key] - scaler.mean) / scaler.std;
-        }
+    numericalFeatures.forEach(feature => {
+      if (scaledFeatures[feature] !== undefined) {
+        // Simple min-max scaling (0-1)
+        scaledFeatures[`${feature}_scaled`] = Math.min(Math.max(scaledFeatures[feature] / 100, 0), 1);
       }
     });
 
-    return normalizedFeatures;
+    return scaledFeatures;
+  }
+
+  /**
+   * Apply categorical encoding
+   * @param {Object} features - Input features
+   * @returns {Object} Encoded features
+   */
+  applyCategoricalEncoding(features) {
+    const categoricalFeatures = ['crop_type', 'season', 'region', 'soil_type'];
+    const encodedFeatures = { ...features };
+
+    categoricalFeatures.forEach(feature => {
+      if (encodedFeatures[feature]) {
+        // Simple one-hot encoding simulation
+        const value = encodedFeatures[feature].toLowerCase();
+        encodedFeatures[`${feature}_encoded`] = this.hashString(value) % 10; // Simple hash encoding
+      }
+    });
+
+    return encodedFeatures;
+  }
+
+  /**
+   * Select features using specified selector
+   * @param {Object} features - Input features
+   * @param {string} selectorName - Name of the selector
+   * @returns {Object} Selected features
+   */
+  async selectFeatures(features, selectorName) {
+    try {
+      const selector = this.featureSelectors.get(selectorName);
+      if (!selector) {
+        throw new Error(`Selector ${selectorName} not found`);
+      }
+
+      console.log(`🎯 Selecting features using ${selectorName}...`);
+
+      let selectedFeatures = { ...features };
+
+      switch (selectorName) {
+        case 'correlation_filter':
+          selectedFeatures = this.applyCorrelationFilter(selectedFeatures);
+          break;
+        case 'variance_filter':
+          selectedFeatures = this.applyVarianceFilter(selectedFeatures);
+          break;
+        case 'recursive_elimination':
+          selectedFeatures = this.applyRecursiveElimination(selectedFeatures, selector.n_features);
+          break;
+        default:
+          console.warn(`Unknown selector: ${selectorName}`);
+      }
+
+      console.log(`✅ Feature selection completed using ${selectorName}`);
+      return selectedFeatures;
+    } catch (error) {
+      console.error(`❌ Error selecting features:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Apply correlation filter
+   * @param {Object} features - Input features
+   * @returns {Object} Filtered features
+   */
+  applyCorrelationFilter(features) {
+    // Simulate correlation filtering
+    const featureKeys = Object.keys(features);
+    const selectedKeys = featureKeys.slice(0, Math.floor(featureKeys.length * 0.8)); // Keep 80%
+    
+    const filteredFeatures = {};
+    selectedKeys.forEach(key => {
+      filteredFeatures[key] = features[key];
+    });
+
+    return filteredFeatures;
+  }
+
+  /**
+   * Apply variance filter
+   * @param {Object} features - Input features
+   * @returns {Object} Filtered features
+   */
+  applyVarianceFilter(features) {
+    // Simulate variance filtering
+    const featureKeys = Object.keys(features);
+    const selectedKeys = featureKeys.filter(key => {
+      const value = features[key];
+      return typeof value === 'number' && Math.abs(value) > 0.01;
+    });
+    
+    const filteredFeatures = {};
+    selectedKeys.forEach(key => {
+      filteredFeatures[key] = features[key];
+    });
+
+    return filteredFeatures;
+  }
+
+  /**
+   * Apply recursive elimination
+   * @param {Object} features - Input features
+   * @param {number} nFeatures - Number of features to select
+   * @returns {Object} Selected features
+   */
+  applyRecursiveElimination(features, nFeatures) {
+    const featureKeys = Object.keys(features);
+    const selectedKeys = featureKeys.slice(0, Math.min(nFeatures, featureKeys.length));
+    
+    const selectedFeatures = {};
+    selectedKeys.forEach(key => {
+      selectedFeatures[key] = features[key];
+    });
+
+    return selectedFeatures;
+  }
+
+  /**
+   * Get season from month
+   * @param {number} month - Month (0-11)
+   * @returns {string} Season name
+   */
+  getSeason(month) {
+    if (month >= 2 && month <= 4) return 'spring';
+    if (month >= 5 && month <= 7) return 'summer';
+    if (month >= 8 && month <= 10) return 'autumn';
+    return 'winter';
+  }
+
+  /**
+   * Hash string to number
+   * @param {string} str - Input string
+   * @returns {number} Hash value
+   */
+  hashString(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
   }
 
   /**
    * Get feature importance scores
+   * @param {Object} features - Input features
    * @returns {Object} Feature importance scores
    */
-  getFeatureImportance() {
-    return {
-      crop_id: 0.15,
-      region: 0.12,
-      season: 0.10,
-      weather_score: 0.20,
-      market_score: 0.18,
-      user_preference_score: 0.15,
-      temperature: 0.05,
-      humidity: 0.03,
-      rainfall: 0.02
-    };
+  getFeatureImportance(features) {
+    const importance = {};
+    const featureKeys = Object.keys(features);
+    
+    featureKeys.forEach(key => {
+      // Simulate importance based on feature type and value
+      let score = 0.5; // Base importance
+      
+      if (key.includes('weather') || key.includes('temperature')) {
+        score += 0.3;
+      }
+      if (key.includes('soil') || key.includes('ph')) {
+        score += 0.2;
+      }
+      if (key.includes('temporal') || key.includes('season')) {
+        score += 0.1;
+      }
+      
+      importance[key] = Math.min(score, 1.0);
+    });
+
+    return importance;
   }
 
   /**
-   * Get all feature information
-   * @returns {Object} All feature information
+   * Clear all feature data
    */
-  getAllFeatureInfo() {
-    return {
-      feature_sets: Object.fromEntries(this.featureSets),
-      feature_mappings: Object.fromEntries(this.featureMappings),
-      feature_scalers: Object.fromEntries(this.featureScalers),
-      feature_importance: this.getFeatureImportance(),
-      initialized: this.initialized
-    };
+  clearFeatures() {
+    this.featureImportance.clear();
+    console.log('🧹 Feature Engineering Service data cleared');
   }
 }
 
-export default new FeatureEngineeringService();
+// Create and export singleton instance
+const featureEngineeringService = new FeatureEngineeringService();
+export default featureEngineeringService;

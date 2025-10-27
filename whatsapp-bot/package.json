@@ -5,7 +5,13 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "dev": "nodemon bot.js"
+    "dev": "nodemon bot.js",
+    "monitor": "node monitor-bot.js",
+    "test-reconnect": "./test-reconnection.sh",
+    "fix-qr": "./fix-qr-issue.sh",
+    "env:dev": "node switch-env.js dev",
+    "env:prod": "node switch-env.js prod",
+    "env:status": "node switch-env.js status"
   },
   "keywords": [
     "whatsapp",

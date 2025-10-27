@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Alert, Image } from 'react-native';
-import ChatbotWrapper from '../services/chatbotWrapper.js';
+import ChatbotWrapper from '../services/chatbotWrapper';
 
 const ChatBot = ({ onShowTraining }) => {
   const [messages, setMessages] = useState([

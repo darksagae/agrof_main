@@ -141,6 +141,144 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ========================================
+// PRODUCT MANAGEMENT API ENDPOINTS
+// ========================================
+// (Placed before messaging routes to fix route precedence)
+
+// Test route to verify routing works
+app.post('/api/test', (req, res) => {
+  console.log('🔍 POST /api/test route hit!');
+  res.json({ success: true, message: 'Test route working' });
+});
+
+// Create new product
+app.post('/api/products', (req, res) => {
+  console.log('🔍 POST /api/products route hit!');
+  console.log('🔍 Request body:', req.body);
+  
+  const { name, category_id, price, selling_price, quantity_in_stock, description, image_url } = req.body;
+  
+  // Validate required fields
+  if (!name || !category_id) {
+    console.log('❌ Validation failed: missing name or category_id');
+    res.status(400).json({ error: 'Name and category_id are required' });
+    return;
+  }
+  
+  console.log('✅ Validation passed, inserting product...');
+  
+  const sql = `INSERT INTO products (name, category_id, price, selling_price, quantity_in_stock, description, image_url, created_at, updated_at) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`;
+  
+  db.run(sql, [name, category_id, price || 'Contact for pricing', selling_price, quantity_in_stock || 0, description, image_url], function(err) {
+    if (err) {
+      console.error('❌ Error creating product:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    console.log('✅ Product created successfully with ID:', this.lastID);
+    res.json({ success: true, id: this.lastID });
+  });
+});
+
+// Update product
+app.patch('/api/products/:id', (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+  
+  // Validate product exists
+  db.get('SELECT id FROM products WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    
+    if (!row) {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+    
+    // Build dynamic update query
+    let sql = 'UPDATE products SET ';
+    let params = [];
+    let setParts = [];
+    
+    if (updates.name) {
+      setParts.push('name = ?');
+      params.push(updates.name);
+    }
+    if (updates.price) {
+      setParts.push('price = ?');
+      params.push(updates.price);
+    }
+    if (updates.selling_price !== undefined) {
+      setParts.push('selling_price = ?');
+      params.push(updates.selling_price);
+    }
+    if (updates.quantity_in_stock !== undefined) {
+      setParts.push('quantity_in_stock = ?');
+      params.push(updates.quantity_in_stock);
+    }
+    if (updates.description) {
+      setParts.push('description = ?');
+      params.push(updates.description);
+    }
+    if (updates.image_url) {
+      setParts.push('image_url = ?');
+      params.push(updates.image_url);
+    }
+    if (updates.availability) {
+      setParts.push('availability = ?');
+      params.push(updates.availability);
+    }
+    
+    if (setParts.length === 0) {
+      res.status(400).json({ error: 'No valid fields to update' });
+      return;
+    }
+    
+    sql += setParts.join(', ') + ', updated_at = datetime("now") WHERE id = ?';
+    params.push(id);
+    
+    db.run(sql, params, function(err) {
+      if (err) {
+        console.error('Error updating product:', err);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ success: true, changes: this.changes });
+    });
+  });
+});
+
+// Delete product
+app.delete('/api/products/:id', (req, res) => {
+  const { id } = req.params;
+  
+  // Validate product exists
+  db.get('SELECT id FROM products WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    
+    if (!row) {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+    
+    db.run('DELETE FROM products WHERE id = ?', [id], function(err) {
+      if (err) {
+        console.error('Error deleting product:', err);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ success: true, changes: this.changes });
+    });
+  });
+});
+
 // Import messaging routes
 const messagingRoutes = require('./messaging');
 app.use('/api', messagingRoutes);
@@ -234,6 +372,17 @@ const initializeDatabase = () => {
           quantity INTEGER DEFAULT 1,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (product_id) REFERENCES products (id)
+        )
+      `);
+
+      // Audit logs table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS audit_logs (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          operation TEXT NOT NULL,
+          user TEXT NOT NULL,
+          details TEXT,
+          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         )
       `);
 
@@ -1431,126 +1580,7 @@ app.get('/api/inventory/export/:type', async (req, res) => {
 // ========================================
 // PRODUCT MANAGEMENT API ENDPOINTS
 // ========================================
-
-// Create new product
-app.post('/api/products', (req, res) => {
-  const { name, category_id, price, selling_price, quantity_in_stock, description, image_url } = req.body;
-  
-  // Validate required fields
-  if (!name || !category_id) {
-    res.status(400).json({ error: 'Name and category_id are required' });
-    return;
-  }
-  
-  const sql = `INSERT INTO products (name, category_id, price, selling_price, quantity_in_stock, description, image_url, created_at, updated_at) 
-               VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`;
-  
-  db.run(sql, [name, category_id, price || 'Contact for pricing', selling_price, quantity_in_stock || 0, description, image_url], function(err) {
-    if (err) {
-      console.error('Error creating product:', err);
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.json({ success: true, id: this.lastID });
-  });
-});
-
-// Update product
-app.patch('/api/products/:id', (req, res) => {
-  const { id } = req.params;
-  const updates = req.body;
-  
-  // Validate product exists
-  db.get('SELECT id FROM products WHERE id = ?', [id], (err, row) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    
-    if (!row) {
-      res.status(404).json({ error: 'Product not found' });
-      return;
-    }
-    
-    // Build dynamic update query
-    let sql = 'UPDATE products SET ';
-    let params = [];
-    let setParts = [];
-    
-    if (updates.name) {
-      setParts.push('name = ?');
-      params.push(updates.name);
-    }
-    if (updates.price) {
-      setParts.push('price = ?');
-      params.push(updates.price);
-    }
-    if (updates.selling_price !== undefined) {
-      setParts.push('selling_price = ?');
-      params.push(updates.selling_price);
-    }
-    if (updates.quantity_in_stock !== undefined) {
-      setParts.push('quantity_in_stock = ?');
-      params.push(updates.quantity_in_stock);
-    }
-    if (updates.description) {
-      setParts.push('description = ?');
-      params.push(updates.description);
-    }
-    if (updates.image_url) {
-      setParts.push('image_url = ?');
-      params.push(updates.image_url);
-    }
-    if (updates.availability) {
-      setParts.push('availability = ?');
-      params.push(updates.availability);
-    }
-    
-    if (setParts.length === 0) {
-      res.status(400).json({ error: 'No valid fields to update' });
-      return;
-    }
-    
-    sql += setParts.join(', ') + ', updated_at = datetime("now") WHERE id = ?';
-    params.push(id);
-    
-    db.run(sql, params, function(err) {
-      if (err) {
-        console.error('Error updating product:', err);
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({ success: true, changes: this.changes });
-    });
-  });
-});
-
-// Delete product
-app.delete('/api/products/:id', (req, res) => {
-  const { id } = req.params;
-  
-  // Validate product exists
-  db.get('SELECT id FROM products WHERE id = ?', [id], (err, row) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    
-    if (!row) {
-      res.status(404).json({ error: 'Product not found' });
-      return;
-    }
-    
-    db.run('DELETE FROM products WHERE id = ?', [id], function(err) {
-      if (err) {
-        console.error('Error deleting product:', err);
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({ success: true, changes: this.changes });
-    });
-  });
-});
+// (Moved to before messaging routes to fix route precedence)
 
 // Search products with enhanced functionality
 app.get('/api/products/search', (req, res) => {
@@ -1798,6 +1828,233 @@ app.get('/api/analytics', (req, res) => {
     });
   }
 });
+
+// ========================================
+// BATCH 3: ADVANCED FEATURES API ENDPOINTS
+// ========================================
+
+// Export products to CSV
+app.get('/api/products/export', (req, res) => {
+  const { category, format = 'csv' } = req.query;
+  
+  let query = 'SELECT p.*, c.name as category_name FROM products p JOIN categories c ON p.category_id = c.id';
+  const params = [];
+  
+  if (category && category !== 'all') {
+    const categoryMap = {
+      'fertilizers': 1,
+      'organic_chemicals': 2,
+      'seeds': 3,
+      'nursery_bed': 4,
+      'fungicides': 5,
+      'herbicides': 6,
+      'tools': 7
+    };
+    const categoryId = categoryMap[category];
+    if (categoryId) {
+      query += ' WHERE p.category_id = ?';
+      params.push(categoryId);
+    }
+  }
+  
+  query += ' ORDER BY p.name';
+  
+  db.all(query, params, (err, rows) => {
+    if (err) {
+      console.error('Error exporting products:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    
+    if (format === 'csv') {
+      // Convert to CSV
+      const csvHeader = 'ID,Name,Category,Price,Selling Price,Stock,Description,Image URL,Created At\n';
+      const csvData = rows.map(row => 
+        `${row.id},"${row.name}","${row.category_name}","${row.price}","${row.selling_price}","${row.quantity_in_stock}","${row.description || ''}","${row.image_url || ''}","${row.created_at}"`
+      ).join('\n');
+      
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename="products_export_${new Date().toISOString().split('T')[0]}.csv"`);
+      res.send(csvHeader + csvData);
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Database backup endpoints
+app.post('/api/backup', (req, res) => {
+  const { name } = req.body;
+  
+  if (!name) {
+    res.status(400).json({ error: 'Backup name is required' });
+    return;
+  }
+  
+  // Create backup by copying database file
+  const fs = require('fs');
+  const path = require('path');
+  const sourceDb = path.join(__dirname, 'store.db');
+  const backupDb = path.join(__dirname, 'backups', `${name}.db`);
+  
+  // Ensure backups directory exists
+  const backupsDir = path.join(__dirname, 'backups');
+  if (!fs.existsSync(backupsDir)) {
+    fs.mkdirSync(backupsDir, { recursive: true });
+  }
+  
+  try {
+    fs.copyFileSync(sourceDb, backupDb);
+    const stats = fs.statSync(backupDb);
+    
+    res.json({
+      success: true,
+      name: name,
+      size: stats.size,
+      created_at: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Error creating backup:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/backup', (req, res) => {
+  const fs = require('fs');
+  const path = require('path');
+  const backupsDir = path.join(__dirname, 'backups');
+  
+  if (!fs.existsSync(backupsDir)) {
+    res.json([]);
+    return;
+  }
+  
+  try {
+    const files = fs.readdirSync(backupsDir);
+    const backups = files
+      .filter(file => file.endsWith('.db'))
+      .map(file => {
+        const filePath = path.join(backupsDir, file);
+        const stats = fs.statSync(filePath);
+        return {
+          name: file.replace('.db', ''),
+          size: stats.size,
+          created_at: stats.birthtime.toISOString()
+        };
+      })
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    
+    res.json(backups);
+  } catch (error) {
+    console.error('Error listing backups:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/backup/:name', (req, res) => {
+  const { name } = req.params;
+  
+  const fs = require('fs');
+  const path = require('path');
+  const sourceDb = path.join(__dirname, 'store.db');
+  const backupDb = path.join(__dirname, 'backups', `${name}.db`);
+  
+  if (!fs.existsSync(backupDb)) {
+    res.status(404).json({ error: 'Backup not found' });
+    return;
+  }
+  
+  try {
+    // Create a backup of current database before restoring
+    const currentBackup = path.join(__dirname, 'backups', `pre_restore_${Date.now()}.db`);
+    fs.copyFileSync(sourceDb, currentBackup);
+    
+    // Restore from backup
+    fs.copyFileSync(backupDb, sourceDb);
+    
+    res.json({
+      success: true,
+      message: 'Database restored successfully',
+      restored_from: name,
+      pre_restore_backup: `pre_restore_${Date.now()}.db`
+    });
+  } catch (error) {
+    console.error('Error restoring backup:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Audit logs endpoints
+app.get('/api/audit-logs', (req, res) => {
+  const { search, date, user, operation, limit = 50 } = req.query;
+  
+  let query = 'SELECT * FROM audit_logs WHERE 1=1';
+  const params = [];
+  
+  if (search) {
+    query += ' AND (operation LIKE ? OR details LIKE ? OR user LIKE ?)';
+    params.push(`%${search}%`, `%${search}%`, `%${search}%`);
+  }
+  
+  if (date) {
+    query += ' AND DATE(timestamp) = ?';
+    params.push(date);
+  }
+  
+  if (user) {
+    query += ' AND user LIKE ?';
+    params.push(`%${user}%`);
+  }
+  
+  if (operation) {
+    query += ' AND operation = ?';
+    params.push(operation);
+  }
+  
+  query += ' ORDER BY timestamp DESC LIMIT ?';
+  params.push(parseInt(limit));
+  
+  db.all(query, params, (err, rows) => {
+    if (err) {
+      console.error('Error getting audit logs:', err);
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Log audit event (middleware function)
+const logAuditEvent = (req, res, next) => {
+  const originalSend = res.send;
+  
+  res.send = function(data) {
+    // Log the operation
+    const operation = req.method + ' ' + req.path;
+    const user = req.headers['x-user-id'] || 'system';
+    const details = JSON.stringify({
+      method: req.method,
+      path: req.path,
+      query: req.query,
+      body: req.body
+    });
+    
+    db.run(
+      'INSERT INTO audit_logs (operation, user, details, timestamp) VALUES (?, ?, ?, datetime("now"))',
+      [operation, user, details],
+      (err) => {
+        if (err) console.error('Error logging audit event:', err);
+      }
+    );
+    
+    originalSend.call(this, data);
+  };
+  
+  next();
+};
+
+// Apply audit logging to all routes
+app.use(logAuditEvent);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

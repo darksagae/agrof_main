@@ -1,0 +1,58 @@
+# EAS Build ignore file
+# Exclude problematic files and directories from EAS builds
+
+# Exclude automation-engine directory (contains restricted files)
+../../automation-engine/
+
+# Exclude other problematic directories
+../node_modules/
+../.git/
+../.gitignore
+../README.md
+../*.md
+../*.txt
+../*.json
+../*.js
+../*.sh
+../*.py
+../*.sql
+../*.yaml
+../*.yml
+../*.conf
+../*.pdf
+../*.log
+../*.tmp
+../*.temp
+
+# Exclude large files that aren't needed for mobile build
+../*.tar
+../*.zip
+../*.gz
+../*.rar
+../*.7z
+
+# Exclude development and deployment files
+../deploy*.sh
+../setup*.sh
+../test*.js
+../health-monitor.js
+../docker-compose.yml
+../render.yaml
+../firebase.json
+../firestore.*
+../storage.rules
+../functions/
+
+# Exclude data files
+../all-*.json
+../complete-*.json
+../seeds-*.json
+../ezyagric_*.json
+../MASTER_*.json
+../FINAL_*.json
+
+# Exclude documentation
+../*.md
+../DOCUMENTATION/
+../GUIDE/
+../SUMMARY/

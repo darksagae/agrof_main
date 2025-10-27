@@ -1,16 +1,48 @@
-// AGROF WhatsApp Bot for Render Deployment
+// AGROF WhatsApp Bot - Enhanced with Auto-Reconnection
 const { Client } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
+const fs = require('fs');
+const path = require('path');
+
+// Import configuration
+const { getStoreApiUrl, getBotPort, config, logConfig } = require('./config');
+
+// Log current configuration
+logConfig();
+
 // Use advanced admin commands with secret triggers
 const AdminCommandsV2 = require('./admin-commands-v2');
-// TEMP: Allow all numbers for testing (empty array means no restrictions)
-const adminHandler = new AdminCommandsV2('https://agrof-store-api.onrender.com/api', []);
 
-// Create WhatsApp client
+// Initialize admin handler with configured API URL
+const adminHandler = new AdminCommandsV2(getStoreApiUrl(), config.admin.allowedNumbers);
+
+// Connection state tracking
+let isConnected = false;
+let reconnectAttempts = 0;
+const maxReconnectAttempts = config.whatsapp.maxReconnectAttempts;
+const reconnectDelay = config.whatsapp.reconnectDelay;
+let lastDisconnectionTime = null;
+
+// Create session directory if it doesn't exist
+const sessionDir = config.whatsapp.sessionDir;
+if (!fs.existsSync(sessionDir)) {
+    fs.mkdirSync(sessionDir, { recursive: true });
+    console.log('📁 Created WhatsApp session directory');
+}
+
+// Create WhatsApp client with enhanced configuration
 const client = new Client({
-    puppeteer: {
-        headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    puppeteer: config.whatsapp.puppeteer,
+    // Session persistence
+    session: sessionDir,
+    // Restart on auth failure
+    restartOnAuthFail: true,
+    // QR code timeout
+    qrTimeoutMs: config.whatsapp.qrTimeoutMs,
+    // Additional options for stability
+    webVersionCache: {
+        type: 'remote',
+        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
   }
 });
 
@@ -23,22 +55,199 @@ const app = express();
 app.use('/', healthApp);
 
 // Start health server
-const PORT = process.env.PORT || 10000;
+const PORT = getBotPort();
 app.listen(PORT, () => {
   console.log(`🏥 Health server running on port ${PORT}`);
 });
 
-// WhatsApp client events
+// WhatsApp client events with enhanced error handling
+
+// QR Code event - when new QR code is needed
 client.on('qr', (qr) => {
-  console.log('📱 QR Code generated - scan with WhatsApp Business');
+  console.log('📱 QR CODE GENERATED - Please scan with WhatsApp Business');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     qrcode.generate(qr, { small: true });
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('📱 Instructions:');
+  console.log('1. Open WhatsApp Business on your phone');
+  console.log('2. Go to Settings > Linked Devices');
+  console.log('3. Tap "Link a Device"');
+  console.log('4. Scan the QR code above');
+  console.log('5. Wait for "Bot is ready!" message');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  
+  // Notify admin about new QR code
+  notifyAdmin('New QR code required - please scan with WhatsApp Business');
+  
+  // Reset connection state
+  isConnected = false;
+  lastDisconnectionTime = new Date();
 });
 
+// Ready event - when bot is successfully connected
 client.on('ready', () => {
-  console.log('✅ AGROF WhatsApp Bot is ready!');
+  console.log('🎉 SUCCESS! WhatsApp Bot is ready!');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('✅ Connection established successfully');
   console.log('🤖 Bot is listening for admin commands...');
+  console.log('📱 You can now send messages to test the bot');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  
+  // Update connection state
+  isConnected = true;
+  reconnectAttempts = 0;
+  lastDisconnectionTime = null;
+  
+  // Notify admin that bot is back online
+  notifyAdmin('WhatsApp bot is back online and ready!');
 });
 
+// Disconnected event - when bot loses connection
+client.on('disconnected', async (reason) => {
+  console.log('❌ WhatsApp disconnected:', reason);
+  isConnected = false;
+  lastDisconnectionTime = new Date();
+  
+  // Notify admin about disconnection
+  await notifyAdmin(`WhatsApp bot disconnected: ${reason}`);
+  
+  // Attempt reconnection
+  if (reconnectAttempts < maxReconnectAttempts) {
+    reconnectAttempts++;
+    console.log(`🔄 Attempting reconnection ${reconnectAttempts}/${maxReconnectAttempts}...`);
+    
+    setTimeout(() => {
+      console.log('🔄 Reconnecting to WhatsApp...');
+      client.initialize();
+    }, reconnectDelay);
+  } else {
+    console.log('❌ Max reconnection attempts reached. Manual intervention required.');
+    await notifyAdmin('WhatsApp bot failed to reconnect. Manual restart required.');
+  }
+});
+
+// Authentication failure event
+client.on('auth_failure', (msg) => {
+  console.log('❌ Authentication failed:', msg);
+  isConnected = false;
+  lastDisconnectionTime = new Date();
+  
+  // Clear session and restart
+  if (fs.existsSync(sessionDir)) {
+    console.log('🗑️ Clearing invalid session data...');
+    fs.rmSync(sessionDir, { recursive: true });
+    fs.mkdirSync(sessionDir, { recursive: true });
+  }
+  
+  // Notify admin
+  notifyAdmin('WhatsApp authentication failed. New QR code required.');
+  
+  // Restart client after delay
+  setTimeout(() => {
+    console.log('🔄 Restarting after auth failure...');
+    client.initialize();
+  }, 5000);
+});
+
+// Error event
+client.on('error', (error) => {
+  console.error('❌ WhatsApp client error:', error);
+  isConnected = false;
+  
+  // Attempt reconnection on error
+  if (reconnectAttempts < maxReconnectAttempts) {
+    console.log('🔄 Attempting reconnection after error...');
+    setTimeout(() => {
+      client.initialize();
+    }, 10000);
+  }
+});
+
+// Loading screen event
+client.on('loading_screen', (percent, message) => {
+  console.log(`🔄 Loading WhatsApp: ${percent}% - ${message}`);
+});
+
+// Authentication success event
+client.on('authenticated', () => {
+  console.log('🔐 Authentication successful!');
+  console.log('📱 Phone has been linked successfully');
+  console.log('⏳ Waiting for WhatsApp to load...');
+});
+
+// Authentication failure event (already exists, but let's enhance it)
+client.on('auth_failure', (msg) => {
+  console.log('❌ AUTHENTICATION FAILED:', msg);
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🔍 Possible causes:');
+  console.log('1. QR code expired (try scanning again)');
+  console.log('2. Phone disconnected during scanning');
+  console.log('3. WhatsApp session conflict');
+  console.log('4. Network connectivity issues');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  
+  isConnected = false;
+  lastDisconnectionTime = new Date();
+  
+  // Clear session and restart
+  if (fs.existsSync(sessionDir)) {
+    console.log('🗑️ Clearing invalid session data...');
+    fs.rmSync(sessionDir, { recursive: true });
+    fs.mkdirSync(sessionDir, { recursive: true });
+  }
+  
+  // Notify admin
+  notifyAdmin('WhatsApp authentication failed. New QR code required.');
+  
+  // Restart client after delay
+  setTimeout(() => {
+    console.log('🔄 Restarting after auth failure...');
+    client.initialize();
+  }, 5000);
+});
+
+// Change state event (tracks connection state changes)
+client.on('change_state', (state) => {
+  console.log(`🔄 WhatsApp state changed to: ${state}`);
+  
+  switch (state) {
+    case 'CONFLICT':
+      console.log('⚠️ Multiple devices detected - logging out others...');
+      break;
+    case 'UNPAIRED':
+      console.log('📱 Device unpaired - need to scan QR again');
+      break;
+    case 'UNLAUNCHED':
+      console.log('🚀 WhatsApp not launched - starting...');
+      break;
+    case 'PROXYBLOCK':
+      console.log('🚫 Proxy blocked - check network settings');
+      break;
+    case 'TOS_BLOCK':
+      console.log('📋 Terms of service blocked - check WhatsApp status');
+      break;
+    case 'SMB_TOS_BLOCK':
+      console.log('📋 Business terms blocked - check WhatsApp Business status');
+      break;
+    case 'DEPRECATED_VERSION':
+      console.log('⚠️ WhatsApp version deprecated - updating...');
+      break;
+    default:
+      console.log(`📊 State: ${state}`);
+  }
+});
+
+// Remote session event (when session is stored remotely)
+client.on('remote_session_saved', () => {
+  console.log('💾 Remote session saved successfully');
+});
+
+// Message event (when bot receives a message)
+client.on('message_create', (message) => {
+  console.log(`📨 Message created: ${message.body?.substring(0, 50)}...`);
+});
+
+// Main message handler
 client.on('message', async (msg) => {
     try {
     const text = msg.body.trim();
@@ -91,13 +300,128 @@ client.on('message', async (msg) => {
   }
 });
 
-// Health check endpoint
+// Enhanced health check endpoint
 app.get('/health', (req, res) => {
   res.json({ 
-    status: 'OK', 
-    message: 'AGROF WhatsApp Bot is running',
+    status: isConnected ? 'OK' : 'DISCONNECTED', 
+    message: isConnected ? 'AGROF WhatsApp Bot is running' : 'WhatsApp Bot is disconnected',
+    whatsapp: {
+      connected: isConnected,
+      reconnectAttempts: reconnectAttempts,
+      lastDisconnection: lastDisconnectionTime,
+      status: isConnected ? 'online' : 'offline'
+    },
+    uptime: process.uptime(),
+    memory: process.memoryUsage(),
     timestamp: new Date().toISOString()
   });
+});
+
+// WhatsApp status endpoint
+app.get('/whatsapp-status', (req, res) => {
+  res.json({
+    connected: isConnected,
+    reconnectAttempts: reconnectAttempts,
+    lastDisconnection: lastDisconnectionTime,
+    status: isConnected ? 'online' : 'offline',
+    maxReconnectAttempts: maxReconnectAttempts,
+    lastCheck: new Date().toISOString()
+  });
+});
+
+// Manual reconnection endpoint
+app.post('/whatsapp-reconnect', (req, res) => {
+  if (!isConnected) {
+    console.log('🔄 Manual reconnection requested');
+    reconnectAttempts = 0; // Reset attempts
+    client.initialize();
+    res.json({ success: true, message: 'Reconnection initiated' });
+  } else {
+    res.json({ success: false, message: 'Bot is already connected' });
+  }
+});
+
+// Admin dashboard endpoint
+app.get('/admin/dashboard', (req, res) => {
+  res.json({
+    whatsapp: {
+      connected: isConnected,
+      reconnectAttempts: reconnectAttempts,
+      lastDisconnection: lastDisconnectionTime,
+      status: isConnected ? 'online' : 'offline'
+    },
+    system: {
+      uptime: process.uptime(),
+      memory: process.memoryUsage(),
+      nodeVersion: process.version,
+      platform: process.platform
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Force reconnection endpoint (for emergencies)
+app.post('/whatsapp-force-reconnect', (req, res) => {
+  console.log('🔄 Force reconnection requested');
+  
+  // Reset all connection state
+  isConnected = false;
+  reconnectAttempts = 0;
+  lastDisconnectionTime = new Date();
+  
+  // Clear session if needed
+  if (fs.existsSync(sessionDir)) {
+    console.log('🗑️ Clearing session for force reconnect...');
+    fs.rmSync(sessionDir, { recursive: true });
+    fs.mkdirSync(sessionDir, { recursive: true });
+  }
+  
+  // Restart client
+  setTimeout(() => {
+    client.initialize();
+  }, 2000);
+  
+  res.json({ success: true, message: 'Force reconnection initiated' });
+});
+
+// Clear session and restart endpoint (for QR code issues)
+app.post('/whatsapp-clear-session', (req, res) => {
+  console.log('🗑️ Clearing session and restarting...');
+  
+  try {
+    // Destroy current client
+    client.destroy();
+    
+    // Clear session directory
+    if (fs.existsSync(sessionDir)) {
+      console.log('🗑️ Clearing session directory...');
+      fs.rmSync(sessionDir, { recursive: true });
+      fs.mkdirSync(sessionDir, { recursive: true });
+    }
+    
+    // Reset connection state
+    isConnected = false;
+    reconnectAttempts = 0;
+    lastDisconnectionTime = new Date();
+    
+    // Restart client after delay
+    setTimeout(() => {
+      console.log('🔄 Restarting with fresh session...');
+      client.initialize();
+    }, 3000);
+    
+    res.json({ 
+      success: true, 
+      message: 'Session cleared and bot restarting. New QR code will appear shortly.' 
+    });
+    
+  } catch (error) {
+    console.error('❌ Error clearing session:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
 });
 
 // API endpoint to send messages
@@ -133,14 +457,76 @@ app.post('/api/send-message', async (req, res) => {
   }
 });
 
+// Admin notification function
+async function notifyAdmin(message) {
+  try {
+    console.log(`📢 Admin Notification: ${message}`);
+    
+    // You can extend this to send notifications via:
+    // - Email (using nodemailer)
+    // - SMS (using Twilio)
+    // - Another messaging service
+    // - Database logging
+    
+    // For now, we'll just log it
+    const logEntry = {
+      timestamp: new Date().toISOString(),
+      message: message,
+      type: 'admin_notification'
+    };
+    
+    // Log to file for monitoring
+    fs.appendFileSync('./admin-notifications.log', JSON.stringify(logEntry) + '\n');
+    
+  } catch (error) {
+    console.error('❌ Error sending admin notification:', error);
+  }
+}
+
+// Periodic connection monitoring
+setInterval(() => {
+  if (!isConnected && reconnectAttempts < maxReconnectAttempts) {
+    console.log('🔄 Periodic reconnection check...');
+    client.initialize();
+  } else if (!isConnected && reconnectAttempts >= maxReconnectAttempts) {
+    console.log('⚠️ WhatsApp bot has been offline for extended period');
+    // Send periodic alerts to admin
+    if (lastDisconnectionTime && (Date.now() - lastDisconnectionTime.getTime()) > 300000) { // 5 minutes
+      notifyAdmin('WhatsApp bot has been offline for 5+ minutes. Manual intervention may be required.');
+    }
+  }
+}, 60000); // Check every minute
+
 // Initialize WhatsApp client
+console.log('🚀 Initializing WhatsApp client...');
 client.initialize();
 
 // Graceful shutdown
 process.on('SIGINT', () => {
   console.log('🔄 Shutting down WhatsApp bot...');
+  isConnected = false;
+  client.destroy();
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  console.log('🔄 Received SIGTERM, shutting down gracefully...');
+  isConnected = false;
   client.destroy();
     process.exit(0);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught Exception:', error);
+  notifyAdmin(`Uncaught exception: ${error.message}`);
+  // Don't exit, let the bot try to recover
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  notifyAdmin(`Unhandled rejection: ${reason}`);
+  // Don't exit, let the bot try to recover
 });
 
 // ==================== CUSTOMER HANDLERS ====================
@@ -206,7 +592,7 @@ async function handleStockInquiry(msg) {
     await msg.reply('Please wait while we prepare our current product catalog...');
     
     try {
-        const response = await fetch('https://agrof-store-api.onrender.com/api/products?limit=20');
+        const response = await fetch(`${getStoreApiUrl()}/products?limit=20`);
         const allProducts = await response.json();
         
         if (allProducts.length === 0) {
@@ -263,7 +649,7 @@ async function handleOrderRequest(msg, text) {
         
         try {
             // Search for product
-            const response = await fetch(`https://agrof-store-api.onrender.com/api/search?q=${encodeURIComponent(productName)}`);
+            const response = await fetch(`${getStoreApiUrl()}/search?q=${encodeURIComponent(productName)}`);
             const products = await response.json();
             
             if (products.length === 0) {
@@ -299,7 +685,7 @@ async function handlePriceInquiry(msg, text) {
     await msg.reply('Let me check our current prices for you...');
     
     try {
-        const response = await fetch('https://agrof-store-api.onrender.com/api/products?limit=10');
+        const response = await fetch(`${getStoreApiUrl()}/products?limit=10`);
         const products = await response.json();
         
         if (products.length === 0) {

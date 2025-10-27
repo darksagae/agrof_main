@@ -16,11 +16,8 @@ import { Card, Title, Paragraph, Button, Chip } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
-import hybridAIService from '../services/enhancedHybridAIService';
-import aiCareService from '../services/aiCareService';
+import hybridAIService from '../services/hybridAIService';
 import ProductRecommendationCards from '../components/ProductRecommendationCards';
-import AICareDashboard from '../components/AICareDashboard';
-import authService from '../services/authService';
 
 const { width, height } = Dimensions.get('window');
 
@@ -32,49 +29,24 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [aiStatus, setAiStatus] = useState(null);
   const [networkStatus, setNetworkStatus] = useState('checking');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+  // Removed authentication requirements for simplicity
 
-  // Initialize AI Care Service and check auth on component mount
+  // Initialize Simple AI Service
   useEffect(() => {
-    initializeAICare();
-    checkAuthentication();
+    initializeAI();
   }, []);
 
-  // Check if user is authenticated
-  const checkAuthentication = async () => {
+  const initializeAI = async () => {
     try {
-      const authResult = await authService.getCurrentUser();
-      if (authResult.success && authResult.user) {
-        setIsAuthenticated(true);
-        console.log('👤 User authenticated in Disease Detection:', authResult.user.email);
-      } else {
-        setIsAuthenticated(false);
-        console.log('⚠️ User not authenticated in Disease Detection');
-      }
+      console.log('🚀 Initializing Hybrid AI Service...');
+      await hybridAIService.initialize();
+      const status = hybridAIService.getStatus();
+      setAiStatus(status);
+      setNetworkStatus(status.isOnline ? 'online' : 'offline');
+      console.log('✅ Hybrid AI initialized:', status);
     } catch (error) {
-      console.log('Auth check error:', error);
-      setIsAuthenticated(false);
-    }
-  };
-
-  const initializeAICare = async () => {
-    try {
-      console.log('🚀 Initializing AI Care Service...');
-      const result = await aiCareService.initialize();
-      
-      if (result.success) {
-        const status = aiCareService.getStatus();
-        setAiStatus(status);
-        setNetworkStatus('online'); // AI Care Service handles network detection internally
-        console.log('✅ AI Care Service initialized:', status);
-      } else {
-        console.error('❌ AI Care Service initialization failed:', result.error);
-        Alert.alert('AI Care Service', 'AI service started with limited features');
-      }
-    } catch (error) {
-      console.error('❌ AI Care Service initialization failed:', error);
-      Alert.alert('AI Care Service', 'AI service started with limited features');
+      console.error('❌ AI initialization failed:', error);
+      Alert.alert('AI Initialization', 'AI service started with limited features');
     }
   };
 
@@ -156,16 +128,10 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     }
   };
 
-  // Analyze image with AI Care Service (Comprehensive analysis with Gemini AI)
+  // Simple AI Analysis - Direct Gemini API
   const analyzeImage = async () => {
     if (!selectedImage) {
       Alert.alert('No Image', 'Please select an image first');
-      return;
-    }
-
-    // Check authentication before analyzing
-    if (!isAuthenticated) {
-      setShowAuthPrompt(true);
       return;
     }
 
@@ -173,55 +139,44 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     setError(null);
 
     try {
-      console.log('🔍 Starting AI Care comprehensive analysis...');
+      console.log('🔍 Starting simple AI analysis...');
       
-      // Use AI Care Service for comprehensive analysis
-      const result = await aiCareService.analyzePlantHealth(selectedImage.uri, {
-        cropType: 'Unknown', // Will be detected by AI
-        location: 'Uganda', // Default location
-        timestamp: new Date().toISOString()
-      });
+      // Use simple AI service (Direct Gemini API)
+      const result = await hybridAIService.analyzeDisease(selectedImage.uri);
 
-      console.log('✅ AI Care analysis complete:', result);
+      console.log('✅ AI analysis complete:', result);
 
       if (result.success) {
-        // Format result for display
+        // Simple result formatting
         const analysisData = result.analysis;
         
         const formattedResult = {
           status: 'success',
-          message: '✨ Comprehensive AI Care analysis completed',
+          message: '✨ AI analysis completed',
           analysis: analysisData,
           timestamp: result.timestamp,
-          source: 'AI Care Service (Gemini AI)',
-          analysisMethod: 'ai_care_comprehensive',
-          treatmentProducts: result.treatmentProducts || [],
-          careRecommendations: result.careRecommendations || [],
-          economicImpact: result.economicImpact || null
+          source: 'Gemini AI (Direct)',
+          analysisMethod: 'gemini_direct'
         };
 
         setAnalysisResult(formattedResult);
         
-        console.log('📊 AI Care result set to state:', JSON.stringify(formattedResult, null, 2));
-        console.log('🎯 Analysis result disease:', formattedResult.analysis?.disease_type);
-        console.log('🎯 Analysis result crop:', formattedResult.analysis?.crop_type);
-        console.log('💊 Treatment products:', formattedResult.treatmentProducts?.length || 0);
-        console.log('💡 Care recommendations:', formattedResult.careRecommendations?.length || 0);
+        console.log('📊 AI result:', formattedResult);
         
         Alert.alert(
-          'AI Care Analysis Complete',
-          `Comprehensive analysis completed!\n\nCrop: ${analysisData.crop_type || 'Unknown'}\nDisease: ${analysisData.disease_type || 'None detected'}\nConfidence: ${((analysisData.confidence || 0) * 100).toFixed(1)}%\n\nTreatment products: ${result.treatmentProducts?.length || 0}\nCare recommendations: ${result.careRecommendations?.length || 0}`,
+          'AI Analysis Complete',
+          `Analysis completed!\n\nCrop: ${analysisData.crop_type || 'Unknown'}\nDisease: ${analysisData.disease_type || 'None detected'}\nConfidence: ${((analysisData.confidence || 0) * 100).toFixed(1)}%`,
           [{ text: 'View Results' }]
         );
       } else {
-        throw new Error(result.error || 'AI Care analysis failed');
+        throw new Error(result.error || 'AI analysis failed');
       }
     } catch (error) {
-      console.error('❌ AI Care analysis failed:', error);
+      console.error('❌ AI analysis failed:', error);
       setError(error.message);
       Alert.alert(
-        'AI Care Analysis Failed',
-        `Failed to analyze image: ${error.message}\n\nPlease ensure:\n• Image is clear and well-lit\n• Plant is visible in the image\n• You have network connection for Gemini AI\n• Try again in a moment`
+        'AI Analysis Failed',
+        `Failed to analyze image: ${error.message}\n\nPlease ensure:\n• Image is clear and well-lit\n• You have internet connection\n• Try again in a moment`
       );
     } finally {
       setIsAnalyzing(false);
@@ -499,132 +454,61 @@ const DiseaseDetectionScreen = ({ navigation }) => {
             {/* Error Display */}
             {renderError()}
 
-            {/* AI Care Dashboard */}
+            {/* Simple AI Analysis Results */}
             {analysisResult && (
-              <AICareDashboard
-                analysisResult={analysisResult}
-                treatmentProducts={analysisResult.treatmentProducts || []}
-                careRecommendations={analysisResult.careRecommendations || []}
-                economicImpact={analysisResult.economicImpact}
-                onProductPress={(product) => {
-                  console.log('Product selected:', product);
-                  // Navigate to product detail or handle product selection
-                }}
-                onRecommendationPress={(recommendation) => {
-                  console.log('Recommendation selected:', recommendation);
-                  // Handle recommendation action
-                }}
-              />
-            )}
-
-            {/* Legacy Product Recommendations (fallback) */}
-            {analysisResult && (!analysisResult.treatmentProducts || analysisResult.treatmentProducts.length === 0) && (
-              <ProductRecommendationCards
-                diseaseType={analysisResult.analysis?.disease_type}
-                symptoms={analysisResult.analysis?.symptoms}
-                onProductPress={(product) => {
-                  console.log('Product selected:', product);
-                }}
-              />
+              <View style={styles.resultsContainer}>
+                <Card style={styles.resultCard}>
+                  <Card.Content>
+                    <Title style={styles.resultTitle}>AI Analysis Results</Title>
+                    
+                    <View style={styles.resultRow}>
+                      <Text style={styles.resultLabel}>Crop:</Text>
+                      <Text style={styles.resultValue}>{analysisResult.analysis?.crop_type || 'Unknown'}</Text>
+                    </View>
+                    
+                    <View style={styles.resultRow}>
+                      <Text style={styles.resultLabel}>Disease:</Text>
+                      <Text style={styles.resultValue}>{analysisResult.analysis?.disease_type || 'None detected'}</Text>
+                    </View>
+                    
+                    <View style={styles.resultRow}>
+                      <Text style={styles.resultLabel}>Health Status:</Text>
+                      <Text style={styles.resultValue}>{analysisResult.analysis?.health_status || 'Unknown'}</Text>
+                    </View>
+                    
+                    <View style={styles.resultRow}>
+                      <Text style={styles.resultLabel}>Confidence:</Text>
+                      <Text style={styles.resultValue}>{((analysisResult.analysis?.confidence || 0) * 100).toFixed(1)}%</Text>
+                    </View>
+                    
+                    {analysisResult.analysis?.recommendations && analysisResult.analysis.recommendations.length > 0 && (
+                      <View style={styles.recommendationsContainer}>
+                        <Text style={styles.recommendationsTitle}>Recommendations:</Text>
+                        {analysisResult.analysis.recommendations.map((rec, index) => (
+                          <Text key={index} style={styles.recommendationItem}>• {rec}</Text>
+                        ))}
+                      </View>
+                    )}
+                  </Card.Content>
+                </Card>
+                
+                {/* Product Recommendations */}
+                <ProductRecommendationCards
+                  diseaseType={analysisResult.analysis?.disease_type}
+                  symptoms={analysisResult.analysis?.symptoms}
+                  cropType={analysisResult.analysis?.crop_type}
+                  onProductPress={(product) => {
+                    console.log('Product selected:', product);
+                  }}
+                />
+              </View>
             )}
 
           </ScrollView>
         </SafeAreaView>
       </View>
 
-      {/* Authentication Prompt Modal */}
-      <Modal
-        visible={showAuthPrompt}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setShowAuthPrompt(false)}
-      >
-        <View style={styles.authModalOverlay}>
-          <View style={styles.authCard}>
-            <View style={styles.authLogoContainer}>
-              <Image 
-                source={require('../assets/logo.png')}
-                style={styles.authLogoImage}
-                resizeMode="contain"
-              />
-            </View>
-            <Text style={styles.authTitle}>Sign In to Analyze</Text>
-            <Text style={styles.authMessage}>
-              Create an account or sign in to use AI-powered disease detection and get personalized recommendations for your crops.
-            </Text>
-
-            {/* Benefits List */}
-            <View style={styles.benefitsList}>
-              <View style={styles.benefitItem}>
-                <MaterialIcons name="check-circle" size={20} color="#4CAF50" />
-                <Text style={styles.benefitText}>AI disease detection</Text>
-              </View>
-              <View style={styles.benefitItem}>
-                <MaterialIcons name="check-circle" size={20} color="#4CAF50" />
-                <Text style={styles.benefitText}>Treatment recommendations</Text>
-              </View>
-              <View style={styles.benefitItem}>
-                <MaterialIcons name="check-circle" size={20} color="#4CAF50" />
-                <Text style={styles.benefitText}>Save analysis history</Text>
-              </View>
-            </View>
-
-            {/* Sign Up Button */}
-            <TouchableOpacity
-              style={styles.authSignupButton}
-              onPress={async () => {
-                setShowAuthPrompt(false);
-                // Save the current image before navigating
-                const currentImage = selectedImage;
-                if (navigation && navigation.navigate) {
-                  navigation.navigate('signup');
-                }
-                // After user returns, check if they're authenticated and auto-analyze
-                setTimeout(async () => {
-                  await checkAuthentication();
-                  if (currentImage && isAuthenticated) {
-                    console.log('🔄 User authenticated, auto-analyzing saved image...');
-                    // Image is still in state, will auto-analyze on next attempt
-                  }
-                }, 1000);
-              }}
-            >
-              <Text style={styles.authSignupButtonText}>Create Free Account</Text>
-            </TouchableOpacity>
-
-            {/* Log In Button */}
-            <TouchableOpacity
-              style={styles.authLoginButton}
-              onPress={async () => {
-                setShowAuthPrompt(false);
-                // Save the current image before navigating
-                const currentImage = selectedImage;
-                if (navigation && navigation.navigate) {
-                  navigation.navigate('login');
-                }
-                // After user returns, check if they're authenticated and auto-analyze
-                setTimeout(async () => {
-                  await checkAuthentication();
-                  if (currentImage && isAuthenticated) {
-                    console.log('🔄 User authenticated, auto-analyzing saved image...');
-                    // Image is still in state, will auto-analyze on next attempt
-                  }
-                }, 1000);
-              }}
-            >
-              <Text style={styles.authLoginButtonText}>Already have an account? Log In</Text>
-            </TouchableOpacity>
-
-            {/* Close Button */}
-            <TouchableOpacity
-              style={styles.authCloseButton}
-              onPress={() => setShowAuthPrompt(false)}
-            >
-              <Text style={styles.authCloseButtonText}>Maybe Later</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      {/* Authentication removed - AI Care works without login */}
     </View>
   );
 };
@@ -986,6 +870,57 @@ const styles = StyleSheet.create({
   authCloseButtonText: {
     color: '#999',
     fontSize: 14,
+  },
+  
+  // Simple Results Styles
+  resultsContainer: {
+    marginTop: 20,
+  },
+  resultCard: {
+    marginBottom: 20,
+    elevation: 2,
+  },
+  resultTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#2E7D32',
+  },
+  resultRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingVertical: 4,
+  },
+  resultLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#666',
+    flex: 1,
+  },
+  resultValue: {
+    fontSize: 14,
+    color: '#333',
+    flex: 2,
+    textAlign: 'right',
+  },
+  recommendationsContainer: {
+    marginTop: 15,
+    paddingTop: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
+  },
+  recommendationsTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#2E7D32',
+  },
+  recommendationItem: {
+    fontSize: 14,
+    color: '#555',
+    marginBottom: 5,
+    lineHeight: 20,
   },
 });
 export default DiseaseDetectionScreen;

@@ -4,19 +4,19 @@
  * Uses single consistent address: 192.168.0.107
  */
 
-// LOCAL TESTING MODE - DISABLE RENDER FOR TESTING
-const LOCAL_TESTING = true; // Set to false to use Render URLs
+// PRODUCTION MODE - Using Render Cloud Backend
+const LOCAL_TESTING = false; // Set to true to use localhost URLs
 
-// Production Render URLs - Primary endpoints (DISABLED FOR TESTING)
+// Production Render URLs - Primary endpoints (ENABLED FOR PRODUCTION)
 const RENDER_URLS = [
-  // 'https://agrof-store-api.onrender.com',    // Store Backend on Render
-  // 'https://agrof-ai-api.onrender.com',       // AI Backend on Render
-  // 'https://agrof-whatsapp-bot.onrender.com' // WhatsApp Bot on Render
+  'https://agrof-store-api.onrender.com',    // Store Backend on Render
+  'https://agrof-ai-api.onrender.com',       // AI Backend on Render
+  'https://agrof-whatsapp-bot.onrender.com' // WhatsApp Bot on Render
 ];
 
 // Localhost URLs for testing
 const LOCALHOST_URLS = [
-  'http://localhost:3001',    // Store Backend local
+  'http://localhost:3002',    // Store Backend local (updated to port 3002)
   'http://localhost:5000',   // AI Backend local  
   'http://localhost:10000'   // WhatsApp Bot local
 ];
@@ -40,14 +40,14 @@ const LOCAL_IPS = [
 const BASE_IPS = LOCAL_TESTING ? [...LOCALHOST_URLS, ...LOCAL_IPS] : [...RENDER_URLS, ...LOCAL_IPS];
 
 // Get the current base URL (will be dynamically determined)
-let BASE_IP = LOCAL_TESTING ? 'http://localhost:3001' : 'https://agrof-store-api.onrender.com';
+let BASE_IP = LOCAL_TESTING ? 'http://localhost:3002' : 'https://agrof-store-api.onrender.com';
 
 // API Configuration
 export const API_CONFIG = {
   // Store Backend API
   STORE: {
-    BASE_URL: BASE_IP.startsWith('https://') ? BASE_IP : `http://${BASE_IP}:3001`,
-    API_URL: BASE_IP.startsWith('https://') ? `${BASE_IP}/api` : `http://${BASE_IP}:3001/api`,
+    BASE_URL: BASE_IP.startsWith('https://') ? BASE_IP : `http://${BASE_IP}:3002`,
+    API_URL: BASE_IP.startsWith('https://') ? `${BASE_IP}/api` : `http://${BASE_IP}:3002/api`,
     ENDPOINTS: {
       PRODUCTS: '/products',
       CATEGORIES: '/categories',
@@ -152,9 +152,24 @@ export const findWorkingApiEndpoint = async () => {
   
   for (const ip of BASE_IPS) {
     try {
-      console.log(`🌐 Testing endpoint: http://${ip}:3001/api/health`);
+      // Determine the correct URL format based on the IP
+      let testUrl, baseUrl, apiUrl;
       
-      const response = await fetch(`http://${ip}:3001/api/health`, {
+      if (ip.startsWith('https://') || ip.startsWith('http://')) {
+        // URLs that already have protocol - Render URLs or localhost URLs
+        testUrl = `${ip}/api/health`;
+        baseUrl = ip;
+        apiUrl = `${ip}/api`;
+        console.log(`🌐 Testing endpoint with protocol: ${testUrl}`);
+      } else {
+        // Local IPs - need http:// and port
+        testUrl = `http://${ip}:3002/api/health`;
+        baseUrl = `http://${ip}:3002`;
+        apiUrl = `http://${ip}:3002/api`;
+        console.log(`🌐 Testing local endpoint: ${testUrl}`);
+      }
+      
+      const response = await fetch(testUrl, {
         method: 'GET',
         timeout: 3000, // 3 second timeout
         headers: {
@@ -166,20 +181,20 @@ export const findWorkingApiEndpoint = async () => {
       if (response.ok) {
         const data = await response.json();
         if (data.status === 'OK') {
-          console.log(`✅ Found working API endpoint: http://${ip}:3001`);
+          console.log(`✅ Found working API endpoint: ${baseUrl}`);
           BASE_IP = ip;
           
           // Update API_CONFIG with working IP
-          API_CONFIG.STORE.BASE_URL = `http://${ip}:3001`;
-          API_CONFIG.STORE.API_URL = `http://${ip}:3001/api`;
-          API_CONFIG.AI.BASE_URL = `http://${ip}:5000`;
-          API_CONFIG.AI.API_URL = `http://${ip}:5000/api`;
+          API_CONFIG.STORE.BASE_URL = baseUrl;
+          API_CONFIG.STORE.API_URL = apiUrl;
+          API_CONFIG.AI.BASE_URL = ip.startsWith('https://') ? ip.replace('store-api', 'ai-api') : (ip.startsWith('http://') ? ip.replace(':3002', ':5000') : `http://${ip}:5000`);
+          API_CONFIG.AI.API_URL = ip.startsWith('https://') ? `${ip.replace('store-api', 'ai-api')}/api` : (ip.startsWith('http://') ? `${ip.replace(':3002', ':5000')}/api` : `http://${ip}:5000/api`);
           
           return ip;
         }
       }
     } catch (error) {
-      console.log(`❌ Failed to connect to http://${ip}:3001 - ${error.message}`);
+      console.log(`❌ Failed to connect to ${ip} - ${error.message}`);
     }
   }
   

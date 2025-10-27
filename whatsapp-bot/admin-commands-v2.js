@@ -14,6 +14,8 @@ class AdminCommandsV2 {
     this.adminNumbers = adminNumbers || [];
     this.flowProcessor = new ConversationFlowProcessor(storeApiUrl);
     
+    console.log(`🔗 Admin Commands initialized with API: ${storeApiUrl}`);
+    
     // Secret trigger words
     this.triggers = ['godeye', 'void', 'destiny', 'oracle', 'guardian', 'phoenix', 'nexus', 'cloud'];
     

@@ -878,9 +878,9 @@ const OutstandingAIPlanScreen = ({ onNavigateToStore }) => {
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <MaterialIcons name="psychology" size={32} color="white" />
-          <Text style={styles.headerTitle}>AI Plan Powered by Advanced AI</Text>
+          <Text style={styles.headerTitle}>Smart Farming Assistant</Text>
         </View>
-        <Text style={styles.headerSubtitle}>Generate Outstanding AI Plan</Text>
+        <Text style={styles.headerSubtitle}>Create Your Perfect Farm Plan</Text>
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
@@ -930,12 +930,12 @@ const OutstandingAIPlanScreen = ({ onNavigateToStore }) => {
           {generatingPlan ? (
             <>
               <ActivityIndicator size="small" color="white" />
-              <Text style={styles.generateButtonText}>Generating Outstanding Plan...</Text>
+              <Text style={styles.generateButtonText}>Creating Your Plan...</Text>
             </>
           ) : (
             <>
               <MaterialIcons name="auto-awesome" size={24} color="white" />
-              <Text style={styles.generateButtonText}>🚀 Generate AI Plan</Text>
+              <Text style={styles.generateButtonText}>Generate Farm Plan</Text>
             </>
           )}
         </TouchableOpacity>
@@ -1277,10 +1277,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    opacity: 0.6,
+    opacity: 1.0,
+    resizeMode: 'cover',
   },
   header: {
-    backgroundColor: 'rgba(76, 175, 80, 0.95)',
+    backgroundColor: 'rgba(34, 139, 34, 0.9)',
     paddingTop: 50,
     paddingBottom: 20,
     paddingHorizontal: 20,
@@ -1315,7 +1316,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cropSelector: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 12,
     padding: 15,
     flexDirection: 'row',
@@ -1358,14 +1359,15 @@ const styles = StyleSheet.create({
   },
   cropSelectorPlaceholder: {
     fontSize: 16,
-    color: '#999',
+    color: '#000',
     flex: 1,
   },
   farmSizeInput: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 12,
     padding: 15,
     fontSize: 16,
+    color: '#000',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -1373,7 +1375,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   generateButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#228B22',
     borderRadius: 12,
     padding: 18,
     flexDirection: 'row',
@@ -1387,7 +1389,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   generateButtonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#90EE90',
   },
   generateButtonText: {
     color: 'white',
@@ -1410,7 +1412,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentSection: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
@@ -1421,7 +1423,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   planContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,

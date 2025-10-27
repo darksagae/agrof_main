@@ -20,6 +20,8 @@ const NetworkDiagnostics = ({ onClose }) => {
     
     const results = [];
     const endpoints = [
+      { name: 'Render Store API', url: 'https://agrof-store-api.onrender.com' },
+      { name: 'Render AI API', url: 'https://agrof-ai-api.onrender.com' },
       { name: 'Primary IP (WiFi)', url: 'http://192.168.1.15:3001' },
       { name: 'WiFi IP', url: 'http://192.168.1.15:3001' },
       { name: 'Localhost', url: 'http://127.0.0.1:3001' },
@@ -32,7 +34,7 @@ const NetworkDiagnostics = ({ onClose }) => {
         console.log(`🧪 Testing ${endpoint.name}: ${endpoint.url}`);
         
         // Use correct health endpoint (AI backend uses /health, Store uses /api/health)
-        const healthEndpoint = endpoint.url.includes(':5000') ? '/health' : '/api/health';
+        const healthEndpoint = endpoint.url.includes('ai-api') ? '/health' : '/api/health';
         const response = await fetch(`${endpoint.url}${healthEndpoint}`, {
           method: 'GET',
           timeout: 3000,

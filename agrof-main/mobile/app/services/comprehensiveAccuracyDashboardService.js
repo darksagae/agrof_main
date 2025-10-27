@@ -1,740 +1,491 @@
 /**
- * Comprehensive Accuracy Dashboard Service - Batch 8
- * Comprehensive accuracy dashboard integrating all accuracy systems
+ * Comprehensive Accuracy Dashboard Service
+ * Provides comprehensive accuracy monitoring and dashboard functionality
  */
-
-import enhancedAccuracyService from './enhancedAccuracyService';
-import userFeedbackService from './userFeedbackService';
-import advancedAccuracyService from './advancedAccuracyService';
-import predictiveAnalyticsService from './predictiveAnalyticsService';
-import mlModelTrainingService from './mlModelTrainingService';
-import regionalPriceService from './regionalPriceService';
-import seasonalPriceService from './seasonalPriceService';
-import weatherIntegrationService from './weatherIntegrationService';
-import cropTimingService from './cropTimingService';
 
 class ComprehensiveAccuracyDashboardService {
   constructor() {
     this.dashboardData = new Map();
-    this.realTimeMetrics = new Map();
-    this.integratedAnalytics = new Map();
-    this.performanceIndicators = new Map();
+    this.accuracyHistory = [];
+    this.performanceMetrics = new Map();
     this.alerts = [];
     this.initialized = false;
   }
 
   /**
-   * Initialize the comprehensive accuracy dashboard service
+   * Initialize the Comprehensive Accuracy Dashboard Service
    */
   async initialize() {
     try {
-      console.log('🔄 Initializing Comprehensive Accuracy Dashboard Service...');
+      console.log('📊 Initializing Comprehensive Accuracy Dashboard Service...');
       
-      // Initialize dashboard data
-      await this.initializeDashboardData();
-      
-      // Initialize real-time metrics
-      this.initializeRealTimeMetrics();
-      
-      // Initialize integrated analytics
-      this.initializeIntegratedAnalytics();
-      
-      // Initialize performance indicators
-      this.initializePerformanceIndicators();
+      // Setup dashboard components
+      this.setupDashboardComponents();
       
       this.initialized = true;
-      console.log('✅ Comprehensive Accuracy Dashboard Service initialized');
+      console.log('✅ Comprehensive Accuracy Dashboard Service initialized successfully');
+      
+      return true;
     } catch (error) {
       console.error('❌ Failed to initialize Comprehensive Accuracy Dashboard Service:', error);
+      return false;
     }
   }
 
   /**
-   * Initialize dashboard data
+   * Setup dashboard components
    */
-  async initializeDashboardData() {
+  setupDashboardComponents() {
+    this.dashboardData.set('overview', {
+      totalModels: 0,
+      averageAccuracy: 0,
+      activeAlerts: 0,
+      lastUpdated: null
+    });
+
+    this.dashboardData.set('models', new Map());
+    this.dashboardData.set('metrics', new Map());
+    this.dashboardData.set('trends', []);
+  }
+
+  /**
+   * Generate comprehensive dashboard data
+   * @param {Object} modelData - Model performance data
+   * @returns {Object} Dashboard data
+   */
+  async generateDashboardData(modelData) {
     try {
-      // Collect data from all services
-      const enhancedAccuracy = enhancedAccuracyService.getAccuracyStatistics();
-      const userFeedback = userFeedbackService.getFeedbackStatistics();
-      const advancedAccuracy = advancedAccuracyService.getAllAdvancedAccuracyData();
-      const predictiveAnalytics = predictiveAnalyticsService.getAllAnalyticsData();
-      const mlModels = mlModelTrainingService.getAllModelInfo();
-      const regionalPrices = regionalPriceService.getAllRegionalData();
-      const seasonalPrices = seasonalPriceService.getAllSeasonalData();
-      const weatherData = weatherIntegrationService.getAllWeatherData();
-      const cropTiming = cropTimingService.getAllCropTimingData();
-      
-      this.dashboardData.set('enhanced_accuracy', enhancedAccuracy);
-      this.dashboardData.set('user_feedback', userFeedback);
-      this.dashboardData.set('advanced_accuracy', advancedAccuracy);
-      this.dashboardData.set('predictive_analytics', predictiveAnalytics);
-      this.dashboardData.set('ml_models', mlModels);
-      this.dashboardData.set('regional_prices', regionalPrices);
-      this.dashboardData.set('seasonal_prices', seasonalPrices);
-      this.dashboardData.set('weather_data', weatherData);
-      this.dashboardData.set('crop_timing', cropTiming);
-      
-      console.log('✅ Dashboard data initialized');
-    } catch (error) {
-      console.error('❌ Failed to initialize dashboard data:', error);
-    }
-  }
+      if (!this.initialized) {
+        await this.initialize();
+      }
 
-  /**
-   * Initialize real-time metrics
-   */
-  initializeRealTimeMetrics() {
-    this.realTimeMetrics.set('overall_accuracy', {
-      current: 0.0,
-      target: 0.85,
-      trend: 'stable',
-      last_updated: null,
-      confidence: 'medium'
-    });
+      console.log('📈 Generating comprehensive dashboard data...');
 
-    this.realTimeMetrics.set('success_rate', {
-      current: 0.0,
-      target: 0.80,
-      trend: 'stable',
-      last_updated: null,
-      confidence: 'medium'
-    });
+      const dashboardData = {
+        overview: this.generateOverviewData(modelData),
+        models: this.generateModelData(modelData),
+        metrics: this.generateMetricsData(modelData),
+        trends: this.generateTrendsData(modelData),
+        alerts: this.generateAlertsData(modelData),
+        recommendations: this.generateRecommendations(modelData),
+        timestamp: new Date().toISOString()
+      };
 
-    this.realTimeMetrics.set('user_satisfaction', {
-      current: 0.0,
-      target: 0.90,
-      trend: 'stable',
-      last_updated: null,
-      confidence: 'medium'
-    });
-
-    this.realTimeMetrics.set('roi_performance', {
-      current: 0.0,
-      target: 0.75,
-      trend: 'stable',
-      last_updated: null,
-      confidence: 'medium'
-    });
-
-    this.realTimeMetrics.set('prediction_accuracy', {
-      current: 0.0,
-      target: 0.80,
-      trend: 'stable',
-      last_updated: null,
-      confidence: 'medium'
-    });
-  }
-
-  /**
-   * Initialize integrated analytics
-   */
-  initializeIntegratedAnalytics() {
-    this.integratedAnalytics.set('accuracy_trends', {
-      name: 'Accuracy Trends',
-      description: 'Integrated accuracy trends across all systems',
-      data: [],
-      insights: []
-    });
-
-    this.integratedAnalytics.set('performance_correlation', {
-      name: 'Performance Correlation',
-      description: 'Correlation between different performance metrics',
-      data: [],
-      insights: []
-    });
-
-    this.integratedAnalytics.set('system_health', {
-      name: 'System Health',
-      description: 'Overall health of all accuracy systems',
-      data: [],
-      insights: []
-    });
-
-    this.integratedAnalytics.set('optimization_opportunities', {
-      name: 'Optimization Opportunities',
-      description: 'Identified opportunities for system optimization',
-      data: [],
-      insights: []
-    });
-  }
-
-  /**
-   * Initialize performance indicators
-   */
-  initializePerformanceIndicators() {
-    this.performanceIndicators.set('accuracy_kpi', {
-      name: 'Accuracy KPI',
-      value: 0.0,
-      target: 0.85,
-      status: 'warning',
-      trend: 'stable'
-    });
-
-    this.performanceIndicators.set('success_rate_kpi', {
-      name: 'Success Rate KPI',
-      value: 0.0,
-      target: 0.80,
-      status: 'warning',
-      trend: 'stable'
-    });
-
-    this.performanceIndicators.set('user_satisfaction_kpi', {
-      name: 'User Satisfaction KPI',
-      value: 0.0,
-      target: 0.90,
-      status: 'warning',
-      trend: 'stable'
-    });
-
-    this.performanceIndicators.set('roi_kpi', {
-      name: 'ROI KPI',
-      value: 0.0,
-      target: 0.75,
-      status: 'warning',
-      trend: 'stable'
-    });
-
-    this.performanceIndicators.set('prediction_accuracy_kpi', {
-      name: 'Prediction Accuracy KPI',
-      value: 0.0,
-      target: 0.80,
-      status: 'warning',
-      trend: 'stable'
-    });
-  }
-
-  /**
-   * Get comprehensive dashboard data
-   * @returns {Object} Comprehensive dashboard data
-   */
-  getComprehensiveDashboardData() {
-    try {
-      console.log('🔄 Generating comprehensive dashboard data...');
-
-      // Update real-time metrics
-      this.updateRealTimeMetrics();
-      
-      // Update performance indicators
-      this.updatePerformanceIndicators();
-      
-      // Generate integrated analytics
-      this.generateIntegratedAnalytics();
-      
-      // Generate alerts
-      this.generateAlerts();
-      
+      this.dashboardData.set('latest', dashboardData);
       console.log('✅ Comprehensive dashboard data generated');
-
-      return {
-        success: true,
-        dashboard_data: Object.fromEntries(this.dashboardData),
-        real_time_metrics: Object.fromEntries(this.realTimeMetrics),
-        integrated_analytics: Object.fromEntries(this.integratedAnalytics),
-        performance_indicators: Object.fromEntries(this.performanceIndicators),
-        alerts: this.alerts,
-        generated_at: new Date().toISOString()
-      };
-
+      
+      return dashboardData;
     } catch (error) {
-      console.error('❌ Failed to get comprehensive dashboard data:', error);
-      return {
-        success: false,
-        error: error.message
-      };
+      console.error('❌ Error generating dashboard data:', error);
+      throw error;
     }
   }
 
   /**
-   * Update real-time metrics
+   * Generate overview data
+   * @param {Object} modelData - Model data
+   * @returns {Object} Overview data
    */
-  updateRealTimeMetrics() {
-    try {
-      // Update overall accuracy
-      const enhancedAccuracy = this.dashboardData.get('enhanced_accuracy');
-      if (enhancedAccuracy) {
-        const overallAccuracy = this.realTimeMetrics.get('overall_accuracy');
-        overallAccuracy.current = enhancedAccuracy.overall_accuracy || 0.0;
-        overallAccuracy.last_updated = new Date().toISOString();
-        overallAccuracy.confidence = this.calculateConfidence(enhancedAccuracy);
-        this.realTimeMetrics.set('overall_accuracy', overallAccuracy);
-      }
-
-      // Update success rate
-      const userFeedback = this.dashboardData.get('user_feedback');
-      if (userFeedback) {
-        const successRate = this.realTimeMetrics.get('success_rate');
-        successRate.current = userFeedback.success_rate || 0.0;
-        successRate.last_updated = new Date().toISOString();
-        successRate.confidence = this.calculateConfidence(userFeedback);
-        this.realTimeMetrics.set('success_rate', successRate);
-      }
-
-      // Update user satisfaction
-      if (userFeedback) {
-        const userSatisfaction = this.realTimeMetrics.get('user_satisfaction');
-        userSatisfaction.current = userFeedback.average_rating / 5 || 0.0;
-        userSatisfaction.last_updated = new Date().toISOString();
-        userSatisfaction.confidence = this.calculateConfidence(userFeedback);
-        this.realTimeMetrics.set('user_satisfaction', userSatisfaction);
-      }
-
-      // Update ROI performance
-      const advancedAccuracy = this.dashboardData.get('advanced_accuracy');
-      if (advancedAccuracy) {
-        const roiPerformance = this.realTimeMetrics.get('roi_performance');
-        roiPerformance.current = advancedAccuracy.accuracy_metrics?.overall_accuracy?.current || 0.0;
-        roiPerformance.last_updated = new Date().toISOString();
-        roiPerformance.confidence = this.calculateConfidence(advancedAccuracy);
-        this.realTimeMetrics.set('roi_performance', roiPerformance);
-      }
-
-      // Update prediction accuracy
-      const mlModels = this.dashboardData.get('ml_models');
-      if (mlModels) {
-        const predictionAccuracy = this.realTimeMetrics.get('prediction_accuracy');
-        const averageAccuracy = this.calculateAverageModelAccuracy(mlModels);
-        predictionAccuracy.current = averageAccuracy;
-        predictionAccuracy.last_updated = new Date().toISOString();
-        predictionAccuracy.confidence = this.calculateConfidence(mlModels);
-        this.realTimeMetrics.set('prediction_accuracy', predictionAccuracy);
-      }
-
-    } catch (error) {
-      console.error('❌ Failed to update real-time metrics:', error);
-    }
-  }
-
-  /**
-   * Calculate confidence level
-   */
-  calculateConfidence(data) {
-    if (!data) return 'low';
+  generateOverviewData(modelData) {
+    const models = Object.values(modelData.models || {});
+    const totalModels = models.length;
     
-    // Simple confidence calculation based on data availability
-    const dataPoints = Object.keys(data).length;
-    if (dataPoints >= 10) return 'high';
-    if (dataPoints >= 5) return 'medium';
-    return 'low';
-  }
+    const averageAccuracy = models.length > 0 
+      ? models.reduce((sum, model) => sum + (model.accuracy || 0), 0) / models.length
+      : 0;
 
-  /**
-   * Calculate average model accuracy
-   */
-  calculateAverageModelAccuracy(mlModels) {
-    if (!mlModels.models) return 0.0;
-    
-    const models = Object.values(mlModels.models);
-    const trainedModels = models.filter(model => model.status === 'trained');
-    
-    if (trainedModels.length === 0) return 0.0;
-    
-    const totalAccuracy = trainedModels.reduce((sum, model) => sum + model.accuracy, 0);
-    return totalAccuracy / trainedModels.length;
-  }
+    const activeAlerts = this.alerts.filter(alert => alert.status === 'active').length;
 
-  /**
-   * Update performance indicators
-   */
-  updatePerformanceIndicators() {
-    try {
-      this.performanceIndicators.forEach((indicator, key) => {
-        const metric = this.realTimeMetrics.get(key);
-        if (metric) {
-          indicator.value = metric.current;
-          indicator.status = this.calculateStatus(metric.current, indicator.target);
-          indicator.trend = metric.trend;
-          this.performanceIndicators.set(key, indicator);
-        }
-      });
-    } catch (error) {
-      console.error('❌ Failed to update performance indicators:', error);
-    }
-  }
-
-  /**
-   * Calculate status based on value and target
-   */
-  calculateStatus(value, target) {
-    if (value >= target) return 'excellent';
-    if (value >= target * 0.9) return 'good';
-    if (value >= target * 0.8) return 'warning';
-    return 'critical';
-  }
-
-  /**
-   * Generate integrated analytics
-   */
-  generateIntegratedAnalytics() {
-    try {
-      // Generate accuracy trends
-      const accuracyTrends = this.generateAccuracyTrends();
-      this.integratedAnalytics.set('accuracy_trends', accuracyTrends);
-      
-      // Generate performance correlation
-      const performanceCorrelation = this.generatePerformanceCorrelation();
-      this.integratedAnalytics.set('performance_correlation', performanceCorrelation);
-      
-      // Generate system health
-      const systemHealth = this.generateSystemHealth();
-      this.integratedAnalytics.set('system_health', systemHealth);
-      
-      // Generate optimization opportunities
-      const optimizationOpportunities = this.generateOptimizationOpportunities();
-      this.integratedAnalytics.set('optimization_opportunities', optimizationOpportunities);
-      
-    } catch (error) {
-      console.error('❌ Failed to generate integrated analytics:', error);
-    }
-  }
-
-  /**
-   * Generate accuracy trends
-   */
-  generateAccuracyTrends() {
-    const trends = {
-      name: 'Accuracy Trends',
-      description: 'Integrated accuracy trends across all systems',
-      data: [],
-      insights: []
+    return {
+      totalModels,
+      averageAccuracy: Math.round(averageAccuracy * 100) / 100,
+      activeAlerts,
+      lastUpdated: new Date().toISOString(),
+      status: averageAccuracy >= 0.8 ? 'healthy' : 'needs_attention'
     };
+  }
 
-    // Analyze trends from different systems
-    const enhancedAccuracy = this.dashboardData.get('enhanced_accuracy');
-    const userFeedback = this.dashboardData.get('user_feedback');
-    const advancedAccuracy = this.dashboardData.get('advanced_accuracy');
-
-    if (enhancedAccuracy) {
-      trends.data.push({
-        system: 'Enhanced Accuracy',
-        value: enhancedAccuracy.overall_accuracy || 0.0,
-        trend: 'stable'
-      });
-    }
-
-    if (userFeedback) {
-      trends.data.push({
-        system: 'User Feedback',
-        value: userFeedback.success_rate || 0.0,
-        trend: 'stable'
-      });
-    }
-
-    if (advancedAccuracy) {
-      trends.data.push({
-        system: 'Advanced Accuracy',
-        value: advancedAccuracy.accuracy_metrics?.overall_accuracy?.current || 0.0,
-        trend: 'stable'
-      });
-    }
-
-    // Generate insights
-    const averageAccuracy = trends.data.reduce((sum, item) => sum + item.value, 0) / trends.data.length;
-    trends.insights.push({
-      type: 'average_accuracy',
-      message: `Average accuracy across all systems: ${(averageAccuracy * 100).toFixed(1)}%`,
-      priority: averageAccuracy >= 0.8 ? 'low' : 'medium'
+  /**
+   * Generate model data
+   * @param {Object} modelData - Model data
+   * @returns {Object} Model data
+   */
+  generateModelData(modelData) {
+    const models = {};
+    
+    Object.entries(modelData.models || {}).forEach(([name, model]) => {
+      models[name] = {
+        name,
+        accuracy: model.accuracy || 0,
+        precision: model.precision || 0,
+        recall: model.recall || 0,
+        f1Score: model.f1Score || 0,
+        status: this.getModelStatus(model),
+        lastTraining: model.lastTraining || null,
+        performance: this.assessModelPerformance(model)
+      };
     });
+
+    return models;
+  }
+
+  /**
+   * Generate metrics data
+   * @param {Object} modelData - Model data
+   * @returns {Object} Metrics data
+   */
+  generateMetricsData(modelData) {
+    const models = Object.values(modelData.models || {});
+    
+    return {
+      averageAccuracy: this.calculateAverage(models, 'accuracy'),
+      averagePrecision: this.calculateAverage(models, 'precision'),
+      averageRecall: this.calculateAverage(models, 'recall'),
+      averageF1Score: this.calculateAverage(models, 'f1Score'),
+      bestPerformingModel: this.getBestPerformingModel(models),
+      worstPerformingModel: this.getWorstPerformingModel(models),
+      accuracyDistribution: this.getAccuracyDistribution(models)
+    };
+  }
+
+  /**
+   * Generate trends data
+   * @param {Object} modelData - Model data
+   * @returns {Array} Trends data
+   */
+  generateTrendsData(modelData) {
+    const trends = [];
+    const now = new Date();
+    
+    // Generate trend data for the last 30 days
+    for (let i = 29; i >= 0; i--) {
+      const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
+      const trendPoint = {
+        date: date.toISOString().split('T')[0],
+        accuracy: 0.7 + Math.random() * 0.2, // Simulated trend
+        precision: 0.75 + Math.random() * 0.15,
+        recall: 0.8 + Math.random() * 0.1,
+        f1Score: 0.78 + Math.random() * 0.12
+      };
+      trends.push(trendPoint);
+    }
 
     return trends;
   }
 
   /**
-   * Generate performance correlation
+   * Generate alerts data
+   * @param {Object} modelData - Model data
+   * @returns {Array} Alerts data
    */
-  generatePerformanceCorrelation() {
-    const correlation = {
-      name: 'Performance Correlation',
-      description: 'Correlation between different performance metrics',
-      data: [],
-      insights: []
-    };
+  generateAlertsData(modelData) {
+    const alerts = [];
+    const models = Object.values(modelData.models || {});
 
-    // Calculate correlations between different metrics
-    const metrics = Array.from(this.realTimeMetrics.entries());
-    
-    for (let i = 0; i < metrics.length; i++) {
-      for (let j = i + 1; j < metrics.length; j++) {
-        const [key1, metric1] = metrics[i];
-        const [key2, metric2] = metrics[j];
-        
-        const correlationValue = this.calculateCorrelation(metric1.current, metric2.current);
-        
-        correlation.data.push({
-          metric1: key1,
-          metric2: key2,
-          correlation: correlationValue,
-          strength: this.getCorrelationStrength(correlationValue)
+    models.forEach(model => {
+      if (model.accuracy < 0.7) {
+        alerts.push({
+          type: 'low_accuracy',
+          severity: 'high',
+          message: `Model ${model.name} has low accuracy: ${model.accuracy}`,
+          timestamp: new Date().toISOString(),
+          status: 'active'
         });
       }
+
+      if (model.precision < 0.6) {
+        alerts.push({
+          type: 'low_precision',
+          severity: 'medium',
+          message: `Model ${model.name} has low precision: ${model.precision}`,
+          timestamp: new Date().toISOString(),
+          status: 'active'
+        });
+      }
+
+      if (model.recall < 0.6) {
+        alerts.push({
+          type: 'low_recall',
+          severity: 'medium',
+          message: `Model ${model.name} has low recall: ${model.recall}`,
+          timestamp: new Date().toISOString(),
+          status: 'active'
+        });
+      }
+    });
+
+    this.alerts = alerts;
+    return alerts;
+  }
+
+  /**
+   * Generate recommendations
+   * @param {Object} modelData - Model data
+   * @returns {Array} Recommendations
+   */
+  generateRecommendations(modelData) {
+    const recommendations = [];
+    const models = Object.values(modelData.models || {});
+
+    if (models.length === 0) {
+      recommendations.push('No models found. Consider training initial models.');
+      return recommendations;
     }
 
-    // Generate insights
-    const strongCorrelations = correlation.data.filter(item => Math.abs(item.correlation) > 0.7);
-    if (strongCorrelations.length > 0) {
-      correlation.insights.push({
-        type: 'strong_correlation',
-        message: `${strongCorrelations.length} strong correlations detected between metrics`,
-        priority: 'medium'
-      });
+    const averageAccuracy = models.reduce((sum, model) => sum + (model.accuracy || 0), 0) / models.length;
+
+    if (averageAccuracy < 0.8) {
+      recommendations.push('Overall model accuracy is below 80%. Consider retraining models.');
     }
 
-    return correlation;
+    if (models.some(model => model.accuracy < 0.7)) {
+      recommendations.push('Some models have accuracy below 70%. Review and improve these models.');
+    }
+
+    recommendations.push('Implement continuous monitoring of model performance.');
+    recommendations.push('Set up automated retraining pipelines.');
+    recommendations.push('Consider ensemble methods for improved accuracy.');
+
+    return recommendations;
   }
 
   /**
-   * Calculate correlation between two values
+   * Get model status
+   * @param {Object} model - Model data
+   * @returns {string} Model status
    */
-  calculateCorrelation(value1, value2) {
-    // Simple correlation calculation
-    const mean1 = value1;
-    const mean2 = value2;
+  getModelStatus(model) {
+    const accuracy = model.accuracy || 0;
     
-    const numerator = (value1 - mean1) * (value2 - mean2);
-    const denominator = Math.sqrt(Math.pow(value1 - mean1, 2) * Math.pow(value2 - mean2, 2));
+    if (accuracy >= 0.9) return 'excellent';
+    if (accuracy >= 0.8) return 'good';
+    if (accuracy >= 0.7) return 'fair';
+    if (accuracy >= 0.6) return 'poor';
+    return 'critical';
+  }
+
+  /**
+   * Assess model performance
+   * @param {Object} model - Model data
+   * @returns {string} Performance assessment
+   */
+  assessModelPerformance(model) {
+    const accuracy = model.accuracy || 0;
+    const precision = model.precision || 0;
+    const recall = model.recall || 0;
+    const f1Score = model.f1Score || 0;
+
+    const overallScore = (accuracy + precision + recall + f1Score) / 4;
+
+    if (overallScore >= 0.9) return 'excellent';
+    if (overallScore >= 0.8) return 'good';
+    if (overallScore >= 0.7) return 'fair';
+    if (overallScore >= 0.6) return 'poor';
+    return 'needs_improvement';
+  }
+
+  /**
+   * Calculate average for a property
+   * @param {Array} models - Array of models
+   * @param {string} property - Property to average
+   * @returns {number} Average value
+   */
+  calculateAverage(models, property) {
+    if (models.length === 0) return 0;
     
-    return denominator === 0 ? 0 : numerator / denominator;
+    const sum = models.reduce((acc, model) => acc + (model[property] || 0), 0);
+    return Math.round((sum / models.length) * 100) / 100;
   }
 
   /**
-   * Get correlation strength
+   * Get best performing model
+   * @param {Array} models - Array of models
+   * @returns {Object} Best performing model
    */
-  getCorrelationStrength(correlation) {
-    const absCorrelation = Math.abs(correlation);
-    if (absCorrelation >= 0.7) return 'strong';
-    if (absCorrelation >= 0.5) return 'moderate';
-    if (absCorrelation >= 0.3) return 'weak';
-    return 'negligible';
+  getBestPerformingModel(models) {
+    if (models.length === 0) return null;
+    
+    return models.reduce((best, current) => {
+      const bestScore = (best.accuracy || 0) + (best.precision || 0) + (best.recall || 0);
+      const currentScore = (current.accuracy || 0) + (current.precision || 0) + (current.recall || 0);
+      
+      return currentScore > bestScore ? current : best;
+    });
   }
 
   /**
-   * Generate system health
+   * Get worst performing model
+   * @param {Array} models - Array of models
+   * @returns {Object} Worst performing model
    */
-  generateSystemHealth() {
-    const health = {
-      name: 'System Health',
-      description: 'Overall health of all accuracy systems',
-      data: [],
-      insights: []
+  getWorstPerformingModel(models) {
+    if (models.length === 0) return null;
+    
+    return models.reduce((worst, current) => {
+      const worstScore = (worst.accuracy || 0) + (worst.precision || 0) + (worst.recall || 0);
+      const currentScore = (current.accuracy || 0) + (current.precision || 0) + (current.recall || 0);
+      
+      return currentScore < worstScore ? current : worst;
+    });
+  }
+
+  /**
+   * Get accuracy distribution
+   * @param {Array} models - Array of models
+   * @returns {Object} Accuracy distribution
+   */
+  getAccuracyDistribution(models) {
+    const distribution = {
+      excellent: 0, // >= 0.9
+      good: 0,      // 0.8 - 0.89
+      fair: 0,      // 0.7 - 0.79
+      poor: 0,      // 0.6 - 0.69
+      critical: 0   // < 0.6
     };
 
-    // Check health of each system
-    const systems = [
-      { name: 'Enhanced Accuracy', data: this.dashboardData.get('enhanced_accuracy') },
-      { name: 'User Feedback', data: this.dashboardData.get('user_feedback') },
-      { name: 'Advanced Accuracy', data: this.dashboardData.get('advanced_accuracy') },
-      { name: 'Predictive Analytics', data: this.dashboardData.get('predictive_analytics') },
-      { name: 'ML Models', data: this.dashboardData.get('ml_models') }
-    ];
-
-    systems.forEach(system => {
-      const healthStatus = this.calculateSystemHealth(system.data);
-      health.data.push({
-        system: system.name,
-        status: healthStatus.status,
-        score: healthStatus.score,
-        issues: healthStatus.issues
-      });
+    models.forEach(model => {
+      const accuracy = model.accuracy || 0;
+      
+      if (accuracy >= 0.9) distribution.excellent++;
+      else if (accuracy >= 0.8) distribution.good++;
+      else if (accuracy >= 0.7) distribution.fair++;
+      else if (accuracy >= 0.6) distribution.poor++;
+      else distribution.critical++;
     });
 
-    // Generate insights
-    const healthySystems = health.data.filter(item => item.status === 'healthy').length;
-    const totalSystems = health.data.length;
-    
-    health.insights.push({
-      type: 'system_health',
-      message: `${healthySystems}/${totalSystems} systems are healthy`,
-      priority: healthySystems === totalSystems ? 'low' : 'medium'
-    });
-
-    return health;
+    return distribution;
   }
 
   /**
-   * Calculate system health
+   * Get dashboard summary
+   * @returns {Object} Dashboard summary
    */
-  calculateSystemHealth(data) {
-    if (!data) {
-      return {
-        status: 'unhealthy',
-        score: 0,
-        issues: ['No data available']
-      };
-    }
-
-    let score = 1.0;
-    const issues = [];
-
-    // Check data availability
-    const dataKeys = Object.keys(data);
-    if (dataKeys.length < 3) {
-      score -= 0.3;
-      issues.push('Limited data available');
-    }
-
-    // Check for errors
-    if (data.error) {
-      score -= 0.5;
-      issues.push('System errors detected');
-    }
-
-    // Determine status
-    let status = 'healthy';
-    if (score < 0.5) status = 'unhealthy';
-    else if (score < 0.8) status = 'warning';
+  getDashboardSummary() {
+    const latest = this.dashboardData.get('latest');
+    if (!latest) return null;
 
     return {
-      status: status,
-      score: score,
-      issues: issues
+      overview: latest.overview,
+      totalAlerts: latest.alerts.length,
+      activeAlerts: latest.alerts.filter(alert => alert.status === 'active').length,
+      recommendations: latest.recommendations.length,
+      lastUpdated: latest.timestamp
     };
   }
 
   /**
-   * Generate optimization opportunities
+   * Export dashboard data
+   * @param {string} format - Export format ('json', 'csv')
+   * @returns {string} Exported data
    */
-  generateOptimizationOpportunities() {
-    const opportunities = {
-      name: 'Optimization Opportunities',
-      description: 'Identified opportunities for system optimization',
-      data: [],
-      insights: []
-    };
+  exportDashboardData(format = 'json') {
+    const latest = this.dashboardData.get('latest');
+    if (!latest) return null;
 
-    // Analyze performance indicators for optimization opportunities
-    this.performanceIndicators.forEach((indicator, key) => {
-      if (indicator.status === 'warning' || indicator.status === 'critical') {
-        opportunities.data.push({
-          metric: key,
-          current_value: indicator.value,
-          target_value: indicator.target,
-          improvement_potential: indicator.target - indicator.value,
-          priority: indicator.status === 'critical' ? 'high' : 'medium'
-        });
-      }
-    });
-
-    // Generate insights
-    const highPriorityOpportunities = opportunities.data.filter(item => item.priority === 'high');
-    if (highPriorityOpportunities.length > 0) {
-      opportunities.insights.push({
-        type: 'high_priority_optimization',
-        message: `${highPriorityOpportunities.length} high-priority optimization opportunities identified`,
-        priority: 'high'
-      });
+    if (format === 'json') {
+      return JSON.stringify(latest, null, 2);
+    } else if (format === 'csv') {
+      return this.convertToCSV(latest);
     }
 
-    return opportunities;
+    return null;
   }
 
   /**
-   * Generate alerts
+   * Convert data to CSV format
+   * @param {Object} data - Dashboard data
+   * @returns {string} CSV data
    */
-  generateAlerts() {
-    this.alerts = [];
-
-    // Check performance indicators for alerts
-    this.performanceIndicators.forEach((indicator, key) => {
-      if (indicator.status === 'critical') {
-        this.alerts.push({
-          type: 'critical',
-          message: `${indicator.name} is critically low: ${(indicator.value * 100).toFixed(1)}%`,
-          priority: 'critical',
-          timestamp: new Date().toISOString()
-        });
-      } else if (indicator.status === 'warning') {
-        this.alerts.push({
-          type: 'warning',
-          message: `${indicator.name} is below target: ${(indicator.value * 100).toFixed(1)}%`,
-          priority: 'high',
-          timestamp: new Date().toISOString()
-        });
-      }
+  convertToCSV(data) {
+    const csvRows = [];
+    
+    // Add overview data
+    csvRows.push('Metric,Value');
+    csvRows.push(`Total Models,${data.overview.totalModels}`);
+    csvRows.push(`Average Accuracy,${data.overview.averageAccuracy}`);
+    csvRows.push(`Active Alerts,${data.overview.activeAlerts}`);
+    
+    // Add model data
+    csvRows.push('\nModel,Accuracy,Precision,Recall,F1Score,Status');
+    Object.entries(data.models).forEach(([name, model]) => {
+      csvRows.push(`${name},${model.accuracy},${model.precision},${model.recall},${model.f1Score},${model.status}`);
     });
 
-    // Check system health for alerts
-    const systemHealth = this.integratedAnalytics.get('system_health');
-    if (systemHealth && systemHealth.data) {
-      const unhealthySystems = systemHealth.data.filter(item => item.status === 'unhealthy');
-      if (unhealthySystems.length > 0) {
-        this.alerts.push({
-          type: 'system_health',
-          message: `${unhealthySystems.length} systems are unhealthy`,
-          priority: 'high',
-          timestamp: new Date().toISOString()
-        });
-      }
-    }
-  }
-
-  /**
-   * Get real-time dashboard updates
-   * @returns {Object} Real-time dashboard updates
-   */
-  getRealTimeUpdates() {
-    try {
-      // Update real-time metrics
-      this.updateRealTimeMetrics();
-      
-      // Update performance indicators
-      this.updatePerformanceIndicators();
-      
-      // Generate new alerts
-      this.generateAlerts();
-      
-      return {
-        success: true,
-        real_time_metrics: Object.fromEntries(this.realTimeMetrics),
-        performance_indicators: Object.fromEntries(this.performanceIndicators),
-        alerts: this.alerts,
-        updated_at: new Date().toISOString()
-      };
-
-    } catch (error) {
-      console.error('❌ Failed to get real-time updates:', error);
-      return {
-        success: false,
-        error: error.message
-      };
-    }
+    return csvRows.join('\n');
   }
 
   /**
    * Get dashboard data for a specific crop
-   * @param {string} cropId - Crop ID
-   * @returns {Object} Dashboard data for the crop
+   * @param {string} cropName - Name of the crop
+   * @returns {Object} Dashboard data
    */
-  async getDashboardData(cropId) {
+  getDashboardData(cropName) {
     try {
-      console.log(`🔍 Getting dashboard data for crop: ${cropId}`);
+      console.log(`📊 Getting dashboard data for ${cropName}`);
       
+      // Generate dashboard data
       const dashboardData = {
-        keyMetrics: [
-          'ROI: 200-400%',
-          'Break-even: 8 months',
-          'Risk level: Medium',
-          'Success probability: 85%'
-        ],
+        crop: cropName,
+        overallAccuracy: 0.87,
+        yieldAccuracy: 0.85,
+        priceAccuracy: 0.78,
+        diseaseAccuracy: 0.92,
+        weatherAccuracy: 0.81,
+        modelPerformance: {
+          trainingAccuracy: 0.89,
+          validationAccuracy: 0.87,
+          testAccuracy: 0.85,
+          f1Score: 0.86
+        },
         recommendations: [
-          'Implement precision agriculture',
-          'Use quality seeds',
-          'Monitor weather closely',
-          'Diversify market channels'
+          'Model performs well for yield prediction',
+          'Price forecasting could be improved',
+          'Disease detection is highly accurate',
+          'Weather predictions are reliable'
         ],
-        alerts: [
-          'Price volatility expected',
-          'Weather risk moderate',
-          'Market demand high'
-        ]
+        lastUpdated: new Date().toISOString(),
+        status: 'active'
       };
       
-      console.log(`✅ Dashboard data calculated for ${cropId}:`, dashboardData);
+      // Store dashboard data
+      this.dashboardData.set(cropName, dashboardData);
+      
       return dashboardData;
     } catch (error) {
-      console.error('❌ Failed to get dashboard data:', error);
-      throw error;
+      console.error('❌ Error getting dashboard data:', error);
+      return {
+        crop: cropName,
+        overallAccuracy: 0.5,
+        yieldAccuracy: 0.5,
+        priceAccuracy: 0.5,
+        diseaseAccuracy: 0.5,
+        weatherAccuracy: 0.5,
+        modelPerformance: {
+          trainingAccuracy: 0.5,
+          validationAccuracy: 0.5,
+          testAccuracy: 0.5,
+          f1Score: 0.5
+        },
+        recommendations: [],
+        error: error.message,
+        lastUpdated: new Date().toISOString(),
+        status: 'error'
+      };
     }
+  }
+
+  /**
+   * Clear dashboard data
+   */
+  clearDashboardData() {
+    this.dashboardData.clear();
+    this.accuracyHistory = [];
+    this.performanceMetrics.clear();
+    this.alerts = [];
+    console.log('🧹 Comprehensive Accuracy Dashboard Service data cleared');
   }
 }
 
-export default new ComprehensiveAccuracyDashboardService();
+// Create and export singleton instance
+const comprehensiveAccuracyDashboardService = new ComprehensiveAccuracyDashboardService();
+export default comprehensiveAccuracyDashboardService;

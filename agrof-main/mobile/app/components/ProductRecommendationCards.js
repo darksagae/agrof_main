@@ -3,12 +3,46 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIn
 import { Card, Title, Paragraph, Button } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import { productsApi } from '../services/storeApi';
-import AdvancedProductService from '../services/advancedProductService';
-import AICommandService from '../services/aiCommandService';
 import storeImageService from '../services/storeImageService';
 import OptimizedImage from './OptimizedImage';
 import { useCart } from '../contexts/CartContext';
-import { AI_API_URL, STORE_BASE_URL, AI_TIMEOUT } from '../config/apiConfig';
+import { STORE_BASE_URL } from '../config/apiConfig';
+
+// Local product recommendations based on disease type
+const getLocalProductRecommendations = async (diseaseType, cropType) => {
+  try {
+    console.log('🔍 Getting local product recommendations...');
+    
+    // Simple local product matching based on disease type
+    const diseaseProductMap = {
+      'fungal': ['Fungicide', 'Copper-based spray', 'Sulfur powder'],
+      'bacterial': ['Bactericide', 'Copper fungicide', 'Antibiotic spray'],
+      'viral': ['Virus control', 'Plant strengthener', 'Systemic treatment'],
+      'pest': ['Insecticide', 'Pest control', 'Natural predators'],
+      'nutrient': ['Fertilizer', 'Nutrient supplement', 'Soil amendment'],
+      'default': ['General treatment', 'Plant care', 'Soil health']
+    };
+    
+    const diseaseKey = diseaseType?.toLowerCase() || 'default';
+    const products = diseaseProductMap[diseaseKey] || diseaseProductMap['default'];
+    
+    // Convert to product objects
+    const productObjects = products.map((name, index) => ({
+      id: `local_${index}`,
+      name: name,
+      price: 'Contact for pricing',
+      category: 'Treatment',
+      description: `Recommended treatment for ${diseaseType || 'plant issues'}`,
+      image: null
+    }));
+    
+    console.log(`📦 Found ${productObjects.length} local products`);
+    return productObjects;
+  } catch (error) {
+    console.error('❌ Local product recommendations failed:', error);
+    return [];
+  }
+};
 
 const ProductRecommendationCards = ({ diseaseType, symptoms, cropType, onProductPress }) => {
   const [recommendedProducts, setRecommendedProducts] = useState([]);
@@ -57,84 +91,33 @@ const ProductRecommendationCards = ({ diseaseType, symptoms, cropType, onProduct
       setLoading(true);
       setError(null);
 
-      console.log('🤖 Using AI Command System for product recommendations...');
+      console.log('📦 Using simple local product recommendations...');
       
-      // Step 1: Send disease analysis to AI backend
-      const diseaseAnalysis = {
-        disease_type: diseaseType,
-        symptoms: symptoms || [],
-        severity_level: 'medium',
-        crop_type: cropType || 'Unknown',
-        timestamp: new Date().toISOString()
-      };
+      // Simple local product matching
+      const localProducts = await getLocalProductRecommendations(diseaseType, cropType);
       
-      console.log('🌾 Crop-specific analysis:', {
-        cropType: cropType,
-        diseaseType: diseaseType,
-        symptoms: symptoms
-      });
-      
-      console.log('📤 Sending disease analysis to AI:', diseaseAnalysis);
-      
-      // Step 2: Get AI command from backend (streamlined for speed)
-      let aiResult = null;
-        console.log('🤖 Attempting AI analysis...');
-        
-        const aiResponse = await fetch(`${AI_API_URL}/ai-analyze-disease`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        body: JSON.stringify({ disease_analysis: diseaseAnalysis })
-      });
-      
-      if (aiResponse.ok) {
-        aiResult = await aiResponse.json();
-        console.log('🤖 AI Analysis Result:', aiResult);
+      if (localProducts && localProducts.length > 0) {
+        console.log(`✅ Found ${localProducts.length} local products`);
+        setRecommendedProducts(localProducts);
+        return;
       } else {
-        console.log('⚠️ AI backend not available, using fallback...');
-        aiResult = null;
+        console.log('⚠️ No local products found, using fallback...');
       }
       
-      if (aiResult && aiResult.success) {
-        // Step 3: Process AI command to fetch products
-        try {
-          const commandResult = await AICommandService.processAICommand(aiResult.ai_command);
-          
-          if (commandResult.success && commandResult.products.length > 0) {
-            console.log(`✅ AI Command processed: ${commandResult.products.length} products`);
-            setRecommendedProducts(commandResult.products);
-            return; // Success, exit early
-          } else {
-            console.log('⚠️ AI Command returned no products, using fallback...');
-          }
-        } catch (commandError) {
-          console.log('⚠️ AI Command processing failed:', commandError.message);
-        }
-      }
-      
-      // If we get here, AI system failed or returned no products
-      console.log('🔄 Using intelligent fallback system...');
-      
-      // Load products immediately for faster display
-      if (cropType && cropType !== 'Unknown') {
-        console.log(`🌾 Using crop-specific products for: ${cropType}`);
-        await fetchCropSpecificProducts(cropType);
+      // Simple fallback - load general products
+      console.log('🔄 Loading general products as fallback...');
+      const fallbackProducts = await fetchGeneralProducts();
+      if (fallbackProducts && fallbackProducts.length > 0) {
+        console.log(`✅ Loaded ${fallbackProducts.length} general products`);
+        setRecommendedProducts(fallbackProducts);
       } else {
-        console.log('🔄 Using general products (no crop type detected)');
-      await fetchBasicRecommendations();
+        console.log('⚠️ No products available');
+        setError('No products available at this time');
       }
       
     } catch (error) {
-      console.error('❌ AI Command system failed:', error);
-      console.log('🆘 Using emergency fallback...');
-      
-      // Simple fallback without complex error handling
-      if (cropType && cropType !== 'Unknown') {
-        await fetchCropSpecificProducts(cropType);
-      } else {
-        await fetchBasicRecommendations();
-      }
+      console.error('❌ Product loading failed:', error);
+      setError('Unable to load products at this time');
     } finally {
       setLoading(false);
     }

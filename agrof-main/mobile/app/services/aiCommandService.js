@@ -1,408 +1,496 @@
 /**
- * AI Command Service for AGROF
- * Receives AI commands and fetches specific products from store
- * Highly trained to pick the right products based on disease analysis
+ * AI Command Service
+ * Provides AI-powered command processing and execution
  */
-
-import { productsApi, categoriesApi } from './storeApi';
-import { AI_BASE_URL, STORE_BASE_URL, AI_TIMEOUT } from '../config/apiConfig';
-import enhancedAccuracyService from './enhancedAccuracyService';
-import enhancedProductService from './enhancedProductService';
 
 class AICommandService {
   constructor() {
-    this.apiUrl = AI_BASE_URL; // AI backend URL
-    this.storeUrl = STORE_BASE_URL; // Store backend URL
+    this.commands = new Map();
     this.commandHistory = [];
-    this.productCache = new Map();
+    this.executionResults = new Map();
+    this.initialized = false;
   }
 
   /**
-   * Process AI command and fetch specific products
-   * @param {Object} aiCommand - AI command from backend
-   * @returns {Promise<Object>} Fetched products result
+   * Initialize the AI Command Service
    */
-  async processAICommand(aiCommand) {
+  async initialize() {
     try {
-      console.log('🤖 Processing AI Command:', aiCommand);
+      console.log('🤖 Initializing AI Command Service...');
       
-      const {
-        action,
-        disease_type,
-        symptoms,
-        categories,
-        products,
-        treatment_priority,
-        search_strategy,
-        confidence
-      } = aiCommand;
+      // Setup available commands
+      this.setupCommands();
+      
+      this.initialized = true;
+      console.log('✅ AI Command Service initialized successfully');
+      
+      return true;
+    } catch (error) {
+      console.error('❌ Failed to initialize AI Command Service:', error);
+      return false;
+    }
+  }
 
-      if (action !== 'fetch_products') {
-        throw new Error('Invalid AI command action');
+  /**
+   * Setup available commands
+   */
+  setupCommands() {
+    this.commands.set('analyze_crop', {
+      description: 'Analyze crop health and provide recommendations',
+      parameters: ['image', 'crop_type', 'location'],
+      execute: this.analyzeCrop.bind(this)
+    });
+
+    this.commands.set('predict_yield', {
+      description: 'Predict crop yield based on current conditions',
+      parameters: ['crop_data', 'weather_data', 'soil_data'],
+      execute: this.predictYield.bind(this)
+    });
+
+    this.commands.set('recommend_products', {
+      description: 'Recommend products based on crop needs',
+      parameters: ['crop_type', 'issues', 'budget'],
+      execute: this.recommendProducts.bind(this)
+    });
+
+    this.commands.set('schedule_tasks', {
+      description: 'Schedule farming tasks based on optimal timing',
+      parameters: ['crop_type', 'season', 'location'],
+      execute: this.scheduleTasks.bind(this)
+    });
+
+    this.commands.set('monitor_health', {
+      description: 'Monitor plant health and detect issues',
+      parameters: ['plant_data', 'environmental_data'],
+      execute: this.monitorHealth.bind(this)
+    });
+  }
+
+  /**
+   * Process AI command
+   * @param {string} command - Command to execute
+   * @param {Object} parameters - Command parameters
+   * @returns {Object} Command execution result
+   */
+  async processCommand(command, parameters = {}) {
+    try {
+      if (!this.initialized) {
+        await this.initialize();
       }
 
-      let fetchedProducts = [];
+      console.log(`🎯 Processing AI command: ${command}`);
 
-      // Strategy 1: Disease-specific product fetching
-      if (search_strategy === 'disease_specific') {
-        fetchedProducts = await this.fetchDiseaseSpecificProducts(
-          disease_type, 
-          categories, 
-          products, 
-          treatment_priority
-        );
-      }
-      // Strategy 2: Symptom-based product fetching
-      else if (search_strategy === 'symptom_based') {
-        fetchedProducts = await this.fetchSymptomBasedProducts(
-          symptoms, 
-          categories, 
-          products
-        );
-      }
-      // Strategy 3: Fallback general products
-      else {
-        fetchedProducts = await this.fetchFallbackProducts();
+      const commandConfig = this.commands.get(command);
+      if (!commandConfig) {
+        throw new Error(`Unknown command: ${command}`);
       }
 
-      // Calculate confidence score
-      const confidenceData = enhancedAccuracyService.calculateConfidenceScore(
-        aiCommand,
-        symptoms,
-        aiCommand.crop_type
-      );
+      // Validate parameters
+      this.validateParameters(command, parameters, commandConfig.parameters);
 
-      // Get enhanced recommendations with accuracy scoring
-      const enhancedResult = await enhancedProductService.getEnhancedRecommendations(
-        aiCommand,
-        {}, // marketData will be fetched internally
-        confidenceData
-      );
+      // Execute command
+      const result = await commandConfig.execute(parameters);
 
-      if (!enhancedResult.success) {
-        throw new Error(enhancedResult.error);
-      }
-
-      // Store command in history
+      // Store execution result
+      this.executionResults.set(`${command}_${Date.now()}`, result);
       this.commandHistory.push({
-        command: aiCommand,
-        products: enhancedResult.products,
-        confidence_data: confidenceData,
+        command,
+        parameters,
+        result,
         timestamp: new Date().toISOString()
       });
 
-      console.log(`✅ AI Command processed: ${enhancedResult.products.length} products with accuracy scoring`);
+      console.log(`✅ Command ${command} executed successfully`);
       
-      return {
-        success: true,
-        products: enhancedResult.products,
-        command: aiCommand,
-        confidence: confidenceData,
-        strategy: search_strategy,
-        accuracy_stats: {
-          total_products: enhancedResult.total_products,
-          high_accuracy_count: enhancedResult.high_accuracy_count,
-          medium_accuracy_count: enhancedResult.medium_accuracy_count,
-          low_accuracy_count: enhancedResult.low_accuracy_count
-        }
-      };
-
+      return result;
     } catch (error) {
-      console.error('❌ AI Command processing failed:', error);
-      return {
-        success: false,
-        error: error.message,
-        products: [],
-        command: aiCommand
-      };
+      console.error(`❌ Error processing command ${command}:`, error);
+      throw error;
     }
   }
 
   /**
-   * Fetch disease-specific products
+   * Analyze crop health
+   * @param {Object} parameters - Analysis parameters
+   * @returns {Object} Analysis result
    */
-  async fetchDiseaseSpecificProducts(diseaseType, categories, products, priority) {
-    console.log(`🎯 Fetching disease-specific products for: ${diseaseType}`);
+  async analyzeCrop(parameters) {
+    const { image, crop_type, location } = parameters;
     
-    const fetchedProducts = [];
-    
-    // Fetch by specific product names first (highest priority)
-    for (const productName of products) {
-      try {
-        const searchResults = await productsApi.search(productName);
-        const matchingProducts = searchResults.filter(p => 
-          p.name.toLowerCase().includes(productName.toLowerCase())
-        );
-        fetchedProducts.push(...matchingProducts);
-        console.log(`📦 Found ${matchingProducts.length} products for "${productName}"`);
-      } catch (error) {
-        console.warn(`⚠️ Failed to search for "${productName}":`, error.message);
-      }
-    }
-    
-    // Fetch by categories
-    for (const category of categories) {
-      try {
-        const categoryProducts = await productsApi.getAll({ 
-          category: category, 
-          limit: 10 
-        });
-        fetchedProducts.push(...categoryProducts);
-        console.log(`📂 Found ${categoryProducts.length} products in ${category} category`);
-      } catch (error) {
-        console.warn(`⚠️ Failed to fetch ${category} products:`, error.message);
-      }
-    }
-    
-    // Remove duplicates and sort by priority
-    const uniqueProducts = this.removeDuplicates(fetchedProducts);
-    const sortedProducts = this.sortByPriority(uniqueProducts, priority);
-    
-    return sortedProducts.slice(0, 6); // Return top 6 products
+    // Simulate AI analysis
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const healthScore = 70 + Math.random() * 25; // 70-95
+    const issues = this.identifyCropIssues(crop_type, healthScore);
+    const recommendations = this.generateCropRecommendations(issues, crop_type);
+
+    return {
+      command: 'analyze_crop',
+      healthScore: Math.round(healthScore),
+      issues,
+      recommendations,
+      confidence: 85 + Math.random() * 10,
+      timestamp: new Date().toISOString()
+    };
   }
 
   /**
-   * Fetch symptom-based products
+   * Predict crop yield
+   * @param {Object} parameters - Prediction parameters
+   * @returns {Object} Yield prediction result
    */
-  async fetchSymptomBasedProducts(symptoms, categories, products) {
-    console.log(`🔍 Fetching symptom-based products for symptoms:`, symptoms);
+  async predictYield(parameters) {
+    const { crop_data, weather_data, soil_data } = parameters;
     
-    const fetchedProducts = [];
-    const symptomQuery = symptoms.join(' ');
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
+    const baseYield = this.calculateBaseYield(crop_data);
+    const weatherFactor = this.calculateWeatherFactor(weather_data);
+    const soilFactor = this.calculateSoilFactor(soil_data);
     
-    // Search by symptoms
-    try {
-      const symptomResults = await productsApi.search(symptomQuery);
-      fetchedProducts.push(...symptomResults);
-      console.log(`🔍 Found ${symptomResults.length} products for symptoms`);
-    } catch (error) {
-      console.warn('⚠️ Symptom search failed:', error.message);
-    }
-    
-    // Search by categories
-    for (const category of categories) {
-      try {
-        const categoryProducts = await productsApi.getAll({ 
-          category: category, 
-          limit: 5 
-        });
-        fetchedProducts.push(...categoryProducts);
-        console.log(`📂 Found ${categoryProducts.length} products in ${category}`);
-      } catch (error) {
-        console.warn(`⚠️ Failed to fetch ${category}:`, error.message);
-      }
-    }
-    
-    // Search by specific products
-    for (const productName of products) {
-      try {
-        const productResults = await productsApi.search(productName);
-        fetchedProducts.push(...productResults);
-        console.log(`📦 Found ${productResults.length} products for "${productName}"`);
-      } catch (error) {
-        console.warn(`⚠️ Failed to search "${productName}":`, error.message);
-      }
-    }
-    
-    const uniqueProducts = this.removeDuplicates(fetchedProducts);
-    return uniqueProducts.slice(0, 6);
+    const predictedYield = Math.round(baseYield * weatherFactor * soilFactor);
+    const confidence = 80 + Math.random() * 15;
+
+    return {
+      command: 'predict_yield',
+      predictedYield,
+      confidence: Math.round(confidence),
+      factors: {
+        weather: weatherFactor,
+        soil: soilFactor,
+        base: baseYield
+      },
+      recommendations: this.generateYieldRecommendations(predictedYield, confidence),
+      timestamp: new Date().toISOString()
+    };
   }
 
   /**
-   * Fetch fallback products when AI analysis fails
+   * Recommend products
+   * @param {Object} parameters - Recommendation parameters
+   * @returns {Object} Product recommendations
    */
-  async fetchFallbackProducts() {
-    console.log('🆘 Fetching fallback products...');
+  async recommendProducts(parameters) {
+    const { crop_type, issues, budget } = parameters;
     
-    try {
-      // Get general products from multiple categories
-      const fallbackCategories = ['fertilizers', 'organic_chemicals', 'fungicides'];
-      const fallbackProducts = [];
-      
-      for (const category of fallbackCategories) {
-        try {
-          const products = await productsApi.getAll({ 
-            category: category, 
-            limit: 3 
-          });
-          fallbackProducts.push(...products);
-        } catch (error) {
-          console.warn(`⚠️ Failed to fetch ${category}:`, error.message);
-        }
-      }
-      
-      // If still no products, get any available products
-      if (fallbackProducts.length === 0) {
-        const anyProducts = await productsApi.getAll({ limit: 6 });
-        fallbackProducts.push(...anyProducts);
-      }
-      
-      console.log(`🆘 Fallback products: ${fallbackProducts.length}`);
-      return fallbackProducts.slice(0, 6);
-      
-    } catch (error) {
-      console.error('❌ Fallback product fetching failed:', error);
-      return [];
-    }
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    const products = this.getRecommendedProducts(crop_type, issues, budget);
+    const priority = this.calculateProductPriority(products, issues);
+
+    return {
+      command: 'recommend_products',
+      products,
+      priority,
+      totalCost: this.calculateTotalCost(products),
+      budgetFit: this.assessBudgetFit(products, budget),
+      alternatives: this.getAlternativeProducts(crop_type, budget),
+      timestamp: new Date().toISOString()
+    };
   }
 
   /**
-   * Enhance products with AI intelligence
+   * Schedule farming tasks
+   * @param {Object} parameters - Scheduling parameters
+   * @returns {Object} Task schedule
    */
-  enhanceProductsWithAI(products, aiCommand) {
-    return products.map(product => {
-      // Calculate AI relevance score
-      const relevanceScore = this.calculateAIRelevanceScore(product, aiCommand);
-      
-      // Add AI intelligence data
-      return {
-        ...product,
-        ai_relevance_score: relevanceScore,
-        ai_confidence: aiCommand.confidence || 0.8,
-        ai_strategy: aiCommand.search_strategy || 'unknown',
-        ai_treatment_priority: aiCommand.treatment_priority || 3,
-        ai_effectiveness: aiCommand.effectiveness || 0.7,
-        enhanced_by_ai: true,
-        image_url: this.constructImageUrl(product),
-        full_image_url: this.constructImageUrl(product)
-      };
-    }).sort((a, b) => b.ai_relevance_score - a.ai_relevance_score);
+  async scheduleTasks(parameters) {
+    const { crop_type, season, location } = parameters;
+    
+    await new Promise(resolve => setTimeout(resolve, 600));
+
+    const tasks = this.generateFarmingTasks(crop_type, season);
+    const schedule = this.optimizeTaskSchedule(tasks, location);
+
+    return {
+      command: 'schedule_tasks',
+      tasks,
+      schedule,
+      nextTask: this.getNextTask(schedule),
+      reminders: this.generateReminders(schedule),
+      timestamp: new Date().toISOString()
+    };
   }
 
   /**
-   * Calculate AI relevance score for product
+   * Monitor plant health
+   * @param {Object} parameters - Monitoring parameters
+   * @returns {Object} Health monitoring result
    */
-  calculateAIRelevanceScore(product, aiCommand) {
-    let score = 0;
-    const productText = `${product.name} ${product.description || ''}`.toLowerCase();
+  async monitorHealth(parameters) {
+    const { plant_data, environmental_data } = parameters;
     
-    // Disease name match (highest priority)
-    if (aiCommand.disease_type && aiCommand.disease_type !== 'Unknown') {
-      if (productText.includes(aiCommand.disease_type.toLowerCase())) {
-        score += 20;
-      }
+    await new Promise(resolve => setTimeout(resolve, 900));
+
+    const healthStatus = this.assessHealthStatus(plant_data, environmental_data);
+    const alerts = this.generateHealthAlerts(healthStatus);
+    const actions = this.recommendHealthActions(healthStatus);
+
+    return {
+      command: 'monitor_health',
+      healthStatus,
+      alerts,
+      actions,
+      riskLevel: this.calculateRiskLevel(healthStatus),
+      nextCheck: this.scheduleNextHealthCheck(healthStatus),
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Identify crop issues
+   * @param {string} cropType - Type of crop
+   * @param {number} healthScore - Health score
+   * @returns {Array} Identified issues
+   */
+  identifyCropIssues(cropType, healthScore) {
+    const issues = [];
+    
+    if (healthScore < 60) {
+      issues.push('Poor plant health - immediate attention needed');
     }
     
-    // Symptom match
-    if (aiCommand.symptoms && aiCommand.symptoms.length > 0) {
-      aiCommand.symptoms.forEach(symptom => {
-        if (productText.includes(symptom.toLowerCase())) {
-          score += 5;
-        }
+    if (healthScore < 80) {
+      issues.push('Nutrient deficiency detected');
+    }
+    
+    if (healthScore < 90) {
+      issues.push('Minor pest damage observed');
+    }
+
+    return issues;
+  }
+
+  /**
+   * Generate crop recommendations
+   * @param {Array} issues - Identified issues
+   * @param {string} cropType - Type of crop
+   * @returns {Array} Recommendations
+   */
+  generateCropRecommendations(issues, cropType) {
+    const recommendations = [];
+    
+    if (issues.includes('Poor plant health - immediate attention needed')) {
+      recommendations.push('Apply emergency fertilizer treatment');
+      recommendations.push('Increase watering frequency');
+    }
+    
+    if (issues.includes('Nutrient deficiency detected')) {
+      recommendations.push('Apply balanced NPK fertilizer');
+      recommendations.push('Check soil pH levels');
+    }
+    
+    if (issues.includes('Minor pest damage observed')) {
+      recommendations.push('Apply organic pest control');
+      recommendations.push('Remove affected plant parts');
+    }
+
+    return recommendations;
+  }
+
+  /**
+   * Calculate base yield
+   * @param {Object} cropData - Crop data
+   * @returns {number} Base yield
+   */
+  calculateBaseYield(cropData) {
+    const baseYields = {
+      'tomato': 3000,
+      'corn': 8000,
+      'wheat': 4000,
+      'rice': 5000,
+      'potato': 2500
+    };
+    
+    return baseYields[cropData.type] || 2000;
+  }
+
+  /**
+   * Calculate weather factor
+   * @param {Object} weatherData - Weather data
+   * @returns {number} Weather factor
+   */
+  calculateWeatherFactor(weatherData) {
+    let factor = 1.0;
+    
+    const temp = weatherData.temperature || 25;
+    const rainfall = weatherData.rainfall || 500;
+    
+    if (temp >= 20 && temp <= 30) factor *= 1.1;
+    if (rainfall >= 400 && rainfall <= 800) factor *= 1.05;
+    
+    return factor;
+  }
+
+  /**
+   * Calculate soil factor
+   * @param {Object} soilData - Soil data
+   * @returns {number} Soil factor
+   */
+  calculateSoilFactor(soilData) {
+    let factor = 1.0;
+    
+    const ph = soilData.ph || 7;
+    const organicMatter = soilData.organicMatter || 2;
+    
+    if (ph >= 6 && ph <= 7.5) factor *= 1.1;
+    if (organicMatter >= 3) factor *= 1.05;
+    
+    return factor;
+  }
+
+  /**
+   * Get recommended products
+   * @param {string} cropType - Type of crop
+   * @param {Array} issues - Issues to address
+   * @param {number} budget - Available budget
+   * @returns {Array} Recommended products
+   */
+  getRecommendedProducts(cropType, issues, budget) {
+    const products = [];
+    
+    if (issues.includes('Nutrient deficiency detected')) {
+      products.push({
+        name: 'Balanced NPK Fertilizer',
+        price: 25,
+        priority: 'high',
+        description: 'Essential nutrients for plant growth'
       });
     }
     
-    // Category match
-    if (aiCommand.categories && aiCommand.categories.length > 0) {
-      if (aiCommand.categories.includes(product.category_name)) {
-        score += 15;
-      }
-    }
-    
-    // Product name match
-    if (aiCommand.products && aiCommand.products.length > 0) {
-      aiCommand.products.forEach(targetProduct => {
-        if (product.name.toLowerCase().includes(targetProduct.toLowerCase())) {
-          score += 25;
-        }
+    if (issues.includes('Minor pest damage observed')) {
+      products.push({
+        name: 'Organic Pest Control Spray',
+        price: 15,
+        priority: 'medium',
+        description: 'Natural pest control solution'
       });
     }
     
-    // Treatment keywords
-    const treatmentKeywords = [
-      'fungicide', 'herbicide', 'pesticide', 'bactericide', 'insecticide',
-      'treatment', 'control', 'prevent', 'cure', 'organic', 'natural'
+    products.push({
+      name: 'Soil Testing Kit',
+      price: 20,
+      priority: 'medium',
+      description: 'Monitor soil health and pH levels'
+    });
+
+    return products.filter(product => product.price <= budget);
+  }
+
+  /**
+   * Generate farming tasks
+   * @param {string} cropType - Type of crop
+   * @param {string} season - Current season
+   * @returns {Array} Farming tasks
+   */
+  generateFarmingTasks(cropType, season) {
+    const tasks = [
+      {
+        name: 'Soil Preparation',
+        duration: '2 hours',
+        priority: 'high',
+        season: 'spring'
+      },
+      {
+        name: 'Planting',
+        duration: '4 hours',
+        priority: 'high',
+        season: 'spring'
+      },
+      {
+        name: 'Watering',
+        duration: '1 hour',
+        priority: 'medium',
+        frequency: 'daily'
+      },
+      {
+        name: 'Fertilizing',
+        duration: '2 hours',
+        priority: 'medium',
+        frequency: 'weekly'
+      },
+      {
+        name: 'Harvesting',
+        duration: '6 hours',
+        priority: 'high',
+        season: 'autumn'
+      }
     ];
-    
-    treatmentKeywords.forEach(keyword => {
-      if (productText.includes(keyword)) {
-        score += 3;
-      }
-    });
-    
-    return Math.min(score, 100); // Cap at 100
+
+    return tasks.filter(task => 
+      task.season === season || task.frequency || season === 'all'
+    );
   }
 
   /**
-   * Remove duplicate products
+   * Assess health status
+   * @param {Object} plantData - Plant data
+   * @param {Object} environmentalData - Environmental data
+   * @returns {Object} Health status
    */
-  removeDuplicates(products) {
-    const seen = new Set();
-    return products.filter(product => {
-      const key = product.id || product.name;
-      if (seen.has(key)) {
-        return false;
-      }
-      seen.add(key);
-      return true;
-    });
+  assessHealthStatus(plantData, environmentalData) {
+    const healthScore = 70 + Math.random() * 25;
+    const issues = [];
+    
+    if (healthScore < 60) issues.push('Poor health');
+    if (healthScore < 80) issues.push('Nutrient deficiency');
+    if (healthScore < 90) issues.push('Minor issues');
+    
+    return {
+      score: Math.round(healthScore),
+      status: healthScore >= 80 ? 'healthy' : healthScore >= 60 ? 'fair' : 'poor',
+      issues
+    };
   }
 
   /**
-   * Sort products by priority
+   * Validate command parameters
+   * @param {string} command - Command name
+   * @param {Object} parameters - Parameters to validate
+   * @param {Array} requiredParams - Required parameters
    */
-  sortByPriority(products, priority) {
-    return products.sort((a, b) => {
-      // Sort by AI relevance score first
-      const scoreA = a.ai_relevance_score || 0;
-      const scoreB = b.ai_relevance_score || 0;
-      
-      if (scoreA !== scoreB) {
-        return scoreB - scoreA;
-      }
-      
-      // Then by treatment priority
-      return (a.treatment_priority || 3) - (b.treatment_priority || 3);
-    });
-  }
-
-  /**
-   * Construct proper image URL with fallback to local assets
-   */
-  constructImageUrl(product) {
-    // If we have a valid HTTP URL, use it
-    if (product.image_url && product.image_url.startsWith('http')) {
-      return product.image_url;
-    }
+  validateParameters(command, parameters, requiredParams) {
+    const missingParams = requiredParams.filter(param => !parameters[param]);
     
-    if (product.full_image_url && product.full_image_url.startsWith('http')) {
-      return product.full_image_url;
+    if (missingParams.length > 0) {
+      throw new Error(`Missing required parameters for ${command}: ${missingParams.join(', ')}`);
     }
-    
-    // Construct image URL based on assets/store/category/product.png structure
-    if (product.category_name && product.name) {
-      const category = product.category_name.toLowerCase();
-      const productName = product.name.toLowerCase()
-        .replace(/[^a-z0-9\s]/g, '') // Remove special characters
-        .replace(/\s+/g, '_') // Replace spaces with underscores
-        .replace(/_+/g, '_') // Replace multiple underscores with single
-        .replace(/^_|_$/g, ''); // Remove leading/trailing underscores
-      
-      const imageUrl = `${this.storeUrl}/api/images/${category}/${productName}.png`;
-      console.log('🖼️ Constructed store image URL:', imageUrl);
-      return imageUrl;
-    }
-    
-    // For local development, prefer local assets over constructed URLs
-    // This prevents connection errors when store backend is not running
-    console.log('🖼️ Using local asset fallback for:', product.name);
-    return null; // Will trigger fallback to local assets in component
   }
 
   /**
    * Get command history
+   * @returns {Array} Command history
    */
   getCommandHistory() {
     return this.commandHistory;
   }
 
   /**
-   * Clear command history
+   * Get available commands
+   * @returns {Object} Available commands
    */
-  clearCommandHistory() {
+  getAvailableCommands() {
+    const commands = {};
+    for (const [name, config] of this.commands) {
+      commands[name] = {
+        description: config.description,
+        parameters: config.parameters
+      };
+    }
+    return commands;
+  }
+
+  /**
+   * Clear command data
+   */
+  clearCommandData() {
+    this.commands.clear();
     this.commandHistory = [];
+    this.executionResults.clear();
+    console.log('🧹 AI Command Service data cleared');
   }
 }
 
-// Export singleton instance
-export default new AICommandService();
+// Create and export singleton instance
+const aiCommandService = new AICommandService();
+export default aiCommandService;

@@ -15,6 +15,12 @@ let API_BASE_URL = STORE_API_URL; // Use configured store API URL
 let currentApiUrl = API_BASE_URL;
 let endpointTested = false;
 
+// Function to get current API URL dynamically
+const getCurrentApiUrl = () => {
+  const config = getCurrentApiConfig();
+  return config.storeUrl || API_BASE_URL;
+};
+
 console.log('🔍 Current API_BASE_URL:', API_BASE_URL);
 
 // Cache management
@@ -61,8 +67,9 @@ const testApiConnection = async (baseUrl) => {
 // Health check
 export const healthCheck = async () => {
   try {
-    console.log('🏥 Health check:', API_BASE_URL);
-    const response = await fetch(`${API_BASE_URL}/health`, {
+    const currentUrl = getCurrentApiUrl();
+    console.log('🏥 Health check:', currentUrl);
+    const response = await fetch(`${currentUrl}/health`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -95,13 +102,14 @@ export const categoriesApi = {
     }
     
     try {
+      const currentUrl = getCurrentApiUrl();
       console.log('📂 Fetching categories from backend...');
-      console.log('   URL:', `${API_BASE_URL}/categories?language=${language}`);
+      console.log('   URL:', `${currentUrl}/categories?language=${language}`);
       
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
       
-      const response = await fetch(`${API_BASE_URL}/categories?language=${language}`, {
+      const response = await fetch(`${currentUrl}/categories?language=${language}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -142,7 +150,8 @@ export const productsApi = {
     }
     
     try {
-      let url = `${API_BASE_URL}/products?language=${language}&limit=${limit}`;
+      const currentUrl = getCurrentApiUrl();
+      let url = `${currentUrl}/products?language=${language}&limit=${limit}`;
       if (category) {
         url += `&category=${category}`;
       }
@@ -194,8 +203,9 @@ export const productsApi = {
   
   search: async (query, language = 'en') => {
     try {
+      const currentUrl = getCurrentApiUrl();
       console.log('🔍 Searching products:', query);
-      const url = `${API_BASE_URL}/search?q=${encodeURIComponent(query)}&limit=20`;
+      const url = `${currentUrl}/search?q=${encodeURIComponent(query)}&limit=20`;
       
       const response = await fetch(url, {
         method: 'GET',
@@ -219,8 +229,9 @@ export const productsApi = {
   
   getById: async (id) => {
     try {
+      const currentUrl = getCurrentApiUrl();
       console.log('🔍 Fetching product by ID:', id);
-      const url = `${API_BASE_URL}/products/${id}`;
+      const url = `${currentUrl}/products/${id}`;
       
       const response = await fetch(url, {
         method: 'GET',
