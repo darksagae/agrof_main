@@ -36,6 +36,9 @@ const client = new Client({
     puppeteer: config.whatsapp.puppeteer,
     // Use LocalAuth for stable session persistence on Render
     authStrategy: new LocalAuth({ dataPath: sessionDir }),
+    // Pin WhatsApp Web version to avoid breaking injection changes
+    webVersion: '2.2412.54',
+    webVersionCache: { type: 'memory' },
     // NEVER restart on auth failure - keep trying to reconnect
     restartOnAuthFail: false,
     // NO QR code timeout - keep trying forever
