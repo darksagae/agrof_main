@@ -107,11 +107,16 @@ class AdvancedAnalyticsService {
     try {
       console.log('🔍 Generating analytics insights...');
 
+      const summary = await this.generateSummary(filters);
+      const trends = await this.analyzeTrends(filters);
+      const patterns = await this.identifyPatterns(filters);
+      const recommendations = await this.generateRecommendations({ summary, trends });
+
       const insights = {
-        summary: await this.generateSummary(filters),
-        trends: await this.analyzeTrends(filters),
-        patterns: await this.identifyPatterns(filters),
-        recommendations: await this.generateRecommendations(filters),
+        summary,
+        trends,
+        patterns,
+        recommendations,
         timestamp: new Date().toISOString()
       };
 
@@ -199,12 +204,13 @@ class AdvancedAnalyticsService {
    * @param {Object} filters - Analysis filters
    * @returns {Array} Recommendations
    */
-  async generateRecommendations(filters) {
+  async generateRecommendations(ctx = {}) {
     const recommendations = [];
-    const insights = await this.generateInsights(filters);
+    const summary = ctx.summary || { averageSessionDuration: 0, conversionRate: 0 };
+    const trends = ctx.trends || { performanceTrend: 1 };
 
     // User engagement recommendations
-    if (insights.summary.averageSessionDuration < 300) { // Less than 5 minutes
+    if (summary.averageSessionDuration < 300) { // Less than 5 minutes
       recommendations.push({
         type: 'engagement',
         priority: 'high',
@@ -219,7 +225,7 @@ class AdvancedAnalyticsService {
     }
 
     // Performance recommendations
-    if (insights.trends.performanceTrend < 0.8) {
+    if (trends.performanceTrend < 0.8) {
       recommendations.push({
         type: 'performance',
         priority: 'medium',
@@ -234,7 +240,7 @@ class AdvancedAnalyticsService {
     }
 
     // Business recommendations
-    if (insights.summary.conversionRate < 0.05) { // Less than 5%
+    if (summary.conversionRate < 0.05) { // Less than 5%
       recommendations.push({
         type: 'business',
         priority: 'high',
@@ -401,10 +407,16 @@ class AdvancedAnalyticsService {
       monthlyData[month]++;
     });
 
+    const keys = Object.keys(monthlyData);
+    if (keys.length === 0) {
+      return {
+        peakMonth: null,
+        seasonalVariation: 0
+      };
+    }
+
     return {
-      peakMonth: Object.keys(monthlyData).reduce((a, b) => 
-        monthlyData[a] > monthlyData[b] ? a : b
-      ),
+      peakMonth: keys.reduce((a, b) => monthlyData[a] > monthlyData[b] ? a : b),
       seasonalVariation: this.calculateSeasonalVariation(monthlyData)
     };
   }

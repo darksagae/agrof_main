@@ -72,7 +72,6 @@ export const CartProvider = ({ children }) => {
 
   const loadCartItems = async () => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
       const items = await cartApi.getItems();
       dispatch({ type: 'SET_ITEMS', payload: items });
     } catch (error) {
@@ -83,14 +82,38 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (product) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
+      // Extract price from complex product structure
+      let normalizedPrice = 0;
       
-      // Add to backend
-      await cartApi.addItem(product.id, 1);
+      if (product.price) {
+        // Simple price field exists
+        normalizedPrice = typeof product.price === 'string'
+          ? parseFloat(product.price.replace(/[^\d.]/g, ''))
+          : Number(product.price || 0);
+      } else if (product.packages && product.packages.length > 0) {
+        // Extract price from first package, first tier
+        const firstPackage = product.packages[0];
+        if (firstPackage.tiers && firstPackage.tiers.length > 0) {
+          normalizedPrice = firstPackage.tiers[0].price || 0;
+        }
+      } else if (product.selling_price) {
+        // Use selling_price if available
+        normalizedPrice = typeof product.selling_price === 'string'
+          ? parseFloat(product.selling_price.replace(/[^\d.]/g, ''))
+          : Number(product.selling_price || 0);
+      }
+
+      // Generate unique cart item ID
+      const cartItemId = `${product.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
-      // Reload cart items
-      await loadCartItems();
-      
+      // Optimistic update: update UI immediately
+      dispatch({ type: 'ADD_TO_CART', payload: { ...product, id: cartItemId, price: normalizedPrice, quantity: product.quantity || 1 } });
+
+      // Persist in background (best-effort)
+      cartApi.addItem(product.id, product.quantity || 1).catch((e) => {
+        console.warn('Cart persistence failed (add):', e.message);
+      });
+
       return { success: true };
     } catch (error) {
       console.error('Failed to add item to cart:', error);
@@ -101,13 +124,13 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (itemId) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      
-      // Remove from backend
-      await cartApi.removeItem(itemId);
-      
-      // Update local state
+      // Optimistic remove: update UI immediately
       dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
+
+      // Persist in background (best-effort)
+      cartApi.removeItem(itemId).catch((e) => {
+        console.warn('Cart persistence failed (remove):', e.message);
+      });
       
       return { success: true };
     } catch (error) {
@@ -119,13 +142,13 @@ export const CartProvider = ({ children }) => {
 
   const updateQuantity = async (itemId, quantity) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      
-      // Update in backend
-      await cartApi.updateQuantity(itemId, quantity);
-      
-      // Update local state
+      // Optimistic update
       dispatch({ type: 'UPDATE_QUANTITY', payload: { id: itemId, quantity } });
+
+      // Persist in background
+      cartApi.updateQuantity(itemId, quantity).catch((e) => {
+        console.warn('Cart persistence failed (update quantity):', e.message);
+      });
       
       return { success: true };
     } catch (error) {
@@ -137,13 +160,13 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = async () => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      
-      // Clear backend cart
-      await cartApi.clear();
-      
-      // Update local state
+      // Optimistic clear
       dispatch({ type: 'CLEAR_CART' });
+
+      // Persist in background
+      cartApi.clear().catch((e) => {
+        console.warn('Cart persistence failed (clear):', e.message);
+      });
       
       return { success: true };
     } catch (error) {
@@ -155,9 +178,45 @@ export const CartProvider = ({ children }) => {
 
   const getTotalPrice = () => {
     return state.items.reduce((total, item) => {
-      const price = parseFloat(item.price?.replace(/[^\d.]/g, '') || 0);
-      return total + (price * item.quantity);
+      // Extract price from complex product structure
+      let price = 0;
+      
+      if (item.price) {
+        // Simple price field exists
+        price = parseFloat(item.price || 0);
+      } else if (item.packages && item.packages.length > 0) {
+        // Extract price from first package, first tier
+        const firstPackage = item.packages[0];
+        if (firstPackage.tiers && firstPackage.tiers.length > 0) {
+          price = firstPackage.tiers[0].price || 0;
+        }
+      } else if (item.selling_price) {
+        // Use selling_price if available
+        price = parseFloat(item.selling_price || 0);
+      }
+      
+      return total + (price * (item.quantity || 1));
     }, 0);
+  };
+
+  const getDeliveryFee = () => {
+    // Calculate delivery fee based on product weight
+    let totalWeight = 0;
+    state.items.forEach(item => {
+      const weight = parseFloat(item.weight || item.quantity_in_stock || 1); // Default to 1 if no weight
+      totalWeight += weight * item.quantity;
+    });
+    
+    // Heavy products (>10kg total) = 18000, Light products = 5000
+    return totalWeight > 10 ? 18000 : 5000;
+  };
+
+  const getSubtotal = () => {
+    return getTotalPrice();
+  };
+
+  const getGrandTotal = () => {
+    return getSubtotal() + getDeliveryFee();
   };
 
   const getTotalItems = () => {
@@ -184,6 +243,9 @@ export const CartProvider = ({ children }) => {
     loadCartItems,
     getTotalPrice,
     getTotalItems,
+    getDeliveryFee,
+    getSubtotal,
+    getGrandTotal,
     isInCart,
     getItemQuantity,
   };

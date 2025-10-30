@@ -29,24 +29,38 @@ const config = {
     // Session persistence
     sessionDir: './whatsapp-session',
     
-    // Reconnection settings
-    maxReconnectAttempts: 5,
-    reconnectDelay: 30000, // 30 seconds
+    // Reconnection settings - INFINITE RECONNECTION for persistent connection
+    maxReconnectAttempts: Infinity, // Never stop trying to reconnect
+    reconnectDelay: 10000, // 10 seconds between attempts
     
-    // QR code timeout
-    qrTimeoutMs: 60000,
+    // QR code timeout - Longer timeout for persistent connection
+    qrTimeoutMs: 0, // No timeout - keep trying forever
     
-    // Puppeteer options
+    // Puppeteer options for persistent connection
     puppeteer: {
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--disable-gpu',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-renderer-backgrounding'
+      ]
     }
   },
   
   // Admin Configuration
   admin: {
+    // Primary admin number - ALWAYS ALLOWED
+    primaryNumber: '256705223777', // Your number with country code
+    
     // Allow all numbers for testing (empty array = no restrictions)
-    allowedNumbers: [],
+    allowedNumbers: ['256705223777'], // Your number is always allowed
     
     // Secret triggers
     triggers: ['godeye', 'void', 'destiny', 'oracle', 'guardian', 'phoenix', 'nexus', 'cloud']

@@ -347,6 +347,92 @@ class SupabaseService {
     }
   }
 
+  // Ensure user exists in Supabase (create if not exists)
+  async ensureUserExists(user) {
+    try {
+      console.log('🔍 Ensuring user exists in Supabase for:', user.uid);
+      
+      // Check if user exists by UID
+      const { data: existingUser, error: userCheckError } = await supabase
+        .from('users')
+        .select('id, user_type, email')
+        .eq('id', user.uid)
+        .single();
+
+      if (userCheckError && userCheckError.code !== 'PGRST116') {
+        throw userCheckError;
+      }
+
+      // If user exists by UID, return success
+      if (existingUser) {
+        console.log('✅ User exists in Supabase with matching UID');
+        return { success: true, created: false, userType: existingUser.user_type };
+      }
+
+      // User doesn't exist by UID, check if email exists with different UID
+      console.log('👤 User not found by UID, checking for email conflict...');
+      const { data: emailUser, error: emailCheckError } = await supabase
+        .from('users')
+        .select('id, user_type, email')
+        .eq('email', user.email)
+        .single();
+
+      if (emailCheckError && emailCheckError.code !== 'PGRST116') {
+        throw emailCheckError;
+      }
+
+      // If email exists with different UID, return the existing user's info
+      if (emailUser) {
+        console.log('⚠️ Email exists with different UID, using existing user');
+        console.log('   Existing UID:', emailUser.id);
+        console.log('   New UID:', user.uid);
+        console.log('   This is likely due to user re-registering or UID mismatch');
+        
+        return { 
+          success: true, 
+          created: false, 
+          userType: emailUser.user_type,
+          existingUserId: emailUser.id,
+          warning: 'Using existing account with different UID'
+        };
+      }
+
+      // Email doesn't exist, create new user
+      console.log('👤 Creating new user record...');
+      const { error: createUserError } = await supabase
+        .from('users')
+        .insert({
+          id: user.uid,
+          email: user.email,
+          full_name: user.fullName || user.displayName || user.email?.split('@')[0] || 'AGROF User',
+          username: user.username || user.displayName || user.email?.split('@')[0] || 'agrof_user',
+          phone: user.phone || '',
+          profile_photo: user.photoURL || null,
+          agrof_balance: 0,
+          email_verified: user.emailVerified || false,
+          firebase_auth: true,
+          contact_info: {
+            email: user.email,
+            phone: user.phone || '',
+            fullName: user.fullName || user.displayName || user.email?.split('@')[0] || 'AGROF User'
+          },
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+
+      if (createUserError) {
+        console.error('❌ Error creating user:', createUserError);
+        throw createUserError;
+      }
+
+      console.log('✅ New user created in Supabase');
+      return { success: true, created: true };
+    } catch (error) {
+      console.error('❌ Error ensuring user exists:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
   // Get all users from Supabase
   async getAllUsers() {
     try {

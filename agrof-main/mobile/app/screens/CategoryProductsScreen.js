@@ -2,11 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { productsApi } from '../services/storeApi';
+import { useSafeTranslation } from '../i18n';
 import storeImageService from '../services/storeImageService';
 import OptimizedImage from '../components/OptimizedImage';
 import ProductDetailScreen from './ProductDetailScreen';
 
 const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) => {
+  const { t } = useSafeTranslation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -67,7 +69,7 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
           {item.name}
         </Text>
         <Text style={styles.productPrice}>
-          {item.price || 'Contact for pricing'}
+          {item.price || t('store.contactForPricing')}
         </Text>
         <Text style={styles.productCategory}>
           {item.category_display_name || categoryDisplayName}
@@ -79,12 +81,12 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
       <MaterialIcons name="inventory" size={80} color="#ccc" />
-      <Text style={styles.emptyTitle}>No Products Found</Text>
+      <Text style={styles.emptyTitle}>{t('store.noProductsTitle')}</Text>
       <Text style={styles.emptySubtitle}>
-        No products available in {categoryDisplayName} category.
+        {t('store.noProductsInCategory', { category: categoryDisplayName })}
       </Text>
       <TouchableOpacity style={styles.retryButton} onPress={loadCategoryProducts}>
-        <Text style={styles.retryButtonText}>Retry</Text>
+        <Text style={styles.retryButtonText}>{t('common.retry')}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -92,10 +94,10 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
   const renderErrorState = () => (
     <View style={styles.emptyContainer}>
       <MaterialIcons name="error-outline" size={80} color="#FF5722" />
-      <Text style={styles.emptyTitle}>Error Loading Products</Text>
+      <Text style={styles.emptyTitle}>{t('store.errorLoading')}</Text>
       <Text style={styles.emptySubtitle}>{error}</Text>
       <TouchableOpacity style={styles.retryButton} onPress={loadCategoryProducts}>
-        <Text style={styles.retryButtonText}>Retry</Text>
+        <Text style={styles.retryButtonText}>{t('common.retry')}</Text>
       </TouchableOpacity>
     </View>
   );

@@ -12,6 +12,8 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { useUser } from '../contexts/UserContext';
 import roleRequestService from '../services/roleRequestService';
+import { supabase } from '../config/supabaseConfig';
+import supabaseService from '../services/supabaseService';
 
 const SellerRequestScreen = ({ navigation }) => {
   const { user } = useUser();
@@ -47,6 +49,16 @@ const SellerRequestScreen = ({ navigation }) => {
     try {
       console.log('🏪 Submitting seller request for:', user.uid);
 
+      // First, ensure user exists in Supabase users table
+      const userExistsResult = await supabaseService.ensureUserExists(user);
+      if (!userExistsResult.success) {
+        throw new Error(userExistsResult.error);
+      }
+
+      // Use the correct user ID (might be different from Firebase UID if email conflict)
+      const userIdToUse = userExistsResult.existingUserId || user.uid;
+      console.log('🆔 Using user ID for seller request:', userIdToUse);
+
       const requestData = {
         businessName: formData.businessName,
         businessLicense: formData.businessLicense,
@@ -61,6 +73,7 @@ const SellerRequestScreen = ({ navigation }) => {
           country: 'Uganda'
         },
         documents: null,
+        userId: userIdToUse, // Pass the correct user ID
       };
 
       const result = await roleRequestService.submitSellerRequest(requestData);

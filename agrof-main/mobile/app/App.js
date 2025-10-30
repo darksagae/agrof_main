@@ -69,6 +69,7 @@ import featureEngineeringService from './services/featureEngineeringService';
 import predictiveAnalyticsService from './services/predictiveAnalyticsService';
 import advancedAccuracyService from './services/advancedAccuracyService';
 import comprehensiveAccuracyDashboardService from './services/comprehensiveAccuracyDashboardService';
+import { supabase } from './config/supabaseConfig';
 
 
 const { width, height } = Dimensions.get('window');
@@ -78,6 +79,182 @@ const API_URL = 'http://10.100.100.180:5000'; // STI Coolify deployment (product
 // const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Old Railway backend
 // const API_URL = 'http://192.168.1.10:5000'; // Use your computer's IP address for local testing
 // const API_URL = 'http://localhost:5000'; // For web browser testing
+
+// Account sub-screens backed by Supabase
+const MyOrdersScreen = ({ navigation, user }) => {
+  const [loading, setLoading] = React.useState(true);
+  const [orders, setOrders] = React.useState([]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await supabase
+          .from('orders')
+          .select('id, order_number, status, total_amount, currency, created_at')
+          .eq('user_id', user?.uid)
+          .order('created_at', { ascending: false });
+        setOrders(data || []);
+      } catch (e) {
+        console.error('Error loading orders:', e);
+        setOrders([]);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [user?.uid]);
+
+  return (
+    <View style={styles.screen}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>My Orders</Text>
+        <View style={styles.headerRight} />
+      </View>
+      <ScrollView style={styles.content}>
+        {loading ? (
+          <View style={styles.emptyState}>
+            <ActivityIndicator size="large" color="#4CAF50" />
+            <Text style={styles.emptyText}>Loading orders...</Text>
+          </View>
+        ) : orders.length === 0 ? (
+          <View style={styles.emptyState}>
+            <MaterialIcons name="shopping-cart" size={64} color="#ccc" />
+            <Text style={styles.emptyText}>No orders yet</Text>
+          </View>
+        ) : (
+          orders.map(o => (
+            <View key={o.id} style={styles.activityCard}>
+              <View style={styles.activityContent}>
+                <Text style={styles.activityTitle}>Order #{o.order_number || o.id.slice(0,8)}</Text>
+                <Text style={styles.activitySubtitle}>{o.status} • {o.currency || 'UGX'} {parseFloat(o.total_amount || 0).toLocaleString()}</Text>
+                <Text style={styles.activitySubtitle}>{new Date(o.created_at).toLocaleString()}</Text>
+              </View>
+            </View>
+          ))
+        )}
+      </ScrollView>
+    </View>
+  );
+};
+
+const WishlistScreen = ({ navigation, user }) => {
+  const [loading, setLoading] = React.useState(true);
+  const [items, setItems] = React.useState([]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await supabase
+          .from('favorites')
+          .select(`id, created_at, product_id, products:product_id ( id, name, price, images )`)
+          .eq('user_id', user?.uid)
+          .order('created_at', { ascending: false });
+        setItems(data || []);
+      } catch (e) {
+        console.error('Error loading wishlist:', e);
+        setItems([]);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [user?.uid]);
+
+  return (
+    <View style={styles.screen}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Wishlist</Text>
+        <View style={styles.headerRight} />
+      </View>
+      <ScrollView style={styles.content}>
+        {loading ? (
+          <View style={styles.emptyState}>
+            <ActivityIndicator size="large" color="#4CAF50" />
+            <Text style={styles.emptyText}>Loading wishlist...</Text>
+          </View>
+        ) : items.length === 0 ? (
+          <View style={styles.emptyState}>
+            <MaterialIcons name="favorite-border" size={64} color="#ccc" />
+            <Text style={styles.emptyText}>No wishlist items</Text>
+          </View>
+        ) : (
+          items.map(f => (
+            <View key={f.id} style={styles.activityCard}>
+              <View style={styles.activityContent}>
+                <Text style={styles.activityTitle}>{f.products?.name || 'Product'}</Text>
+                <Text style={styles.activitySubtitle}>{f.products?.price || ''}</Text>
+                <Text style={styles.activitySubtitle}>Saved on {new Date(f.created_at).toLocaleDateString()}</Text>
+              </View>
+            </View>
+          ))
+        )}
+      </ScrollView>
+    </View>
+  );
+};
+
+const PurchaseHistoryScreen = ({ navigation, user }) => {
+  const [loading, setLoading] = React.useState(true);
+  const [orders, setOrders] = React.useState([]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await supabase
+          .from('orders')
+          .select('id, order_number, status, total_amount, currency, created_at')
+          .eq('user_id', user?.uid)
+          .in('status', ['delivered', 'completed'])
+          .order('created_at', { ascending: false });
+        setOrders(data || []);
+      } catch (e) {
+        console.error('Error loading purchase history:', e);
+        setOrders([]);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [user?.uid]);
+
+  return (
+    <View style={styles.screen}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Purchase History</Text>
+        <View style={styles.headerRight} />
+      </View>
+      <ScrollView style={styles.content}>
+        {loading ? (
+          <View style={styles.emptyState}>
+            <ActivityIndicator size="large" color="#4CAF50" />
+            <Text style={styles.emptyText}>Loading history...</Text>
+          </View>
+        ) : orders.length === 0 ? (
+          <View style={styles.emptyState}>
+            <MaterialIcons name="history" size={64} color="#ccc" />
+            <Text style={styles.emptyText}>No past orders yet</Text>
+          </View>
+        ) : (
+          orders.map(o => (
+            <View key={o.id} style={styles.activityCard}>
+              <View style={styles.activityContent}>
+                <Text style={styles.activityTitle}>Order #{o.order_number || o.id.slice(0,8)}</Text>
+                <Text style={styles.activitySubtitle}>{o.status} • {o.currency || 'UGX'} {parseFloat(o.total_amount || 0).toLocaleString()}</Text>
+                <Text style={styles.activitySubtitle}>{new Date(o.created_at).toLocaleString()}</Text>
+              </View>
+            </View>
+          ))
+        )}
+      </ScrollView>
+    </View>
+  );
+};
 
 export default function App() {
   // Load Material Icons font
@@ -118,6 +295,18 @@ export default function App() {
   
   // News state for floating widget
   const [newsData, setNewsData] = useState([]);
+
+  // React to language changes globally to force UI re-render across screens
+  useEffect(() => {
+    const handler = (lng) => {
+      setCurrentLanguage(lng);
+      setLanguageKey((k) => k + 1);
+    };
+    i18n.on('languageChanged', handler);
+    return () => {
+      i18n.off('languageChanged', handler);
+    };
+  }, [i18n]);
   const [newsLoading, setNewsLoading] = useState(false);
   
   // Hybrid offline/online state
@@ -337,12 +526,12 @@ export default function App() {
 
   const handleLogout = async () => {
     Alert.alert(
-      'Logout',
-      'Are you sure you want to logout? This will clear all cached data.',
+      t('account.logoutTitle', { defaultValue: 'Logout' }),
+      t('account.logoutConfirm', { defaultValue: 'Are you sure you want to logout? This will clear all cached data.' }),
       [
-        { text: 'Cancel', style: 'cancel' },
+        { text: t('common.cancel', { defaultValue: 'Cancel' }), style: 'cancel' },
         {
-          text: 'Logout',
+          text: t('account.logout', { defaultValue: 'Logout' }),
           style: 'destructive',
           onPress: async () => {
             console.log('🔐 Logging out and clearing data...');
@@ -356,13 +545,13 @@ export default function App() {
               setShowAuthScreen(null);
               
               Alert.alert(
-                'Logged Out',
-                'You have been logged out successfully. All cached data has been cleared.',
-                [{ text: 'OK' }]
+                t('account.loggedOut', { defaultValue: 'Logged Out' }),
+                t('account.loggedOutMsg', { defaultValue: 'You have been logged out successfully. All cached data has been cleared.' }),
+                [{ text: t('common.ok', { defaultValue: 'OK' }) }]
               );
               console.log('✅ Logout complete - app reset to fresh state');
             } else {
-              Alert.alert('Error', 'Failed to logout. Please try again.');
+              Alert.alert(t('common.error', { defaultValue: 'Error' }), t('account.logoutFailed', { defaultValue: 'Failed to logout. Please try again.' }));
             }
           }
         }
@@ -643,7 +832,6 @@ export default function App() {
   }, [currentLanguage]);
 
   // Camera permissions removed - camera functionality disabled
-
   // Test backend connection on app start with dynamic endpoint discovery
   useEffect(() => {
     const testBackendConnection = async () => {
@@ -1217,7 +1405,6 @@ export default function App() {
         return '#607D8B';
     }
   };
-
   const renderAnalysisResults = () => {
     if (!result) {
       console.log('No result to display');
@@ -2134,7 +2321,6 @@ export default function App() {
       </View>
     );
   };
-
   // Saved tab with dynamic content
   const renderSavedScreen = () => (
     <View style={styles.screen}>
@@ -2356,9 +2542,9 @@ export default function App() {
             <View style={styles.authStatusCard}>
               <MaterialIcons name="verified" size={24} color="#4CAF50" />
               <View style={styles.authStatusInfo}>
-                <Text style={styles.authStatusTitle}>Account Verified</Text>
+              <Text style={styles.authStatusTitle}>{t('account.verified', { defaultValue: 'Account Verified' })}</Text>
                 <Text style={styles.authStatusSubtitle}>
-                  {isEmailVerified ? 'Email verified' : 'Email verification pending'}
+                  {isEmailVerified ? t('account.emailVerified', { defaultValue: 'Email verified' }) : t('account.emailPending', { defaultValue: 'Email verification pending' })}
                 </Text>
               </View>
               <TouchableOpacity 
@@ -2366,7 +2552,7 @@ export default function App() {
                 onPress={handleLogout}
               >
                 <MaterialIcons name="logout" size={20} color="#F44336" />
-                <Text style={styles.logoutButtonText}>Logout</Text>
+                <Text style={styles.logoutButtonText}>{t('account.logout', { defaultValue: 'Logout' })}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -2375,9 +2561,9 @@ export default function App() {
         {/* My Orders Section */}
         {isAuthenticated && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>My Activity</Text>
+            <Text style={styles.sectionTitle}>{t('account.myActivity', { defaultValue: 'My Activity' })}</Text>
             
-            <TouchableOpacity style={styles.activityCard}>
+            <TouchableOpacity style={styles.activityCard} onPress={() => setCurrentAccountScreen('MyOrders')}>
               <View style={styles.activityIconContainer}>
                 <MaterialIcons name="shopping-cart" size={28} color="#4CAF50" />
               </View>
@@ -2388,7 +2574,7 @@ export default function App() {
               <MaterialIcons name="chevron-right" size={20} color="#666" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.activityCard}>
+            <TouchableOpacity style={styles.activityCard} onPress={() => setCurrentAccountScreen('Wishlist')}>
               <View style={styles.activityIconContainer}>
                 <MaterialIcons name="favorite" size={28} color="#FF5722" />
               </View>
@@ -2399,7 +2585,7 @@ export default function App() {
               <MaterialIcons name="chevron-right" size={20} color="#666" />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.activityCard}>
+            <TouchableOpacity style={styles.activityCard} onPress={() => setCurrentAccountScreen('PurchaseHistory')}>
               <View style={styles.activityIconContainer}>
                 <MaterialIcons name="history" size={28} color="#2196F3" />
               </View>
@@ -2415,7 +2601,7 @@ export default function App() {
         {/* P2P Market Panel - Only for registered buyers/sellers */}
         {(currentUser?.userType === 'buyer' || currentUser?.userType === 'seller' || currentUser?.userType === 'both') && (
         <View style={styles.section}>
-            <Text style={styles.sectionTitle}>My P2P Market</Text>
+            <Text style={styles.sectionTitle}>{t('account.myP2PMarket', { defaultValue: 'My P2P Market' })}</Text>
             
             <TouchableOpacity
               style={styles.activityItem}
@@ -2425,9 +2611,9 @@ export default function App() {
                 <MaterialIcons name="storefront" size={24} color="#4CAF50" />
               </View>
               <View style={styles.activityContent}>
-                <Text style={styles.activityTitle}>P2P Market Dashboard</Text>
+                <Text style={styles.activityTitle}>{t('account.p2pDashboard', { defaultValue: 'P2P Market Dashboard' })}</Text>
                 <Text style={styles.activitySubtitle}>
-                  Manage listings, view messages, track sales
+                  {t('account.p2pDashboardSubtitle', { defaultValue: 'Manage listings, view messages, track sales' })}
                 </Text>
               </View>
               <MaterialIcons name="chevron-right" size={20} color="#666" />
@@ -2473,7 +2659,7 @@ export default function App() {
 
         {/* Buyer/Seller Registration Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Join the AGROF Marketplace</Text>
+          <Text style={styles.sectionTitle}>{t('account.joinMarketplace', { defaultValue: 'Join the AGROF Marketplace' })}</Text>
           
           <View style={styles.sellerCard}>
             <MaterialIcons name="store" size={40} color="#4CAF50" />
@@ -2507,7 +2693,7 @@ export default function App() {
               }}
             >
               <MaterialIcons name="how-to-reg" size={20} color="white" />
-              <Text style={styles.sellerButtonText}>Register Now</Text>
+              <Text style={styles.sellerButtonText}>{t('account.registerNow', { defaultValue: 'Register Now' })}</Text>
             </TouchableOpacity>
             
             <View style={styles.contactInfo}>
@@ -2525,14 +2711,14 @@ export default function App() {
 
         {/* Help & Support */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Need Assistance?</Text>
+          <Text style={styles.sectionTitle}>{t('account.needAssistance', { defaultValue: 'Need Assistance?' })}</Text>
           
           <TouchableOpacity 
             style={styles.assistanceItem}
-            onPress={() => Alert.alert('FAQs', 'Frequently Asked Questions coming soon!')}
+            onPress={() => Alert.alert(t('account.faqs', { defaultValue: 'FAQs' }), t('account.faqsComing', { defaultValue: 'Frequently Asked Questions coming soon!' }))}
           >
             <MaterialIcons name="help-outline" size={24} color="#4CAF50" />
-            <Text style={styles.assistanceItemText}>FAQs</Text>
+            <Text style={styles.assistanceItemText}>{t('account.faqs', { defaultValue: 'FAQs' })}</Text>
             <MaterialIcons name="chevron-right" size={16} color="#666" />
           </TouchableOpacity>
 
@@ -2543,7 +2729,7 @@ export default function App() {
             }}
           >
             <MaterialIcons name="email" size={24} color="#4CAF50" />
-            <Text style={styles.assistanceItemText}>Email Support</Text>
+            <Text style={styles.assistanceItemText}>{t('account.emailSupport', { defaultValue: 'Email Support' })}</Text>
             <MaterialIcons name="chevron-right" size={16} color="#666" />
           </TouchableOpacity>
 
@@ -2605,7 +2791,7 @@ export default function App() {
           >
             <MaterialIcons name="logout" size={24} color="#F44336" />
             <Text style={[styles.accountItemText, { color: '#F44336', fontWeight: 'bold' }]}>
-              Logout & Clear Data
+              {t('account.logoutClear', { defaultValue: 'Logout & Clear Data' })}
             </Text>
             <MaterialIcons name="arrow-forward-ios" size={16} color="#F44336" />
           </TouchableOpacity>
@@ -2713,7 +2899,6 @@ export default function App() {
       </ScrollView>
     </View>
   );
-
   // Help Center screen
   const renderHelpCenterScreen = () => (
     <View style={styles.screen}>
@@ -2861,7 +3046,7 @@ export default function App() {
   const renderNavigationTabs = () => {
     
     return (
-      <View style={styles.navigationTabs}>
+      <View key={`tabs-${languageKey}`} style={styles.navigationTabs}>
         {/* Home tab - Smart farming dashboard */}
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'home' && styles.activeTab]} 
@@ -2877,7 +3062,7 @@ export default function App() {
             color={currentTab === 'home' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'home' && styles.activeTabLabel]}>Home</Text>
+          <Text style={[styles.tabLabel, currentTab === 'home' && styles.activeTabLabel]}>{t('navigation.home')}</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -2894,7 +3079,7 @@ export default function App() {
             color={currentTab === 'plan' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'plan' && styles.activeTabLabel]}>AI Plan</Text>
+          <Text style={[styles.tabLabel, currentTab === 'plan' && styles.activeTabLabel]}>{t('navigation.plan')}</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -2911,7 +3096,7 @@ export default function App() {
             color={currentTab === 'care' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'care' && styles.activeTabLabel]}>AI Care</Text>
+          <Text style={[styles.tabLabel, currentTab === 'care' && styles.activeTabLabel]}>{t('navigation.care')}</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -2928,7 +3113,7 @@ export default function App() {
             color={currentTab === 'stocks' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'stocks' && styles.activeTabLabel]}>Blocker</Text>
+          <Text style={[styles.tabLabel, currentTab === 'stocks' && styles.activeTabLabel]}>{t('navigation.stocks')}</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -2945,7 +3130,7 @@ export default function App() {
             color={currentTab === 'store' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'store' && styles.activeTabLabel]}>Store</Text>
+          <Text style={[styles.tabLabel, currentTab === 'store' && styles.activeTabLabel]}>{t('navigation.store')}</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -2962,7 +3147,7 @@ export default function App() {
             color={currentTab === 'account' ? '#4CAF50' : '#666'} 
             style={styles.tabIcon} 
           />
-          <Text style={[styles.tabLabel, currentTab === 'account' && styles.activeTabLabel]}>Account</Text>
+          <Text style={[styles.tabLabel, currentTab === 'account' && styles.activeTabLabel]}>{t('navigation.account')}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -3095,12 +3280,13 @@ export default function App() {
            currentAccountScreen === 'BuyerRequest' ? <BuyerRequestScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: setCurrentTab }} /> :
            currentAccountScreen === 'SellerRequest' ? <SellerRequestScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} /> :
            currentAccountScreen === 'P2PMarketPanel' ? <P2PMarketPanel navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} /> :
-           currentAccountScreen === 'ProductSelection' ? <ProductSelectionScreen navigation={{ goBack: () => setCurrentAccountScreen('P2PMarketPanel'), navigate: (screen, params) => { console.log('📍 Navigating to:', screen, 'with params:', params); setScreenParams(params); setCurrentAccountScreen(screen); } }} route={{ params: screenParams }} /> :
-           currentAccountScreen === 'PriceQuantityInput' ? <PriceQuantityInputScreen navigation={{ goBack: () => setCurrentAccountScreen('ProductSelection'), navigate: (screen) => { setCurrentAccountScreen(screen); setScreenParams(null); } }} route={{ params: screenParams }} /> :
-           currentAccountScreen === 'CreateBuyRequest' ? <CreateBuyRequestScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} /> :
+           currentAccountScreen === 'ProductSelection' ? <ProductSelectionScreen navigation={{ goBack: () => setCurrentAccountScreen('P2PMarketPanel'), navigate: (screen, params) => { console.log('📍 Navigating to:', screen, 'with params:', params); setScreenParams(params); setCurrentAccountScreen(screen); } }} route={{ params: screenParams }} /> : 
+           currentAccountScreen === 'PriceQuantityInput' ? <PriceQuantityInputScreen navigation={{ goBack: () => setCurrentAccountScreen('ProductSelection'), navigate: (screen) => { setCurrentAccountScreen(screen); setScreenParams(null); } }} route={{ params: screenParams }} /> : 
+           currentAccountScreen === 'CreateBuyRequest' ? <CreateBuyRequestScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} /> : 
            currentAccountScreen === 'BrowseBuyRequests' ? <BrowseBuyRequestsScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} /> :
-           currentAccountScreen === 'BuyRequestDetails' ? <BuyRequestDetailsScreen navigation={{ goBack: () => setCurrentAccountScreen('main'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} route={{ params: screenParams }} /> :
-           currentAccountScreen === 'Conversation' ? <ConversationScreen navigation={{ goBack: () => setCurrentAccountScreen('P2PMarketPanel'), navigate: (screen, params) => { setScreenParams(params); setCurrentAccountScreen(screen); } }} route={{ params: screenParams }} /> :
+           currentAccountScreen === 'MyOrders' ? <MyOrdersScreen navigation={{ goBack: () => setCurrentAccountScreen('main') }} user={currentUser} /> :
+           currentAccountScreen === 'Wishlist' ? <WishlistScreen navigation={{ goBack: () => setCurrentAccountScreen('main') }} user={currentUser} /> :
+           currentAccountScreen === 'PurchaseHistory' ? <PurchaseHistoryScreen navigation={{ goBack: () => setCurrentAccountScreen('main') }} user={currentUser} /> :
            renderAccountScreen()}
           </AuthGate>
           <FloatingNewsWidget news={newsData} />
@@ -3194,7 +3380,7 @@ export default function App() {
     <UserProvider>
     <LanguageProvider>
       <CartProvider key={languageKey}>
-        <BackgroundImage overlayOpacity={0.4} backgroundImage={getBackgroundImage()}>
+        <BackgroundImage key={`bg-${languageKey}`} overlayOpacity={0.4} backgroundImage={getBackgroundImage()}>
         <StatusBar style="auto" />
         
         {renderTabContent()}
@@ -3266,7 +3452,6 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -5526,7 +5711,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
 const insightsStyles = StyleSheet.create({
   insightsText: {
     fontSize: 14,
@@ -9183,5 +9367,3 @@ const insightsStyles2 = StyleSheet.create({
     marginLeft: 6,
   },
 });
-
-

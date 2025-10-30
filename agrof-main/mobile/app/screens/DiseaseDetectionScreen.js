@@ -18,10 +18,15 @@ import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
 import hybridAIService from '../services/hybridAIService';
 import ProductRecommendationCards from '../components/ProductRecommendationCards';
+import AuthGate from '../components/AuthGate';
+import { useUser } from '../contexts/UserContext';
+import { useSafeTranslation } from '../i18n';
 
 const { width, height } = Dimensions.get('window');
 
 const DiseaseDetectionScreen = ({ navigation }) => {
+  const { t } = useSafeTranslation();
+  const { user, isAuthenticated } = useUser();
   const [selectedImage, setSelectedImage] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
@@ -29,7 +34,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [aiStatus, setAiStatus] = useState(null);
   const [networkStatus, setNetworkStatus] = useState('checking');
-  // Removed authentication requirements for simplicity
 
   // Initialize Simple AI Service
   useEffect(() => {
@@ -46,7 +50,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
       console.log('✅ Hybrid AI initialized:', status);
     } catch (error) {
       console.error('❌ AI initialization failed:', error);
-      Alert.alert('AI Initialization', 'AI service started with limited features');
+      Alert.alert(t('diseaseDetection.aiInitTitle', { defaultValue: 'AI Initialization' }), t('diseaseDetection.aiInitLimited', { defaultValue: 'AI service started with limited features' }));
     }
   };
 
@@ -56,7 +60,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
       setIsLoading(true);
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('Permission Required', 'Gallery permission is needed to select images');
+        Alert.alert(t('diseaseDetection.permissionTitle', { defaultValue: 'Permission Required' }), t('diseaseDetection.galleryPermission', { defaultValue: 'Gallery permission is needed to select images' }));
         return;
       }
       const result = await ImagePicker.launchImageLibraryAsync({
@@ -72,19 +76,19 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         
         // Validate image data
         if (!image.uri) {
-          throw new Error('Image URI is missing');
+          throw new Error(t('diseaseDetection.imageUriMissing', { defaultValue: 'Image URI is missing' }));
         }
         
         setSelectedImage(image);
         setAnalysisResult(null);
         setError(null);
-        Alert.alert('Success', 'Image selected successfully!');
+        Alert.alert(t('common.success', { defaultValue: 'Success' }), t('diseaseDetection.imageSelected', { defaultValue: 'Image selected successfully!' }));
       } else {
-        Alert.alert('Info', 'No image was selected');
+        Alert.alert(t('common.info', { defaultValue: 'Info' }), t('diseaseDetection.noImageSelected', { defaultValue: 'No image was selected' }));
       }
     } catch (error) {
-      setError(`Gallery error: ${error.message}`);
-      Alert.alert('Error', `Failed to pick image: ${error.message}`);
+      setError(`${t('common.error', { defaultValue: 'Error' })}: ${error.message}`);
+      Alert.alert(t('common.error', { defaultValue: 'Error' }), t('diseaseDetection.galleryFailed', { defaultValue: 'Failed to pick image: {{msg}}', msg: error.message }));
     } finally {
       setIsLoading(false);
     }
@@ -96,7 +100,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
       setIsLoading(true);
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('Permission Required', 'Camera permission is needed to take photos');
+        Alert.alert(t('diseaseDetection.permissionTitle', { defaultValue: 'Permission Required' }), t('diseaseDetection.cameraPermission', { defaultValue: 'Camera permission is needed to take photos' }));
         return;
       }
       const result = await ImagePicker.launchCameraAsync({
@@ -112,17 +116,17 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         
         // Validate image data
         if (!image.uri) {
-          throw new Error('Image URI is missing');
+          throw new Error(t('diseaseDetection.imageUriMissing', { defaultValue: 'Image URI is missing' }));
         }
         
         setSelectedImage(image);
         setAnalysisResult(null);
         setError(null);
-        Alert.alert('Success', 'Photo taken successfully!');
+        Alert.alert(t('common.success', { defaultValue: 'Success' }), t('diseaseDetection.photoTaken', { defaultValue: 'Photo taken successfully!' }));
       }
     } catch (error) {
-      setError(`Camera error: ${error.message}`);
-      Alert.alert('Error', `Failed to take photo: ${error.message}`);
+      setError(`${t('common.error', { defaultValue: 'Error' })}: ${error.message}`);
+      Alert.alert(t('common.error', { defaultValue: 'Error' }), t('diseaseDetection.cameraFailed', { defaultValue: 'Failed to take photo: {{msg}}', msg: error.message }));
     } finally {
       setIsLoading(false);
     }
@@ -131,7 +135,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   // Simple AI Analysis - Direct Gemini API
   const analyzeImage = async () => {
     if (!selectedImage) {
-      Alert.alert('No Image', 'Please select an image first');
+      Alert.alert(t('diseaseDetection.noImageTitle', { defaultValue: 'No Image' }), t('diseaseDetection.selectImageFirst', { defaultValue: 'Please select an image first' }));
       return;
     }
 
@@ -164,19 +168,19 @@ const DiseaseDetectionScreen = ({ navigation }) => {
         console.log('📊 AI result:', formattedResult);
         
         Alert.alert(
-          'AI Analysis Complete',
-          `Analysis completed!\n\nCrop: ${analysisData.crop_type || 'Unknown'}\nDisease: ${analysisData.disease_type || 'None detected'}\nConfidence: ${((analysisData.confidence || 0) * 100).toFixed(1)}%`,
-          [{ text: 'View Results' }]
+          t('diseaseDetection.completeTitle', { defaultValue: 'AI Analysis Complete' }),
+          t('diseaseDetection.completeBody', { defaultValue: 'Analysis completed!\n\nCrop: {{crop}}\nDisease: {{disease}}\nConfidence: {{conf}}%', crop: (analysisData.crop_type || t('diseaseDetection.unknown', { defaultValue: 'Unknown' })), disease: (analysisData.disease_type || t('diseaseDetection.noneDetected', { defaultValue: 'None detected' })), conf: ((analysisData.confidence || 0) * 100).toFixed(1) }),
+          [{ text: t('diseaseDetection.viewResults', { defaultValue: 'View Results' }) }]
         );
       } else {
-        throw new Error(result.error || 'AI analysis failed');
+        throw new Error(result.error || t('diseaseDetection.analysisFailed', { defaultValue: 'AI analysis failed' }));
       }
     } catch (error) {
       console.error('❌ AI analysis failed:', error);
       setError(error.message);
       Alert.alert(
-        'AI Analysis Failed',
-        `Failed to analyze image: ${error.message}\n\nPlease ensure:\n• Image is clear and well-lit\n• You have internet connection\n• Try again in a moment`
+        t('diseaseDetection.failedTitle', { defaultValue: 'AI Analysis Failed' }),
+        t('diseaseDetection.failedBody', { defaultValue: 'Failed to analyze image: {{msg}}\n\nPlease ensure:\n• Image is clear and well-lit\n• You have internet connection\n• Try again in a moment', msg: error.message })
       );
     } finally {
       setIsAnalyzing(false);
@@ -325,13 +329,13 @@ const DiseaseDetectionScreen = ({ navigation }) => {
             </View>
             <View style={styles.cropInfo}>
               <Text style={styles.cropType}>
-                {analysisResult.analysis?.crop_type || 'Unknown Crop'}
+                {analysisResult.analysis?.crop_type || t('diseaseDetection.unknownCrop', { defaultValue: 'Unknown Crop' })}
               </Text>
               <Text style={styles.plantFamily}>
-                Family: {analysisResult.analysis?.plant_family || 'Unknown'}
+                {t('diseaseDetection.family', { defaultValue: 'Family' })}: {analysisResult.analysis?.plant_family || t('diseaseDetection.unknown', { defaultValue: 'Unknown' })}
               </Text>
               <Text style={styles.growthStage}>
-                Stage: {analysisResult.analysis?.growth_stage || 'Unknown'}
+                {t('diseaseDetection.stage', { defaultValue: 'Stage' })}: {analysisResult.analysis?.growth_stage || t('diseaseDetection.unknown', { defaultValue: 'Unknown' })}
               </Text>
             </View>
           </View>
@@ -426,25 +430,31 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Background handled by App.js BackgroundImage wrapper */}
-      
-      {/* Content */}
-      <View style={styles.overlay}>
-        <SafeAreaView style={styles.safeArea}>
-          {/* Header with Back Button */}
-          <View style={styles.headerContainer}>
-            <TouchableOpacity 
-              style={styles.backButton}
-              onPress={() => navigation.goBack()}
-            >
-              <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
-            </TouchableOpacity>
-            <View style={styles.headerContent}>
-              <Text style={styles.headerTitle}>Disease Detection</Text>
-              <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
+    <AuthGate 
+      tabName="AI Disease Detection" 
+      navigation={navigation}
+      showSoftGate={true}
+      softGateAttempts={1}
+    >
+      <View style={styles.container}>
+        {/* Background handled by App.js BackgroundImage wrapper */}
+        
+        {/* Content */}
+        <View style={styles.overlay}>
+          <SafeAreaView style={styles.safeArea}>
+            {/* Header with Back Button */}
+            <View style={styles.headerContainer}>
+              <TouchableOpacity 
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+              >
+                <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
+              </TouchableOpacity>
+              <View style={styles.headerContent}>
+                <Text style={styles.headerTitle}>Disease Detection</Text>
+                <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
+              </View>
             </View>
-          </View>
           
           <ScrollView contentContainerStyle={styles.scrollContent}>
 
@@ -507,9 +517,8 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           </ScrollView>
         </SafeAreaView>
       </View>
-
-      {/* Authentication removed - AI Care works without login */}
     </View>
+    </AuthGate>
   );
 };
 

@@ -277,8 +277,11 @@ export const cartApi = {
     }
   },
 
-  addItem: async (productId, quantity = 1) => {
+  // Accept either a product object or a productId
+  addItem: async (productOrId, quantity = 1) => {
     try {
+      const productId = typeof productOrId === 'object' ? productOrId.id : productOrId;
+      const productObj = typeof productOrId === 'object' ? productOrId : null;
       console.log('➕ Adding to cart:', productId);
       const items = await cartApi.getItems();
       
@@ -290,11 +293,20 @@ export const cartApi = {
         items[existingIndex].quantity += quantity;
       } else {
         // Add new item
-        items.push({
-          id: Date.now().toString(),
+        const newItem = {
+          id: `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           product_id: productId,
           quantity
-        });
+        };
+        // If caller provided full product details, persist them for UI rendering
+        if (productObj) {
+          newItem.name = productObj.name;
+          newItem.price = productObj.price || productObj.selling_price || productObj.total_cost;
+          newItem.category_name = productObj.category_name || productObj.category;
+          newItem.images = productObj.images;
+          newItem.image_url = productObj.image || productObj.image_url;
+        }
+        items.push(newItem);
       }
       
       await AsyncStorage.setItem('agrof_cart', JSON.stringify(items));

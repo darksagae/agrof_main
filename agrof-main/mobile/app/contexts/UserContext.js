@@ -49,6 +49,21 @@ export const UserProvider = ({ children }) => {
     };
 
     initializeAuth();
+
+    // Subscribe to live Firebase auth state changes
+    const unsubscribe = authService.onAuthStateChanged(async (fbUser) => {
+      console.log('👂 UserContext: Firebase auth state changed:', fbUser ? fbUser.uid : 'no user');
+      if (fbUser) {
+        await fetchUserData(fbUser.uid);
+      } else {
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    });
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const fetchUserData = async (uid) => {
@@ -83,6 +98,7 @@ export const UserProvider = ({ children }) => {
 
   const refreshUserData = async () => {
     console.log('🔄 UserContext: Manual refresh requested');
+    setIsLoading(true);
     
     try {
       // Don't rely on existing user state - get fresh data from auth service
@@ -107,6 +123,8 @@ export const UserProvider = ({ children }) => {
       setUser(null);
       setIsAuthenticated(false);
       return { success: false, error: error.message };
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -119,6 +137,7 @@ export const UserProvider = ({ children }) => {
     }
 
     try {
+      setIsLoading(true);
       const result = await authService.updateUserData(user.uid, updateData);
       
       if (result.success) {
@@ -132,6 +151,9 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       console.error('❌ UserContext: Update error:', error);
       return { success: false, error: error.message };
+    } finally {
+      // fetchUserData will set isLoading to false, but ensure fallback
+      setIsLoading(false);
     }
   };
 

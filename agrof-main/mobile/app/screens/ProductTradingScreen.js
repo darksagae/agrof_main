@@ -42,33 +42,51 @@ const ProductTradingScreen = ({ route, navigation }) => {
   const [realSellers, setRealSellers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
   
-  // Load real users on component mount and when currentUser changes
+  // Load real users on component mount and when currentUser or product changes
   useEffect(() => {
     loadRealUsers();
-  }, [currentUser]); // Re-load when user data updates
+  }, [currentUser, displayProduct]); // Re-load when user data or product changes
   
   const loadRealUsers = async () => {
     setLoadingUsers(true);
     
     try {
       console.log('👥 ProductTradingScreen: Fetching real buyers and sellers from Supabase...');
+      console.log('🔍 Current product:', displayProduct?.name, 'ID:', displayProduct?.id);
       
-      // Fetch real BUYERS from Supabase
-      const { data: buyersData, error: buyersError } = await supabase
-        .from('buyers')
-        .select(`
-          id,
-          shipping_address,
-          users!inner (
-            id,
-            full_name,
-            phone,
-            email,
-            profile_photo,
-            user_type
-          )
-        `)
-        .in('users.user_type', ['buyer', 'both']);
+      // Resolve current user's allowed areas (preferred areas for buyer)
+      let allowedAreas = [];
+      if (currentUser?.uid) {
+        try {
+          const { data: buyerProfile } = await supabase
+            .from('buyers')
+            .select('preferred_areas, shipping_address')
+            .eq('id', currentUser.uid)
+            .single();
+          const pref = Array.isArray(buyerProfile?.preferred_areas) ? buyerProfile.preferred_areas : [];
+          const shipDistrict = buyerProfile?.shipping_address?.district || buyerProfile?.shipping_address?.location;
+          allowedAreas = (pref.length ? pref : (shipDistrict ? [shipDistrict] : []))
+            .filter(Boolean)
+            .map(a => String(a).toLowerCase().trim());
+          if (allowedAreas.length > 0) {
+            console.log('📍 Area filter enabled. Buyer allowed areas:', allowedAreas);
+          }
+        } catch (e) {
+          console.log('⚠️ Could not resolve buyer preferred areas, proceeding without area filter');
+        }
+      }
+      
+      // Resolve the active P2P product to filter by
+      let activeP2PProduct = p2pProduct;
+      if (!activeP2PProduct && displayProduct?.name) {
+        const { data: matchProducts } = await supabase
+          .from('p2p_products')
+          .select('id, name, unit_of_measure')
+          .ilike('name', displayProduct.name);
+        if (Array.isArray(matchProducts) && matchProducts.length > 0) {
+          activeP2PProduct = matchProducts[0];
+        }
+      }
       
       // Fetch real SELLERS from Supabase  
       const { data: sellersData, error: sellersError } = await supabase
@@ -89,36 +107,54 @@ const ProductTradingScreen = ({ route, navigation }) => {
         `)
         .in('users.user_type', ['seller', 'both']);
       
-      if (buyersError) {
-        console.error('❌ Error fetching buyers:', buyersError);
-      }
       
       if (sellersError) {
         console.error('❌ Error fetching sellers:', sellersError);
       }
       
-      // Process BUYERS
-      const buyers = (buyersData || []).map((buyer) => ({
-        id: buyer.users.id,
-        name: buyer.users.full_name || buyer.users.email,
-        location: buyer.shipping_address?.location || buyer.shipping_address?.district || 'Uganda',
-        price: 0, // Will be set based on actual orders
-        quantity: 0, // Will be set based on actual orders
-        rating: 0, // Buyers don't have ratings yet
-        avatar: buyer.users.profile_photo,
-        phone: buyer.users.phone,
-        email: buyer.users.email,
-        uid: buyer.users.id,
-        isCurrentUser: buyer.users.id === currentUser?.uid,
-        userType: 'buyer'
-      }));
+      // Load BUYERS by active buy requests for this product (so only buyers who applied appear)
+      let buyers = [];
+      if (activeP2PProduct?.id) {
+        const { data: requests } = await supabase
+          .from('buy_requests')
+          .select('id, buyer_id, location, status')
+          .eq('p2p_product_id', activeP2PProduct.id)
+          .eq('status', 'active');
+
+        const buyerIds = Array.from(new Set((requests || []).map(r => r.buyer_id))).filter(Boolean);
+        if (buyerIds.length > 0) {
+          const { data: buyerUsers } = await supabase
+            .from('users')
+            .select('id, full_name, phone, email, profile_photo, user_type')
+            .in('id', buyerIds);
+
+          const userById = new Map((buyerUsers || []).map(u => [u.id, u]));
+          buyers = (requests || []).map(r => {
+            const u = userById.get(r.buyer_id) || {};
+            return {
+              id: u.id,
+              name: u.full_name || u.email,
+              location: r.location || 'uganda',
+              price: 0,
+              quantity: 0,
+              rating: 0,
+              avatar: u.profile_photo,
+              phone: u.phone,
+              email: u.email,
+              uid: u.id,
+              isCurrentUser: u.id === currentUser?.uid,
+              userType: 'buyer'
+            };
+          });
+        }
+      }
       
       // Process SELLERS with their P2P listings
       console.log('💰 Fetching P2P listings for sellers...');
       
       // If we're coming from P2P Market with a specific product, filter by that product
-      const isP2PFiltered = fromP2PMarket && p2pProduct;
-      console.log('🔍 P2P Product Filter:', isP2PFiltered ? p2pProduct.name : 'None (showing all)');
+      const isP2PFiltered = !!activeP2PProduct;
+      console.log('🔍 P2P Product Filter:', isP2PFiltered ? activeP2PProduct.name : 'None (showing all)');
       
       const sellersWithListings = await Promise.all(
         (sellersData || []).map(async (seller) => {
@@ -143,12 +179,16 @@ const ProductTradingScreen = ({ route, navigation }) => {
           
           // Filter by specific P2P product if provided
           if (isP2PFiltered) {
-            query = query.eq('p2p_product_id', p2pProduct.id);
+            query = query.eq('p2p_product_id', activeP2PProduct.id);
+          }
+          // Enforce buyer area scope if known
+          if (allowedAreas.length > 0) {
+            query = query.in('location', allowedAreas);
           }
           
           const { data: listings } = await query;
 
-          console.log(`   Seller ${seller.business_name || seller.users.full_name}:`, listings?.length || 0, 'listings');
+          console.log(`   Seller ${seller.business_name || seller.users.full_name}:`, listings?.length || 0, 'listings for product', displayProduct?.name);
 
           return {
         id: seller.users.id,
@@ -177,9 +217,19 @@ const ProductTradingScreen = ({ route, navigation }) => {
       
       console.log('✅ Real data loaded from Supabase:');
       console.log('   Buyers:', buyers.length);
-      console.log('   Sellers:', sellers.length);
+      console.log('   Sellers (before filtering):', sellersWithListings.length);
+      console.log('   Sellers (after filtering):', sellers.length);
       if (isP2PFiltered) {
         console.log(`   📌 Filtered to sellers with ${p2pProduct.name} only`);
+      }
+      
+      // Debug: Show which sellers were filtered out
+      const filteredOutSellers = sellersWithListings.filter(seller => seller.listingCount === 0);
+      if (filteredOutSellers.length > 0) {
+        console.log('   🚫 Sellers filtered out (no listings for this product):');
+        filteredOutSellers.forEach(seller => {
+          console.log(`     - ${seller.name}: ${seller.listingCount} listings`);
+        });
       }
       
       if (buyers.length === 0) {
@@ -211,8 +261,8 @@ const ProductTradingScreen = ({ route, navigation }) => {
   };
 
   const tradingInfo = {
-    buyers: realBuyers,
-    sellers: realSellers
+    buyers: realBuyers || [],
+    sellers: realSellers || []
   };
 
 

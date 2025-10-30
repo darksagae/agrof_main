@@ -458,7 +458,7 @@ const StoreScreen = () => {
           ) : (
             <View style={styles.marqueeContainer}>
               <Text style={styles.noProductsText}>
-                {loading ? t('common.loading') : 'Featured products loading...'}
+                {loading ? t('common.loading') : t('store.featuredLoading')}
               </Text>
             </View>
           )}

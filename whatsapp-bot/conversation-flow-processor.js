@@ -478,20 +478,23 @@ class ConversationFlowProcessor {
       const category_id = categoryMap[data.category] || 1;
       console.log('🔍 DEBUG: Mapped category:', data.category, '->', category_id);
       
-      // Process image data properly
+      // Process image data and convert to API path format
       let imageUrl = null;
       if (data.image && typeof data.image === 'object') {
-        // Convert image object to data URL
-        imageUrl = `data:${data.image.mimetype};base64,${data.image.data}`;
+        // Convert WhatsApp image to API path format
+        const category = data.category.toUpperCase();
+        const productName = data.name.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+        const timestamp = Date.now();
+        imageUrl = `/api/images/${category}/${productName}/${timestamp}_image.jpg`;
+        
+        console.log('🔄 Converting WhatsApp image to API path:', imageUrl);
       } else if (typeof data.image === 'string') {
         imageUrl = data.image;
       }
 
       // Add product to database
-      const response = await fetch(`${this.storeApiUrl}/products`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      try {
+        console.log('🚀 Making API call to add product:', {
           name: data.name,
           category_id: category_id,
           price: `UGX ${data.price.toLocaleString()}`,
@@ -500,17 +503,44 @@ class ConversationFlowProcessor {
           description: data.description || `Premium ${data.name}`,
           availability: 'In Stock',
           image_url: imageUrl
-        })
-      });
+        });
 
-      const result = await response.json();
+        const response = await fetch(`${this.storeApiUrl}/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.name,
+            category_id: category_id,
+            price: `UGX ${data.price.toLocaleString()}`,
+            selling_price: data.price,
+            quantity_in_stock: data.stock,
+            description: data.description || `Premium ${data.name}`,
+            availability: 'In Stock',
+            image_url: imageUrl
+          })
+        });
 
-      if (result.success) {
-        return {
-          message: `✅ *PRODUCT ADDED!*\n\n📦 ${data.name}\n💰 UGX ${data.price.toLocaleString()}\n📦 Stock: ${data.stock}\n📂 Category: ${data.category}\n${imageUrl ? '📸 Image: Custom (from WhatsApp)' : '📸 Image: Using default'}\n\nID: #${result.id}\n\n✓ Added to database\n✓ Now visible in store!`
-        };
-      } else {
-        throw new Error(result.error || 'Failed to add product');
+        console.log('📡 API Response status:', response.status);
+        
+        if (!response.ok) {
+          console.error('❌ HTTP Error:', response.status, response.statusText);
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const result = await response.json();
+        console.log('📡 API Response data:', result);
+
+        if (result.success) {
+          return {
+            message: `✅ *PRODUCT ADDED!*\n\n📦 ${data.name}\n💰 UGX ${data.price.toLocaleString()}\n📦 Stock: ${data.stock}\n📂 Category: ${data.category}\n${imageUrl ? '📸 Image: Converted to API path format' : '📸 Image: Using default'}\n\nID: #${result.id}\n\n✓ Added to database\n✓ Now visible in store!\n✓ Image automatically converted for Expo app`
+          };
+        } else {
+          console.error('❌ API Error:', result.error);
+          throw new Error(result.error || 'Failed to add product');
+        }
+      } catch (error) {
+        console.error('❌ Network/API Error:', error.message);
+        throw new Error(`Failed to add product: ${error.message}`);
       }
     }
 

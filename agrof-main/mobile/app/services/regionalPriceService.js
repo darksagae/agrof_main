@@ -449,14 +449,38 @@ class RegionalPriceService {
     try {
       console.log(`🔍 Getting regional prices for crop: ${cropId}`);
       
-      // Base price for the crop (you can get this from crop database)
-      const basePrice = 2000; // Default base price
+      // Resolve crop entry by id or name (case-insensitive)
+      const findCrop = () => {
+        // Try exact key
+        if (this.regions.has(cropId)) return this.regions.get(cropId);
+        // Try by name
+        const key = String(cropId || '').toLowerCase();
+        for (const entry of this.regions.values()) {
+          if (String(entry.crop_name || '').toLowerCase() === key) return entry;
+          if (String(entry.crop_id || '').toLowerCase() === key) return entry;
+        }
+        return null;
+      };
+
+      const cropEntry = findCrop();
+
+      // Base price for the crop
+      let basePrice = 2000; // Default base price
+      if (cropEntry && typeof cropEntry.base_price === 'number' && isFinite(cropEntry.base_price) && cropEntry.base_price > 0) {
+        basePrice = cropEntry.base_price;
+      }
+
+      // Override for Avocados specific price range (UGX 500-700 per fruit)
+      const cropIdLc = String(cropId || '').toLowerCase();
+      if (cropIdLc === 'avocados' || String(cropEntry?.crop_name || '').toLowerCase() === 'avocados') {
+        basePrice = 600; // midpoint of 500-700
+      }
       
       const regionalPrices = {};
       
-      // Calculate prices for each region
-      for (const [region, multiplier] of this.regionalMultipliers) {
-        const regionalPrice = Math.floor(basePrice * multiplier);
+      // Calculate prices for each region (use multiplier.multiplier)
+      for (const [region, m] of this.regionalMultipliers) {
+        const regionalPrice = Math.floor(basePrice * (m?.multiplier || 1));
         regionalPrices[region.toLowerCase()] = regionalPrice;
       }
       

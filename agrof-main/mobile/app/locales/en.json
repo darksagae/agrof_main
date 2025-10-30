@@ -11,7 +11,9 @@
     "back": "Back",
     "next": "Next",
     "continue": "Continue",
-    "close": "Close"
+    "close": "Close",
+    "retry": "Retry",
+    "selectLanguage": "Select Language"
   },
   "navigation": {
     "home": "Home",
@@ -19,6 +21,7 @@
     "care": "AI Care",
     "plan": "AI Plan",
     "account": "Account",
+    "stocks": "Market",
     "cart": "Cart"
   },
   "welcome": {
@@ -46,7 +49,32 @@
     "severity": "Severity",
     "confidence": "Confidence",
     "treatment": "Treatment Recommendations",
-    "prevention": "Prevention Tips"
+    "prevention": "Prevention Tips",
+    "aiInitTitle": "AI Initialization",
+    "aiInitLimited": "AI service started with limited features",
+    "permissionTitle": "Permission Required",
+    "galleryPermission": "Gallery permission is needed to select images",
+    "cameraPermission": "Camera permission is needed to take photos",
+    "imageUriMissing": "Image URI is missing",
+    "imageSelected": "Image selected successfully!",
+    "noImageSelected": "No image was selected",
+    "galleryFailed": "Failed to pick image: {{msg}}",
+    "photoTaken": "Photo taken successfully!",
+    "cameraFailed": "Failed to take photo: {{msg}}",
+    "noImageTitle": "No Image",
+    "selectImageFirst": "Please select an image first",
+    "completeTitle": "AI Analysis Complete",
+    "completeBody": "Analysis completed!\n\nCrop: {{crop}}\nDisease: {{disease}}\nConfidence: {{conf}}%",
+    "unknown": "Unknown",
+    "noneDetected": "None detected",
+    "viewResults": "View Results",
+    "analysisFailed": "AI analysis failed",
+    "failedTitle": "AI Analysis Failed",
+    "failedBody": "Failed to analyze image: {{msg}}\n\nPlease ensure:\n• Image is clear and well-lit\n• You have internet connection\n• Try again in a moment",
+    "analysisCompleted": "Analysis completed",
+    "unknownCrop": "Unknown Crop",
+    "family": "Family",
+    "stage": "Stage"
   },
   "store": {
     "title": "AGROF Store",
@@ -54,6 +82,11 @@
     "search": "Search products...",
     "categories": "Categories",
     "featured": "Featured Products",
+    "featuredLoading": "Loading featured products...",
+    "contactForPricing": "Contact for pricing",
+    "noProductsTitle": "No Products Found",
+    "noProductsInCategory": "No products available in {{category}} category.",
+    "errorLoading": "Error Loading Products",
     "addToCart": "Add to Cart",
     "price": "Price",
     "description": "Description",
@@ -74,16 +107,32 @@
     "balance": "AGROF Balance",
     "settings": "Settings",
     "help": "Help & Support",
-    "logout": "Logout"
+    "logout": "Logout",
+    "logoutTitle": "Logout",
+    "logoutConfirm": "Are you sure you want to logout? This will clear all cached data.",
+    "loggedOut": "Logged Out",
+    "loggedOutMsg": "You have been logged out successfully. All cached data has been cleared.",
+    "logoutFailed": "Failed to logout. Please try again.",
+    "verified": "Account Verified",
+    "emailVerified": "Email verified",
+    "emailPending": "Email verification pending",
+    "myActivity": "My Activity",
+    "myP2PMarket": "My P2P Market",
+    "p2pDashboard": "P2P Market Dashboard",
+    "p2pDashboardSubtitle": "Manage listings, view messages, track sales",
+    "joinMarketplace": "Join the AGROF Marketplace",
+    "registerNow": "Register Now",
+    "needAssistance": "Need Assistance?",
+    "faqs": "FAQs",
+    "faqsComing": "Frequently Asked Questions coming soon!",
+    "emailSupport": "Email Support",
+    "logoutClear": "Logout & Clear Data"
   },
   "ai": {
     "assistant": "AGROF AI Assistant",
     "askQuestion": "Ask me anything about farming...",
     "send": "Send",
     "clear": "Clear Chat"
-  },
-  "common": {
-    "selectLanguage": "Select Language"
   },
   "errors": {
     "networkError": "Network connection error",

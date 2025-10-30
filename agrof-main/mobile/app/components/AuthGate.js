@@ -72,10 +72,7 @@ const AuthGate = ({
     return <>{children}</>;
   }
 
-  // TEMPORARY: Bypass authentication for testing
-  console.log('🔓 AuthGate: Bypassing authentication for testing');
-  return <>{children}</>;
-  
+  // Not authenticated – show gate UI
   console.log('🔒 AuthGate: User not authenticated - showing login prompt');
 
   return (

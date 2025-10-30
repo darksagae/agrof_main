@@ -32,6 +32,9 @@ class StoreDatabase {
         { id: 'fanaka_f1_cabbage', name: 'Fanaka F1 Cabbage', category: 'seeds', price: 2301, stock: 100, weight: 1, description: 'Hybrid cabbage with excellent heat tolerance and high adaptability', quality: 'hybrid', image: 'cabbage.png', maturity: '75-80 days', yield: '4-5kg heads', resistance: 'heat tolerant, fusarium yellows' },
         
         { id: 'copenhagen_market_cabbage', name: 'Copenhagen Market Cabbage', category: 'seeds', price: 2101, stock: 110, weight: 10, description: 'Most popular early maturing ball-headed cabbage variety', quality: 'open_pollinated', image: 'cabbage.png', maturity: '75-90 days', yield: '16-32mt/acre', resistance: 'early maturing' },
+
+        // New Seeds Product
+        { id: 'beans_seeds_bush_medium', name: 'Beans Seeds (Bush Type, Medium Seeded)', category: 'seeds', price: 6000, stock: 150, weight: 1, description: 'Bush type, medium seeded beans with attractive colour and high yield potential (800–1000 kg/acre). Matures in 80–90 days, tasty, swells on cooking, cooks fairly fast. Best suited for low–mid altitude areas.', image: 'beans_seedling.png', maturity: '80-90 days', yield: '800-1000 kg/acre' },
         
         { id: 'california_wonder_pepper', name: 'California Wonder Pepper', category: 'seeds', price: 3621, stock: 85, weight: 10, description: 'Uniform fruits, blocky and medium-sized, widely adaptable variety', quality: 'hybrid', image: 'peppers.png', maturity: '80-90 days', yield: '6-7 tonnes/acre', resistance: 'uniform growth' },
         
@@ -110,6 +113,12 @@ class StoreDatabase {
         { id: 'lemon_grass_seedling', name: 'Lemon Grass (Kisubi) Seedling', category: 'nursery_bed', price: 3000, stock: 120, weight: 1, description: 'Aromatic lemon grass seedlings for culinary and medicinal use', image: 'lemon_grass.png', maturity: '3-4 months', yield: 'aromatic leaves', resistance: 'pest resistant' },
         
         { id: 'sweet_basil_seedling', name: 'Sweet Basil Seedling (Mujaaja)', category: 'nursery_bed', price: 2500, stock: 100, weight: 1, description: 'Aromatic basil seedlings for culinary use', image: 'basil.png', maturity: '2-3 months', yield: 'aromatic leaves', resistance: 'easy to grow' },
+
+        // New Nursery Bed Product
+        { id: 'local_avocado_seedling', name: 'Local Avocado Seedlings', category: 'nursery_bed', price: 7000, stock: 120, weight: 1, description: 'Selected with care and cultivated with expertise, our Local avocado seedlings are tailored to flourish in diverse farming environments, suitable for both commercial growers and home gardeners.', image: 'avocado.png', maturity: '2-3 years to fruit', resistance: 'vigorous, adaptable' },
+
+        // New Nursery Bed Product - Coffee
+        { id: 'coffee_seedling', name: 'Coffee Seedling', category: 'nursery_bed', price: 3000, stock: 100, weight: 1, description: 'First dig holes that are at least 60 cm deep and wide, and let them sit for a few months, preferably filled with a mix of topsoil and compost. Plant at the beginning of the rainy season, ideally on a cloudy day, by carefully removing the seedling from its container, placing it upright in the hole, and refilling the hole, ensuring the taproot is not twisted and the crown remains above the soil line. Finally, firmly pack the soil, water well, and add mulch to retain moisture and protect the young plant.', image: 'coffee.png', maturity: '2-3 years to fruit', resistance: 'vigorous, adaptable' },
 
         // SOIL AMENDMENTS Category - Real Products
         { id: 'organic_compost_soil', name: 'Organic Compost Soil Amendment', category: 'soil_amendments', price: 30000, stock: 100, weight: 25, description: 'Organic compost for soil improvement and nutrient enrichment', image: 'compost.png', organic: true, application: 'soil improvement', rate: '100-200kgs/acre' },

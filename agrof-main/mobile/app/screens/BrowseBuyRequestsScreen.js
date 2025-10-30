@@ -26,14 +26,10 @@ const BrowseBuyRequestsScreen = ({ navigation }) => {
     try {
       setLoading(true);
       
+      // Use backend view that enforces area scoping and active status
       const { data, error } = await supabase
-        .from('buy_requests')
-        .select(`
-          *,
-          buyer:users!buy_requests_buyer_id_fkey(id, full_name, phone, email),
-          p2p_products(id, name, unit_of_measure)
-        `)
-        .eq('is_active', true)
+        .from('v_active_buy_requests_by_area')
+        .select('id, buyer_id, buyer_full_name, product_name, quantity_needed, location, status, created_at, target_price, p2p_product_id')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -90,8 +86,8 @@ const BrowseBuyRequestsScreen = ({ navigation }) => {
               onPress={() => navigation.navigate('BuyRequestDetails', { requestId: request.id })}
             >
               <View style={styles.requestHeader}>
-                <Text style={styles.requestProduct}>{request.p2p_products?.name}</Text>
-                <Text style={styles.requestQuantity}>{request.quantity_needed} {request.p2p_products?.unit_of_measure}</Text>
+                <Text style={styles.requestProduct}>{request.product_name}</Text>
+                <Text style={styles.requestQuantity}>{request.quantity_needed}</Text>
               </View>
               
               <Text style={styles.requestMessage} numberOfLines={2}>
@@ -99,9 +95,7 @@ const BrowseBuyRequestsScreen = ({ navigation }) => {
               </Text>
               
               <View style={styles.requestFooter}>
-                <Text style={styles.requestBuyer}>
-                  By: {request.buyer?.full_name || 'Anonymous'}
-                </Text>
+                <Text style={styles.requestBuyer}>By: {request.buyer_full_name || 'Anonymous'}</Text>
                 <Text style={styles.requestDate}>
                   {new Date(request.created_at).toLocaleDateString()}
                 </Text>
