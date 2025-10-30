@@ -1,5 +1,5 @@
 // AGROF WhatsApp Bot - Enhanced with Auto-Reconnection
-const { Client } = require('whatsapp-web.js');
+const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
@@ -34,17 +34,12 @@ if (!fs.existsSync(sessionDir)) {
 // Create WhatsApp client with PERSISTENT CONNECTION configuration
 const client = new Client({
     puppeteer: config.whatsapp.puppeteer,
-    // Session persistence - CRITICAL for staying connected
-    session: sessionDir,
+    // Use LocalAuth for stable session persistence on Render
+    authStrategy: new LocalAuth({ dataPath: sessionDir }),
     // NEVER restart on auth failure - keep trying to reconnect
     restartOnAuthFail: false,
     // NO QR code timeout - keep trying forever
     qrTimeoutMs: 0,
-    // Additional options for PERSISTENT connection
-    webVersionCache: {
-        type: 'remote',
-        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
-    },
     // Keep alive settings
     authTimeoutMs: 0, // No auth timeout
     takeoverOnConflict: false, // Don't conflict with other sessions
