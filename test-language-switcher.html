@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROF Language Switcher Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .language-options {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background: white;
+            color: #333;
+            border-radius: 10px;
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+            min-width: 150px;
+        }
+        
+        .language-option {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .language-option:hover {
+            background: #f0f0f0;
+        }
+        
+        .continue-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .continue-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .translated-text {
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher" onclick="toggleLanguageOptions()">
+        <span id="current-language">🌐 English</span>
+        <span style="margin-left: 5px;">▼</span>
+    </div>
+    
+    <!-- Language Options -->
+    <div class="language-options" id="language-options">
+        <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+        <div class="language-option" onclick="changeLanguage('lg')">🇺🇬 Luganda</div>
+        <div class="language-option" onclick="changeLanguage('rn')">🇺🇬 Runyankole</div>
+        <div class="language-option" onclick="changeLanguage('sw')">🇹🇿 Kiswahili</div>
+    </div>
+    
+    <div class="container">
+        <div class="logo">AGROF</div>
+        <div class="subtitle" id="subtitle">Your AI Powered Crop Health Companion</div>
+        
+        <div class="translated-text" id="welcome-text">
+            Welcome to AGROF! This is a test of the multilingual functionality.
+        </div>
+        
+        <button class="continue-button" onclick="continueToApp()" id="continue-button">
+            Continue to AGROF →
+        </button>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                subtitle: "Your AI Powered Crop Health Companion",
+                welcome: "Welcome to AGROF! This is a test of the multilingual functionality.",
+                continue: "Continue to AGROF →"
+            },
+            lg: {
+                subtitle: "Omuyambi w'eby'obulimi akola ku AI",
+                welcome: "Tusanyuse okukulaba mu AGROF! Kino kikakasa obukakafu bwa bulimi obw'ekika ekya waggulu.",
+                continue: "Ddamu okutuuka ku AGROF →"
+            },
+            rn: {
+                subtitle: "Omuyambi w'eby'oburimi akora ku AI",
+                welcome: "Tusanyuse okukulaba mu AGROF! Kino kikakasa obukakafu bwa burimi obw'ekika ekya waggulu.",
+                continue: "Ddamu okutuuka ku AGROF →"
+            },
+            sw: {
+                subtitle: "Msaidizi wa Kilimo wa AI",
+                welcome: "Karibu AGROF! Hii ni jaribio la utendaji wa lugha nyingi.",
+                continue: "Endelea hadi AGROF →"
+            }
+        };
+        
+        let currentLanguage = 'en';
+        
+        function toggleLanguageOptions() {
+            const options = document.getElementById('language-options');
+            options.style.display = options.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const langNames = {
+                'en': 'English',
+                'lg': 'Luganda', 
+                'rn': 'Runyankole',
+                'sw': 'Kiswahili'
+            };
+            
+            // Update current language display
+            document.getElementById('current-language').textContent = `🌐 ${langNames[lang]}`;
+            
+            // Update all text
+            document.getElementById('subtitle').textContent = translations[lang].subtitle;
+            document.getElementById('welcome-text').textContent = translations[lang].welcome;
+            document.getElementById('continue-button').textContent = translations[lang].continue;
+            
+            // Hide language options
+            document.getElementById('language-options').style.display = 'none';
+            
+            // Save language preference
+            localStorage.setItem('agrof-language', lang);
+        }
+        
+        function continueToApp() {
+            alert(`Language: ${currentLanguage}\nThis would continue to the main AGROF app!`);
+        }
+        
+        // Load saved language preference
+        window.onload = function() {
+            const savedLang = localStorage.getItem('agrof-language') || 'en';
+            changeLanguage(savedLang);
+        };
+        
+        // Close language options when clicking outside
+        document.addEventListener('click', function(event) {
+            const switcher = document.querySelector('.language-switcher');
+            const options = document.getElementById('language-options');
+            if (!switcher.contains(event.target) && !options.contains(event.target)) {
+                options.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+# Cloudinary Backend Configuration
+
+# Cloudinary Credentials (Get from https://cloudinary.com/console)
+CLOUDINARY_CLOUD_NAME=dsr8twjxe
+CLOUDINARY_API_KEY=your_cloudinary_api_key_here
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret_here
+
+# Server Port
+PORT=3002
+
+# Instructions:
+# 1. Rename this file to .env
+# 2. Go to https://cloudinary.com/console
+# 3. Copy your API Key and API Secret from the dashboard
+# 4. Paste them above (replace the placeholders)
+# 5. Save the file
+# 6. Run: npm start
+
+
+
+# Cloudinary Credentials (Get from https://cloudinary.com/console)
+CLOUDINARY_CLOUD_NAME=dsr8twjxe
+CLOUDINARY_API_KEY=your_cloudinary_api_key_here
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret_here
+
+# Server Port
+PORT=3002
+
+# Instructions:
+# 1. Rename this file to .env
+# 2. Go to https://cloudinary.com/console
+# 3. Copy your API Key and API Secret from the dashboard
+# 4. Paste them above (replace the placeholders)
+# 5. Save the file
+# 6. Run: npm start
+
+
+
