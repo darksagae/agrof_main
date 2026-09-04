@@ -1,73 +1,45 @@
 # Ammonium Sulphate
 
+## Supplier
+Export Trading Group
+
 ## Overview
-Ammonium Sulphate is a nitrogen and sulphur fertilizer containing 21% nitrogen and 24% sulphur. This fast-acting fertilizer provides immediate nitrogen availability and essential sulphur for crop growth, making it ideal for crops with high sulphur requirements.
-
-## Specifications
-Active Ingredient: Ammonium Sulphate (NH4)2SO4
-Formulation: Granular
-Mode of Action: Nitrogen and sulphur fertilizer
-Target Application: All crops requiring nitrogen and sulphur
-Application Areas: Cereals, vegetables, fruits, pastures
-Packaging: 25kg, 50kg bags
-
-## Key Features
-21% nitrogen content
-24% sulphur content
-Fast-acting nitrogen
-Acidifying effect on soil
-Water soluble
-Cost-effective fertilizer
-Easy to apply
-
-## Usage Instructions
-Mixing: Apply directly to soil
-Application: Broadcast or band application
-Timing: Best applied at planting or early growth stage
-Rate: 100-200kg per hectare
-Incorporation: Mix into top 10-15cm of soil
-Frequency: Apply as needed during growing season
-
-## Application Method
-Broadcast Spreader: For large areas
-Hand Application: For small areas
-Tractor Mounted: For commercial farming
-Timing: Dry weather conditions preferred
-
-## Benefits
-Fast Nitrogen: Immediate nitrogen availability
-Sulphur Source: Provides essential sulphur
-Cost Effective: Economical nitrogen source
-Water Soluble: Easy nutrient uptake
-Versatile: Suitable for many crops
-Acidifying: Helps with alkaline soils
+N-21%: S-24%. Contains two nutrients (Nitrogen and Sulphur). It is used for growth of different plants especially ground plants and cereals.
 
 ## Price Information
-Per 25kg bag: UGX 35,000
-Per 50kg bag: UGX 65,000
-Per ton: UGX 1,200,000
-Bulk orders: Contact for pricing
+50 Kg: UGX 140,000
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in dry, covered area
-Keep away from moisture
-Protect from direct sunlight
-Shelf life: Indefinite with proper storage
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves and dust mask
-First Aid: In case of contact, wash thoroughly with water
-Storage: Store away from food and feed
-Disposal: Safe for agricultural use
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

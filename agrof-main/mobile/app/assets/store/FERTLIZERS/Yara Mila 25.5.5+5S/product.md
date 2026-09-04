@@ -1,74 +1,45 @@
-# Yara Mila 25.5.5+5S - Premium Fertilizer
+# Yara Mila 25.5.5+5S
+
+## Supplier
+Mabugu Farm Supply
 
 ## Overview
-Yara Mila 25.5.5+5S is a premium quality fertilizer from Yara, containing nitrogen, phosphorus, potassium, and sulfur. This high-quality fertilizer is designed to provide balanced nutrition for optimal crop growth and yield.
-
-## Specifications
-NPK Ratio: 25.5-5-5+5S
-Nitrogen Content: 25.5% (Ammonium and Nitrate forms)
-Phosphorus Content: 5% (P2O5)
-Potassium Content: 5% (K2O)
-Sulfur Content: 5% (S)
-Form: Granular
-Particle Size: 2-4mm
-Packaging: 50kg bags
-
-## Key Features
-Premium quality from Yara
-High nitrogen content
-Contains sulfur for better nutrition
-Balanced nutrient ratio
-Suitable for all crops
-Easy to apply
-Long-lasting effect
-
-## Usage Instructions
-Soil Application: Apply 150-250kg per hectare
-Planting Application: Apply at planting time
-Side Dressing: Apply 75-125kg per hectare
-Top Dressing: Apply during active growth
-Timing: Apply at planting and during growth stages
-
-## Application Method
-Broadcast Spreading: For field crops
-Band Application: For row crops
-Incorporation: Mix into soil before planting
-Split Application: Divide into multiple applications
-
-## Benefits
-Premium Quality: High-quality Yara product
-High Nitrogen: Promotes vigorous growth
-Sulfur Content: Improves protein synthesis
-Balanced Nutrition: Provides essential nutrients
-Better Yield: Increases crop production
-Cost Effective: Efficient nutrient delivery
+This is an inorganic fertilizer made of Nitrogen 25%, Phosphorous 5%, Potassium 5% and Sulphur 5%.the percentages represent the total weight of these elements in the fertilizer.
 
 ## Price Information
-Per 50kg bag: UGX 200,000
-Bulk orders (10+ bags): UGX 195,000 per bag
-Wholesale (50+ bags): UGX 190,000 per bag
-Premium packages: Contact for special pricing
+50 Kgs: UGX 125,000
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in cool, dry place
-Keep away from moisture
-Ensure proper ventilation
-Shelf life: 24 months from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Keep away from children and pets
-Use protective equipment during application
-Avoid contact with eyes and skin
-Store separately from food items
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

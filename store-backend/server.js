@@ -201,10 +201,16 @@ const parseProductMarkdownFile = async (filePath) => {
         const text = token.text;
         
         if (currentSection === 'price') {
-          // Extract price information
+          // Extract price information - prioritize main price (usually first)
           const priceMatch = text.match(/UGX\s*([0-9,]+(?:\.[0-9]+)?)/i);
           if (priceMatch) {
-            product.price = `UGX ${priceMatch[1]}`;
+            // Only set price if not already set (prioritize first/main price)
+            if (!product.price || product.price === 'Contact for pricing') {
+              product.price = `UGX ${priceMatch[1]}`;
+              // Also set selling_price as numeric value
+              const numericPrice = parseInt(priceMatch[1].replace(/,/g, ''));
+              product.selling_price = numericPrice;
+            }
           }
         } else if (product[currentSection]) {
           product[currentSection] += '\n' + text;

@@ -1,73 +1,45 @@
-# DAP (Diammonium Phosphate)
+# Dap
+
+## Supplier
+Grain Pulse Ltd
 
 ## Overview
-DAP (Diammonium Phosphate) is a high-analysis fertilizer containing 18% nitrogen and 46% phosphorus. This premium fertilizer provides both nitrogen and phosphorus in a highly available form, making it ideal for planting and early growth stages of crops.
-
-## Specifications
-Active Ingredient: Diammonium Phosphate (NH4)2HPO4
-Formulation: Granular
-Mode of Action: Nitrogen and phosphorus fertilizer
-Target Application: All crops requiring nitrogen and phosphorus
-Application Areas: Cereals, vegetables, fruits, field crops
-Packaging: 25kg, 50kg bags
-
-## Key Features
-18% nitrogen content
-46% phosphorus content
-High-analysis fertilizer
-Water soluble
-Fast-acting nutrients
-Cost-effective
-Easy to apply
-
-## Usage Instructions
-Mixing: Apply directly to soil
-Application: Broadcast or band application
-Timing: Best applied at planting or early growth stage
-Rate: 100-150kg per hectare
-Incorporation: Mix into top 10-15cm of soil
-Frequency: Apply as needed during growing season
-
-## Application Method
-Broadcast Spreader: For large areas
-Hand Application: For small areas
-Tractor Mounted: For commercial farming
-Timing: Dry weather conditions preferred
-
-## Benefits
-High Analysis: Concentrated nitrogen and phosphorus
-Fast Acting: Immediate nutrient availability
-Cost Effective: Economical high-analysis fertilizer
-Water Soluble: Easy nutrient uptake
-Versatile: Suitable for many crops
-Planting Ready: Ideal for planting applications
+This is the most concentrated phosphorous-based fertilizer perfect for any agriculture crop. This can be applied as top-dressing during planting and at seeding level as well as cultivating period.
 
 ## Price Information
-Per 25kg bag: UGX 40,000
-Per 50kg bag: UGX 75,000
-Per ton: UGX 1,400,000
-Bulk orders: Contact for pricing
+50 Kg: UGX 175,000
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in dry, covered area
-Keep away from moisture
-Protect from direct sunlight
-Shelf life: Indefinite with proper storage
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves and dust mask
-First Aid: In case of contact, wash thoroughly with water
-Storage: Store away from food and feed
-Disposal: Safe for agricultural use
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

@@ -1,73 +1,46 @@
 # Greensea K20 2.5%
 
+## Supplier
+Hangzhou Agrochemicals (U) Ltd
+
 ## Overview
-Greensea K20 2.5% is a potassium-rich fertilizer containing 2.5% potassium oxide. This specialized fertilizer provides essential potassium for plant growth, improving fruit quality, disease resistance, and overall plant vigor.
-
-## Specifications
-Active Ingredient: Potassium Oxide (K2O) 2.5%
-Formulation: Liquid fertilizer
-Mode of Action: Potassium fertilizer
-Target Application: Crops requiring potassium supplementation
-Application Areas: Fruits, vegetables, field crops, ornamental plants
-Packaging: 1L, 5L, 20L containers
-
-## Key Features
-2.5% potassium oxide content
-Liquid formulation
-Foliar application compatible
-Fast-acting potassium
-Premium quality
-Easy to apply
-Disease resistance enhancement
-
-## Usage Instructions
-Mixing: Dilute in water for application
-Application: Foliar spray or soil application
-Timing: Apply during active growth periods
-Rate: 2-3L per hectare
-Frequency: Apply every 2-3 weeks
-Concentration: 0.5-1% for foliar spray
-
-## Application Method
-Foliar Spray: Direct application to leaves
-Soil Application: Broadcast or band placement
-Fertigation: Through irrigation systems
-Timing: Early morning or late evening
-
-## Benefits
-Potassium Rich: Essential for plant growth
-Fast Acting: Immediate nutrient availability
-Foliar Compatible: Safe for leaf application
-Disease Resistance: Improves plant immunity
-Fruit Quality: Enhances fruit size and quality
-Premium Quality: High-grade fertilizer
+A biological biostimulant that improves root and shoot development, improves photosynthesis and helps a lot of times of stress e.g. during drought.
 
 ## Price Information
-Per 1L container: UGX 8,000
-Per 5L container: UGX 35,000
-Per 20L container: UGX 130,000
-Bulk orders: Contact for pricing
+1ltr: UGX 35,000
+100mls: UGX 5,500
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 container
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in cool, dry place
-Keep away from direct sunlight
-Protect from freezing
-Shelf life: 2 years from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves and eye protection
-First Aid: In case of contact, wash thoroughly with water
-Storage: Store away from food and feed
-Disposal: Safe for agricultural use
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

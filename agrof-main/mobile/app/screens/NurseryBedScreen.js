@@ -1,22 +1,41 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { productsApi } from '../services/storeApi';
 
 const NurseryBedScreen = ({ onBack }) => {
+  const [nurseryProducts, setNurseryProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Empty products array - store is currently empty
-  const nurseryProducts = [];
-  
-  console.log('🌱 NurseryBedScreen: Rendering with', nurseryProducts.length, 'products');
+  useEffect(() => {
+    fetchNurseryProducts();
+  }, []);
+
+  const fetchNurseryProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      console.log('🌱 Fetching nursery bed products...');
+      
+      const products = await productsApi.getAll({ category: 'nursery_bed' });
+      console.log('🌱 Nursery bed products loaded:', products.length);
+      
+      setNurseryProducts(products);
+    } catch (err) {
+      console.error('❌ Error fetching nursery products:', err);
+      setError('Failed to load nursery products');
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-  // Nursery bed images have been removed - using placeholder
-  const nurseryImages = {};
   // Optimized product rendering with memoization
   const renderProduct = useCallback(({ item: product }) => (
-    <View style={styles.productItem}>
+    <TouchableOpacity style={styles.productItem}>
       <Image 
-        source={product.image} 
+        source={product.image_url ? { uri: `http://192.168.0.105:3001${product.image_url}` } : require('../assets/nurserybed.png')} 
         style={styles.productImage} 
         resizeMode="cover"
         fadeDuration={0}
@@ -25,8 +44,11 @@ const NurseryBedScreen = ({ onBack }) => {
         }}
       />
       <Text style={styles.productName}>{product.name}</Text>
-      <Text style={styles.productDescription}>{product.description}</Text>
-    </View>
+      <Text style={styles.productPrice}>{product.price || 'Contact for pricing'}</Text>
+      <Text style={styles.productDescription} numberOfLines={2} ellipsizeMode="tail">
+        {product.description}
+      </Text>
+    </TouchableOpacity>
   ), []);
 
   return (
@@ -43,25 +65,46 @@ const NurseryBedScreen = ({ onBack }) => {
         <Text style={styles.headerSubtitle}>Quality seedlings and plantlets for your garden</Text>
       </View>
 
+      {/* Loading State */}
+      {loading && (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#2c5530" />
+          <Text style={styles.loadingText}>Loading nursery products...</Text>
+        </View>
+      )}
+
+      {/* Error State */}
+      {error && (
+        <View style={styles.errorContainer}>
+          <MaterialIcons name="error-outline" size={48} color="#e74c3c" />
+          <Text style={styles.errorText}>{error}</Text>
+          <TouchableOpacity style={styles.retryButton} onPress={fetchNurseryProducts}>
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       {/* Products Grid - Optimized FlatList */}
-      <FlatList
-        data={nurseryProducts}
-        renderItem={renderProduct}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        style={styles.productsContainer}
-        showsVerticalScrollIndicator={false}
-        initialNumToRender={8}
-        maxToRenderPerBatch={6}
-        windowSize={10}
-        removeClippedSubviews={true}
-        updateCellsBatchingPeriod={50}
-        getItemLayout={(data, index) => ({
-          length: 280,
-          offset: 280 * Math.floor(index / 2),
-          index,
-        })}
-      />
+      {!loading && !error && (
+        <FlatList
+          data={nurseryProducts}
+          renderItem={renderProduct}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+          style={styles.productsContainer}
+          showsVerticalScrollIndicator={false}
+          initialNumToRender={8}
+          maxToRenderPerBatch={6}
+          windowSize={10}
+          removeClippedSubviews={true}
+          updateCellsBatchingPeriod={50}
+          getItemLayout={(data, index) => ({
+            length: 280,
+            offset: 280 * Math.floor(index / 2),
+            index,
+          })}
+        />
+      )}
     </View>
   );
 };
@@ -137,11 +180,53 @@ const styles = StyleSheet.create({
     marginTop: 8,
     textAlign: 'center',
   },
+  productPrice: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#e74c3c',
+    marginBottom: 5,
+    textAlign: 'center',
+  },
   productDescription: {
     fontSize: 11,
     color: '#666',
     lineHeight: 16,
     textAlign: 'center',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#2c5530',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  errorText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#e74c3c',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  retryButton: {
+    backgroundColor: '#2c5530',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   imageLoader: {
     position: 'absolute',

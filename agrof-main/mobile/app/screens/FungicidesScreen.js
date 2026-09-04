@@ -1,18 +1,41 @@
-import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import FungicideDetailScreen from './FungicideDetailScreen';
 import SimplePricingWidget from '../components/SimplePricingWidget';
+import { productsApi } from '../services/storeApi';
 
 const FungicidesScreen = ({ onBack }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [pricingWidgetVisible, setPricingWidgetVisible] = useState(false);
   const [selectedProductForPricing, setSelectedProductForPricing] = useState(null);
+  const [fungicideProducts, setFungicideProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Empty products array - store is currently empty
-  const fungicideProducts = [];
-  
-  console.log('🦠 FungicidesScreen: Rendering with', fungicideProducts.length, 'products');
+  // Load fungicide products on mount
+  useEffect(() => {
+    loadFungicideProducts();
+  }, []);
+
+  const loadFungicideProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Fetch fungicide products from API
+      const products = await productsApi.getAll({ category: 'fungicides' });
+      setFungicideProducts(products);
+      
+      console.log('🦠 FungicidesScreen: Loaded', products.length, 'fungicide products');
+    } catch (err) {
+      console.error('Failed to load fungicide products:', err);
+      setError('Failed to load fungicide products. Please try again.');
+      Alert.alert('Error', 'Failed to load fungicide products. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Helper function to check if product has multiple prices
   const hasMultiplePrices = (product) => {
@@ -51,27 +74,27 @@ const FungicidesScreen = ({ onBack }) => {
   // Fungicide images have been removed - using placeholder
   const fungicideImages = {};
 
-  const renderProduct = (product) => (
+  const renderProduct = ({ item: product }) => (
     <TouchableOpacity 
       key={product.id} 
       style={styles.productItem}
       onPress={() => setSelectedProduct(product)}
     >
       <Image 
-        source={product.image} 
+            source={product.image_url ? { uri: `http://192.168.0.105:3001${product.image_url}` } : require('../assets/fungicides.png')}
         style={styles.productImage}
         resizeMode="cover"
         fadeDuration={0}
         onError={(error) => console.log('Image load error:', error)}
       />
       
-      <Text style={styles.productName} numberOfLines={1} ellipsizeMode="tail">
+      <Text style={styles.productName} numberOfLines={2} ellipsizeMode="tail">
         {product.name}
       </Text>
       
       <View style={styles.priceContainer}>
         <Text style={styles.price}>
-          {hasMultiplePrices(product) ? getUnitPrice(product) : product.price}
+          {product.price || 'Contact for pricing'}
         </Text>
       </View>
     </TouchableOpacity>
@@ -88,6 +111,53 @@ const FungicidesScreen = ({ onBack }) => {
     );
   }
 
+  // Show loading state
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={onBack}>
+            <MaterialIcons name="arrow-back" size={24} color="white" />
+          </TouchableOpacity>
+          <View style={styles.headerTitleContainer}>
+            <MaterialIcons name="bug_report" size={32} color="white" />
+            <Text style={styles.headerTitle}>Fungicide Products</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>Loading fungicides...</Text>
+        </View>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#2c5530" />
+          <Text style={styles.loadingText}>Loading fungicide products...</Text>
+        </View>
+      </View>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={onBack}>
+            <MaterialIcons name="arrow-back" size={24} color="white" />
+          </TouchableOpacity>
+          <View style={styles.headerTitleContainer}>
+            <MaterialIcons name="bug_report" size={32} color="white" />
+            <Text style={styles.headerTitle}>Fungicide Products</Text>
+          </View>
+          <Text style={styles.headerSubtitle}>Error loading products</Text>
+        </View>
+        <View style={styles.errorContainer}>
+          <MaterialIcons name="error-outline" size={48} color="#e74c3c" />
+          <Text style={styles.errorText}>{error}</Text>
+          <TouchableOpacity style={styles.retryButton} onPress={loadFungicideProducts}>
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -99,13 +169,15 @@ const FungicidesScreen = ({ onBack }) => {
           <MaterialIcons name="bug_report" size={32} color="white" />
           <Text style={styles.headerTitle}>Fungicide Products</Text>
         </View>
-        <Text style={styles.headerSubtitle}>Complete range of agricultural fungicides</Text>
+        <Text style={styles.headerSubtitle}>
+          {fungicideProducts.length} fungicide products available
+        </Text>
       </View>
 
       {/* Products Grid */}
       <FlatList
         data={fungicideProducts}
-        renderItem={({ item }) => renderProduct(item)}
+        renderItem={renderProduct}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         contentContainerStyle={styles.productsContainer}
@@ -209,6 +281,41 @@ const styles = StyleSheet.create({
   priceContainer: {
     alignItems: 'center',
     marginBottom: 8,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    fontSize: 16,
+    color: '#666',
+    marginTop: 10,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#e74c3c',
+    textAlign: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  retryButton: {
+    backgroundColor: '#2c5530',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

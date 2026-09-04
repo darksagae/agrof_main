@@ -1,51 +1,46 @@
-# Basagran 480 SL Herbicide For Weed Control In Dry Beans, Maize And Potato
+# Basagran 480 Sl – Herbicide For Weed Control In Dry Beans, Maize And Potato
 
 ## Overview
-Basagran 480 SL is a selective herbicide containing bentazone, providing excellent control against broadleaf weeds in dry beans, maize and potato crops. This herbicide is highly effective for post-emergence weed management in these important food crops.
+Basagran 480 SL is a post-emergence Herbicide for the control of Broad leaf weeds in dry beans, maize and potato.
 
 ## Specifications
-Active Ingredient: Bentazone 480g/L
+Active Ingredient: Bentazone 480 g/l
 Formulation: Soluble Liquid (SL)
-Mode of Action: Selective herbicide
-Target Weeds: Broadleaf weeds
-Application Areas: Dry beans, maize, potato crops
-Packaging: 1L, 5L, 20L containers
+Mode of Action: Post-emergence herbicide
+Target Weeds: Broad leaf weeds
+Target Crops: Dry beans, maize, potato
+Packaging: 5L container
 
 ## Key Features
-Selective weed control
-Post-emergence application
-Broadleaf weed control
-Rainfast within 6 hours
+Post-emergence broad leaf weed control
+Effective against broad leaf weeds
+Selective herbicide
+Suitable for multiple crops
 Cost-effective weed control
 Easy to apply
-Crop-safe formulation
 
 ## Usage Instructions
-Mixing: Mix 150-200ml per 20 liters of water
-Application: Apply as a foliar spray to actively growing weeds
-Timing: Best applied post-emergence when weeds are young
-Avoid Drift: Do not apply when windy to prevent drift
-Re-entry Period: 12 hours after application
+**Dosage:**
+- **Beans:** 1.5-3.0 L/ha (150-300 ml/20ltrs of water)
+- **Maize:** 2.0-3.0 L/ha (200-300 ml/20ltrs of water)
+- **Potatoes:** 1.75-3.0 l/ha (175-300 ml/20L of water)
+
+**Application:** Apply as a post-emergence herbicide
+**Timing:** Apply when weeds are actively growing
+**Coverage:** Ensure thorough coverage of target weeds
 
 ## Application Method
-Foliar Spray: Apply to weed foliage
-Boom Sprayer: For large areas
-Knapsack Sprayer: For small areas
-Timing: Early morning or late evening
+Foliar Spray: Direct application to weed foliage
 
 ## Benefits
-Selective Control: Kills broadleaf weeds, spares crops
-Post-emergence: Controls weeds after they emerge
-Cost Effective: Reduces manual weeding
-Time Saving: Quick and efficient application
-Multi-crop: Suitable for beans, maize, and potato
-Easy Use: Simple application method
+Effective control of broad leaf weeds
+Selective action on target crops
+Suitable for multiple crops
+Cost-effective solution
+Easy to use
 
 ## Price Information
-Per 1L container: UGX 45,000
-Per 5L container: UGX 200,000
-Per 20L container: UGX 750,000
-Bulk orders: Contact for pricing
+Per 5L: UGX 305,200
 
 ## Availability & Delivery
 Stock Status: In Stock
@@ -55,18 +50,21 @@ Delivery Time: 2-3 business days
 Payment: Cash on delivery, Mobile money, Bank transfer
 
 ## Storage Instructions
-Store in original container
-Keep in cool, dry place
-Avoid direct sunlight
-Shelf life: 2 years from manufacturing date
+Store in cool, dry place
+Keep away from direct sunlight
+Ensure proper ventilation
+Shelf life: 24 months from manufacturing date
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves, eye protection, and long-sleeved clothing
-First Aid: In case of contact, rinse immediately with water
+WHO Class II: Moderately Hazardous
+Personal Protective Equipment: Wear appropriate protective clothing
+First Aid: In case of contact, wash thoroughly with soap and water
 Storage: Store away from food and feed
-Disposal: Dispose according to local regulations
 
 ## Contact Information
 Phone: +256 700 123 456
 Email: herbicides@agrof.com
 WhatsApp: +256 700 123 456
+
+## Mode of Action
+The active ingredient is taken up through the green parts of the plant. The leaves and stems must therefore be adequately wetted with the spray solution. Warmth and good growing weather accelerate the action of the product. Basagran 480 SL is sprayed post emergence, i.e., when the weeds have already emerged. After treatment no rain should fall for six hours, so that the active ingredient can penetrate the weeds. Basagran 480 SL has no biologically active vapour pressure and so constitutes no risk to neighbouring crops in this way.

@@ -45,7 +45,6 @@ export default function App() {
     notes: ''
   });
   const agrofVideoRef = useRef(null);
-  const backgroundVideoRef = useRef(null);
 
   // Request permissions on app start
   useEffect(() => {
@@ -85,27 +84,7 @@ export default function App() {
   }, []);
 
   // Start background video when Care tab is active
-  useEffect(() => {
-    if (currentTab === 'care' && currentScreen === 'home') {
-      console.log('Care tab activated - starting background video');
-      // Start video with multiple attempts to ensure it plays
-      const startVideo = () => {
-        if (backgroundVideoRef.current) {
-          backgroundVideoRef.current.playAsync().catch(error => {
-            console.log('Video play error:', error);
-          });
-        }
-      };
-      
-      // Try immediately
-      startVideo();
-      
-      // Try after short delays
-      setTimeout(startVideo, 500);
-      setTimeout(startVideo, 1000);
-      setTimeout(startVideo, 2000);
-    }
-  }, [currentTab, currentScreen]);
+  // Background video removed - no longer needed
 
   const userCategories = [
     { id: 'farmer', title: 'Farmer', icon: 'agriculture', description: 'I grow crops and need disease detection' },
@@ -731,75 +710,13 @@ export default function App() {
     );
   };
 
-  // Main Care screen with background video
+  // Main Care screen
   const renderHomeScreen = () => (
     <View style={styles.screen}>
-      {/* Background Video - Auto-playing */}
-      <View style={styles.backgroundVideoWrapper}>
-        <Video
-          ref={backgroundVideoRef}
-          source={require('./assets/background.mp4')}
-          style={styles.backgroundVideo}
-          useNativeControls={false}
-          resizeMode={ResizeMode.COVER}
-          isLooping={true}
-          shouldPlay={true}
-          isMuted={true}
-          onError={(error) => {
-            console.log('Background video error:', error);
-          }}
-          onLoad={() => {
-            console.log('Background video loaded successfully');
-            // Force play the video multiple times to ensure it starts
-            const forcePlay = () => {
-              if (backgroundVideoRef.current) {
-                backgroundVideoRef.current.playAsync().catch(e => {
-                  console.log('Force play error:', e);
-                });
-              }
-            };
-            forcePlay();
-            setTimeout(forcePlay, 100);
-            setTimeout(forcePlay, 500);
-            setTimeout(forcePlay, 1000);
-          }}
-          onPlaybackStatusUpdate={(status) => {
-            if (status.isPlaying) {
-              console.log('Background video is playing');
-            } else if (status.didJustFinish) {
-              console.log('Background video finished, restarting...');
-              // Auto-restart video
-              if (backgroundVideoRef.current) {
-                backgroundVideoRef.current.playAsync().catch(e => {
-                  console.log('Restart error:', e);
-                });
-              }
-            }
-          }}
-        />
-        <View style={styles.backgroundVideoOverlay} />
-      </View>
-      
       {/* Main Content with ScrollView */}
       <ScrollView 
         style={styles.screenContent} 
         showsVerticalScrollIndicator={false}
-        onScrollBeginDrag={() => {
-          console.log('Scrolling started - ensuring video plays');
-          if (backgroundVideoRef.current) {
-            backgroundVideoRef.current.playAsync().catch(e => {
-              console.log('Scroll play error:', e);
-            });
-          }
-        }}
-        onScrollEndDrag={() => {
-          console.log('Scrolling ended - ensuring video continues');
-          if (backgroundVideoRef.current) {
-            backgroundVideoRef.current.playAsync().catch(e => {
-              console.log('Scroll end play error:', e);
-            });
-          }
-        }}
       >
         {/* Header */}
         <View style={styles.header}>
@@ -2188,30 +2105,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
 
-  // Background video styles
-  backgroundVideoWrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-    elevation: -1,
-  },
-  backgroundVideo: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-  },
-  backgroundVideoOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    zIndex: 0,
-  },
+  // Background video styles - REMOVED
   screenContent: {
     flex: 1,
     zIndex: 1,

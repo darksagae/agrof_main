@@ -1,74 +1,45 @@
-# Urea (Prilled) - High Nitrogen Fertilizer
+# Urea (Prilled)
+
+## Supplier
+Export Trading Group
 
 ## Overview
-Urea is the most concentrated solid nitrogen fertilizer available, containing 46% nitrogen. The prilled form ensures easy handling, uniform spreading, and excellent storage properties. Ideal for all crops requiring high nitrogen levels.
-
-## Specifications
-Nitrogen Content: 46% (Urea-N)
-Form: Prilled granules
-Particle Size: 1-3mm diameter
-Moisture Content: <0.5%
-Biuret Content: <1.0%
-Solubility: Highly soluble in water
-Packaging: 50kg bags
-
-## Key Features
-Highest nitrogen content among solid fertilizers
-Excellent storage and handling properties
-Uniform granule size for even distribution
-Highly soluble for quick plant uptake
-Cost-effective nitrogen source
-Suitable for all soil types
-Compatible with most other fertilizers
-
-## Usage Instructions
-Soil Application: Apply 100-200kg per hectare
-Side Dressing: Apply 50-100kg per hectare
-Top Dressing: Apply during active growth
-Timing: Best applied before planting or during early growth
-Frequency: 2-3 applications per growing season
-
-## Application Method
-Broadcast Spreading: For field crops
-Band Application: For row crops
-Incorporation: Mix into soil before planting
-Split Application: Divide total amount into 2-3 applications
-
-## Benefits
-High Nitrogen Content: Provides maximum nitrogen per unit
-Cost Effective: Most economical nitrogen source
-Quick Action: Rapid nitrogen release
-Versatile: Suitable for all crops
-Easy Handling: Prilled form ensures uniform spreading
+UREA 46% N is a white crystalline solid containing 46% of nitrogen.it has the highest nitrogen content of all solid nitrogenous fertilizers making it have the lowest transportation cost per unit nitrogen nutrient.
 
 ## Price Information
-Per 50kg bag: UGX 120,000
-Bulk orders (10+ bags): UGX 115,000 per bag
-Wholesale (50+ bags): UGX 110,000 per bag
-Truckload (1000+ bags): Contact for pricing
+50 Kg: UGX 125,000
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in cool, dry place
-Keep away from moisture
-Ensure proper ventilation
-Shelf life: 24 months from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Keep away from children and pets
-Use protective equipment during application
-Avoid contact with eyes and skin
-Store separately from food items
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456
-
-

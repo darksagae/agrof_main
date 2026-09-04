@@ -1,76 +1,99 @@
 # Strawberry Chandler Seedlings
 
 ## Overview
-Strawberry Chandler seedlings are premium quality strawberry plants ready for transplanting. This variety produces large, sweet, and juicy strawberries with excellent flavor and high yield potential. Perfect for home gardens and commercial cultivation.
+Strawberries are low-growing herbaceous plants with a fibrous root system and a crown from which arise basal leaves. The leaves are compound, typically with three leaflets, sawtooth-edged, and usually hairy. The flowers, generally white, rarely reddish, are borne in small clusters on slender stalks.
 
 ## Specifications
-Variety: Chandler Strawberry
-Plant Type: June-bearing
-Mature Height: 15-20cm
-Fruit Size: Large (20-30g)
-Fruit Color: Bright red
-Flavor: Sweet and aromatic
-Yield: High yielding variety
-Planting Season: Year-round
-Pot Size: 4-inch diameter
+- **Plant Type:** Perennial herbaceous plant
+- **Height:** 15-30 cm (6-12 inches)
+- **Leaf Type:** Compound, three leaflets
+- **Leaf Color:** Bright green
+- **Flower Color:** White, rarely reddish
+- **Growth Habit:** Low-growing, spreading
+- **Lifespan:** Perennial
+- **Hardiness:** Hardy perennial
 
 ## Key Features
-Large, sweet fruits
-High yield potential
-Excellent flavor
-Disease resistant
-Easy to grow
-Suitable for containers
-Long fruiting season
+- **Nutritious:** Packed with vitamins, fiber, and antioxidants
+- **Antioxidant Rich:** High levels of polyphenols
+- **Low Calorie:** Sodium-free, fat-free, cholesterol-free
+- **Vitamin C:** More vitamin C than an orange
+- **Minerals:** Good source of manganese and potassium
+- **Easy to Grow:** Simple cultivation
+- **Versatile:** Multiple uses
+
+## Growing Requirements
+- **Climate:** Temperate to subtropical
+- **Temperature:** 15-25°C optimal
+- **Soil:** Well-drained, loamy soil
+- **pH Range:** 5.5-7.0
+- **Water:** Regular watering required
+- **Sunlight:** 6-10 hours daily direct sunlight
+- **Spacing:** 30-45 cm between plants
+
+## Gardening Tips
+- **Sunlight:** Require 6-10 hours daily direct sunlight
+- **Soil:** Prefer loamy soil that drains well
+- **Preparation:** Work in aged manure or compost
+- **Clay Soil:** Mix in 4 inches or more of compost
+- **Sandy Soil:** Cultivate lightly and mix in compost
+- **pH:** Maintain pH between 5.5 and 7
+- **Drainage:** Ensure good drainage
+
+## Health Benefits
+- **Antioxidants:** High antioxidant capacity
+- **Vitamin C:** More than an orange
+- **Minerals:** Rich in manganese and potassium
+- **Fiber:** High fiber content
+- **Low Calorie:** Healthy snack option
+- **Nutrients:** Packed with essential nutrients
 
 ## Usage Instructions
-Transplanting: Plant in well-drained, fertile soil
-Location: Choose sunny location (6-8 hours sun)
-Spacing: Plant 30-45cm apart
-Watering: Keep soil consistently moist
-Fertilization: Apply balanced fertilizer monthly
-Mulching: Use straw or mulch around plants
+- **Fresh:** Eat fresh as snack
+- **Desserts:** Use in cakes and pies
+- **Smoothies:** Blend into smoothies
+- **Preserves:** Make jams and jellies
+- **Storage:** Store in refrigerator
+- **Freezing:** Freeze for long-term storage
 
-## Application Method
-Container Growing: Plant in large pots or hanging baskets
-Garden Planting: Plant in raised beds or garden rows
-Vertical Growing: Suitable for vertical garden systems
-Greenhouse Growing: Ideal for protected cultivation
+## Care and Maintenance
+- **Watering:** Keep soil consistently moist
+- **Fertilization:** Regular feeding with balanced fertilizer
+- **Weeding:** Regular weeding around plants
+- **Pest Control:** Monitor for pests
+- **Disease Prevention:** Avoid overwatering
+- **Renovation:** Renovate beds annually
+
+## Harvesting
+- **Timing:** When berries are fully red
+- **Method:** Pick by hand, leaving stem attached
+- **Frequency:** Harvest every 2-3 days
+- **Storage:** Store in refrigerator
+- **Preservation:** Freeze or make preserves
 
 ## Benefits
-High Yield: Produces abundant fruits
-Excellent Quality: Large, sweet strawberries
-Easy Care: Low maintenance requirements
-Versatile: Suitable for various growing methods
-Profit Potential: Good for commercial cultivation
-Home Garden: Perfect for home consumption
-
-## Price Information
-Per seedling: UGX 12,000
-Pack of 5 seedlings: UGX 50,000
-Pack of 10 seedlings: UGX 90,000
-Bulk orders: Contact for pricing
-
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 seedling
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+- **Nutritious:** High nutritional value
+- **Antioxidant:** Rich in antioxidants
+- **Easy Care:** Simple to grow
+- **Versatile:** Multiple uses
+- **Health:** Multiple health benefits
+- **Commercial:** High commercial value
 
 ## Storage Instructions
-Keep in original pot until transplanting
-Water regularly
-Place in bright, indirect light
-Transplant within 1 week of purchase
-
-## Safety Information
-Safe for consumption
-Keep away from pets
-Wash hands after handling
-Store in cool, dry place
+- **Fresh:** Store in refrigerator for 3-5 days
+- **Freezing:** Freeze whole or sliced
+- **Temperature:** Cool, dry storage
+- **Humidity:** Moderate humidity preferred
+- **Shelf Life:** 3-5 days when fresh
 
 ## Contact Information
-Phone: +256 700 123 456
-Email: nursery@agrof.com
-WhatsApp: +256 700 123 456
+**Supplier:** William Omwech
+**Phone:** +256 XXX XXX XXX
+**Email:** william@example.com
+**Location:** Uganda
+
+## Pricing
+- **1 Piece:** UGX 5,600
+- **Bulk Orders:** Contact for pricing
+- **Payment:** Cash on delivery available
+- **Delivery:** Available within Uganda

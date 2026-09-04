@@ -1,76 +1,98 @@
 # Parsley Seedling
 
 ## Overview
-Parsley seedlings are ready-to-transplant herb plants that provide fresh parsley leaves for culinary purposes. These healthy seedlings are grown in optimal conditions and are ready for immediate transplanting into your garden or containers.
+Parsley is a versatile herb that can be used in many ways, such as in sauces, juices, or as a garnish. Parsley contains several important nutrients, such as vitamins A, K, and C. It's also a good source of the mineral calcium, iron, magnesium, and potassium.
 
 ## Specifications
-Plant Type: Biennial Herb
-Growth Habit: Rosette
-Mature Height: 30-60cm
-Leaf Size: 5-15cm long
-Sunlight: Full sun to partial shade
-Soil: Well-drained, fertile soil
-Watering: Regular watering required
-Hardiness: Hardy biennial
-Pot Size: 4-inch diameter
+- **Plant Type:** Biennial herb
+- **Height:** 30-60 cm (1-2 feet)
+- **Leaf Type:** Curly or flat leaves
+- **Leaf Color:** Bright green
+- **Flower Color:** Small yellow-green flowers
+- **Growth Habit:** Upright, bushy
+- **Lifespan:** Biennial (2 years)
+- **Hardiness:** Hardy
 
 ## Key Features
-Ready for immediate transplanting
-Healthy root system
-Fresh, aromatic leaves
-Easy to grow and maintain
-Pest resistant
-Medicinal properties
-Rich in vitamins
+- **Nutritious:** Rich in vitamins A, K, and C
+- **Mineral Rich:** Good source of calcium, iron, magnesium, potassium
+- **Versatile:** Multiple culinary uses
+- **Easy to Grow:** Simple cultivation
+- **Long Shelf Life:** Fresh for up to two weeks
+- **Dried Storage:** Dried parsley lasts up to a year
+- **Health Benefits:** Boosts health while adding flavor
+
+## Growing Requirements
+- **Climate:** Cool to warm temperate
+- **Temperature:** 15-25°C optimal
+- **Soil:** Well-draining, rich in organic matter
+- **pH Range:** 6.0-7.0
+- **Water:** Regular watering required
+- **Sunlight:** Full sun (6-8 hours daily)
+- **Spacing:** 15-20 cm between plants
+
+## Gardening Tips
+- **Soil:** Parsley enjoys well-draining soil rich in organic matter
+- **Location:** Pick a spot that gets full sun (6-8 hours of sunlight)
+- **Weed Control:** Choose an area that is weed-free
+- **Watering:** Keep parsley plants sufficiently watered, especially through summer
+- **Mulching:** Lightly mulch around plants to conserve moisture
+- **Harvesting:** When leaf stems have three segments, parsley is ready
+
+## Health Benefits
+- **Vitamin Rich:** High in vitamins A, K, and C
+- **Mineral Content:** Good source of calcium, iron, magnesium, potassium
+- **Antioxidants:** Contains beneficial antioxidants
+- **Digestive Health:** Aids in digestion
+- **Immune Support:** Boosts immune system
+- **Bone Health:** Vitamin K for bone strength
 
 ## Usage Instructions
-Transplanting: Plant in well-drained, fertile soil
-Location: Choose sunny to partially shaded spot
-Spacing: Plant 20-30cm apart
-Watering: Keep soil consistently moist
-Harvesting: Pick leaves as needed
-Pruning: Trim regularly to encourage bushiness
+- **Culinary:** Use in sauces, juices, as garnish
+- **Fresh:** Add to salads and dishes
+- **Dried:** Use dried parsley in cooking
+- **Tea:** Make herbal tea from leaves
+- **Garnish:** Decorate dishes with fresh leaves
+- **Storage:** Keep fresh or dry for later use
 
-## Application Method
-Container Growing: Plant in pots with drainage holes
-Garden Planting: Plant directly in garden beds
-Indoor Growing: Suitable for indoor cultivation
-Companion Planting: Plant near vegetables
+## Care and Maintenance
+- **Watering:** Keep soil consistently moist
+- **Fertilization:** Light feeding with balanced fertilizer
+- **Weeding:** Regular weeding around plants
+- **Pest Control:** Generally pest-resistant
+- **Disease Prevention:** Avoid overwatering
+- **Harvesting:** Regular harvesting promotes growth
+
+## Harvesting
+- **Timing:** When leaf stems have three segments
+- **Method:** Cut outer leaves with scissors
+- **Frequency:** Regular harvesting encourages growth
+- **Storage:** Use fresh or dry for storage
+- **Preservation:** Dry leaves for long-term storage
 
 ## Benefits
-Culinary Use: Fresh parsley for cooking
-Medicinal Properties: Rich in vitamins and antioxidants
-Easy Care: Low maintenance plant
-Pest Resistant: Natural pest deterrent
-Versatile: Multiple uses
-Container Friendly: Can be grown in pots
-
-## Price Information
-Per seedling: UGX 6,000
-Pack of 5 seedlings: UGX 25,000
-Pack of 10 seedlings: UGX 45,000
-Bulk orders: Contact for pricing
-
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 seedling
-Delivery Areas: Nationwide
-Delivery Time: 1-2 business days
-Payment: Cash on delivery, Mobile money
+- **Nutritional:** High nutritional value
+- **Culinary:** Versatile cooking herb
+- **Health:** Multiple health benefits
+- **Easy Care:** Simple to grow and maintain
+- **Long Shelf Life:** Fresh for up to two weeks
+- **Dried Storage:** Dried parsley lasts up to a year
 
 ## Storage Instructions
-Keep in original pot until transplanting
-Water regularly
-Place in bright, indirect light
-Transplant within 1 week of purchase
-
-## Safety Information
-Safe for consumption
-Keep away from pets (toxic to some animals)
-Wash hands after handling
-Store in cool, dry place
+- **Fresh:** Store in refrigerator for 1-2 weeks
+- **Dried:** Store in airtight containers
+- **Freezing:** Freeze leaves in ice cubes
+- **Temperature:** Cool, dry storage
+- **Humidity:** Moderate humidity preferred
 
 ## Contact Information
-Phone: +256 700 123 456
-Email: nursery@agrof.com
-WhatsApp: +256 700 123 456
+**Supplier:** William Omwech
+**Phone:** +256 XXX XXX XXX
+**Email:** william@example.com
+**Location:** Uganda
+
+## Pricing
+- **1 Piece:** UGX 5,600
+- **Bulk Orders:** Contact for pricing
+- **Payment:** Cash on delivery available
+- **Delivery:** Available within Uganda

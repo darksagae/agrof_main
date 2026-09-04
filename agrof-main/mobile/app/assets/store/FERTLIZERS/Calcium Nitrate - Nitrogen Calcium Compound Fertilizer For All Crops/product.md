@@ -1,73 +1,48 @@
 # Calcium Nitrate - Nitrogen Calcium Compound Fertilizer For All Crops
 
+## Supplier
+Uganda Crop Care Limited
+
 ## Overview
-Calcium Nitrate is a water-soluble fertilizer containing 15.5% nitrogen and 19% calcium. This premium fertilizer provides both nitrogen and calcium in a highly available form, making it ideal for foliar application and fertigation systems.
+Calcium Nitrate helps with cell formation but it also neutralizes acids to detoxify the plant. The nitrogen component is also responsible for fuelling protein production and essentially leafy growth.
 
-## Specifications
-Active Ingredient: Calcium Nitrate Ca(NO3)2
-Formulation: Water-soluble granules
-Mode of Action: Nitrogen and calcium fertilizer
-Target Application: All crops requiring nitrogen and calcium
-Application Areas: Vegetables, fruits, flowers, field crops
-Packaging: 25kg, 50kg bags
-
-## Key Features
-15.5% nitrogen content
-19% calcium content
-Water-soluble formulation
-Fast-acting nutrients
-Foliar application compatible
-Fertigation suitable
-Premium quality
-
-## Usage Instructions
-Mixing: Dissolve in water for foliar or fertigation
-Application: Foliar spray or soil application
-Timing: Apply during active growth periods
-Rate: 2-5kg per hectare for foliar application
-Frequency: Apply every 2-3 weeks
-Concentration: 0.5-1% for foliar spray
-
-## Application Method
-Foliar Spray: Direct application to leaves
-Fertigation: Through irrigation systems
-Soil Application: Broadcast or band placement
-Timing: Early morning or late evening
-
-## Benefits
-Dual Nutrients: Provides nitrogen and calcium
-Water Soluble: Easy application and uptake
-Fast Acting: Immediate nutrient availability
-Foliar Compatible: Safe for leaf application
-Fertigation Ready: Suitable for irrigation systems
-Premium Quality: High-grade fertilizer
+## Content/Composition
+Nitrogen (N): 15.5%, Nitrate Nitrogen (N): 14.4%, Ammonical Nitrogen (N): 1.1%, Calcium Oxide: 26%
 
 ## Price Information
-Per 25kg bag: UGX 45,000
-Per 50kg bag: UGX 85,000
-Per ton: UGX 1,600,000
-Bulk orders: Contact for pricing
+25 Kg: UGX 170,400
 
-## Availability & Delivery
-Stock Status: In Stock
-Minimum Order: 1 bag
-Delivery Areas: Nationwide
-Delivery Time: 2-3 business days
-Payment: Cash on delivery, Mobile money, Bank transfer
+## Key Features
+- High quality agricultural fertilizer
+- Suitable for various crop types
+- Easy to apply and use
+- Proven results in crop yield improvement
+
+## Usage Instructions
+- Follow recommended application rates
+- Apply at appropriate growth stages
+- Ensure proper soil conditions
+- Water after application for best results
+
+## Benefits
+- Improved crop yield and quality
+- Enhanced plant growth and development
+- Better nutrient uptake and utilization
+- Cost-effective solution for farmers
 
 ## Storage Instructions
-Store in dry, covered area
-Keep away from moisture
-Protect from direct sunlight
-Shelf life: 2 years from manufacturing date
+- Store in cool, dry place
+- Keep away from direct sunlight
+- Ensure proper ventilation
+- Keep away from children and pets
 
 ## Safety Information
-Personal Protective Equipment: Wear gloves and dust mask
-First Aid: In case of contact, wash thoroughly with water
-Storage: Store away from food and feed
-Disposal: Safe for agricultural use
+- Use protective equipment during application
+- Avoid contact with eyes and skin
+- Store separately from food items
+- Follow all safety guidelines
 
 ## Contact Information
 Phone: +256 700 123 456
-Email: fertilizers@agrof.com
+Email: sales@agrof.com
 WhatsApp: +256 700 123 456

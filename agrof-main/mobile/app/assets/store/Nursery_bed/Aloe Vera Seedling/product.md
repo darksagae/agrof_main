@@ -1,24 +1,26 @@
 # Aloe Vera Seedling
 
 ## Overview
-Aloe Vera is a succulent plant known for its medicinal properties and easy cultivation. Our high-quality seedlings are grown from certified seeds and are ready for transplanting. Aloe Vera is drought-resistant and requires minimal maintenance.
+Aloe vera is a succulent plant species that is stemless or very short-stemmed with thick, greenish, fleshy leaves that fan out from the plant's central stem. The margin of the leaf is serrated with small teeth. The useful parts of aloe are the gel and latex.
 
 ## Specifications
 - **Plant Type:** Succulent perennial
-- **Height:** 15-20cm at transplant
-- **Age:** 8-12 weeks old
-- **Root System:** Well-developed
-- **Health Status:** Disease-free, pest-free
-- **Packaging:** Individual pots or trays
+- **Height:** 30-60 cm (1-2 feet)
+- **Leaf Type:** Thick, fleshy leaves
+- **Leaf Color:** Greenish, fleshy
+- **Leaf Margin:** Serrated with small teeth
+- **Growth Habit:** Stemless or short-stemmed
+- **Lifespan:** Perennial
+- **Hardiness:** Hardy succulent
 
 ## Key Features
-- **Medicinal Properties:** Rich in vitamins and minerals
-- **Drought Resistant:** Requires minimal watering
-- **Easy Care:** Low maintenance plant
-- **Fast Growing:** Quick establishment
-- **Disease Resistant:** Natural pest resistance
-- **Versatile Use:** Medicinal, cosmetic, ornamental
-- **Long Lifespan:** Perennial plant
+- **Medicinal:** Rich in vitamins and minerals
+- **Easy to Grow:** Simple cultivation
+- **Drought Tolerant:** Requires minimal watering
+- **Pest Resistant:** Tolerant to most pests and diseases
+- **Heat Tolerant:** Does well in hot climate
+- **Commercial Value:** High commercial potential
+- **Versatile:** Multiple uses
 
 ## Growing Requirements
 - **Climate:** Warm, dry climate preferred
@@ -27,65 +29,63 @@ Aloe Vera is a succulent plant known for its medicinal properties and easy culti
 - **pH Range:** 6.0-8.0
 - **Water:** Minimal watering needed
 - **Sunlight:** Full sun to partial shade
+- **Spacing:** 30-45 cm between plants
 
-## Planting Instructions
-1. **Soil Preparation:** Ensure well-drained soil
-2. **Planting Depth:** Same depth as in pot
-3. **Spacing:** 30-45cm between plants
-4. **Watering:** Water lightly after planting
-5. **Mulching:** Apply organic mulch around plants
+## Health Benefits
+- **Skin Treatment:** Psoriasis, Seborrhea, Dandruff
+- **Burns:** Minor burns and skin abrasions
+- **Radiation:** Skin injured by radiation
+- **Herpes:** Herpes sores treatment
+- **Acne:** Acne treatment
+- **Anal Fissures:** Treatment of anal fissures
+- **Blood Sugar:** May help lower blood sugar levels
 
-## Care & Maintenance
-- **Watering:** Water only when soil is dry
-- **Fertilization:** Apply balanced fertilizer monthly
-- **Pruning:** Remove dead leaves regularly
-- **Pest Control:** Monitor for mealybugs
+## Usage Instructions
+- **Medicinal:** Use gel for skin treatments
+- **Culinary:** Use gel in drinks and foods
+- **Cosmetic:** Use in skincare products
+- **Storage:** Store gel in refrigerator
+- **Preparation:** Extract gel from leaves
+- **Application:** Apply topically or consume
+
+## Care and Maintenance
+- **Watering:** Minimal watering required
+- **Fertilization:** Light feeding with balanced fertilizer
+- **Pruning:** Remove old leaves regularly
+- **Pest Control:** Generally pest-resistant
 - **Disease Prevention:** Avoid overwatering
+- **Division:** Divide every 2-3 years
 
 ## Harvesting
-- **Harvest Time:** 12-18 months after planting
-- **Harvest Method:** Cut outer leaves at base
-- **Harvest Frequency:** 2-3 leaves per plant per month
-- **Storage:** Refrigerate harvested leaves
+- **Timing:** Harvest leaves when mature
+- **Method:** Cut leaves at base with sharp knife
+- **Storage:** Use fresh or extract gel
+- **Preservation:** Store gel in refrigerator
+- **Usage:** Use immediately or store properly
 
-## Uses & Benefits
-- **Medicinal:** Skin treatment, wound healing
-- **Cosmetic:** Natural skincare products
-- **Ornamental:** Beautiful garden plant
-- **Air Purification:** Improves indoor air quality
-- **Economic Value:** High market demand
-
-## Price Information
-- **Per seedling:** UGX 5,000
-- **Per 10 seedlings:** UGX 45,000
-- **Per 50 seedlings:** UGX 200,000
-- **Bulk orders:** Contact for pricing
-
-## Availability & Delivery
-- **Stock Status:** In Stock
-- **Minimum Order:** 10 seedlings
-- **Delivery Areas:** Nationwide
-- **Delivery Time:** 1-2 business days
-- **Payment:** Cash on delivery, Mobile money
+## Benefits
+- **Medicinal:** Multiple health benefits
+- **Easy Care:** Low maintenance plant
+- **Drought Tolerant:** Minimal watering needed
+- **Pest Resistant:** Natural resistance
+- **Heat Tolerant:** Thrives in hot climates
+- **Commercial:** High commercial value
 
 ## Storage Instructions
-- Store in cool, shaded area
-- Keep soil slightly moist
-- Avoid direct sunlight
-- Handle with care to prevent damage
-- Shelf life: 2-3 weeks in pots
-
-## Success Tips
-- Plant in well-drained soil
-- Avoid overwatering
-- Provide adequate sunlight
-- Protect from frost
-- Regular monitoring for pests
+- **Fresh:** Store leaves in refrigerator
+- **Gel:** Store gel in airtight containers
+- **Temperature:** Cool, dry storage
+- **Humidity:** Low humidity preferred
+- **Shelf Life:** 1-2 weeks when fresh
 
 ## Contact Information
-For technical support and bulk orders:
-- **Phone:** +256 700 123 456
-- **Email:** nursery@agrof.com
-- **WhatsApp:** +256 700 123 456
+**Supplier:** Mukama Mwesigwa Compound Designers
+**Phone:** +256 XXX XXX XXX
+**Email:** mukama@example.com
+**Location:** Uganda
 
-
+## Pricing
+- **1 Piece:** UGX 5,600
+- **Bulk Orders:** Contact for pricing
+- **Payment:** Cash on delivery available
+- **Delivery:** Available within Uganda
