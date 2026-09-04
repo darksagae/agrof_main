@@ -1,0 +1,51 @@
+{
+  "title": "Duka rya AGROF",
+  "subtitle": "Ebintu by'okulima by'omutindo ogw'amaanyi ku lulimi lwo",
+  "categories": {
+    "fertilizers": "Ebyokugazisa",
+    "fungicides": "Endwara y'ebimera",
+    "herbicides": "Endwara y'ebishaka",
+    "seeds": "Embazi",
+    "nursery": "Ekibuga ky'ebimera",
+    "organic": "Eby'ekikula"
+  },
+  "productInfo": {
+    "price": "Omuguzi",
+    "quantity": "Obwongye",
+    "description": "Obwongye",
+    "specifications": "Ebyokukola",
+    "features": "Ebintu by'okukola",
+    "usage": "Amagezi g'okukozesa",
+    "benefits": "Eby'okukola",
+    "storage": "Amagezi g'okutereka",
+    "safety": "Amagezi g'okukola",
+    "availability": "Okusangibwa",
+    "inStock": "Mulimu",
+    "outOfStock": "Tewali",
+    "lowStock": "Gye kuggwa"
+  },
+  "cart": {
+    "title": "Rukwama rw'okugula",
+    "empty": "Rukwama rwo rw'omu",
+    "items": "ebintu",
+    "total": "Omugatte",
+    "checkout": "Maliriza okugula",
+    "remove": "Sangulawo",
+    "update": "Kyusa obwongye",
+    "clear": "Sangulawo rukwama"
+  },
+  "search": {
+    "placeholder": "Rondera ebintu...",
+    "noResults": "Tewali bintu bisangidwa",
+    "suggestions": "Garuka okurondera:"
+  },
+  "filters": {
+    "category": "Ekika",
+    "price": "Omugatte gw'omuguzi",
+    "availability": "Okusangibwa",
+    "sortBy": "Panga ku",
+    "name": "Erinnya",
+    "price": "Omuguzi",
+    "newest": "Ebipya"
+  }
+}

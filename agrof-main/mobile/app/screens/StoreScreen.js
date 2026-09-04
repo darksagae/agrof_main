@@ -1,14 +1,17 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert, ActivityIndicator, TextInput, FlatList, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert, ActivityIndicator, TextInput, FlatList, Animated, Easing, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { categoriesApi, productsApi, healthCheck } from '../services/storeApi';
 import { useCart } from '../contexts/CartContext';
+import storeImageService from '../services/storeImageService';
 import CategoryProductsScreen from './CategoryProductsScreen';
 import CartScreen from './CartScreen';
 import ProductDetailScreen from './ProductDetailScreen';
 import { featuredProducts } from '../data/featuredProducts';
 
 const StoreScreen = () => {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCart, setShowCart] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -20,11 +23,6 @@ const StoreScreen = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   
-  // Debug state changes
-  useEffect(() => {
-    console.log('🔍 Search results state changed:', showSearchResults);
-    console.log('🎯 Featured products should be visible:', !showSearchResults);
-  }, [showSearchResults]);
   const [backendStatus, setBackendStatus] = useState('checking');
   
   // Marquee animation
@@ -32,31 +30,14 @@ const StoreScreen = () => {
 
   const { getTotalItems } = useCart();
 
-
   // Function to get real product images from store folder
   const getProductImage = (product) => {
-    // For now, use category images to avoid complex path issues
-    // TODO: Implement real product images later
-    console.log('🎯 Using category image for product:', product.name, 'category:', product.category);
-    return getCategoryImage(product.category);
+    return storeImageService.getProductImage(product);
   };
 
   // Legacy function for backward compatibility
   const getCategoryImage = (categoryName) => {
-    console.log('🖼️ Getting category image for:', categoryName);
-    const imageMap = {
-      'fertilizers': require('../assets/fertilizers.png'),
-      'fungicides': require('../assets/fungicides.png'),
-      'herbicides': require('../assets/herbicides.png'),
-      'nursery_bed': require('../assets/nurserybed.png'),
-      'organic_chemicals': require('../assets/organic_chemicals.png'),
-      'seeds': require('../assets/seeds.png'),
-      'pesticides': require('../assets/fungicides.png'),
-      'tools': require('../assets/fertilizers.png'),
-    };
-    const image = imageMap[categoryName] || require('../assets/fertilizers.png');
-    console.log('🖼️ Category image result:', image ? 'Found' : 'Not found');
-    return image;
+    return storeImageService.getCategoryImage(categoryName);
   };
 
   // Fallback categories if API fails
@@ -71,9 +52,6 @@ const StoreScreen = () => {
 
   // Featured products fetched from JavaScript array
   const extendedFeaturedProducts = useMemo(() => {
-    console.log('🎯 Featured Products loaded:', featuredProducts.length, 'products');
-    console.log('🎯 First few products:', featuredProducts.slice(0, 3));
-    console.log('🎯 Sample product with imagePath:', featuredProducts[0]);
     return featuredProducts;
   }, []);
 
@@ -85,8 +63,6 @@ const StoreScreen = () => {
   // Start marquee animation - never stops
   useEffect(() => {
     if (extendedFeaturedProducts.length === 0) return;
-    
-    console.log('🎬 Starting marquee animation with', extendedFeaturedProducts.length, 'products');
     
     const startMarquee = () => {
       marqueeAnimation.setValue(0);
@@ -132,7 +108,6 @@ const StoreScreen = () => {
       setCategories(categoriesData.length > 0 ? categoriesData : fallbackCategories);
       
       // Load featured products
-      console.log('⭐ Loading featured products...');
       const productsData = await productsApi.getAll({ limit: 6 });
       console.log('⭐ Featured products loaded:', productsData.length, 'products');
       setApiFeaturedProducts(productsData);
@@ -185,10 +160,16 @@ const StoreScreen = () => {
   // Show product detail screen if a product is selected
   if (selectedProduct) {
     return (
-      <ProductDetailScreen 
-        route={{ params: { productId: selectedProduct.id, product: selectedProduct } }}
-        navigation={{ goBack: () => setSelectedProduct(null) }}
-      />
+      <Modal
+        visible={true}
+        animationType="slide"
+        presentationStyle="fullScreen"
+      >
+        <ProductDetailScreen 
+          route={{ params: { productId: selectedProduct.id, product: selectedProduct } }}
+          navigation={{ goBack: () => setSelectedProduct(null) }}
+        />
+      </Modal>
     );
   }
 
@@ -217,12 +198,12 @@ const StoreScreen = () => {
         <View style={styles.header}>
           <View style={styles.headerTitleContainer}>
             <MaterialIcons name="store" size={32} color="white" />
-            <Text style={styles.headerTitle}>AGROF Store</Text>
+            <Text style={styles.headerTitle}>{t('store.title')}</Text>
           </View>
         </View>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#4CAF50" />
-          <Text style={styles.loadingText}>Loading store...</Text>
+          <Text style={styles.loadingText}>{t('common.status.loading')}</Text>
         </View>
       </View>
     );
@@ -234,7 +215,7 @@ const StoreScreen = () => {
       <View style={styles.header}>
         <View style={styles.headerTitleContainer}>
           <MaterialIcons name="store" size={32} color="white" />
-          <Text style={styles.headerTitle}>AGROF Store</Text>
+          <Text style={styles.headerTitle}>{t('store.title')}</Text>
           <TouchableOpacity 
             style={styles.cartButton}
             onPress={() => setShowCart(true)}
@@ -247,7 +228,7 @@ const StoreScreen = () => {
             )}
           </TouchableOpacity>
         </View>
-        <Text style={styles.headerSubtitle}>Quality agricultural products for your farm</Text>
+        <Text style={styles.headerSubtitle}>{t('store.subtitle')}</Text>
         
         {/* Backend Status */}
         <View style={styles.statusContainer}>
@@ -257,7 +238,7 @@ const StoreScreen = () => {
             color={backendStatus === 'connected' ? '#4CAF50' : '#FF5722'} 
           />
           <Text style={[styles.statusText, { color: backendStatus === 'connected' ? '#4CAF50' : '#FF5722' }]}>
-            {backendStatus === 'connected' ? 'Online' : 'Offline Mode'}
+            {backendStatus === 'connected' ? t('common.status.online') : t('common.status.offline')}
           </Text>
         </View>
       </View>
@@ -300,7 +281,7 @@ const StoreScreen = () => {
                 onPress={() => setSelectedProduct(item)}
               >
                 <Image 
-                  source={item.image_url ? { uri: `http://192.168.1.15:3001${item.image_url}` } : getCategoryImage(item.category_name)} 
+                  source={item.image_url ? { uri: `http://192.168.0.107:3001${item.image_url}` } : getCategoryImage(item.category_name)} 
                   style={styles.searchResultImage} 
                 />
                 <View style={styles.searchResultContent}>
@@ -319,7 +300,6 @@ const StoreScreen = () => {
       {!showSearchResults && (
         <View style={styles.featuredContainer}>
           <Text style={styles.featuredTitle}>Featured Products</Text>
-          {console.log('🎬 Rendering marquee with', extendedFeaturedProducts.length, 'products')}
           {extendedFeaturedProducts.length > 0 ? (
             <View style={styles.marqueeContainer}>
             <Animated.View 
@@ -337,7 +317,6 @@ const StoreScreen = () => {
             >
               {/* First set of products */}
               {extendedFeaturedProducts.map((product, index) => {
-                console.log(`🎬 Rendering product ${index + 1}:`, product.name, 'imagePath:', product.imagePath);
                 return (
                   <TouchableOpacity 
                     key={product.id} 
@@ -385,9 +364,7 @@ const StoreScreen = () => {
       <View style={styles.categoriesContainer}>
           <Text style={styles.categoriesTitle}>Categories</Text>
         <View style={styles.categoriesGrid}>
-          {console.log('🏪 Rendering categories:', categories.length, 'categories')}
           {categories.map((category, index) => {
-            console.log(`🏪 Category ${index + 1}:`, category.name, 'display_name:', category.display_name);
             return (
               <TouchableOpacity
                 key={category.id}
@@ -397,7 +374,7 @@ const StoreScreen = () => {
                 <Image 
                   source={getCategoryImage(category.name)} 
                   style={styles.categoryImage} 
-                  resizeMode="cover" 
+                  resizeMode="cover"
                 />
                 <Text style={styles.categoryText}>
                   {category.display_name || category.name}
@@ -566,13 +543,22 @@ const styles = StyleSheet.create({
   },
   featuredContainer: {
     marginBottom: 20,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    padding: 15,
+    margin: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   featuredTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2c5530',
-    marginLeft: 15,
+    color: '#333',
     marginBottom: 10,
+    textAlign: 'center',
   },
   featuredScroll: {
     paddingLeft: 15,
@@ -630,13 +616,21 @@ const styles = StyleSheet.create({
   },
   categoriesContainer: {
     padding: 20,
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    margin: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   categoriesTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2c5530',
+    color: '#333',
     marginBottom: 15,
+    textAlign: 'center',
   },
   categoriesGrid: {
     flexDirection: 'row',
@@ -649,7 +643,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 15,
-    padding: 15,
+    padding: 20,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -657,10 +651,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   categoryImage: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
     marginBottom: 10,
-    borderRadius: 40,
+    borderRadius: 60,
   },
   categoryText: {
     fontSize: 14,

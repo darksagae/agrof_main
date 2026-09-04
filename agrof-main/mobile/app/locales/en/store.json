@@ -1,0 +1,51 @@
+{
+  "title": "AGROF Store",
+  "subtitle": "Quality agricultural products for your farm",
+  "categories": {
+    "fertilizers": "Fertilizers",
+    "fungicides": "Fungicides",
+    "herbicides": "Herbicides",
+    "seeds": "Seeds",
+    "nursery": "Nursery Bed",
+    "organic": "Organic Chemicals"
+  },
+  "productInfo": {
+    "price": "Price",
+    "quantity": "Quantity",
+    "description": "Description",
+    "specifications": "Specifications",
+    "features": "Features",
+    "usage": "Usage Instructions",
+    "benefits": "Benefits",
+    "storage": "Storage Instructions",
+    "safety": "Safety Information",
+    "availability": "Availability",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "lowStock": "Low Stock"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "items": "items",
+    "total": "Total",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "update": "Update Quantity",
+    "clear": "Clear Cart"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "noResults": "No products found",
+    "suggestions": "Try searching for:"
+  },
+  "filters": {
+    "category": "Category",
+    "price": "Price Range",
+    "availability": "Availability",
+    "sortBy": "Sort By",
+    "name": "Name",
+    "price": "Price",
+    "newest": "Newest"
+  }
+}

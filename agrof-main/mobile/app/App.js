@@ -15,8 +15,16 @@ import StocksStyleScreen from './screens/StocksStyleScreen';
 import ProductTradingScreen from './screens/ProductTradingScreen';
 // SmartFarmingDashboard removed - dashboard functionality disabled
 import DiseaseDetectionScreen from './screens/DiseaseDetectionScreen';
+import ProductRecommendationCards from './components/ProductRecommendationCards';
 import { CartProvider } from './contexts/CartContext';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { cropProducts } from './data/cropProducts';
+import LanguageSelector from './components/LanguageSelector';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Import i18n configuration
+import './i18n';
+import i18n from './i18n';
 
 
 const { width, height } = Dimensions.get('window');
@@ -27,7 +35,7 @@ const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed
 // const API_URL = 'http://localhost:5000'; // For web browser testing
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('welcome');
+  const [currentTab, setCurrentTab] = useState('care'); // Changed from 'welcome' to 'care' to show navigation immediately
   const [currentScreen, setCurrentScreen] = useState('disease-detection');
   const [userCategory, setUserCategory] = useState('');
   const [navigationStack, setNavigationStack] = useState([]);
@@ -53,6 +61,7 @@ export default function App() {
   });
   const [currentAccountScreen, setCurrentAccountScreen] = useState('main'); // main, about, help
   const [showChatbot, setShowChatbot] = useState(false); // For bot image chatbot
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false); // For language selector
   const agrofVideoRef = useRef(null);
 
   // Camera permissions removed - camera functionality disabled
@@ -568,6 +577,17 @@ export default function App() {
           </View>
         )}
         
+        {/* Product Recommendations */}
+        {result.analysis?.disease_type && result.analysis.disease_type !== 'none' && (
+          <ProductRecommendationCards
+            diseaseType={result.analysis.disease_type}
+            symptoms={result.analysis.symptoms ? [result.analysis.symptoms] : []}
+            onProductPress={(product) => {
+              console.log('Product selected:', product);
+            }}
+          />
+        )}
+        
         {/* Action Buttons */}
         <View style={styles.actionButtons}>
           <TouchableOpacity style={styles.actionButton} onPress={() => setResult(null)}>
@@ -616,15 +636,15 @@ export default function App() {
           
           <View style={styles.smartFarmingGrid}>
             <TouchableOpacity 
-              style={styles.smartFeatureButton} 
-              onPress={() => setCurrentScreen('disease-detection')}
+              style={[styles.smartFeatureButton, { backgroundColor: '#4CAF50' }]} 
+              onPress={() => setCurrentTab('care')}
             >
               <MaterialIcons name="search" size={24} color="white" />
               <Text style={styles.smartFeatureText}>Disease Detection</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.smartFeatureButton} 
+              style={[styles.smartFeatureButton, { backgroundColor: '#FF9800' }]} 
               onPress={() => setCurrentTab('store')}
             >
               <MaterialIcons name="store" size={24} color="white" />
@@ -750,19 +770,35 @@ export default function App() {
                 Based on your {savedAnalyses?.length || 0} crop analyses
               </Text>
               
-              {getCropRotationRecommendations().map((rec, index) => (
-                <View key={index} style={styles.recommendationCard}>
-                  <View style={styles.recommendationHeader}>
-                    <MaterialIcons name="agriculture" size={24} color="#4CAF50" />
-                    <Text style={styles.recommendationCrop}>{rec.crop}</Text>
+              {getCropRotationRecommendations().map((rec, index) => {
+                // Get appropriate icon based on crop type
+                const getCropIcon = (cropName) => {
+                  const crop = cropName.toLowerCase();
+                  if (crop.includes('maize') || crop.includes('corn')) {
+                    return <MaterialIcons name="eco" size={24} color="#4CAF50" />;
+                  } else if (crop.includes('bean')) {
+                    return <MaterialIcons name="circle" size={24} color="#FF9800" />;
+                  } else if (crop.includes('wheat')) {
+                    return <MaterialIcons name="grain" size={24} color="#8BC34A" />;
+                  } else {
+                    return <MaterialIcons name="agriculture" size={24} color="#4CAF50" />;
+                  }
+                };
+
+                return (
+                  <View key={index} style={styles.recommendationCard}>
+                    <View style={styles.recommendationHeader}>
+                      {getCropIcon(rec.crop)}
+                      <Text style={styles.recommendationCrop}>{rec.crop}</Text>
+                    </View>
+                    <View style={styles.recommendationDetails}>
+                      <Text style={styles.recommendationText}>Season: {rec.season}</Text>
+                      <Text style={styles.recommendationText}>Duration: {rec.duration}</Text>
+                      <Text style={styles.recommendationText}>Budget: {rec.budget}</Text>
+                    </View>
                   </View>
-                  <View style={styles.recommendationDetails}>
-                    <Text style={styles.recommendationText}>Season: {rec.season}</Text>
-                    <Text style={styles.recommendationText}>Duration: {rec.duration}</Text>
-                    <Text style={styles.recommendationText}>Budget: {rec.budget}</Text>
-                  </View>
-                </View>
-              ))}
+                );
+              })}
             </View>
           )}
 
@@ -923,7 +959,9 @@ export default function App() {
 
 
   // Account tab
-  const renderAccountScreen = () => (
+  const renderAccountScreen = () => {
+    console.log('🔍 renderAccountScreen called');
+    return (
     <View style={styles.screen}>
       <View style={styles.tabHeader}>
         <View style={styles.tabTitleContainer}>
@@ -1004,6 +1042,7 @@ export default function App() {
         {/* My Settings */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>My Settings</Text>
+          {console.log('🔍 Rendering My Settings section with Language Settings button')}
           
           <TouchableOpacity style={styles.accountItem}>
             <MaterialIcons name="payment" size={24} color="#4CAF50" />
@@ -1011,9 +1050,73 @@ export default function App() {
             <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.accountItem}>
-            <MaterialIcons name="manage-accounts" size={24} color="#4CAF50" />
-            <Text style={styles.accountItemText}>Account Management</Text>
+          <TouchableOpacity 
+            style={[styles.accountItem, { backgroundColor: '#E8F5E8', borderWidth: 2, borderColor: '#4CAF50' }]}
+            onPress={() => {
+              console.log('🔍 Language Settings button pressed - this should be visible!');
+              Alert.alert(
+                '🌍 Language Selection',
+                'Choose your preferred language:',
+                [
+                  { 
+                    text: '🇺🇸 English', 
+                    onPress: async () => {
+                      console.log('English selected');
+                      try {
+                        await i18n.changeLanguage('en');
+                        await AsyncStorage.setItem('user-language', 'en');
+                        Alert.alert('Success', 'Language changed to English');
+                      } catch (error) {
+                        console.log('Error changing language:', error);
+                      }
+                    }
+                  },
+                  { 
+                    text: '🇹🇿 Kiswahili', 
+                    onPress: async () => {
+                      console.log('Kiswahili selected');
+                      try {
+                        await i18n.changeLanguage('sw');
+                        await AsyncStorage.setItem('user-language', 'sw');
+                        Alert.alert('Success', 'Lugha imebadilishwa ku Kiswahili');
+                      } catch (error) {
+                        console.log('Error changing language:', error);
+                      }
+                    }
+                  },
+                  { 
+                    text: '🇺🇬 Luganda', 
+                    onPress: async () => {
+                      console.log('Luganda selected');
+                      try {
+                        await i18n.changeLanguage('lg');
+                        await AsyncStorage.setItem('user-language', 'lg');
+                        Alert.alert('Success', 'Olulimi lwakyusiddwa ku Luganda');
+                      } catch (error) {
+                        console.log('Error changing language:', error);
+                      }
+                    }
+                  },
+                  { 
+                    text: '🇺🇬 Runyankole', 
+                    onPress: async () => {
+                      console.log('Runyankole selected');
+                      try {
+                        await i18n.changeLanguage('rn');
+                        await AsyncStorage.setItem('user-language', 'rn');
+                        Alert.alert('Success', 'Olulimi lwakyusiddwa ku Runyankole');
+                      } catch (error) {
+                        console.log('Error changing language:', error);
+                      }
+                    }
+                  },
+                  { text: 'Cancel', style: 'cancel' }
+                ]
+              );
+            }}
+          >
+            <MaterialIcons name="translate" size={24} color="#4CAF50" />
+            <Text style={[styles.accountItemText, { fontWeight: 'bold', color: '#2E7D32' }]}>🌍 Language Settings</Text>
             <MaterialIcons name="arrow-forward-ios" size={16} color="#666" />
           </TouchableOpacity>
 
@@ -1031,7 +1134,8 @@ export default function App() {
         </View>
       </ScrollView>
     </View>
-  );
+    );
+  };
 
   // About AGROF screen
   const renderAboutAgrofScreen = () => (
@@ -1237,6 +1341,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'plan' && styles.activeTab]} 
           onPress={() => {
             console.log('Plan tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('plan');
           }}
         >
@@ -1253,6 +1358,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'care' && styles.activeTab]} 
           onPress={() => {
             console.log('Care tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('care');
           }}
         >
@@ -1269,6 +1375,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'stocks' && styles.activeTab]} 
           onPress={() => {
             console.log('Stocks tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('stocks');
           }}
         >
@@ -1285,6 +1392,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'store' && styles.activeTab]} 
           onPress={() => {
             console.log('Store tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('store');
           }}
         >
@@ -1300,8 +1408,11 @@ export default function App() {
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'account' && styles.activeTab]} 
           onPress={() => {
-            console.log('Account tab pressed, current tab:', currentTab);
+            console.log('🔍 Account tab pressed, current tab:', currentTab);
+            Alert.alert('Debug', 'Account tab pressed!');
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('account');
+            console.log('🔍 Account tab set to:', 'account');
           }}
         >
           <MaterialIcons 
@@ -1384,9 +1495,10 @@ export default function App() {
       return <StoreScreen />;
     }
     if (currentTab === 'account') {
-      console.log('Rendering account screen');
+      console.log('🔍 Rendering account screen, currentAccountScreen:', currentAccountScreen);
       if (currentAccountScreen === 'about') return renderAboutAgrofScreen();
       if (currentAccountScreen === 'help') return renderHelpCenterScreen();
+      console.log('🔍 Calling renderAccountScreen');
       return renderAccountScreen();
     }
     
@@ -1398,74 +1510,200 @@ export default function App() {
 
   // Get background image based on current screen and tab
   const getBackgroundImage = () => {
+    console.log('🎨 Background Debug - currentTab:', currentTab, 'currentScreen:', currentScreen);
+    console.log('🎨 Tab comparison - currentTab === "care":', currentTab === 'care');
+    
+    // AI Care tab takes precedence over specific screens
+    if (currentTab === 'care') {
+      console.log('🎨 Using AI background for care tab');
+      return 'ai';          // AI Care tab - ai.png background
+    }
+    
     // Welcome and onboarding screens
     if (currentScreen === 'welcome') {
+      console.log('🎨 Using welcome background for welcome screen');
       return 'welcome';  // Initial app opening uses welcome.png
     } else if (currentScreen === 'welcome2' || currentScreen === 'manual') {
+      console.log('🎨 Using welcome background for welcome2/manual screen');
       return 'welcome';  // Other welcome screens also use welcome.png
     } 
     // Category selection screen
     else if (currentScreen === 'category') {
+      console.log('🎨 Using background1 for category screen');
       return 'background1';
     } 
     // Feed screen removed
     // Analysis and results screens
     else if (currentScreen === 'analysis') {
+      console.log('🎨 Using fungicides background for analysis screen');
       return 'fungicides';  // Analysis screen - fungicides background
     } else if (currentScreen === 'results') {
+      console.log('🎨 Using herbicides background for results screen');
       return 'herbicides';  // Results screen - herbicides background
     } 
     // Store-related screens
     else if (currentScreen === 'store') {
+      console.log('🎨 Using seeds background for store screen');
       return 'seeds';       // Store screen - seeds background
     } else if (currentScreen === 'nursery') {
+      console.log('🎨 Using nursery background for nursery screen');
       return 'nursery';     // Nursery screen - nursery bed background
     }
     // Default fallback
+    console.log('🎨 Using default welcome background');
     return 'welcome';
   };
 
   return (
-    <CartProvider>
-      <BackgroundImage overlayOpacity={0.4} backgroundImage={getBackgroundImage()}>
-        <StatusBar style="auto" />
-        
-        {renderTabContent()}
-        
-        {renderCareSubTabs()}
-        
-        {renderNavigationTabs()}
-        
-        {/* ChatBot Button - Available on all screens except welcome */}
-        {currentTab !== 'welcome' && (
-          <ChatBotButton onPress={() => setShowChatbot(true)} />
-        )}
-        
-        {/* Chatbot Modal */}
-        {showChatbot && (
-          <Modal
-            visible={showChatbot}
-            animationType="slide"
-            presentationStyle="fullScreen"
-          >
-            <View style={styles.chatbotModal}>
-              <View style={styles.chatbotHeader}>
-                <TouchableOpacity 
-                  style={styles.closeButton}
-                  onPress={() => setShowChatbot(false)}
-                >
-                  <MaterialIcons name="close" size={24} color="white" />
-                </TouchableOpacity>
-                <Text style={styles.chatbotTitle}>AGROF AI Assistant</Text>
+    <LanguageProvider>
+      <CartProvider>
+        <BackgroundImage overlayOpacity={0.4} backgroundImage={getBackgroundImage()}>
+          <StatusBar style="auto" />
+          
+          {renderTabContent()}
+          
+          {renderCareSubTabs()}
+          
+          {renderNavigationTabs()}
+          
+          {/* ChatBot Button - Available on all screens except welcome */}
+          {currentTab !== 'welcome' && (
+            <ChatBotButton onPress={() => setShowChatbot(true)} />
+          )}
+          
+          {/* Language Switch Button - Always visible */}
+          {currentTab !== 'welcome' && (
+            <TouchableOpacity 
+              style={styles.languageSwitchButton}
+              onPress={() => {
+                console.log('🌍 Language Switch pressed from main button');
+                Alert.alert('Debug', 'Language button is working!');
+                Alert.alert(
+                  '🌍 Select Language',
+                  'Choose your preferred language:',
+                  [
+                    { 
+                      text: '🇺🇸 English', 
+                      onPress: async () => {
+                        try {
+                          await i18n.changeLanguage('en');
+                          await AsyncStorage.setItem('user-language', 'en');
+                          Alert.alert('Success', 'Language changed to English');
+                        } catch (error) {
+                          console.log('Error changing language:', error);
+                        }
+                      }
+                    },
+                    { 
+                      text: '🇹🇿 Kiswahili', 
+                      onPress: async () => {
+                        try {
+                          await i18n.changeLanguage('sw');
+                          await AsyncStorage.setItem('user-language', 'sw');
+                          Alert.alert('Success', 'Lugha imebadilishwa ku Kiswahili');
+                        } catch (error) {
+                          console.log('Error changing language:', error);
+                        }
+                      }
+                    },
+                    { 
+                      text: '🇺🇬 Luganda', 
+                      onPress: async () => {
+                        try {
+                          await i18n.changeLanguage('lg');
+                          await AsyncStorage.setItem('user-language', 'lg');
+                          Alert.alert('Success', 'Olulimi lwakyusiddwa ku Luganda');
+                        } catch (error) {
+                          console.log('Error changing language:', error);
+                        }
+                      }
+                    },
+                    { 
+                      text: '🇺🇬 Runyankole', 
+                      onPress: async () => {
+                        try {
+                          await i18n.changeLanguage('rn');
+                          await AsyncStorage.setItem('user-language', 'rn');
+                          Alert.alert('Success', 'Olulimi lwakyusiddwa ku Runyankole');
+                        } catch (error) {
+                          console.log('Error changing language:', error);
+                        }
+                      }
+                    },
+                    { text: 'Cancel', style: 'cancel' }
+                  ]
+                );
+              }}
+            >
+              <MaterialIcons name="translate" size={24} color="white" />
+            </TouchableOpacity>
+          )}
+          
+          {/* Chatbot Modal */}
+          {showChatbot && (
+            <Modal
+              visible={showChatbot}
+              animationType="slide"
+              presentationStyle="fullScreen"
+            >
+              <View style={styles.chatbotModal}>
+                {/* Background Image */}
+                <Image 
+                  source={require('./assets/care.png')} 
+                  style={styles.chatbotBackgroundImage}
+                  resizeMode="cover"
+                />
+                
+                {/* Content Overlay */}
+                <View style={styles.chatbotOverlay}>
+                  <View style={styles.chatbotHeader}>
+                    <TouchableOpacity 
+                      style={styles.closeButton}
+                      onPress={() => setShowChatbot(false)}
+                    >
+                      <MaterialIcons name="close" size={24} color="white" />
+                    </TouchableOpacity>
+                    <Text style={styles.chatbotTitle}>AGROF AI Assistant</Text>
+                  </View>
+                  <ChatBot onShowTraining={() => setShowChatbot(false)} />
+                </View>
               </View>
-              <ChatBot onShowTraining={() => setShowChatbot(false)} />
-            </View>
-          </Modal>
-        )}
-        
-        {/* Futuristic AI Analysis Screen component was removed */}
-      </BackgroundImage>
-    </CartProvider>
+            </Modal>
+          )}
+
+          {/* Language Selector Modal */}
+          {showLanguageSelector && (
+            <Modal
+              visible={showLanguageSelector}
+              animationType="slide"
+              transparent={true}
+              onRequestClose={() => {
+                console.log('Language selector modal closed');
+                setShowLanguageSelector(false);
+              }}
+            >
+              {console.log('Rendering language selector modal')}
+              <View style={styles.modalOverlay}>
+                <View style={styles.modalContent}>
+                  <View style={styles.modalHeader}>
+                    <Text style={styles.modalTitle}>Select Language</Text>
+                    <TouchableOpacity
+                      onPress={() => setShowLanguageSelector(false)}
+                      style={styles.closeButton}
+                    >
+                      <MaterialIcons name="close" size={24} color="#666" />
+                    </TouchableOpacity>
+                  </View>
+                  <LanguageSelector onClose={() => setShowLanguageSelector(false)} />
+                </View>
+              </View>
+            </Modal>
+          )}
+          
+          {/* Futuristic AI Analysis Screen component was removed */}
+        </BackgroundImage>
+      </CartProvider>
+    </LanguageProvider>
   );
 }
 
@@ -3053,13 +3291,23 @@ const styles = StyleSheet.create({
   // Chatbot modal styles
   chatbotModal: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  chatbotBackgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  chatbotOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Semi-transparent overlay for better text readability
   },
   chatbotHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#2c5530',
+    backgroundColor: 'rgba(44, 85, 48, 0.9)', // Semi-transparent dark green
     paddingTop: 50,
     paddingBottom: 15,
     paddingHorizontal: 20,
@@ -3081,6 +3329,56 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     marginRight: 40, // Compensate for close button
+  },
+  // Language selector modal styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 9999,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    width: '90%',
+    maxHeight: '80%',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  // Language switch button styles
+  languageSwitchButton: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    backgroundColor: '#4CAF50',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    zIndex: 1000,
   },
 });
 

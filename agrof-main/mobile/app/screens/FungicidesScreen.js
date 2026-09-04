@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import FungicideDetailScreen from './FungicideDetailScreen';
 import SimplePricingWidget from '../components/SimplePricingWidget';
 import { productsApi } from '../services/storeApi';
+import storeImageService from '../services/storeImageService';
 
 const FungicidesScreen = ({ onBack }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -81,7 +82,7 @@ const FungicidesScreen = ({ onBack }) => {
       onPress={() => setSelectedProduct(product)}
     >
       <Image 
-            source={product.image_url ? { uri: `http://192.168.1.15:3001${product.image_url}` } : require('../assets/fungicides.png')}
+            source={product.image_url ? { uri: `http://192.168.0.107:3001${product.image_url}` } : require('../assets/fungicides.png')}
         style={styles.productImage}
         resizeMode="cover"
         fadeDuration={0}

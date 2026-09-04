@@ -10,7 +10,7 @@ const HerbicidesScreen = ({ onBack }) => {
   const herbicideImages = {};
   // Get image source from static mapping
   const getImageSource = (imageName) => {
-    return herbicideImages[imageName] || require('../assets/herbicides.png');
+    return storeImageService.getProductImage({ name: imageName, category_name: 'herbicides' });
   };
 
   // Empty products array - store is currently empty

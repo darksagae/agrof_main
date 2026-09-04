@@ -1,0 +1,71 @@
+{
+  "navigation": {
+    "store": "Store",
+    "cart": "Cart",
+    "disease": "Disease Detection",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "help": "Help",
+    "settings": "Settings"
+  },
+  "buttons": {
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details",
+    "search": "Search",
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "send": "Send",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "submit": "Submit",
+    "continue": "Continue",
+    "finish": "Finish",
+    "retry": "Retry",
+    "refresh": "Refresh",
+    "close": "Close",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "status": {
+    "loading": "Loading...",
+    "online": "Online",
+    "offline": "Offline",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "labels": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "language": "Language",
+    "currency": "Currency",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "shipping": "Shipping"
+  },
+  "messages": {
+    "welcome": "Welcome to AGROF",
+    "noResults": "No results found",
+    "tryAgain": "Please try again",
+    "networkError": "Network error. Please check your connection.",
+    "serverError": "Server error. Please try again later.",
+    "successMessage": "Operation completed successfully",
+    "errorMessage": "An error occurred. Please try again."
+  }
+}

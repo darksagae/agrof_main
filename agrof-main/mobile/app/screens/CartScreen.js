@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useCart } from '../contexts/CartContext';
+import storeImageService from '../services/storeImageService';
 
 const CartScreen = ({ onBack }) => {
   const { 
@@ -120,7 +121,7 @@ const CartScreen = ({ onBack }) => {
   const renderCartItem = ({ item }) => (
     <View style={styles.cartItem}>
       <Image 
-        source={item.image_url ? { uri: `http://192.168.1.15:3001${item.image_url}` } : require('../assets/fertilizers.png')} 
+        source={storeImageService.getProductImage(item)} 
         style={styles.itemImage} 
       />
       <View style={styles.itemDetails}>

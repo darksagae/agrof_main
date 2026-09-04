@@ -1,0 +1,71 @@
+{
+  "navigation": {
+    "store": "Dduuka",
+    "cart": "Rukwama",
+    "disease": "Okulaba Endwara",
+    "dashboard": "Dashibodi",
+    "profile": "Obwongye bw'omuntu",
+    "help": "Okuyamba",
+    "settings": "Enteekateeka"
+  },
+  "buttons": {
+    "addToCart": "Ongerako mu Rukwama",
+    "viewDetails": "Labako Obwongye",
+    "search": "Rondera",
+    "back": "Ddayo",
+    "next": "Ekiddako",
+    "cancel": "Kka",
+    "save": "Tereka",
+    "delete": "Sangulawo",
+    "edit": "Kyusa",
+    "send": "Tuma",
+    "login": "Yingira",
+    "logout": "Fuluma",
+    "register": "Wandikira",
+    "submit": "Tuma",
+    "continue": "Komekera",
+    "finish": "Maliriza",
+    "retry": "Ddayo okuddamu",
+    "refresh": "Kyusa",
+    "close": "Ggalawo",
+    "ok": "Kale",
+    "yes": "Ye",
+    "no": "Nedda"
+  },
+  "status": {
+    "loading": "Bikola...",
+    "online": "Ku mutimbagano",
+    "offline": "Tewali mutimbagano",
+    "connected": "Gye tuliko",
+    "disconnected": "Tewali kukwatagana",
+    "success": "Kikole",
+    "error": "Kizibu",
+    "warning": "Okulabula",
+    "info": "Amagezi"
+  },
+  "labels": {
+    "name": "Erinnya",
+    "email": "Email",
+    "phone": "Essimu",
+    "address": "Wano",
+    "password": "Ekigambo ekikwata",
+    "confirmPassword": "Kakasa ekigambo ekikwata",
+    "language": "Olulimi",
+    "currency": "Ssente",
+    "quantity": "Obwongye",
+    "price": "Omuguzi",
+    "total": "Omugatte",
+    "subtotal": "Omugatte mutono",
+    "tax": "Omusolo",
+    "shipping": "Okutwala"
+  },
+  "messages": {
+    "welcome": "Tukusanyukidde AGROF",
+    "noResults": "Tewali byonna",
+    "tryAgain": "Ddayo okuddamu",
+    "networkError": "Kizibu ku mutimbagano. Laba mu kukwatagana kw'oyo.",
+    "serverError": "Kizibu ku server. Ddayo okuddamu oluvannyuma.",
+    "successMessage": "Ekintu kikole",
+    "errorMessage": "Kizibu kibeerawo. Ddayo okuddamu."
+  }
+}

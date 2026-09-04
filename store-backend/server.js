@@ -397,7 +397,7 @@ const populateDatabase = async () => {
               }
               
               const imageUrl = imageFile ? 
-                `/api/images/${categoryDirMap[category.name] || category.name.toUpperCase()}/${encodeURIComponent(item)}/${imageFile}` : 
+                `/api/images/${categoryDirMap[category.name] || category.name.toUpperCase()}/${item}/${imageFile}` : 
                 null;
               
               // Insert product with enhanced data

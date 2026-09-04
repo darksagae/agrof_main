@@ -1,10 +1,10 @@
 // AGROF Store API Service
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { STORE_API_URL, CACHE_DURATION, API_TIMEOUT } from '../config/apiConfig';
 
 // Backend API configuration - Single local address
-const API_BASE_URL = 'http://192.168.1.15:3001/api'; // Store backend API
+const API_BASE_URL = STORE_API_URL; // Store backend API
 let currentApiUrl = API_BASE_URL;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
 
 // Generate a simple session ID for cart management
 const generateSessionId = () => {
@@ -74,21 +74,26 @@ const findWorkingApiUrl = async () => {
   throw new Error('API connection failed');
 };
 
-// Generic API request function
+// Generic API request function with improved error handling
 const apiRequest = async (endpoint, options = {}) => {
   try {
     const url = `${API_BASE_URL}${endpoint}`;
     console.log(`🌐 API Request: ${url}`);
     console.log(`🔍 Current API_BASE_URL: ${API_BASE_URL}`);
     
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT); // Use centralized timeout
+    
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
       },
-      timeout: 10000, // 10 second timeout
+      signal: controller.signal,
       ...options,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       console.log(`❌ HTTP error! status: ${response.status} for ${url}`);
@@ -101,6 +106,13 @@ const apiRequest = async (endpoint, options = {}) => {
   } catch (error) {
     console.error(`❌ API request failed for ${endpoint} with ${API_BASE_URL}:`, error);
     console.error(`❌ Error details:`, error.message);
+    
+    // Check if it's a network error
+    if (error.name === 'AbortError' || error.message.includes('Network request failed')) {
+      console.log('🔄 Network error detected, using offline fallback...');
+      throw new Error('NETWORK_ERROR');
+    }
+    
     throw error;
   }
 };
@@ -169,7 +181,62 @@ export const productsApi = {
       return data;
     } catch (error) {
       console.error('Failed to fetch all products:', error);
-      return [];
+      console.log('🔄 Using offline products fallback...');
+      
+      // Return offline fallback products
+      const offlineProducts = [
+        {
+          id: 'offline-1',
+          name: 'General Fertilizer',
+          category_name: 'fertilizers',
+          selling_price: 50000,
+          description: 'General purpose fertilizer for plant nutrition',
+          image_url: null
+        },
+        {
+          id: 'offline-2',
+          name: 'Fungicide Treatment',
+          category_name: 'fungicides',
+          selling_price: 75000,
+          description: 'Broad spectrum fungicide for disease control',
+          image_url: null
+        },
+        {
+          id: 'offline-3',
+          name: 'Organic Pesticide',
+          category_name: 'organic_chemicals',
+          selling_price: 60000,
+          description: 'Organic pest control solution',
+          image_url: null
+        },
+        {
+          id: 'offline-4',
+          name: 'Herbicide Control',
+          category_name: 'herbicides',
+          selling_price: 45000,
+          description: 'Weed control herbicide',
+          image_url: null
+        },
+        {
+          id: 'offline-5',
+          name: 'Quality Seeds',
+          category_name: 'seeds',
+          selling_price: 30000,
+          description: 'High-quality crop seeds',
+          image_url: null
+        },
+        {
+          id: 'offline-6',
+          name: 'Nursery Soil',
+          category_name: 'nursery_bed',
+          selling_price: 25000,
+          description: 'Premium nursery soil mix',
+          image_url: null
+        }
+      ];
+      
+      console.log(`📦 Offline products loaded: ${offlineProducts.length} products`);
+      return offlineProducts;
     }
   },
 
@@ -226,6 +293,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to add item to cart:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, item not added...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   },
@@ -238,6 +309,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to fetch cart items:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, returning empty cart...');
+        return [];
+      }
       return [];
     }
   },
@@ -253,6 +328,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to update cart item quantity:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, quantity not updated...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   },
@@ -267,6 +346,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to remove item from cart:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, item not removed...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   },
@@ -281,6 +364,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to clear cart:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, cart not cleared...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   }

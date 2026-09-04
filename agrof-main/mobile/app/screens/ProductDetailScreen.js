@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { productsApi } from '../services/storeApi';
+import storeImageService from '../services/storeImageService';
 import { useCart } from '../contexts/CartContext';
 
 const { width } = Dimensions.get('window');
@@ -201,11 +202,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
             </View>
           )}
           <Image
-            source={
-              productData.image_url 
-                ? { uri: `http://192.168.1.15:3001${productData.image_url}` }
-                : getCategoryImage(productData.category_name)
-            }
+            source={storeImageService.getProductImage(productData)}
             style={styles.productImage}
             onLoad={() => setImageLoading(false)}
             onError={() => setImageLoading(false)}

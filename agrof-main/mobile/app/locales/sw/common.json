@@ -1,0 +1,71 @@
+{
+  "navigation": {
+    "store": "Duka",
+    "cart": "Rukwama",
+    "disease": "Kugundua Magonjwa",
+    "dashboard": "Dashibodi",
+    "profile": "Wasifu",
+    "help": "Msaada",
+    "settings": "Mipangilio"
+  },
+  "buttons": {
+    "addToCart": "Ongeza kwenye Rukwama",
+    "viewDetails": "Angalia Maelezo",
+    "search": "Tafuta",
+    "back": "Rudi",
+    "next": "Ifuatayo",
+    "cancel": "Ghairi",
+    "save": "Hifadhi",
+    "delete": "Futa",
+    "edit": "Hariri",
+    "send": "Tuma",
+    "login": "Ingia",
+    "logout": "Toka",
+    "register": "Jisajili",
+    "submit": "Wasilisha",
+    "continue": "Endelea",
+    "finish": "Maliza",
+    "retry": "Jaribu Tena",
+    "refresh": "Sasisha",
+    "close": "Funga",
+    "ok": "Sawa",
+    "yes": "Ndiyo",
+    "no": "Hapana"
+  },
+  "status": {
+    "loading": "Inapakia...",
+    "online": "Mtandaoni",
+    "offline": "Nje ya mtandao",
+    "connected": "Imeunganishwa",
+    "disconnected": "Haijaunganishwa",
+    "success": "Imefanikiwa",
+    "error": "Hitilafu",
+    "warning": "Onyo",
+    "info": "Maelezo"
+  },
+  "labels": {
+    "name": "Jina",
+    "email": "Barua pepe",
+    "phone": "Simu",
+    "address": "Anwani",
+    "password": "Nenosiri",
+    "confirmPassword": "Thibitisha Nenosiri",
+    "language": "Lugha",
+    "currency": "Sarafu",
+    "quantity": "Kiasi",
+    "price": "Bei",
+    "total": "Jumla",
+    "subtotal": "Jumla ndogo",
+    "tax": "Ushuru",
+    "shipping": "Usafiri"
+  },
+  "messages": {
+    "welcome": "Karibu AGROF",
+    "noResults": "Hakuna matokeo",
+    "tryAgain": "Tafadhali jaribu tena",
+    "networkError": "Hitilafu ya mtandao. Tafadhali angalia muunganisho wako.",
+    "serverError": "Hitilafu ya seva. Tafadhali jaribu tena baadaye.",
+    "successMessage": "Operesheni imekamilika kwa mafanikio",
+    "errorMessage": "Hitilafu imetokea. Tafadhali jaribu tena."
+  }
+}

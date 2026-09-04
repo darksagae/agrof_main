@@ -1,0 +1,51 @@
+{
+  "title": "Duka la AGROF",
+  "subtitle": "Bidhaa bora za kilimo kwa shamba lako",
+  "categories": {
+    "fertilizers": "Mbolea",
+    "fungicides": "Dawa ya Ukungu",
+    "herbicides": "Dawa ya Magugu",
+    "seeds": "Mbegu",
+    "nursery": "Mahali pa Miti",
+    "organic": "Kemikali za Asili"
+  },
+  "productInfo": {
+    "price": "Bei",
+    "quantity": "Kiasi",
+    "description": "Maelezo",
+    "specifications": "Vipimo",
+    "features": "Vipengele",
+    "usage": "Maelekezo ya Matumizi",
+    "benefits": "Faida",
+    "storage": "Maelekezo ya Uhifadhi",
+    "safety": "Maelezo ya Usalama",
+    "availability": "Upatikanaji",
+    "inStock": "Ipo",
+    "outOfStock": "Haipo",
+    "lowStock": "Inakaribia Kuisha"
+  },
+  "cart": {
+    "title": "Rukwama wa Ununuzi",
+    "empty": "Rukwama wako ni tupu",
+    "items": "vitu",
+    "total": "Jumla",
+    "checkout": "Maliza Ununuzi",
+    "remove": "Ondoa",
+    "update": "Sasisha Kiasi",
+    "clear": "Safisha Rukwama"
+  },
+  "search": {
+    "placeholder": "Tafuta bidhaa...",
+    "noResults": "Hakuna bidhaa zilizopatikana",
+    "suggestions": "Jaribu kutafuta:"
+  },
+  "filters": {
+    "category": "Kategoria",
+    "price": "Mipaka ya Bei",
+    "availability": "Upatikanaji",
+    "sortBy": "Panga Kwa",
+    "name": "Jina",
+    "price": "Bei",
+    "newest": "Vipya"
+  }
+}
