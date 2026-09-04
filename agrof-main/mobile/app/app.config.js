@@ -30,7 +30,8 @@ export default {
     extra: {
       eas: {
         projectId: "5078ace1-2ba3-4c26-8cfa-62c952a21a2c"
-      }
+      },
+      geminiApiKey: process.env.GEMINI_API_KEY || ""
     },
     owner: "agrof",
     runtimeVersion: {

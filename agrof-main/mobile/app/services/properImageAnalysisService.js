@@ -4,9 +4,16 @@
  */
 
 import { Platform } from 'react-native';
+import Constants from 'expo-constants';
 
-const GEMINI_API_KEY = "AIzaSyDUMB5H8bzSIbaECO2CmVk3hfoNj7zfU60";
+// Key comes from app.config.js -> extra.geminiApiKey, which reads process.env.GEMINI_API_KEY (.env, gitignored).
+// Do NOT hardcode the key here — committed keys get auto-revoked by Google's leak scanner.
+const GEMINI_API_KEY = Constants.expoConfig?.extra?.geminiApiKey || '';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+if (!GEMINI_API_KEY) {
+  console.warn('⚠️ GEMINI_API_KEY is missing. Set it in agrof-main/mobile/app/.env and restart Expo (npx expo start -c).');
+}
 
 /**
  * Convert image to base64 using React Native's built-in capabilities
