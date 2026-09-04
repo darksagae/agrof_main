@@ -1,0 +1,398 @@
+STI Hackathon 2025: Complete
+Setup Guide
+Welcome to the comprehensive setup guide for STI Hackathon 2025. This stepby-step tutorial will walk you through creating your account, setting up your
+virtual machine, and deploying applications using Coolify. By the end of this
+guide, you'll have everything needed to build and deploy your hackathon project
+successfully.
+
+What You'll Accomplish
+01
+
+02
+
+03
+
+Create STI Console Account
+
+Join Hackathon Tenant
+
+Set Up VPN Connection
+
+Register and verify your account on the STI
+
+Request access and join the STI Industry
+
+Configure WireGuard VPN for secure access
+
+platform console
+
+4.0+ tenant
+
+to resources
+
+04
+
+05
+
+Deploy Virtual Machine
+
+Connect to Coolify
+
+Create and configure your Ubuntu development environment
+
+Set up application deployment platform for easy project hosting
+
+Step 1: Access the STI Console
+Navigate to https://console.sti.go.ug in your web browser. This is the main
+portal where you'll manage your hackathon resources and virtual machines.
+The STI Console provides a comprehensive dashboard for accessing cloud
+resources, managing virtual machines, and connecting to various services
+needed for your hackathon project development.
+
+Step 2: Register Your Account
+Registration Process
+1. Click "Register Now" on the
+homepage
+2. Fill in your personal details
+accurately
+3. Read and accept the terms and
+conditions
+4. Click the "Register" button to
+submit
+
+Important: Use a valid email
+address as you'll receive
+verification codes and
+important notifications
+about your tenant access
+throughout the hackathon.
+
+Step 3: Email
+Verification
+After registering, check your email for an OTP (One-Time
+Password) verification code. This security step ensures your
+account is properly authenticated and prevents unauthorised
+access.
+Enter the OTP code when prompted to complete your
+registration. Once verified, you'll be automatically redirected
+to the web console dashboard where you can begin
+accessing STI services.
+
+Step 4: Request Tenant Access
+Send Support Email
+Email support@abq.africa to request invitation to the STI Industry 4.0+
+tenant. Include your registered email address and mention you're
+participating in Hackathon 2025.
+The support team will process your request within 24 hours. You'll receive an
+email notification once you've been successfully added to the hackathon tenant
+with access to all necessary resources.
+
+Step 5: Accept Tenant
+Invitation
+When you receive the tenant invitation email, click the provided link to accept
+access to the STI Industry 4.0+ tenant. This grants you permission to use
+hackathon resources including virtual machines and development tools.
+After accepting, return to the web console and refresh the page. You should
+now see the "STI Industry 4.0+" tenant available in your dashboard, indicating
+successful access to hackathon resources.
+
+Step 6: Access Your Tenant
+Click on the "STI Industry 4.0+" tenant tile in your dashboard to access its
+resources and features. This opens up the hackathon-specific environment
+where you can create virtual machines, manage storage, and deploy
+applications.
+The tenant dashboard provides access to cloudspaces, networking tools, and
+various services specifically configured for hackathon participants.
+
+Step 7: Navigate to Hackathon
+Cloudspace
+From the tenant dashboard, navigate to Cloudspaces > hackathon 2025. This is
+your dedicated workspace containing all the resources, templates, and
+configurations specifically prepared for the hackathon event.
+The hackathon cloudspace includes pre-configured networks, security groups,
+and access to specialised services that will support your project development
+throughout the event.
+
+Step 8: Set Up WireGuard VPN
+Before creating your virtual machine, you need to establish a secure VPN
+connection. Navigate to WireGuard VPNs > external-mgmt to begin configuring
+your VPN access.
+The VPN ensures secure communication between your local machine and the
+cloud resources, protecting your data and maintaining network security
+throughout your development work.
+
+Step 9: Create VPN Peer
+Configuration
+1
+
+2
+
+3
+
+Add Peer
+Click "Add Peer" and leave all default settings on the first page
+
+Configure Public Key
+Accept the automatically generated public key configuration
+
+Set Network Options
+Choose NAT option for Allowed IPs and proceed
+
+Step 10: Complete VPN Setup
+Endpoint Configuration
+
+Peer Naming
+
+On the "Endpoint & Keep Alive" page,
+
+Give your peer a descriptive name
+
+accept the default values and click
+
+(like "yourname-hackathon") and
+
+next. These settings ensure reliable
+
+click "Add" to create the
+
+VPN connectivity.
+
+configuration.
+
+Step 11: Download VPN
+Configuration
+Critical Step: Click "Download Config" to save the configuration file as
+"yourname-hackathon.conf" on your computer. You'll need this file to
+connect to the VPN.
+
+Store the configuration file in a safe location as it contains your unique VPN
+credentials. This file will be imported into your WireGuard client to establish the
+secure connection.
+
+Step 12: Install WireGuard Client
+If you haven't already, install WireGuard on your computer from https://www.wireguard.com/install/. WireGuard is available for Windows,
+macOS, Linux, and mobile platforms.
+Choose the appropriate version for your operating system and follow the installation instructions. The lightweight VPN client will manage
+your secure connection to the hackathon infrastructure.
+
+Step 13: Return to Create
+Virtual Machine
+Navigate back to the "hackathon 2025" cloudspace. In the top menu, click
+"Create VM" to begin setting up your development virtual machine.
+This virtual machine will serve as your primary development environment,
+providing you with a Ubuntu server where you can install tools, run applications,
+and develop your hackathon project.
+
+Step 14: Choose VM Creation
+Method
+On the VM creation page, select "Create from an image" and click next. This
+option allows you to start with a pre-configured operating system image, saving
+setup time.
+Creating from an image provides a clean, standardised environment that's
+optimised for development work and compatible with the hackathon
+infrastructure.
+
+Step 15: Select Operating
+System
+Choose "Ubuntu 24.04" from the available images and click next. Ubuntu 24.04
+LTS provides a stable, well-supported Linux environment perfect for
+development work.
+This image comes pre-configured with essential development tools and
+libraries, providing an excellent foundation for various programming languages
+and frameworks commonly used in hackathons.
+
+Step 16: Configure VM
+Resources
+
+2
+
+2048
+
+1000
+
+vCPU Cores
+
+RAM (MB)
+
+Disk (GB)
+
+Processing power for
+
+Memory allocation for
+
+Storage space for code,
+
+compilation and
+
+running applications and
+
+dependencies, and
+
+development tasks
+
+services
+
+project files
+
+These resource allocations provide sufficient computing power for most
+hackathon projects whilst ensuring optimal performance across the shared
+infrastructure.
+
+Step 17: Configure Storage and
+Networking
+Data Disk Settings
+
+Network Configuration
+
+Leave the data disk configuration as
+
+You'll configure the IP address and
+
+default and click next. The default
+
+networking settings on the next page
+
+settings provide adequate additional
+
+to ensure proper connectivity within
+
+storage for your project needs.
+
+the hackathon environment.
+
+Step 18: Name and IP
+Configuration
+VM Name
+
+IP Address Range
+
+Give your VM a descriptive name
+
+Select an IP address between
+
+like "teamname-dev-vm" for
+
+10.100.100.50 - 10.100.100.200
+
+easy identification
+
+Default Settings
+Leave all other settings as default
+and click "Create"
+
+Step 19: VM Creation Process
+The virtual machine creation process will take several minutes to complete.
+During this time, the system is provisioning your Ubuntu server, configuring
+networking, and preparing the development environment.
+You can monitor the progress in the console. Once the status changes to
+"Running", your VM is ready for use and you can proceed to establish an SSH
+connection.
+
+Step 20: Prepare for SSH
+Connection
+Before connecting to your VM, you'll need to activate your WireGuard VPN using
+the configuration file you downloaded earlier. Import the .conf file into your
+WireGuard client and activate the connection.
+The default login credentials are visible on the VM's console page: username is
+user and the password is your VM's unique ID displayed on the console.
+
+Step 21: Connect via SSH
+Connect to your VM using SSH. For Linux/Mac, use the terminal; for Windows,
+use PowerShell, Windows Terminal, or PuTTY.
+ssh user@10.100.100.50
+Replace the IP address with your VM's assigned IP. When prompted, enter the
+initial password (VM ID) shown on the console page. For security, immediately
+change your password using the passwd command after logging in.
+
+Step 22: Secure Your VM
+1
+
+2
+
+3
+
+Change Password
+Run passwd to set a strong, unique password
+
+Gain Root Access
+Use sudo -i when administrative privileges are needed
+
+Install Software
+Install development tools and libraries required for your project
+
+Step 23: Introduction to
+Coolify
+Your VM will be connected to Coolify, a powerful self-hosted deployment
+platform that simplifies application deployment. Coolify allows you to deploy
+applications directly from Git repositories with minimal configuration.
+Access Coolify at http://developer.abq.africa to streamline your application
+deployment process throughout the hackathon.
+
+Step 24: Register on Coolify
+Platform
+Navigate to https://developer.abq.africa and select "Register" to create your
+Coolify account. Fill in your details and password, then click register.
+After registration, you'll be redirected to the landing page where you can click
+"Get Started" to begin configuring your deployment environment for easy
+application hosting.
+
+Step 25: Configure Coolify
+Server Connection
+Click "Next" under "Self-hosting with
+superpowers" and select "Remote server" to
+
+Copy the generated
+
+add your VM to Coolify's deployment system.
+
+public key - you'll
+
+On the SSH Key page, select "No (create one
+for me)" to generate a new SSH key pair for
+secure server communication.
+
+need to add this to
+your VM's
+authorised keys for
+secure access.
+
+Step 26: Configure SSH
+Access
+Connect to your VM via SSH and switch to root user with sudo -i. Open the
+authorised keys file using:
+nano /root/.ssh/authorized_keys
+Paste the public key from Coolify at the end of the file and save. This enables
+Coolify to securely connect to your VM for automated deployments.
+
+Step 27: Complete Server Setup
+Return to Coolify and click "Save". Name your server (like "teamname-vm"), set your
+VM's IP address from the console page, and click "Continue".
+On the "Validate and Configure Server" page, click "Let's do it!" The validation and
+configuration process may take several minutes as Coolify installs necessary
+components on your server.
+
+You're Ready to Build!
+VM Ready
+
+VPN Connected
+
+Your Ubuntu development
+
+Secure WireGuard connection
+
+environment is configured and
+
+established for safe resource
+
+accessible via SSH
+
+access
+
+Coolify Integrated
+Deployment platform ready for easy application hosting and management
+Your development environment is fully configured! Create a new project in
+Coolify by clicking "Create new project!" then "Let's do it!" Your server will be
+listed under "Servers" where you can manage deployments throughout the
+hackathon. Happy coding!
+
+
