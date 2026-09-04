@@ -20,24 +20,24 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/robot-icon.png",
-        "backgroundColor": "#4CAF50"
+        "backgroundColor": "#FFFFFF"
       },
-      "package": "com.enick.cropdiseasedetectormobile"
+      "package": "com.agrof.cropdiseasedetectormobile"
     },
     "web": {
       "favicon": "./assets/robot-icon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "cd41ed72-135f-4983-bb17-5ae7ea6d49ff"
+        "projectId": "5078ace1-2ba3-4c26-8cfa-62c952a21a2c"
       }
     },
-    "owner": "enick",
+    "owner": "agrof",
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/cd41ed72-135f-4983-bb17-5ae7ea6d49ff"
+      "url": "https://u.expo.dev/5078ace1-2ba3-4c26-8cfa-62c952a21a2c"
     }
   }
 }

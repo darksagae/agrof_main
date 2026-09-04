@@ -10,7 +10,15 @@ import OptimizedImage from '../components/OptimizedImage';
 import CategoryProductsScreen from './CategoryProductsScreen';
 import CartScreen from './CartScreen';
 import ProductDetailScreen from './ProductDetailScreen';
-import { featuredProducts } from '../data/featuredProducts';
+
+// Fallback featured products (minimal set - API will provide full list)
+const featuredProducts = [
+  { id: 1, name: 'NPK Fertilizer', price: 'UGX 45,000', category_name: 'fertilizers' },
+  { id: 2, name: 'Organic Pesticide', price: 'UGX 25,000', category_name: 'organic_chemicals' },
+  { id: 3, name: 'Maize Seeds', price: 'UGX 15,000', category_name: 'seeds' },
+  { id: 4, name: 'Fungicide Spray', price: 'UGX 35,000', category_name: 'fungicides' },
+  { id: 5, name: 'Herbicide', price: 'UGX 30,000', category_name: 'herbicides' }
+];
 
 const StoreScreen = () => {
   const { t } = useSafeTranslation();

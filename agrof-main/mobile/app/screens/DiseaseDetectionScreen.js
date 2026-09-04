@@ -181,8 +181,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
       const analysisData = result.analysis || result;
       
       const formattedResult = {
-          status: 'success',
-        message: getAnalysisMessage(result),
+        status: 'success',
         analysis: analysisData, // Use the extracted analysis data
         timestamp: result.timestamp || new Date().toISOString(),
         source: result.source || 'Gemini AI',
@@ -195,11 +194,8 @@ const DiseaseDetectionScreen = ({ navigation }) => {
       console.log('🎯 Analysis result disease:', formattedResult.analysis?.disease_type);
       console.log('🎯 Analysis result crop:', formattedResult.analysis?.crop_type);
       
-      Alert.alert(
-        'Analysis Complete',
-        `Disease detected using ${result.source === 'Gemini AI' ? 'Gemini AI (Online)' : 'TensorFlow Lite (Offline)'}\n\nCrop: ${result.crop_type || 'Unknown'}\nDisease: ${result.disease_type || 'Unknown'}\nConfidence: ${(result.confidence * 100).toFixed(1)}%`,
-        [{ text: 'View Results' }]
-      );
+      // Results displayed automatically - no alert popup needed
+      console.log('✅ Analysis complete - showing results');
     } catch (error) {
       console.error('❌ Analysis failed:', error);
       setError(error.message);
@@ -210,20 +206,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     } finally {
       setIsAnalyzing(false);
     }
-  };
-
-  // Get analysis message based on source
-  const getAnalysisMessage = (result) => {
-    if (result.source === 'gemini') {
-      return '✨ Analysis completed using Gemini AI (Online mode)';
-    } else if (result.source === 'tensorflow_lite') {
-      return '📱 Analysis completed using TensorFlow Lite (Offline mode)';
-    } else if (result.analysisMethod === 'offline_fallback') {
-      return '📱 Online service unavailable - using TensorFlow Lite (Offline fallback)';
-    } else if (result.source === 'cache') {
-      return '📦 Using cached analysis result';
-    }
-    return 'Analysis completed';
   };
 
   // Reset all states
@@ -354,10 +336,12 @@ const DiseaseDetectionScreen = ({ navigation }) => {
             </View>
             <View style={styles.cropInfo}>
               <Text style={styles.cropType}>
-                {analysisResult.analysis?.crop_type || 'Unknown Crop'}
+                {analysisResult.analysis?.crop_type && analysisResult.analysis.crop_type !== 'Unknown' 
+                  ? analysisResult.analysis.crop_type 
+                  : 'Crop detected - analyzing...'}
               </Text>
               <Text style={styles.plantFamily}>
-                Family: {analysisResult.analysis?.plant_family || 'Unknown'}
+                Family: {analysisResult.analysis?.plant_family || 'Identifying...'}
               </Text>
               <Text style={styles.growthStage}>
                 Stage: {analysisResult.analysis?.growth_stage || 'Unknown'}
@@ -420,7 +404,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           )}
 
           {/* Confidence Score */}
-          {analysisResult.analysis?.confidence && (
+          {analysisResult.analysis?.confidence && analysisResult.analysis.confidence > 0 && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>Confidence Score</Text>

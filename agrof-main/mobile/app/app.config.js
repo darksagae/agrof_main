@@ -20,6 +20,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supportsTablet: true
   },
   android: {
+    package: "com.agrof.cropdiseasedetectormobile",
     adaptiveIcon: {
       foregroundImage: "./assets/robot-icon.png",
       backgroundColor: "#FFFFFF"

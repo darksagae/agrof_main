@@ -21,7 +21,19 @@ import ProductRecommendationCards from './components/ProductRecommendationCards'
 import { CartProvider } from './contexts/CartContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { UserProvider } from './contexts/UserContext';
-import { cropProducts } from './data/cropProducts';
+// Crop Products Data (moved inline to avoid import issues)
+const cropProducts = [
+  { id: 'maize', name: 'Maize', image: '../assets/crops/maize.png', category: 'cereals', description: 'Staple cereal crop' },
+  { id: 'coffee', name: 'Coffee', image: '../assets/crops/coffee.png', category: 'cash_crops', description: 'Premium coffee beans' },
+  { id: 'rice', name: 'Rice', image: '../assets/crops/rice.png', category: 'cereals', description: 'Essential grain crop' },
+  { id: 'banana', name: 'Banana', image: '../assets/crops/banana.png', category: 'fruits', description: 'Nutritious fruit crop' },
+  { id: 'tomatoes', name: 'Tomatoes', image: '../assets/crops/tomatoes.png', category: 'vegetables', description: 'Versatile vegetable crop' },
+  { id: 'beans', name: 'Beans', image: '../assets/crops/beans.png', category: 'legumes', description: 'Protein-rich legume' },
+  { id: 'avocados', name: 'Avocados', image: '../assets/crops/avocados.png', category: 'fruits', description: 'Healthy fruit crop' },
+  { id: 'pineapple', name: 'Pineapple', image: '../assets/crops/pineapple.png', category: 'fruits', description: 'Tropical fruit crop' },
+  { id: 'oranges', name: 'Oranges', image: '../assets/crops/orangoes.png', category: 'fruits', description: 'Citrus fruit crop' },
+  { id: 'mangoes', name: 'Mangoes', image: '../assets/crops/mangoes.png', category: 'fruits', description: 'Sweet tropical fruit' }
+];
 import './i18n'; // Initialize i18n
 
 // Firebase imports
@@ -48,10 +60,10 @@ import ConversationScreen from './screens/ConversationScreen';
 
 const { width, height } = Dimensions.get('window');
 
-// Update API URL to use deployed backend
-const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed Railway backend
-// const API_URL = 'http://192.168.1.10:5000'; // Use your computer's IP address for local testing
-// const API_URL = 'http://localhost:5000'; // For web browser testing
+// Update API URL to use local backend
+// const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed Railway backend
+const API_URL = 'http://192.168.1.15:8000'; // Use your computer's IP address for local testing
+// const API_URL = 'http://localhost:8000'; // For web browser testing
 
 export default function App() {
   // Load Material Icons font
@@ -1145,29 +1157,6 @@ export default function App() {
             <Text style={styles.headerTitle}> AGROF AI</Text>
           </View>
                       <Text style={styles.headerSubtitle}>{t('care.subtitle')}</Text>
-          
-          {/* Firebase Status Indicator */}
-          <View style={[styles.firebaseStatus, { 
-            backgroundColor: 
-              firebaseStatus === 'connected' ? '#4CAF50' : 
-              firebaseStatus === 'partial' ? '#2196F3' : 
-              firebaseStatus === 'error' ? '#f44336' : '#ff9800' 
-          }]}>
-            <MaterialIcons 
-              name={
-                firebaseStatus === 'connected' ? 'check-circle' : 
-                firebaseStatus === 'partial' ? 'sync' : 
-                firebaseStatus === 'error' ? 'error' : 'schedule'
-              } 
-              size={16} 
-              color="white" 
-            />
-        <Text style={styles.firebaseStatusText}>
-          {firebaseStatus === 'connected' ? 'AGROF: Firebase Auth + Supabase' : 
-           firebaseStatus === 'partial' ? 'AGROF: Ready' : 
-           firebaseStatus === 'error' ? 'AGROF: Offline' : 'AGROF: Starting...'}
-        </Text>
-          </View>
         </View>
 
         {/* Smart Farming Features */}
@@ -2867,21 +2856,6 @@ const styles = StyleSheet.create({
   },
   screen: {
     flex: 1,
-  },
-  firebaseStatus: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    marginTop: 10,
-    alignSelf: 'center',
-  },
-  firebaseStatusText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginLeft: 6,
   },
   welcomeOverlay: {
     position: 'absolute',

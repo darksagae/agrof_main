@@ -1,7 +1,8 @@
 import Constants from 'expo-constants';
+import { AI_BASE_URL, AI_API_URL } from './config/apiConfig';
 
-// Get API URL from environment or use default
-const BASE_URL = Constants.expoConfig?.extra?.API_URL || 'http://192.168.0.107:5000';
+// Get API URL from environment or use default from apiConfig
+const BASE_URL = Constants.expoConfig?.extra?.API_URL || AI_BASE_URL;
 
 /**
  * Send image to API for disease detection
@@ -9,6 +10,82 @@ const BASE_URL = Constants.expoConfig?.extra?.API_URL || 'http://192.168.0.107:5
  * @param {string} language - Language code (en, lg, rn)
  * @returns {Promise<Object>} - Prediction result
  */
+/**
+ * Test connection to the backend API
+ * @returns {Promise<Object>} - Connection test result
+ */
+export async function testConnection() {
+  try {
+    console.log('🔍 Testing connection to:', AI_BASE_URL);
+    
+    const response = await fetch(`${AI_API_URL}/connection-test`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ test: 'mobile_app' }),
+      timeout: 10000 // 10 second timeout
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    console.log('✅ Connection test successful:', result.message);
+    
+    return {
+      success: true,
+      message: result.message,
+      timestamp: result.timestamp
+    };
+  } catch (error) {
+    console.error('❌ Connection test failed:', error.message);
+    return {
+      success: false,
+      message: error.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+}
+
+/**
+ * Test health endpoint
+ * @returns {Promise<Object>} - Health check result
+ */
+export async function testHealth() {
+  try {
+    console.log('🔍 Testing health endpoint:', AI_BASE_URL);
+    
+    const response = await fetch(`${AI_BASE_URL}/health`, {
+      method: 'GET',
+      timeout: 5000 // 5 second timeout
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    console.log('✅ Health check successful:', result.message);
+    
+    return {
+      success: true,
+      status: result.status,
+      message: result.message,
+      ai_status: result.ai_status,
+      timestamp: result.timestamp
+    };
+  } catch (error) {
+    console.error('❌ Health check failed:', error.message);
+    return {
+      success: false,
+      message: error.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+}
+
 export async function sendImage(uri, language = 'en') {
   try {
     console.log('📤 Sending image to API:', BASE_URL);
@@ -30,7 +107,7 @@ export async function sendImage(uri, language = 'en') {
     formData.append('stakeholder', 'farmers');
     
     // Make API request to the correct endpoint
-    const response = await fetch(`${BASE_URL}/api/analyze`, {
+    const response = await fetch(`${AI_API_URL}/analyze`, {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',

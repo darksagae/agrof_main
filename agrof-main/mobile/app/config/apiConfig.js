@@ -6,17 +6,18 @@
 
 // Base IP addresses for all services - with fallbacks
 const BASE_IPS = [
-  '192.168.1.15',  // Current WiFi IP - UPDATED Oct 11, 2025
-  '10.0.0.1',      // VPN interface (wg0)
-  '192.168.0.108', // Previous WiFi IP
-  '192.168.0.113', // Older WiFi IP
-  '127.0.0.1',     // Localhost fallback
-  '10.0.2.2',      // Android emulator host
-  'localhost'      // Local fallback
+  '10.100.100.180', // Deployed AGROF Backend Server
+  '192.168.1.15',   // Current WiFi IP - UPDATED Oct 11, 2025
+  '10.0.0.1',       // VPN interface (wg0)
+  '192.168.0.108',  // Previous WiFi IP
+  '192.168.0.113',  // Older WiFi IP
+  '127.0.0.1',      // Localhost fallback
+  '10.0.2.2',       // Android emulator host
+  'localhost'       // Local fallback
 ];
 
 // Get the current base IP (will be dynamically determined)
-let BASE_IP = '192.168.1.15';  // WiFi IP - your phone can reach this!
+let BASE_IP = '192.168.1.15';  // Current working WiFi IP
 
 // API Configuration
 export const API_CONFIG = {
@@ -36,11 +37,13 @@ export const API_CONFIG = {
   
   // AI Backend API
   AI: {
-    BASE_URL: `http://${BASE_IP}:5000`,
-    API_URL: `http://${BASE_IP}:5000/api`,
+    BASE_URL: `http://${BASE_IP}:8000`,
+    API_URL: `http://${BASE_IP}:8000/api`,
     ENDPOINTS: {
       ANALYZE_DISEASE: '/ai-analyze-disease',
-      HEALTH: '/health'
+      HEALTH: '/health',
+      TEST: '/test',
+      CONNECTION_TEST: '/connection-test'
     }
   }
 };
@@ -134,8 +137,8 @@ export const findWorkingApiEndpoint = async () => {
           // Update API_CONFIG with working IP
           API_CONFIG.STORE.BASE_URL = `http://${ip}:3001`;
           API_CONFIG.STORE.API_URL = `http://${ip}:3001/api`;
-          API_CONFIG.AI.BASE_URL = `http://${ip}:5000`;
-          API_CONFIG.AI.API_URL = `http://${ip}:5000/api`;
+          API_CONFIG.AI.BASE_URL = `http://${ip}:8000`;
+          API_CONFIG.AI.API_URL = `http://${ip}:8000/api`;
           
           return ip;
         }

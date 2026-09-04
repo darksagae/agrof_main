@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { testAllApiUrls, getCurrentApiUrl, resetApiUrl, setApiUrl } from '../services/storeApi';
+import { testConnection, testHealth } from '../api';
 
 const NetworkConfigScreen = ({ onBack }) => {
   const [currentUrl, setCurrentUrl] = useState('');
@@ -24,6 +25,38 @@ const NetworkConfigScreen = ({ onBack }) => {
       setWorkingUrls(urls);
     } catch (error) {
       console.error('Failed to test URLs:', error);
+    } finally {
+      setTesting(false);
+    }
+  };
+
+  const testAiBackend = async () => {
+    setTesting(true);
+    try {
+      console.log('🧪 Testing AI Backend Connection...');
+      
+      // Test health endpoint first
+      const healthResult = await testHealth();
+      if (!healthResult.success) {
+        Alert.alert('Health Check Failed', healthResult.message);
+        return;
+      }
+      
+      // Test connection endpoint
+      const connectionResult = await testConnection();
+      if (!connectionResult.success) {
+        Alert.alert('Connection Test Failed', connectionResult.message);
+        return;
+      }
+      
+      Alert.alert(
+        'AI Backend Test Success!', 
+        `✅ Health: ${healthResult.message}\n✅ Connection: ${connectionResult.message}`,
+        [{ text: 'OK' }]
+      );
+      
+    } catch (error) {
+      Alert.alert('AI Backend Test Failed', error.message);
     } finally {
       setTesting(false);
     }
@@ -147,6 +180,22 @@ const NetworkConfigScreen = ({ onBack }) => {
               <MaterialIcons name="send" size={20} color="white" />
             </TouchableOpacity>
           </View>
+        </View>
+
+        {/* AI Backend Test */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>AI Backend Connection Test</Text>
+          <TouchableOpacity 
+            style={styles.actionButton}
+            onPress={testAiBackend}
+            disabled={testing}
+          >
+            <MaterialIcons name="smart-toy" size={20} color="white" />
+            <Text style={styles.actionButtonText}>Test AI Backend</Text>
+          </TouchableOpacity>
+          <Text style={styles.helpText}>
+            Tests connection to the AI backend at 10.100.100.180:8000
+          </Text>
         </View>
 
         {/* Actions */}
