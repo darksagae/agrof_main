@@ -1,0 +1,6 @@
+[{"id":1,"name":"fertilizers","display_name":"Fertilizers","description":"Agricultural fertilizers for crop nutrition","image_url":null,"created_at":"2025-09-23 12:13:14"},
+{"id":5,"name":"fungicides","display_name":"Fungicides","description":"Plant protection against fungal diseases","image_url":null,"created_at":"2025-09-23 12:13:14"},
+{"id":6,"name":"herbicides","display_name":"Herbicides","description":"Weed control solutions","image_url":null,"created_at":"2025-09-23 12:13:14"},
+{"id":4,"name":"nursery_bed","display_name":"Nursery Bed","description":"Seedlings and plantlets","image_url":null,"created_at":"2025-09-23 12:13:14"},
+{"id":2,"name":"organic_chemicals","display_name":"Organic Chemicals","description":"Organic agricultural chemicals","image_url":null,"created_at":"2025-09-23 12:13:14"},
+{"id":3,"name":"seeds","display_name":"Seeds","description":"High-quality agricultural seeds","image_url":null,"created_at":"2025-09-23 12:13:14"}]

@@ -1,10 +1,18 @@
 // AGROF Store API Service
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { 
+  STORE_API_URL, 
+  CACHE_DURATION, 
+  API_TIMEOUT, 
+  findWorkingApiEndpoint,
+  getCurrentApiConfig,
+  API_CONFIG 
+} from '../config/apiConfig';
 
-// Backend API configuration - Single local address
-const API_BASE_URL = 'http://192.168.1.15:3001/api'; // Store backend API
+// Backend API configuration - Dynamic endpoint discovery
+let API_BASE_URL = STORE_API_URL; // Store backend API
 let currentApiUrl = API_BASE_URL;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
+let endpointTested = false;
 
 // Generate a simple session ID for cart management
 const generateSessionId = () => {
@@ -63,32 +71,53 @@ const testApiConnection = async (baseUrl) => {
   }
 };
 
-// Find working API URL
+// Find working API URL with dynamic endpoint discovery
 const findWorkingApiUrl = async () => {
-  console.log(`🔍 Testing API URL: ${API_BASE_URL}`);
+  if (!endpointTested) {
+    console.log('🔍 First time connecting - testing all available endpoints...');
+    const workingIp = await findWorkingApiEndpoint();
+    
+    if (workingIp) {
+      const config = getCurrentApiConfig();
+      API_BASE_URL = config.storeUrl;
+      currentApiUrl = API_BASE_URL;
+      endpointTested = true;
+      console.log(`✅ Using API URL: ${API_BASE_URL}`);
+      return API_BASE_URL;
+    }
+  }
+  
+  // Fallback to original testing method
+  console.log(`🔍 Testing current API URL: ${API_BASE_URL}`);
   const isWorking = await testApiConnection(API_BASE_URL);
   if (isWorking) {
-    console.log(`✅ Found working API URL: ${API_BASE_URL}`);
+    console.log(`✅ API URL working: ${API_BASE_URL}`);
     return API_BASE_URL;
   }
-  throw new Error('API connection failed');
+  
+  throw new Error('API connection failed - no working endpoints found');
 };
 
-// Generic API request function
+// Generic API request function with improved error handling
 const apiRequest = async (endpoint, options = {}) => {
   try {
     const url = `${API_BASE_URL}${endpoint}`;
     console.log(`🌐 API Request: ${url}`);
     console.log(`🔍 Current API_BASE_URL: ${API_BASE_URL}`);
     
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT); // Use centralized timeout
+    
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
       },
-      timeout: 10000, // 10 second timeout
+      signal: controller.signal,
       ...options,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       console.log(`❌ HTTP error! status: ${response.status} for ${url}`);
@@ -101,6 +130,13 @@ const apiRequest = async (endpoint, options = {}) => {
   } catch (error) {
     console.error(`❌ API request failed for ${endpoint} with ${API_BASE_URL}:`, error);
     console.error(`❌ Error details:`, error.message);
+    
+    // Check if it's a network error
+    if (error.name === 'AbortError' || error.message.includes('Network request failed')) {
+      console.log('🔄 Network error detected, using offline fallback...');
+      throw new Error('NETWORK_ERROR');
+    }
+    
     throw error;
   }
 };
@@ -108,36 +144,30 @@ const apiRequest = async (endpoint, options = {}) => {
 // Categories API
 export const categoriesApi = {
   // Get all categories
-  getAll: async () => {
-    const cacheKey = 'categories_all';
+  getAll: async (language = 'en') => {
+    const cacheKey = `categories_all_${language}`;
     const cached = getCachedData(cacheKey);
     if (cached) return cached;
 
     try {
-      const data = await apiRequest('/categories');
+      const data = await apiRequest(`/categories?language=${language}`);
       setCachedData(cacheKey, data);
       return data;
     } catch (error) {
-      // Return fallback categories if API fails
-      return [
-        { id: 1, name: 'fertilizers', display_name: 'Fertilizers', description: 'Agricultural fertilizers' },
-        { id: 2, name: 'fungicides', display_name: 'Fungicides', description: 'Plant protection' },
-        { id: 3, name: 'herbicides', display_name: 'Herbicides', description: 'Weed control' },
-        { id: 4, name: 'nursery_bed', display_name: 'Nursery Bed', description: 'Seedlings and plantlets' },
-        { id: 5, name: 'organic_chemicals', display_name: 'Organic Chemicals', description: 'Organic solutions' },
-        { id: 6, name: 'seeds', display_name: 'Seeds', description: 'High-quality seeds' }
-      ];
+      console.error('Failed to fetch categories:', error);
+      // Re-throw the error so hybridStoreApi can handle it with the real offline database
+      throw new Error('NETWORK_ERROR');
     }
   },
 
   // Get products by category
-  getProducts: async (categoryName) => {
-    const cacheKey = `category_products_${categoryName}`;
+  getProducts: async (categoryName, language = 'en') => {
+    const cacheKey = `category_products_${categoryName}_${language}`;
     const cached = getCachedData(cacheKey);
     if (cached) return cached;
 
     try {
-      const data = await apiRequest(`/categories/${categoryName}/products`);
+      const data = await apiRequest(`/categories/${categoryName}/products?language=${language}`);
       setCachedData(cacheKey, data);
       return data;
     } catch (error) {
@@ -151,7 +181,7 @@ export const categoriesApi = {
 export const productsApi = {
   // Get all products
   getAll: async (params = {}) => {
-    const { search, category, limit = 500, offset = 0 } = params;
+    const { search, category, limit = 500, offset = 0, language = 'en' } = params;
     const cacheKey = `products_all_${JSON.stringify(params)}`;
     const cached = getCachedData(cacheKey);
     if (cached) return cached;
@@ -159,6 +189,7 @@ export const productsApi = {
     try {
       const queryParams = new URLSearchParams();
       if (search) queryParams.append('search', search);
+      if (language) queryParams.append('language', language);
       if (category) queryParams.append('category', category);
       if (limit) queryParams.append('limit', limit);
       if (offset) queryParams.append('offset', offset);
@@ -169,18 +200,18 @@ export const productsApi = {
       return data;
     } catch (error) {
       console.error('Failed to fetch all products:', error);
-      return [];
+      // Re-throw the error so hybridStoreApi can handle it with the real offline database
+      throw new Error('NETWORK_ERROR');
     }
-  },
 
   // Get single product
-  getById: async (id) => {
-    const cacheKey = `product_${id}`;
+  getById: async (id, language = 'en') => {
+    const cacheKey = `product_${id}_${language}`;
     const cached = getCachedData(cacheKey);
     if (cached) return cached;
 
     try {
-      const data = await apiRequest(`/products/${id}`);
+      const data = await apiRequest(`/products/${id}?language=${language}`);
       setCachedData(cacheKey, data);
       return data;
     } catch (error) {
@@ -226,6 +257,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to add item to cart:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, item not added...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   },
@@ -238,6 +273,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to fetch cart items:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, returning empty cart...');
+        return [];
+      }
       return [];
     }
   },
@@ -253,6 +292,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to update cart item quantity:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, quantity not updated...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   },
@@ -267,6 +310,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to remove item from cart:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, item not removed...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   },
@@ -281,6 +328,10 @@ export const cartApi = {
       return data;
     } catch (error) {
       console.error('Failed to clear cart:', error);
+      if (error.message === 'NETWORK_ERROR') {
+        console.log('🔄 Cart unavailable due to network error, cart not cleared...');
+        return { success: false, message: 'Cart unavailable' };
+      }
       throw error;
     }
   }

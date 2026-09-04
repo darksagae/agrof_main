@@ -15,7 +15,9 @@ import { Card, Title, Paragraph, Button, Chip } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
-import { getProperImageAnalysis } from '../services/properImageAnalysisService';
+import hybridDiseaseDetection from '../services/hybridDiseaseDetection';
+import networkManager from '../services/networkManager';
+import ProductRecommendationCards from '../components/ProductRecommendationCards';
 
 const { width, height } = Dimensions.get('window');
 
@@ -104,7 +106,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     }
   };
 
-  // Analyze image with Gemini AI
+  // Analyze image with Hybrid Detection (Gemini AI or TensorFlow Lite)
   const analyzeImage = async () => {
     if (!selectedImage) {
       Alert.alert('No Image', 'Please select an image first');
@@ -115,23 +117,52 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     setError(null);
 
     try {
-      // Use proper image analysis service
-      const result = await getProperImageAnalysis(selectedImage.uri);
+      // Initialize network manager
+      await networkManager.initialize();
+      const networkStatus = networkManager.getStatus();
+      
+      console.log('📡 Network Status:', networkStatus.isOnline ? 'Online' : 'Offline');
+      console.log('🔬 Starting hybrid disease detection...');
+
+      // Use hybrid detection service (auto-switches between Gemini AI and TensorFlow Lite)
+      const result = await hybridDiseaseDetection.analyzeImage(selectedImage.uri);
+
+      console.log('🔬 Detection result:', result);
 
       if (result.success) {
+        // Format the result for display
+        const detectionMethod = result.source === 'gemini_ai' ? 'Gemini AI (Online)' : 
+                               result.source === 'tensorflow_lite' ? 'TensorFlow Lite (Offline)' : 
+                               'Unknown';
+        
         setAnalysisResult({
           status: 'success',
-          message: 'Disease analysis completed using JavaScript AI',
-          analysis: result.analysis,
-          timestamp: result.timestamp
+          message: `Analysis completed using ${detectionMethod}`,
+          analysis: {
+            disease: result.disease || 'Disease detected',
+            severity: result.severity || 'medium',
+            treatment: result.treatment || result.message,
+            confidence: result.confidencePercent || result.confidence || 'N/A',
+            method: result.method,
+            accuracy: result.accuracy,
+            dataUsed: result.dataUsed || '0 KB'
+          },
+          timestamp: new Date().toISOString(),
+          source: result.source
         });
-        Alert.alert('Analysis Complete', 'Disease analysis completed successfully!');
+        
+        Alert.alert(
+          'Analysis Complete', 
+          `${detectionMethod}\n${result.isConfident === false ? '⚠️ Low confidence - Connect to WiFi for better accuracy' : '✅ High confidence detection'}`
+        );
       } else {
-        throw new Error(result.error || 'Analysis failed');
+        // Handle failure
+        throw new Error(result.message || result.error || 'Analysis failed');
       }
     } catch (error) {
+      console.error('❌ Disease detection error:', error);
       setError(error.message);
-      Alert.alert('Analysis Failed', `Failed to analyze image: ${error.message}`);
+      Alert.alert('Analysis Failed', `${error.message}\n\nTip: ${networkManager.isOnline ? 'Try TensorFlow Lite model' : 'Connect to WiFi for AI analysis'}`);
     } finally {
       setIsAnalyzing(false);
     }
@@ -248,7 +279,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
     return (
       <Card style={styles.card}>
         <Card.Content>
-          <Title style={styles.cardTitle}><Text>🔬 Analysis Results</Text></Title>
+          <Title style={styles.cardTitle}><Text>Analysis Results</Text></Title>
           
           {/* Crop Identification */}
           <View style={styles.resultSection}>
@@ -258,7 +289,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
             </View>
             <View style={styles.cropInfo}>
               <Text style={styles.cropType}>
-                🌾 {analysisResult.analysis?.crop_type || 'Unknown Crop'}
+                {analysisResult.analysis?.crop_type || 'Unknown Crop'}
               </Text>
               <Text style={styles.plantFamily}>
                 Family: {analysisResult.analysis?.plant_family || 'Unknown'}
@@ -288,7 +319,7 @@ const DiseaseDetectionScreen = ({ navigation }) => {
                 color: analysisResult.analysis?.health_status === 'healthy' ? '#2E7D32' : '#C62828'
               }}
             >
-              <Text>{analysisResult.analysis?.health_status === 'healthy' ? '🌱 Healthy Plant' : '🦠 Diseased Plant'}</Text>
+              <Text>{analysisResult.analysis?.health_status === 'healthy' ? 'Healthy Plant' : 'Diseased Plant'}</Text>
             </Chip>
           </View>
 
@@ -296,7 +327,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.analysis?.disease_type && analysisResult.analysis.disease_type !== 'none' && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="warning" size={24} color="#FF9800" />
                 <Text style={styles.sectionTitle}>Disease Detected</Text>
               </View>
               <Text style={styles.diseaseName}>
@@ -314,7 +344,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.analysis?.recommendations && analysisResult.analysis.recommendations.length > 0 && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="lightbulb" size={24} color="#2196F3" />
                 <Text style={styles.sectionTitle}>Recommendations</Text>
               </View>
               {analysisResult.analysis.recommendations.map((rec, index) => (
@@ -329,7 +358,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.analysis?.confidence && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="analytics" size={24} color="#9C27B0" />
                 <Text style={styles.sectionTitle}>Confidence Score</Text>
               </View>
               <Text style={styles.confidence}>
@@ -362,51 +390,87 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Header with Back Button */}
-      <View style={styles.headerContainer}>
-        <TouchableOpacity 
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
-          <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
-        </TouchableOpacity>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>🔬 Disease Detection</Text>
-          <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
-        </View>
+    <View style={styles.container}>
+      {/* Background Image */}
+      <Image 
+        source={require('../assets/green.png')} 
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      />
+      
+      {/* Content Overlay */}
+      <View style={styles.overlay}>
+        <SafeAreaView style={styles.safeArea}>
+          {/* Header with Back Button */}
+          <View style={styles.headerContainer}>
+            <TouchableOpacity 
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
+            </TouchableOpacity>
+            <View style={styles.headerContent}>
+              <Text style={styles.headerTitle}>Disease Detection</Text>
+              <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
+            </View>
+          </View>
+          
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+
+            {/* Image Selection */}
+            {renderImageSelection()}
+
+            {/* Error Display */}
+            {renderError()}
+
+            {/* Analysis Results */}
+            {renderAnalysisResults()}
+
+            {/* Product Recommendations */}
+            {analysisResult && (
+              <ProductRecommendationCards
+                diseaseType={analysisResult.analysis?.disease_type}
+                symptoms={analysisResult.analysis?.symptoms}
+                onProductPress={(product) => {
+                  // Navigate to product detail or handle product selection
+                  console.log('Product selected:', product);
+                }}
+              />
+            )}
+
+          </ScrollView>
+        </SafeAreaView>
       </View>
-      
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-
-        {/* Image Selection */}
-        {renderImageSelection()}
-
-        {/* Error Display */}
-        {renderError()}
-
-        {/* Analysis Results */}
-        {renderAnalysisResults()}
-
-      </ScrollView>
-      
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Semi-transparent overlay for better text readability
+  },
+  safeArea: {
+    flex: 1,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(26, 26, 26, 0.8)', // Semi-transparent dark background
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: 'rgba(51, 51, 51, 0.5)',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -417,7 +481,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     padding: 8,
     borderRadius: 20,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#333333',
   },
   headerContent: {
     flex: 1,
@@ -427,33 +491,36 @@ const styles = StyleSheet.create({
   },
   headerCard: {
     marginBottom: 16,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(26, 26, 26, 0.8)',
     elevation: 2,
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2E7D32',
+    color: '#4CAF50',
     marginBottom: 4,
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#666',
+    color: '#cccccc',
   },
   card: {
     marginBottom: 16,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(26, 26, 26, 0.8)',
     elevation: 2,
+    borderWidth: 2,
+    borderColor: '#4CAF50',
+    borderRadius: 12,
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#ffffff',
     marginBottom: 8,
   },
   cardSubtitle: {
     fontSize: 14,
-    color: '#666',
+    color: '#cccccc',
     marginBottom: 16,
   },
   imageContainer: {
@@ -506,23 +573,23 @@ const styles = StyleSheet.create({
   imagePlaceholder: {
     width: width - 64,
     height: 200,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#333333',
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#ddd',
+    borderColor: '#4CAF50',
     borderStyle: 'dashed',
   },
   placeholderText: {
     marginTop: 8,
-    color: '#666',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
   },
   placeholderSubtext: {
     marginTop: 4,
-    color: '#999',
+    color: '#cccccc',
     fontSize: 12,
   },
   buttonContainer: {
@@ -543,7 +610,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4CAF50',
   },
   cameraButton: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#4CAF50',
   },
   buttonText: {
     color: '#fff',
@@ -559,6 +626,11 @@ const styles = StyleSheet.create({
   },
   resultSection: {
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#4CAF50',
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: 'rgba(26, 26, 26, 0.8)',
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -569,7 +641,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 8,
-    color: '#333',
+    color: '#ffffff',
   },
   healthChip: {
     alignSelf: 'flex-start',
@@ -585,12 +657,12 @@ const styles = StyleSheet.create({
   },
   plantFamily: {
     fontSize: 14,
-    color: '#666',
+    color: '#cccccc',
     marginBottom: 2,
   },
   growthStage: {
     fontSize: 14,
-    color: '#666',
+    color: '#cccccc',
     fontStyle: 'italic',
   },
   diseaseName: {
@@ -601,11 +673,11 @@ const styles = StyleSheet.create({
   },
   severity: {
     fontSize: 14,
-    color: '#666',
+    color: '#cccccc',
   },
   recommendation: {
     fontSize: 14,
-    color: '#333',
+    color: '#ffffff',
     marginBottom: 4,
     lineHeight: 20,
   },
@@ -633,7 +705,7 @@ const styles = StyleSheet.create({
   },
   instructionText: {
     fontSize: 14,
-    color: '#666',
+    color: '#cccccc',
     lineHeight: 20,
   },
 });

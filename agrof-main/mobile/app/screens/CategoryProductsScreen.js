@@ -2,6 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { productsApi } from '../services/storeApi';
+import hybridStoreApi from '../services/hybridStoreApi';
+import networkManager from '../services/networkManager';
+import imageCacheService from '../services/imageCacheService';
+import storeImageService from '../services/storeImageService';
+import OptimizedImage from '../components/OptimizedImage';
 import ProductDetailScreen from './ProductDetailScreen';
 
 const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) => {
@@ -15,18 +20,36 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
     loadCategoryProducts();
   }, [categoryName]);
 
+  // Preload images when products are loaded and online
+  useEffect(() => {
+    if (products.length > 0) {
+      const networkStatus = networkManager.getStatus();
+      if (networkStatus.isOnline) {
+        console.log(`📸 Caching images for ${products.length} ${categoryName} products...`);
+        imageCacheService.preloadProductImages(products, 200)
+          .then(() => console.log('✅ Category images cached'))
+          .catch(err => console.warn('⚠️ Image cache error:', err.message));
+      }
+    }
+  }, [products, categoryName]);
+
   const loadCategoryProducts = async () => {
     try {
       setLoading(true);
       setError(null);
       
-      // Fetch products for the specific category
-      const categoryProducts = await productsApi.getAll({ category: categoryName });
-      setProducts(categoryProducts);
+      // Use hybrid API for offline support
+      console.log(`🔄 Loading ${categoryName} products with hybrid API...`);
+      const result = await hybridStoreApi.getProducts({ category: categoryName, limit: 500 });
+      
+      console.log(`📦 ${categoryName} products loaded from ${result.source}: ${result.data.length} items`);
+      console.log(`💾 Data used: ${result.dataUsed || 0} KB`);
+      
+      setProducts(result.data);
     } catch (err) {
       console.error(`Failed to load ${categoryName} products:`, err);
-      setError('Failed to load products. Please try again.');
-      Alert.alert('Error', 'Failed to load products. Please try again.');
+      setError('Failed to load products. Using offline data...');
+      // Don't show alert - just continue with offline data
     } finally {
       setLoading(false);
     }
@@ -47,8 +70,8 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
       activeOpacity={0.7}
     >
       <View style={styles.imageContainer}>
-        <Image 
-          source={item.image_url ? { uri: `http://192.168.1.15:3001${item.image_url}` } : require('../assets/fertilizers.png')} 
+        <OptimizedImage 
+          product={item}
           style={styles.productImage}
           resizeMode="cover"
         />

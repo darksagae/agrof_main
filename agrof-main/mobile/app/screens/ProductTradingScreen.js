@@ -12,6 +12,9 @@ import {
   Alert,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useSafeTranslation } from '../i18n';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import networkManager from '../services/networkManager';
 
 const { width, height } = Dimensions.get('window');
 
@@ -91,8 +94,39 @@ const ProductTradingScreen = ({ route, navigation }) => {
   const [selectedTrader, setSelectedTrader] = useState(null);
   const [chatMessage, setChatMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
+  const [networkStatus, setNetworkStatus] = useState({ isOnline: true, isOffline: false });
+  const [userListings, setUserListings] = useState([]);
 
   const tradingInfo = tradingData[product.name] || { buyers: [], sellers: [] };
+
+  // Load network status and user listings on mount
+  useEffect(() => {
+    const initializeScreen = async () => {
+      // Check network status
+      await networkManager.initialize();
+      const status = networkManager.getStatus();
+      setNetworkStatus({
+        isOnline: status.isOnline,
+        isOffline: !status.isOnline,
+        connectionType: status.connectionType
+      });
+      console.log('📡 Product Trading - Network:', status.isOnline ? 'Online' : 'Offline');
+
+      // Load user's saved crop listings
+      try {
+        const savedListings = await AsyncStorage.getItem('user_crop_listings');
+        if (savedListings) {
+          const listings = JSON.parse(savedListings);
+          setUserListings(listings);
+          console.log('📦 Loaded user listings:', listings.length);
+        }
+      } catch (error) {
+        console.error('Failed to load user listings:', error);
+      }
+    };
+
+    initializeScreen();
+  }, []);
 
 
   const renderTraderCard = (trader, type) => (
@@ -169,7 +203,7 @@ const ProductTradingScreen = ({ route, navigation }) => {
         <View style={styles.chatInput}>
           <TextInput
             style={styles.messageInput}
-            placeholder="Type your message..."
+            placeholder={t('search.messagePlaceholder')}
             value={chatMessage}
             onChangeText={setChatMessage}
             multiline
@@ -205,6 +239,20 @@ const ProductTradingScreen = ({ route, navigation }) => {
         <View style={styles.headerRight}>
           <MaterialIcons name="notifications" size={24} color="#333" />
         </View>
+      </View>
+
+      {/* Network Status Banner */}
+      <View style={[styles.networkBanner, networkStatus.isOffline && styles.offlineBanner]}>
+        <MaterialIcons 
+          name={networkStatus.isOffline ? "cloud-off" : "cloud-done"} 
+          size={16} 
+          color={networkStatus.isOffline ? "#FF5722" : "#4CAF50"} 
+        />
+        <Text style={styles.networkText}>
+          {networkStatus.isOffline 
+            ? "📴 Offline Mode - Listings saved locally" 
+            : "📡 Online - Can chat with traders"}
+        </Text>
       </View>
 
       {/* Tabs */}
@@ -272,6 +320,26 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     width: 24,
+  },
+  networkBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#E8F5E9',
+    borderBottomWidth: 1,
+    borderBottomColor: '#C8E6C9',
+  },
+  offlineBanner: {
+    backgroundColor: '#FFF3E0',
+    borderBottomColor: '#FFE0B2',
+  },
+  networkText: {
+    fontSize: 12,
+    color: '#333',
+    marginLeft: 6,
+    fontWeight: '500',
   },
   tabContainer: {
     flexDirection: 'row',

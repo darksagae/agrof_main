@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, ScrollView, Dimensions, FlatList, Modal, TextInput } from 'react-native';
 // ImagePicker removed - camera functionality disabled
 import { StatusBar } from 'expo-status-bar';
-import { Video, ResizeMode } from 'expo-av';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import ChatBot from './components/ChatBot';
 import ChatBotButton from './components/ChatBotButton';
+import LanguageSwitcher from './components/LanguageSwitcher';
 // ChatBotTraining removed - AI functionality disabled
-import FuturisticTechShowcase from './components/ShaderPlayground';
 // AI components removed
 import BackgroundImage from './components/BackgroundImage';
 import StoreScreen from './screens/StoreScreen';
@@ -15,8 +15,12 @@ import StocksStyleScreen from './screens/StocksStyleScreen';
 import ProductTradingScreen from './screens/ProductTradingScreen';
 // SmartFarmingDashboard removed - dashboard functionality disabled
 import DiseaseDetectionScreen from './screens/DiseaseDetectionScreen';
+import ProductRecommendationCards from './components/ProductRecommendationCards';
 import { CartProvider } from './contexts/CartContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { cropProducts } from './data/cropProducts';
+import { findWorkingApiEndpoint, getCurrentApiConfig } from './config/apiConfig';
+import './i18n'; // Initialize i18n
 
 
 const { width, height } = Dimensions.get('window');
@@ -27,15 +31,44 @@ const API_URL = 'https://loyal-wholeness-production.up.railway.app'; // Deployed
 // const API_URL = 'http://localhost:5000'; // For web browser testing
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('welcome');
+  const { t, i18n } = useTranslation();
+  const [currentTab, setCurrentTab] = useState('home');
+  const [languageKey, setLanguageKey] = useState(0); // Force re-render key
   const [currentScreen, setCurrentScreen] = useState('disease-detection');
-  const [userCategory, setUserCategory] = useState('');
+  
+  // Force re-render when language changes
+  useEffect(() => {
+    console.log('Current language:', i18n.language);
+    
+    // Force re-render every time the component mounts or language changes
+    setLanguageKey(prev => prev + 1);
+  }, [i18n.language]);
+  
+  // Add a global language state that forces re-renders
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  
+  // Update current language when i18n language changes
+  useEffect(() => {
+    const updateLanguage = () => {
+      console.log('Language changed to:', i18n.language);
+      setCurrentLanguage(i18n.language);
+      setLanguageKey(prev => prev + 1);
+    };
+    
+    // Check for language changes periodically
+    const interval = setInterval(() => {
+      if (i18n.language !== currentLanguage) {
+        updateLanguage();
+      }
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [currentLanguage]);
   const [navigationStack, setNavigationStack] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   // AI training removed
-  const [showAgrofVideo, setShowAgrofVideo] = useState(false);
   // AI analysis removed
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [remindersEnabled, setRemindersEnabled] = useState(true);
@@ -53,25 +86,32 @@ export default function App() {
   });
   const [currentAccountScreen, setCurrentAccountScreen] = useState('main'); // main, about, help
   const [showChatbot, setShowChatbot] = useState(false); // For bot image chatbot
-  const agrofVideoRef = useRef(null);
 
   // Camera permissions removed - camera functionality disabled
 
-  // Test backend connection on app start
+  // Test backend connection on app start with dynamic endpoint discovery
   useEffect(() => {
     const testBackendConnection = async () => {
       try {
-        console.log('🔍 Testing backend connection...');
-        const response = await fetch(`${API_URL}/api/connection-test`);
-        const data = await response.json();
-        console.log('✅ Backend connection successful:', data);
+        console.log('🔍 Testing backend connection with dynamic endpoint discovery...');
+        
+        // Try to find a working endpoint (imported at top of file)
+        const workingIp = await findWorkingApiEndpoint();
+        
+        if (workingIp) {
+          const config = getCurrentApiConfig();
+          console.log('✅ Backend connection successful:', {
+            workingIp,
+            storeUrl: config.storeUrl,
+            aiUrl: config.aiUrl
+          });
+        } else {
+          console.warn('⚠️ No working backend endpoints found, using offline mode');
+        }
       } catch (error) {
         console.error('❌ Backend connection failed:', error);
-        Alert.alert(
-          'Connection Error',
-          'Failed to connect to backend. Please check your internet connection.',
-          [{ text: 'OK' }]
-        );
+        console.log('📱 App will continue in offline mode with cached data');
+        // Don't show alert for network errors - just log and continue
       }
     };
 
@@ -81,10 +121,6 @@ export default function App() {
   // Start background video when Care tab is active
   // Background video removed - no longer needed
 
-  const userCategories = [
-    { id: 'farmer', title: 'Farmer', icon: 'agriculture', description: 'I grow crops and need disease detection' },
-    { id: 'researcher', title: 'Researcher', icon: 'biotech', description: 'I conduct agricultural research' }
-  ];
 
   // Blog and community posts data removed
 
@@ -195,153 +231,6 @@ export default function App() {
 
   // analyzeImage function removed - disease detection disabled
 
-  // Welcome screen with AGROF falling animation - Updated
-  const renderWelcomeScreen = () => (
-    <View style={styles.screen}>
-      <FuturisticTechShowcase />
-      
-      <View style={styles.welcomeOverlay}>
-        <TouchableOpacity 
-          style={styles.nextButton} 
-          onPress={() => setCurrentScreen('category')}
-        >
-          <Text style={styles.nextButtonText}>Continue to AGROF →</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
-  const renderCategoryScreen = () => (
-    <View style={styles.screen}>
-      <Text style={styles.screenTitle}>Which of the following best describes you?</Text>
-      <Text style={styles.screenSubtitle}>Choose your role to personalize your experience</Text>
-      
-      <ScrollView style={styles.categoryList} showsVerticalScrollIndicator={false}>
-        {userCategories.map((category) => (
-          <TouchableOpacity
-            key={category.id}
-            style={[
-              styles.categoryCard,
-              userCategory === category.id && styles.selectedCategory
-            ]}
-            onPress={() => setUserCategory(category.id)}
-          >
-            <MaterialIcons name={category.icon} size={40} color="#4CAF50" style={styles.categoryIcon} />
-            <Text style={styles.categoryTitle}>{category.title}</Text>
-            <Text style={styles.categoryDescription}>{category.description}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-
-      <TouchableOpacity 
-        style={[styles.nextButton, !userCategory && styles.disabledButton]} 
-        onPress={() => userCategory && setCurrentScreen('welcome2')}
-        disabled={!userCategory}
-      >
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  const renderWelcome2Screen = () => (
-    <View style={styles.fullScreenContainer}>
-      {showAgrofVideo ? (
-        <View style={styles.fullScreenVideoContainer}>
-          <Video
-            ref={agrofVideoRef}
-            source={require('./assets/agrof.mp4')}
-            style={styles.fullScreenVideo}
-            useNativeControls={false}
-            resizeMode={ResizeMode.COVER}
-            isLooping={false}
-            shouldPlay={true}
-            onPlaybackStatusUpdate={(status) => {
-              if (status.didJustFinish) {
-                setShowAgrofVideo(false);
-                setCurrentScreen('manual');
-              }
-            }}
-          />
-          <View style={styles.videoOverlay}>
-            <TouchableOpacity 
-              style={styles.skipButton}
-              onPress={() => {
-                setShowAgrofVideo(false);
-                setCurrentScreen('manual');
-              }}
-            >
-              <Text style={styles.skipButtonText}>✕</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ) : (
-        <>
-          <Image 
-            source={require('./assets/background-image.png')} 
-            style={styles.welcomeFullScreenImage}
-            resizeMode="cover"
-          />
-          <View style={styles.welcomeOverlay}>
-            <View style={styles.welcomeContent}>
-              <Text style={styles.welcomeTitle}>AGROF</Text>
-              <Text style={styles.welcomeSubtitle}>
-                Your AI Powered Crop Health Companion
-              </Text>
-            </View>
-
-            <TouchableOpacity 
-              style={styles.nextButton} 
-              onPress={() => setShowAgrofVideo(true)}
-            >
-              <Text style={styles.nextButtonText}>Watch Introduction</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      )}
-    </View>
-  );
-
-  const renderManualScreen = () => (
-    <View style={styles.screen}>
-              <Text style={styles.screenTitle}>How to Use AGROF AI</Text>
-      
-      <ScrollView style={styles.manualContainer} showsVerticalScrollIndicator={false}>
-        <View style={styles.manualStep}>
-          <Text style={styles.stepNumber}>1</Text>
-          <Text style={styles.stepTitle}>Take or Select Photo</Text>
-          <Text style={styles.stepDescription}>
-            Disease detection functionality has been removed from this application
-          </Text>
-        </View>
-
-        <View style={styles.manualStep}>
-          <Text style={styles.stepNumber}>2</Text>
-          <Text style={styles.stepTitle}>AI Analysis</Text>
-          <Text style={styles.stepDescription}>
-            Our AI will analyze the image and identify any diseases or health issues
-          </Text>
-        </View>
-
-        <View style={styles.manualStep}>
-          <Text style={styles.stepNumber}>3</Text>
-          <Text style={styles.stepTitle}>Detailed Results</Text>
-          <Text style={styles.stepDescription}>
-            Get comprehensive information including disease identification, treatment options, and care instructions
-          </Text>
-        </View>
-      </ScrollView>
-
-      <TouchableOpacity 
-        style={styles.nextButton} 
-        onPress={() => {
-          setCurrentScreen('main');
-          setCurrentTab('care');
-        }}
-      >
-        <Text style={styles.nextButtonText}>Start Using App</Text>
-      </TouchableOpacity>
-    </View>
-  );
 
   // Enhanced result display with business analysis
   // Helper function for severity colors
@@ -380,15 +269,15 @@ export default function App() {
         {/* Professional Header */}
         <View style={styles.resultHeader}>
           <MaterialIcons name="science" size={32} color="#2196F3" />
-          <Text style={styles.resultTitle}>AI-Powered Crop Analysis Report</Text>
-          <Text style={styles.resultSubtitle}>Comprehensive Disease Detection & Treatment Plan</Text>
+          <Text style={styles.resultTitle}>{t('analysis.title')}</Text>
+          <Text style={styles.resultSubtitle}>{t('analysis.subtitle')}</Text>
         </View>
         
         {/* Crop Identification Section */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <MaterialIcons name="eco" size={24} color="#4CAF50" />
-            <Text style={styles.sectionTitle}>Crop Identification</Text>
+            <Text style={styles.sectionTitle}>{t('analysis.cropIdentification')}</Text>
           </View>
           <View style={styles.cropInfo}>
             <Text style={styles.cropName}>
@@ -410,7 +299,7 @@ export default function App() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <MaterialIcons name="favorite" size={24} color={analysis.health_status === 'healthy' ? '#4CAF50' : '#FF5722'} />
-            <Text style={styles.sectionTitle}>Health Status</Text>
+            <Text style={styles.sectionTitle}>{t('analysis.healthStatus')}</Text>
           </View>
           <View style={[styles.healthIndicator, { backgroundColor: analysis.health_status === 'healthy' ? '#E8F5E8' : '#FFEBEE' }]}>
             <Text style={[styles.healthText, { color: analysis.health_status === 'healthy' ? '#2E7D32' : '#C62828' }]}>
@@ -424,7 +313,7 @@ export default function App() {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <MaterialIcons name="warning" size={24} color="#FF9800" />
-              <Text style={styles.sectionTitle}>Disease Detection</Text>
+              <Text style={styles.sectionTitle}>{t('analysis.diseaseDetection')}</Text>
             </View>
             <Text style={styles.diseaseName}>
               Disease: {analysis.disease_type}
@@ -440,13 +329,13 @@ export default function App() {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <MaterialIcons name="business" size={24} color="#9C27B0" />
-              <Text style={styles.sectionTitle}>Business Analysis</Text>
+              <Text style={styles.sectionTitle}>{t('analysis.businessAnalysis')}</Text>
             </View>
             
             {/* Economic Impact */}
             {businessInsights.economic_impact && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>💰 Economic Impact</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.economicImpact')}</Text>
                 <Text style={styles.infoText}>
                   {businessInsights.economic_impact}
                 </Text>
@@ -456,7 +345,7 @@ export default function App() {
             {/* Risk Level */}
             {businessInsights.risk_level && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>⚠️ Risk Assessment</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.riskAssessment')}</Text>
                 <Text style={styles.infoText}>
                   Risk Level: {businessInsights.risk_level}
                 </Text>
@@ -466,7 +355,7 @@ export default function App() {
             {/* Immediate Treatments */}
             {businessInsights.immediate_treatments && Array.isArray(businessInsights.immediate_treatments) && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>💊 Immediate Treatments</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.immediateTreatments')}</Text>
                 {businessInsights.immediate_treatments.map((treatment, index) => (
                   <Text key={index} style={styles.treatmentText}>
                     {index + 1}. {treatment}
@@ -478,7 +367,7 @@ export default function App() {
             {/* Business Recommendations */}
             {businessInsights.business_recommendations && Array.isArray(businessInsights.business_recommendations) && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>🏢 Business Recommendations</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.businessRecommendations')}</Text>
                 {businessInsights.business_recommendations.map((rec, index) => (
                   <Text key={index} style={styles.treatmentText}>
                     {index + 1}. {rec}
@@ -493,7 +382,7 @@ export default function App() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <MaterialIcons name="info" size={24} color="#607D8B" />
-            <Text style={styles.sectionTitle}>Analysis Details</Text>
+            <Text style={styles.sectionTitle}>{t('analysis.analysisDetails')}</Text>
           </View>
           <Text style={styles.infoText}>
             Timestamp: {result.timestamp || 'Unknown'}
@@ -519,13 +408,13 @@ export default function App() {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <MaterialIcons name="psychology" size={24} color="#9C27B0" />
-              <Text style={styles.sectionTitle}>AI Analysis Results</Text>
+              <Text style={styles.sectionTitle}>{t('analysis.aiAnalysisResults')}</Text>
             </View>
             
             {/* Symptoms */}
             {result.analysis.symptoms && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>🔍 Symptoms</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.symptoms')}</Text>
                 <Text style={styles.infoText}>
                   {result.analysis.symptoms}
                 </Text>
@@ -535,7 +424,7 @@ export default function App() {
             {/* Immediate Treatments */}
             {result.analysis.immediate_treatments && Array.isArray(result.analysis.immediate_treatments) && result.analysis.immediate_treatments.length > 0 && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>💊 Immediate Treatments</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.immediateTreatments')}</Text>
                 {result.analysis.immediate_treatments.map((treatment, index) => (
                   <Text key={index} style={styles.treatmentText}>
                     {index + 1}. {treatment}
@@ -547,7 +436,7 @@ export default function App() {
             {/* Long-term Strategies */}
             {result.analysis.long_term_strategies && Array.isArray(result.analysis.long_term_strategies) && result.analysis.long_term_strategies.length > 0 && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>🌱 Long-term Strategies</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.longTermStrategies')}</Text>
                 {result.analysis.long_term_strategies.map((strategy, index) => (
                   <Text key={index} style={styles.treatmentText}>
                     {index + 1}. {strategy}
@@ -559,7 +448,7 @@ export default function App() {
             {/* Prevention */}
             {result.analysis.prevention && (
               <View style={styles.subSection}>
-                <Text style={styles.subSectionTitle}>🛡️ Prevention</Text>
+                <Text style={styles.subSectionTitle}>{t('analysis.prevention')}</Text>
                 <Text style={styles.infoText}>
                   {result.analysis.prevention}
                 </Text>
@@ -568,11 +457,22 @@ export default function App() {
           </View>
         )}
         
+        {/* Product Recommendations */}
+        {result.analysis?.disease_type && result.analysis.disease_type !== 'none' && (
+          <ProductRecommendationCards
+            diseaseType={result.analysis.disease_type}
+            symptoms={result.analysis.symptoms ? [result.analysis.symptoms] : []}
+            onProductPress={(product) => {
+              console.log('Product selected:', product);
+            }}
+          />
+        )}
+        
         {/* Action Buttons */}
         <View style={styles.actionButtons}>
           <TouchableOpacity style={styles.actionButton} onPress={() => setResult(null)}>
             <MaterialIcons name="refresh" size={20} color="white" />
-            <Text style={styles.actionButtonText}>New Analysis</Text>
+            <Text style={styles.actionButtonText}>{t('analysis.newAnalysis')}</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.actionButton} onPress={() => {
@@ -580,7 +480,7 @@ export default function App() {
             Alert.alert('Share Results', 'Results sharing feature coming soon!');
           }}>
             <MaterialIcons name="share" size={20} color="white" />
-            <Text style={styles.actionButtonText}>Share Results</Text>
+            <Text style={styles.actionButtonText}>{t('analysis.shareResults')}</Text>
           </TouchableOpacity>
         </View>
         
@@ -603,32 +503,32 @@ export default function App() {
             <MaterialIcons name="eco" size={32} color="white" />
             <Text style={styles.headerTitle}> AGROF AI</Text>
           </View>
-                      <Text style={styles.headerSubtitle}>AI-Powered Crop Management</Text>
+                      <Text style={styles.headerSubtitle}>{t('care.subtitle')}</Text>
         </View>
 
         {/* Smart Farming Features */}
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
             <MaterialIcons name="smart-toy" size={24} color="#2c5530" />
-            <Text style={styles.sectionTitle}> Smart Farming</Text>
+            <Text style={styles.sectionTitle}> {t('care.smartFarming')}</Text>
           </View>
-          <Text style={styles.sectionSubtitle}>AI-powered crop management and monitoring</Text>
+          <Text style={styles.sectionSubtitle}>{t('care.smartFarmingSubtitle')}</Text>
           
           <View style={styles.smartFarmingGrid}>
             <TouchableOpacity 
-              style={styles.smartFeatureButton} 
-              onPress={() => setCurrentScreen('disease-detection')}
+              style={[styles.smartFeatureButton, { backgroundColor: '#4CAF50' }]} 
+              onPress={() => setCurrentTab('care')}
             >
               <MaterialIcons name="search" size={24} color="white" />
-              <Text style={styles.smartFeatureText}>Disease Detection</Text>
+              <Text style={styles.smartFeatureText}>{t('care.diseaseDetection')}</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.smartFeatureButton} 
+              style={[styles.smartFeatureButton, { backgroundColor: '#FF9800' }]} 
               onPress={() => setCurrentTab('store')}
             >
               <MaterialIcons name="store" size={24} color="white" />
-              <Text style={styles.smartFeatureText}>Market Connect</Text>
+              <Text style={styles.smartFeatureText}>{t('care.marketConnect')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -672,9 +572,9 @@ export default function App() {
         <View style={styles.tabHeader}>
           <View style={styles.tabTitleContainer}>
             <MaterialIcons name="assignment" size={28} color="white" />
-                            <Text style={styles.tabTitle}> AI Farm Planning</Text>
+                            <Text style={styles.tabTitle}> {t('plan.title')}</Text>
           </View>
-                      <Text style={styles.tabSubtitle}>AI-powered agricultural planning</Text>
+                      <Text style={styles.tabSubtitle}>{t('plan.subtitle')}</Text>
         </View>
         
         {/* Plan Type Selector */}
@@ -684,7 +584,7 @@ export default function App() {
             onPress={() => setSelectedPlan('calendar')}
           >
             <MaterialIcons name="calendar-today" size={20} color={selectedPlan === 'calendar' ? 'white' : '#666'} />
-            <Text style={[styles.planTypeText, selectedPlan === 'calendar' && styles.activePlanTypeText]}>Calendar</Text>
+            <Text style={[styles.planTypeText, selectedPlan === 'calendar' && styles.activePlanTypeText]}>{t('plan.calendar')}</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
@@ -692,7 +592,7 @@ export default function App() {
             onPress={() => setSelectedPlan('rotation')}
           >
             <MaterialIcons name="autorenew" size={20} color={selectedPlan === 'rotation' ? 'white' : '#666'} />
-            <Text style={[styles.planTypeText, selectedPlan === 'rotation' && styles.activePlanTypeText]}>Rotation</Text>
+            <Text style={[styles.planTypeText, selectedPlan === 'rotation' && styles.activePlanTypeText]}>{t('plan.rotation')}</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
@@ -700,7 +600,7 @@ export default function App() {
             onPress={() => setSelectedPlan('budget')}
           >
             <MaterialIcons name="account-balance-wallet" size={20} color={selectedPlan === 'budget' ? 'white' : '#666'} />
-            <Text style={[styles.planTypeText, selectedPlan === 'budget' && styles.activePlanTypeText]}>Budget</Text>
+            <Text style={[styles.planTypeText, selectedPlan === 'budget' && styles.activePlanTypeText]}>{t('plan.budget')}</Text>
           </TouchableOpacity>
         </View>
         
@@ -709,20 +609,20 @@ export default function App() {
           {selectedPlan === 'calendar' && (
             <View>
               <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Crop Calendar Planning</Text>
+                <Text style={styles.sectionTitle}>{t('plan.cropCalendarPlanning')}</Text>
                 <TouchableOpacity 
                   style={styles.addButton}
                   onPress={() => setShowAddPlan(true)}
                 >
                   <MaterialIcons name="add" size={20} color="white" />
-                  <Text style={styles.addButtonText}>Add Plan</Text>
+                  <Text style={styles.addButtonText}>{t('plan.addPlan')}</Text>
                 </TouchableOpacity>
               </View>
               
               {cropPlans.length === 0 ? (
                 <View style={styles.emptyState}>
                   <MaterialIcons name="calendar-today" size={48} color="#ccc" />
-                  <Text style={styles.emptyStateText}>No crop plans yet. Add your first plan!</Text>
+                  <Text style={styles.emptyStateText}>{t('plan.noPlans')}</Text>
                 </View>
               ) : (
                 cropPlans.map(plan => (
@@ -745,41 +645,57 @@ export default function App() {
           {/* Crop Rotation */}
           {selectedPlan === 'rotation' && (
             <View>
-              <Text style={styles.sectionTitle}>Crop Rotation Strategy</Text>
+              <Text style={styles.sectionTitle}>{t('plan.cropRotationStrategy')}</Text>
               <Text style={styles.sectionSubtitle}>
                 Based on your {savedAnalyses?.length || 0} crop analyses
               </Text>
               
-              {getCropRotationRecommendations().map((rec, index) => (
-                <View key={index} style={styles.recommendationCard}>
-                  <View style={styles.recommendationHeader}>
-                    <MaterialIcons name="agriculture" size={24} color="#4CAF50" />
-                    <Text style={styles.recommendationCrop}>{rec.crop}</Text>
+              {getCropRotationRecommendations().map((rec, index) => {
+                // Get appropriate icon based on crop type
+                const getCropIcon = (cropName) => {
+                  const crop = cropName.toLowerCase();
+                  if (crop.includes('maize') || crop.includes('corn')) {
+                    return <MaterialIcons name="eco" size={24} color="#4CAF50" />;
+                  } else if (crop.includes('bean')) {
+                    return <MaterialIcons name="circle" size={24} color="#FF9800" />;
+                  } else if (crop.includes('wheat')) {
+                    return <MaterialIcons name="grain" size={24} color="#8BC34A" />;
+                  } else {
+                    return <MaterialIcons name="agriculture" size={24} color="#4CAF50" />;
+                  }
+                };
+
+                return (
+                  <View key={index} style={styles.recommendationCard}>
+                    <View style={styles.recommendationHeader}>
+                      {getCropIcon(rec.crop)}
+                      <Text style={styles.recommendationCrop}>{rec.crop}</Text>
+                    </View>
+                    <View style={styles.recommendationDetails}>
+                      <Text style={styles.recommendationText}>Season: {rec.season}</Text>
+                      <Text style={styles.recommendationText}>Duration: {rec.duration}</Text>
+                      <Text style={styles.recommendationText}>Budget: {rec.budget}</Text>
+                    </View>
                   </View>
-                  <View style={styles.recommendationDetails}>
-                    <Text style={styles.recommendationText}>Season: {rec.season}</Text>
-                    <Text style={styles.recommendationText}>Duration: {rec.duration}</Text>
-                    <Text style={styles.recommendationText}>Budget: {rec.budget}</Text>
-                  </View>
-                </View>
-              ))}
+                );
+              })}
             </View>
           )}
 
           {/* Budget Planning */}
           {selectedPlan === 'budget' && (
             <View>
-              <Text style={styles.sectionTitle}>Budget Planning</Text>
+              <Text style={styles.sectionTitle}>{t('plan.budgetPlanning')}</Text>
               
               <View style={styles.budgetSummary}>
                 <View style={styles.budgetCard}>
-                  <Text style={styles.budgetLabel}>Total Planned</Text>
+                  <Text style={styles.budgetLabel}>{t('plan.totalPlanned')}</Text>
                   <Text style={styles.budgetAmount}>
                     {formatUGX(cropPlans.reduce((sum, plan) => sum + plan.budget, 0))}
                   </Text>
                 </View>
                 <View style={styles.budgetCard}>
-                  <Text style={styles.budgetLabel}>Active Plans</Text>
+                  <Text style={styles.budgetLabel}>{t('plan.activePlans')}</Text>
                   <Text style={styles.budgetAmount}>{cropPlans.length}</Text>
                 </View>
               </View>
@@ -818,32 +734,32 @@ export default function App() {
               <ScrollView style={styles.modalBody}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Crop Type (e.g., Maize, Coffee)"
+                  placeholder={t('form.cropType')}
                   value={newPlan.crop}
                   onChangeText={(text) => setNewPlan({...newPlan, crop: text})}
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Area (acres)"
+                  placeholder={t('form.area')}
                   value={newPlan.area}
                   onChangeText={(text) => setNewPlan({...newPlan, area: text})}
                   keyboardType="numeric"
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Start Date (YYYY-MM-DD)"
+                  placeholder={t('form.startDate')}
                   value={newPlan.startDate}
                   onChangeText={(text) => setNewPlan({...newPlan, startDate: text})}
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="End Date (YYYY-MM-DD)"
+                  placeholder={t('form.endDate')}
                   value={newPlan.endDate}
                   onChangeText={(text) => setNewPlan({...newPlan, endDate: text})}
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Notes (optional)"
+                  placeholder={t('form.notes')}
                   value={newPlan.notes}
                   onChangeText={(text) => setNewPlan({...newPlan, notes: text})}
                   multiline
@@ -1004,6 +920,15 @@ export default function App() {
         {/* My Settings */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>My Settings</Text>
+          
+          {/* Language Switcher */}
+          <View style={styles.languageSwitcherCard}>
+            <View style={styles.languageSwitcherHeader}>
+              <MaterialIcons name="language" size={24} color="#4CAF50" />
+              <Text style={styles.languageSwitcherTitle}>Language Settings</Text>
+            </View>
+            <LanguageSwitcher style={styles.languageSwitcherInCard} showLabel={true} />
+          </View>
           
           <TouchableOpacity style={styles.accountItem}>
             <MaterialIcons name="payment" size={24} color="#4CAF50" />
@@ -1227,16 +1152,32 @@ export default function App() {
 
   // Navigation tabs
   const renderNavigationTabs = () => {
-    if (currentTab === 'welcome') return null;
     
     return (
       <View style={styles.navigationTabs}>
-        {/* Consult tab removed - functionality moved to bot image */}
+        {/* Home tab - Smart farming dashboard */}
+        <TouchableOpacity 
+          style={[styles.tab, currentTab === 'home' && styles.activeTab]} 
+          onPress={() => {
+            console.log('Home tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
+            setCurrentTab('home');
+          }}
+        >
+          <MaterialIcons 
+            name="home" 
+            size={24} 
+            color={currentTab === 'home' ? '#4CAF50' : '#666'} 
+            style={styles.tabIcon} 
+          />
+          <Text style={[styles.tabLabel, currentTab === 'home' && styles.activeTabLabel]}>Home</Text>
+        </TouchableOpacity>
         
         <TouchableOpacity 
           style={[styles.tab, currentTab === 'plan' && styles.activeTab]} 
           onPress={() => {
             console.log('Plan tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('plan');
           }}
         >
@@ -1253,6 +1194,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'care' && styles.activeTab]} 
           onPress={() => {
             console.log('Care tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('care');
           }}
         >
@@ -1269,6 +1211,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'stocks' && styles.activeTab]} 
           onPress={() => {
             console.log('Stocks tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('stocks');
           }}
         >
@@ -1285,6 +1228,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'store' && styles.activeTab]} 
           onPress={() => {
             console.log('Store tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('store');
           }}
         >
@@ -1301,6 +1245,7 @@ export default function App() {
           style={[styles.tab, currentTab === 'account' && styles.activeTab]} 
           onPress={() => {
             console.log('Account tab pressed, current tab:', currentTab);
+            setNavigationStack([]); // Clear navigation stack
             setCurrentTab('account');
           }}
         >
@@ -1355,11 +1300,11 @@ export default function App() {
       />;
     }
 
-    if (currentTab === 'welcome') {
-      if (currentScreen === 'welcome') return renderWelcomeScreen();
-      if (currentScreen === 'category') return renderCategoryScreen();
-      if (currentScreen === 'welcome2') return renderWelcome2Screen();
-      if (currentScreen === 'manual') return renderManualScreen();
+    
+    // Home tab - shows smart farming dashboard with navigation
+    if (currentTab === 'home') {
+      console.log('Rendering home screen');
+      return renderHomeScreen();
     }
     
     // Consult tab removed - functionality moved to bot image
@@ -1371,9 +1316,9 @@ export default function App() {
       console.log('Rendering care screen');
       // Feed screen removed
       // Dashboard and IoT monitoring removed
-      if (currentScreen === 'disease-detection') return <DiseaseDetectionScreen navigation={{ navigate, goBack: () => setCurrentTab('welcome') }} />;
+      if (currentScreen === 'disease-detection') return <DiseaseDetectionScreen navigation={{ navigate, goBack: () => setCurrentTab('care') }} />;
       // Default to disease detection screen
-      return <DiseaseDetectionScreen navigation={{ navigate, goBack: () => setCurrentTab('welcome') }} />;
+      return <DiseaseDetectionScreen navigation={{ navigate, goBack: () => setCurrentTab('care') }} />;
     }
     if (currentTab === 'stocks') {
       console.log('Rendering stocks screen');
@@ -1398,36 +1343,47 @@ export default function App() {
 
   // Get background image based on current screen and tab
   const getBackgroundImage = () => {
-    // Welcome and onboarding screens
-    if (currentScreen === 'welcome') {
-      return 'welcome';  // Initial app opening uses welcome.png
-    } else if (currentScreen === 'welcome2' || currentScreen === 'manual') {
-      return 'welcome';  // Other welcome screens also use welcome.png
-    } 
-    // Category selection screen
-    else if (currentScreen === 'category') {
-      return 'background1';
-    } 
+    console.log('🎨 Background Debug - currentTab:', currentTab, 'currentScreen:', currentScreen);
+    console.log('🎨 Tab comparison - currentTab === "care":', currentTab === 'care');
+    
+    // Home tab - smart farming dashboard
+    if (currentTab === 'home') {
+      console.log('🎨 Using welcome background for home tab');
+      return 'welcome';     // Home tab - welcome.png background
+    }
+    
+    // AI Care tab takes precedence over specific screens
+    if (currentTab === 'care') {
+      console.log('🎨 Using AI background for care tab');
+      return 'ai';          // AI Care tab - ai.png background
+    }
+    
     // Feed screen removed
     // Analysis and results screens
     else if (currentScreen === 'analysis') {
+      console.log('🎨 Using fungicides background for analysis screen');
       return 'fungicides';  // Analysis screen - fungicides background
     } else if (currentScreen === 'results') {
+      console.log('🎨 Using herbicides background for results screen');
       return 'herbicides';  // Results screen - herbicides background
     } 
     // Store-related screens
     else if (currentScreen === 'store') {
+      console.log('🎨 Using seeds background for store screen');
       return 'seeds';       // Store screen - seeds background
     } else if (currentScreen === 'nursery') {
+      console.log('🎨 Using nursery background for nursery screen');
       return 'nursery';     // Nursery screen - nursery bed background
     }
     // Default fallback
+    console.log('🎨 Using default welcome background');
     return 'welcome';
   };
 
   return (
-    <CartProvider>
-      <BackgroundImage overlayOpacity={0.4} backgroundImage={getBackgroundImage()}>
+    <LanguageProvider>
+      <CartProvider key={languageKey}>
+        <BackgroundImage overlayOpacity={0.4} backgroundImage={getBackgroundImage()}>
         <StatusBar style="auto" />
         
         {renderTabContent()}
@@ -1436,10 +1392,8 @@ export default function App() {
         
         {renderNavigationTabs()}
         
-        {/* ChatBot Button - Available on all screens except welcome */}
-        {currentTab !== 'welcome' && (
-          <ChatBotButton onPress={() => setShowChatbot(true)} />
-        )}
+        {/* ChatBot Button - Available on all screens */}
+        <ChatBotButton onPress={() => setShowChatbot(true)} />
         
         {/* Chatbot Modal */}
         {showChatbot && (
@@ -1449,23 +1403,34 @@ export default function App() {
             presentationStyle="fullScreen"
           >
             <View style={styles.chatbotModal}>
-              <View style={styles.chatbotHeader}>
-                <TouchableOpacity 
-                  style={styles.closeButton}
-                  onPress={() => setShowChatbot(false)}
-                >
-                  <MaterialIcons name="close" size={24} color="white" />
-                </TouchableOpacity>
-                <Text style={styles.chatbotTitle}>AGROF AI Assistant</Text>
+              {/* Background Image */}
+              <Image 
+                source={require('./assets/care.png')} 
+                style={styles.chatbotBackgroundImage}
+                resizeMode="cover"
+              />
+              
+              {/* Content Overlay */}
+              <View style={styles.chatbotOverlay}>
+                <View style={styles.chatbotHeader}>
+                  <TouchableOpacity 
+                    style={styles.closeButton}
+                    onPress={() => setShowChatbot(false)}
+                  >
+                    <MaterialIcons name="close" size={24} color="white" />
+                  </TouchableOpacity>
+                  <Text style={styles.chatbotTitle}>AGROF AI Assistant</Text>
+                </View>
+                <ChatBot onShowTraining={() => setShowChatbot(false)} />
               </View>
-              <ChatBot onShowTraining={() => setShowChatbot(false)} />
             </View>
           </Modal>
         )}
         
         {/* Futuristic AI Analysis Screen component was removed */}
       </BackgroundImage>
-    </CartProvider>
+      </CartProvider>
+    </LanguageProvider>
   );
 }
 
@@ -1483,6 +1448,37 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: 'center',
     zIndex: 1000,
+  },
+  languageSwitcherContainer: {
+    position: 'absolute',
+    top: 60,
+    right: 20,
+    zIndex: 1000,
+  },
+  languageSwitcherCard: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 16,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  languageSwitcherHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  languageSwitcherTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginLeft: 8,
+  },
+  languageSwitcherInCard: {
+    marginTop: 0,
   },
   // Welcome screens
   welcomeContainer: {
@@ -1931,27 +1927,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     lineHeight: 20,
-  },
-  // Video styles
-  fullScreenVideoContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 999,
-  },
-  fullScreenVideo: {
-    width: '100%',
-    height: '100%',
-  },
-  videoOverlay: {
-    position: 'absolute',
-    top: 50,
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    zIndex: 1000,
   },
 
   // Background video styles - REMOVED
@@ -3053,13 +3028,23 @@ const styles = StyleSheet.create({
   // Chatbot modal styles
   chatbotModal: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+  },
+  chatbotBackgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  chatbotOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Semi-transparent overlay for better text readability
   },
   chatbotHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#2c5530',
+    backgroundColor: 'rgba(44, 85, 48, 0.9)', // Semi-transparent dark green
     paddingTop: 50,
     paddingBottom: 15,
     paddingHorizontal: 20,
