@@ -18,10 +18,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
 import hybridAIService from '../services/hybridAIService';
 import ProductRecommendationCards from '../components/ProductRecommendationCards';
+import AuthGate from '../components/AuthGate';
+import { useUser } from '../contexts/UserContext';
 
 const { width, height } = Dimensions.get('window');
 
 const DiseaseDetectionScreen = ({ navigation }) => {
+  const { user, isAuthenticated } = useUser();
   const [selectedImage, setSelectedImage] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
@@ -29,7 +32,6 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [aiStatus, setAiStatus] = useState(null);
   const [networkStatus, setNetworkStatus] = useState('checking');
-  // Removed authentication requirements for simplicity
 
   // Initialize Simple AI Service
   useEffect(() => {
@@ -426,25 +428,31 @@ const DiseaseDetectionScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Background handled by App.js BackgroundImage wrapper */}
-      
-      {/* Content */}
-      <View style={styles.overlay}>
-        <SafeAreaView style={styles.safeArea}>
-          {/* Header with Back Button */}
-          <View style={styles.headerContainer}>
-            <TouchableOpacity 
-              style={styles.backButton}
-              onPress={() => navigation.goBack()}
-            >
-              <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
-            </TouchableOpacity>
-            <View style={styles.headerContent}>
-              <Text style={styles.headerTitle}>Disease Detection</Text>
-              <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
+    <AuthGate 
+      tabName="AI Disease Detection" 
+      navigation={navigation}
+      showSoftGate={true}
+      softGateAttempts={1}
+    >
+      <View style={styles.container}>
+        {/* Background handled by App.js BackgroundImage wrapper */}
+        
+        {/* Content */}
+        <View style={styles.overlay}>
+          <SafeAreaView style={styles.safeArea}>
+            {/* Header with Back Button */}
+            <View style={styles.headerContainer}>
+              <TouchableOpacity 
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+              >
+                <MaterialIcons name="arrow-back" size={24} color="#2E7D32" />
+              </TouchableOpacity>
+              <View style={styles.headerContent}>
+                <Text style={styles.headerTitle}>Disease Detection</Text>
+                <Text style={styles.headerSubtitle}>Advanced plant health analysis and crop monitoring</Text>
+              </View>
             </View>
-          </View>
           
           <ScrollView contentContainerStyle={styles.scrollContent}>
 
@@ -507,9 +515,8 @@ const DiseaseDetectionScreen = ({ navigation }) => {
           </ScrollView>
         </SafeAreaView>
       </View>
-
-      {/* Authentication removed - AI Care works without login */}
     </View>
+    </AuthGate>
   );
 };
 

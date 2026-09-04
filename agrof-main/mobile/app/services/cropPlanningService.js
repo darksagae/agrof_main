@@ -125,6 +125,36 @@ class CropPlanningService {
         }
       },
 
+      coffee: {
+        name: 'Coffee',
+        duration_days: '365-730', // Coffee is perennial, takes 1-2 years to first harvest
+        planting_seasons: ['March-April', 'September-October'],
+        spacing: '3m × 3m',
+        plants_per_acre: 450,
+        expected_yield_kg: '300-600',
+        market_price_per_kg: { min: 12000, max: 15000 },
+        seed_categories: ['seeds'],
+        seed_keywords: ['coffee', 'arabica', 'robusta'],
+        seed_quantity_kg: 2,
+        fertilizer_plan: [
+          { timing: 'Basal', product_type: 'NPK 16-2-31', quantity_per_acre: 2, unit: 'bags' },
+          { timing: 'Top dressing (Month 6)', product_type: 'Urea', quantity_per_acre: 1, unit: 'bag' },
+          { timing: 'Annual maintenance', product_type: 'NPK 16-2-31', quantity_per_acre: 1, unit: 'bag' },
+        ],
+        pest_control: [
+          { type: 'fungicide', products: ['copper', 'mancozeb'], applications: 3 },
+          { type: 'insecticide', products: ['dimethoate', 'lambda'], applications: 2 },
+        ],
+        labor_costs_ugx: {
+          land_preparation: 150000,
+          planting: 80000,
+          weeding: 60000, // per round × 4
+          pruning: 100000,
+          harvesting: 120000,
+          processing: 80000,
+        }
+      },
+
       cabbage: {
         name: 'Cabbage',
         duration_days: '80-100',
@@ -190,7 +220,11 @@ class CropPlanningService {
    */
   async generateCropPlan(cropType, acres = 1, language = 'en') {
     const cropKey = cropType.toLowerCase().replace(/\s+/g, '_');
-    const cropData = this.cropDatabase[cropKey] || this.cropDatabase.tomatoes;
+    const cropData = this.cropDatabase[cropKey];
+    
+    if (!cropData) {
+      throw new Error(`Crop '${cropType}' not found in database. Available crops: ${Object.keys(this.cropDatabase).join(', ')}`);
+    }
 
     console.log(`🌾 Generating plan for ${cropData.name} on ${acres} acres`);
 

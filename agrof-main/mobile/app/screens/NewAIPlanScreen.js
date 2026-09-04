@@ -23,6 +23,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useSafeTranslation } from '../i18n';
 import FloatingNewsWidget from '../components/FloatingNewsWidget';
 import supabaseCropDatabase from '../services/supabaseCropDatabase';
+import weatherIntegrationService from '../services/weatherIntegrationService';
 
 const { width } = Dimensions.get('window');
 
@@ -51,6 +52,12 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
   // Load all crops from Supabase on component mount
   useEffect(() => {
     loadAllCrops();
+    // Initialize weather integration in background
+    try {
+      weatherIntegrationService.initialize();
+    } catch (e) {
+      console.warn('Weather service init failed:', e?.message);
+    }
   }, []);
 
   /**
@@ -111,6 +118,28 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
   };
 
   /**
+   * Extract a numeric seed rate value from crop.seed_rate, handling strings like
+   * "60-80 seedlings per acre" by averaging the range. Falls back to default.
+   */
+  const getNumericSeedRate = (crop) => {
+    const raw = crop?.seed_rate;
+    if (raw == null) return 25;
+    if (typeof raw === 'number' && isFinite(raw)) return raw;
+    if (typeof raw === 'string') {
+      const matches = raw.match(/\d+(?:\.\d+)?/g);
+      if (matches && matches.length > 0) {
+        const nums = matches.map(n => parseFloat(n)).filter(n => isFinite(n));
+        if (nums.length === 1) return nums[0];
+        if (nums.length >= 2) {
+          const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
+          return avg;
+        }
+      }
+    }
+    return 25;
+  };
+
+  /**
    * Generate crop plan
    */
   const generatePlan = async () => {
@@ -119,12 +148,10 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
       return;
     }
 
-    setGeneratingPlan(true);
     try {
       console.log(`🤖 AI is analyzing ${selectedCrop.name} for ${farmSize} acres...`);
       
-      // Simulate AI processing with dynamic loading states
-      await simulateAIProcessing();
+      // Immediate processing: no simulated delays
       
       // Get real-time market data
       const marketData = await getRealTimeMarketData(selectedCrop);
@@ -174,7 +201,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
       console.error('❌ Error generating AI plan:', error);
       Alert.alert('Error', 'Failed to generate AI plan');
     } finally {
-      setGeneratingPlan(false);
+      // No loading state toggles to keep UI immediate
     }
   };
 
@@ -182,30 +209,15 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Simulate AI processing with dynamic loading states
    */
   const simulateAIProcessing = async () => {
-    const steps = [
-      'Analyzing crop characteristics...',
-      'Processing market data...',
-      'Calculating optimal planting schedule...',
-      'Generating budget recommendations...',
-      'Analyzing weather patterns...',
-      'Predicting yield potential...',
-      'Optimizing resource allocation...',
-      'Finalizing AI recommendations...'
-    ];
-    
-    for (let i = 0; i < steps.length; i++) {
-      console.log(`🤖 ${steps[i]}`);
-      await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
-    }
+    // Removed artificial delays for instant plan generation
+    return;
   };
 
   /**
    * Get real-time market data
    */
   const getRealTimeMarketData = async (crop) => {
-    // Simulate real-time market data fetching
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
+    // Immediate return without artificial delay
     return {
       currentPrice: crop.market_price_min + Math.floor(Math.random() * 500),
       priceChange: (Math.random() - 0.5) * 20, // -10% to +10%
@@ -223,8 +235,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Get store recommendations
    */
   const getStoreRecommendations = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 600));
-    
+    // Immediate return without artificial delay
     return {
       seeds: [
         {
@@ -274,8 +285,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Calculate dynamic budget with ML predictions
    */
   const calculateDynamicBudget = async (crop, area) => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
+    // Immediate return without artificial delay
     const baseCost = (crop.seed_cost_per_acre || 2500) * area;
     const marketMultiplier = 0.8 + Math.random() * 0.4; // 0.8 to 1.2
     const seasonalAdjustment = 0.9 + Math.random() * 0.2; // 0.9 to 1.1
@@ -287,8 +297,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Calculate dynamic budget breakdown
    */
   const calculateDynamicBudgetBreakdown = async (crop, area) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
+    // Immediate return without artificial delay
     const seedCost = (crop.seed_rate || 25) * 120 * area * (0.8 + Math.random() * 0.4);
     const fertilizerCost = 350 * area * (0.9 + Math.random() * 0.2);
     const laborCost = 220 * area * (0.85 + Math.random() * 0.3);
@@ -313,8 +322,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate intelligent planting guide
    */
   const generateIntelligentPlantingGuide = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
+    // Immediate return without artificial delay
     return {
       soilPreparation: [
         'AI Analysis: Optimal soil pH range 6.0-7.0 detected',
@@ -344,8 +352,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate AI seasonal recommendations
    */
   const generateAISeasonalRecommendations = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
+    // Immediate return without artificial delay
     const currentMonth = new Date().getMonth() + 1;
     const weatherData = await getWeatherForecast();
     
@@ -400,8 +407,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate AI market insights
    */
   const generateAIMarketInsights = async (crop, marketData) => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
+    // Immediate return without artificial delay
     return {
       currentPrice: marketData.currentPrice,
       priceChange: marketData.priceChange,
@@ -427,8 +433,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate AI risk analysis
    */
   const generateAIRiskAnalysis = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 350));
-    
+    // Immediate return without artificial delay
     return {
       weatherRisks: [
         '🤖 AI Weather Alert: 30% chance of drought in next 30 days',
@@ -470,8 +475,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate AI action items
    */
   const generateAIActionItems = async (crop, area) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
+    // Immediate return without artificial delay
     return [
       {
         id: 1,
@@ -534,8 +538,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate AI timeline
    */
   const generateAITimeline = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 250));
-    
+    // Immediate return without artificial delay
     const growthDuration = crop.growth_duration || '90-120 days';
     const duration = parseInt(growthDuration.split('-')[0]) || 90;
     
@@ -560,8 +563,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Calculate AI expected yield
    */
   const calculateAIExpectedYield = async (crop, area) => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
+    // Immediate return without artificial delay
     const baseYield = {
       maize: 800,
       tomatoes: 15000,
@@ -594,8 +596,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Calculate AI profit projection
    */
   const calculateAIProfitProjection = async (crop, area) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
+    // Immediate return without artificial delay
     const expectedYield = await calculateAIExpectedYield(crop, area);
     const marketPrice = crop.market_price_min + Math.floor(Math.random() * 500);
     const totalRevenue = expectedYield * marketPrice;
@@ -623,8 +624,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Generate ML insights
    */
   const generateMLInsights = async (crop, area) => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
+    // Immediate return without artificial delay
     return {
       yieldPrediction: {
         confidence: 87 + Math.floor(Math.random() * 13),
@@ -650,32 +650,50 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
   };
 
   /**
-   * Get weather forecast
+   * Get weather forecast using real integration service, based on crop region.
    */
   const getWeatherForecast = async () => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
-    return {
-      temperature: {
-        current: 25 + Math.floor(Math.random() * 10),
-        forecast: 'Stable with 2°C increase expected',
-        impact: 'Optimal for crop growth'
-      },
-      rainfall: {
-        current: Math.floor(Math.random() * 50),
-        forecast: 'Below average rainfall predicted',
-        impact: 'Irrigation recommended'
-      },
-      humidity: {
-        current: 60 + Math.floor(Math.random() * 20),
-        forecast: 'Moderate humidity levels',
-        impact: 'Good for disease prevention'
-      },
-      wind: {
-        current: Math.floor(Math.random() * 20),
-        forecast: 'Light winds expected',
-        impact: 'Favorable for pollination'
+    try {
+      // Pick first suitable region or default to Central
+      const preferred = (selectedCrop?.regional_suitability || 'Central')
+        .toString()
+        .split(',')[0]
+        .trim();
+      const region = preferred || 'Central';
+      const data = weatherIntegrationService.getWeatherData(region);
+      if (data) {
+        return {
+          temperature: {
+            current: data.temperature,
+            forecast: 'Based on current regional trend',
+            impact: 'Computed from thresholds'
+          },
+          rainfall: {
+            current: data.rainfall,
+            forecast: 'Regional forecast loaded',
+            impact: 'Adjust irrigation accordingly'
+          },
+          humidity: {
+            current: data.humidity,
+            forecast: 'Regional forecast loaded',
+            impact: 'Impacts disease pressure'
+          },
+          wind: {
+            current: data.wind_speed,
+            forecast: 'Regional forecast loaded',
+            impact: 'Affects pollination and spraying'
+          }
+        };
       }
+    } catch (e) {
+      console.warn('Weather fetch failed, using fallback:', e?.message);
+    }
+    // Fallback simulated values without delay
+    return {
+      temperature: { current: 27, forecast: 'Stable', impact: 'Optimal for crop growth' },
+      rainfall: { current: 20, forecast: 'Below average', impact: 'Irrigation recommended' },
+      humidity: { current: 70, forecast: 'Moderate', impact: 'Good for disease prevention' },
+      wind: { current: 8, forecast: 'Light', impact: 'Favorable for pollination' }
     };
   };
 
@@ -683,8 +701,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Get competitor analysis
    */
   const getCompetitorAnalysis = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
+    // Immediate return without artificial delay
     return {
       marketShare: Math.floor(Math.random() * 30) + 10,
       competitors: [
@@ -706,8 +723,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Calculate sustainability score
    */
   const calculateSustainabilityScore = async (crop) => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
+    // Immediate return without artificial delay
     return {
       score: Math.floor(Math.random() * 20) + 75, // 75-95
       factors: {
@@ -730,7 +746,8 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    */
   const calculateBudget = (crop, area) => {
     // Use real crop data from Supabase
-    const seedCost = (crop.seed_rate || 25) * 100; // Convert to cost per acre
+    const seedUnits = getNumericSeedRate(crop);
+    const seedCost = seedUnits * 100; // Convert to cost per acre
     const fertilizerCost = 300; // Base fertilizer cost
     const laborCost = 200; // Base labor cost
     const equipmentCost = 150; // Base equipment cost
@@ -745,7 +762,8 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
    * Calculate detailed budget breakdown
    */
   const calculateBudgetBreakdown = (crop, area) => {
-    const seedCost = (crop.seed_rate || 25) * 100 * area;
+    const seedUnits = getNumericSeedRate(crop);
+    const seedCost = seedUnits * 100 * area;
     const fertilizerCost = 300 * area;
     const laborCost = 200 * area;
     const equipmentCost = 150 * area;
@@ -1111,7 +1129,7 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
     <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
       {/* Crop Selection */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>🌾 Select Your Crop</Text>
+        <Text style={styles.sectionTitle}>Select Your Crop</Text>
         <Text style={styles.sectionSubtitle}>Choose from {crops.length} available crops</Text>
         
         <TouchableOpacity
@@ -1132,17 +1150,15 @@ const NewAIPlanScreen = ({ onNavigateToStore }) => {
             </>
           ) : (
             <>
-              <MaterialIcons name="agriculture" size={24} color="#4CAF50" />
               <Text style={styles.cropSelectorPlaceholder}>Select a crop</Text>
             </>
           )}
-          <MaterialIcons name="arrow-drop-down" size={24} color="#666" />
         </TouchableOpacity>
       </View>
 
       {/* Farm Size Input */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>📏 Farm Size</Text>
+        <Text style={styles.sectionTitle}>Farm Size</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter farm size in acres"

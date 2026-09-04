@@ -37,7 +37,8 @@ class RoleRequestService {
    */
   async submitSellerRequest(requestData) {
     try {
-      const userId = this.getCurrentUserId();
+      // Use passed userId if available, otherwise get from Firebase
+      const userId = requestData.userId || this.getCurrentUserId();
       if (!userId) {
         return { success: false, error: 'User not authenticated' };
       }

@@ -10,6 +10,7 @@ import {
   Image,
   SafeAreaView,
   StatusBar,
+  Animated,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../config/supabaseConfig';
@@ -49,12 +50,37 @@ const cropImages = {
 // TOTAL: 19 product names = 19 image files (100% match verified!)
 
 const P2PProductsScreen = ({ navigation }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [products, setProducts] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [autoRefreshing, setAutoRefreshing] = useState(false);
+  const spinValue = new Animated.Value(0);
 
   useEffect(() => {
     loadProducts();
+    
+    // Auto-refresh every 30 seconds
+    const autoRefreshInterval = setInterval(() => {
+      console.log('🔄 P2PProductsScreen: Auto-refreshing data...');
+      setAutoRefreshing(true);
+      
+      // Start spinning animation
+      Animated.loop(
+        Animated.timing(spinValue, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        })
+      ).start();
+      
+      loadProducts();
+    }, 30000); // 30 seconds
+
+    // Cleanup interval on unmount
+    return () => {
+      clearInterval(autoRefreshInterval);
+    };
   }, []);
 
   const loadProducts = async () => {
@@ -115,6 +141,7 @@ const P2PProductsScreen = ({ navigation }) => {
       );
 
       setProducts(productsWithCounts);
+      setLastUpdated(new Date());
       console.log('✅ Successfully loaded', productsWithCounts.length, 'P2P products with images!');
       console.log('📊 Product names:', productsWithCounts.map(p => p.name).join(', '));
     } catch (error) {
@@ -125,6 +152,11 @@ const P2PProductsScreen = ({ navigation }) => {
     } finally {
       setLoading(false);
       setRefreshing(false);
+      setAutoRefreshing(false);
+      
+      // Stop spinning animation
+      spinValue.stopAnimation();
+      spinValue.setValue(0);
     }
   };
 
@@ -218,7 +250,7 @@ const P2PProductsScreen = ({ navigation }) => {
     );
   };
 
-  if (loading) {
+  if (loading && products.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -238,9 +270,30 @@ const P2PProductsScreen = ({ navigation }) => {
         <View>
           <Text style={styles.headerTitle}>P2P Market</Text>
           <Text style={styles.headerSubtitle}>Trade directly with farmers</Text>
+          {lastUpdated && (
+            <Text style={styles.lastUpdatedText}>
+              Last updated: {lastUpdated.toLocaleTimeString()}
+              {autoRefreshing && ' (Refreshing...)'}
+            </Text>
+          )}
         </View>
-        <TouchableOpacity onPress={onRefresh}>
-          <MaterialIcons name="refresh" size={24} color="#4CAF50" />
+        <TouchableOpacity onPress={onRefresh} disabled={autoRefreshing}>
+          <Animated.View
+            style={{
+              transform: [{
+                rotate: spinValue.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['0deg', '360deg'],
+                })
+              }]
+            }}
+          >
+            <MaterialIcons 
+              name="refresh" 
+              size={24} 
+              color={autoRefreshing ? "#999" : "#4CAF50"} 
+            />
+          </Animated.View>
         </TouchableOpacity>
       </View>
 
@@ -329,6 +382,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 4,
+  },
+  lastUpdatedText: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 2,
   },
   infoBanner: {
     flexDirection: 'row',

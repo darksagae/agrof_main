@@ -12,6 +12,7 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import { useUser } from '../contexts/UserContext';
 import { supabase } from '../config/supabaseConfig';
+import supabaseService from '../services/supabaseService';
 
 const BuyerRequestScreen = ({ navigation }) => {
   const { user } = useUser();
@@ -44,11 +45,21 @@ const BuyerRequestScreen = ({ navigation }) => {
     try {
       console.log('🛒 Creating buyer profile for:', user.uid);
 
+      // First, ensure user exists in Supabase users table
+      const userExistsResult = await supabaseService.ensureUserExists(user);
+      if (!userExistsResult.success) {
+        throw new Error(userExistsResult.error);
+      }
+
+      // Use the correct user ID (might be different from Firebase UID if email conflict)
+      const userIdToUse = userExistsResult.existingUserId || user.uid;
+      console.log('🆔 Using user ID for buyer profile:', userIdToUse);
+
       // Create buyer entry in Supabase
       const { data, error } = await supabase
         .from('buyers')
         .insert({
-          id: user.uid,  // Same as user ID
+          id: userIdToUse,  // Use the correct user ID
           shipping_address: {
             street: formData.shippingAddress,
             city: formData.city,
@@ -92,7 +103,7 @@ const BuyerRequestScreen = ({ navigation }) => {
       const { data: currentUserData } = await supabase
         .from('users')
         .select('user_type')
-        .eq('id', user.uid)
+        .eq('id', userIdToUse)
         .single();
 
       const newUserType = currentUserData?.user_type === 'seller' ? 'both' : 'buyer';
@@ -100,7 +111,7 @@ const BuyerRequestScreen = ({ navigation }) => {
       await supabase
         .from('users')
         .update({ user_type: newUserType })
-        .eq('id', user.uid);
+        .eq('id', userIdToUse);
 
       console.log('✅ User type updated to:', newUserType);
 

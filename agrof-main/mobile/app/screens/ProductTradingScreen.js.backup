@@ -149,7 +149,7 @@ const ProductTradingScreen = ({ route, navigation }) => {
           
           const { data: listings } = await query;
 
-          console.log(`   Seller ${seller.business_name || seller.users.full_name}:`, listings?.length || 0, 'listings for product', displayProduct?.name);
+          console.log(`   Seller ${seller.business_name || seller.users.full_name}:`, listings?.length || 0, 'listings for product ${displayProduct?.name}`);
 
           return {
         id: seller.users.id,
@@ -222,8 +222,8 @@ const ProductTradingScreen = ({ route, navigation }) => {
   };
 
   const tradingInfo = {
-    buyers: realBuyers || [],
-    sellers: realSellers || []
+    buyers: realBuyers,
+    sellers: realSellers
   };
 
 

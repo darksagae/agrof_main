@@ -49,6 +49,21 @@ export const UserProvider = ({ children }) => {
     };
 
     initializeAuth();
+
+    // Subscribe to live Firebase auth state changes
+    const unsubscribe = authService.onAuthStateChanged(async (fbUser) => {
+      console.log('👂 UserContext: Firebase auth state changed:', fbUser ? fbUser.uid : 'no user');
+      if (fbUser) {
+        await fetchUserData(fbUser.uid);
+      } else {
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    });
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const fetchUserData = async (uid) => {

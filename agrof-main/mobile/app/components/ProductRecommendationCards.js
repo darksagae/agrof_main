@@ -2,47 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { Card, Title, Paragraph, Button } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
-import { productsApi } from '../services/storeApi';
+import { productsApi, categoriesApi } from '../services/storeApi';
 import storeImageService from '../services/storeImageService';
 import OptimizedImage from './OptimizedImage';
 import { useCart } from '../contexts/CartContext';
 import { STORE_BASE_URL } from '../config/apiConfig';
 
-// Local product recommendations based on disease type
-const getLocalProductRecommendations = async (diseaseType, cropType) => {
-  try {
-    console.log('🔍 Getting local product recommendations...');
-    
-    // Simple local product matching based on disease type
-    const diseaseProductMap = {
-      'fungal': ['Fungicide', 'Copper-based spray', 'Sulfur powder'],
-      'bacterial': ['Bactericide', 'Copper fungicide', 'Antibiotic spray'],
-      'viral': ['Virus control', 'Plant strengthener', 'Systemic treatment'],
-      'pest': ['Insecticide', 'Pest control', 'Natural predators'],
-      'nutrient': ['Fertilizer', 'Nutrient supplement', 'Soil amendment'],
-      'default': ['General treatment', 'Plant care', 'Soil health']
-    };
-    
-    const diseaseKey = diseaseType?.toLowerCase() || 'default';
-    const products = diseaseProductMap[diseaseKey] || diseaseProductMap['default'];
-    
-    // Convert to product objects
-    const productObjects = products.map((name, index) => ({
-      id: `local_${index}`,
-      name: name,
-      price: 'Contact for pricing',
-      category: 'Treatment',
-      description: `Recommended treatment for ${diseaseType || 'plant issues'}`,
-      image: null
-    }));
-    
-    console.log(`📦 Found ${productObjects.length} local products`);
-    return productObjects;
-  } catch (error) {
-    console.error('❌ Local product recommendations failed:', error);
-    return [];
-  }
-};
+// This function has been removed - now using real store products instead of local fallback
 
 const ProductRecommendationCards = ({ diseaseType, symptoms, cropType, onProductPress }) => {
   const [recommendedProducts, setRecommendedProducts] = useState([]);
@@ -91,30 +57,175 @@ const ProductRecommendationCards = ({ diseaseType, symptoms, cropType, onProduct
       setLoading(true);
       setError(null);
 
-      console.log('📦 Using simple local product recommendations...');
+      console.log('🔍 Starting AI product fetch...');
+      console.log('🔍 DEBUG: diseaseType:', diseaseType);
+      console.log('🔍 DEBUG: symptoms:', symptoms);
+      console.log('🔍 DEBUG: cropType:', cropType);
+
+      // Fetch live categories
+      const liveCategories = await categoriesApi.getAll();
+      console.log('🔍 DEBUG: Live categories fetched:', liveCategories?.length || 0);
+      console.log('🔍 DEBUG: Category names:', liveCategories?.map(c => c.name) || []);
       
-      // Simple local product matching
-      const localProducts = await getLocalProductRecommendations(diseaseType, cropType);
+      const availableCategoryNames = new Set(
+        Array.isArray(liveCategories) ? liveCategories.map(c => (c.name || '').toLowerCase()) : []
+      );
+
+      const diseaseLower = (diseaseType || '').toString().toLowerCase();
+      console.log('🔍 DEBUG: diseaseLower:', diseaseLower);
+
+      // Canonical disease groups
+      const toGroup = (d) => {
+        if (!d) return null;
+        if (d.includes('fung')) return 'fungal';
+        if (d.includes('mildew') || d.includes('blight') || d.includes('rot')) return 'fungal';
+        if (d.includes('bacter')) return 'bacterial';
+        if (d.includes('virus') || d.includes('viral') || d.includes('mosaic')) return 'viral';
+        if (d.includes('weed')) return 'weed';
+        if (d.includes('aphid') || d.includes('mite') || d.includes('whitefly') || d.includes('pest') || d.includes('insect')) return 'pest';
+        if (d.includes('deficien') || d.includes('nutri')) return 'nutrient';
+        return null;
+      };
+
+      const group = toGroup(diseaseLower);
+      console.log('🔍 DEBUG: Detected group:', group);
       
-      if (localProducts && localProducts.length > 0) {
-        console.log(`✅ Found ${localProducts.length} local products`);
-        setRecommendedProducts(localProducts);
+      if (!group) {
+        console.log('🔍 DEBUG: No group detected, trying fallback with general categories');
+        const fallbackCategories = ['fungicides', 'herbicides', 'fertilizers', 'organic_chemicals', 'insecticides'];
+        const availableFallback = fallbackCategories.filter(c => availableCategoryNames.has(c));
+        
+        if (availableFallback.length > 0) {
+          console.log('🔍 DEBUG: Using fallback categories:', availableFallback);
+          const fallbackProducts = [];
+          for (const cat of availableFallback.slice(0, 2)) {
+            const products = await productsApi.getAll({ category: cat, limit: 10 });
+            fallbackProducts.push(...(products || []));
+            if (fallbackProducts.length >= 6) break;
+          }
+          console.log('🔍 DEBUG: Fallback found', fallbackProducts.length, 'products');
+          setRecommendedProducts(fallbackProducts.slice(0, 6));
+      } else {
+          console.log('🔍 DEBUG: No fallback categories available, showing no products');
+          setRecommendedProducts([]);
+        }
+        setLoading(false);
         return;
-      } else {
-        console.log('⚠️ No local products found, using fallback...');
       }
+
+      // Group → candidate categories (intersect with available)
+      const groupToCategories = {
+        fungal: ['fungicides', 'organic_chemicals'],
+        bacterial: ['fungicides', 'organic_chemicals'],
+        viral: ['organic_chemicals', 'fertilizers'],
+        pest: ['insecticides', 'organic_chemicals'],
+        weed: ['herbicides', 'organic_chemicals'],
+        nutrient: ['fertilizers', 'organic_chemicals']
+      };
+
+      const desiredCategoriesRaw = (groupToCategories[group] || []);
+      const desiredCategories = desiredCategoriesRaw
+        .map(c => c.toLowerCase())
+        .filter(c => availableCategoryNames.size === 0 || availableCategoryNames.has(c));
+      console.log('🔍 DEBUG: Desired categories for group', group, ':', desiredCategories);
+      console.log('🔍 DEBUG: Available categories:', Array.from(availableCategoryNames));
       
-      // Simple fallback - load general products
-      console.log('🔄 Loading general products as fallback...');
-      const fallbackProducts = await fetchGeneralProducts();
-      if (fallbackProducts && fallbackProducts.length > 0) {
-        console.log(`✅ Loaded ${fallbackProducts.length} general products`);
-        setRecommendedProducts(fallbackProducts);
-      } else {
-        console.log('⚠️ No products available');
-        setError('No products available at this time');
+      if (desiredCategories.length === 0) {
+        console.log('🔍 DEBUG: No matching categories found, showing no products');
+        setRecommendedProducts([]);
+        setLoading(false);
+        return;
       }
-      
+
+      // Build keyword set from disease + symptoms + treatment terms by group
+      const baseTerms = [diseaseLower, ...(Array.isArray(symptoms) ? symptoms : []).map(s => (s || '').toString().toLowerCase())].filter(Boolean);
+      const groupTermsMap = {
+        fungal: ['fungicide', 'copper', 'mancozeb', 'sulfur', 'chlorothalonil', 'blight'],
+        bacterial: ['copper', 'bactericide', 'streptomycin', 'blight'],
+        viral: ['immune', 'booster', 'treatment'],
+        pest: ['insecticide', 'neem', 'pyrethrin', 'control', 'miticide'],
+        weed: ['herbicide', 'glyphosate', 'weed'],
+        nutrient: ['fertilizer', 'npk', 'nitrogen', 'phosphorus', 'potassium', 'urea']
+      };
+      const keywords = Array.from(new Set([...baseTerms, ...((groupTermsMap[group]) || [])]));
+      console.log('🔍 DEBUG: Keywords for search:', keywords);
+
+      const selected = [];
+      const seenIds = new Set();
+      const tryAdd = (arr) => {
+        for (const p of arr) {
+          if (!seenIds.has(p.id)) {
+            selected.push(p);
+            seenIds.add(p.id);
+            if (selected.length >= 6) break;
+          }
+        }
+      };
+
+      // Pass 1: For each desired category, getByCategory and filter by keywords
+      console.log('🔍 DEBUG: Pass 1 - Category-based search');
+      for (const cat of desiredCategories) {
+        if (selected.length >= 6) break;
+        console.log('🔍 DEBUG: Searching category:', cat);
+        const catProducts = await productsApi.getAll({ category: cat, limit: 100 });
+        console.log('🔍 DEBUG: Found', catProducts?.length || 0, 'products in category', cat);
+        
+        const filtered = (catProducts || []).filter(p => {
+          const text = `${p.name} ${p.description || ''} ${p.features || ''}`.toLowerCase();
+          return keywords.some(term => text.includes(term));
+        });
+        console.log('🔍 DEBUG: After keyword filtering:', filtered.length, 'products');
+        tryAdd(filtered);
+
+        // If nothing matched by keywords, add a few from the category to avoid empty state
+        if (selected.length < 2 && (filtered.length === 0)) {
+          console.log('🔍 DEBUG: No keyword matches, adding a few from category as fallback');
+          tryAdd((catProducts || []).slice(0, 6));
+        }
+      }
+
+      console.log('🔍 DEBUG: After Pass 1, selected:', selected.length, 'products');
+
+      // Pass 2: If still low, use search without category and keyword-merge
+      if (selected.length < 2) {
+        console.log('🔍 DEBUG: Pass 2 - Search API fallback');
+        const q = keywords.slice(0, 5).join(' ');
+        console.log('🔍 DEBUG: Search query:', q);
+        const searchResults = await productsApi.search(q);
+        console.log('🔍 DEBUG: Search results:', searchResults?.length || 0);
+        const refined = (searchResults || []).filter(p => {
+          const cat = (p.category_name || '').toLowerCase();
+          return !p.category_name || desiredCategories.includes(cat);
+        });
+        console.log('🔍 DEBUG: After category filter:', refined.length, 'products');
+        tryAdd(refined);
+      }
+
+      console.log('🔍 DEBUG: After Pass 2, selected:', selected.length, 'products');
+
+      // Pass 3: If still low, take top of category lists without keyword filter
+      if (selected.length < 2) {
+        console.log('🔍 DEBUG: Pass 3 - Category fallback without keywords');
+        for (const cat of desiredCategories) {
+          if (selected.length >= 6) break;
+          console.log('🔍 DEBUG: Fallback search in category:', cat);
+          const catProducts = await productsApi.getAll({ category: cat, limit: 20 });
+          console.log('🔍 DEBUG: Fallback found', catProducts?.length || 0, 'products');
+          tryAdd(catProducts || []);
+        }
+      }
+
+      console.log('🔍 DEBUG: Final selected products:', selected.length);
+      console.log('🔍 DEBUG: Product names:', selected.map(p => p.name));
+
+      // Final absolute fallback: ensure at least some products show
+      if (selected.length === 0) {
+        console.log('🔍 DEBUG: Absolute fallback - fetching any products');
+        const anyProducts = await productsApi.getAll({ limit: 20 });
+        tryAdd(anyProducts || []);
+      }
+
+      setRecommendedProducts(selected);
     } catch (error) {
       console.error('❌ Product loading failed:', error);
       setError('Unable to load products at this time');

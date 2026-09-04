@@ -197,7 +197,9 @@ const OutstandingAIPlanScreen = ({ onNavigateToStore }) => {
       
       // Step 4: Weather Integration
       await updateProgress('Integrating weather forecasts...', 40);
-      const weatherData = await safeServiceCall(() => weatherIntegrationService.getWeatherForecast('Central'));
+      // Use region based on crop suitability or default to Central
+      const preferredRegion = (selectedCrop?.regional_suitability || 'Central').toString().split(',')[0].trim();
+      const weatherData = await safeServiceCall(() => weatherIntegrationService.getWeatherData(preferredRegion || 'Central'));
       
       // Step 5: Crop Timing
       await updateProgress('Optimizing crop timing...', 50);
@@ -886,7 +888,7 @@ const OutstandingAIPlanScreen = ({ onNavigateToStore }) => {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Crop Selection */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>🌾 Select Your Crop</Text>
+          <Text style={styles.sectionTitle}>Select Your Crop</Text>
           <TouchableOpacity
             style={styles.cropSelector}
             onPress={() => setShowCropSelector(true)}
@@ -905,13 +907,12 @@ const OutstandingAIPlanScreen = ({ onNavigateToStore }) => {
             ) : (
               <Text style={styles.cropSelectorPlaceholder}>Tap to select crop</Text>
             )}
-            <MaterialIcons name="keyboard-arrow-down" size={24} color="#666" />
           </TouchableOpacity>
         </View>
 
         {/* Farm Size Input */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>📏 Farm Size</Text>
+          <Text style={styles.sectionTitle}>Farm Size</Text>
           <TextInput
             style={styles.farmSizeInput}
             placeholder="Enter farm size in acres"
@@ -1060,7 +1061,7 @@ const OutstandingAIPlanScreen = ({ onNavigateToStore }) => {
                 {Object.entries(currentPlan.regionalPricing).map(([region, price]) => (
                   <View key={region} style={styles.regionCard}>
                     <Text style={styles.regionName}>{region.charAt(0).toUpperCase() + region.slice(1)}</Text>
-                    <Text style={styles.regionPrice}>{formatUGX(price)}/bag</Text>
+                    <Text style={styles.regionPrice}>{formatUGX(price)}</Text>
                     <Text style={styles.insightSubtext}>Source: Farmgain Africa - Market data</Text>
                   </View>
                 ))}
