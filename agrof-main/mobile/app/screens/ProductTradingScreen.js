@@ -12,6 +12,7 @@ import {
   Alert,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 const { width, height } = Dimensions.get('window');
 
@@ -169,7 +170,7 @@ const ProductTradingScreen = ({ route, navigation }) => {
         <View style={styles.chatInput}>
           <TextInput
             style={styles.messageInput}
-            placeholder="Type your message..."
+            placeholder={t('search.messagePlaceholder')}
             value={chatMessage}
             onChangeText={setChatMessage}
             multiline

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { productsApi } from '../services/storeApi';
+import storeImageService from '../services/storeImageService';
 import ProductDetailScreen from './ProductDetailScreen';
 
 const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) => {
@@ -48,7 +49,7 @@ const CategoryProductsScreen = ({ categoryName, categoryDisplayName, onBack }) =
     >
       <View style={styles.imageContainer}>
         <Image 
-          source={item.image_url ? { uri: `http://192.168.1.15:3001${item.image_url}` } : require('../assets/fertilizers.png')} 
+          source={item.image_url ? { uri: `http://192.168.0.107:3001${item.image_url}` } : require('../assets/fertilizers.png')} 
           style={styles.productImage}
           resizeMode="cover"
         />

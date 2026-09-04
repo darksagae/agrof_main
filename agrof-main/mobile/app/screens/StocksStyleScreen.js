@@ -13,6 +13,7 @@ import {
   Image,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 const { width, height } = Dimensions.get('window');
 
@@ -677,7 +678,7 @@ const StocksStyleScreen = ({ navigation }) => {
           <MaterialIcons name="search" size={20} color="#666" />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search products..."
+            placeholder={t('search.placeholder')}
             value={searchQuery}
             onChangeText={setSearchQuery}
             placeholderTextColor="#666"

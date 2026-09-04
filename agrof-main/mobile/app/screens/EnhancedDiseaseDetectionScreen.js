@@ -18,6 +18,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { theme } from '../theme';
 import EnhancedImageAnalysisService from '../services/enhancedImageAnalysisService';
+import ProductRecommendationCards from '../components/ProductRecommendationCards';
 
 const { width, height } = Dimensions.get('window');
 
@@ -300,7 +301,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {/* Disease Information */}
           <View style={styles.resultSection}>
             <View style={styles.sectionHeader}>
-              <MaterialIcons name="eco" size={24} color="#4CAF50" />
               <Text style={styles.sectionTitle}>Disease Detection</Text>
             </View>
             <Text style={styles.diseaseName}>
@@ -317,7 +317,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {/* Crop Information */}
           <View style={styles.resultSection}>
             <View style={styles.sectionHeader}>
-              <MaterialIcons name="local-florist" size={24} color="#FF9800" />
               <Text style={styles.sectionTitle}>Crop Information</Text>
             </View>
             <Text style={styles.cropType}>
@@ -329,7 +328,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.analysis.symptoms && analysisResult.analysis.symptoms.length > 0 && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="visibility" size={24} color="#2196F3" />
                 <Text style={styles.sectionTitle}>Symptoms</Text>
               </View>
               {analysisResult.analysis.symptoms.map((symptom, index) => (
@@ -343,7 +341,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {/* AI Models Used */}
           <View style={styles.resultSection}>
             <View style={styles.sectionHeader}>
-              <MaterialIcons name="smart-toy" size={24} color="#9C27B0" />
               <Text style={styles.sectionTitle}>AI Models Used</Text>
             </View>
             <Text style={styles.modelsUsed}>
@@ -355,38 +352,19 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
     );
   };
 
-  // Render AGROF store treatments
+  // Render AGROF store treatments with new product cards
   const renderStoreTreatments = () => {
-    if (!analysisResult || !storeProducts.length) return null;
+    if (!analysisResult) return null;
 
     return (
-      <Card style={styles.card}>
-        <Card.Content>
-          <Title style={styles.cardTitle}>🛒 AGROF Store Treatments</Title>
-          <Text style={styles.treatmentsSubtitle}>
-            Recommended products for {analysisResult.analysis.disease_type}
-          </Text>
-          
-          <FlatList
-            data={storeProducts.slice(0, 5)} // Show top 5 products
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.treatmentItem}>
-                <Text style={styles.treatmentName}>{item.name}</Text>
-                {item.price && (
-                  <Text style={styles.treatmentPrice}>{item.price}</Text>
-                )}
-                {item.application && (
-                  <Text style={styles.treatmentApplication}>
-                    Application: {item.application}
-                  </Text>
-                )}
-              </View>
-            )}
-            showsVerticalScrollIndicator={false}
-          />
-        </Card.Content>
-      </Card>
+      <ProductRecommendationCards
+        diseaseType={analysisResult.analysis?.disease_type}
+        symptoms={analysisResult.analysis?.symptoms}
+        onProductPress={(product) => {
+          // Navigate to product detail or handle product selection
+          console.log('Product selected:', product);
+        }}
+      />
     );
   };
 
@@ -403,7 +381,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.recommendations.immediate_actions && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="flash-on" size={24} color="#FF5722" />
                 <Text style={styles.sectionTitle}>Immediate Actions</Text>
               </View>
               {analysisResult.recommendations.immediate_actions.map((action, index) => (
@@ -418,7 +395,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.recommendations.prevention && analysisResult.recommendations.prevention.length > 0 && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="shield" size={24} color="#4CAF50" />
                 <Text style={styles.sectionTitle}>Prevention</Text>
               </View>
               {analysisResult.recommendations.prevention.map((prevention, index) => (
@@ -433,7 +409,6 @@ const EnhancedDiseaseDetectionScreen = ({ navigation }) => {
           {analysisResult.recommendations.follow_up && (
             <View style={styles.resultSection}>
               <View style={styles.sectionHeader}>
-                <MaterialIcons name="schedule" size={24} color="#2196F3" />
                 <Text style={styles.sectionTitle}>Follow-up</Text>
               </View>
               {analysisResult.recommendations.follow_up.map((followUp, index) => (
@@ -629,6 +604,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     backgroundColor: '#fff',
     elevation: 2,
+    borderWidth: 2,
+    borderColor: '#4CAF50',
+    borderRadius: 12,
   },
   cardTitle: {
     fontSize: 18,
@@ -700,10 +678,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#4CAF50',
   },
   cameraButton: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#4CAF50',
   },
   modelsButton: {
-    backgroundColor: '#9C27B0',
+    backgroundColor: '#4CAF50',
   },
   buttonText: {
     color: '#fff',
@@ -712,7 +690,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   analyzeButton: {
-    backgroundColor: '#FF9800',
+    backgroundColor: '#4CAF50',
     marginTop: 8,
   },
   analyzeButtonContent: {
@@ -720,6 +698,11 @@ const styles = StyleSheet.create({
   },
   resultSection: {
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: '#FAFAFA',
   },
   sectionHeader: {
     flexDirection: 'row',

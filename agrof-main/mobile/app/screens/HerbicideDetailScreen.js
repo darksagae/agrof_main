@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Dimensions, Linking } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { useCart } from '../contexts/CartContext';
 
 const { width } = Dimensions.get('window');
 
 const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
+  const { t } = useTranslation();
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 
@@ -66,7 +68,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
         <TouchableOpacity style={styles.backButton} onPress={onBack}>
           <MaterialIcons name="arrow-back" size={24} color="white" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Product Details</Text>
+        <Text style={styles.headerTitle}>{t('productDetails.title')}</Text>
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
@@ -90,7 +92,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
           
           {product.availability === 'Out of stock' && (
             <View style={styles.outOfStockBadge}>
-              <Text style={styles.outOfStockText}>Out of Stock</Text>
+              <Text style={styles.outOfStockText}>{t('productDetails.outOfStock')}</Text>
             </View>
           )}
           
@@ -101,7 +103,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
               onPress={() => onViewPackages(product)}
             >
               <MaterialIcons name="shopping-cart" size={20} color="white" />
-              <Text style={styles.viewPackagesText}>View Packages & Pricing</Text>
+              <Text style={styles.viewPackagesText}>{t('productDetails.viewPackages')}</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -110,7 +112,7 @@ const HerbicideDetailScreen = ({ product, onBack, onViewPackages }) => {
         <View style={styles.phoneSection}>
           <TouchableOpacity style={styles.phoneButton} onPress={handleCall}>
             <MaterialIcons name="phone" size={24} color="#2c5530" />
-            <Text style={styles.phoneText}>Call for Inquiry</Text>
+            <Text style={styles.phoneText}>{t('productDetails.callForInquiry')}</Text>
           </TouchableOpacity>
         </View>
 
